@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { IntlProvider, load, LocalizationProvider, loadMessages } from '@progress/kendo-react-intl';
 
+// Locale
 import likelySubtags from 'cldr-core/supplemental/likelySubtags.json';
 import currencyData from 'cldr-core/supplemental/currencyData.json';
 import weekData from 'cldr-core/supplemental/weekData.json';
@@ -23,7 +24,8 @@ import esDateFields from 'cldr-dates-full/main/es/dateFields.json';
 import { enMessages } from './messages/en-US';
 // Components
 import { DrawerRouterContainer } from './components';
-import './App.scss';
+// Styles
+import './AppStyles.scss';
 
 load(
   likelySubtags,
