@@ -8,5 +8,8 @@ export const itMessages = {
     services: 'Servizi',
     dashboard: 'Dashboard',
     language: 'Lingua',
+    gridSearch: 'Cerca in tutte le colonne ...',
+    exportExcel: 'Esporta in Excel',
+    exportPdf: 'Esporta in PDF',
   },
 };

@@ -8,5 +8,8 @@ export const deMessages = {
     services: 'Dienstleistungen',
     dashboard: 'Dashboard',
     language: 'Sprache',
+    gridSearch: 'In allen Spalten suchen ...',
+    exportExcel: 'Export nach Excel',
+    exportPdf: 'In PDF exportieren',
   },
 };

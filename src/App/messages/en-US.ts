@@ -8,6 +8,9 @@ export const enMessages = {
     services: 'Services',
     dashboard: 'Dashboard',
     language: 'Language',
+    gridSearch: 'Search in all columns...',
+    exportExcel: 'Export to Excel',
+    exportPdf: 'Export to PDF',
 
     teamEfficiency: 'Team Efficiency',
     teamMembers: 'Team Members',
@@ -42,9 +45,7 @@ export const enMessages = {
     contacts: 'Contacts',
     address: 'Address',
     phone: 'Phone',
-    gridSearch: 'Search in all columns...',
-    exportExcel: 'Export to Excel',
-    exportPdf: 'Export to PDF',
+
   },
   grid: {
     groupPanelEmpty: 'Drag a column header and drop it here to group by that column',

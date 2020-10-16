@@ -38,7 +38,7 @@ export const Header: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element => {
         </div>
 
         <div className="settings">
-          <span>{localizationService.toLanguageString('Language', 'Language')}</span>
+          <span>{localizationService.toLanguageString('custom.language', 'Language')}</span>
           <DropDownList textField={'locale'} dataItemKey={'localeId'} data={locales} value={currentLanguage} onChange={onLanguageChange} />
         </div>
       </div>

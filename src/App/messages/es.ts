@@ -8,5 +8,8 @@ export const esMessages = {
     services: 'Servicios',
     dashboard: 'Tablero',
     language: 'Idioma',
+    gridSearch: 'Buscar en todas las columnas ...',
+    exportExcel: 'Exportar a Excel',
+    exportPdf: 'Exportar a PDF',
   },
 };

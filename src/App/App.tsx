@@ -36,6 +36,8 @@ import { enMessages, deMessages, frMessages, esMessages, itMessages } from './me
 
 // Components
 import { DrawerRouterContainer } from './components';
+// Pages
+import { Home } from '../Home';
 // Styles
 import './AppStyles.scss';
 // Selectors
@@ -84,7 +86,7 @@ export const App: FC = (): JSX.Element => {
             <DrawerRouterContainer>
               <Switch>
                 <Route exact path="/">
-                  <h1>Home</h1>
+                  <Home />
                 </Route>
                 <Route exact path="/agenda">
                   <h1>Agenda</h1>

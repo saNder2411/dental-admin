@@ -266,8 +266,8 @@ a {
   }
 }
 
-// Dashboard page
-.dashboard-page {
+// Home page
+.home-page {
   .card-container:last-of-type {
     padding-top: 0;
   }
@@ -275,10 +275,14 @@ a {
   .k-grid-toolbar .k-textbox {
     margin-bottom: 10px;
   }
+
+  .k-indicator-container {
+    display: none;
+  }
 }
 
 @media (min-width: 480px) {
-  .dashboard-page {
+  .home-page {
     .k-grid-toolbar .k-textbox {
       margin-bottom: 0;
       float: left;
@@ -291,7 +295,7 @@ a {
 }
 
 @media (min-width: 768px) {
-  .dashboard-page {
+  .home-page {
     .card-container:last-of-type {
       padding-top: 30px;
     }
