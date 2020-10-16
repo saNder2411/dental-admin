@@ -1,31 +1,45 @@
 import React, { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { IntlProvider, load, LocalizationProvider, loadMessages } from '@progress/kendo-react-intl';
-
 // Locale
 import likelySubtags from 'cldr-core/supplemental/likelySubtags.json';
 import currencyData from 'cldr-core/supplemental/currencyData.json';
 import weekData from 'cldr-core/supplemental/weekData.json';
-
-import frNumbers from 'cldr-numbers-full/main/fr/numbers.json';
-import frLocalCurrency from 'cldr-numbers-full/main/fr/currencies.json';
-import frCaGregorian from 'cldr-dates-full/main/fr/ca-gregorian.json';
-import frDateFields from 'cldr-dates-full/main/fr/dateFields.json';
 
 import usNumbers from 'cldr-numbers-full/main/en/numbers.json';
 import usLocalCurrency from 'cldr-numbers-full/main/en/currencies.json';
 import usCaGregorian from 'cldr-dates-full/main/en/ca-gregorian.json';
 import usDateFields from 'cldr-dates-full/main/en/dateFields.json';
 
+import deNumbers from 'cldr-numbers-full/main/de/numbers.json';
+import deLocalCurrency from 'cldr-numbers-full/main/de/currencies.json';
+import deCaGregorian from 'cldr-dates-full/main/de/ca-gregorian.json';
+import deDateFields from 'cldr-dates-full/main/de/dateFields.json';
+
+import frNumbers from 'cldr-numbers-full/main/fr/numbers.json';
+import frLocalCurrency from 'cldr-numbers-full/main/fr/currencies.json';
+import frCaGregorian from 'cldr-dates-full/main/fr/ca-gregorian.json';
+import frDateFields from 'cldr-dates-full/main/fr/dateFields.json';
+
 import esNumbers from 'cldr-numbers-full/main/es/numbers.json';
 import esLocalCurrency from 'cldr-numbers-full/main/es/currencies.json';
 import esCaGregorian from 'cldr-dates-full/main/es/ca-gregorian.json';
 import esDateFields from 'cldr-dates-full/main/es/dateFields.json';
-import { enMessages } from './messages/en-US';
+
+import itNumbers from 'cldr-numbers-full/main/it/numbers.json';
+import itLocalCurrency from 'cldr-numbers-full/main/it/currencies.json';
+import itCaGregorian from 'cldr-dates-full/main/it/ca-gregorian.json';
+import itDateFields from 'cldr-dates-full/main/it/dateFields.json';
+// Messages
+import { enMessages, deMessages, frMessages, esMessages, itMessages } from './messages';
+
 // Components
 import { DrawerRouterContainer } from './components';
 // Styles
 import './AppStyles.scss';
+// Selectors
+import { selectLocaleId } from './AppSelectors';
 
 load(
   likelySubtags,
@@ -42,16 +56,30 @@ load(
   esNumbers,
   esLocalCurrency,
   esCaGregorian,
-  esDateFields
+  esDateFields,
+  deNumbers,
+  deLocalCurrency,
+  deCaGregorian,
+  deDateFields,
+  itNumbers,
+  itLocalCurrency,
+  itCaGregorian,
+  itDateFields
 );
 
 loadMessages(enMessages, 'en-US');
+loadMessages(deMessages, 'de');
+loadMessages(esMessages, 'es');
+loadMessages(frMessages, 'fr');
+loadMessages(itMessages, 'it');
 
 export const App: FC = (): JSX.Element => {
+  const currentLocaleId = useSelector(selectLocaleId);
+
   return (
     <div className="App">
-      <LocalizationProvider language={'en-US'}>
-        <IntlProvider locale={'en-US'}>
+      <LocalizationProvider language={currentLocaleId}>
+        <IntlProvider locale={currentLocaleId}>
           <Router>
             <DrawerRouterContainer>
               <Switch>

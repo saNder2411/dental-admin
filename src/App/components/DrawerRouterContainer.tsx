@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
-import { Drawer, DrawerContent, DrawerItem } from '@progress/kendo-react-layout';
+import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Header } from './Header';
@@ -8,12 +8,12 @@ import { Header } from './Header';
 import bodyBg from '../../assets/body-bg.jpeg';
 
 const items = [
-  { name: 'Home', iconSvg: 'home-icon', selected: true, route: '/' },
-  { name: 'Agenda', iconSvg: 'k-i-calendar-date', selected: false, route: '/agenda' },
-  { name: 'Stylists', iconSvg: 'profile-icon', selected: false, route: '/stylists' },
-  { name: 'Customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
-  { name: 'Services', iconSvg: 'k-i-currency', selected: false, route: '/services' },
-  { name: 'Dashboard', iconSvg: 'dashboard-icon', selected: true, route: '/dashboard' },
+  { name: 'home', iconSvg: 'home-icon', selected: true, route: '/' },
+  { name: 'agenda', iconSvg: 'k-i-calendar-date', selected: false, route: '/agenda' },
+  { name: 'stylists', iconSvg: 'profile-icon', selected: false, route: '/stylists' },
+  { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
+  { name: 'services', iconSvg: 'k-i-currency', selected: false, route: '/services' },
+  { name: 'dashboard', iconSvg: 'dashboard-icon', selected: true, route: '/dashboard' },
 ];
 
 const getSelectedItemName = (pathname: string): string => {
@@ -24,10 +24,9 @@ const getSelectedItemName = (pathname: string): string => {
   return ``;
 };
 
-const CustomDrawerItem = (props: any) => {
-  const { iconSvg, text, ...others } = props;
+export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ...others }): JSX.Element => {
   return (
-    <NavLink to={props.route}>
+    <NavLink to={route}>
       <DrawerItem {...others}>
         <span className={`k-icon ${iconSvg}`} />
         <span className="k-item-text">{text}</span>
@@ -42,19 +41,17 @@ interface Props {
 
 export const DrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
   const [isExpended, setIsExpended] = useState(true);
-  const [isSmallerScreen, setIsSmallerScreen] = useState(window.innerWidth < 768);
+  const [isSmallerScreen, setIsSmallerScreen] = useState(false);
   const localizationService = useLocalization();
   // const intl = useInternationalization();
   const { pathname } = useLocation();
   const selectedItemName = getSelectedItemName(pathname);
 
   useEffect(() => {
-    const onResizeWindow = () => {
-      setIsSmallerScreen(window.innerWidth < 768);
-    };
+    const onResizeWindow = () => setIsSmallerScreen(window.innerWidth < 768);
+    setIsSmallerScreen(window.innerWidth < 768);
 
     window.addEventListener('resize', onResizeWindow);
-    onResizeWindow();
 
     return () => {
       window.removeEventListener('resize', onResizeWindow);
@@ -64,20 +61,20 @@ export const DrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
   return (
     <>
       <Header
-        onMenuClick={() => setIsExpended((prevState) => !prevState)}
-        page={localizationService.toLanguageString(`${selectedItemName}`, `${selectedItemName}`)}
+        onBurgerMenuClick={() => setIsExpended((prevState) => !prevState)}
+        page={localizationService.toLanguageString(`custom.${selectedItemName}`, `${selectedItemName}`)}
       />
       <Drawer
         expanded={isExpended}
         items={items.map((item) => ({
           ...item,
-          text: localizationService.toLanguageString(`${item.name}`, `${item.name}`),
+          text: localizationService.toLanguageString(`custom.${item.name}`, `${item.name}`),
           selected: item.name === selectedItemName,
         }))}
         item={CustomDrawerItem}
         position="start"
         mode={isSmallerScreen ? 'overlay' : 'push'}
-        mini={isSmallerScreen ? false : true}
+        mini={!isSmallerScreen}
         onOverlayClick={() => setIsExpended((prevState) => !prevState)}
         onSelect={() => setIsExpended(true)}
         style={{ backgroundImage: `url(${bodyBg})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
