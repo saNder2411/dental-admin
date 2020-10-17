@@ -41,7 +41,7 @@ export const Home: FC = (): JSX.Element => {
               />
               <GridColumn
                 field={'end'}
-                title={localizationService.toLanguageString('custom.start', 'End')}
+                title={localizationService.toLanguageString('custom.end', 'End')}
                 columnMenu={ColumnMenu}
                 // width={120}
                 filter={'text'}

@@ -1,65 +1,9 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useInternationalization } from '@progress/kendo-react-intl';
 // Images
-import clockSvg from '../assets/clocks/iconmonstr-time-12.svg';
+import clockSvg from '../assets/clocks/clock-5.svg';
 
-export const FullNameCell = (props: any) => {
-  const customerPhotoStyle = {
-    display: 'inline-block',
-    width: 32,
-    height: 32,
-    borderRadius: '50%',
-    backgroundSize: '32px 35px',
-    backgroundPosition: 'center center',
-    verticalAlign: 'middle',
-    lineHeight: '32px',
-    boxShadow: 'inset 0 0 1px #999, inset 0 0 10px rgba(0,0,0,.2)',
-    marginLeft: '5px',
-    backgroundImage: clockSvg,
-  };
-
-  const customerName = {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    lineHeight: '32px',
-    paddingLeft: '10px',
-  };
-
-  if (props.rowType === 'groupHeader') {
-    return null;
-  }
-
-  return (
-    <td>
-      <div style={customerPhotoStyle} />
-      <div style={customerName}>{props.dataItem.fullName}</div>
-    </td>
-  );
-};
-
-export const RatingCell = (props: any) => {
-  const MAX_STARS = 5;
-  const rating = props.dataItem.rating;
-
-  if (props.rowType === 'groupHeader') {
-    return null;
-  }
-
-  return (
-    <td>
-      {[...new Array(MAX_STARS)].map((_, idx) => {
-        const isActive = rating <= idx;
-        return (
-          <span
-            key={idx}
-            className={!isActive ? 'k-icon k-i-star' : 'k-icon k-i-star-outline'}
-            style={!isActive ? { color: '#ffa600' } : undefined}
-          />
-        );
-      })}
-    </td>
-  );
-};
 
 export const CurrencyCell = (props: any) => {
   const intlService = useInternationalization();
@@ -105,14 +49,34 @@ export const DateCell = (props: any) => {
   );
 };
 
+const SCClockCell = styled.td`
+  && {
+    padding: 20;
+  }
+
+  & .grid-clock {
+    margin: auto;
+    width: 70px;
+    height: 70px;
+    mask-image: url(${clockSvg});
+    mask-size: contain;
+    mask-position: center;
+    mask-repeat: no-repeat;
+    /* background-color: #293897; */
+    background-color: #656565;
+    /* background-color: #4db5c8; */
+  }
+`;
+
 export const ClockCell = (props: any) => {
   if (props.rowType === 'groupHeader') {
     return null;
   }
 
   return (
-    <td style={{ padding: 0 }}>
-      <img src={clockSvg} alt="clock" width="50" style={{ display: 'block', margin: 'auto' }} />
-    </td>
+    <SCClockCell>
+      <div className="grid-clock" />
+      {/* <img src={clockSvg} alt="clock" /> */}
+    </SCClockCell>
   );
 };
