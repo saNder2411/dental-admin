@@ -30,8 +30,14 @@ export const esMessages = {
     jobTitle: 'Título del trabajo',
     showOnline: 'Mostrar en línea',
     email: 'Email',
-
     gender: 'Género',
     upcoming: 'Próximo',
+
+    discount: 'Descuento %',
+    price: 'Precio',
+    consultation: 'Consulta',
+    duration: 'Duración (minutos)',
+    category: 'Categoría',
+    offeringId: 'ID de Oferta'
   },
 };

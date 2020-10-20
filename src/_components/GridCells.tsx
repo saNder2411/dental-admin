@@ -9,23 +9,44 @@ import FemalePhotoPlaceholder from '../_assets/customers/female_placeholder.jpg'
 
 type GridCell = (props: GridCellProps) => JSX.Element | null;
 
-export const CurrencyCell: GridCell = ({ rowType, dataItem }) => {
+export const CurrencyCell: GridCell = ({ rowType, dataItem, field }) => {
   const intlService = useInternationalization();
+  const value = dataItem[field ? field : ''];
 
   return rowType === 'groupHeader' ? null : (
-    <SC.CurrencyCell isNegativeAmount={dataItem.budget < 0}>
-      <span>{intlService.formatNumber(dataItem.budget, 'c')}</span>
+    <SC.CurrencyCell isNegativeAmount={value < 0}>
+      <span>{intlService.formatNumber(value, 'c')}</span>
     </SC.CurrencyCell>
   );
 };
 
-export const DateCell: GridCell = ({ rowType, dataItem }) => {
-  const intlService = useInternationalization();
-  const date = dataItem.start || dataItem.end || dataItem.lastUpdate;
+export const DiscountCell: GridCell = ({ rowType, dataItem, field }) => {
+  const value = dataItem[field ? field : ''];
 
   return rowType === 'groupHeader' ? null : (
     <td>
-      <span>{intlService.formatDate(new Date(date), 'EEE d-MMM hh:mm')}</span>
+      <span>{`${value ? value * 100 : `0`}%`}</span>
+    </td>
+  );
+};
+
+export const TotalPriceCell: GridCell = ({ rowType, dataItem }) => {
+  const intlService = useInternationalization();
+  const value = dataItem.price - dataItem.price * dataItem.discount;
+
+  return rowType === 'groupHeader' ? null : (
+    <SC.CurrencyCell isNegativeAmount={value < 0}>
+      <span>{intlService.formatNumber(value, 'c')}</span>
+    </SC.CurrencyCell>
+  );
+};
+
+export const DateCell: GridCell = ({ rowType, dataItem, field }) => {
+  const intlService = useInternationalization();
+
+  return rowType === 'groupHeader' ? null : (
+    <td>
+      <span>{intlService.formatDate(new Date(dataItem[field ? field : '']), 'EEE d-MMM hh:mm')}</span>
     </td>
   );
 };
@@ -46,10 +67,12 @@ export const PhotoCell: GridCell = ({ rowType, dataItem }) => {
   );
 };
 
-export const FlagCell: GridCell = ({ rowType, dataItem }) => {
+export const FlagCell: GridCell = ({ rowType, dataItem, field }) => {
+  const flag = dataItem[field ? field : ''];
+
   return rowType === 'groupHeader' ? null : (
-    <SC.FlagCell isOnline={dataItem.isShowOnline}>
-      <span className={dataItem.isShowOnline ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
+    <SC.FlagCell isOnline={flag}>
+      <span className={flag ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
     </SC.FlagCell>
   );
 };

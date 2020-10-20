@@ -30,9 +30,15 @@ export const enMessages = {
     jobTitle: 'Job Title',
     showOnline: 'Show Online',
     email: 'Email',
-
     gender: 'Gender',
     upcoming: 'Upcoming',
+
+    discount: 'Discount %',
+    price: 'Price',
+    consultation: 'Consultation',
+    duration: 'Duration(mins)',
+    category: 'Category',
+    offeringId: 'Offering ID'
   },
   grid: {
     groupPanelEmpty: 'Drag a column header and drop it here to group by that column',

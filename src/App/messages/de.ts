@@ -30,8 +30,14 @@ export const deMessages = {
     jobTitle: 'Job Title',
     showOnline: 'Online Anzeigen',
     email: 'Email',
-
     gender: 'Geschlecht',
     upcoming: 'Bevorstehend',
+
+    discount: 'Rabatt %',
+    price: 'Preis',
+    consultation: 'Beratung',
+    duration: 'Dauer (Minuten)',
+    category: 'Kategorie',
+    offeringId: 'Anbieten ID',
   },
 };

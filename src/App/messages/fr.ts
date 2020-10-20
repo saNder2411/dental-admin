@@ -30,8 +30,14 @@ export const frMessages = {
     jobTitle: 'Titre du Poste',
     showOnline: 'Afficher en Ligne',
     email: 'Email',
-
     gender: 'Genre',
     upcoming: 'À venir',
+
+    discount: 'Remise %',
+    price: 'Prix',
+    consultation: 'Consultation',
+    duration: `Durée (mins)`,
+    category: 'Catégorie',
+    offeringId: `ID de L'offre`,
   },
 };

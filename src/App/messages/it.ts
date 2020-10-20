@@ -30,8 +30,14 @@ export const itMessages = {
     jobTitle: 'Titolo Lavorativo',
     showOnline: 'Mostra Online',
     email: 'Email',
-
     gender: 'Genere',
     upcoming: ' In Arrivo',
+
+    discount: 'Di Sconto %',
+    price: 'Prezzo',
+    consultation: 'Consultazione',
+    duration: 'Durata (min)',
+    category: 'Categoria',
+    offeringId: 'Offerta ID'
   },
 };

@@ -40,6 +40,7 @@ import { DrawerRouterContainer } from './components';
 import { Home } from '../Home';
 import { Stylists } from '../Stylists';
 import { Customers } from '../Customers';
+import { Services } from '../Services';
 // Styles
 import './AppStyles.scss';
 // Selectors
@@ -100,7 +101,7 @@ export const App: FC = (): JSX.Element => {
                   <Customers />
                 </Route>
                 <Route exact path="/services">
-                  <h1>Services</h1>
+                  <Services />
                 </Route>
                 <Route exact path="/dashboard">
                   <h1>Dashboard</h1>
