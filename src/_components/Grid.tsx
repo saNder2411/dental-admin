@@ -148,7 +148,6 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
       rowHeight={40}
       pageable
       sortable
-      groupable
       data={processedData}
       onDataStateChange={onDataStateChange}
       onSelectionChange={onSelectionChange}

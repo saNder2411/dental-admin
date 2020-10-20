@@ -5,7 +5,7 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
 import { selectLocaleState } from '../AppSelectors';
 // Images
-import headerBg from '../../assets/header-bg.png';
+import headerBg from '../../_assets/header-bg.png';
 
 interface Props {
   page: string;

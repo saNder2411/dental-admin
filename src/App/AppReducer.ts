@@ -11,7 +11,7 @@ export interface AppState {
   onLocaleChange: (dispatch: Dispatch, localeId: string) => void;
 }
 
-const initialState = {
+const _initialState = {
   currentLocaleId: `en-US`,
   locales: [
     { locale: 'English', localeId: 'en-US' },
@@ -23,7 +23,7 @@ const initialState = {
   onLocaleChange: (dispatch: Dispatch, localeId: string) => dispatch(changeLocaleAC(localeId)),
 };
 
-export const reducer = (state: AppState = initialState, action: Actions): AppState => {
+export const reducer = (state: AppState = _initialState, action: Actions): AppState => {
   switch (action.type) {
     case ActionTypes.CHANGE_LOCALE: {
       return { ...state, currentLocaleId: action.payload };

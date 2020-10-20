@@ -5,7 +5,7 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Header } from './Header';
 // Images
-import bodyBg from '../../assets/body-bg.jpeg';
+import bodyBg from '../../_assets/body-bg.jpeg';
 
 const items = [
   { name: 'home', iconSvg: 'home-icon', selected: true, route: '/' },

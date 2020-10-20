@@ -1,34 +1,33 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_components';
 import { CurrencyCell, DateCell, ClockCell } from '../_components';
 
-import { homeGridData } from './mockData';
+import { homeGridData } from './HomeMockData';
 
 export const Home: FC = (): JSX.Element => {
-  const [data, setData] = useState(homeGridData);
   const localizationService = useLocalization();
 
   return (
     <div id="Dashboard" className="home-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid data={data} onDataChange={(data: any) => setData(data)}>
-            <GridColumn title={localizationService.toLanguageString('custom.performance', 'Performance')} groupable={false}>
-              <GridColumn field={''} title={localizationService.toLanguageString('', '')} width={120} cell={ClockCell} />
+          <Grid data={homeGridData}>
+            <GridColumn title={localizationService.toLanguageString('custom.performance', 'Performance')}>
+              <GridColumn field={''} title={localizationService.toLanguageString('', '')} width={100} cell={ClockCell} />
               <GridColumn
                 field={'status'}
                 title={localizationService.toLanguageString('custom.status', 'Status')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={100}
                 filter={'text'}
               />
               <GridColumn
                 field={'references'}
                 title={localizationService.toLanguageString('custom.references', 'References')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={100}
                 filter={'text'}
               />
               <GridColumn
@@ -43,6 +42,7 @@ export const Home: FC = (): JSX.Element => {
                 field={'end'}
                 title={localizationService.toLanguageString('custom.end', 'End')}
                 columnMenu={ColumnMenu}
+                cell={DateCell}
                 // width={120}
                 filter={'text'}
               />
@@ -50,7 +50,7 @@ export const Home: FC = (): JSX.Element => {
                 field={'svcStaff'}
                 title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={110}
                 filter={'text'}
               />
               <GridColumn
@@ -64,24 +64,24 @@ export const Home: FC = (): JSX.Element => {
                 field={'budget'}
                 title={localizationService.toLanguageString('custom.total', 'Total')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={90}
                 cell={CurrencyCell}
                 filter={'numeric'}
               />
             </GridColumn>
-            <GridColumn title={localizationService.toLanguageString('custom.contacts', 'Contacts')} groupable={false}>
+            <GridColumn title={localizationService.toLanguageString('custom.contacts', 'Contacts')}>
               <GridColumn
                 field={'lastName'}
                 title={localizationService.toLanguageString('custom.lastName', 'Last Name')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={120}
                 filter={'text'}
               />
               <GridColumn
                 field={'firstName'}
                 title={localizationService.toLanguageString('custom.firstName', 'First Name')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={120}
                 filter={'text'}
               />
               <GridColumn
@@ -94,6 +94,7 @@ export const Home: FC = (): JSX.Element => {
                 field={'lastUpdate'}
                 title={localizationService.toLanguageString('custom.lastUpdate', 'Last Update')}
                 columnMenu={ColumnMenu}
+                cell={DateCell}
                 // width={120}
                 filter={'date'}
               />
@@ -101,7 +102,7 @@ export const Home: FC = (): JSX.Element => {
                 field={'eventId'}
                 title={localizationService.toLanguageString('custom.eventId', 'Event ID')}
                 columnMenu={ColumnMenu}
-                // width={120}
+                width={100}
                 filter={'text'}
               />
             </GridColumn>

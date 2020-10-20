@@ -52,21 +52,21 @@ a {
       font-size: 1.7rem;
 
       &.dashboard-icon {
-        -webkit-mask-image: url('./../assets/dashboard-icon.svg');
-        mask-image: url('./../assets/dashboard-icon.svg');
+        -webkit-mask-image: url('./../_assets/dashboard-icon.svg');
+        mask-image: url('./../_assets/dashboard-icon.svg');
         margin-top: 2px;
         margin-left: 7px;
         background-color: #656565;
       }
       &.profile-icon {
-        -webkit-mask-image: url('./../assets/profile-icon.svg');
-        mask-image: url('./../assets/profile-icon.svg');
+        -webkit-mask-image: url('./../_assets/profile-icon.svg');
+        mask-image: url('./../_assets/profile-icon.svg');
         margin-left: 9px;
         background-color: #656565;
       }
       &.home-icon {
-        -webkit-mask-image: url('./../assets/house.svg');
-        mask-image: url('./../assets/house.svg');
+        -webkit-mask-image: url('./../_assets/house.svg');
+        mask-image: url('./../_assets/house.svg');
         margin-left: 9px;
         background-color: #656565;
       }
@@ -125,7 +125,7 @@ a {
 
 @media (min-width: 480px) {
   .card-container {
-    text-align: initial;
+    text-align: _initial;
     padding: 30px;
 
     &.grid {
@@ -204,7 +204,7 @@ a {
   }
 
   .hamburger-icon {
-    background-image: url('./../assets/hamburger-icon.svg');
+    background-image: url('./../_assets/hamburger-icon.svg');
     background-repeat: no-repeat;
     width: 20px;
     cursor: pointer;
@@ -267,7 +267,8 @@ a {
 }
 
 // Home page
-.home-page {
+.home-page,
+.stylists-page {
   .card-container:last-of-type {
     padding-top: 0;
   }
@@ -275,14 +276,11 @@ a {
   .k-grid-toolbar .k-textbox {
     margin-bottom: 10px;
   }
-
-  // .k-indicator-container {
-  //   display: none;
-  // }
 }
 
 @media (min-width: 480px) {
-  .home-page {
+  .home-page,
+  .stylists-page {
     .k-grid-toolbar .k-textbox {
       margin-bottom: 0;
       float: left;
@@ -295,7 +293,8 @@ a {
 }
 
 @media (min-width: 768px) {
-  .home-page {
+  .home-page,
+  .stylists-page {
     .card-container:last-of-type {
       padding-top: 30px;
     }
@@ -533,7 +532,7 @@ a {
   }
 
   .footer {
-    background-image: url('../assets/info-background.svg');
+    background-image: url('../_assets/info-background.svg');
     background-repeat: no-repeat;
     height: 320px;
   }

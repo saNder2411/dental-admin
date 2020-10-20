@@ -11,7 +11,6 @@ export const enMessages = {
     gridSearch: 'Search in all columns...',
     exportExcel: 'Export to Excel',
     exportPdf: 'Export to PDF',
-
     performance: 'Performance',
     status: 'Status',
     references: 'References',
@@ -25,10 +24,15 @@ export const enMessages = {
     phone: 'Mobile Phone',
     lastUpdate: 'Last Update',
     eventId: 'Event ID',
+    teamId: 'Team ID',
+    photo: 'Photo',
+    fullName: 'Name',
+    jobTitle: 'Job Title',
+    showOnline: 'Show Online',
+    email: 'Email',
 
-
-    
-
+    gender: 'Gender',
+    upcoming: 'Upcoming',
   },
   grid: {
     groupPanelEmpty: 'Drag a column header and drop it here to group by that column',

@@ -11,7 +11,6 @@ export const deMessages = {
     gridSearch: 'In allen Spalten suchen ...',
     exportExcel: 'Export nach Excel',
     exportPdf: 'In PDF exportieren',
-
     performance: 'Leistung',
     status: 'Status',
     references: 'Referenzen',
@@ -25,5 +24,14 @@ export const deMessages = {
     phone: 'Handy',
     lastUpdate: 'Letztes Update',
     eventId: 'Ereignis ID',
+    teamId: 'Team ID',
+    photo: 'Foto',
+    fullName: 'Name',
+    jobTitle: 'Job Title',
+    showOnline: 'Online Anzeigen',
+    email: 'Email',
+
+    gender: 'Geschlecht',
+    upcoming: 'Bevorstehend',
   },
 };

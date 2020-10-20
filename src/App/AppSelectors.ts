@@ -1,5 +1,5 @@
 // Types
-import { GlobalState } from '../init/store';
+import { GlobalState } from '../_init/store';
 
 export const selectLocaleId = ({ AppState }: GlobalState) => AppState.currentLocaleId;
 

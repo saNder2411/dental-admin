@@ -11,7 +11,6 @@ export const itMessages = {
     gridSearch: 'Cerca in tutte le colonne ...',
     exportExcel: 'Esporta in Excel',
     exportPdf: 'Esporta in PDF',
-
     performance: 'Performance',
     status: 'Stato',
     references: 'Riferimenti',
@@ -25,5 +24,14 @@ export const itMessages = {
     phone: 'Cellulare',
     lastUpdate: 'Ultimo Aggiornamento',
     eventId: `ID Evento`,
+    teamId: 'ID Squadra',
+    photo: 'Foto',
+    fullName: 'Nome',
+    jobTitle: 'Titolo Lavorativo',
+    showOnline: 'Mostra Online',
+    email: 'Email',
+
+    gender: 'Genere',
+    upcoming: ' In Arrivo',
   },
 };

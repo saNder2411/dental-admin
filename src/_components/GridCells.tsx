@@ -1,82 +1,66 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useInternationalization } from '@progress/kendo-react-intl';
+import { GridCellProps } from '@progress/kendo-react-grid';
+// Styled Components
+import * as SC from './GridCellsStyled';
 // Images
-import clockSvg from '../assets/clocks/clock-5.svg';
+import MalePhotoPlaceholder from '../_assets/customers/male_placeholder.jpg';
+import FemalePhotoPlaceholder from '../_assets/customers/female_placeholder.jpg';
 
+type GridCell = (props: GridCellProps) => JSX.Element | null;
 
-export const CurrencyCell = (props: any) => {
+export const CurrencyCell: GridCell = ({ rowType, dataItem }) => {
   const intlService = useInternationalization();
 
-  const redBoldStyle = {
-    color: '#d9534f',
-    fontWeight: 600,
-  };
+  return rowType === 'groupHeader' ? null : (
+    <SC.CurrencyCell isNegativeAmount={dataItem.budget < 0}>
+      <span>{intlService.formatNumber(dataItem.budget, 'c')}</span>
+    </SC.CurrencyCell>
+  );
+};
 
-  if (props.rowType === 'groupHeader') {
-    return null;
-  }
+export const DateCell: GridCell = ({ rowType, dataItem }) => {
+  const intlService = useInternationalization();
+  const date = dataItem.start || dataItem.end || dataItem.lastUpdate;
 
-  return (
+  return rowType === 'groupHeader' ? null : (
     <td>
-      <span style={props.dataItem.budget < 0 ? redBoldStyle : {}}>{intlService.formatNumber(props.dataItem.budget, 'c')}</span>
+      <span>{intlService.formatDate(new Date(date), 'EEE d-MMM hh:mm')}</span>
     </td>
   );
 };
 
-export const DateCell = (props: any) => {
-  const intlService = useInternationalization();
-
-  // const date = new Date(props.dataItem.start).toLocaleDateString('en-US');
-
-  if (props.rowType === 'groupHeader') {
-    return null;
-  }
-
-  return (
-    <td>
-      <span>
-        {intlService.formatDate(props.dataItem.start, {
-          date: 'medium',
-          time: 'medium',
-          datetime: 'short',
-          year: '2-digit',
-          month: '2-digit',
-          day: '2-digit',
-        })}
-      </span>
-    </td>
+export const ClockCell: GridCell = ({ rowType }) => {
+  return rowType === 'groupHeader' ? null : (
+    <SC.ClockCell>
+      <div className="grid__clock-image" />
+    </SC.ClockCell>
   );
 };
 
-const SCClockCell = styled.td`
-  && {
-    padding: 20;
-  }
+export const PhotoCell: GridCell = ({ rowType, dataItem }) => {
+  return rowType === 'groupHeader' ? null : (
+    <SC.PhotoCell imageUrl={dataItem.photo}>
+      <div className="grid__stylist-photo" />
+    </SC.PhotoCell>
+  );
+};
 
-  & .grid-clock {
-    margin: auto;
-    width: 70px;
-    height: 70px;
-    mask-image: url(${clockSvg});
-    mask-size: contain;
-    mask-position: center;
-    mask-repeat: no-repeat;
-    /* background-color: #293897; */
-    background-color: #656565;
-    /* background-color: #4db5c8; */
-  }
-`;
+export const FlagCell: GridCell = ({ rowType, dataItem }) => {
+  return rowType === 'groupHeader' ? null : (
+    <SC.FlagCell isOnline={dataItem.isShowOnline}>
+      <span className={dataItem.isShowOnline ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
+    </SC.FlagCell>
+  );
+};
 
-export const ClockCell = (props: any) => {
-  if (props.rowType === 'groupHeader') {
-    return null;
-  }
+export const CustomerPhotoCell: GridCell = ({ rowType, dataItem }) => {
+  const placeholderImageUrl = dataItem.gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const imageUrl = dataItem.photo ? dataItem.photo : placeholderImageUrl;
 
-  return (
-    <SCClockCell>
-      <div className="grid-clock" />
-      {/* <img src={clockSvg} alt="clock" /> */}
-    </SCClockCell>
+  return rowType === 'groupHeader' ? null : (
+    <SC.PhotoCell imageUrl={imageUrl}>
+      <div className="grid__stylist-photo" />
+    </SC.PhotoCell>
   );
 };

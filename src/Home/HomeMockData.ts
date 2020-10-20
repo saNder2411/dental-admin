@@ -1,0 +1,16 @@
+export const homeGridData = new Array(25).fill(``).map(() => ({
+  id: (Math.random() * Math.random()).toString(),
+  clock: '',
+  status: '(2) Pending',
+  references: 'S.Pye-0635',
+  start: new Date().toISOString(),
+  end: new Date().toISOString(),
+  svcStaff: 'Romanova',
+  services: '02-Mens Wash+Cut+Dry S3_006',
+  budget: -38.25,
+  lastName: 'Pye',
+  firstName: 'Stephen',
+  phone: '0798302214',
+  lastUpdate: new Date().toISOString(),
+  eventId: 635,
+}));
