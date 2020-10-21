@@ -38,6 +38,7 @@ export const esMessages = {
     consultation: 'Consulta',
     duration: 'Duración (minutos)',
     category: 'Categoría',
-    offeringId: 'ID de Oferta'
+    offeringId: 'ID de Oferta',
+    teamCalendar: 'Calendario Del Equipo',
   },
 };

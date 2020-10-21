@@ -2,20 +2,15 @@ import React, { useState, useCallback } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 import { Card, CardHeader, Avatar, CardTitle, CardSubtitle } from '@progress/kendo-react-layout';
 import { guid } from '@progress/kendo-react-common';
-
+// Components
 import { Scheduler } from '../_components';
+// Mocks
+import { employees, teams, orders, ordersModelFields } from './AgendaMockData';
 
-// import { employees } from '../_resources/employees';
-import { employees, teams } from './AgendaMockData';
-import { orders, ordersModelFields } from '../_resources/orders';
-// import { teams } from '../_resources/teams';
-
-// const orderEmployees = employees.filter((employee) => employee.jobTitle === 'Sales Representative');
-const orderEmployees = employees;
 const initialFilterState: { [key: string]: boolean } = {};
-console.log(`orderEmployees`, orderEmployees);
+console.log(`orderEmployees`, employees);
 
-orderEmployees.forEach((employee) => (initialFilterState[employee.id] = true));
+employees.forEach((employee) => (initialFilterState[employee.id] = true));
 
 export const Agenda = () => {
   const localizationService = useLocalization();
@@ -64,7 +59,7 @@ export const Agenda = () => {
     <div id="Planning" className="planning-page main-content">
       <div className="card-container grid">
         <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
-        {orderEmployees.map((employee) => {
+        {employees.map((employee) => {
           return (
             <div key={employee.id} onClick={() => onEmployeeClick(employee.id)} style={!filterState[employee.id] ? { opacity: 0.5 } : {}}>
               <Card style={{ borderWidth: 0, cursor: 'pointer' }}>

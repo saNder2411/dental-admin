@@ -32,12 +32,12 @@ export const frMessages = {
     email: 'Email',
     gender: 'Genre',
     upcoming: 'À venir',
-
     discount: 'Remise %',
     price: 'Prix',
     consultation: 'Consultation',
     duration: `Durée (mins)`,
     category: 'Catégorie',
     offeringId: `ID de L'offre`,
+    teamCalendar: `Calendrier D'équipe`,
   },
 };

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { Scheduler as KendoScheduler, DayView, WeekView, WorkWeekView, MonthView } from '@progress/kendo-react-scheduler';
 
 export const Scheduler = (props: any) => {

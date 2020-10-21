@@ -39,5 +39,6 @@ export const deMessages = {
     duration: 'Dauer (Minuten)',
     category: 'Kategorie',
     offeringId: 'Anbieten ID',
+    teamCalendar: 'Teamkalender',
   },
 };
