@@ -1,4 +1,4 @@
-import AnyStylist from '../_assets/stylists/Any-Stylist-Portrait-85x85.png';
+// import AnyStylist from '../_assets/stylists/Any-Stylist-Portrait-85x85.png';
 import Amelia from '../_assets/stylists/Amelia-Giroud-Portrait-85x85.png';
 import GraceRobinson from '../_assets/stylists/Grace-Robinson-Portrait-85x85.png';
 import ChristinaRomanov from '../_assets/stylists/Christina-Romanov-Portrait-85x85.png';
@@ -7,17 +7,17 @@ import AlexLocatelli from '../_assets/stylists/Alex-Locatelli-Portrait-85x85.png
 import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
 
 export const employees = [
-  {
-    teamId: 1,
-    id: '3d2f991c-58ef-436d-912e-49496fd2065c',
-    photo: AnyStylist,
-    fullName: '--Team Stylist--',
-    jobTitle: 'Various',
-    isShowOnline: true,
-    mobilePhone: '+89 7955 99888',
-    email: 'any.stylist@metroapps.online',
-    gender: 'F',
-  },
+  // {
+  //   teamId: 1,
+  //   id: '3d2f991c-58ef-436d-912e-49496fd2065c',
+  //   photo: AnyStylist,
+  //   fullName: '--Team Stylist--',
+  //   jobTitle: 'Various',
+  //   isShowOnline: true,
+  //   mobilePhone: '+89 7955 99888',
+  //   email: 'any.stylist@metroapps.online',
+  //   gender: 'F',
+  // },
   {
     teamId: 3,
     id: '7b991e13-bef7-4f19-bd18-d5aa9d263cba',
