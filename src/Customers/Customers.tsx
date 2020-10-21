@@ -44,7 +44,6 @@ export const Customers: FC = (): JSX.Element => {
               field={'svcStaff'}
               title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
               columnMenu={ColumnMenu}
-              width={110}
               filter={'text'}
             />
             <GridColumn

@@ -300,6 +300,16 @@ a {
     }
   }
 }
+
+.k-dialog-content {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+
+  & .k-scheduler-edit-form {
+    padding: 20px;
+  }
+}
 // Planning page
 .planning-page {
   .card-container {
@@ -307,6 +317,7 @@ a {
   }
   .card-title {
     grid-column: 1 / -1;
+    text-align: left;
   }
   .k-hbox {
     padding: 0 20px;

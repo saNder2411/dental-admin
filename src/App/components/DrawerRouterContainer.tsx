@@ -13,7 +13,7 @@ const items = [
   { name: 'stylists', iconSvg: 'profile-icon', selected: false, route: '/stylists' },
   { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
   { name: 'services', iconSvg: 'k-i-currency', selected: false, route: '/services' },
-  { name: 'dashboard', iconSvg: 'dashboard-icon', selected: true, route: '/dashboard' },
+  // { name: 'dashboard', iconSvg: 'dashboard-icon', selected: true, route: '/dashboard' },
 ];
 
 const getSelectedItemName = (pathname: string): string => {

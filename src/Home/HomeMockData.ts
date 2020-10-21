@@ -7,7 +7,7 @@ export const homeGridData = new Array(25).fill(``).map(() => ({
   end: new Date().toISOString(),
   svcStaff: 'Romanova',
   services: '02-Mens Wash+Cut+Dry S3_006',
-  budget: -38.25,
+  budget: 38.25,
   lastName: 'Pye',
   firstName: 'Stephen',
   phone: '0798302214',
