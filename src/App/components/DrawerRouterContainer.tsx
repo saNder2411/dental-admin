@@ -76,7 +76,7 @@ export const DrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
         mode={isSmallerScreen ? 'overlay' : 'push'}
         mini={!isSmallerScreen}
         onOverlayClick={() => setIsExpended((prevState) => !prevState)}
-        onSelect={() => setIsExpended(true)}
+        onSelect={() => setIsExpended(false)}
         style={{ backgroundImage: `url(${bodyBg})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
         <DrawerContent>{children}</DrawerContent>
       </Drawer>
