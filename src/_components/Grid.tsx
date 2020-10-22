@@ -55,7 +55,7 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
 
   const onPdfExportDone = useCallback(() => setIsPdfExporting(false), []);
 
-  const onAllColumnFilterChange = useCallback((evt) => setAllColumnFilter(evt.value), [setAllColumnFilter]);
+  const onAllColumnFilterChange = useCallback((_evt) => setAllColumnFilter(``), [setAllColumnFilter]);
 
   const onSelectionChange = useCallback(
     (evt) => {
