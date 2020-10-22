@@ -4,7 +4,8 @@ import { Scheduler as KendoScheduler, DayView, WeekView, WorkWeekView, MonthView
 export const Scheduler = (props: any) => {
   const { data, modelFields, resources, onDataChange } = props;
 
-  const defaultDate = new Date('2020-04-27T00:00:00Z');
+  // const defaultDate = new Date('2020-04-27T00:00:00Z');
+  const defaultDate = new Date();
 
   return (
     <KendoScheduler

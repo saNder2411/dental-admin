@@ -9,7 +9,7 @@ import bodyBg from '../../_assets/body-bg.jpeg';
 
 const items = [
   { name: 'home', iconSvg: 'home-icon', selected: true, route: '/' },
-  { name: 'agenda', iconSvg: 'k-i-calendar-date', selected: false, route: '/agenda' },
+  { name: 'calendar', iconSvg: 'k-i-calendar-date', selected: false, route: '/calendar' },
   { name: 'stylists', iconSvg: 'profile-icon', selected: false, route: '/stylists' },
   { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
   { name: 'services', iconSvg: 'k-i-currency', selected: false, route: '/services' },
@@ -43,7 +43,6 @@ export const DrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
   const [isExpended, setIsExpended] = useState(true);
   const [isSmallerScreen, setIsSmallerScreen] = useState(false);
   const localizationService = useLocalization();
-  // const intl = useInternationalization();
   const { pathname } = useLocation();
   const selectedItemName = getSelectedItemName(pathname);
 

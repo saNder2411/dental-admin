@@ -3,6 +3,7 @@ export const frMessages = {
     silverAgenda: 'Agenda Argent',
     home: 'Maison',
     agenda: 'Agenda',
+    calendar: 'Calendrier',
     stylists: 'Stylistes',
     customers: 'Clients',
     services: 'Services',

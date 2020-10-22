@@ -3,6 +3,7 @@ export const esMessages = {
     silverAgenda: 'Agenda de Plata',
     home: 'Hogar',
     agenda: 'Agenda',
+    calendar: 'Calendario',
     stylists: 'Estilistas',
     customers: 'Clientes',
     services: 'Servicios',

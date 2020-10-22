@@ -38,7 +38,7 @@ import { enMessages, deMessages, frMessages, esMessages, itMessages } from './me
 import { DrawerRouterContainer } from './components';
 // Pages
 import { Home } from '../Home';
-import { Agenda } from '../Agenda';
+import { Calendar } from '../Calendar';
 import { Stylists } from '../Stylists';
 import { Customers } from '../Customers';
 import { Services } from '../Services';
@@ -92,8 +92,8 @@ export const App: FC = (): JSX.Element => {
                 <Route exact path="/">
                   <Home />
                 </Route>
-                <Route exact path="/agenda">
-                  <Agenda />
+                <Route exact path="/calendar">
+                  <Calendar />
                 </Route>
                 <Route exact path="/stylists">
                   <Stylists />
