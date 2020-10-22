@@ -340,6 +340,10 @@ a {
   .disabled {
     opacity: 0.5;
   }
+
+  .SchedulerItemContent__item {
+    margin-bottom: 4px;
+  }
 }
 
 @media (min-width: 480px) {
