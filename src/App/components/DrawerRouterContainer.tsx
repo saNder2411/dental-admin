@@ -8,12 +8,12 @@ import { Header } from './Header';
 import bodyBg from '../../_assets/body-bg.jpeg';
 
 const items = [
-  { name: 'home', iconSvg: 'home-icon', selected: true, route: '/' },
+  { name: 'agenda', iconSvg: 'home-icon', selected: true, route: '/' },
   { name: 'calendar', iconSvg: 'k-i-calendar-date', selected: false, route: '/calendar' },
   { name: 'stylists', iconSvg: 'profile-icon', selected: false, route: '/stylists' },
   { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
   { name: 'services', iconSvg: 'k-i-currency', selected: false, route: '/services' },
-  // { name: 'dashboard', iconSvg: 'dashboard-icon', selected: true, route: '/dashboard' },
+  { name: 'dashboard', iconSvg: 'dashboard-icon', selected: false, route: '/dashboard' },
 ];
 
 const getSelectedItemName = (pathname: string): string => {

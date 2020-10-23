@@ -1,13 +1,13 @@
 import React, { useState, useCallback } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
-import { Card, CardHeader, Avatar, CardTitle, CardSubtitle } from '@progress/kendo-react-layout';
 import { guid } from '@progress/kendo-react-common';
 // Components
 import { Scheduler } from '../_components';
+import { EmployeeControlBtn, HeadingCell } from './components';
 // Styled Components
 import * as SC from './CalendarStyledCmp';
 // Mocks
-import { employees, teams, orders, ordersModelFields } from './CalendarMockData';
+import { employees, orders, teams, ordersModelFields } from './CalendarMockData';
 
 const initialFilterState: { [key: string]: boolean } = {};
 employees.forEach((employee) => (initialFilterState[employee.id] = true));
@@ -15,6 +15,7 @@ employees.forEach((employee) => (initialFilterState[employee.id] = true));
 export const Calendar = () => {
   const localizationService = useLocalization();
   const [filterState, setFilterState] = useState(initialFilterState);
+  // const [filteredTeam] = useState(-1);
   const [data, setData] = useState(orders);
 
   const onDataChange = useCallback(({ created, updated, deleted }) => {
@@ -41,46 +42,53 @@ export const Calendar = () => {
   );
 
   return (
-    <div id="Planning" className="planning-page main-content">
+    <SC.Calendar id="Planning" className="planning-page main-content">
       <div className="card-container grid">
         <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
-        {employees.map((employee) => (
-          <SC.EmployeeCard
-            key={employee.id}
-            onClick={() => onEmployeeClick(employee.id)}
-            isFiltered={!filterState[employee.id]}
-            cardColor={teams.find(({ teamID }: any) => teamID === employee.teamId)?.teamColor ?? ''}>
-            <Card>
-              <CardHeader className="k-hbox">
-                <Avatar type="image" shape="circle">
-                  <img src={employee.photo} alt="employee avatar" />
-                </Avatar>
-                <div>
-                  <CardTitle>{employee.fullName}</CardTitle>
-                  <CardSubtitle>{employee.jobTitle}</CardSubtitle>
-                </div>
-              </CardHeader>
-            </Card>
-          </SC.EmployeeCard>
-        ))}
+        <div className="card-control-wrapper">
+          {employees.map((employee) => (
+            <EmployeeControlBtn
+              key={employee.id}
+              isFiltered={!filterState[employee.id]}
+              cardColor={teams.find(({ teamID }: any) => teamID === employee.teamId)?.teamColor ?? ''}
+              onEmployeeClick={() => onEmployeeClick(employee.id)}
+              fullName={employee.fullName}
+            />
+          ))}
+        </div>
         <div className="card-component">
           <Scheduler
             data={data.filter((event: any) => filterState[event.employeeID ? event.employeeID : ''])}
             onDataChange={onDataChange}
             modelFields={ordersModelFields}
+            group={{
+              resources: ['Teams'],
+            }}
             resources={[
               {
                 name: 'Teams',
-                data: teams,
+                data: teams
+                  .filter((team) => filterState[team.managerID])
+                  .map((item) => ({
+                    ...item,
+                    text: (
+                      <HeadingCell
+                        cardColor={item.teamColor}
+                        employeeImage={item.photo}
+                        fullName={item.managerName}
+                        jobTitle={item.jobTitle}
+                      />
+                    ),
+                  })),
                 field: 'teamID',
                 valueField: 'teamID',
-                textField: 'teamName',
+                textField: 'text',
                 colorField: 'teamColor',
               },
             ]}
           />
         </div>
       </div>
-    </div>
+    </SC.Calendar>
   );
 };

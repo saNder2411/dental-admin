@@ -13,7 +13,7 @@ export const CurrencyCell = styled.td<{ isNegativeAmount: boolean }>`
   }
 `;
 
-export const ClockCell = styled.td`
+export const StatusIcon = styled.td`
   && {
     padding: 20;
   }

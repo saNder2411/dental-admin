@@ -1,4 +1,4 @@
-export const homeGridData = [
+export const AgendaGridData = [
   {
     id: (Math.random() * Math.random()).toString(),
     clock: '',

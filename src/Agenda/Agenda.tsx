@@ -2,20 +2,20 @@ import React, { FC } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_components';
-import { CurrencyCell, DateCell, ClockCell } from '../_components';
+import { CurrencyCell, DateCell, StatusIcon } from '../_components';
 
-import { homeGridData } from './HomeMockData';
+import { AgendaGridData } from './AgendaMockData';
 
-export const Home: FC = (): JSX.Element => {
+export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   return (
     <div id="Dashboard" className="home-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid data={homeGridData}>
+          <Grid data={AgendaGridData}>
             <GridColumn title={localizationService.toLanguageString('custom.performance', 'Performance')}>
-              <GridColumn field={''} title={localizationService.toLanguageString('', '')} width={100} cell={ClockCell} />
+              <GridColumn width={100} cell={StatusIcon} />
               <GridColumn
                 field={'status'}
                 title={localizationService.toLanguageString('custom.status', 'Status')}

@@ -5,10 +5,11 @@ import {
   SchedulerItemContent,
   DayView,
   WeekView,
-  WorkWeekView,
+  // WorkWeekView,
+  AgendaView,
   MonthView,
 } from '@progress/kendo-react-scheduler';
-import ReactTooltip from 'react-tooltip';
+// import ReactTooltip from 'react-tooltip';
 import { useInternationalization } from '@progress/kendo-react-intl';
 
 const CustomItem = (props: any) => {
@@ -31,27 +32,27 @@ const CustomItem = (props: any) => {
           )}
         </div>
       </SchedulerItem>
-      <ReactTooltip
+      {/* <ReactTooltip
         id="global"
         aria-haspopup="true"
         effect="solid"
         wrapper="div"
-        // overridePosition={({ left, top }, currentEvent, currentTarget, node, place, desiredPlace, effect, offset) => ({ left, top })}
+        overridePosition={({ left, top }, currentEvent, currentTarget, node, place, desiredPlace, effect, offset) => ({ left, top })}
       >
-        <div style={{zIndex: 100000}}>
+        <div style={{ zIndex: 100000 }}>
           <p>This is a global react component tooltip</p>
           <p>You can put every thing here</p>
           <p>Word</p>
           <p>Chart</p>
           <p>Else</p>
         </div>
-      </ReactTooltip>
+      </ReactTooltip> */}
     </>
   );
 };
 
 export const Scheduler = (props: any) => {
-  const { data, modelFields, resources, onDataChange } = props;
+  const { data, modelFields, group, resources, onDataChange } = props;
 
   // const defaultDate = new Date('2020-04-27T00:00:00Z');
   const defaultDate = new Date();
@@ -60,11 +61,12 @@ export const Scheduler = (props: any) => {
     <KendoScheduler
       data={data}
       modelFields={modelFields}
+      group={group}
       resources={resources}
       timezone={'Etc/UTC'}
       defaultDate={defaultDate}
       item={CustomItem}
-      defaultView={window.innerWidth < 768 ? 'day' : 'work-week'}
+      defaultView={'day'}
       onDataChange={onDataChange}
       editable={{
         add: true,
@@ -74,10 +76,11 @@ export const Scheduler = (props: any) => {
         edit: true,
         select: false,
       }}>
-      <DayView />
-      <WorkWeekView numberOfDays={7} />
+      <DayView workDayStart={'08:00'} workDayEnd={'20:00'} />
+      {/* <WorkWeekView numberOfDays={7} /> */}
       <WeekView />
       <MonthView />
+      <AgendaView />
     </KendoScheduler>
   );
 };
