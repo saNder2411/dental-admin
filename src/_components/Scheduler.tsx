@@ -59,6 +59,7 @@ export const Scheduler = (props: any) => {
 
   return (
     <KendoScheduler
+      style={{ minHeight: 700 }}
       data={data}
       modelFields={modelFields}
       group={group}
@@ -76,9 +77,9 @@ export const Scheduler = (props: any) => {
         edit: true,
         select: false,
       }}>
-      <DayView workDayStart={'08:00'} workDayEnd={'20:00'} />
+      <DayView workDayStart={'08:00'} workDayEnd={'20:00'} slotDuration={60} slotDivisions={4} step={4} />
       {/* <WorkWeekView numberOfDays={7} /> */}
-      <WeekView />
+      <WeekView slotDuration={60} slotDivisions={4} />
       <MonthView />
       <AgendaView />
     </KendoScheduler>
