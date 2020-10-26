@@ -149,13 +149,42 @@ export const ordersModelFields = {
 const now = Date.now();
 const hour = 3.6e6;
 
-export const orders = [
+enum OrderStatus {
+  Consultation = 'Consultation',
+  Pending = 'Pending',
+  Reserved = 'Reserved',
+  Booked = 'Booked',
+  Paid = 'Paid',
+  Checking = 'Checking',
+  Cancelled = 'Cancelled',
+  Closed = 'Closed',
+  Unavailable = 'Unavailable',
+  Other = 'Other',
+}
+
+interface Order {
+  title: string;
+  start: Date;
+  end: Date;
+  orderID: number;
+  refID: string;
+  status: OrderStatus;
+  mobilePhone: string;
+  email: string;
+  notes: string;
+  description: string;
+  employeeID: string;
+  teamID: number;
+}
+
+export const orders: Order[] = [
   {
     title: 'Amelia Giround',
     start: now - hour * 2,
     end: now - hour,
     orderID: 1,
     refID: 'C.A.Female-0640',
+    status: OrderStatus.Consultation,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '06-Ladies Blow Dry S1_021',
@@ -169,6 +198,7 @@ export const orders = [
     end: now + hour,
     orderID: 2,
     refID: 'S.Pye-0503',
+    status: OrderStatus.Pending,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '02-Mens Wash+Cut+Dry S4_007',
@@ -182,6 +212,7 @@ export const orders = [
     end: now - hour * 1,
     orderID: 3,
     refID: 'A.Cea-0505',
+    status: OrderStatus.Reserved,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '05-Highlights 1/1 S4_013',
@@ -195,6 +226,7 @@ export const orders = [
     end: now - hour * 1,
     orderID: 4,
     refID: 'A.Switzer-0506',
+    status: OrderStatus.Booked,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
@@ -208,6 +240,7 @@ export const orders = [
     end: now + hour * 3,
     orderID: 5,
     refID: 'A.Cea-0505',
+    status: OrderStatus.Paid,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '05-Highlights 1/1 S4_013',
@@ -221,6 +254,7 @@ export const orders = [
     end: now + hour * 4,
     orderID: 6,
     refID: 'A.Switzer-0506',
+    status: OrderStatus.Checking,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
@@ -234,6 +268,7 @@ export const orders = [
     end: now + hour * 2,
     orderID: 7,
     refID: 'C.Smith-0507',
+    status: OrderStatus.Cancelled,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '06-Ladies Blow Dry S1_021',
@@ -247,6 +282,7 @@ export const orders = [
     end: now,
     orderID: 8,
     refID: 'C.Smith-0507',
+    status: OrderStatus.Closed,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '08-Balayage Natural S4_027',
@@ -257,9 +293,24 @@ export const orders = [
   {
     title: 'Sara Khan',
     start: now + hour * 2,
-    end: now + hour * 2.5,
+    end: now + hour * 3,
     orderID: 9,
     refID: 'C.Smith-0507',
+    status: OrderStatus.Unavailable,
+    mobilePhone: 'Phone',
+    email: 'Email',
+    notes: '08-Balayage Natural S4_027',
+    employeeID: 'SaraKhan',
+    teamID: 6,
+    description: '08-Balayage Natural S4_027',
+  },
+  {
+    title: 'Sara Khan',
+    start: now - hour * 2,
+    end: now - hour * 3.5,
+    orderID: 10,
+    refID: 'C.Smith-0507',
+    status: OrderStatus.Other,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '08-Balayage Natural S4_027',
