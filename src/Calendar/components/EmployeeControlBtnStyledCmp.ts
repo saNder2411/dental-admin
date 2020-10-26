@@ -23,7 +23,7 @@ export const EmployeeControlBtn = styled.div<EmployeeControlBtnProps>`
     margin: auto;
     border-radius: 50%;
     border: 2px solid ${({ cardColor }) => cardColor};
-    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0, 0, 0, 0.7);
+    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0, 0, 0, .7);
     background-color: ${({ cardColor }) => cardColor};
   }
 `;

@@ -6,8 +6,8 @@ import { GridCellProps } from '@progress/kendo-react-grid';
 // Styled Components
 import * as SC from './GridCellsStyled';
 // Images
-import MalePhotoPlaceholder from '../_assets/customers/male_placeholder.jpg';
-import FemalePhotoPlaceholder from '../_assets/customers/female_placeholder.jpg';
+import MalePhotoPlaceholder from '../../_assets/customers/male_placeholder.jpg';
+import FemalePhotoPlaceholder from '../../_assets/customers/female_placeholder.jpg';
 
 type GridCell = (props: GridCellProps) => JSX.Element | null;
 

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 // Images
-import clockSvg from '../_assets/clocks/clock-5.svg';
+import clockSvg from '../../_assets/clocks/clock-5.svg';
 
 export const CurrencyCell = styled.td<{ isNegativeAmount: boolean }>`
   & span {
