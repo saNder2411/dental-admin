@@ -28,11 +28,11 @@ export const SchedulerCustomItem = (props: any) => {
       </SC.SchedulerItemTopWrapper>
       {!props.isAllDay && (
         <SchedulerItemContent>
-          <div className="SchedulerItemContent__item">Ref: {props.dataItem.refID}</div>
+          <div className="SchedulerItemContent__item">{props.dataItem.refID}</div>
           <div className="SchedulerItemContent__item">
             {intl.formatDate(props.zonedStart, 't')} - {intl.formatDate(props.zonedEnd, 't')}
           </div>
-          <div className="SchedulerItemContent__item">Notes: {props.dataItem.notes}</div>
+          <div className="SchedulerItemContent__item">{props.dataItem.notes}</div>
         </SchedulerItemContent>
       )}
     </SchedulerItem>

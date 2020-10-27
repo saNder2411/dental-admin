@@ -1,8 +1,25 @@
-export const AgendaGridData = [
+import { IconStatus } from '../_instruments';
+
+interface DataItem {
+  id: string;
+  status: IconStatus;
+  references: string;
+  start: string;
+  end: string;
+  svcStaff: string;
+  services: string;
+  budget: number;
+  lastName: string;
+  firstName: string;
+  phone: string;
+  lastUpdate: string;
+  eventId: number;
+}
+
+export const AgendaGridData: DataItem[] = [
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Pending,
     references: 'S.Pye-0635',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -17,8 +34,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Booked,
     references: 'C.Wong-0499',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -33,8 +49,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Cancelled,
     references: 'S.Pye-0500',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -49,8 +64,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Checking,
     references: 'S.Pye-0501',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -65,8 +79,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Closed,
     references: 'S.Pye-0502',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -81,8 +94,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Consultation,
     references: 'C.A.Female-0640',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -97,8 +109,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Other,
     references: 'S.Pye-0503',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -113,8 +124,7 @@ export const AgendaGridData = [
   },
   {
     id: (Math.random() * Math.random()).toString(),
-    clock: '',
-    status: '(2) Pending',
+    status: IconStatus.Paid,
     references: 'S.Pye-0504',
     start: new Date().toISOString(),
     end: new Date().toISOString(),
@@ -126,5 +136,35 @@ export const AgendaGridData = [
     phone: '0798302214',
     lastUpdate: new Date().toISOString(),
     eventId: 504,
+  },
+  {
+    id: (Math.random() * Math.random()).toString(),
+    status: IconStatus.Reserved,
+    references: 'S.Pye-0504',
+    start: new Date().toISOString(),
+    end: new Date().toISOString(),
+    svcStaff: 'Robinson',
+    services: '06-Ladies Blow Dry S1_021',
+    budget: 15.49,
+    lastName: 'A.Female',
+    firstName: 'Consultation',
+    phone: '0798302214',
+    lastUpdate: new Date().toISOString(),
+    eventId: 505,
+  },
+  {
+    id: (Math.random() * Math.random()).toString(),
+    status: IconStatus.Unavailable,
+    references: 'S.Pye-0504',
+    start: new Date().toISOString(),
+    end: new Date().toISOString(),
+    svcStaff: 'Robinson',
+    services: '06-Ladies Blow Dry S1_021',
+    budget: 15.49,
+    lastName: 'A.Female',
+    firstName: 'Consultation',
+    phone: '0798302214',
+    lastUpdate: new Date().toISOString(),
+    eventId: 506,
   },
 ];

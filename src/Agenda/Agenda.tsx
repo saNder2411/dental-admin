@@ -20,14 +20,14 @@ export const Agenda: FC = (): JSX.Element => {
                 field={'status'}
                 title={localizationService.toLanguageString('custom.status', 'Status')}
                 columnMenu={ColumnMenu}
-                width={100}
+                // width={100}
                 filter={'text'}
               />
               <GridColumn
                 field={'references'}
                 title={localizationService.toLanguageString('custom.references', 'References')}
                 columnMenu={ColumnMenu}
-                width={100}
+                // width={100}
                 filter={'text'}
               />
               <GridColumn

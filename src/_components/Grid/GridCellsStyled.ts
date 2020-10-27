@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
 // Images
-import clockSvg from '../../_assets/clocks/clock-5.svg';
 
 export const CurrencyCell = styled.td<{ isNegativeAmount: boolean }>`
   & span {
@@ -18,17 +17,10 @@ export const StatusIcon = styled.td`
     padding: 20;
   }
 
-  & .grid__clock-image {
+  & .grid__status-icon {
     margin: auto;
     width: 70px;
     height: 70px;
-    mask-image: url(${clockSvg});
-    mask-size: contain;
-    mask-position: center;
-    mask-repeat: no-repeat;
-    /* background-color: #293897; */
-    background-color: #656565;
-    /* background-color: #4db5c8; */
   }
 `;
 

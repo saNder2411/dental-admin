@@ -1,8 +1,9 @@
 import React from 'react';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { GridCellProps } from '@progress/kendo-react-grid';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// Instruments
+import { IconBook, IconStatus } from '../../_instruments';
 // Styled Components
 import * as SC from './GridCellsStyled';
 // Images
@@ -53,16 +54,11 @@ export const DateCell: GridCell = ({ rowType, dataItem, field }) => {
   );
 };
 
-export const StatusIcon: GridCell = ({ rowType }) => {
+export const StatusIcon: GridCell = ({ rowType, dataItem }) => {
+  const iconStatus = dataItem.status as IconStatus;
   return rowType === 'groupHeader' ? null : (
     <SC.StatusIcon>
-      <div className="grid__clock-image" />
-      {/* <FontAwesomeIcon
-        icon={faExchangeAlt}
-        pull="left"
-        size="lg"
-        // style={{ '--fa-primary-color': '#39A9E0', '--fa-secondary-color': '#A51A22', '--fa-secondary-opacity': 1 }}
-      /> */}
+      <FontAwesomeIcon className="grid__status-icon" icon={IconBook[iconStatus].icon} style={IconBook[iconStatus].style} />
     </SC.StatusIcon>
   );
 };
