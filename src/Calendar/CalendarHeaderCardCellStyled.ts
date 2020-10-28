@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface HeadingCellProps {
+interface Props {
   cardColor: string;
 }
 
-export const HeadingCell = styled.div<HeadingCellProps>`
+export const CalendarHeaderCardCell = styled.div<Props>`
   & .k-card {
     border-width: 0;
   }

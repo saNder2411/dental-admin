@@ -3,9 +3,9 @@ import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Header } from './Header';
+import { AppHeader } from './';
 // Images
-import bodyBg from '../../_assets/body-bg.jpeg';
+import bodyBg from '../_assets/body-bg.jpeg';
 
 const items = [
   { name: 'agenda', iconSvg: 'home-icon', selected: true, route: '/' },
@@ -39,7 +39,7 @@ interface Props {
   children: JSX.Element | JSX.Element[] | [];
 }
 
-export const DrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
+export const AppDrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
   const [isExpended, setIsExpended] = useState(true);
   const [isSmallerScreen, setIsSmallerScreen] = useState(false);
   const localizationService = useLocalization();
@@ -59,7 +59,7 @@ export const DrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
 
   return (
     <>
-      <Header
+      <AppHeader
         onBurgerMenuClick={() => setIsExpended((prevState) => !prevState)}
         page={localizationService.toLanguageString(`custom.${selectedItemName}`, `${selectedItemName}`)}
       />

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 // Styled Components
-import * as SC from './EmployeeControlBtnStyledCmp';
+import * as SC from './CalendarTopControlItemStyled';
 
 interface Props {
   isFiltered: boolean;
@@ -9,9 +9,9 @@ interface Props {
   onEmployeeClick: () => void;
 }
 
-export const EmployeeControlBtn: FC<Props> = ({ isFiltered, cardColor, fullName, onEmployeeClick }): JSX.Element => {
+export const CalendarTopControlItem: FC<Props> = ({ isFiltered, cardColor, fullName, onEmployeeClick }): JSX.Element => {
   return (
-    <SC.EmployeeControlBtn onClick={onEmployeeClick} isFiltered={isFiltered} cardColor={cardColor}>
+    <SC.CalendarTopControlItem onClick={onEmployeeClick} isFiltered={isFiltered} cardColor={cardColor}>
       <h3 className="employee-control__title">
         {fullName
           .split(' ')
@@ -20,6 +20,6 @@ export const EmployeeControlBtn: FC<Props> = ({ isFiltered, cardColor, fullName,
         .
       </h3>
       <div className="icon-toggle" />
-    </SC.EmployeeControlBtn>
+    </SC.CalendarTopControlItem>
   );
 };

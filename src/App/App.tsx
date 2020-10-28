@@ -32,10 +32,10 @@ import itLocalCurrency from 'cldr-numbers-full/main/it/currencies.json';
 import itCaGregorian from 'cldr-dates-full/main/it/ca-gregorian.json';
 import itDateFields from 'cldr-dates-full/main/it/dateFields.json';
 // Messages
-import { enMessages, deMessages, frMessages, esMessages, itMessages } from './messages';
+import { enMessages, deMessages, frMessages, esMessages, itMessages } from '../_messages';
 
 // Components
-import { DrawerRouterContainer } from './components';
+import { AppDrawerRouterContainer } from './';
 // Pages
 import { Agenda } from '../Agenda';
 import { Calendar } from '../Calendar';
@@ -87,7 +87,7 @@ export const App: FC = (): JSX.Element => {
       <LocalizationProvider language={currentLocaleId}>
         <IntlProvider locale={currentLocaleId}>
           <Router>
-            <DrawerRouterContainer>
+            <AppDrawerRouterContainer>
               <Switch>
                 <Route exact path="/">
                   <Agenda />
@@ -108,7 +108,7 @@ export const App: FC = (): JSX.Element => {
                   <h1>Dashboard</h1>
                 </Route>
               </Switch>
-            </DrawerRouterContainer>
+            </AppDrawerRouterContainer>
           </Router>
         </IntlProvider>
       </LocalizationProvider>

@@ -48,3 +48,31 @@ export const FlagCell = styled.td<{ isOnline: boolean }>`
     color: ${({ isOnline }) => (isOnline ? '#28a745 ' : '#dc3545')};
   }
 `;
+
+export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
+  && button {
+    ${({ inEdit }) =>
+      !inEdit &&
+      css`
+        background: transparent;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+      `}
+  }
+
+  && span {
+    display: block;
+    margin: auto;
+    font-size: 2rem;
+  }
+
+  .k-i-edit {
+    color: #4db5c8;
+  }
+
+  .k-i-trash {
+    color: #dc3545;
+  }
+`;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Card, CardHeader, Avatar, CardTitle, CardSubtitle } from '@progress/kendo-react-layout';
 // Styled Components
-import * as SC from './HeadingCellStyledCmp';
+import * as SC from './CalendarHeaderCardCellStyled';
 
 interface Props {
   cardColor: string;
@@ -10,9 +10,9 @@ interface Props {
   jobTitle: string;
 }
 
-export const HeadingCell: FC<Props> = ({ cardColor, employeeImage, fullName, jobTitle }): JSX.Element => {
+export const CalendarHeaderCardCell: FC<Props> = ({ cardColor, employeeImage, fullName, jobTitle }): JSX.Element => {
   return (
-    <SC.HeadingCell cardColor={cardColor}>
+    <SC.CalendarHeaderCardCell cardColor={cardColor}>
       <Card>
         <CardHeader className="k-hbox">
           <Avatar type="image" shape="circle">
@@ -24,6 +24,6 @@ export const HeadingCell: FC<Props> = ({ cardColor, employeeImage, fullName, job
           </div>
         </CardHeader>
       </Card>
-    </SC.HeadingCell>
+    </SC.CalendarHeaderCardCell>
   );
 };

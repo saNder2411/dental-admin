@@ -3,16 +3,16 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DropDownList, DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
-import { selectLocaleState } from '../AppSelectors';
+import { selectLocaleState } from './AppSelectors';
 // Images
-import headerBg from '../../_assets/header-bg.png';
+import headerBg from '../_assets/header-bg.png';
 
 interface Props {
   page: string;
   onBurgerMenuClick: () => void;
 }
 
-export const Header: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element => {
+export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element => {
   const localizationService = useLocalization();
   const { currentLocaleId, locales, onLocaleChange } = useSelector(selectLocaleState);
   const dispatch = useDispatch();

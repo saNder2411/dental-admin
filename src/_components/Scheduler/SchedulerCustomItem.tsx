@@ -4,7 +4,7 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTooth } from '@fortawesome/pro-regular-svg-icons';
 // Styled Components
-import * as SC from './SchedulerCustomItemStyledCmp';
+import * as SC from './SchedulerCustomItemStyled';
 // Instruments
 import { IconBook, IconStatus } from '../../_instruments';
 

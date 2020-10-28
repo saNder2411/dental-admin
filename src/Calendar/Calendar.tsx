@@ -3,19 +3,17 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { guid } from '@progress/kendo-react-common';
 // Components
 import { Scheduler } from '../_components';
-import { EmployeeControlBtn, HeadingCell } from './components';
+import { CalendarTopControlItem, CalendarHeaderCardCell } from './';
 // Styled Components
 import * as SC from './CalendarStyledCmp';
 // Mocks
 import { employees, orders, teams, ordersModelFields } from './CalendarMockData';
 
-const initialFilterState: { [key: string]: boolean } = {};
-employees.forEach((employee) => (initialFilterState[employee.id] = true));
+const initialFilterState: { [key: string]: boolean } = employees.reduce((prevVal, employee) => ({ ...prevVal, [employee.id]: true }), {});
 
 export const Calendar = () => {
   const localizationService = useLocalization();
   const [filterState, setFilterState] = useState(initialFilterState);
-  // const [filteredTeam] = useState(-1);
   const [data, setData] = useState(orders);
 
   const onDataChange = useCallback(({ created, updated, deleted }) => {
@@ -47,7 +45,7 @@ export const Calendar = () => {
         <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
         <div className="card-control-wrapper">
           {employees.map((employee) => (
-            <EmployeeControlBtn
+            <CalendarTopControlItem
               key={employee.id}
               isFiltered={!filterState[employee.id]}
               cardColor={teams.find(({ teamID }: any) => teamID === employee.teamId)?.teamColor ?? ''}
@@ -72,7 +70,7 @@ export const Calendar = () => {
                   .map((item) => ({
                     ...item,
                     text: (
-                      <HeadingCell
+                      <CalendarHeaderCardCell
                         cardColor={item.teamColor}
                         employeeImage={item.photo}
                         fullName={item.managerName}
