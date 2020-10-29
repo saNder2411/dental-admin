@@ -5,7 +5,7 @@ import { guid } from '@progress/kendo-react-common';
 import { Scheduler } from '../_components';
 import { CalendarTopControlItem, CalendarHeaderCardCell } from './';
 // Styled Components
-import * as SC from './CalendarStyledCmp';
+import * as SC from './CalendarStyled';
 // Mocks
 import { employees, orders, teams, ordersModelFields } from './CalendarMockData';
 

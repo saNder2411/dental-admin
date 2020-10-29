@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { GridCellProps } from '@progress/kendo-react-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';
+import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react-dateinputs';
+import { Popup } from '@progress/kendo-react-popup';
 // Instruments
-import { IconBook, IconStatus } from '../../_instruments';
+import { IconBook, IconName } from '../../_instruments';
 // Styled Components
 import * as SC from './GridCellsStyled';
 // Images
@@ -55,18 +57,40 @@ export const TotalPriceCell: GridCell = ({ rowType, dataItem }) => {
   );
 };
 
-export const DateCell: GridCell = ({ rowType, dataItem, field }) => {
+export const DateCell: GridCell = ({ rowType, dataItem, field, onChange }) => {
   const intlService = useInternationalization();
+  const value = new Date(dataItem[field ? field : '']);
 
-  return rowType === 'groupHeader' ? null : <td>{intlService.formatDate(new Date(dataItem[field ? field : '']), 'EEE d-MMM hh:mm')}</td>;
+  const onDateChange = (evt: DateTimePickerChangeEvent) => {
+    onChange &&
+      onChange({
+        dataItem,
+        field,
+        syntheticEvent: evt.syntheticEvent,
+        value: evt.target.value,
+      });
+  };
+
+  return rowType === 'groupHeader' ? null : (
+    <td>{dataItem.inEdit ? <DateTimePicker value={value} onChange={onDateChange} /> : intlService.formatDate(value, 'EEE d-MMM hh:mm')}</td>
+  );
 };
 
 export const StatusIcon: GridCell = ({ rowType, dataItem }) => {
-  const iconStatus = dataItem.status as IconStatus;
+  const iconName = dataItem.status as IconName;
   return rowType === 'groupHeader' ? null : (
     <SC.StatusIcon>
-      <FontAwesomeIcon className="grid__status-icon" icon={IconBook[iconStatus].icon} style={IconBook[iconStatus].style} />
+      <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
     </SC.StatusIcon>
+  );
+};
+
+export const ServicesIcon: GridCell = ({ rowType, dataItem }) => {
+  const iconName = dataItem.offerIconName as IconName;
+  return rowType === 'groupHeader' ? null : (
+    <SC.ServicesIcon>
+      <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName].icon} color={IconBook[iconName].statusColor} />
+    </SC.ServicesIcon>
   );
 };
 
@@ -113,5 +137,21 @@ export const ActionsControlCell = ({ editField, onItemEdit, onItemUpdate, onActi
         {inEdit ? `Cancel` : <span className="k-icon k-i-trash" />}
       </button>
     </SC.ActionsControlCell>
+  );
+};
+
+export const ReferenceCell: GridCell = ({ rowType, dataItem, field }) => {
+  const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const value = dataItem[field ? field : ''];
+
+  return rowType === 'groupHeader' ? null : (
+    <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
+      {value}
+      <Popup show={showPopup} anchor={anchorRef.current as HTMLTableDataCellElement} popupClass="popup-content">
+        <p>Details reference</p>
+        {value}...
+      </Popup>
+    </SC.ReferenceCell>
   );
 };

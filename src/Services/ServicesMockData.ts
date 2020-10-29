@@ -1,8 +1,26 @@
-export const ServicesGridData = [
+enum OfferIcons {
+  Tooth = 'Tooth',
+}
+
+interface Offer {
+  offerID: number;
+  offerIconName: OfferIcons;
+  references: string;
+  detailsReference: string;
+  category: string;
+  duration: number;
+  isShowOnline: boolean;
+  isConsultation: boolean;
+  price: number;
+  discount: number;
+}
+
+export const ServicesGridData: Offer[] = [
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '1',
+    offerID: 1,
+    offerIconName: OfferIcons.Tooth,
     references: 'Ladies Wash+Cut+Dry S1',
+    detailsReference: 'Details reference',
     category: '(01) Ladies Hair Cut',
     duration: 60,
     isShowOnline: true,
@@ -11,9 +29,10 @@ export const ServicesGridData = [
     discount: 0.15,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '2',
+    offerID: 2,
+    offerIconName: OfferIcons.Tooth,
     references: 'Ladies Wash+Cut+Dry S2',
+    detailsReference: 'Details reference',
     category: '(01) Ladies Hair Cut',
     duration: 50,
     isShowOnline: true,
@@ -22,9 +41,10 @@ export const ServicesGridData = [
     discount: 0.1,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '3',
+    offerID: 3,
+    offerIconName: OfferIcons.Tooth,
     references: 'Ladies Wash+Cut+Dry S3',
+    detailsReference: 'Details reference',
     category: '(01) Ladies Hair Cut',
     duration: 45,
     isShowOnline: true,
@@ -33,9 +53,10 @@ export const ServicesGridData = [
     discount: 0.15,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '4',
+    offerID: 4,
+    offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S1',
+    detailsReference: 'Details reference',
     category: '(02) Mens Hair Cut',
     duration: 45,
     isShowOnline: true,
@@ -44,9 +65,10 @@ export const ServicesGridData = [
     discount: 0.15,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '5',
+    offerID: 5,
+    offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S2',
+    detailsReference: 'Details reference',
     category: '(02) Mens Hair Cut',
     duration: 40,
     isShowOnline: true,
@@ -55,9 +77,10 @@ export const ServicesGridData = [
     discount: 0.15,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '6',
+    offerID: 6,
+    offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S3',
+    detailsReference: 'Details reference',
     category: '(02) Mens Hair Cut',
     duration: 35,
     isShowOnline: true,
@@ -66,9 +89,10 @@ export const ServicesGridData = [
     discount: 0.15,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '7',
+    offerID: 7,
+    offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S4',
+    detailsReference: 'Details reference',
     category: '(02) Mens Hair Cut',
     duration: 35,
     isShowOnline: true,
@@ -77,9 +101,10 @@ export const ServicesGridData = [
     discount: 0.15,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '8',
+    offerID: 8,
+    offerIconName: OfferIcons.Tooth,
     references: 'Girls Wash+Cut+Dry',
+    detailsReference: 'Details reference',
     category: '(03) Kids Hair Cut',
     duration: 40,
     isShowOnline: true,
@@ -88,9 +113,10 @@ export const ServicesGridData = [
     discount: 0.2,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '9',
+    offerID: 9,
+    offerIconName: OfferIcons.Tooth,
     references: 'Boys Wash+Cut+Dry',
+    detailsReference: 'Details reference',
     category: '(03) Kids Hair Cut',
     duration: 25,
     isShowOnline: true,
@@ -99,9 +125,10 @@ export const ServicesGridData = [
     discount: 0.2,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '10',
+    offerID: 10,
+    offerIconName: OfferIcons.Tooth,
     references: 'Girl Student Wash+Cut',
+    detailsReference: 'Details reference',
     category: '(04) Students Hair Cut',
     duration: 40,
     isShowOnline: true,
@@ -110,9 +137,10 @@ export const ServicesGridData = [
     discount: 0.2,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '11',
+    offerID: 11,
+    offerIconName: OfferIcons.Tooth,
     references: 'Boy Student Wash+Cut',
+    detailsReference: 'Details reference',
     category: '(04) Students Hair Cut',
     duration: 25,
     isShowOnline: true,
@@ -121,9 +149,10 @@ export const ServicesGridData = [
     discount: 0.2,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '12',
+    offerID: 12,
+    offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/1 S3',
+    detailsReference: 'Details reference',
     category: '(05) Colouring',
     duration: 90,
     isShowOnline: true,
@@ -132,9 +161,10 @@ export const ServicesGridData = [
     discount: 0.25,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '13',
+    offerID: 13,
+    offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/1 S4',
+    detailsReference: 'Details reference',
     category: '(05) Colouring',
     duration: 90,
     isShowOnline: true,
@@ -143,9 +173,10 @@ export const ServicesGridData = [
     discount: 0.25,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '14',
+    offerID: 14,
+    offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/2 S3',
+    detailsReference: 'Details reference',
     category: '(05) Colouring',
     duration: 75,
     isShowOnline: true,
@@ -154,9 +185,10 @@ export const ServicesGridData = [
     discount: 0.25,
   },
   {
-    id: (Math.random() * Math.random()).toString(),
-    offeringId: '15',
+    offerID: 15,
+    offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/2 S4',
+    detailsReference: 'Details reference',
     category: '(05) Colouring',
     duration: 75,
     isShowOnline: true,

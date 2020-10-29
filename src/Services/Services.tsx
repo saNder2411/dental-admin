@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_components';
-import { FlagCell, CurrencyCell, DiscountCell, TotalPriceCell } from '../_components';
+import { FlagCell, CurrencyCell, DiscountCell, TotalPriceCell, ServicesIcon, ReferenceCell } from '../_components';
 
 import { ServicesGridData } from './ServicesMockData';
 
@@ -14,17 +14,19 @@ export const Services: FC = (): JSX.Element => {
       <div className="card-container grid">
         <div className="card-component">
           <Grid data={ServicesGridData}>
+            <GridColumn width={100} cell={ServicesIcon} />
             <GridColumn
-              field={'offeringId'}
+              field={'offerID'}
               title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}
               columnMenu={ColumnMenu}
-              width={130}
               filter={'numeric'}
+              width={120}
             />
             <GridColumn
               field={'references'}
               title={localizationService.toLanguageString('custom.references', 'References')}
               columnMenu={ColumnMenu}
+              cell={ReferenceCell}
               filter={'text'}
             />
             <GridColumn
@@ -37,7 +39,6 @@ export const Services: FC = (): JSX.Element => {
               field={'duration'}
               title={localizationService.toLanguageString('custom.duration', 'Duration (mins)')}
               columnMenu={ColumnMenu}
-              width={170}
               filter={'numeric'}
             />
             <GridColumn
@@ -45,7 +46,6 @@ export const Services: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
               columnMenu={ColumnMenu}
               cell={FlagCell}
-              width={170}
               filter={'boolean'}
             />
             <GridColumn
@@ -53,7 +53,6 @@ export const Services: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.consultation', 'Consultation')}
               columnMenu={ColumnMenu}
               cell={FlagCell}
-              width={170}
               filter={'boolean'}
             />
             <GridColumn
@@ -68,7 +67,6 @@ export const Services: FC = (): JSX.Element => {
               field={'discount'}
               title={localizationService.toLanguageString('custom.discount', 'Discount %')}
               columnMenu={ColumnMenu}
-              width={130}
               cell={DiscountCell}
               filter={'numeric'}
             />

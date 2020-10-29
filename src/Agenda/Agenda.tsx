@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Components
-import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell } from '../_components';
+import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell } from '../_components';
 // Mock
 import { AgendaGridData, AgendaDataItem } from './AgendaMockData';
 // Helpers
@@ -67,16 +67,14 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.start', 'Start')}
               columnMenu={ColumnMenu}
               filter={'text'}
-              editor="date"
-              format="{0: EEE d-MMM hh:mm}"
+              cell={DateCell}
             />
             <GridColumn
               field={'end'}
               title={localizationService.toLanguageString('custom.end', 'End')}
               columnMenu={ColumnMenu}
               filter={'text'}
-              editor="date"
-              format="{0: EEE d-MMM hh:mm}"
+              cell={DateCell}
             />
             <GridColumn
               field={'svcStaff'}

@@ -1,8 +1,8 @@
-import { IconStatus } from '../_instruments';
+import { IconName } from '../_instruments';
 
 export interface AgendaDataItem {
   id: number;
-  status: IconStatus;
+  status: IconName;
   references: string;
   start: Date;
   end: Date;
@@ -20,7 +20,7 @@ export interface AgendaDataItem {
 export const AgendaGridData: AgendaDataItem[] = [
   {
     id: 1,
-    status: IconStatus.Pending,
+    status: IconName.Pending,
     references: 'S.Pye-0635',
     start: new Date(),
     end: new Date(),
@@ -35,7 +35,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 2,
-    status: IconStatus.Booked,
+    status: IconName.Booked,
     references: 'C.Wong-0499',
     start: new Date(),
     end: new Date(),
@@ -50,7 +50,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 3,
-    status: IconStatus.Cancelled,
+    status: IconName.Cancelled,
     references: 'S.Pye-0500',
     start: new Date(),
     end: new Date(),
@@ -65,7 +65,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 4,
-    status: IconStatus.Checking,
+    status: IconName.Checking,
     references: 'S.Pye-0501',
     start: new Date(),
     end: new Date(),
@@ -80,7 +80,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 5,
-    status: IconStatus.Closed,
+    status: IconName.Closed,
     references: 'S.Pye-0502',
     start: new Date(),
     end: new Date(),
@@ -95,7 +95,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 6,
-    status: IconStatus.Consultation,
+    status: IconName.Consultation,
     references: 'C.A.Female-0640',
     start: new Date(),
     end: new Date(),
@@ -110,7 +110,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 7,
-    status: IconStatus.Other,
+    status: IconName.Other,
     references: 'S.Pye-0503',
     start: new Date(),
     end: new Date(),
@@ -125,7 +125,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 8,
-    status: IconStatus.Paid,
+    status: IconName.Paid,
     references: 'S.Pye-0504',
     start: new Date(),
     end: new Date(),
@@ -140,7 +140,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 9,
-    status: IconStatus.Reserved,
+    status: IconName.Reserved,
     references: 'S.Pye-0504',
     start: new Date(),
     end: new Date(),
@@ -155,7 +155,7 @@ export const AgendaGridData: AgendaDataItem[] = [
   },
   {
     id: 10,
-    status: IconStatus.Unavailable,
+    status: IconName.Unavailable,
     references: 'S.Pye-0504',
     start: new Date(),
     end: new Date(),

@@ -160,6 +160,7 @@ enum OrderStatus {
   Closed = 'Closed',
   Unavailable = 'Unavailable',
   Other = 'Other',
+  Tooth = 'Tooth',
 }
 
 interface Order {
@@ -169,6 +170,7 @@ interface Order {
   orderID: number;
   refID: string;
   status: OrderStatus;
+  dentalStatus: OrderStatus;
   mobilePhone: string;
   email: string;
   notes: string;
@@ -185,6 +187,7 @@ export const orders: Order[] = [
     orderID: 1,
     refID: 'C.A.Female-0640',
     status: OrderStatus.Consultation,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '06-Ladies Blow Dry S1_021',
@@ -199,6 +202,7 @@ export const orders: Order[] = [
     orderID: 2,
     refID: 'S.Pye-0503',
     status: OrderStatus.Pending,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '02-Mens Wash+Cut+Dry S4_007',
@@ -213,6 +217,7 @@ export const orders: Order[] = [
     orderID: 3,
     refID: 'A.Cea-0505',
     status: OrderStatus.Reserved,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '05-Highlights 1/1 S4_013',
@@ -227,6 +232,7 @@ export const orders: Order[] = [
     orderID: 4,
     refID: 'A.Switzer-0506',
     status: OrderStatus.Booked,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
@@ -241,6 +247,7 @@ export const orders: Order[] = [
     orderID: 5,
     refID: 'A.Cea-0505',
     status: OrderStatus.Paid,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '05-Highlights 1/1 S4_013',
@@ -255,6 +262,7 @@ export const orders: Order[] = [
     orderID: 6,
     refID: 'A.Switzer-0506',
     status: OrderStatus.Checking,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
@@ -269,6 +277,7 @@ export const orders: Order[] = [
     orderID: 7,
     refID: 'C.Smith-0507',
     status: OrderStatus.Cancelled,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '06-Ladies Blow Dry S1_021',
@@ -283,6 +292,7 @@ export const orders: Order[] = [
     orderID: 8,
     refID: 'C.Smith-0507',
     status: OrderStatus.Closed,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '08-Balayage Natural S4_027',
@@ -297,6 +307,7 @@ export const orders: Order[] = [
     orderID: 9,
     refID: 'C.Smith-0507',
     status: OrderStatus.Unavailable,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '08-Balayage Natural S4_027',
@@ -311,6 +322,7 @@ export const orders: Order[] = [
     orderID: 10,
     refID: 'C.Smith-0507',
     status: OrderStatus.Other,
+    dentalStatus: OrderStatus.Tooth,
     mobilePhone: 'Phone',
     email: 'Email',
     notes: '08-Balayage Natural S4_027',

@@ -13,14 +13,18 @@ export const CurrencyCell = styled.td<{ isNegativeAmount: boolean }>`
 `;
 
 export const StatusIcon = styled.td`
-  && {
-    padding: 20;
-  }
-
-  & .grid__status-icon {
+  & .grid__icon {
+    display: block;
     margin: auto;
     width: 70px;
     height: 70px;
+  }
+`;
+
+export const ServicesIcon = styled(StatusIcon)`
+  & .grid__icon {
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -75,4 +79,8 @@ export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
   .k-i-trash {
     color: #dc3545;
   }
+`;
+
+export const ReferenceCell = styled.td`
+  cursor: pointer;
 `;

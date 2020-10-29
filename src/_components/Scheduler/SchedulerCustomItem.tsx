@@ -1,38 +1,39 @@
-import React from 'react';
-import { SchedulerItem, SchedulerItemContent } from '@progress/kendo-react-scheduler';
+import React, { FC } from 'react';
+import { SchedulerItem, SchedulerItemContent, SchedulerItemProps } from '@progress/kendo-react-scheduler';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTooth } from '@fortawesome/pro-regular-svg-icons';
 // Styled Components
 import * as SC from './SchedulerCustomItemStyled';
 // Instruments
-import { IconBook, IconStatus } from '../../_instruments';
+import { IconBook, IconName } from '../../_instruments';
 
-export const SchedulerCustomItem = (props: any) => {
+export const SchedulerCustomItem: FC<SchedulerItemProps> = (props) => {
   const intl = useInternationalization();
   // console.log(`CustomItemProps`, props);
-  const iconStatus = props.dataItem.status as IconStatus;
+  const { dataItem, children, isAllDay, zonedStart, zonedEnd } = props;
+  const iconName = dataItem.status as IconName;
+  const iconDentalName = dataItem.dentalStatus as IconName;
 
   return (
     <SchedulerItem {...props}>
       <SC.SchedulerItemTopWrapper>
-        {props.children}
+        {children}
         <div className="SchedulerItem__icons">
           <div className="SchedulerItem__icon">
-            <FontAwesomeIcon icon={faTooth} size={'lg'} color={'#17325f'} />
+            <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} size={'lg'} />
           </div>
           <div className="SchedulerItem__icon">
-            <FontAwesomeIcon icon={IconBook[iconStatus].icon} style={IconBook[iconStatus].style} size={'lg'} />
+            <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} size={'lg'} />
           </div>
         </div>
       </SC.SchedulerItemTopWrapper>
-      {!props.isAllDay && (
+      {!isAllDay && (
         <SchedulerItemContent>
-          <div className="SchedulerItemContent__item">{props.dataItem.refID}</div>
+          <div className="SchedulerItemContent__item">{dataItem.refID}</div>
           <div className="SchedulerItemContent__item">
-            {intl.formatDate(props.zonedStart, 't')} - {intl.formatDate(props.zonedEnd, 't')}
+            {intl.formatDate(zonedStart, 't')} - {intl.formatDate(zonedEnd, 't')}
           </div>
-          <div className="SchedulerItemContent__item">{props.dataItem.notes}</div>
+          <div className="SchedulerItemContent__item">{dataItem.notes}</div>
         </SchedulerItemContent>
       )}
     </SchedulerItem>

@@ -12,13 +12,14 @@ import {
   faUserTimes,
   faCalendar,
 } from '@fortawesome/pro-duotone-svg-icons';
+import { faTooth } from '@fortawesome/pro-regular-svg-icons';
 
 interface IconStyle extends CSSProperties {
   '--fa-primary-color': string;
   '--fa-secondary-color': string;
 }
 
-export enum IconStatus {
+export enum IconName {
   Consultation = 'Consultation',
   Pending = 'Pending',
   Reserved = 'Reserved',
@@ -29,10 +30,11 @@ export enum IconStatus {
   Closed = 'Closed',
   Unavailable = 'Unavailable',
   Other = 'Other',
+  Tooth = 'Tooth',
 }
 
 type TIconBook = {
-  [key in IconStatus]: {
+  [key in IconName]: {
     icon: IconDefinition;
     style: IconStyle;
     statusColor: string;
@@ -118,6 +120,14 @@ export const IconBook: TIconBook = {
     style: {
       '--fa-primary-color': '#39A9E0',
       '--fa-secondary-color': '#B2C7D9',
+    },
+  },
+  Tooth: {
+    icon: faTooth,
+    statusColor: '#17325f',
+    style: {
+      '--fa-primary-color': '#17325f',
+      '--fa-secondary-color': '#17325f',
     },
   },
 };
