@@ -626,3 +626,24 @@ a {
     margin-top: 0;
   }
 }
+
+.k-scheduler-toolbar {
+  z-index: 1;
+}
+
+.SchedulerItemContent-popup-content {
+  box-sizing: border-box;
+  padding: 10px;
+  color: #787878;
+  background-color: #fcf7f8;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  h5 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .k-card-header {
+    padding: 8px;
+  }
+}

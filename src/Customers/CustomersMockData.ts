@@ -136,4 +136,17 @@ export const CustomersGridData = [
     lastUpdate: new Date().toISOString(),
     photo: Cindia,
   },
+  {
+    id: (Math.random() * Math.random()).toString(),
+    teamId: '477',
+    lastName: 'Pye',
+    firstName: 'Stephen',
+    gender: '(1) Female',
+    svcStaff: '',
+    upcoming: '',
+    email: 'Cindia.adamson@scheduling',
+    mobilePhone: '+1189796168185',
+    lastUpdate: new Date().toISOString(),
+    photo: Cindia,
+  },
 ];
