@@ -226,8 +226,8 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                             />
                           </div>
                         </div>
-                        <div className="row m-0 pt-1">
-                          <div className="col-md-4 p-0">
+                        <div className="row pt-1  yearly-group yearly-group-dropdown">
+                          <div className="col-md-3 p-0 pr-1">
                             <Field
                               id={'yearlyWeekNumber'}
                               name={'yearlyWeekNumber'}
@@ -246,6 +246,9 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                               disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
                               component={FormDropDownList}
                             />
+                          </div>
+                          <div className="col-md-1 p-2">
+                            of
                           </div>
                           <div className="col-md-4 p-0">
                             <Field

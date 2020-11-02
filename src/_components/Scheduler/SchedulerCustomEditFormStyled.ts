@@ -76,4 +76,13 @@ export const SchedulerCustomEditForm = styled.section`
   .yearly-group .k-dropdown {
     width: 80%;
   }
+
+  .yearly-group-dropdown {
+    margin: 0;
+    margin-right: -30px;
+  }
+
+  .yearly-group-dropdown .k-dropdown {
+    width: 100%;
+  }
 `;
