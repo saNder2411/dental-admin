@@ -12,7 +12,7 @@ import { IconBook, IconName } from '../../_instruments';
 export const SchedulerCustomItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   const [showPopup, setShowPopup] = useState(false);
   const intl = useInternationalization();
-  console.log(`CustomItemProps`, props);
+  // console.log(`CustomItemProps`, props);
   const { dataItem, children, isAllDay, zonedStart, zonedEnd, _ref } = props;
   const iconName = dataItem.status as IconName;
   const iconDentalName = dataItem.dentalStatus as IconName;

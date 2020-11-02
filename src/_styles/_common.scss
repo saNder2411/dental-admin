@@ -643,7 +643,15 @@ a {
     font-size: 1rem;
   }
 
+  .k-card-body {
+    padding: 0 8px;
+  }
+
   .k-card-header {
     padding: 8px;
+  }
+
+  .k-card-header:last-child {
+    border: none;
   }
 }

@@ -5,10 +5,11 @@ export const SchedulerCustomEditForm = styled.section`
 
   && .k-form-horizontal .k-form-field {
     flex-wrap: wrap;
+    /* align-items: center; */
   }
 
   && .k-label {
-    width: 20%;
+    width: 127px;
   }
 
   && .k-form .k-textbox,
@@ -23,7 +24,6 @@ export const SchedulerCustomEditForm = styled.section`
   .k-form .k-datetimepicker,
   .k-form .k-daterangepicker-wrap,
   .k-form .k-timepicker,
-  .k-form .k-numerictextbox,
   .k-form .k-maskedtextbox,
   .k-form .k-textbox-container,
   .k-form .k-floating-label-container {
@@ -32,6 +32,10 @@ export const SchedulerCustomEditForm = styled.section`
 
   && .k-form .k-textarea {
     width: calc(60% - 34px);
+  }
+
+  & .k-form .k-numerictextbox {
+    width: 70px;
   }
 
   & .k-combobox .k-dropdown-wrap,
@@ -46,5 +50,28 @@ export const SchedulerCustomEditForm = styled.section`
   .form__actions-bar-wrapper {
     margin: -2rem;
     border-color: #ebebeb;
+  }
+
+  && .k-radio-item {
+    text-align: left;
+  }
+
+  .col-md-6 .k-form-field {
+    margin-top: 0;
+  }
+
+  && .col-md-6.monthly-group {
+    padding: 0;
+    padding-top: 12px;
+  }
+
+  .k-button-group .k-button {
+    border-radius: none;
+    width: 50px;
+    height: 30px;
+  }
+
+  .monthly-group .k-dropdown {
+    width: 80%;
   }
 `;

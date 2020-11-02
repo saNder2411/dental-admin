@@ -180,6 +180,10 @@ interface Order {
   customer: string;
   firstName: string;
   lastName: string;
+  isAllDay: boolean;
+  repeat: string;
+  recurrenceId?: undefined | number;
+  recurrenceRule?: null | string;
 }
 
 export const orders: Order[] = [
@@ -200,6 +204,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Grace Robinson',
@@ -218,6 +224,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Christina Romanov',
@@ -236,6 +244,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'David Wenger',
@@ -254,6 +264,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Christina Romanov',
@@ -272,6 +284,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'David Wenger',
@@ -290,6 +304,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Alex Locatelli',
@@ -308,6 +324,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Sara Khan',
@@ -326,6 +344,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Sara Khan',
@@ -344,6 +364,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
   {
     staff: 'Sara Khan',
@@ -362,6 +384,8 @@ export const orders: Order[] = [
     customer: 'Stephen Pye',
     firstName: 'Stephen',
     lastName: 'Pye',
+    isAllDay: false,
+    repeat: 'Never',
   },
 ].map((order) => ({
   ...order,
