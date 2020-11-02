@@ -49,6 +49,13 @@ const repeatOnMonthlyData = [
 const weekNumbers = ['First', 'Second', 'Third', 'Fourth', 'Last'];
 const monthlyDayNames = ['Day', 'Weekday', 'Weekend Day', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+const repeatOnYearlyData = [
+  { label: '', value: 'month' },
+  { label: '', value: 'week' },
+];
+
+const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
 export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   console.log(`formState`, dataItem);
 
@@ -59,6 +66,24 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
           initialValues={dataItem}
           onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
           render={(formRenderProps) => {
+            const repeatValue = formRenderProps.valueGetter('repeat');
+            let secondLabelForRepeatEvery: string;
+            switch (repeatValue) {
+              case 'Daily':
+                secondLabelForRepeatEvery = 'day(s)';
+                break;
+              case 'Weekly':
+                secondLabelForRepeatEvery = 'week(s)';
+                break;
+              case 'Monthly':
+                secondLabelForRepeatEvery = 'month(s)';
+                break;
+              case 'Yearly':
+                secondLabelForRepeatEvery = 'year(s)';
+                break;
+              default:
+                secondLabelForRepeatEvery = '';
+            }
             console.log(`formRenderProps`, formRenderProps);
             console.log(formRenderProps.valueGetter('repeatOnMonthly'));
             return (
@@ -78,217 +103,197 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                     id={'mobilePhone'}
                     name={'mobilePhone'}
                     label={'Mobile Phone'}
-                    // hint={'Hint: Customer active phone number.'}
                     mask={'+1(999) 000-00-00-00'}
                     component={FormMaskedTextBox}
                     validator={phoneValidator}
                   />
-                  <Field
-                    id={'email'}
-                    name={'email'}
-                    label={'Email'}
-                    // hint={'Hint: Enter customer personal email address.'}
-                    type={'email'}
-                    component={FormInput}
-                    validator={emailValidator}
-                  />
+                  <Field id={'email'} name={'email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
                   <Field id={'staff'} name={'staff'} label={'Support Stuff'} data={stuffs} component={FormComboBox} validator={requiredValidator} />
                   <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'refID'} name={'refID'} label={'Services'} component={FormInput} validator={requiredValidator} />
                   <Field id={'status'} name={'status'} label={'Status'} data={statusList} component={FormComboBox} validator={requiredValidator} />
-                  <Field id={'repeat'} name={'repeat'} label={'Repeat'} data={recurrenceNames} component={FormComboBox} />
+                  <Field id={'repeat'} name={'repeat'} label={'Repeat'} data={recurrenceNames} component={FormDropDownList} />
 
-                  {formRenderProps.valueGetter('repeat') === 'Daily' && (
+                  {repeatValue !== 'Never' && (
                     <>
                       <Field
-                        id={'repeatDayCount'}
-                        name={'repeatDayCount'}
+                        id={'repeatEvery'}
+                        name={'repeatEvery'}
                         label={'Repeat every'}
                         format={'n0'}
                         min={1}
                         defaultValue={1}
-                        secondLabel={'day(s)'}
+                        secondLabel={secondLabelForRepeatEvery}
                         component={FormNumericTextBox}
                       />
-                      <div className="row m-0">
-                        <div className="col-md-4 p-0">
-                          <Field
-                            id={'endRecurrenceDaily'}
-                            name={'endRecurrenceDaily'}
-                            label={'End'}
-                            defaultValue={'never'}
-                            data={endRecurrenceDailyData}
-                            component={FormRadioGroup}
-                          />
-                        </div>
-                        <div className="col-md-6 p-0 pt-5 align-self-end">
-                          <Field
-                            id={'endAfterRepeatDayCount'}
-                            name={'endAfterRepeatDayCount'}
-                            format={'n0'}
-                            min={1}
-                            defaultValue={1}
-                            disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'after'}
-                            secondLabel={'occurrence(s)'}
-                            component={FormNumericTextBox}
-                          />
-                          <Field
-                            id={'endOn'}
-                            name={'start'}
-                            disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'on'}
-                            component={FormDateTimePicker}
-                            validator={requiredValidator}
-                          />
-                        </div>
-                      </div>
                     </>
                   )}
 
-                  {formRenderProps.valueGetter('repeat') === 'Weekly' && (
-                    <>
-                      <Field
-                        id={'repeatWeekCount'}
-                        name={'repeatWeekCount'}
-                        label={'Repeat every'}
-                        format={'n0'}
-                        min={1}
-                        defaultValue={1}
-                        secondLabel={'week(s)'}
-                        component={FormNumericTextBox}
-                      />
-                      <Field
-                        id={'repeatOnWeekday'}
-                        name={'repeatOnWeekday'}
-                        label={'Repeat on'}
-                        data={recurrenceWeeklyData}
-                        component={FormButtonGroup}
-                      />
-
-                      <div className="row m-0">
-                        <div className="col-md-4 p-0">
-                          <Field
-                            id={'endRecurrenceDaily'}
-                            name={'endRecurrenceDaily'}
-                            label={'End'}
-                            defaultValue={'never'}
-                            data={endRecurrenceDailyData}
-                            component={FormRadioGroup}
-                          />
-                        </div>
-                        <div className="col-md-6 p-0 pt-5 align-self-end">
-                          <Field
-                            id={'endAfterRepeatDayCount'}
-                            name={'endAfterRepeatDayCount'}
-                            format={'n0'}
-                            min={1}
-                            defaultValue={1}
-                            disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'after'}
-                            secondLabel={'occurrence(s)'}
-                            component={FormNumericTextBox}
-                          />
-                          <Field
-                            id={'endOn'}
-                            name={'start'}
-                            disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'on'}
-                            component={FormDateTimePicker}
-                            validator={requiredValidator}
-                          />
-                        </div>
-                      </div>
-                    </>
+                  {repeatValue === 'Weekly' && (
+                    <Field
+                      id={'repeatOnWeekday'}
+                      name={'repeatOnWeekday'}
+                      label={'Repeat on'}
+                      data={recurrenceWeeklyData}
+                      component={FormButtonGroup}
+                    />
                   )}
 
-                  {formRenderProps.valueGetter('repeat') === 'Never' && (
-                    <>
-                      <Field
-                        id={'repeatMonthCount'}
-                        name={'repeatMonthCount'}
-                        label={'Repeat every'}
-                        format={'n0'}
-                        min={1}
-                        defaultValue={1}
-                        secondLabel={'month(s)'}
-                        component={FormNumericTextBox}
-                      />
-                      <div className="row m-0">
-                        <div className="col-md-4 p-0">
-                          <Field
-                            id={'repeatOnMonthly'}
-                            name={'repeatOnMonthly'}
-                            label={'Repeat on'}
-                            defaultValue={'day'}
-                            data={repeatOnMonthlyData}
-                            component={FormRadioGroup}
-                          />
-                        </div>
-                        <div className="col-md-6 monthly-group">
-                          <Field
-                            id={'repeatOnMonthlyDay'}
-                            name={'repeatOnMonthlyDay'}
-                            format={'n0'}
-                            min={1}
-                            max={31}
-                            defaultValue={1}
-                            disabled={formRenderProps.valueGetter('repeatOnMonthly') === 'week'}
-                            component={FormNumericTextBox}
-                          />
-                          <div className="row m-0 pt-1">
-                            <div className="col-md-4 p-0">
-                              <Field
-                                id={'monthlyWeekNumber'}
-                                name={'monthlyWeekNumber'}
-                                component={FormDropDownList}
-                                data={weekNumbers}
-                                defaultValue={weekNumbers[0]}
-                                disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week'}
-                              />
-                            </div>
-                            <div className="col-md-6 p-0">
-                              <Field
-                                id={'monthlyWeekday'}
-                                name={'monthlyWeekday'}
-                                component={FormDropDownList}
-                                data={monthlyDayNames}
-                                defaultValue={monthlyDayNames[0]}
-                                disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week'}
-                              />
-                            </div>
+                  {repeatValue === 'Monthly' && (
+                    <div className="row m-0">
+                      <div className="col-md-4 p-0">
+                        <Field
+                          id={'repeatOnMonthly'}
+                          name={'repeatOnMonthly'}
+                          label={'Repeat on'}
+                          defaultValue={'day'}
+                          data={repeatOnMonthlyData}
+                          component={FormRadioGroup}
+                        />
+                      </div>
+                      <div className="col-md-6 monthly-group">
+                        <Field
+                          id={'repeatOnMonthlyDay'}
+                          name={'repeatOnMonthlyDay'}
+                          format={'n0'}
+                          min={1}
+                          max={31}
+                          defaultValue={1}
+                          disabled={formRenderProps.valueGetter('repeatOnMonthly') === 'week'}
+                          component={FormNumericTextBox}
+                        />
+                        <div className="row m-0 pt-1">
+                          <div className="col-md-4 p-0">
+                            <Field
+                              id={'monthlyWeekNumber'}
+                              name={'monthlyWeekNumber'}
+                              component={FormDropDownList}
+                              data={weekNumbers}
+                              defaultValue={weekNumbers[0]}
+                              disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week'}
+                            />
+                          </div>
+                          <div className="col-md-6 p-0">
+                            <Field
+                              id={'monthlyWeekday'}
+                              name={'monthlyWeekday'}
+                              component={FormDropDownList}
+                              data={monthlyDayNames}
+                              defaultValue={monthlyDayNames[3]}
+                              disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week'}
+                            />
                           </div>
                         </div>
                       </div>
-                      <div className="row m-0">
-                        <div className="col-md-4 p-0">
-                          <Field
-                            id={'endRecurrenceDaily'}
-                            name={'endRecurrenceDaily'}
-                            label={'End'}
-                            defaultValue={'never'}
-                            component={FormRadioGroup}
-                            data={endRecurrenceDailyData}
-                          />
+                    </div>
+                  )}
+
+                  {repeatValue === 'Yearly' && (
+                    <div className="row m-0">
+                      <div className="col-md-3 p-0">
+                        <Field
+                          id={'repeatOnYearly'}
+                          name={'repeatOnYearly'}
+                          label={'Repeat on'}
+                          defaultValue={'month'}
+                          data={repeatOnYearlyData}
+                          component={FormRadioGroup}
+                        />
+                      </div>
+                      <div className="col-md-6 yearly-group">
+                        <div className="row m-0 pt-1">
+                          <div className="col-md-6 p-0">
+                            <Field
+                              id={'monthNames'}
+                              name={'monthNames'}
+                              data={monthName}
+                              defaultValue={monthName[0]}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week'}
+                              component={FormDropDownList}
+                            />
+                          </div>
+                          <div className="col-md-4 p-0">
+                            <Field
+                              id={'repeatOnYearlyDay'}
+                              name={'repeatOnYearlyDay'}
+                              format={'n0'}
+                              min={1}
+                              max={31}
+                              defaultValue={1}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week'}
+                              component={FormNumericTextBox}
+                            />
+                          </div>
                         </div>
-                        <div className="col-md-6 p-0 pt-5 align-self-end">
-                          <Field
-                            id={'endAfterRepeatDayCount'}
-                            name={'endAfterRepeatDayCount'}
-                            format={'n0'}
-                            min={1}
-                            defaultValue={1}
-                            disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'after'}
-                            secondLabel={'occurrence(s)'}
-                            component={FormNumericTextBox}
-                          />
-                          <Field
-                            id={'endOn'}
-                            name={'start'}
-                            disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'on'}
-                            component={FormDateTimePicker}
-                            validator={requiredValidator}
-                          />
+                        <div className="row m-0 pt-1">
+                          <div className="col-md-4 p-0">
+                            <Field
+                              id={'yearlyWeekNumber'}
+                              name={'yearlyWeekNumber'}
+                              component={FormDropDownList}
+                              data={weekNumbers}
+                              defaultValue={weekNumbers[0]}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
+                            />
+                          </div>
+                          <div className="col-md-4 p-0">
+                            <Field
+                              id={'yearlyWeekday'}
+                              name={'yearlyWeekday'}
+                              data={monthlyDayNames}
+                              defaultValue={monthlyDayNames[3]}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
+                              component={FormDropDownList}
+                            />
+                          </div>
+                          <div className="col-md-4 p-0">
+                            <Field
+                              id={'monthNamess'}
+                              name={'monthNames'}
+                              data={monthName}
+                              defaultValue={monthName[0]}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
+                              component={FormDropDownList}
+                            />
+                          </div>
                         </div>
                       </div>
-                    </>
+                    </div>
+                  )}
+
+                  {repeatValue !== 'Never' && (
+                    <div className="row m-0">
+                      <div className="col-md-4 p-0">
+                        <Field
+                          id={'endRecurrenceDaily'}
+                          name={'endRecurrenceDaily'}
+                          label={'End'}
+                          defaultValue={'never'}
+                          component={FormRadioGroup}
+                          data={endRecurrenceDailyData}
+                        />
+                      </div>
+                      <div className="col-md-6 p-0 pt-5 align-self-end">
+                        <Field
+                          id={'endAfterRepeatDayCount'}
+                          name={'endAfterRepeatDayCount'}
+                          format={'n0'}
+                          min={1}
+                          defaultValue={1}
+                          disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'after'}
+                          secondLabel={'occurrence(s)'}
+                          component={FormNumericTextBox}
+                        />
+                        <Field
+                          id={'endOn'}
+                          name={'start'}
+                          disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'on'}
+                          component={FormDateTimePicker}
+                          validator={requiredValidator}
+                        />
+                      </div>
+                    </div>
                   )}
 
                   <Field id={'notes'} name={'notes'} label={'Notes'} component={FormTextArea} />

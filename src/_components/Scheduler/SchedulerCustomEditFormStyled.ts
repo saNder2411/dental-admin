@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const SchedulerCustomEditForm = styled.section`
-  padding: 2rem;
+  padding: 1rem;
 
   && .k-form-horizontal .k-form-field {
     flex-wrap: wrap;
-    /* align-items: center; */
   }
 
   && .k-label {
@@ -30,7 +29,8 @@ export const SchedulerCustomEditForm = styled.section`
     width: 70%;
   }
 
-  && .k-form .k-textarea {
+  && .k-form .k-textarea,
+  && .k-dropdown {
     width: calc(60% - 34px);
   }
 
@@ -48,7 +48,7 @@ export const SchedulerCustomEditForm = styled.section`
   }
 
   .form__actions-bar-wrapper {
-    margin: -2rem;
+    margin: -1rem;
     border-color: #ebebeb;
   }
 
@@ -60,7 +60,8 @@ export const SchedulerCustomEditForm = styled.section`
     margin-top: 0;
   }
 
-  && .col-md-6.monthly-group {
+  && .col-md-6.monthly-group,
+  && .col-md-6.yearly-group {
     padding: 0;
     padding-top: 12px;
   }
@@ -71,7 +72,8 @@ export const SchedulerCustomEditForm = styled.section`
     height: 30px;
   }
 
-  .monthly-group .k-dropdown {
+  .monthly-group .k-dropdown,
+  .yearly-group .k-dropdown {
     width: 80%;
   }
 `;
