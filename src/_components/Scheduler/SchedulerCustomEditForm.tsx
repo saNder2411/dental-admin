@@ -60,7 +60,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
   console.log(`formDataItem`, dataItem);
 
   return (
-    <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={678}>
+    <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={'73%'}>
       <SC.SchedulerCustomEditForm>
         <Form
           initialValues={dataItem}
@@ -111,7 +111,14 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                   <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'refID'} name={'refID'} label={'Services'} component={FormInput} validator={requiredValidator} />
-                  <Field id={'status'} name={'status'} label={'Status'} data={statusList} component={FormDropDownList} validator={requiredValidator} />
+                  <Field
+                    id={'status'}
+                    name={'status'}
+                    label={'Status'}
+                    data={statusList}
+                    component={FormDropDownList}
+                    validator={requiredValidator}
+                  />
                   <Field id={'repeat'} name={'repeat'} label={'Repeat'} data={recurrenceNames} component={FormDropDownList} />
 
                   {repeatValue !== 'Never' && (

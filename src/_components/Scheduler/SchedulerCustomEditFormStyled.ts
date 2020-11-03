@@ -2,13 +2,25 @@ import styled from 'styled-components';
 
 export const SchedulerCustomEditForm = styled.section`
   padding: 1rem;
+  padding-bottom: 0;
+  /* height: 100%; */
+
+  & .k-form {
+    /* height: 100%; */
+  }
+
+  && .k-form-fieldset {
+    /* min-height: 700px; */
+    display: flex;
+    flex-direction: column;
+  }
 
   && .k-form-horizontal .k-form-field {
     flex-wrap: wrap;
   }
 
   && .k-label {
-    width: 125px;
+    width: 126px;
   }
 
   && .k-form .k-textbox,
@@ -48,8 +60,9 @@ export const SchedulerCustomEditForm = styled.section`
   }
 
   .form__actions-bar-wrapper {
-    margin: -1rem;
-    margin-top: 18px;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    margin-top: calc(2% + 10px);
     border-color: #ebebeb;
   }
 
