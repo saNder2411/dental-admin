@@ -3,20 +3,19 @@ import styled from 'styled-components';
 export const SchedulerCustomEditForm = styled.section`
   padding: 1rem;
   padding-bottom: 0;
-  /* height: 100%; */
-
-  & .k-form {
-    /* height: 100%; */
-  }
 
   && .k-form-fieldset {
-    /* min-height: 700px; */
+    height: 622px;
     display: flex;
     flex-direction: column;
   }
 
   && .k-form-horizontal .k-form-field {
     flex-wrap: wrap;
+  }
+
+  && .k-form-fieldset > .k-form-field:nth-last-child(2) {
+    margin-bottom: 18px;
   }
 
   && .k-label {
@@ -62,7 +61,7 @@ export const SchedulerCustomEditForm = styled.section`
   .form__actions-bar-wrapper {
     margin-left: -1rem;
     margin-right: -1rem;
-    margin-top: calc(2% + 10px);
+    margin-top: auto;
     border-color: #ebebeb;
   }
 
