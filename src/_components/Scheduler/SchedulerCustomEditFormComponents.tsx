@@ -9,14 +9,6 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 // Helpers
 import { getFormInputOptionalProps } from './SchedulerHelpers';
 
-const repeatRanges = [
-  { name: 'Never', data: [] },
-  { name: 'Daily', data: [] },
-  { name: 'Weekly', data: [] },
-  { name: 'Monthly', data: [] },
-  { name: 'Yearly', data: [] },
-];
-
 export const FormInput = (fieldRenderProps: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
@@ -117,33 +109,6 @@ export const FormTextArea = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormChipList = (fieldRenderProps: FieldRenderProps) => {
-  const { label, id, valid, optional } = fieldRenderProps;
-  const [range, setRange] = useState(repeatRanges[0]);
-
-  const onChipClick = (name: string) => {
-    const range = repeatRanges.find((range) => range.name === name);
-    setRange(range ? range : repeatRanges[0]);
-  };
-
-  return (
-    <FieldWrapper>
-      <Label editorId={id} editorValid={valid} optional={optional}>
-        {label}
-      </Label>
-      <ButtonGroup>
-        {repeatRanges.map(({ name }) => (
-          <div key={Math.random()}>
-            <Button togglable={true} selected={range.name === name} onClick={() => onChipClick(name)}>
-              {name}
-            </Button>
-          </div>
-        ))}
-      </ButtonGroup>
-    </FieldWrapper>
-  );
-};
-
 export const FormNumericTextBox = (fieldRenderProps: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, secondLabel, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
@@ -210,6 +175,7 @@ export const FormDropDownList = (fieldRenderProps: FieldRenderProps) => {
   const editorRef = React.useRef(null);
   const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+  console.log(`fieldRenderProps`, fieldRenderProps);
 
   return (
     <FieldWrapper>

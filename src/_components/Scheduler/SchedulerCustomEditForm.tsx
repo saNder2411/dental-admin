@@ -60,7 +60,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
   console.log(`formDataItem`, dataItem);
 
   return (
-    <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700}>
+    <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={678}>
       <SC.SchedulerCustomEditForm>
         <Form
           initialValues={dataItem}
