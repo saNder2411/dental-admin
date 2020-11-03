@@ -57,7 +57,7 @@ export const SchedulerCustomItem: FC<SchedulerItemProps> = (props): JSX.Element 
                 <h5>{dataItem.staff}</h5>
               </CardHeader>
               <CardBody>
-                <CardHeader>Ref ID{dataItem.refID}</CardHeader>
+                <CardHeader>Ref ID {dataItem.refID}</CardHeader>
                 <CardHeader>Start: {intl.formatDate(props.zonedStart, 't')}</CardHeader>
                 <CardHeader>End: {intl.formatDate(props.zonedEnd, 't')}</CardHeader>
                 <CardHeader>Mobile Phone: {dataItem.mobilePhone}</CardHeader>
