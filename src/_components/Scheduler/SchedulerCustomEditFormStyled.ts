@@ -8,7 +8,7 @@ export const SchedulerCustomEditForm = styled.section`
   }
 
   && .k-label {
-    width: 127px;
+    width: 125px;
   }
 
   && .k-form .k-textbox,
@@ -26,12 +26,12 @@ export const SchedulerCustomEditForm = styled.section`
   .k-form .k-maskedtextbox,
   .k-form .k-textbox-container,
   .k-form .k-floating-label-container {
-    width: 70%;
+    width: 75%;
   }
 
   && .k-form .k-textarea,
   && .k-dropdown {
-    width: calc(60% - 34px);
+    width: calc(65% - 32px);
   }
 
   & .k-form .k-numerictextbox {
@@ -40,7 +40,7 @@ export const SchedulerCustomEditForm = styled.section`
 
   & .k-combobox .k-dropdown-wrap,
   .k-picker-wrap.k-state-default {
-    width: calc(80% - 7px);
+    width: calc(80% - 1px);
   }
 
   & .k-textarea > .k-input {
