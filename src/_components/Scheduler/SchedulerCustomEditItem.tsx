@@ -5,7 +5,7 @@ import { SchedulerCustomEditForm } from './';
 
 export const SchedulerCustomEditItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   const [formItem, setFormItem] = useState(null);
-  // console.log(`SchedulerCustomEditItem`, props);
+  console.log(`SchedulerCustomEditItemProps`, props);
 
   const onFormItemChange = useCallback(({ value }: any) => setFormItem(value), []);
 

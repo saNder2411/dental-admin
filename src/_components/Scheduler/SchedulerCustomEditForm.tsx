@@ -57,7 +57,7 @@ const repeatOnYearlyData = [
 const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
-  console.log(`formState`, dataItem);
+  console.log(`formDataItem`, dataItem);
 
   return (
     <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700}>
@@ -66,6 +66,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
           initialValues={dataItem}
           onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
           render={(formRenderProps) => {
+            console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('repeat');
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {
@@ -84,8 +85,6 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
               default:
                 secondLabelForRepeatEvery = '';
             }
-            console.log(`formRenderProps`, formRenderProps);
-            console.log(formRenderProps.valueGetter('repeatOnMonthly'));
             return (
               <FormElement horizontal={true}>
                 <fieldset className="k-form-fieldset">
@@ -112,7 +111,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                   <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'refID'} name={'refID'} label={'Services'} component={FormInput} validator={requiredValidator} />
-                  <Field id={'status'} name={'status'} label={'Status'} data={statusList} component={FormComboBox} validator={requiredValidator} />
+                  <Field id={'status'} name={'status'} label={'Status'} data={statusList} component={FormDropDownList} validator={requiredValidator} />
                   <Field id={'repeat'} name={'repeat'} label={'Repeat'} data={recurrenceNames} component={FormDropDownList} />
 
                   {repeatValue !== 'Never' && (
@@ -247,9 +246,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                               component={FormDropDownList}
                             />
                           </div>
-                          <div className="col-md-1 p-1">
-                            of
-                          </div>
+                          <div className="col-md-1 p-1">of</div>
                           <div className="col-md-4 p-0">
                             <Field
                               id={'monthNamess'}

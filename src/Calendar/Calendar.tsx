@@ -30,10 +30,7 @@ export const Calendar = () => {
 
   const onEmployeeClick = useCallback(
     (employeeId) => {
-      setFilterState({
-        ...filterState,
-        [employeeId]: !filterState[employeeId],
-      });
+      setFilterState({ ...filterState, [employeeId]: !filterState[employeeId] });
       console.log(employeeId, filterState);
     },
     [filterState, setFilterState]
