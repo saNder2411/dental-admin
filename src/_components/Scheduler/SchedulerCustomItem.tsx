@@ -18,56 +18,54 @@ export const SchedulerCustomItem: FC<SchedulerItemProps> = (props): JSX.Element 
   const iconDentalName = dataItem.dentalStatus as IconName;
 
   return (
-    <SchedulerItem
-      {...props}
-      // onMouseEnter={() => setShowPopup(true)}
-      // onMouseLeave={() => setShowPopup(false)}
-      onClick={() => setShowPopup((prevState) => !prevState)}>
-      <SC.SchedulerItemTopWrapper>
-        {children}
-        <div className="SchedulerItem__icons">
-          <div className="SchedulerItem__icon">
-            <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} size={'lg'} />
-          </div>
-          <div className="SchedulerItem__icon">
-            <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} size={'lg'} />
-          </div>
-        </div>
-      </SC.SchedulerItemTopWrapper>
-      {!isAllDay && (
-        <SchedulerItemContent>
-          <div className="SchedulerItemContent__item">{dataItem.refID}</div>
-          <div className="SchedulerItemContent__item">
-            {intl.formatDate(zonedStart, 't')} - {intl.formatDate(zonedEnd, 't')}
-          </div>
-          <div className="SchedulerItemContent__item">{dataItem.notes}</div>
-        </SchedulerItemContent>
-      )}
-      <Popup
-        show={showPopup}
-        anchorAlign={{ horizontal: 'left', vertical: 'top' }}
-        popupAlign={{ horizontal: 'left', vertical: 'bottom' }}
-        popupClass="SchedulerItemContent-popup-content"
-        anchor={_ref.current?.element as any}
-        style={{ width: _ref.current?.element?.offsetWidth }}>
-        <div className="rounded" style={{ overflow: 'hidden' }}>
-          <Card>
-            <div>
-              <CardHeader>
-                <h5>{dataItem.staff}</h5>
-              </CardHeader>
-              <CardBody>
-                <CardHeader>Ref ID: {dataItem.refID}</CardHeader>
-                <CardHeader>Start: {intl.formatDate(props.zonedStart, 't')}</CardHeader>
-                <CardHeader>End: {intl.formatDate(props.zonedEnd, 't')}</CardHeader>
-                <CardHeader>Mobile Phone: {dataItem.mobilePhone}</CardHeader>
-                <CardHeader>Email: {dataItem.email}</CardHeader>
-                <CardHeader>Notes: {dataItem.notes}</CardHeader>
-              </CardBody>
+    <div onMouseUp={() => setShowPopup((prevState) => !prevState)} onMouseMove={() => setShowPopup(false)}>
+      <SchedulerItem {...props}>
+        <SC.SchedulerItemTopWrapper>
+          {children}
+          <div className="SchedulerItem__icons">
+            <div className="SchedulerItem__icon">
+              <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} size={'lg'} />
             </div>
-          </Card>
-        </div>
-      </Popup>
-    </SchedulerItem>
+            <div className="SchedulerItem__icon">
+              <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} size={'lg'} />
+            </div>
+          </div>
+        </SC.SchedulerItemTopWrapper>
+        {!isAllDay && (
+          <SchedulerItemContent>
+            <div className="SchedulerItemContent__item">{dataItem.refID}</div>
+            <div className="SchedulerItemContent__item">
+              {intl.formatDate(zonedStart, 't')} - {intl.formatDate(zonedEnd, 't')}
+            </div>
+            <div className="SchedulerItemContent__item">{dataItem.notes}</div>
+          </SchedulerItemContent>
+        )}
+        <Popup
+          show={showPopup}
+          anchorAlign={{ horizontal: 'left', vertical: 'top' }}
+          popupAlign={{ horizontal: 'left', vertical: 'bottom' }}
+          popupClass="SchedulerItemContent-popup-content"
+          anchor={_ref.current?.element as any}
+          style={{ width: _ref.current?.element?.offsetWidth }}>
+          <div className="rounded" style={{ overflow: 'hidden' }}>
+            <Card>
+              <div>
+                <CardHeader>
+                  <h5>{dataItem.staff}</h5>
+                </CardHeader>
+                <CardBody>
+                  <CardHeader>Ref ID: {dataItem.refID}</CardHeader>
+                  <CardHeader>Start: {intl.formatDate(props.zonedStart, 't')}</CardHeader>
+                  <CardHeader>End: {intl.formatDate(props.zonedEnd, 't')}</CardHeader>
+                  <CardHeader>Mobile Phone: {dataItem.mobilePhone}</CardHeader>
+                  <CardHeader>Email: {dataItem.email}</CardHeader>
+                  <CardHeader>Notes: {dataItem.notes}</CardHeader>
+                </CardBody>
+              </div>
+            </Card>
+          </div>
+        </Popup>
+      </SchedulerItem>
+    </div>
   );
 };

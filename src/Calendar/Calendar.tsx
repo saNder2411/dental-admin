@@ -14,7 +14,7 @@ const initialFilterState: { [key: string]: boolean } = employees.reduce((prevVal
 export const Calendar = () => {
   const localizationService = useLocalization();
   const [filterState, setFilterState] = useState(initialFilterState);
-  const [data, setData] = useState(orders.slice(0, 1));
+  const [data, setData] = useState(orders);
 
   const onDataChange = useCallback(({ created, updated, deleted }) => {
     setData((old: any) =>
