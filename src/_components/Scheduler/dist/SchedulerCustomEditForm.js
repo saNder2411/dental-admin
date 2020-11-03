@@ -112,7 +112,7 @@ exports.SchedulerCustomEditForm = function (_a) {
                                             react_1["default"].createElement(kendo_react_form_1.Field, { id: 'yearlyWeekNumber', name: 'yearlyWeekNumber', component: SchedulerCustomEditFormComponents_1.FormDropDownList, data: weekNumbers, defaultValue: weekNumbers[0], disabled: formRenderProps.valueGetter('repeatOnYearly') !== 'week' })),
                                         react_1["default"].createElement("div", { className: "col-md-4 p-0" },
                                             react_1["default"].createElement(kendo_react_form_1.Field, { id: 'yearlyWeekday', name: 'yearlyWeekday', data: monthlyDayNames, defaultValue: monthlyDayNames[3], disabled: formRenderProps.valueGetter('repeatOnYearly') !== 'week', component: SchedulerCustomEditFormComponents_1.FormDropDownList })),
-                                        react_1["default"].createElement("div", { className: "col-md-1 p-2" }, "of"),
+                                        react_1["default"].createElement("div", { className: "col-md-1 p-1" }, "of"),
                                         react_1["default"].createElement("div", { className: "col-md-4 p-0" },
                                             react_1["default"].createElement(kendo_react_form_1.Field, { id: 'monthNamess', name: 'monthNames', data: monthName, defaultValue: monthName[0], disabled: formRenderProps.valueGetter('repeatOnYearly') !== 'week', component: SchedulerCustomEditFormComponents_1.FormDropDownList })))))),
                             repeatValue !== 'Never' && (react_1["default"].createElement("div", { className: "row m-0" },

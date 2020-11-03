@@ -49,6 +49,7 @@ export const SchedulerCustomEditForm = styled.section`
 
   .form__actions-bar-wrapper {
     margin: -1rem;
+    margin-top: 18px;
     border-color: #ebebeb;
   }
 

@@ -247,7 +247,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
                               component={FormDropDownList}
                             />
                           </div>
-                          <div className="col-md-1 p-2">
+                          <div className="col-md-1 p-1">
                             of
                           </div>
                           <div className="col-md-4 p-0">
@@ -301,7 +301,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
 
                   <Field id={'notes'} name={'notes'} label={'Notes'} component={FormTextArea} />
 
-                  <div className="form__actions-bar-wrapper" style={{ marginTop: '25px' }}>
+                  <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>
                       <button className="k-button" type="submit" disabled={!formRenderProps.allowSubmit}>
                         Save
