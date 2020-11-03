@@ -2,7 +2,7 @@ import React, { FC, useState } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Components
-import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell } from '../_components';
+import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell, StatusCell } from '../_components';
 // Mock
 import { AgendaGridData, AgendaDataItem } from './AgendaMockData';
 // Helpers
@@ -13,11 +13,10 @@ export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
   const editField = 'inEdit';
 
-  const onItemEdit = (dataItem: AgendaDataItem) =>
-    setData([...data.map((item) => (item.id === dataItem.id ? { ...item, inEdit: true } : item))]);
+  const onItemEdit = (dataItem: AgendaDataItem) => setData([...data.map((item) => (item.id === dataItem.id ? { ...item, inEdit: true } : item))]);
 
   const onItemUpdate = (dataItem: AgendaDataItem) => {
-    const updatedItem = { ...dataItem, inEdit: undefined };
+    const updatedItem = { ...dataItem, inEdit: false };
     const updatedData = updateItem(data, updatedItem);
 
     updateItem(AgendaGridData, updatedItem);
@@ -38,8 +37,8 @@ export const Agenda: FC = (): JSX.Element => {
     setData(recoveredData);
   };
 
-  const onItemChange = (event: GridItemChangeEvent) => {
-    const changeData = data.map((item) => (item.id === event.dataItem.id ? { ...item, [event.field as string]: event.value } : item));
+  const onItemChange = (evt: GridItemChangeEvent) => {
+    const changeData = data.map((item) => (item.id === evt.dataItem.id ? { ...item, [evt.field as string]: evt.value } : item));
 
     setData(changeData);
   };
@@ -54,6 +53,7 @@ export const Agenda: FC = (): JSX.Element => {
               field={'status'}
               title={localizationService.toLanguageString('custom.status', 'Status')}
               columnMenu={ColumnMenu}
+              cell={StatusCell}
               filter={'text'}
             />
             <GridColumn

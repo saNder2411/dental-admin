@@ -16,8 +16,8 @@ export const StatusIcon = styled.td`
   & .grid__icon {
     display: block;
     margin: auto;
-    width: 70px;
-    height: 70px;
+    width: 40px;
+    height: 40px;
   }
 `;
 
@@ -55,15 +55,11 @@ export const FlagCell = styled.td<{ isOnline: boolean }>`
 
 export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
   && button {
-    ${({ inEdit }) =>
-      !inEdit &&
-      css`
-        background: transparent;
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-      `}
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
   }
 
   && span {
@@ -76,7 +72,12 @@ export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
     color: #4db5c8;
   }
 
-  .k-i-trash {
+  .k-i-checkmark-outline {
+    color: #28a745;
+  }
+
+  .k-i-trash,
+  .k-i-cancel-outline {
     color: #dc3545;
   }
 `;
