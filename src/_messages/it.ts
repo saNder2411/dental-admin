@@ -5,6 +5,7 @@ export const itMessages = {
     agenda: 'Agenda',
     calendar: 'Calendario',
     stylists: 'Stilisti',
+    teamStaff: 'Staff del Team',
     customers: 'Clienti',
     services: 'Servizi',
     dashboard: 'Dashboard',

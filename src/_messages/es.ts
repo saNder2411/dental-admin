@@ -5,6 +5,7 @@ export const esMessages = {
     agenda: 'Agenda',
     calendar: 'Calendario',
     stylists: 'Estilistas',
+    teamStaff: 'Personal del Equipo',
     customers: 'Clientes',
     services: 'Servicios',
     dashboard: 'Tablero',

@@ -5,6 +5,7 @@ export const frMessages = {
     agenda: 'Agenda',
     calendar: 'Calendrier',
     stylists: 'Stylistes',
+    teamStaff: `Personnel de L'équipe`,
     customers: 'Clients',
     services: 'Services',
     dashboard: 'Tableau de bord',

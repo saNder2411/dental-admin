@@ -5,6 +5,7 @@ export const enMessages = {
     agenda: 'Agenda',
     calendar: 'Calendar',
     stylists: 'Stylists',
+    teamStaff: 'Team Staff',
     customers: 'Customers',
     services: 'Services',
     dashboard: 'Dashboard',

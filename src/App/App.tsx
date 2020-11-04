@@ -39,7 +39,7 @@ import { AppDrawerRouterContainer } from './';
 // Pages
 import { Agenda } from '../Agenda';
 import { Calendar } from '../Calendar';
-import { Stylists } from '../Stylists';
+import { TeamStaff } from '../TeamStaff';
 import { Customers } from '../Customers';
 import { Services } from '../Services';
 // Styles
@@ -95,8 +95,8 @@ export const App: FC = (): JSX.Element => {
                 <Route exact path="/calendar">
                   <Calendar />
                 </Route>
-                <Route exact path="/stylists">
-                  <Stylists />
+                <Route exact path="/team-staff">
+                  <TeamStaff />
                 </Route>
                 <Route exact path="/customers">
                   <Customers />

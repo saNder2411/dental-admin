@@ -6,9 +6,9 @@ import DavidWenger from '../_assets/stylists/David-Wenger-Portrait-85x85.png';
 import AlexLocatelli from '../_assets/stylists/Alex-Locatelli-Portrait-85x85.png';
 import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
 
-export const StylistsGridData = [
+export const TeamStaffGridData = [
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 1,
     teamId: '1',
     photo: AnyStylist,
     fullName: '--Team Stylist--',
@@ -18,7 +18,7 @@ export const StylistsGridData = [
     email: 'any.stylist@metroapps.online',
   },
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 2,
     teamId: '2',
     photo: Amelia,
     fullName: 'Amelia Giround',
@@ -28,7 +28,7 @@ export const StylistsGridData = [
     email: 'amelia.giround@metroapps.online',
   },
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 3,
     teamId: '3',
     photo: GraceRobinson,
     fullName: 'Grace Robinson',
@@ -38,7 +38,7 @@ export const StylistsGridData = [
     email: 'grace.robinson@metroapps.online',
   },
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 4,
     teamId: '4',
     photo: ChristinaRomanov,
     fullName: 'Christina Romanov',
@@ -48,7 +48,7 @@ export const StylistsGridData = [
     email: 'christine.romanov@metroapps.online',
   },
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 5,
     teamId: '5',
     photo: DavidWenger,
     fullName: 'David Wenger',
@@ -58,7 +58,7 @@ export const StylistsGridData = [
     email: 'david.wenger@metroapps.online',
   },
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 6,
     teamId: '6',
     photo: AlexLocatelli,
     fullName: 'Alex Locatelli',
@@ -68,7 +68,7 @@ export const StylistsGridData = [
     email: 'alex.locatelli@metroapps.online',
   },
   {
-    id: (Math.random() * Math.random()).toString(),
+    id: 7,
     teamId: '7',
     photo: SaraKhan,
     fullName: 'Sara Khan',

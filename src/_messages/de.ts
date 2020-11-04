@@ -5,6 +5,7 @@ export const deMessages = {
     agenda: 'Tagesordnung',
     calendar: 'Kalender',
     stylists: 'Stylisten',
+    teamStaff: 'Teammitarbeiter',
     customers: 'Kunden',
     services: 'Dienstleistungen',
     dashboard: 'Dashboard',

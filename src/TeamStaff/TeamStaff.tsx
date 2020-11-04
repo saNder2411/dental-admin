@@ -4,16 +4,16 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import { PhotoCell, FlagCell } from '../_sections';
 
-import { StylistsGridData } from './StylistsMockData';
+import { TeamStaffGridData } from './TeamStaffMockData';
 
-export const Stylists: FC = (): JSX.Element => {
+export const TeamStaff: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   return (
     <div id="Grid" className="stylists-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid data={StylistsGridData}>
+          <Grid data={TeamStaffGridData}>
             <GridColumn
               field={'teamId'}
               title={localizationService.toLanguageString('custom.teamId', 'Team ID')}
