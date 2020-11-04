@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 import { guid } from '@progress/kendo-react-common';
 // Components
-import { Scheduler } from '../_components';
+import { Scheduler } from '../_sections';
 import { CalendarTopControlItem, CalendarHeaderCardCell } from './';
 // Styled Components
 import * as SC from './CalendarStyled';

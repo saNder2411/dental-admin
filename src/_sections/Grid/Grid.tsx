@@ -6,6 +6,8 @@ import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
+// Styled Components
+import * as SC from './GridStyledComponents/GridStyled';
 
 export { GridColumn };
 
@@ -18,7 +20,7 @@ export const ColumnMenu = (props: any) => {
   );
 };
 
-export const Grid = ({ data, onDataChange, children, ...others }: any) => {
+export const Grid = ({ data, onDataChange, children, onAddNewItem, addItemTitle, ...others }: any) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
 
@@ -142,31 +144,40 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
   }, [processedData, onPdfExportDone]);
 
   const GridElement = (
-    <KendoGrid
-      {...dataState}
-      {...others}
-      rowHeight={40}
-      pageable
-      sortable
-      data={processedData}
-      onDataStateChange={onDataStateChange}
-      onSelectionChange={onSelectionChange}
-      onHeaderSelectionChange={onHeaderSelectionChange}>
-      <GridToolbar>
-        <Input
-          value={allColumnFilter}
-          onChange={onAllColumnFilterChange}
-          placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
-        />
-        <Button icon="excel" onClick={onExcelExport}>
-          {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
-        </Button>
-        <Button icon="pdf" onClick={onPdfExport} disabled={isPdfExporting}>
-          {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
-        </Button>
-      </GridToolbar>
-      {children}
-    </KendoGrid>
+    <SC.Grid>
+      <KendoGrid
+        {...dataState}
+        {...others}
+        rowHeight={40}
+        pageable
+        sortable
+        data={processedData}
+        onDataStateChange={onDataStateChange}
+        onSelectionChange={onSelectionChange}
+        onHeaderSelectionChange={onHeaderSelectionChange}>
+        <GridToolbar>
+          <span className="Grid__addNewItemWrapper">
+            <Input
+              value={allColumnFilter}
+              onChange={onAllColumnFilterChange}
+              placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
+            />
+            <span className="Grid__addNewItemTitle">{addItemTitle}</span>
+            <button title="Add new" className="k-button" onClick={onAddNewItem}>
+              <span className="k-icon k-i-plus-circle" />
+            </button>
+          </span>
+
+          <Button icon="excel" onClick={onExcelExport}>
+            {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
+          </Button>
+          <Button icon="pdf" onClick={onPdfExport} disabled={isPdfExporting}>
+            {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
+          </Button>
+        </GridToolbar>
+        {children}
+      </KendoGrid>
+    </SC.Grid>
   );
 
   return (

@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Grid, GridColumn, ColumnMenu } from '../_components';
-import { PhotoCell, FlagCell } from '../_components';
+import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { PhotoCell, FlagCell } from '../_sections';
 
 import { StylistsGridData } from './StylistsMockData';
 

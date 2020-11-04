@@ -53,7 +53,7 @@ export const FlagCell = styled.td<{ isOnline: boolean }>`
   }
 `;
 
-export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
+export const ActionsControlCell = styled.td`
   && button {
     background: transparent;
     border: none;
@@ -72,7 +72,8 @@ export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
     color: #4db5c8;
   }
 
-  .k-i-reload {
+  .k-i-reload,
+  .k-i-plus-circle {
     color: #28a745;
   }
 

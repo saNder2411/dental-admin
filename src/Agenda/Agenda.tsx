@@ -2,18 +2,19 @@ import React, { FC, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell, StatusCell } from '../_components';
+import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell, StatusCell } from '../_sections';
 // Mock
 import { AgendaGridData } from './AgendaMockData';
 // Selectors
-import { selectGridState } from '../_components/Grid';
+import { selectGridState } from '../_sections/Grid';
 
 export const Agenda: FC = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { data, editField, setData, onItemChange } = useSelector(selectGridState);
+  const { data, editField, setData, onItemChange, onAddNewItem } = useSelector(selectGridState);
   const localizationService = useLocalization();
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [onItemChange, dispatch]);
+  const onGridAddNewItemClick = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
 
   useEffect(() => {
     if (data.length > 0) return;
@@ -25,7 +26,7 @@ export const Agenda: FC = (): JSX.Element => {
     <div id="Dashboard" className="home-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid data={data} onItemChange={onGridItemChange} editField={editField}>
+          <Grid data={data} onItemChange={onGridItemChange} editField={editField} onAddNewItem={onGridAddNewItemClick} addItemTitle="New Appointment">
             <GridColumn width={100} cell={StatusIcon} />
             <GridColumn
               field={'status'}

@@ -16,7 +16,7 @@ import * as SC from './GridStyledComponents/GridCellsStyled';
 import MalePhotoPlaceholder from '../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../_assets/customers/female_placeholder.jpg';
 // Selectors
-import { selectGridState } from '../../_components/Grid';
+import { selectGridState } from '.';
 
 const statusList = Object.values(StatusNames).map((status) => ({ status, value: status }));
 
@@ -137,21 +137,27 @@ export const CustomerPhotoCell: GridCell = ({ rowType, dataItem }) => {
 };
 
 export const ActionsControlCell: GridCell = ({ dataItem }) => {
-  const { editField, onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit } = useSelector(selectGridState);
+  const { editField, onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData } = useSelector(selectGridState);
   const dispatch = useDispatch();
   const inEdit = dataItem[editField];
+  const isNewItem = dataItem.id === -1;
 
-  return (
-    <SC.ActionsControlCell className="k-command-cell" inEdit={inEdit}>
-      <button
-        className="k-button k-grid-save-command edit"
-        onClick={() => (inEdit ? onItemUpdatedAfterEdit(dispatch, dataItem) : onItemEdit(dispatch, dataItem))}>
-        {inEdit ? <span className="k-icon k-i-reload" /> : <span className="k-icon k-i-edit" />}
+  return inEdit ? (
+    <SC.ActionsControlCell className="k-command-cell">
+      <button className="k-button" onClick={() => (isNewItem ? onAddNewItemToData(dispatch, dataItem) : onItemUpdatedAfterEdit(dispatch, dataItem))}>
+        {isNewItem ? <span className="k-icon k-i-plus-circle" /> : <span className="k-icon k-i-reload" />}
       </button>
-      <button
-        className="k-button k-grid-cancel-command trash"
-        onClick={() => (inEdit ? onCancelEdit(dispatch, dataItem) : onItemRemove(dispatch, dataItem))}>
-        {inEdit ? <span className="k-icon k-i-cancel-outline" /> : <span className="k-icon k-i-trash" />}
+      <button className="k-button" onClick={() => onCancelEdit(dispatch, dataItem)}>
+        <span className="k-icon k-i-cancel-outline" />
+      </button>
+    </SC.ActionsControlCell>
+  ) : (
+    <SC.ActionsControlCell className="k-command-cell">
+      <button className="k-button" onClick={() => onItemEdit(dispatch, dataItem)}>
+        <span className="k-icon k-i-edit" />
+      </button>
+      <button className="k-button" onClick={() => onItemRemove(dispatch, dataItem)}>
+        <span className="k-icon k-i-trash" />
       </button>
     </SC.ActionsControlCell>
   );

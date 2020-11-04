@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Grid, GridColumn, ColumnMenu } from '../_components';
-import { FlagCell, CurrencyCell, DiscountCell, TotalPriceCell, ServicesIcon, ReferenceCell } from '../_components';
+import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { FlagCell, CurrencyCell, DiscountCell, TotalPriceCell, ServicesIcon, ReferenceCell } from '../_sections';
 
 import { ServicesGridData } from './ServicesMockData';
 

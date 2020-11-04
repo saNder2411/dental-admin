@@ -12,6 +12,8 @@ export const ActionTypes = {
   REMOVE_ITEM_FROM_DATA: 'GRID/REMOVE_ITEM_FROM_DATA' as const,
   CANCEL_EDIT: 'GRID/CANCEL_EDIT' as const,
   CHANGE_ITEM: 'GRID/CHANGE_ITEM' as const,
+  ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
+  ADD_NEW_ITEM_TO_DATA: 'GRID/ADD_NEW_ITEM_TO_DATA' as const,
 };
 
 export interface GridState {
@@ -24,6 +26,8 @@ export interface GridState {
   onItemRemove: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
   onCancelEdit: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
   onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
+  onAddNewItem: (dispatch: Dispatch) => void;
+  onAddNewItemToData: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
 }
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
