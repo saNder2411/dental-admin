@@ -1,5 +1,5 @@
 // Types
-import { AgendaDataItem } from './AgendaMockData';
+import { AgendaDataItem } from './AgendaTypes';
 
 export const generateId = (data: AgendaDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.id), 0) + 1;
 

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { GridCellProps } from '@progress/kendo-react-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,14 +7,18 @@ import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react
 import { DropDownList, DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 import { Popup } from '@progress/kendo-react-popup';
 // Instruments
-import { IconBook, IconName } from '../../_instruments';
+import { IconBook } from '../../_instruments';
+// Types
+import { StatusNames } from '../../Agenda/AgendaTypes';
 // Styled Components
-import * as SC from './GridCellsStyled';
+import * as SC from './GridStyledComponents/GridCellsStyled';
 // Images
 import MalePhotoPlaceholder from '../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../_assets/customers/female_placeholder.jpg';
+// Selectors
+import { selectGridState } from '../../_components/Grid';
 
-const statusList = Object.values(IconName).map((status) => ({ status, value: status }));
+const statusList = Object.values(StatusNames).map((status) => ({ status, value: status }));
 
 type GridCell = (props: GridCellProps) => JSX.Element | null;
 
@@ -84,7 +89,7 @@ export const DateCell: GridCell = ({ rowType, dataItem, field, onChange }) => {
 };
 
 export const StatusIcon: GridCell = ({ rowType, dataItem }) => {
-  const iconName = dataItem.status as IconName;
+  const iconName = dataItem.status as StatusNames;
 
   return rowType === 'groupHeader' ? null : (
     <SC.StatusIcon>
@@ -94,7 +99,7 @@ export const StatusIcon: GridCell = ({ rowType, dataItem }) => {
 };
 
 export const ServicesIcon: GridCell = ({ rowType, dataItem }) => {
-  const iconName = dataItem.offerIconName as IconName;
+  const iconName = dataItem.offerIconName as StatusNames;
   return rowType === 'groupHeader' ? null : (
     <SC.ServicesIcon>
       <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName].icon} color={IconBook[iconName].statusColor} />
@@ -131,15 +136,21 @@ export const CustomerPhotoCell: GridCell = ({ rowType, dataItem }) => {
   );
 };
 
-export const ActionsControlCell = ({ editField, onItemEdit, onItemUpdate, onActionCancel, onItemRemove }: any): GridCell => ({ dataItem }) => {
+export const ActionsControlCell: GridCell = ({ dataItem }) => {
+  const { editField, onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit } = useSelector(selectGridState);
+  const dispatch = useDispatch();
   const inEdit = dataItem[editField];
 
   return (
     <SC.ActionsControlCell className="k-command-cell" inEdit={inEdit}>
-      <button className="k-button k-grid-save-command edit" onClick={() => (inEdit ? onItemUpdate(dataItem) : onItemEdit(dataItem))}>
-        {inEdit ? <span className="k-icon k-i-checkmark-outline" /> : <span className="k-icon k-i-edit" />}
+      <button
+        className="k-button k-grid-save-command edit"
+        onClick={() => (inEdit ? onItemUpdatedAfterEdit(dispatch, dataItem) : onItemEdit(dispatch, dataItem))}>
+        {inEdit ? <span className="k-icon k-i-reload" /> : <span className="k-icon k-i-edit" />}
       </button>
-      <button className="k-button k-grid-cancel-command trash" onClick={() => (inEdit ? onActionCancel(dataItem) : onItemRemove(dataItem))}>
+      <button
+        className="k-button k-grid-cancel-command trash"
+        onClick={() => (inEdit ? onCancelEdit(dispatch, dataItem) : onItemRemove(dispatch, dataItem))}>
         {inEdit ? <span className="k-icon k-i-cancel-outline" /> : <span className="k-icon k-i-trash" />}
       </button>
     </SC.ActionsControlCell>

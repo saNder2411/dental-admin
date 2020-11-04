@@ -13,28 +13,16 @@ import {
   faCalendar,
 } from '@fortawesome/pro-duotone-svg-icons';
 import { faTooth } from '@fortawesome/pro-regular-svg-icons';
+// Types
+import { StatusNames } from '../Agenda';
 
 interface IconStyle extends CSSProperties {
   '--fa-primary-color': string;
   '--fa-secondary-color': string;
 }
 
-export enum IconName {
-  Consultation = 'Consultation',
-  Pending = 'Pending',
-  Reserved = 'Reserved',
-  Booked = 'Booked',
-  Paid = 'Paid',
-  Checking = 'Checking',
-  Cancelled = 'Cancelled',
-  Closed = 'Closed',
-  Unavailable = 'Unavailable',
-  Other = 'Other',
-  Tooth = 'Tooth',
-}
-
 type TIconBook = {
-  [key in IconName]: {
+  [key in StatusNames]: {
     icon: IconDefinition;
     style: IconStyle;
     statusColor: string;

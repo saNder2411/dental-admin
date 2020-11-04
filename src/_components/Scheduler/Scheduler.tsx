@@ -1,7 +1,7 @@
 import React from 'react';
 import { Scheduler as KendoScheduler, DayView, WeekView, AgendaView, MonthView } from '@progress/kendo-react-scheduler';
 //Components
-import { SchedulerCustomItem, SchedulerCustomEditItem } from './';
+import { SchedulerItem, SchedulerItemEdit } from './';
 
 export const Scheduler = ({ data, modelFields, group, resources, onDataChange }: any) => {
   const defaultDate = new Date();
@@ -15,8 +15,8 @@ export const Scheduler = ({ data, modelFields, group, resources, onDataChange }:
       resources={resources}
       timezone={'Etc/UTC'}
       defaultDate={defaultDate}
-      item={SchedulerCustomItem}
-      editItem={SchedulerCustomEditItem}
+      item={SchedulerItem}
+      editItem={SchedulerItemEdit}
       defaultView={'day'}
       onDataChange={onDataChange}
       editable={{

@@ -1,25 +1,27 @@
 import React, { FC, useState } from 'react';
-import { SchedulerItem, SchedulerItemContent, SchedulerItemProps } from '@progress/kendo-react-scheduler';
+import { SchedulerItem as KendoSchedulerItem, SchedulerItemContent, SchedulerItemProps } from '@progress/kendo-react-scheduler';
 import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
 // Styled Components
-import * as SC from './SchedulerCustomItemStyled';
+import * as SC from './SchedulerStyledComponents/SchedulerItemStyled';
 // Instruments
-import { IconBook, IconName } from '../../_instruments';
+import { IconBook } from '../../_instruments';
+// Types
+import { StatusNames } from '../../Agenda/AgendaTypes';
 
-export const SchedulerCustomItem: FC<SchedulerItemProps> = (props): JSX.Element => {
+export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   const [showPopup, setShowPopup] = useState(false);
   const intl = useInternationalization();
   // console.log(`CustomItemProps`, props);
   const { dataItem, children, isAllDay, zonedStart, zonedEnd, _ref } = props;
-  const iconName = dataItem.status as IconName;
-  const iconDentalName = dataItem.dentalStatus as IconName;
+  const iconName = dataItem.status as StatusNames;
+  const iconDentalName = dataItem.dentalStatus as StatusNames;
 
   return (
     <div onMouseUp={() => setShowPopup((prevState) => !prevState)} onMouseMove={() => setShowPopup(false)}>
-      <SchedulerItem {...props}>
+      <KendoSchedulerItem {...props}>
         <SC.SchedulerItemTopWrapper>
           {children}
           <div className="SchedulerItem__icons">
@@ -65,7 +67,7 @@ export const SchedulerCustomItem: FC<SchedulerItemProps> = (props): JSX.Element 
             </Card>
           </div>
         </Popup>
-      </SchedulerItem>
+      </KendoSchedulerItem>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import { SchedulerFormProps } from '@progress/kendo-react-scheduler';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 // Styled Components
-import * as SC from './SchedulerCustomEditFormStyled';
+import * as SC from './SchedulerStyledComponents/SchedulerFormStyled';
 // Form Inputs
 import {
   FormInput,
@@ -15,14 +15,15 @@ import {
   FormRadioGroup,
   FormButtonGroup,
   FormDropDownList,
-} from './SchedulerCustomEditFormComponents';
+} from './SchedulerFormComponents';
 // Mock
 import { CustomersGridData } from '../../Customers/CustomersMockData';
-import { employees, OrderStatus } from '../../Calendar/CalendarMockData';
+import { employees } from '../../Calendar/CalendarMockData';
+import { StatusNames } from '../../Agenda/AgendaTypes';
 
 const customers = CustomersGridData.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
 const stuffs = employees.map(({ fullName }) => fullName);
-const statusList = Object.values(OrderStatus);
+const statusList = Object.values(StatusNames);
 
 const recurrenceNames = ['Never', 'Daily', 'Weekly', 'Monthly', 'Yearly'];
 const endRecurrenceDailyData = [
@@ -56,12 +57,12 @@ const repeatOnYearlyData = [
 
 const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
+export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   console.log(`formDataItem`, dataItem);
 
   return (
     <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={'73%'}>
-      <SC.SchedulerCustomEditForm>
+      <SC.SchedulerForm>
         <Form
           initialValues={dataItem}
           onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
@@ -320,7 +321,7 @@ export const SchedulerCustomEditForm: FC<SchedulerFormProps> = ({ dataItem, onSu
             );
           }}
         />
-      </SC.SchedulerCustomEditForm>
+      </SC.SchedulerForm>
     </Dialog>
   );
 };

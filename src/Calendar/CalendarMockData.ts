@@ -1,10 +1,12 @@
-// import AnyStylist from '../_assets/stylists/Any-Stylist-Portrait-85x85.png';
+// Images
 import AmeliaGiround from '../_assets/stylists/Amelia-Giroud-Portrait-85x85.png';
 import GraceRobinson from '../_assets/stylists/Grace-Robinson-Portrait-85x85.png';
 import ChristinaRomanov from '../_assets/stylists/Christina-Romanov-Portrait-85x85.png';
 import DavidWenger from '../_assets/stylists/David-Wenger-Portrait-85x85.png';
 import AlexLocatelli from '../_assets/stylists/Alex-Locatelli-Portrait-85x85.png';
 import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
+// Types
+import { StatusNames } from '../Agenda/AgendaTypes';
 
 export const employees = [
   {
@@ -149,19 +151,6 @@ export const ordersModelFields = {
 const now = Date.now();
 const hour = 3.6e6;
 
-export enum OrderStatus {
-  Consultation = 'Consultation',
-  Pending = 'Pending',
-  Reserved = 'Reserved',
-  Booked = 'Booked',
-  Paid = 'Paid',
-  Checking = 'Checking',
-  Cancelled = 'Cancelled',
-  Closed = 'Closed',
-  Unavailable = 'Unavailable',
-  Other = 'Other',
-  Tooth = 'Tooth',
-}
 
 interface Order {
   staff: string;
@@ -169,8 +158,8 @@ interface Order {
   end: Date;
   orderID: number;
   refID: string;
-  status: OrderStatus;
-  dentalStatus: OrderStatus;
+  status: StatusNames;
+  dentalStatus: StatusNames;
   mobilePhone: string;
   email: string;
   notes: string;
@@ -193,8 +182,8 @@ export const orders: Order[] = [
     end: now - hour,
     orderID: 1,
     refID: 'C.A.Female-0640',
-    status: OrderStatus.Consultation,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Consultation,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '06-Ladies Blow Dry S1_021',
@@ -213,8 +202,8 @@ export const orders: Order[] = [
     end: now + hour,
     orderID: 2,
     refID: 'S.Pye-0503',
-    status: OrderStatus.Pending,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Pending,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '02-Mens Wash+Cut+Dry S4_007',
@@ -233,8 +222,8 @@ export const orders: Order[] = [
     end: now - hour * 1,
     orderID: 3,
     refID: 'A.Cea-0505',
-    status: OrderStatus.Reserved,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Reserved,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '05-Highlights 1/1 S4_013',
@@ -253,8 +242,8 @@ export const orders: Order[] = [
     end: now - hour * 1,
     orderID: 4,
     refID: 'A.Switzer-0506',
-    status: OrderStatus.Booked,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Booked,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
@@ -273,8 +262,8 @@ export const orders: Order[] = [
     end: now + hour * 3,
     orderID: 5,
     refID: 'A.Cea-0505',
-    status: OrderStatus.Paid,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Paid,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '05-Highlights 1/1 S4_013',
@@ -293,8 +282,8 @@ export const orders: Order[] = [
     end: now + hour * 4,
     orderID: 6,
     refID: 'A.Switzer-0506',
-    status: OrderStatus.Checking,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Checking,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
@@ -313,8 +302,8 @@ export const orders: Order[] = [
     end: now + hour * 2,
     orderID: 7,
     refID: 'C.Smith-0507',
-    status: OrderStatus.Cancelled,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Cancelled,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '06-Ladies Blow Dry S1_021',
@@ -333,8 +322,8 @@ export const orders: Order[] = [
     end: now,
     orderID: 8,
     refID: 'C.Smith-0507',
-    status: OrderStatus.Closed,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Closed,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '08-Balayage Natural S4_027',
@@ -353,8 +342,8 @@ export const orders: Order[] = [
     end: now + hour * 3,
     orderID: 9,
     refID: 'C.Smith-0507',
-    status: OrderStatus.Unavailable,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Unavailable,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '08-Balayage Natural S4_027',
@@ -373,8 +362,8 @@ export const orders: Order[] = [
     end: now - hour * 3.5,
     orderID: 10,
     refID: 'C.Smith-0507',
-    status: OrderStatus.Other,
-    dentalStatus: OrderStatus.Tooth,
+    status: StatusNames.Other,
+    dentalStatus: StatusNames.Tooth,
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '08-Balayage Natural S4_027',

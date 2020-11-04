@@ -72,7 +72,7 @@ export const ActionsControlCell = styled.td<{ inEdit: boolean }>`
     color: #4db5c8;
   }
 
-  .k-i-checkmark-outline {
+  .k-i-reload {
     color: #28a745;
   }
 

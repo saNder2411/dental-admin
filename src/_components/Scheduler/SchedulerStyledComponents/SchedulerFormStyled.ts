@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const SchedulerCustomEditForm = styled.section`
+export const SchedulerForm = styled.section`
   padding: 1rem;
   padding-bottom: 0;
 

@@ -1,53 +1,31 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
-import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Components
 import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell, StatusCell } from '../_components';
 // Mock
-import { AgendaGridData, AgendaDataItem } from './AgendaMockData';
-// Helpers
-import { updateItem, removeItem } from './AgendaHelpers';
+import { AgendaGridData } from './AgendaMockData';
+// Selectors
+import { selectGridState } from '../_components/Grid';
 
 export const Agenda: FC = (): JSX.Element => {
-  const [data, setData] = useState(AgendaGridData.slice());
+  const dispatch = useDispatch();
+  const { data, editField, setData, onItemChange } = useSelector(selectGridState);
   const localizationService = useLocalization();
-  const editField = 'inEdit';
 
-  const onItemEdit = (dataItem: AgendaDataItem) => setData([...data.map((item) => (item.id === dataItem.id ? { ...item, inEdit: true } : item))]);
+  const onGridItemChange = useCallback(onItemChange(dispatch), [onItemChange, dispatch]);
 
-  const onItemUpdate = (dataItem: AgendaDataItem) => {
-    const updatedItem = { ...dataItem, inEdit: false };
-    const updatedData = updateItem(data, updatedItem);
+  useEffect(() => {
+    if (data.length > 0) return;
 
-    updateItem(AgendaGridData, updatedItem);
-
-    setData(updatedData);
-  };
-
-  const onItemRemove = (dataItem: AgendaDataItem) => {
-    const updatedData = removeItem(data, dataItem);
-
-    setData(updatedData);
-  };
-
-  const onActionCancel = (dataItem: AgendaDataItem) => {
-    const originalItem = AgendaGridData.find(({ id }) => id === dataItem.id);
-    const recoveredData = data.map((item) => (item.id === originalItem?.id ? originalItem : item));
-
-    setData(recoveredData);
-  };
-
-  const onItemChange = (evt: GridItemChangeEvent) => {
-    const changeData = data.map((item) => (item.id === evt.dataItem.id ? { ...item, [evt.field as string]: evt.value } : item));
-
-    setData(changeData);
-  };
+    setData(dispatch, AgendaGridData.slice());
+  }, [data, setData, dispatch]);
 
   return (
     <div id="Dashboard" className="home-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid data={data} onItemChange={onItemChange} editField={editField}>
+          <Grid data={data} onItemChange={onGridItemChange} editField={editField}>
             <GridColumn width={100} cell={StatusIcon} />
             <GridColumn
               field={'status'}
@@ -104,10 +82,7 @@ export const Agenda: FC = (): JSX.Element => {
               width={120}
               filter={'text'}
             />
-            <GridColumn
-              title={localizationService.toLanguageString('custom.actions', 'Actions')}
-              cell={ActionsControlCell({ editField, onItemEdit, onItemUpdate, onActionCancel, onItemRemove })}
-            />
+            <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />
           </Grid>
         </div>
       </div>
