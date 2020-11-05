@@ -26,7 +26,7 @@ export const itMessages = {
     phone: 'Cellulare',
     lastUpdate: 'Ultimo Aggiornamento',
     eventId: `ID Evento`,
-    teamId: 'ID Squadra',
+    teamID: 'ID Squadra',
     photo: 'Foto',
     fullName: 'Nome',
     jobTitle: 'Titolo Lavorativo',

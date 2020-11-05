@@ -7,26 +7,34 @@ import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlC
 import { AgendaGridData } from './AgendaMockData';
 // Selectors
 import { selectGridState } from '../_sections/Grid';
+// Types
+import { GridDataName } from '../_sections/Grid';
 
 export const Agenda: FC = (): JSX.Element => {
   const dispatch = useDispatch();
-  const { data, editField, setData, onItemChange, onAddNewItem } = useSelector(selectGridState);
+  const { data, editField, setData, onItemChange, onAddNewItem, titleForAddNewItemSection, dataName } = useSelector(selectGridState);
   const localizationService = useLocalization();
+  const hasAgendaData = dataName === GridDataName.Agenda;
 
-  const onGridItemChange = useCallback(onItemChange(dispatch), [onItemChange, dispatch]);
-  const onGridAddNewItemClick = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
+  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
+  const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
 
   useEffect(() => {
-    if (data.length > 0) return;
+    if (dataName === GridDataName.Agenda) return;
 
     setData(dispatch, AgendaGridData.slice());
-  }, [data, setData, dispatch]);
+  }, [dataName, setData, dispatch]);
 
   return (
     <div id="Dashboard" className="home-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid data={data} onItemChange={onGridItemChange} editField={editField} onAddNewItem={onGridAddNewItemClick} addItemTitle="New Appointment">
+          <Grid
+            data={hasAgendaData ? data : []}
+            editField={editField}
+            addItemTitle={titleForAddNewItemSection}
+            onItemChange={onGridItemChange}
+            onAddNewItem={onAddNewGridItem}>
             <GridColumn width={100} cell={StatusIcon} />
             <GridColumn
               field={'status'}

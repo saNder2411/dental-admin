@@ -1,22 +1,9 @@
-enum OfferIcons {
-  Tooth = 'Tooth',
-}
+// Types
+import { ServicesDataItem, OfferIcons } from './ServicesTypes';
 
-interface Offer {
-  offerID: number;
-  offerIconName: OfferIcons;
-  references: string;
-  detailsReference: string;
-  category: string;
-  duration: number;
-  isShowOnline: boolean;
-  isConsultation: boolean;
-  price: number;
-  discount: number;
-}
-
-export const ServicesGridData: Offer[] = [
+export const ServicesGridData: ServicesDataItem[] = [
   {
+    id: 1,
     offerID: 1,
     offerIconName: OfferIcons.Tooth,
     references: 'Ladies Wash+Cut+Dry S1',
@@ -29,6 +16,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.15,
   },
   {
+    id: 2,
     offerID: 2,
     offerIconName: OfferIcons.Tooth,
     references: 'Ladies Wash+Cut+Dry S2',
@@ -41,6 +29,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.1,
   },
   {
+    id: 3,
     offerID: 3,
     offerIconName: OfferIcons.Tooth,
     references: 'Ladies Wash+Cut+Dry S3',
@@ -53,6 +42,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.15,
   },
   {
+    id: 4,
     offerID: 4,
     offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S1',
@@ -65,6 +55,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.15,
   },
   {
+    id: 5,
     offerID: 5,
     offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S2',
@@ -77,6 +68,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.15,
   },
   {
+    id: 6,
     offerID: 6,
     offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S3',
@@ -89,6 +81,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.15,
   },
   {
+    id: 7,
     offerID: 7,
     offerIconName: OfferIcons.Tooth,
     references: 'Mens Wash+Cut+Dry S4',
@@ -101,6 +94,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.15,
   },
   {
+    id: 8,
     offerID: 8,
     offerIconName: OfferIcons.Tooth,
     references: 'Girls Wash+Cut+Dry',
@@ -113,6 +107,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.2,
   },
   {
+    id: 9,
     offerID: 9,
     offerIconName: OfferIcons.Tooth,
     references: 'Boys Wash+Cut+Dry',
@@ -125,6 +120,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.2,
   },
   {
+    id: 10,
     offerID: 10,
     offerIconName: OfferIcons.Tooth,
     references: 'Girl Student Wash+Cut',
@@ -137,6 +133,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.2,
   },
   {
+    id: 11,
     offerID: 11,
     offerIconName: OfferIcons.Tooth,
     references: 'Boy Student Wash+Cut',
@@ -149,6 +146,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.2,
   },
   {
+    id: 12,
     offerID: 12,
     offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/1 S3',
@@ -161,6 +159,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.25,
   },
   {
+    id: 13,
     offerID: 13,
     offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/1 S4',
@@ -173,6 +172,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.25,
   },
   {
+    id: 14,
     offerID: 14,
     offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/2 S3',
@@ -185,6 +185,7 @@ export const ServicesGridData: Offer[] = [
     discount: 0.25,
   },
   {
+    id: 15,
     offerID: 15,
     offerIconName: OfferIcons.Tooth,
     references: 'Highlights 1/2 S4',

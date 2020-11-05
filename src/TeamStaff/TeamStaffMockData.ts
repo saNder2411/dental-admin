@@ -9,7 +9,7 @@ import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
 export const TeamStaffGridData = [
   {
     id: 1,
-    teamId: '1',
+    teamID: '1',
     photo: AnyStylist,
     fullName: '--Team Stylist--',
     jobTitle: 'Various',
@@ -19,7 +19,7 @@ export const TeamStaffGridData = [
   },
   {
     id: 2,
-    teamId: '2',
+    teamID: '2',
     photo: Amelia,
     fullName: 'Amelia Giround',
     jobTitle: 'Art Director',
@@ -29,7 +29,7 @@ export const TeamStaffGridData = [
   },
   {
     id: 3,
-    teamId: '3',
+    teamID: '3',
     photo: GraceRobinson,
     fullName: 'Grace Robinson',
     jobTitle: 'Junior Stylists',
@@ -39,7 +39,7 @@ export const TeamStaffGridData = [
   },
   {
     id: 4,
-    teamId: '4',
+    teamID: '4',
     photo: ChristinaRomanov,
     fullName: 'Christina Romanov',
     jobTitle: 'Senior Stylists',
@@ -49,7 +49,7 @@ export const TeamStaffGridData = [
   },
   {
     id: 5,
-    teamId: '5',
+    teamID: '5',
     photo: DavidWenger,
     fullName: 'David Wenger',
     jobTitle: 'Senior Stylists',
@@ -59,7 +59,7 @@ export const TeamStaffGridData = [
   },
   {
     id: 6,
-    teamId: '6',
+    teamID: '6',
     photo: AlexLocatelli,
     fullName: 'Alex Locatelli',
     jobTitle: 'Stylist Director',
@@ -69,7 +69,7 @@ export const TeamStaffGridData = [
   },
   {
     id: 7,
-    teamId: '7',
+    teamID: '7',
     photo: SaraKhan,
     fullName: 'Sara Khan',
     jobTitle: 'Senior Stylist',

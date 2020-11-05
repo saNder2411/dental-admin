@@ -2,6 +2,9 @@ import { Dispatch } from 'redux';
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
 import { AgendaDataItem } from '../../Agenda';
+import { TeamStaffDataItem } from '../../TeamStaff';
+import { CustomersDataItem } from '../../Customers';
+import { ServicesDataItem } from '../../Services';
 // Actions
 import * as actions from './GridActionCreators';
 
@@ -16,20 +19,32 @@ export const ActionTypes = {
   ADD_NEW_ITEM_TO_DATA: 'GRID/ADD_NEW_ITEM_TO_DATA' as const,
 };
 
-export interface GridState {
-  data: AgendaDataItem[];
-  originData: AgendaDataItem[];
-  editField: 'inEdit';
-  setData: (dispatch: Dispatch, data: AgendaDataItem[]) => void;
-  onItemEdit: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
-  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
-  onItemRemove: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
-  onCancelEdit: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
-  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
-  onAddNewItem: (dispatch: Dispatch) => void;
-  onAddNewItemToData: (dispatch: Dispatch, dataItem: AgendaDataItem) => void;
-}
-
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
+
+export type GridDataItem = InferValueTypes<{ type1: AgendaDataItem; type2: TeamStaffDataItem; type3: CustomersDataItem; type4: ServicesDataItem }>;
+
+export enum GridDataName {
+  Default = 'Empty',
+  Agenda = 'Agenda',
+  TeamStaff = 'TeamStaff',
+  Customers = 'Customers',
+  Services = 'Services',
+}
+
+export interface GridState {
+  data: GridDataItem[];
+  originData: GridDataItem[];
+  dataName: GridDataName,
+  editField: 'inEdit';
+  titleForAddNewItemSection: string;
+  setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
+  onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onCancelEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
+  onAddNewItem: (dispatch: Dispatch) => void;
+  onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+}

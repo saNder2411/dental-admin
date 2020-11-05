@@ -26,7 +26,7 @@ export const enMessages = {
     phone: 'Mobile Phone',
     lastUpdate: 'Last Update',
     eventId: 'Event ID',
-    teamId: 'Team ID',
+    teamID: 'Team ID',
     photo: 'Photo',
     fullName: 'Name',
     jobTitle: 'Job Title',

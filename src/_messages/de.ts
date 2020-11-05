@@ -26,7 +26,7 @@ export const deMessages = {
     phone: 'Handy',
     lastUpdate: 'Letztes Update',
     eventId: 'Ereignis ID',
-    teamId: 'Team ID',
+    teamID: 'Team ID',
     photo: 'Foto',
     fullName: 'Name',
     jobTitle: 'Job Title',

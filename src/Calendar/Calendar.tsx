@@ -45,7 +45,7 @@ export const Calendar = () => {
             <CalendarTopControlItem
               key={employee.id}
               isFiltered={!filterState[employee.id]}
-              cardColor={teams.find(({ teamID }: any) => teamID === employee.teamId)?.teamColor ?? ''}
+              cardColor={teams.find(({ teamID }: any) => teamID === employee.teamID)?.teamColor ?? ''}
               onEmployeeClick={() => onEmployeeClick(employee.id)}
               fullName={employee.fullName}
             />

@@ -44,7 +44,7 @@ export const PhotoCell = styled.td<{ imageUrl: string }>`
   }
 `;
 
-export const FlagCell = styled.td<{ isOnline: boolean }>`
+export const BooleanFlagCell = styled.td<{ isOnline: boolean }>`
   & span {
     display: block;
     margin: auto;

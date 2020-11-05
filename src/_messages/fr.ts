@@ -26,7 +26,7 @@ export const frMessages = {
     phone: 'Mobile Phone',
     lastUpdate: 'Dernière mise à jour',
     eventId: `ID d'événement`,
-    teamId: `ID de L'équipe`,
+    teamID: `ID de L'équipe`,
     photo: 'Photo',
     fullName: 'Nom',
     jobTitle: 'Titre du Poste',

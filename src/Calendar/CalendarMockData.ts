@@ -10,7 +10,7 @@ import { StatusNames } from '../Agenda/AgendaTypes';
 
 export const employees = [
   {
-    teamId: 1,
+    teamID: 1,
     id: 'AmeliaGiround',
     fullName: 'Amelia Giround',
     jobTitle: 'Art Director',
@@ -21,7 +21,7 @@ export const employees = [
     gender: 'F',
   },
   {
-    teamId: 2,
+    teamID: 2,
     id: 'DavidWenger',
     photo: DavidWenger,
     fullName: 'David Wenger',
@@ -32,7 +32,7 @@ export const employees = [
     gender: 'M',
   },
   {
-    teamId: 3,
+    teamID: 3,
     id: 'ChristinaRomanov',
     photo: ChristinaRomanov,
     fullName: 'Christina Romanov',
@@ -43,7 +43,7 @@ export const employees = [
     gender: 'F',
   },
   {
-    teamId: 4,
+    teamID: 4,
     id: 'GraceRobinson',
     photo: GraceRobinson,
     fullName: 'Grace Robinson',
@@ -55,7 +55,7 @@ export const employees = [
   },
 
   {
-    teamId: 5,
+    teamID: 5,
     id: 'AlexLocatelli',
     photo: AlexLocatelli,
     fullName: 'Alex Locatelli',
@@ -66,7 +66,7 @@ export const employees = [
     gender: 'M',
   },
   {
-    teamId: 6,
+    teamID: 6,
     id: 'SaraKhan',
     photo: SaraKhan,
     fullName: 'Sara Khan',

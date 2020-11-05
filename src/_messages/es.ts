@@ -26,7 +26,7 @@ export const esMessages = {
     phone: ' Teléfono Móvil',
     lastUpdate: 'Última Actualización',
     eventId: 'ID de Evento',
-    teamId: 'ID de Equipo',
+    teamID: 'ID de Equipo',
     photo: 'Foto',
     fullName: 'Nombre',
     jobTitle: 'Título del trabajo',
