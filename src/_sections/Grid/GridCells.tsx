@@ -46,8 +46,8 @@ export const StatusCell: GridCell = ({ dataItem, field, onChange }) => {
 export const BooleanFlagCell: GridCell = ({ dataItem, field, onChange }) => {
   const flag = dataItem[field ? field : ''] ? dataItem[field ? field : ''] : false;
   const localizedDataForFlagCell = [
-    { [`${field}`]: 'yes', value: true },
-    { [`${field}`]: 'no', value: false },
+    { [field ? field : '']: 'yes', value: true },
+    { [field ? field : '']: 'no', value: false },
   ];
   const dropDownListValue = localizedDataForFlagCell.find(({ value }) => value === flag);
 
@@ -62,6 +62,28 @@ export const BooleanFlagCell: GridCell = ({ dataItem, field, onChange }) => {
     <SC.BooleanFlagCell isOnline={flag}>
       <span className={flag ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
     </SC.BooleanFlagCell>
+  );
+};
+
+export const GenderCell: GridCell = ({ dataItem, field, onChange }) => {
+  const value = dataItem[field ? field : ''] ? dataItem[field ? field : ''] : '(1) Female';
+  const localizedDataForGenderCell = [
+    { [field ? field : '']: 'Female', value: '(1) Female' },
+    { [field ? field : '']: 'Male', value: '(2) Male' },
+  ];
+  const dropDownListValue = localizedDataForGenderCell.find((item) => item.value === value);
+
+  const onGenderChange = (evt: DropDownListChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <DropDownList onChange={onGenderChange} value={dropDownListValue} data={localizedDataForGenderCell} textField={field} />
+      ) : (
+        value
+      )}
+    </td>
   );
 };
 
