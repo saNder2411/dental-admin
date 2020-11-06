@@ -7,7 +7,7 @@ h3 {
   padding: 0;
 }
 
-a, 
+a,
 a:hover {
   text-decoration: none;
   color: inherit;
@@ -639,6 +639,13 @@ a:hover {
   background-color: #fcf7f8;
   border: 1px solid rgba(0, 0, 0, 0.05);
 
+  .team-marker {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    margin-right: 6px;
+  }
+
   h5 {
     margin: 0;
     font-size: 1rem;
@@ -654,5 +661,13 @@ a:hover {
 
   .k-card-header:last-child {
     border: none;
+  }
+
+  .k-i-edit {
+    color: #4db5c8;
+  }
+
+  .k-i-delete {
+    color: #dc3545;
   }
 }

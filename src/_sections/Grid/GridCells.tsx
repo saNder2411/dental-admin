@@ -150,7 +150,7 @@ export const DateCell: GridCell = ({ dataItem, field, onChange }) => {
   const onDateChange = (evt: DateTimePickerChangeEvent) =>
     onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
 
-  return <td>{dataItem.inEdit ? <DateTimePicker value={value} onChange={onDateChange} /> : intlService.formatDate(value, 'EEE d-MMM hh:mm')}</td>;
+  return <td>{dataItem.inEdit ? <DateTimePicker value={value} onChange={onDateChange} /> : intlService.formatDate(value, 'H:mm / dd.MM')}</td>;
 };
 
 export const CurrencyCell: GridCell = ({ dataItem, field }) => {

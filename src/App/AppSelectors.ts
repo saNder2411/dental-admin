@@ -1,10 +1,10 @@
 // Types
 import { GlobalState } from '../_init/store';
 
-export const selectLocaleId = ({ AppState }: GlobalState) => AppState.currentLocaleId;
+export const selectLocaleId = ({ AppState }: GlobalState) => AppState.currentLocaleID;
 
-export const selectLocaleState = ({ AppState: { currentLocaleId, onLocaleChange, locales } }: GlobalState) => ({
-  currentLocaleId,
+export const selectLocaleState = ({ AppState: { currentLocaleID, onLocaleChange, locales } }: GlobalState) => ({
+  currentLocaleID,
   onLocaleChange,
   locales,
 });

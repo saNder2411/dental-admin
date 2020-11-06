@@ -1,11 +1,12 @@
 import React, { useState, useCallback } from 'react';
 import { useLocalization } from '@progress/kendo-react-intl';
+import { SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 import { guid } from '@progress/kendo-react-common';
 // Components
 import { Scheduler } from '../_sections';
 import { CalendarTopControlItem, CalendarHeaderCardCell } from './';
 // Styled Components
-import * as SC from './CalendarStyled';
+import * as SC from './CalendarStyledComponents/CalendarStyled';
 // Mocks
 import { employees, orders, teams, ordersModelFields } from './CalendarMockData';
 
@@ -16,7 +17,7 @@ export const Calendar = () => {
   const [filterState, setFilterState] = useState(initialFilterState);
   const [data, setData] = useState(orders);
 
-  const onDataChange = useCallback(({ created, updated, deleted }) => {
+  const onDataChange = useCallback(({ created, updated, deleted }: SchedulerDataChangeEvent) => {
     setData((old: any) =>
       old
         // Filter the deleted items

@@ -6,6 +6,6 @@ interface ChangeLocaleAc {
   payload: string;
 }
 
-export const changeLocaleAC = (localeId: string): ChangeLocaleAc => ({ type: ActionTypes.CHANGE_LOCALE, payload: localeId });
+export const changeLocaleAC = (localeID: string): ChangeLocaleAc => ({ type: ActionTypes.CHANGE_LOCALE, payload: localeID });
 
 export type Actions = ChangeLocaleAc;

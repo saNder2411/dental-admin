@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Card, CardHeader, Avatar, CardTitle, CardSubtitle } from '@progress/kendo-react-layout';
 // Styled Components
-import * as SC from './CalendarHeaderCardCellStyled';
+import * as SC from './CalendarStyledComponents/CalendarHeaderCardCellStyled';
 
 interface Props {
   cardColor: string;

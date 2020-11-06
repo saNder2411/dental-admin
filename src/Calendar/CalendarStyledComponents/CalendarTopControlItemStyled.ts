@@ -18,12 +18,12 @@ export const CalendarTopControlItem = styled.div<Props>`
   }
 
   & .icon-toggle {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     margin: auto;
     border-radius: 50%;
-    border: 2px solid ${({ cardColor }) => cardColor};
-    box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(0, 0, 0, 0.7);
-    background-color: ${({ cardColor }) => cardColor};
+    border: 4px solid ${({ cardColor }) => cardColor};
+    box-shadow: inset 0 0 1px #999, inset 0 0 6px ${({isFiltered }) => (isFiltered ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.5)')};
+    background-color: ${({ cardColor, isFiltered }) => (isFiltered ? 'none' : cardColor)};
   }
 `;

@@ -6,27 +6,27 @@ import { Actions } from './AppActions';
 import { changeLocaleAC } from './AppActions';
 
 export interface AppState {
-  currentLocaleId: string;
-  locales: Array<{ locale: string; localeId: string }>;
-  onLocaleChange: (dispatch: Dispatch, localeId: string) => void;
+  currentLocaleID: string;
+  locales: Array<{ locale: string; localeID: string }>;
+  onLocaleChange: (dispatch: Dispatch, localeID: string) => void;
 }
 
 const _initialState = {
-  currentLocaleId: `en-US`,
+  currentLocaleID: `en-GB`,
   locales: [
-    { locale: 'English', localeId: 'en-US' },
-    { locale: 'German', localeId: 'de' },
-    { locale: 'French', localeId: 'fr' },
-    { locale: 'Spanish', localeId: 'es' },
-    { locale: 'Italian', localeId: 'it' },
+    { locale: 'English', localeID: 'en-GB' },
+    { locale: 'German', localeID: 'de' },
+    { locale: 'French', localeID: 'fr' },
+    { locale: 'Spanish', localeID: 'es' },
+    { locale: 'Italian', localeID: 'it' },
   ],
-  onLocaleChange: (dispatch: Dispatch, localeId: string) => dispatch(changeLocaleAC(localeId)),
+  onLocaleChange: (dispatch: Dispatch, localeID: string) => dispatch(changeLocaleAC(localeID)),
 };
 
 export const reducer = (state: AppState = _initialState, action: Actions): AppState => {
   switch (action.type) {
     case ActionTypes.CHANGE_LOCALE: {
-      return { ...state, currentLocaleId: action.payload };
+      return { ...state, currentLocaleID: action.payload };
     }
     default:
       return state;

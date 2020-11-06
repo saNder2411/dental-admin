@@ -14,12 +14,12 @@ interface Props {
 
 export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element => {
   const localizationService = useLocalization();
-  const { currentLocaleId, locales, onLocaleChange } = useSelector(selectLocaleState);
+  const { currentLocaleID, locales, onLocaleChange } = useSelector(selectLocaleState);
   const dispatch = useDispatch();
 
-  const currentLanguage = locales.find((item) => item.localeId === currentLocaleId);
+  const currentLanguage = locales.find((item) => item.localeID === currentLocaleID);
 
-  const onLanguageChange = useCallback(({ value }: DropDownListChangeEvent) => onLocaleChange(dispatch, value.localeId), [
+  const onLanguageChange = useCallback(({ value }: DropDownListChangeEvent) => onLocaleChange(dispatch, value.localeID), [
     onLocaleChange,
     dispatch,
   ]);
@@ -39,7 +39,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
 
         <div className="settings">
           <span>{localizationService.toLanguageString('custom.language', 'Language')}</span>
-          <DropDownList textField={'locale'} dataItemKey={'localeId'} data={locales} value={currentLanguage} onChange={onLanguageChange} />
+          <DropDownList textField={'locale'} dataItemKey={'localeID'} data={locales} value={currentLanguage} onChange={onLanguageChange} />
         </div>
       </div>
     </header>

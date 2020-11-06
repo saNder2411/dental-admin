@@ -17,8 +17,8 @@ export interface AgendaDataItem {
   id: number;
   status: StatusNames;
   references: string;
-  start: Date;
-  end: Date;
+  start: number;
+  end: number;
   svcStaff: string;
   services: string;
   budget: number;

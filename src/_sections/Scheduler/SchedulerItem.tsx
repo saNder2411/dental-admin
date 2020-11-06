@@ -1,9 +1,18 @@
-import React, { FC, useState } from 'react';
-import { SchedulerItem as KendoSchedulerItem, SchedulerItemContent, SchedulerItemProps } from '@progress/kendo-react-scheduler';
+import React, { FC, useState, useCallback } from 'react';
+import {
+  SchedulerItem as KendoSchedulerItem,
+  SchedulerItemProps,
+  useSchedulerEditItemFormItemContext,
+  useSchedulerEditItemRemoveItemContext,
+  useSchedulerEditItemShowOccurrenceDialogContext,
+  useSchedulerEditItemShowRemoveDialogContext,
+} from '@progress/kendo-react-scheduler';
+import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
+import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
 import * as SC from './SchedulerStyledComponents/SchedulerItemStyled';
 // Instruments
@@ -12,62 +21,108 @@ import { IconBook } from '../../_instruments';
 import { StatusNames } from '../../Agenda/AgendaTypes';
 
 export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
-  const [showPopup, setShowPopup] = useState(false);
-  const intl = useInternationalization();
   // console.log(`CustomItemProps`, props);
-  const { dataItem, children, isAllDay, zonedStart, zonedEnd, _ref } = props;
+  const intl = useInternationalization();
+  const [showPopup, setShowPopup] = useState(false);
+  const [, setFormItem] = useSchedulerEditItemFormItemContext();
+  const [, setRemoveItem] = useSchedulerEditItemRemoveItemContext();
+  const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
+  const [, setShowRemoveDialog] = useSchedulerEditItemShowRemoveDialogContext();
+
+  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
+  const resource = group.resources[0] as any;
+  const color = resource.teamColor;
   const iconName = dataItem.status as StatusNames;
   const iconDentalName = dataItem.dentalStatus as StatusNames;
 
+  const onSchedulerItemClick = useCallback(
+    (evt) => {
+      setShowPopup((prevState) => !prevState);
+      onClick && onClick(evt);
+    },
+    [setShowPopup, onClick]
+  );
+
+  const onSchedulerItemBlur = useCallback(
+    (evt) => {
+      setShowPopup(false);
+      onBlur && onBlur(evt);
+    },
+    [onBlur]
+  );
+
+  const onCloseBtnClick = useCallback(() => setShowPopup(false), [setShowPopup]);
+
+  const onEditBtnClick = useCallback(() => {
+    setShowPopup(false);
+    setFormItem(dataItem);
+    isRecurring && setShowOccurrenceDialog(true);
+  }, [setShowPopup, setFormItem, dataItem, isRecurring, setShowOccurrenceDialog]);
+
+  const onDeleteBtnClick = useCallback(() => {
+    setShowPopup(false);
+    setRemoveItem(dataItem);
+
+    if (isRecurring) {
+      setShowOccurrenceDialog(true);
+    } else {
+      setShowRemoveDialog(true);
+    }
+  }, [setRemoveItem, setShowPopup, dataItem, isRecurring, setShowOccurrenceDialog, setShowRemoveDialog]);
+
+  const { onFocus: onFocusAsync, onBlur: onBlurAsync } = useAsyncFocusBlur({ onFocus, onBlur: onSchedulerItemBlur });
+  const width = _ref.current?.element?.offsetWidth;
+  console.log(`width`, _ref);
   return (
-    <div onMouseUp={() => setShowPopup((prevState) => !prevState)} onMouseMove={() => setShowPopup(false)}>
-      <KendoSchedulerItem {...props}>
+    <>
+      <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onFocus={onFocusAsync} onBlur={onBlurAsync}>
         <SC.SchedulerItemTopWrapper>
-          {children}
+          {width && width > 180 && children}
           <div className="SchedulerItem__icons">
             <div className="SchedulerItem__icon">
-              <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} size={'lg'} />
+              <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} />
             </div>
             <div className="SchedulerItem__icon">
-              <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} size={'lg'} />
+              <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
             </div>
           </div>
         </SC.SchedulerItemTopWrapper>
-        {!isAllDay && (
-          <SchedulerItemContent>
-            <div className="SchedulerItemContent__item">{dataItem.refID}</div>
-            <div className="SchedulerItemContent__item">
-              {intl.formatDate(zonedStart, 't')} - {intl.formatDate(zonedEnd, 't')}
-            </div>
-            <div className="SchedulerItemContent__item">{dataItem.notes}</div>
-          </SchedulerItemContent>
-        )}
-        <Popup
-          show={showPopup}
-          anchorAlign={{ horizontal: 'left', vertical: 'top' }}
-          popupAlign={{ horizontal: 'left', vertical: 'bottom' }}
-          popupClass="SchedulerItemContent-popup-content"
-          anchor={_ref.current?.element as any}
-          style={{ width: _ref.current?.element?.offsetWidth }}>
-          <div className="rounded" style={{ overflow: 'hidden' }}>
-            <Card>
-              <div>
-                <CardHeader>
-                  <h5>{dataItem.staff}</h5>
-                </CardHeader>
-                <CardBody>
-                  <CardHeader>Ref ID: {dataItem.refID}</CardHeader>
-                  <CardHeader>Start: {intl.formatDate(props.zonedStart, 't')}</CardHeader>
-                  <CardHeader>End: {intl.formatDate(props.zonedEnd, 't')}</CardHeader>
-                  <CardHeader>Mobile Phone: {dataItem.mobilePhone}</CardHeader>
-                  <CardHeader>Email: {dataItem.email}</CardHeader>
-                  <CardHeader>Notes: {dataItem.notes}</CardHeader>
-                </CardBody>
-              </div>
-            </Card>
-          </div>
-        </Popup>
       </KendoSchedulerItem>
-    </div>
+      <Popup
+        show={showPopup}
+        anchorAlign={{ horizontal: 'right', vertical: 'center' }}
+        popupAlign={{ horizontal: 'left', vertical: 'center' }}
+        popupClass="SchedulerItemContent-popup-content"
+        anchor={_ref.current?.element as any}
+        style={{ width: 300 }}>
+        <div className="rounded" tabIndex={-1} onFocus={onFocusAsync as any} onBlur={onBlurAsync as any}>
+          <Card>
+            <CardHeader>
+              <div className="d-flex align-items-center">
+                <div className="team-marker" style={{ backgroundColor: color }} />
+                <h5>{dataItem.staff}</h5>
+                <div className="ml-auto">
+                  <Button iconClass="k-icon k-i-edit" look="flat" onClick={onEditBtnClick} />
+                  <Button iconClass="k-icon k-i-delete" look="flat" onClick={onDeleteBtnClick} />
+                  <Button iconClass="k-icon k-i-close" look="flat" onClick={onCloseBtnClick} />
+                </div>
+              </div>
+            </CardHeader>
+            <CardBody>
+              <CardHeader>Ref ID: {dataItem.refID}</CardHeader>
+              <CardHeader>
+                <span className="k-icon k-i-clock" /> Start: {intl.formatDate(zonedStart, 't')}
+              </CardHeader>
+              <CardHeader>
+                <span className="k-icon k-i-clock" /> End: {intl.formatDate(zonedEnd, 't')}
+              </CardHeader>
+              <CardHeader>Mobile Phone: {dataItem.mobilePhone}</CardHeader>
+              <CardHeader>Email: {dataItem.email}</CardHeader>
+              <CardHeader>Notes: {dataItem.notes}</CardHeader>
+            </CardBody>
+          </Card>
+        </div>
+      </Popup>
+    </>
   );
 };

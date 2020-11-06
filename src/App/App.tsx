@@ -7,10 +7,10 @@ import likelySubtags from 'cldr-core/supplemental/likelySubtags.json';
 import currencyData from 'cldr-core/supplemental/currencyData.json';
 import weekData from 'cldr-core/supplemental/weekData.json';
 
-import usNumbers from 'cldr-numbers-full/main/en/numbers.json';
-import usLocalCurrency from 'cldr-numbers-full/main/en/currencies.json';
-import usCaGregorian from 'cldr-dates-full/main/en/ca-gregorian.json';
-import usDateFields from 'cldr-dates-full/main/en/dateFields.json';
+import usNumbers from 'cldr-numbers-full/main/en-GB/numbers.json';
+import usLocalCurrency from 'cldr-numbers-full/main/en-GB/currencies.json';
+import usCaGregorian from 'cldr-dates-full/main/en-GB/ca-gregorian.json';
+import usDateFields from 'cldr-dates-full/main/en-GB/dateFields.json';
 
 import deNumbers from 'cldr-numbers-full/main/de/numbers.json';
 import deLocalCurrency from 'cldr-numbers-full/main/de/currencies.json';
@@ -73,19 +73,19 @@ load(
   itDateFields
 );
 
-loadMessages(enMessages, 'en-US');
+loadMessages(enMessages, 'en-GB');
 loadMessages(deMessages, 'de');
 loadMessages(esMessages, 'es');
 loadMessages(frMessages, 'fr');
 loadMessages(itMessages, 'it');
 
 export const App: FC = (): JSX.Element => {
-  const currentLocaleId = useSelector(selectLocaleId);
+  const currentLocaleID = useSelector(selectLocaleId);
 
   return (
     <div className="App">
-      <LocalizationProvider language={currentLocaleId}>
-        <IntlProvider locale={currentLocaleId}>
+      <LocalizationProvider language={currentLocaleID}>
+        <IntlProvider locale={currentLocaleID}>
           <Router>
             <AppDrawerRouterContainer>
               <Switch>
