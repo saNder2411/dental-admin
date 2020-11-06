@@ -5,7 +5,8 @@ export const SchedulerItemTopWrapper = styled.div`
   margin-left: 0.1rem;
   text-align: center;
   margin-right: -0.4rem;
-  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
+  padding-bottom: 0.2rem;
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 0 1px #999, inset 0 0 10px rgba(255, 255, 255, 0.5);
@@ -13,26 +14,30 @@ export const SchedulerItemTopWrapper = styled.div`
   & .SchedulerItem__icons {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 4px;
 
     & .SchedulerItem__icon {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 28px;
-      margin-bottom: 2px;
+      width: 40px;
+      margin-right: 4px;
+      margin-bottom: 4px;
       border-radius: 50%;
       background-color: rgba(255, 255, 255, 1);
 
-      /* & svg {
-        width: 26px;
-        height: 26px;
-      } */
+      & svg {
+        width: 50%;
+        height: 50%;
+      }
     }
 
-    & .SchedulerItem__icon:first-of-type {
-      margin-right: 0.2rem;
+    & .SchedulerItem__icon:after {
+      content: '';
+      display: block;
+      padding-top: 100%;
     }
   }
 `;

@@ -34,6 +34,8 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   const color = resource.teamColor;
   const iconName = dataItem.status as StatusNames;
   const iconDentalName = dataItem.dentalStatus as StatusNames;
+  const width = _ref.current?.element?.offsetWidth;
+  const height = _ref.current?.element?.offsetHeight;
 
   const onSchedulerItemClick = useCallback(
     (evt) => {
@@ -71,22 +73,23 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   }, [setRemoveItem, setShowPopup, dataItem, isRecurring, setShowOccurrenceDialog, setShowRemoveDialog]);
 
   const { onFocus: onFocusAsync, onBlur: onBlurAsync } = useAsyncFocusBlur({ onFocus, onBlur: onSchedulerItemBlur });
-  const width = _ref.current?.element?.offsetWidth;
-  console.log(`width`, _ref);
+
   return (
     <>
       <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onFocus={onFocusAsync} onBlur={onBlurAsync}>
-        <SC.SchedulerItemTopWrapper>
-          {width && width > 180 && children}
-          <div className="SchedulerItem__icons">
-            <div className="SchedulerItem__icon">
-              <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} />
+        {height && height > 25 && (
+          <SC.SchedulerItemTopWrapper>
+            {width && width > 120 && children}
+            <div className="SchedulerItem__icons">
+              <div className="SchedulerItem__icon">
+                <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} />
+              </div>
+              <div className="SchedulerItem__icon">
+                <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
+              </div>
             </div>
-            <div className="SchedulerItem__icon">
-              <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
-            </div>
-          </div>
-        </SC.SchedulerItemTopWrapper>
+          </SC.SchedulerItemTopWrapper>
+        )}
       </KendoSchedulerItem>
       <Popup
         show={showPopup}
