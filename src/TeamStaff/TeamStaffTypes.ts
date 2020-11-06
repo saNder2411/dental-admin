@@ -8,3 +8,7 @@ export interface TeamStaffDataItem {
   mobilePhone: string;
   email: string;
 }
+
+export interface TeamStaffState {
+  data: TeamStaffDataItem[];
+}

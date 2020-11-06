@@ -15,3 +15,7 @@ export interface ServicesDataItem {
   price: number;
   discount: number;
 }
+
+export interface ServicesState {
+  data: ServicesDataItem[];
+}

@@ -12,7 +12,6 @@ export enum StatusNames {
   Tooth = 'Tooth',
 }
 
-
 export interface AgendaDataItem {
   id: number;
   status: StatusNames;
@@ -28,4 +27,8 @@ export interface AgendaDataItem {
   lastUpdate: Date;
   eventId: number;
   inEdit?: boolean;
+}
+
+export interface AgendaState {
+  data: AgendaDataItem[];
 }

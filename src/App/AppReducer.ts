@@ -1,15 +1,9 @@
 import { Dispatch } from 'redux';
 // Types
-import { ActionTypes } from './AppTypes';
+import { ActionTypes, AppState } from './AppTypes';
 import { Actions } from './AppActions';
 // Actions
 import { changeLocaleAC } from './AppActions';
-
-export interface AppState {
-  currentLocaleID: string;
-  locales: Array<{ locale: string; localeID: string }>;
-  onLocaleChange: (dispatch: Dispatch, localeID: string) => void;
-}
 
 const _initialState = {
   currentLocaleID: `en-GB`,

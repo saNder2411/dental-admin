@@ -11,3 +11,7 @@ export interface CustomersDataItem {
   lastUpdate: Date;
   photo: string;
 }
+
+export interface CustomersState {
+  data: CustomersDataItem[];
+}
