@@ -112,6 +112,19 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
               </div>
             </CardHeader>
             <CardBody>
+              <CardHeader>
+                <div className="row">
+                  <span className="col-md-9">Status: {dataItem.status}</span>
+                  <div className="col-md-4 row">
+                    <div className="col-md-6">
+                      <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} />
+                    </div>
+                    <div className="col-md-6">
+                      <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
+                    </div>
+                  </div>
+                </div>
+              </CardHeader>
               <CardHeader>Ref ID: {dataItem.refID}</CardHeader>
               <CardHeader>
                 <span className="k-icon k-i-clock" /> Start: {intl.formatDate(zonedStart, 't')}
