@@ -9,8 +9,8 @@ export const CustomersGridData = [
   {
     id: (Math.random() * Math.random()),
     teamID: '1269',
-    lastName: 'A.Female',
-    firstName: 'Consultation',
+    lastName: 'Smith',
+    firstName: 'Jon',
     gender: '(1) Female',
     svcStaff: '',
     upcoming: '',
@@ -22,8 +22,8 @@ export const CustomersGridData = [
   {
     id: (Math.random() * Math.random()),
     teamID: '1270',
-    lastName: 'A.Male',
-    firstName: 'Consultation',
+    lastName: 'Maldini',
+    firstName: 'Paulo',
     gender: '(2) Male',
     svcStaff: '',
     upcoming: '',

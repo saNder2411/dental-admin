@@ -1,3 +1,3 @@
 // Types
 import { GlobalState } from '../_init';
-export const selectAgendaState = ({ TeamStaffState }: GlobalState) => TeamStaffState;
+export const selectTeamStaffState = ({ TeamStaffState }: GlobalState) => TeamStaffState;

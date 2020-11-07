@@ -2,7 +2,19 @@ import React, { FC, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Grid, GridColumn, ColumnMenu, CurrencyCell, StatusIcon, ActionsControlCell, DateCell, StatusCell } from '../_sections';
+import {
+  Grid,
+  GridColumn,
+  ColumnMenu,
+  CurrencyCell,
+  StatusIcon,
+  ActionsControlCell,
+  DateCell,
+  StatusCell,
+  SvcStaffCell,
+  LastNameCell,
+  ServicesCell,
+} from '../_sections';
 // Mock
 import { AgendaGridData } from './AgendaMockData';
 // Selectors
@@ -69,11 +81,13 @@ export const Agenda: FC = (): JSX.Element => {
               columnMenu={ColumnMenu}
               width={110}
               filter={'text'}
+              cell={SvcStaffCell}
             />
             <GridColumn
               field={'services'}
               title={localizationService.toLanguageString('custom.services', 'Services')}
               columnMenu={ColumnMenu}
+              cell={ServicesCell}
               filter={'text'}
             />
             <GridColumn
@@ -89,6 +103,7 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.lastName', 'Last Name')}
               columnMenu={ColumnMenu}
               width={120}
+              cell={LastNameCell}
               filter={'text'}
             />
             <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />

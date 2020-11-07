@@ -19,6 +19,9 @@ import FemalePhotoPlaceholder from '../../_assets/customers/female_placeholder.j
 import AnyStylist from '../../_assets/stylists/Any-Stylist-Portrait-85x85.png';
 // Selectors
 import { selectGridState } from '.';
+import { selectTeamStaffState } from '../../TeamStaff';
+import { selectCustomersState } from '../../Customers';
+import { selectServicesState } from '../../Services';
 
 const statusList = Object.values(StatusNames).map((status) => ({ status, value: status }));
 
@@ -40,6 +43,66 @@ export const StatusCell: GridCell = ({ dataItem, field, onChange }) => {
 
   return (
     <td>{dataItem.inEdit ? <DropDownList onChange={onStatusChange} value={dropDownListValue} data={statusList} textField={'status'} /> : value}</td>
+  );
+};
+
+export const SvcStaffCell: GridCell = ({ dataItem, field, onChange }) => {
+  const { data } = useSelector(selectTeamStaffState);
+  const teamStaffNameList = data.map(({ lastName }) => ({ [field ? field : '']: lastName, value: lastName }));
+  const value = dataItem[field ? field : ''];
+  const dropDownListValue = teamStaffNameList.find((item) => item.value === value);
+
+  const onSvcStaffChange = (evt: DropDownListChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={teamStaffNameList} textField={'svcStaff'} />
+      ) : (
+        value
+      )}
+    </td>
+  );
+};
+
+export const LastNameCell: GridCell = ({ dataItem, field, onChange }) => {
+  const { data } = useSelector(selectCustomersState);
+  const customerNameList = data.map(({ lastName, firstName }) => ({ [field ? field : '']: `${firstName} ${lastName}`, value: lastName }));
+  const value = dataItem[field ? field : ''];
+  const dropDownListValue = customerNameList.find((item) => item.value === value);
+
+  const onLastNameChange = (evt: DropDownListChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <DropDownList onChange={onLastNameChange} value={dropDownListValue} data={customerNameList} textField={'lastName'} />
+      ) : (
+        value
+      )}
+    </td>
+  );
+};
+
+export const ServicesCell: GridCell = ({ dataItem, field, onChange }) => {
+  const { data } = useSelector(selectServicesState);
+  const serviceReferenceList = data.map(({ references }) => ({ [field ? field : '']: references, value: references }));
+  const value = dataItem[field ? field : ''];
+  const dropDownListValue = serviceReferenceList.find((item) => item.value === value);
+
+  const onServicesChange = (evt: DropDownListChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <DropDownList onChange={onServicesChange} value={dropDownListValue} data={serviceReferenceList} textField={'services'} />
+      ) : (
+        value
+      )}
+    </td>
   );
 };
 
