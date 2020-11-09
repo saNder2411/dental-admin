@@ -1,139 +1,7 @@
-// Images
-import AmeliaGiround from '../_assets/stylists/Amelia-Giroud-Portrait-85x85.png';
-import GraceRobinson from '../_assets/stylists/Grace-Robinson-Portrait-85x85.png';
-import ChristinaRomanov from '../_assets/stylists/Christina-Romanov-Portrait-85x85.png';
-import DavidWenger from '../_assets/stylists/David-Wenger-Portrait-85x85.png';
-import AlexLocatelli from '../_assets/stylists/Alex-Locatelli-Portrait-85x85.png';
-import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
 // Types
+import { CalendarDataItem } from './CalendarTypes';
 import { StatusNames } from '../Agenda/AgendaTypes';
 
-export const employees = [
-  {
-    teamID: 1,
-    id: 'AmeliaGiround',
-    fullName: 'Amelia Giround',
-    jobTitle: 'Art Director',
-    isShowOnline: true,
-    mobilePhone: '+89 7955 99888',
-    email: 'amelia.giround@metroapps.online',
-    photo: AmeliaGiround,
-    gender: 'F',
-  },
-  {
-    teamID: 2,
-    id: 'DavidWenger',
-    photo: DavidWenger,
-    fullName: 'David Wenger',
-    jobTitle: 'Senior Stylists',
-    isShowOnline: false,
-    mobilePhone: '+89 7955 99555',
-    email: 'david.wenger@metroapps.online',
-    gender: 'M',
-  },
-  {
-    teamID: 3,
-    id: 'ChristinaRomanov',
-    photo: ChristinaRomanov,
-    fullName: 'Christina Romanov',
-    jobTitle: 'Senior Stylists',
-    isShowOnline: true,
-    mobilePhone: '+89 7955 99666',
-    email: 'christine.romanov@metroapps.online',
-    gender: 'F',
-  },
-  {
-    teamID: 4,
-    id: 'GraceRobinson',
-    photo: GraceRobinson,
-    fullName: 'Grace Robinson',
-    jobTitle: 'Junior Stylists',
-    isShowOnline: true,
-    mobilePhone: '+89 7955 99444',
-    email: 'grace.robinson@metroapps.online',
-    gender: 'F',
-  },
-
-  {
-    teamID: 5,
-    id: 'AlexLocatelli',
-    photo: AlexLocatelli,
-    fullName: 'Alex Locatelli',
-    jobTitle: 'Stylist Director',
-    isShowOnline: true,
-    mobilePhone: '+89 7955 99777',
-    email: 'alex.locatelli@metroapps.online',
-    gender: 'M',
-  },
-  {
-    teamID: 6,
-    id: 'SaraKhan',
-    photo: SaraKhan,
-    fullName: 'Sara Khan',
-    jobTitle: 'Senior Stylist',
-    isShowOnline: true,
-    mobilePhone: '+89 7955 99333',
-    email: 'sara.khan@metroapps.online',
-    gender: 'F',
-  },
-];
-
-export const teams = [
-  {
-    teamID: 1,
-    teamName: 'Organic Team',
-    managerName: 'Amelia Giround',
-    teamColor: '#55AB1D',
-    photo: AmeliaGiround,
-    jobTitle: 'Art Director',
-    managerID: 'AmeliaGiround',
-  },
-  {
-    teamID: 2,
-    teamName: 'Tiger Team',
-    managerName: 'David Wenger',
-    teamColor: '#FF6358',
-    photo: DavidWenger,
-    jobTitle: 'Senior Stylists',
-    managerID: 'DavidWenger',
-  },
-  {
-    teamID: 3,
-    teamName: 'Lemon Team',
-    managerName: 'Christina Romanov',
-    teamColor: '#F7C62F',
-    photo: ChristinaRomanov,
-    jobTitle: 'Senior Stylists',
-    managerID: 'ChristinaRomanov',
-  },
-  {
-    teamID: 4,
-    teamName: 'Ocean Team',
-    managerName: 'Grace Robinson',
-    teamColor: '#28B4C8',
-    photo: GraceRobinson,
-    jobTitle: 'Junior Stylists',
-    managerID: 'GraceRobinson',
-  },
-  {
-    teamID: 5,
-    teamName: 'Sky Team',
-    managerName: 'Alex Locatelli',
-    teamColor: '#58F4FF',
-    photo: AlexLocatelli,
-    jobTitle: 'Stylist Director',
-    managerID: 'AlexLocatelli',
-  },
-  {
-    teamID: 6,
-    teamName: 'Purple Team',
-    managerName: 'Sara Khan',
-    teamColor: '#C828B4',
-    photo: SaraKhan,
-    jobTitle: 'Senior Stylist',
-    managerID: 'SaraKhan',
-  },
-];
 
 export const ordersModelFields = {
   id: 'orderID',
@@ -151,31 +19,7 @@ export const ordersModelFields = {
 const now = Date.now();
 const hour = 3.6e6;
 
-
-interface Order {
-  staff: string;
-  start: Date;
-  end: Date;
-  orderID: number;
-  refID: string;
-  status: StatusNames;
-  dentalStatus: StatusNames;
-  mobilePhone: string;
-  email: string;
-  notes: string;
-  description: string;
-  employeeID: string;
-  teamID: number;
-  customer: string;
-  firstName: string;
-  lastName: string;
-  isAllDay: boolean;
-  repeat: string;
-  recurrenceId?: undefined | number;
-  recurrenceRule?: null | string;
-}
-
-export const orders: Order[] = [
+export const orders: CalendarDataItem[] = [
   {
     staff: 'Amelia Giround',
     start: now - hour * 2,
@@ -188,7 +32,7 @@ export const orders: Order[] = [
     email: 'stevenp@metrobpm.com',
     notes: '06-Ladies Blow Dry S1_021',
     description: '06-Ladies Blow Dry S1_021',
-    employeeID: 'AmeliaGiround',
+    employeeID: 1,
     teamID: 1,
     customer: 'Stephen Pye',
     firstName: 'Stephen',
@@ -207,7 +51,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '02-Mens Wash+Cut+Dry S4_007',
-    employeeID: 'GraceRobinson',
+    employeeID: 2,
     teamID: 4,
     description: '02-Mens Wash+Cut+Dry S4_007',
     customer: 'Stephen Pye',
@@ -227,7 +71,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '05-Highlights 1/1 S4_013',
-    employeeID: 'ChristinaRomanov',
+    employeeID: 3,
     teamID: 3,
     description: '05-Highlights 1/1 S4_013',
     customer: 'Stephen Pye',
@@ -247,7 +91,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
-    employeeID: 'DavidWenger',
+    employeeID: 4,
     teamID: 2,
     description: '01-Ladies Wash+Cut+Dry S2_002',
     customer: 'Stephen Pye',
@@ -267,7 +111,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '05-Highlights 1/1 S4_013',
-    employeeID: 'ChristinaRomanov',
+    employeeID: 3,
     teamID: 3,
     description: '05-Highlights 1/1 S4_013',
     customer: 'Stephen Pye',
@@ -287,7 +131,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '01-Ladies Wash+Cut+Dry S2_002',
-    employeeID: 'DavidWenger',
+    employeeID: 4,
     teamID: 2,
     description: '01-Ladies Wash+Cut+Dry S2_002',
     customer: 'Stephen Pye',
@@ -307,7 +151,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '06-Ladies Blow Dry S1_021',
-    employeeID: 'AlexLocatelli',
+    employeeID: 5,
     teamID: 5,
     description: '06-Ladies Blow Dry S1_021',
     customer: 'Stephen Pye',
@@ -327,7 +171,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '08-Balayage Natural S4_027',
-    employeeID: 'SaraKhan',
+    employeeID: 6,
     teamID: 6,
     description: '08-Balayage Natural S4_027',
     customer: 'Stephen Pye',
@@ -347,7 +191,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '08-Balayage Natural S4_027',
-    employeeID: 'SaraKhan',
+    employeeID: 6,
     teamID: 6,
     description: '08-Balayage Natural S4_027',
     customer: 'Stephen Pye',
@@ -367,7 +211,7 @@ export const orders: Order[] = [
     mobilePhone: '+111897654324570',
     email: 'stevenp@metrobpm.com',
     notes: '08-Balayage Natural S4_027',
-    employeeID: 'SaraKhan',
+    employeeID: 6,
     teamID: 6,
     description: '08-Balayage Natural S4_027',
     customer: 'Stephen Pye',

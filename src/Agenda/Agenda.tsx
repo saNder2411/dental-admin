@@ -26,16 +26,17 @@ export const Agenda: FC = (): JSX.Element => {
   const dispatch = useDispatch();
   const { data, editField, setData, onItemChange, onAddNewItem, titleForAddNewItemSection, dataName } = useSelector(selectGridState);
   const localizationService = useLocalization();
-  const hasAgendaData = dataName === GridDataName.Agenda;
-
-  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
-  const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
 
   useEffect(() => {
     if (dataName === GridDataName.Agenda) return;
 
     setData(dispatch, AgendaGridData.slice());
   }, [dataName, setData, dispatch]);
+
+  const hasAgendaData = dataName === GridDataName.Agenda;
+
+  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
+  const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
 
   return (
     <div id="Dashboard" className="home-page main-content">

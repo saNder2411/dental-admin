@@ -12,7 +12,7 @@ import {
   changeItemAC,
   addNewItemToEditAC,
   addNewItemToDataAC,
-} from './GridActionCreators';
+} from './GridAC';
 // Helpers
 import {
   updateDataAfterAddItemToEdit,

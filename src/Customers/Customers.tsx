@@ -22,7 +22,7 @@ export const Customers: FC = (): JSX.Element => {
     setData(dispatch, CustomersGridData.slice());
   }, [dataName, setData, dispatch]);
 
-  const hasServicesData = dataName === GridDataName.Customers;
+  const hasCustomersData = dataName === GridDataName.Customers;
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
   const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
@@ -32,7 +32,7 @@ export const Customers: FC = (): JSX.Element => {
       <div className="card-container grid">
         <div className="card-component">
           <Grid
-            data={hasServicesData ? data : []}
+            data={hasCustomersData ? data : []}
             editField={editField}
             addItemTitle={titleForAddNewItemSection}
             onItemChange={onGridItemChange}

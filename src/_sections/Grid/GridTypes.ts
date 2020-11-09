@@ -6,7 +6,7 @@ import { TeamStaffDataItem } from '../../TeamStaff';
 import { CustomersDataItem } from '../../Customers';
 import { ServicesDataItem } from '../../Services';
 // Actions
-import * as actions from './GridActionCreators';
+import * as actions from './GridAC';
 
 export const ActionTypes = {
   SET_DATA: 'GRID/SET_DATA' as const,

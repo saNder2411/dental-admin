@@ -1,6 +1,6 @@
 export interface TeamStaffDataItem {
   id: number;
-  teamID: string;
+  teamID: number;
   photo: string;
   firstName: string;
   lastName: string;
@@ -9,6 +9,17 @@ export interface TeamStaffDataItem {
   isShowOnline: boolean;
   mobilePhone: string;
   email: string;
+  gender: string;
+}
+
+export interface TeamStaffTeamData {
+  teamID: number;
+  teamName: string;
+  managerName: string;
+  teamColor: string;
+  photo: string;
+  jobTitle: string;
+  managerID: number;
 }
 
 export interface TeamStaffState {

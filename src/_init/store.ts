@@ -6,6 +6,7 @@ import { composeEnhancers, middleware, sagaMiddleware } from './middleware';
 // Types
 import { AppState } from '../App';
 import { GridState } from '../_sections/Grid';
+import { SchedulerState } from '../_sections/Scheduler/SchedulerTypes';
 import { AgendaState } from '../Agenda';
 import { CustomersState } from '../Customers';
 import { ServicesState } from '../Services';
@@ -14,6 +15,7 @@ import { TeamStaffState } from '../TeamStaff';
 export interface GlobalState {
   AppState: AppState;
   GridState: GridState;
+  SchedulerState: SchedulerState;
   AgendaState: AgendaState;
   CustomersState: CustomersState;
   ServicesState: ServicesState;

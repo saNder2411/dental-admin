@@ -1,4 +1,5 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 import { SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 import { guid } from '@progress/kendo-react-common';
@@ -7,35 +8,31 @@ import { Scheduler } from '../_sections';
 import { CalendarTopControlItem, CalendarHeaderCardCell } from './';
 // Styled Components
 import * as SC from './CalendarStyledComponents/CalendarStyled';
+// Selectors
+import { selectSchedulerState } from '../_sections/Scheduler';
 // Mocks
-import { employees, orders, teams, ordersModelFields } from './CalendarMockData';
-
-const initialFilterState: { [key: string]: boolean } = employees.reduce((prevVal, employee) => ({ ...prevVal, [employee.id]: true }), {});
+import { ordersModelFields } from './CalendarMockData';
 
 export const Calendar = () => {
+  const { data, filterEmployee, teams, employees, setData, onEmployeeChange } = useSelector(selectSchedulerState);
+  const dispatch = useDispatch();
   const localizationService = useLocalization();
-  const [filterState, setFilterState] = useState(initialFilterState);
-  const [data, setData] = useState(orders);
 
-  const onDataChange = useCallback(({ created, updated, deleted }: SchedulerDataChangeEvent) => {
-    setData((old: any) =>
-      old
+  const onDataChange = useCallback(
+    ({ created, updated, deleted }: SchedulerDataChangeEvent) => {
+      const newData = data
         // Filter the deleted items
-        .filter((item: any) => deleted.find((current: any) => current[ordersModelFields.id] === item[ordersModelFields.id]) === undefined)
+        .filter((item) => deleted.find((current) => current[ordersModelFields.id] === item.orderID) === undefined)
         // Find and replace the updated items
-        .map((item: any) => updated.find((current: any) => current[ordersModelFields.id] === item[ordersModelFields.id]) || item)
+        .map((item) => updated.find((current) => current[ordersModelFields.id] === item.orderID) || item)
         // Add the newly created items and assign an `id`.
-        .concat(created.map((item: any) => Object.assign({}, item, { [ordersModelFields.id]: guid() })))
-    );
-  }, []);
-
-  const onEmployeeClick = useCallback(
-    (employeeId) => {
-      setFilterState({ ...filterState, [employeeId]: !filterState[employeeId] });
-      console.log(employeeId, filterState);
+        .concat(created.map((item) => Object.assign({}, item, { [ordersModelFields.id]: guid() })));
+      setData(dispatch, newData);
     },
-    [filterState, setFilterState]
+    [data, dispatch, setData]
   );
+
+  const onEmployeeClick = useCallback((employeeID) => onEmployeeChange(dispatch, employeeID), [dispatch, onEmployeeChange]);
 
   return (
     <SC.Calendar id="Planning" className="planning-page main-content">
@@ -45,16 +42,22 @@ export const Calendar = () => {
           {employees.map((employee) => (
             <CalendarTopControlItem
               key={employee.id}
-              isFiltered={!filterState[employee.id]}
-              cardColor={teams.find(({ teamID }: any) => teamID === employee.teamID)?.teamColor ?? ''}
+              isFiltered={!filterEmployee[employee.id]}
+              cardColor={teams.find(({ teamID }) => teamID === employee.teamID)?.teamColor ?? ''}
               onEmployeeClick={() => onEmployeeClick(employee.id)}
               fullName={employee.fullName}
             />
           ))}
         </div>
+        <div className="Calendar__addNewItemWrapper">
+          <span className="Calendar__addNewItemTitle">New Appointment</span>
+          <button title="Add new" className="k-button" onClick={() => {}}>
+            <span className="k-icon k-i-plus-circle" />
+          </button>
+        </div>
         <div className="card-component">
           <Scheduler
-            data={data.filter((event: any) => filterState[event.employeeID ? event.employeeID : ''])}
+            data={data.filter((event: any) => filterEmployee[event.employeeID ? event.employeeID : ''])}
             onDataChange={onDataChange}
             modelFields={ordersModelFields}
             group={{
@@ -64,7 +67,7 @@ export const Calendar = () => {
               {
                 name: 'Teams',
                 data: teams
-                  .filter((team) => filterState[team.managerID])
+                  .filter((team) => filterEmployee[team.managerID])
                   .map((item) => ({
                     ...item,
                     text: (

@@ -18,11 +18,11 @@ import {
 } from './SchedulerFormComponents';
 // Mock
 import { CustomersGridData } from '../../Customers/CustomersMockData';
-import { employees } from '../../Calendar/CalendarMockData';
+import { TeamStaffGridData } from '../../TeamStaff/TeamStaffMockData';
 import { StatusNames } from '../../Agenda/AgendaTypes';
 
 const customers = CustomersGridData.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
-const stuffs = employees.map(({ fullName }) => fullName);
+const stuffs = TeamStaffGridData.map(({ fullName }) => fullName);
 const statusList = Object.values(StatusNames);
 
 const recurrenceNames = ['Never', 'Daily', 'Weekly', 'Monthly', 'Yearly'];
@@ -58,7 +58,7 @@ const repeatOnYearlyData = [
 const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
-  console.log(`formDataItem`, dataItem);
+  // console.log(`formDataItem`, dataItem);
 
   return (
     <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={'73%'}>
@@ -67,7 +67,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
           initialValues={dataItem}
           onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
           render={(formRenderProps) => {
-            console.log(`formRenderProps`, formRenderProps);
+            // console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('repeat');
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {

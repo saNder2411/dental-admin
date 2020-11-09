@@ -102,7 +102,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
       return [
         {
           id: -1,
-          teamID: '',
+          teamID: -1,
           photo: '',
           firstName: '--Team Stylist--',
           lastName: '--Team Stylist--',
@@ -112,6 +112,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           mobilePhone: '',
           email: '',
           inEdit: true,
+          gender: 'F',
         },
         ...data,
       ];
@@ -137,7 +138,7 @@ export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem):
     return { titleForAddNewItemSection: 'New Appointment', dataName: GridDataName.Agenda };
   } else if ('offerID' in dataItem) {
     return { titleForAddNewItemSection: 'New Service', dataName: GridDataName.Services };
-  } else if ('gender' in dataItem) {
+  } else if ('upcoming' in dataItem) {
     return { titleForAddNewItemSection: 'New Customer', dataName: GridDataName.Customers };
   } else if ('isShowOnline' in dataItem) {
     return { titleForAddNewItemSection: 'New Staff', dataName: GridDataName.TeamStaff };
