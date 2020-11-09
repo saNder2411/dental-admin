@@ -330,5 +330,5 @@ const phoneRegex = new RegExp(/^[0-9 ()+-]+$/);
 const emailRegex = new RegExp(/\S+@\S+\.\S+/);
 
 const requiredValidator = (value: string) => (value ? '' : 'Error: This field is required.');
-export const phoneValidator = (value: string) => (!value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.');
-export const emailValidator = (value: string) => (!value ? 'Email field is required.' : emailRegex.test(value) ? '' : 'Email is not valid format.');
+const phoneValidator = (value: string) => (!value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.');
+const emailValidator = (value: string) => (!value ? 'Email field is required.' : emailRegex.test(value) ? '' : 'Email is not valid format.');

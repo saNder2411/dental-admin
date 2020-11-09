@@ -4,7 +4,7 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 import { GridCellProps } from '@progress/kendo-react-grid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react-dateinputs';
-import { DropDownList, DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
+import { DropDownList, DropDownListChangeEvent, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 import { Input, NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 import { Popup } from '@progress/kendo-react-popup';
 // Instruments
@@ -91,14 +91,16 @@ export const ServicesCell: GridCell = ({ dataItem, field, onChange }) => {
   const serviceReferenceList = data.map(({ references }) => ({ [field ? field : '']: references, value: references }));
   const value = dataItem[field ? field : ''];
   const dropDownListValue = serviceReferenceList.find((item) => item.value === value);
+  const [multiSelectValue, setMultiSelectValue] = useState([dropDownListValue]);
 
-  const onServicesChange = (evt: DropDownListChangeEvent) =>
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
-
+  const onServicesChange = (evt: MultiSelectChangeEvent) => {
+    setMultiSelectValue([...evt.target.value]);
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value).join(', ') });
+  };
   return (
     <td>
       {dataItem.inEdit ? (
-        <DropDownList onChange={onServicesChange} value={dropDownListValue} data={serviceReferenceList} textField={'services'} />
+        <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={serviceReferenceList} textField={'services'} />
       ) : (
         value
       )}
