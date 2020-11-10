@@ -1,4 +1,4 @@
-import React, { useState, useRef, SyntheticEvent, ChangeEvent } from 'react';
+import React, { useState, useRef, SyntheticEvent, ChangeEvent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { GridCellProps } from '@progress/kendo-react-grid';
@@ -90,8 +90,17 @@ export const ServicesCell: GridCell = ({ dataItem, field, onChange }) => {
   const { data } = useSelector(selectServicesState);
   const serviceReferenceList = data.map(({ references }) => ({ [field ? field : '']: references, value: references }));
   const value = dataItem[field ? field : ''];
-  const dropDownListValue = serviceReferenceList.find((item) => item.value === value);
-  const [multiSelectValue, setMultiSelectValue] = useState([dropDownListValue ? dropDownListValue : { [field ? field : '']: value, value }]);
+  const dropDownListValue = [{ [field ? field : '']: value, value }];
+  const [multiSelectValue, setMultiSelectValue] = useState<{ [key: string]: string; value: string }[]>(dropDownListValue);
+
+  useEffect(() => {
+    let isNewItem = !!!value;
+
+    if (isNewItem) {
+      setMultiSelectValue([]);
+      isNewItem = false;
+    }
+  }, [value]);
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
     setMultiSelectValue([...evt.target.value]);
@@ -286,10 +295,10 @@ export const ActionsControlCell: GridCell = ({ dataItem }) => {
   return inEdit ? (
     <SC.ActionsControlCell className="k-command-cell">
       <button className="k-button" onClick={() => (isNewItem ? onAddNewItemToData(dispatch, dataItem) : onItemUpdatedAfterEdit(dispatch, dataItem))}>
-        {isNewItem ? <span className="k-icon k-i-plus-circle" /> : <span className="k-icon k-i-reload" />}
+        {isNewItem ? <span className="k-icon k-i-checkmark" /> : <span className="k-icon k-i-reload" />}
       </button>
       <button className="k-button" onClick={() => (isNewItem ? onDiscardNewItemToData(dispatch, dataItem) : onCancelEdit(dispatch, dataItem))}>
-        <span className="k-icon k-i-cancel-outline" />
+        <span className="k-icon k-i-x" />
       </button>
     </SC.ActionsControlCell>
   ) : (

@@ -30,7 +30,7 @@ export const updateDataAfterRemoveItem = (data: GridDataItem[], removeItemID: nu
 export const updateDataAfterCancelEdit = (data: GridDataItem[], originData: GridDataItem[], editItemID: number): GridDataItem[] => {
   const originalItem = originData.find(({ id }) => id === editItemID);
 
-  return originalItem ? [...data.map((item) => (item.id === originalItem.id ? originalItem : item))] : [...data];
+  return originalItem ? [...data.map((item) => (item.id === originalItem.id ? originalItem : item))] : data;
 };
 
 export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, value, syntheticEvent }: GridItemChangeEvent): GridDataItem[] => {
@@ -48,7 +48,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           references: '',
           start: Date.now(),
           end: Date.now(),
-          svcStaff: '--Team Stylist--',
+          svcStaff: '',
           services: '',
           totalPrice: 0,
           lastName: '',
@@ -103,11 +103,11 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
       return [
         {
           id: -1,
-          teamID: -1,
+          teamID: generateId(data),
           photo: '',
-          firstName: '--Team Stylist--',
-          lastName: '--Team Stylist--',
-          fullName: '--Team Stylist--',
+          firstName: '',
+          lastName: '',
+          fullName: '',
           jobTitle: '',
           isShowOnline: false,
           mobilePhone: '',
@@ -119,7 +119,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
       ];
 
     default:
-      return [...data];
+      return data;
   }
 };
 

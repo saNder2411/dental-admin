@@ -73,12 +73,12 @@ export const ActionsControlCell = styled.td`
   }
 
   .k-i-reload,
-  .k-i-plus-circle {
+  .k-i-checkmark {
     color: #28a745;
   }
 
   .k-i-trash,
-  .k-i-cancel-outline {
+  .k-i-x {
     color: #dc3545;
   }
 `;
