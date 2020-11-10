@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { SchedulerFormProps } from '@progress/kendo-react-scheduler';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
@@ -16,6 +17,8 @@ import {
   FormButtonGroup,
   FormDropDownList,
 } from './SchedulerFormComponents';
+// Selectors
+import { selectServicesReferences } from '../../Services';
 // Mock
 import { CustomersGridData } from '../../Customers/CustomersMockData';
 import { TeamStaffGridData } from '../../TeamStaff/TeamStaffMockData';
@@ -63,6 +66,7 @@ const genders = [
 ];
 
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
+  const serviceReferences = useSelector(selectServicesReferences);
   // console.log(`formDataItem`, dataItem);
 
   return (
@@ -113,11 +117,25 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     validator={phoneValidator}
                   />
                   <Field id={'email'} name={'email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
-                  <Field id={'customerGender'} name={'customerGender'} label={'Gender'} layout={'horizontal'} component={FormRadioGroup} data={genders} />
+                  <Field
+                    id={'customerGender'}
+                    name={'customerGender'}
+                    label={'Gender'}
+                    layout={'horizontal'}
+                    component={FormRadioGroup}
+                    data={genders}
+                  />
                   <Field id={'staff'} name={'staff'} label={'Support Stuff'} data={stuffs} component={FormComboBox} validator={requiredValidator} />
                   <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
-                  <Field id={'refID'} name={'refID'} label={'Services'} component={FormInput} validator={requiredValidator} />
+                  <Field
+                    id={'refID'}
+                    name={'refID'}
+                    label={'Services'}
+                    component={FormDropDownList}
+                    data={serviceReferences}
+                    validator={requiredValidator}
+                  />
                   <Field
                     id={'status'}
                     name={'status'}
