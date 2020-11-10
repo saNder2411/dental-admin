@@ -57,6 +57,11 @@ const repeatOnYearlyData = [
 
 const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+const genders = [
+  { label: 'Male', value: 'Male' },
+  { label: 'Female', value: 'Female' },
+];
+
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   // console.log(`formDataItem`, dataItem);
 
@@ -108,6 +113,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     validator={phoneValidator}
                   />
                   <Field id={'email'} name={'email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
+                  <Field id={'customerGender'} name={'customerGender'} label={'Gender'} layout={'horizontal'} component={FormRadioGroup} data={genders} />
                   <Field id={'staff'} name={'staff'} label={'Support Stuff'} data={stuffs} component={FormComboBox} validator={requiredValidator} />
                   <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />

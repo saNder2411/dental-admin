@@ -20,13 +20,14 @@ export interface AgendaDataItem {
   end: number;
   svcStaff: string;
   services: string;
-  budget: number;
+  totalPrice: number;
   lastName: string;
   firstName: string;
   phone: string;
   lastUpdate: Date;
   eventId: number;
   inEdit?: boolean;
+  customerGender: string;
 }
 
 export interface AgendaState {

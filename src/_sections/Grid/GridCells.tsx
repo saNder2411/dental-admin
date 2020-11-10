@@ -131,10 +131,10 @@ export const BooleanFlagCell: GridCell = ({ dataItem, field, onChange }) => {
 };
 
 export const GenderCell: GridCell = ({ dataItem, field, onChange }) => {
-  const value = dataItem[field ? field : ''] ? dataItem[field ? field : ''] : '(1) Female';
+  const value = dataItem[field ? field : ''] ? dataItem[field ? field : ''] : 'Female';
   const localizedDataForGenderCell = [
-    { [field ? field : '']: 'Female', value: '(1) Female' },
-    { [field ? field : '']: 'Male', value: '(2) Male' },
+    { [field ? field : '']: 'Female', value: 'Female' },
+    { [field ? field : '']: 'Male', value: 'Male' },
   ];
   const dropDownListValue = localizedDataForGenderCell.find((item) => item.value === value);
 
@@ -265,7 +265,7 @@ export const PhotoCell: GridCell = ({ dataItem }) => {
 };
 
 export const CustomerPhotoCell: GridCell = ({ dataItem }) => {
-  const placeholderImageUrl = dataItem.gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const placeholderImageUrl = dataItem.gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl = dataItem.photo ? dataItem.photo : placeholderImageUrl;
 
   return (

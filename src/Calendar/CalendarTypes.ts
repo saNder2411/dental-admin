@@ -17,6 +17,7 @@ export interface CalendarDataItem {
   customer: string;
   firstName: string;
   lastName: string;
+  customerGender: 'Male' | 'Female';
   isAllDay: boolean;
   repeat: string;
   recurrenceId?: undefined | number;

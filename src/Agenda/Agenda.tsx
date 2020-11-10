@@ -14,6 +14,7 @@ import {
   SvcStaffCell,
   LastNameCell,
   ServicesCell,
+  GenderCell,
 } from '../_sections';
 // Mock
 import { AgendaGridData } from './AgendaMockData';
@@ -54,6 +55,7 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.status', 'Status')}
               columnMenu={ColumnMenu}
               cell={StatusCell}
+              width={120}
               filter={'text'}
             />
             <GridColumn
@@ -67,6 +69,7 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.start', 'Start')}
               columnMenu={ColumnMenu}
               filter={'text'}
+              width={120}
               cell={DateCell}
             />
             <GridColumn
@@ -74,6 +77,7 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.end', 'End')}
               columnMenu={ColumnMenu}
               filter={'text'}
+              width={120}
               cell={DateCell}
             />
             <GridColumn
@@ -92,7 +96,7 @@ export const Agenda: FC = (): JSX.Element => {
               filter={'text'}
             />
             <GridColumn
-              field={'budget'}
+              field={'totalPrice'}
               title={localizationService.toLanguageString('custom.total', 'Total')}
               columnMenu={ColumnMenu}
               width={90}
@@ -106,6 +110,14 @@ export const Agenda: FC = (): JSX.Element => {
               width={120}
               cell={LastNameCell}
               filter={'text'}
+            />
+            <GridColumn
+              field={'customerGender'}
+              title={localizationService.toLanguageString('custom.gender', 'Gender')}
+              columnMenu={ColumnMenu}
+              cell={GenderCell}
+              filter={'text'}
+              width={120}
             />
             <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />
           </Grid>
