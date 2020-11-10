@@ -189,6 +189,45 @@ export const ReferenceCell: GridCell = ({ dataItem, field, onChange }) => {
   );
 };
 
+export const StaffPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
+  const value = dataItem[field ? field : ''] as string;
+  const placeholderImageUrl = value.includes('png') || value.includes('jpg') || value.includes('jpeg') ? value : AnyStylist;
+
+  const onStaffPhotoChange = (evt: InputChangeEvent) => {
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
+  };
+
+  return dataItem.inEdit ? (
+    <td>
+      <Input value={value} onChange={onStaffPhotoChange} />
+    </td>
+  ) : (
+    <SC.PhotoCell imageUrl={placeholderImageUrl}>
+      <div className="grid__stylist-photo" />
+    </SC.PhotoCell>
+  );
+};
+
+export const CustomerPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
+  const value = dataItem[field ? field : ''] as string;
+  const placeholderImageUrl = dataItem.gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const imageUrl = value.includes('png') || value.includes('jpg') || value.includes('jpeg') ? value : placeholderImageUrl;
+
+  const onCustomerPhotoChange = (evt: InputChangeEvent) => {
+    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
+  };
+
+  return dataItem.inEdit ? (
+    <td>
+      <Input value={value} onChange={onCustomerPhotoChange} />
+    </td>
+  ) : (
+    <SC.PhotoCell imageUrl={imageUrl}>
+      <div className="grid__stylist-photo" />
+    </SC.PhotoCell>
+  );
+};
+
 export const DiscountCell: GridCell = ({ dataItem, field, onChange }) => {
   const value = dataItem[field ? field : ''];
 
@@ -261,26 +300,6 @@ export const ServicesIcon: GridCell = ({ dataItem }) => {
     <SC.ServicesIcon>
       <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName as StatusNames].icon} color={IconBook[iconName as StatusNames].statusColor} />
     </SC.ServicesIcon>
-  );
-};
-
-export const PhotoCell: GridCell = ({ dataItem }) => {
-  const placeholderImageUrl = dataItem.photo ? dataItem.photo : AnyStylist;
-  return (
-    <SC.PhotoCell imageUrl={placeholderImageUrl}>
-      <div className="grid__stylist-photo" />
-    </SC.PhotoCell>
-  );
-};
-
-export const CustomerPhotoCell: GridCell = ({ dataItem }) => {
-  const placeholderImageUrl = dataItem.gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
-  const imageUrl = dataItem.photo ? dataItem.photo : placeholderImageUrl;
-
-  return (
-    <SC.PhotoCell imageUrl={imageUrl}>
-      <div className="grid__stylist-photo" />
-    </SC.PhotoCell>
   );
 };
 
