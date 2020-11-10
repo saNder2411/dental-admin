@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 // Types
 import { SchedulerState, ActionTypes, Actions, SchedulerDataItem } from './SchedulerTypes';
 // Actions
-import { setDataAC, setFilterEmployeeAC, changeFilterEmployeeAC, setFormItemAC } from './SchedulerAC';
+import { setDataAC, setFilterEmployeeAC, changeFilterEmployeeAC, setFormItemAC, setSelectedItemIdAC } from './SchedulerAC';
 // Helpers
 
 // Mock
@@ -15,10 +15,12 @@ const initialState = {
   teams,
   employees: TeamStaffGridData,
   formItem: null,
+  selectedItemID: null,
   setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => dispatch(setDataAC(data)),
   setFilterEmployee: (dispatch: Dispatch, data: { [key: string]: boolean }) => dispatch(setFilterEmployeeAC(data)),
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeFilterEmployeeAC(employeeID)),
   setFormItem: (dispatch: Dispatch, formItem: SchedulerDataItem | null) => dispatch(setFormItemAC(formItem)),
+  setSelectedItemID: (dispatch: Dispatch, selectedItemID: number | null) => dispatch(setSelectedItemIdAC(selectedItemID)),
 };
 
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
@@ -34,6 +36,9 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
 
     case ActionTypes.SET_FORM_ITEM:
       return { ...state, formItem: action.payload };
+
+    case ActionTypes.SET_SELECTED_ITEM_ID:
+      return { ...state, selectedItemID: action.payload };
 
     default:
       return state;

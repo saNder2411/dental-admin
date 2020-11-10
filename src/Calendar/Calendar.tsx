@@ -12,9 +12,10 @@ import * as SC from './CalendarStyledComponents/CalendarStyled';
 import { selectSchedulerState } from '../_sections/Scheduler';
 // Mocks
 import { ordersModelFields } from './CalendarMockData';
+import { StatusNames } from '../Agenda';
 
 export const Calendar = () => {
-  const { data, filterEmployee, teams, employees, setData, onEmployeeChange } = useSelector(selectSchedulerState);
+  const { data, filterEmployee, teams, employees, setData, onEmployeeChange, setFormItem } = useSelector(selectSchedulerState);
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
@@ -51,7 +52,32 @@ export const Calendar = () => {
         </div>
         <div className="Calendar__addNewItemWrapper">
           <span className="Calendar__addNewItemTitle">New Appointment</span>
-          <button title="Add new" className="k-button" onClick={() => {}}>
+          <button
+            title="Add new"
+            className="k-button"
+            onClick={() =>
+              setFormItem(dispatch, {
+                staff: '',
+                start: new Date(),
+                end: new Date(),
+                orderID: -1,
+                refID: '',
+                status: StatusNames.Closed,
+                dentalStatus: StatusNames.Tooth,
+                mobilePhone: '',
+                email: '',
+                notes: '',
+                employeeID: 0,
+                teamID: 0,
+                description: '',
+                customer: '',
+                customerGender: 'Male' as const,
+                firstName: '',
+                lastName: '',
+                isAllDay: false,
+                repeat: 'Never',
+              })
+            }>
             <span className="k-icon k-i-plus-circle" />
           </button>
         </div>

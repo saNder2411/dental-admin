@@ -10,6 +10,7 @@ export const ActionTypes = {
   SET_FILTER_EMPLOYEE: 'SCHEDULER/SET_FILTER_EMPLOYEE' as const,
   CHANGE_FILTER_EMPLOYEE: 'SCHEDULER/CHANGE_FILTER_EMPLOYEE' as const,
   SET_FORM_ITEM: 'SCHEDULER/SET_FORM_ITEM' as const,
+  SET_SELECTED_ITEM_ID: 'SET_SELECTED_ITEM_ID' as const,
 };
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -24,8 +25,10 @@ export interface SchedulerState {
   teams: TeamStaffTeamData[];
   employees: TeamStaffDataItem[];
   formItem: SchedulerDataItem | null;
+  selectedItemID: number | null;
   setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => void;
   setFilterEmployee: (dispatch: Dispatch, data: { [key: string]: boolean }) => void;
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => void;
   setFormItem: (dispatch: Dispatch, formItem: SchedulerDataItem | null) => void;
+  setSelectedItemID: (dispatch: Dispatch, selectedItemID: number | null) => void;
 }

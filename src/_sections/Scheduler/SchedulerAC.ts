@@ -7,3 +7,5 @@ export const setFilterEmployeeAC = (data: { [key: string]: boolean }) => ({ type
 export const changeFilterEmployeeAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_FILTER_EMPLOYEE, payload: employeeID });
 
 export const setFormItemAC = (formItem: SchedulerDataItem | null) => ({ type: ActionTypes.SET_FORM_ITEM, payload: formItem });
+
+export const setSelectedItemIdAC = (selectedItemID: number | null) => ({ type: ActionTypes.SET_SELECTED_ITEM_ID, payload: selectedItemID });

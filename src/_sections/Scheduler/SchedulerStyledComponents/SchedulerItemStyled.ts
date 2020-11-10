@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-export const SchedulerItemTopWrapper = styled.div`
-  margin-top: 0.1rem;
+export const SchedulerItemTopWrapper = styled.div<{ isSmallDisplay: boolean }>`
+  margin-top: ${({ isSmallDisplay }) => (isSmallDisplay ? `1.4rem` : `0.1rem`)};
   margin-left: 0.1rem;
   text-align: center;
   margin-right: -0.4rem;

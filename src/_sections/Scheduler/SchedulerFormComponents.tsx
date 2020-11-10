@@ -175,7 +175,6 @@ export const FormDropDownList = (fieldRenderProps: FieldRenderProps) => {
   const editorRef = React.useRef(null);
   const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-  console.log(`fieldRenderProps`, fieldRenderProps);
 
   return (
     <FieldWrapper>

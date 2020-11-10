@@ -119,7 +119,7 @@ export const Agenda: FC = (): JSX.Element => {
               filter={'text'}
               width={120}
             />
-            <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />
+            <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} width={140} cell={ActionsControlCell} />
           </Grid>
         </div>
       </div>

@@ -1,8 +1,9 @@
 import React, { FC, useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   SchedulerItem as KendoSchedulerItem,
   SchedulerItemProps,
-  useSchedulerEditItemFormItemContext,
+  // useSchedulerEditItemFormItemContext,
   useSchedulerEditItemRemoveItemContext,
   useSchedulerEditItemShowOccurrenceDialogContext,
   useSchedulerEditItemShowRemoveDialogContext,
@@ -19,12 +20,16 @@ import * as SC from './SchedulerStyledComponents/SchedulerItemStyled';
 import { IconBook } from '../../_instruments';
 // Types
 import { StatusNames } from '../../Agenda/AgendaTypes';
+// Selectors
+import { selectSchedulerState } from './SchedulerSelectors';
 
 export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   // console.log(`CustomItemProps`, props);
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
-  const [, setFormItem] = useSchedulerEditItemFormItemContext();
+  const { setFormItem } = useSelector(selectSchedulerState);
+  const dispatch = useDispatch();
+  // const [, setFormItem] = useSchedulerEditItemFormItemContext();
   const [, setRemoveItem] = useSchedulerEditItemRemoveItemContext();
   const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
   const [, setShowRemoveDialog] = useSchedulerEditItemShowRemoveDialogContext();
@@ -42,7 +47,7 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
       setShowPopup((prevState) => !prevState);
       onClick && onClick(evt);
     },
-    [setShowPopup, onClick]
+    [onClick]
   );
 
   const onSchedulerItemBlur = useCallback(
@@ -57,9 +62,9 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
 
   const onEditBtnClick = useCallback(() => {
     setShowPopup(false);
-    setFormItem(dataItem);
+    setFormItem(dispatch, dataItem);
     isRecurring && setShowOccurrenceDialog(true);
-  }, [setShowPopup, setFormItem, dataItem, isRecurring, setShowOccurrenceDialog]);
+  }, [setFormItem, dispatch, dataItem, isRecurring, setShowOccurrenceDialog]);
 
   const onDeleteBtnClick = useCallback(() => {
     setShowPopup(false);
@@ -78,7 +83,7 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
     <>
       <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onFocus={onFocusAsync} onBlur={onBlurAsync}>
         {height && height > 25 && (
-          <SC.SchedulerItemTopWrapper>
+          <SC.SchedulerItemTopWrapper isSmallDisplay={!!(width && width < 120)}>
             {width && width > 120 && children}
             <div className="SchedulerItem__icons">
               <div className="SchedulerItem__icon">
