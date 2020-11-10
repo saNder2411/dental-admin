@@ -12,6 +12,7 @@ import {
   changeItemAC,
   addNewItemToEditAC,
   addNewItemToDataAC,
+  discardAddNewItemToDataAC,
 } from './GridAC';
 // Helpers
 import {
@@ -22,6 +23,7 @@ import {
   updateDataOnAddNewItemToChange,
   updateDataAfterEditNewItem,
   setTitleForAddNewItemSectionAndDataName,
+  updateDataAfterCancelEdit,
 } from './GridHelpers';
 
 const initialState = {
@@ -38,6 +40,7 @@ const initialState = {
   onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => dispatch(changeItemAC(evt)),
   onAddNewItem: (dispatch: Dispatch) => dispatch(addNewItemToEditAC()),
   onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(addNewItemToDataAC(dataItem)),
+  onDiscardNewItemToData: (dispatch: Dispatch, { id }: GridDataItem) => dispatch(discardAddNewItemToDataAC(id)),
 };
 
 export const reducer = (state: GridState = initialState, action: Actions): GridState => {
@@ -62,7 +65,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       return { ...state, data: newDataAfterRemoveItem, originData: [...newDataAfterRemoveItem] };
 
     case ActionTypes.CANCEL_EDIT:
-      return { ...state, data: [...state.originData] };
+      return { ...state, data: updateDataAfterCancelEdit(state.data, state.originData, action.payload) };
 
     case ActionTypes.CHANGE_ITEM:
       return { ...state, data: updateDataOnChangeItem(state.data, action.payload) };
@@ -73,6 +76,10 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.ADD_NEW_ITEM_TO_DATA:
       const newDataAfterEditNewItem = updateDataAfterEditNewItem(state.data, action.payload);
       return { ...state, data: newDataAfterEditNewItem, originData: [...newDataAfterEditNewItem] };
+
+    case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
+      const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.data, action.payload);
+      return { ...state, data: newDataAfterDiscardAddNewItem, originData: [...newDataAfterDiscardAddNewItem] };
 
     default:
       return state;

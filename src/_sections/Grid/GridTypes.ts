@@ -17,6 +17,7 @@ export const ActionTypes = {
   CHANGE_ITEM: 'GRID/CHANGE_ITEM' as const,
   ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
   ADD_NEW_ITEM_TO_DATA: 'GRID/ADD_NEW_ITEM_TO_DATA' as const,
+  DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
 };
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -36,7 +37,7 @@ export enum GridDataName {
 export interface GridState {
   data: GridDataItem[];
   originData: GridDataItem[];
-  dataName: GridDataName,
+  dataName: GridDataName;
   editField: 'inEdit';
   titleForAddNewItemSection: string;
   setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
@@ -47,4 +48,5 @@ export interface GridState {
   onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
   onAddNewItem: (dispatch: Dispatch) => void;
   onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onDiscardNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
 }

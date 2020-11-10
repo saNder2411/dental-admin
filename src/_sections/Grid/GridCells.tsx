@@ -91,7 +91,7 @@ export const ServicesCell: GridCell = ({ dataItem, field, onChange }) => {
   const serviceReferenceList = data.map(({ references }) => ({ [field ? field : '']: references, value: references }));
   const value = dataItem[field ? field : ''];
   const dropDownListValue = serviceReferenceList.find((item) => item.value === value);
-  const [multiSelectValue, setMultiSelectValue] = useState([dropDownListValue]);
+  const [multiSelectValue, setMultiSelectValue] = useState([dropDownListValue ? dropDownListValue : { [field ? field : '']: value, value }]);
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
     setMultiSelectValue([...evt.target.value]);
@@ -276,7 +276,9 @@ export const CustomerPhotoCell: GridCell = ({ dataItem }) => {
 };
 
 export const ActionsControlCell: GridCell = ({ dataItem }) => {
-  const { editField, onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData } = useSelector(selectGridState);
+  const { editField, onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData, onDiscardNewItemToData } = useSelector(
+    selectGridState
+  );
   const dispatch = useDispatch();
   const inEdit = dataItem[editField];
   const isNewItem = dataItem.id === -1;
@@ -286,7 +288,7 @@ export const ActionsControlCell: GridCell = ({ dataItem }) => {
       <button className="k-button" onClick={() => (isNewItem ? onAddNewItemToData(dispatch, dataItem) : onItemUpdatedAfterEdit(dispatch, dataItem))}>
         {isNewItem ? <span className="k-icon k-i-plus-circle" /> : <span className="k-icon k-i-reload" />}
       </button>
-      <button className="k-button" onClick={() => onCancelEdit(dispatch, dataItem)}>
+      <button className="k-button" onClick={() => (isNewItem ? onDiscardNewItemToData(dispatch, dataItem) : onCancelEdit(dispatch, dataItem))}>
         <span className="k-icon k-i-cancel-outline" />
       </button>
     </SC.ActionsControlCell>

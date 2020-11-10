@@ -2,7 +2,6 @@ import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
 import { ActionTypes, GridDataItem } from './GridTypes';
 
-
 export const setDataAC = (data: GridDataItem[]) => ({ type: ActionTypes.SET_DATA, payload: data });
 
 export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
@@ -18,3 +17,5 @@ export const changeItemAC = (gridEvent: GridItemChangeEvent) => ({ type: ActionT
 export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT });
 
 export const addNewItemToDataAC = (dataItem: GridDataItem) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_DATA, payload: dataItem });
+
+export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
