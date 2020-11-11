@@ -14,6 +14,8 @@ export interface ServicesDataItem {
   isConsultation: boolean;
   price: number;
   discount: number;
+  inEdit?: boolean;
+  isNew?: boolean;
 }
 
 export interface ServicesState {

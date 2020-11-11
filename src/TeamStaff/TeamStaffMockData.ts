@@ -7,18 +7,6 @@ import AlexLocatelli from '../_assets/stylists/Alex-Locatelli-Portrait-85x85.png
 import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
 
 export const TeamStaffGridData = [
-  // {
-  //   id: 1,
-  //   teamID: '1',
-  //   photo: AnyStylist,
-  //   firstName: '--Team Stylist--',
-  //   lastName: '--Team Stylist--',
-  //   fullName: '--Team Stylist--',
-  //   jobTitle: 'Various',
-  //   isShowOnline: true,
-  //   mobilePhone: '+89 7955 99888',
-  //   email: 'any.stylist@metroapps.online',
-  // },
   {
     id: 1,
     teamID: 1,
@@ -30,7 +18,7 @@ export const TeamStaffGridData = [
     isShowOnline: true,
     mobilePhone: '+89 7955 99888',
     email: 'amelia.giround@metroapps.online',
-    gender: 'F',
+    gender: 'Female' as const,
   },
   {
     id: 2,
@@ -43,7 +31,7 @@ export const TeamStaffGridData = [
     isShowOnline: true,
     mobilePhone: '+89 7955 99444',
     email: 'grace.robinson@metroapps.online',
-    gender: 'F',
+    gender: 'Female' as const,
   },
   {
     id: 3,
@@ -56,7 +44,7 @@ export const TeamStaffGridData = [
     isShowOnline: true,
     mobilePhone: '+89 7955 99666',
     email: 'christine.romanov@metroapps.online',
-    gender: 'F',
+    gender: 'Female' as const,
   },
   {
     id: 4,
@@ -69,7 +57,7 @@ export const TeamStaffGridData = [
     isShowOnline: false,
     mobilePhone: '+89 7955 99555',
     email: 'david.wenger@metroapps.online',
-    gender: 'M',
+    gender: 'Male' as const,
   },
   {
     id: 5,
@@ -82,7 +70,7 @@ export const TeamStaffGridData = [
     isShowOnline: true,
     mobilePhone: '+89 7955 99777',
     email: 'alex.locatelli@metroapps.online',
-    gender: 'M',
+    gender: 'Male' as const,
   },
   {
     id: 6,
@@ -95,7 +83,7 @@ export const TeamStaffGridData = [
     isShowOnline: true,
     mobilePhone: '+89 7955 99333',
     email: 'sara.khan@metroapps.online',
-    gender: 'F',
+    gender: 'Female' as const,
   },
 ];
 

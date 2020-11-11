@@ -20,7 +20,7 @@ export const ActionTypes = {
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
 };
 
-type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
+export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 

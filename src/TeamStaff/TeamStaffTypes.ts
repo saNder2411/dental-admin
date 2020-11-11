@@ -9,7 +9,9 @@ export interface TeamStaffDataItem {
   isShowOnline: boolean;
   mobilePhone: string;
   email: string;
-  gender: string;
+  gender: 'Male' | 'Female';
+  inEdit?: boolean;
+  isNew?: boolean;
 }
 
 export interface TeamStaffTeamData {

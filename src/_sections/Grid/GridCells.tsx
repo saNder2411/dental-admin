@@ -203,7 +203,7 @@ export const StaffPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
     </td>
   ) : (
     <SC.PhotoCell imageUrl={placeholderImageUrl}>
-      <div className="grid__stylist-photo" />
+      <div className="Grid__avatar" />
     </SC.PhotoCell>
   );
 };
@@ -223,7 +223,7 @@ export const CustomerPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
-      <div className="grid__stylist-photo" />
+      <div className="Grid__avatar" />
     </SC.PhotoCell>
   );
 };
@@ -309,7 +309,7 @@ export const ActionsControlCell: GridCell = ({ dataItem }) => {
   );
   const dispatch = useDispatch();
   const inEdit = dataItem[editField];
-  const isNewItem = dataItem.id === -1;
+  const isNewItem = dataItem.isNew;
 
   return inEdit ? (
     <SC.ActionsControlCell className="k-command-cell">

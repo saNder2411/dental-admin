@@ -27,7 +27,8 @@ export interface AgendaDataItem {
   lastUpdate: Date;
   eventId: number;
   inEdit?: boolean;
-  customerGender: string;
+  customerGender: 'Female' | 'Male';
+  isNew?: boolean;
 }
 
 export interface AgendaState {

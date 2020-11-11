@@ -33,7 +33,7 @@ export const PhotoCell = styled.td<{ imageUrl: string }>`
     padding: 20;
   }
 
-  & .grid__stylist-photo {
+  & .Grid__avatar {
     margin: auto;
     width: 90px;
     height: 90px;
