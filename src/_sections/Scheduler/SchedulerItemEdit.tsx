@@ -8,8 +8,8 @@ import { selectSchedulerState, selectFormItem } from './SchedulerSelectors';
 
 export const SchedulerItemEdit: FC<SchedulerItemProps> = ({ dataItem, ...others }): JSX.Element | null => {
   const dataItemID = useMemo(() => dataItem.orderID, [dataItem.orderID]);
-  const tr = useCallback((dataItemId) => selectFormItem(dataItemId), []);
-  const formItem = useSelector(tr(dataItemID));
+  // const tr = useCallback((dataItemId) => selectFormItem(dataItemId), []);
+  const formItemID = useSelector(selectFormItem(dataItemID));
   const { setFormItem } = useSelector(selectSchedulerState);
   const dispatch = useDispatch();
   // console.log(`SchedulerItemEdit`, formItem);
@@ -18,5 +18,12 @@ export const SchedulerItemEdit: FC<SchedulerItemProps> = ({ dataItem, ...others 
 
   const onFormItemChange = useCallback(({ value }) => setFormItem(dispatch, value), [setFormItem, dispatch]);
 
-  return <SchedulerEditItem {...{ ...others, dataItem }} formItem={formItem} onFormItemChange={onFormItemChange} form={SchedulerForm} />;
+  return (
+    <SchedulerEditItem
+      {...{ ...others, dataItem }}
+      formItem={formItemID ? dataItem : null}
+      onFormItemChange={onFormItemChange}
+      form={SchedulerForm}
+    />
+  );
 };

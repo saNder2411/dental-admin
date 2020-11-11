@@ -24,7 +24,7 @@ export interface SchedulerState {
   filterEmployee: { [key: string]: boolean };
   teams: TeamStaffTeamData[];
   employees: TeamStaffDataItem[];
-  formItem: SchedulerDataItem | null;
+  formItemID: number | null;
   selectedItemID: number | null;
   setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => void;
   setFilterEmployee: (dispatch: Dispatch, data: { [key: string]: boolean }) => void;

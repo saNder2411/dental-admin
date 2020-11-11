@@ -30,7 +30,7 @@ const stuffs = TeamStaffGridData.map(({ fullName }) => fullName);
 const statusList = Object.values(StatusNames);
 
 const recurrenceNames = ['Never', 'Daily', 'Weekly', 'Monthly', 'Yearly'];
-const endRecurrenceDailyData = [
+const endRecurrenceData = [
   { label: 'Never', value: 'never' },
   { label: 'After', value: 'after' },
   { label: 'On', value: 'on' },
@@ -290,14 +290,15 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
 
                   {repeatValue !== 'Never' && (
                     <div className="row m-0">
+                      {console.log(formRenderProps.valueGetter('endRecurrence'))}
                       <div className="col-md-4 p-0">
                         <Field
-                          id={'endRecurrenceDaily'}
-                          name={'endRecurrenceDaily'}
+                          id={'endRecurrence'}
+                          name={'endRecurrence'}
                           label={'End'}
                           defaultValue={'after'}
                           component={FormRadioGroup}
-                          data={endRecurrenceDailyData}
+                          data={endRecurrenceData}
                         />
                       </div>
                       <div className="col-md-6 p-0 pt-5 align-self-end">
@@ -307,14 +308,14 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           format={'n0'}
                           min={1}
                           defaultValue={1}
-                          disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'after'}
+                          disabled={formRenderProps.valueGetter('endRecurrence') === 'on' || formRenderProps.valueGetter('endRecurrence') === 'never'}
                           secondLabel={'occurrence(s)'}
                           component={FormNumericTextBox}
                         />
                         <Field
                           id={'endOn'}
                           name={'start'}
-                          disabled={formRenderProps.valueGetter('endRecurrenceDaily') !== 'on'}
+                          disabled={formRenderProps.valueGetter('endRecurrence') !== 'on'}
                           component={FormDateTimePicker}
                           validator={requiredValidator}
                         />

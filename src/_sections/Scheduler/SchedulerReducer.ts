@@ -14,12 +14,12 @@ const initialState = {
   filterEmployee: TeamStaffGridData.reduce((prevVal, employee) => ({ ...prevVal, [employee.id]: true }), {}),
   teams,
   employees: TeamStaffGridData,
-  formItem: null,
+  formItemID: null,
   selectedItemID: null,
   setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => dispatch(setDataAC(data)),
   setFilterEmployee: (dispatch: Dispatch, data: { [key: string]: boolean }) => dispatch(setFilterEmployeeAC(data)),
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeFilterEmployeeAC(employeeID)),
-  setFormItem: (dispatch: Dispatch, formItem: SchedulerDataItem | null) => dispatch(setFormItemAC(formItem)),
+  setFormItem: (dispatch: Dispatch, formItem: SchedulerDataItem | null) => dispatch(setFormItemAC(formItem ? formItem?.orderID : null)),
   setSelectedItemID: (dispatch: Dispatch, selectedItemID: number | null) => dispatch(setSelectedItemIdAC(selectedItemID)),
 };
 
@@ -35,7 +35,7 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
       return { ...state, filterEmployee: { ...state.filterEmployee, [`${action.payload}`]: !state.filterEmployee[`${action.payload}`] } };
 
     case ActionTypes.SET_FORM_ITEM:
-      return { ...state, formItem: action.payload };
+      return { ...state, formItemID: action.payload };
 
     case ActionTypes.SET_SELECTED_ITEM_ID:
       return { ...state, selectedItemID: action.payload };
