@@ -12,9 +12,10 @@ import {
   DateCell,
   StatusCell,
   SvcStaffCell,
-  LastNameCell,
+  FullNameCell,
   ServicesCell,
   GenderCell,
+  ReferenceCell,
 } from '../_sections';
 // Mock
 import { AgendaGridData } from './AgendaMockData';
@@ -55,13 +56,14 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.status', 'Status')}
               columnMenu={ColumnMenu}
               cell={StatusCell}
-              width={120}
+              width={130}
               filter={'text'}
             />
             <GridColumn
               field={'references'}
               title={localizationService.toLanguageString('custom.references', 'References')}
               columnMenu={ColumnMenu}
+              cell={ReferenceCell}
               filter={'text'}
             />
             <GridColumn
@@ -104,11 +106,11 @@ export const Agenda: FC = (): JSX.Element => {
               filter={'numeric'}
             />
             <GridColumn
-              field={'lastName'}
-              title={localizationService.toLanguageString('custom.lastName', 'Last Name')}
+              field={'fullName'}
+              title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
               columnMenu={ColumnMenu}
-              width={120}
-              cell={LastNameCell}
+              width={140}
+              cell={FullNameCell}
               filter={'text'}
             />
             <GridColumn

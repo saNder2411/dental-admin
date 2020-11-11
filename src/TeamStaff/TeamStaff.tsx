@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
-import { StaffPhotoCell, BooleanFlagCell, ActionsControlCell } from '../_sections';
+import { AvatarCell, BooleanFlagCell, ActionsControlCell } from '../_sections';
 // Mock
 import { TeamStaffGridData } from './TeamStaffMockData';
 // Selectors
@@ -43,7 +43,7 @@ export const TeamStaff: FC = (): JSX.Element => {
               width={130}
               filter={'numeric'}
             />
-            <GridColumn field={'photo'} title={localizationService.toLanguageString('custom.photo', 'Photo')} cell={StaffPhotoCell} width={120} />
+            <GridColumn field={'photo'} title={localizationService.toLanguageString('custom.photo', 'Photo')} cell={AvatarCell} width={120} />
             <GridColumn
               field={'fullName'}
               title={localizationService.toLanguageString('custom.fullName', 'Name')}

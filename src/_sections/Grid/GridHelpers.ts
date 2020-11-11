@@ -53,6 +53,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           totalPrice: 0,
           lastName: '',
           firstName: '',
+          fullName: '',
           phone: '',
           lastUpdate: new Date(),
           eventId: Math.random() * 100,
@@ -86,7 +87,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
       return [
         {
           id: generateId(data),
-          offerID: 0,
+          offerID: generateId(data),
           offerIconName: OfferIcons.Tooth,
           references: '',
           detailsReference: '',

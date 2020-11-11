@@ -12,7 +12,7 @@ export const SchedulerItemEdit: FC<SchedulerItemProps> = ({ dataItem, ...others 
   const formItem = useSelector(tr(dataItemID));
   const { setFormItem } = useSelector(selectSchedulerState);
   const dispatch = useDispatch();
-  console.log(`SchedulerItemEdit`, formItem);
+  // console.log(`SchedulerItemEdit`, formItem);
   // console.log(`formItemEdit`, formItem);
   // console.log(`setFormItemEdit`, setFormItem);
 

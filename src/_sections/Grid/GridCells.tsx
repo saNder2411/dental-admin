@@ -16,7 +16,6 @@ import * as SC from './GridStyledComponents/GridCellsStyled';
 // Images
 import MalePhotoPlaceholder from '../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../_assets/customers/female_placeholder.jpg';
-import AnyStylist from '../../_assets/stylists/Any-Stylist-Portrait-85x85.png';
 // Selectors
 import { selectGridState } from '.';
 import { selectTeamStaffState } from '../../TeamStaff';
@@ -42,7 +41,7 @@ export const StatusCell: GridCell = ({ dataItem, field, onChange }) => {
     onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
 
   return (
-    <td>{dataItem.inEdit ? <DropDownList onChange={onStatusChange} value={dropDownListValue} data={statusList} textField={'status'} /> : value}</td>
+    <td>{dataItem.inEdit ? <DropDownList onChange={onStatusChange} value={dropDownListValue} data={statusList} textField={field} /> : value}</td>
   );
 };
 
@@ -57,18 +56,17 @@ export const SvcStaffCell: GridCell = ({ dataItem, field, onChange }) => {
 
   return (
     <td>
-      {dataItem.inEdit ? (
-        <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={teamStaffNameList} textField={'svcStaff'} />
-      ) : (
-        value
-      )}
+      {dataItem.inEdit ? <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={teamStaffNameList} textField={field} /> : value}
     </td>
   );
 };
 
-export const LastNameCell: GridCell = ({ dataItem, field, onChange }) => {
+export const FullNameCell: GridCell = ({ dataItem, field, onChange }) => {
   const { data } = useSelector(selectCustomersState);
-  const customerNameList = data.map(({ lastName, firstName }) => ({ [field ? field : '']: `${firstName} ${lastName}`, value: lastName }));
+  const customerNameList = data.map(({ lastName, firstName }) => ({
+    [field ? field : '']: `${firstName} ${lastName}`,
+    value: `${firstName} ${lastName}`,
+  }));
   const value = dataItem[field ? field : ''];
   const dropDownListValue = customerNameList.find((item) => item.value === value);
 
@@ -77,11 +75,7 @@ export const LastNameCell: GridCell = ({ dataItem, field, onChange }) => {
 
   return (
     <td>
-      {dataItem.inEdit ? (
-        <DropDownList onChange={onLastNameChange} value={dropDownListValue} data={customerNameList} textField={'lastName'} />
-      ) : (
-        value
-      )}
+      {dataItem.inEdit ? <DropDownList onChange={onLastNameChange} value={dropDownListValue} data={customerNameList} textField={field} /> : value}
     </td>
   );
 };
@@ -89,8 +83,10 @@ export const LastNameCell: GridCell = ({ dataItem, field, onChange }) => {
 export const ServicesCell: GridCell = ({ dataItem, field, onChange }) => {
   const { data } = useSelector(selectServicesState);
   const serviceReferenceList = data.map(({ references }) => ({ [field ? field : '']: references, value: references }));
-  const value = dataItem[field ? field : ''];
-  const dropDownListValue = [{ [field ? field : '']: value, value }];
+  const value = dataItem[field ? field : ''] as string;
+  const dropDownListValue = value
+    ? value.split(`, `).map((value) => ({ [field ? field : '']: value, value }))
+    : [{ [field ? field : '']: value, value }];
   const [multiSelectValue, setMultiSelectValue] = useState<{ [key: string]: string; value: string }[]>(dropDownListValue);
 
   useEffect(() => {
@@ -108,11 +104,7 @@ export const ServicesCell: GridCell = ({ dataItem, field, onChange }) => {
   };
   return (
     <td>
-      {dataItem.inEdit ? (
-        <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={serviceReferenceList} textField={'services'} />
-      ) : (
-        value
-      )}
+      {dataItem.inEdit ? <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={serviceReferenceList} textField={field} /> : value}
     </td>
   );
 };
@@ -166,13 +158,12 @@ export const ReferenceCell: GridCell = ({ dataItem, field, onChange }) => {
   const [showPopup, setShowPopup] = useState(false);
   const value = dataItem[field ? field : ''];
 
-  const onReferenceChange = (evt: InputChangeEvent) => {
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
-  };
+  const onReferenceChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent, value });
 
   return dataItem.inEdit ? (
     <td>
-      <Input value={value} onChange={onReferenceChange} />
+      <Input value={value} placeholder="Ref: TBA-000" onChange={onReferenceChange} />
     </td>
   ) : (
     <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
@@ -189,37 +180,17 @@ export const ReferenceCell: GridCell = ({ dataItem, field, onChange }) => {
   );
 };
 
-export const StaffPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
-  const value = dataItem[field ? field : ''] as string;
-  const placeholderImageUrl = value.includes('png') || value.includes('jpg') || value.includes('jpeg') ? value : AnyStylist;
-
-  const onStaffPhotoChange = (evt: InputChangeEvent) => {
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
-  };
-
-  return dataItem.inEdit ? (
-    <td>
-      <Input value={value} onChange={onStaffPhotoChange} />
-    </td>
-  ) : (
-    <SC.PhotoCell imageUrl={placeholderImageUrl}>
-      <div className="Grid__avatar" />
-    </SC.PhotoCell>
-  );
-};
-
-export const CustomerPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
+export const AvatarCell: GridCell = ({ dataItem, field, onChange }) => {
   const value = dataItem[field ? field : ''] as string;
   const placeholderImageUrl = dataItem.gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl = value.includes('png') || value.includes('jpg') || value.includes('jpeg') ? value : placeholderImageUrl;
 
-  const onCustomerPhotoChange = (evt: InputChangeEvent) => {
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
-  };
+  const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent, value });
 
   return dataItem.inEdit ? (
     <td>
-      <Input value={value} onChange={onCustomerPhotoChange} />
+      <Input value={value} onChange={onAvatarChange} />
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
@@ -231,9 +202,8 @@ export const CustomerPhotoCell: GridCell = ({ dataItem, field, onChange }) => {
 export const DiscountCell: GridCell = ({ dataItem, field, onChange }) => {
   const value = dataItem[field ? field : ''];
 
-  const onDiscountChange = (evt: NumericTextBoxChangeEvent) => {
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
-  };
+  const onDiscountChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent, value });
 
   return (
     <td>
@@ -249,9 +219,8 @@ export const DiscountCell: GridCell = ({ dataItem, field, onChange }) => {
 export const DurationCell: GridCell = ({ dataItem, field, onChange }) => {
   const value = dataItem[field ? field : ''];
 
-  const onDurationChange = (evt: NumericTextBoxChangeEvent) => {
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
-  };
+  const onDurationChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent, value });
 
   return <td>{dataItem.inEdit ? <NumericTextBox value={value} step={5} min={5} onChange={onDurationChange} /> : <span>{value}</span>}</td>;
 };
@@ -260,10 +229,10 @@ export const DateCell: GridCell = ({ dataItem, field, onChange }) => {
   const intlService = useInternationalization();
   const value = new Date(dataItem[field ? field : '']);
 
-  const onDateChange = (evt: DateTimePickerChangeEvent) =>
-    onChange && onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value });
+  const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent, value });
 
-  return <td>{dataItem.inEdit ? <DateTimePicker value={value} onChange={onDateChange} /> : intlService.formatDate(value, 'H:mm / dd.MM')}</td>;
+  return <td>{dataItem.inEdit ? <DateTimePicker value={value} onChange={onDateChange} /> : intlService.formatDate(value, 'H:mm | dd.MM')}</td>;
 };
 
 export const CurrencyCell: GridCell = ({ dataItem, field }) => {

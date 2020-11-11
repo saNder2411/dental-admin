@@ -5,7 +5,7 @@ import { StatusNames } from '../Agenda/AgendaTypes';
 
 export const ordersModelFields = {
   id: 'orderID',
-  title: 'staff',
+  title: 'refID',
   description: 'description',
   start: 'start',
   end: 'end',

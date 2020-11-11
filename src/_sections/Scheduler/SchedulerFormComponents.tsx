@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { FieldWrapper } from '@progress/kendo-react-form';
 import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup } from '@progress/kendo-react-inputs';
-import { ComboBox, DropDownList } from '@progress/kendo-react-dropdowns';
+import { ComboBox, DropDownList, MultiSelect } from '@progress/kendo-react-dropdowns';
 import { DateTimePicker } from '@progress/kendo-react-dateinputs';
 import { ButtonGroup, Button } from '@progress/kendo-react-buttons';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
@@ -189,6 +189,33 @@ export const FormDropDownList = (fieldRenderProps: FieldRenderProps) => {
         ref={editorRef}
         valid={valid}
         id={id}
+        disabled={disabled}
+        {...others}
+      />
+      {showHint && <Hint id={hintId}>{hint}</Hint>}
+      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+    </FieldWrapper>
+  );
+};
+
+export const FormMultiSelect = (fieldRenderProps: FieldRenderProps) => {
+  const editorRef = React.useRef(null);
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, ...others } = fieldRenderProps;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+  const multiSelectValue = Array.isArray(value) ? value : [...value.split(`, `)];
+  
+  return (
+    <FieldWrapper style={wrapperStyle}>
+      <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <MultiSelect
+        ariaLabelledBy={labelId}
+        ariaDescribedBy={`${hintId} ${errorId}`}
+        ref={editorRef}
+        valid={valid}
+        id={id}
+        value={multiSelectValue}
         disabled={disabled}
         {...others}
       />

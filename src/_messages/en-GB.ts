@@ -28,7 +28,7 @@ export const enMessages = {
     eventId: 'Event ID',
     teamID: 'Team ID',
     photo: 'Photo',
-    fullName: 'Name',
+    fullName: 'Full Name',
     jobTitle: 'Job Title',
     showOnline: 'Show Online',
     email: 'Email',

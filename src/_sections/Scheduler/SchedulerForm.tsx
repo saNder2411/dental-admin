@@ -16,6 +16,7 @@ import {
   FormRadioGroup,
   FormButtonGroup,
   FormDropDownList,
+  FormMultiSelect,
 } from './SchedulerFormComponents';
 // Selectors
 import { selectServicesReferences } from '../../Services';
@@ -128,14 +129,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                   <Field id={'staff'} name={'staff'} label={'Support Stuff'} data={stuffs} component={FormComboBox} validator={requiredValidator} />
                   <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
-                  <Field
-                    id={'refID'}
-                    name={'refID'}
-                    label={'Services'}
-                    component={FormDropDownList}
-                    data={serviceReferences}
-                    validator={requiredValidator}
-                  />
+                  <Field id={'refID'} name={'refID'} label={'Services'} component={FormMultiSelect} data={serviceReferences} />
                   <Field
                     id={'status'}
                     name={'status'}
@@ -301,7 +295,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           id={'endRecurrenceDaily'}
                           name={'endRecurrenceDaily'}
                           label={'End'}
-                          defaultValue={'never'}
+                          defaultValue={'after'}
                           component={FormRadioGroup}
                           data={endRecurrenceDailyData}
                         />

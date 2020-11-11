@@ -52,6 +52,7 @@ export const Services: FC = (): JSX.Element | null => {
               title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}
               columnMenu={ColumnMenu}
               filter={'numeric'}
+              editable={false}
               width={120}
             />
             <GridColumn

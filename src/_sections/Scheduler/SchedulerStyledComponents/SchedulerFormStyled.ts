@@ -50,6 +50,7 @@ export const SchedulerForm = styled.section`
   }
 
   & .k-combobox .k-dropdown-wrap,
+  && .k-multiselect-wrap,
   .k-picker-wrap.k-state-default {
     width: calc(80% - 1px);
   }

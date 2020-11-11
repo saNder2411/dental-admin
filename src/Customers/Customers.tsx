@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
-import { DateCell, CustomerPhotoCell, ActionsControlCell, GenderCell } from '../_sections';
+import { DateCell, AvatarCell, ActionsControlCell, GenderCell } from '../_sections';
 // Mock
 import { CustomersGridData } from './CustomersMockData';
 // Selectors
@@ -94,7 +94,7 @@ export const Customers: FC = (): JSX.Element => {
               cell={DateCell}
               filter={'date'}
             />
-            <GridColumn field={'photo'} title={localizationService.toLanguageString('custom.photo', 'Photo')} cell={CustomerPhotoCell} width={120} />
+            <GridColumn field={'photo'} title={localizationService.toLanguageString('custom.photo', 'Photo')} cell={AvatarCell} width={120} />
             <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />
           </Grid>
         </div>

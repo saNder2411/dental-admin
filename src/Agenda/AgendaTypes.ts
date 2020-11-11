@@ -23,6 +23,7 @@ export interface AgendaDataItem {
   totalPrice: number;
   lastName: string;
   firstName: string;
+  fullName: string;
   phone: string;
   lastUpdate: Date;
   eventId: number;
