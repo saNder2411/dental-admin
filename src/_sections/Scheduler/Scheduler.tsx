@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scheduler as KendoScheduler, DayView, WeekView, AgendaView, MonthView } from '@progress/kendo-react-scheduler';
+import { Scheduler as KendoScheduler, DayView, WeekView, MonthView } from '@progress/kendo-react-scheduler';
 //Components
 import { SchedulerItem, SchedulerItemEdit, SchedulerSlotEdit, SchedulerAgendaTask } from '.';
 
@@ -32,7 +32,7 @@ export const Scheduler = ({ data, modelFields, group, resources, onDataChange }:
       <DayView workDayStart={'08:00'} workDayEnd={'20:00'} slotDuration={60} slotDivisions={4} />
       <WeekView slotDuration={60} slotDivisions={4} />
       <MonthView />
-      <AgendaView />
+      {/* <AgendaView /> */}
     </KendoScheduler>
   );
 };

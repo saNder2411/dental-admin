@@ -8,7 +8,7 @@ import {
   CurrencyCell,
   DiscountCell,
   TotalPriceCell,
-  ServicesIcon,
+  ServicesIconCell,
   ReferenceCell,
   ActionsControlCell,
   DurationCell,
@@ -46,7 +46,7 @@ export const Services: FC = (): JSX.Element | null => {
             addItemTitle={titleForAddNewItemSection}
             onItemChange={onGridItemChange}
             onAddNewItem={onAddNewGridItem}>
-            <GridColumn width={100} cell={ServicesIcon} />
+            <GridColumn width={100} cell={ServicesIconCell} field={`offerIconName`} title={` `} />
             <GridColumn
               field={'offerID'}
               title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}

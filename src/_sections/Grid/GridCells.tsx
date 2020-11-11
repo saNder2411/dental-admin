@@ -199,6 +199,29 @@ export const AvatarCell: GridCell = ({ dataItem, field, onChange }) => {
   );
 };
 
+export const ServicesIconCell: GridCell = ({ dataItem, field, onChange }) => {
+  const value = dataItem[field ? field : ''];
+  const isImageUrl = value && (value.includes('png') || value.includes('jpg') || value.includes('jpeg'));
+  console.log(value);
+
+  const onServicesIconChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
+    onChange && onChange({ dataItem, field, syntheticEvent, value });
+
+  return dataItem.inEdit ? (
+    <td>
+      <Input value={value} onChange={onServicesIconChange} />
+    </td>
+  ) : isImageUrl ? (
+    <SC.ServicesImageCell imageUrl={value}>
+      <div className="Grid__serviceImage" />
+    </SC.ServicesImageCell>
+  ) : (
+    <SC.ServicesIconCell>
+      <FontAwesomeIcon className="grid__icon" icon={IconBook[StatusNames.Tooth].icon} color={IconBook[StatusNames.Tooth].statusColor} />
+    </SC.ServicesIconCell>
+  );
+};
+
 export const DiscountCell: GridCell = ({ dataItem, field, onChange }) => {
   const value = dataItem[field ? field : ''];
 
@@ -253,22 +276,13 @@ export const TotalPriceCell: GridCell = ({ dataItem }) => {
   );
 };
 
-export const StatusIcon: GridCell = ({ dataItem }) => {
-  const iconName = dataItem.status as StatusNames;
+export const StatusIcon: GridCell = ({ dataItem, field }) => {
+  const iconName = dataItem[field ? field : ''] as StatusNames;
 
   return (
     <SC.StatusIcon>
       <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
     </SC.StatusIcon>
-  );
-};
-
-export const ServicesIcon: GridCell = ({ dataItem }) => {
-  const iconName = dataItem.offerIconName ? dataItem.offerIconName : StatusNames.Tooth;
-  return (
-    <SC.ServicesIcon>
-      <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName as StatusNames].icon} color={IconBook[iconName as StatusNames].statusColor} />
-    </SC.ServicesIcon>
   );
 };
 

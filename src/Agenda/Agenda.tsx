@@ -50,7 +50,7 @@ export const Agenda: FC = (): JSX.Element => {
             addItemTitle={titleForAddNewItemSection}
             onItemChange={onGridItemChange}
             onAddNewItem={onAddNewGridItem}>
-            <GridColumn width={100} cell={StatusIcon} />
+            <GridColumn field={'status'} title={` `} width={100} cell={StatusIcon} />
             <GridColumn
               field={'status'}
               title={localizationService.toLanguageString('custom.status', 'Status')}

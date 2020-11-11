@@ -21,10 +21,23 @@ export const StatusIcon = styled.td`
   }
 `;
 
-export const ServicesIcon = styled(StatusIcon)`
+export const ServicesIconCell = styled(StatusIcon)`
   & .grid__icon {
     width: 40px;
     height: 40px;
+  }
+`;
+
+export const ServicesImageCell = styled.td<{ imageUrl: string }>`
+
+  & .Grid__serviceImage {
+    margin: auto;
+    width: 40px;
+    height: 40px;
+    background-image: url(${({ imageUrl }) => imageUrl});
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
   }
 `;
 
