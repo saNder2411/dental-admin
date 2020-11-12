@@ -1,4 +1,5 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { Grid as KendoGrid, GridColumn, GridColumnMenuSort, GridColumnMenuFilter, GridToolbar } from '@progress/kendo-react-grid';
 import { Button } from '@progress/kendo-react-buttons';
 import { GridPDFExport } from '@progress/kendo-react-pdf';
@@ -8,6 +9,8 @@ import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Styled Components
 import * as SC from './GridStyledComponents/GridStyled';
+// Selectors
+import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridActions } from './GridSelectors';
 
 export { GridColumn };
 
@@ -20,9 +23,17 @@ export const ColumnMenu = (props: any) => {
   );
 };
 
-export const Grid = ({ data, onDataChange, children, onAddNewItem, addItemTitle, ...others }: any) => {
+export const Grid = ({ data, onDataChange, children, ...others }: any) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
+
+  const editField = useSelector(selectGridEditField);
+  const addItemTitle = useSelector(selectGridTitleForAddNewItemSection);
+  const dispatch = useDispatch();
+  const { onItemChange, onAddNewItem } = useSelector(selectGridActions, shallowEqual);
+
+  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
+
 
   const [isPdfExporting, setIsPdfExporting] = useState(false);
   const [take, setTake] = useState(10);
@@ -152,6 +163,8 @@ export const Grid = ({ data, onDataChange, children, onAddNewItem, addItemTitle,
         pageable
         sortable
         data={processedData}
+        editField={editField}
+        onItemChange={onGridItemChange}
         onDataStateChange={onDataStateChange}
         onSelectionChange={onSelectionChange}
         onHeaderSelectionChange={onHeaderSelectionChange}>
@@ -163,7 +176,7 @@ export const Grid = ({ data, onDataChange, children, onAddNewItem, addItemTitle,
               placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
             />
             <span className="Grid__addNewItemTitle">{addItemTitle}</span>
-            <button title="Add new" className="k-button" onClick={onAddNewItem}>
+            <button title="Add new" className="k-button" onClick={() => onAddNewItem(dispatch)}>
               <span className="k-icon k-i-plus-circle" />
             </button>
           </span>

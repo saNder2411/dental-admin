@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import {
@@ -20,13 +20,17 @@ import {
 // Mock
 import { AgendaGridData } from './AgendaMockData';
 // Selectors
-import { selectGridState } from '../_sections/Grid';
+import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
 // Types
 import { GridDataName } from '../_sections/Grid';
+import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
 
 export const Agenda: FC = (): JSX.Element => {
+  const data = useSelector(selectGridData);
+  const dataName = useSelector(selectGridDataName);
   const dispatch = useDispatch();
-  const { data, editField, setData, onItemChange, onAddNewItem, titleForAddNewItemSection, dataName } = useSelector(selectGridState);
+  const { setData } = useSelector(selectGridActions, shallowEqual);
+
   const localizationService = useLocalization();
 
   useEffect(() => {
@@ -37,25 +41,17 @@ export const Agenda: FC = (): JSX.Element => {
 
   const hasAgendaData = dataName === GridDataName.Agenda;
 
-  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
-  const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
-
   return (
     <div id="Dashboard" className="home-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid
-            data={hasAgendaData ? data : []}
-            editField={editField}
-            addItemTitle={titleForAddNewItemSection}
-            onItemChange={onGridItemChange}
-            onAddNewItem={onAddNewGridItem}>
-            <GridColumn field={'status'} title={` `} width={100} cell={StatusIcon} />
+          <Grid data={hasAgendaData ? data : []}>
+            <GridColumn field={'status'} title={` `} width={100} cell={StatusIcon as CustomGridCell} />
             <GridColumn
               field={'status'}
               title={localizationService.toLanguageString('custom.status', 'Status')}
               columnMenu={ColumnMenu}
-              cell={StatusCell}
+              cell={StatusCell as CustomGridCell}
               width={130}
               filter={'text'}
             />
@@ -63,7 +59,7 @@ export const Agenda: FC = (): JSX.Element => {
               field={'references'}
               title={localizationService.toLanguageString('custom.references', 'References')}
               columnMenu={ColumnMenu}
-              cell={ReferenceCell}
+              cell={ReferenceCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn
@@ -72,7 +68,7 @@ export const Agenda: FC = (): JSX.Element => {
               columnMenu={ColumnMenu}
               filter={'text'}
               width={120}
-              cell={DateCell}
+              cell={DateCell as CustomGridCell}
             />
             <GridColumn
               field={'end'}
@@ -80,21 +76,21 @@ export const Agenda: FC = (): JSX.Element => {
               columnMenu={ColumnMenu}
               filter={'text'}
               width={120}
-              cell={DateCell}
+              cell={DateCell as CustomGridCell}
             />
             <GridColumn
               field={'svcStaff'}
               title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
               columnMenu={ColumnMenu}
-              width={110}
+              width={140}
               filter={'text'}
-              cell={SvcStaffCell}
+              cell={SvcStaffCell as CustomGridCell}
             />
             <GridColumn
               field={'services'}
               title={localizationService.toLanguageString('custom.services', 'Services')}
               columnMenu={ColumnMenu}
-              cell={ServicesCell}
+              cell={ServicesCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn
@@ -102,7 +98,7 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.total', 'Total')}
               columnMenu={ColumnMenu}
               width={90}
-              cell={CurrencyCell}
+              cell={CurrencyCell as CustomGridCell}
               filter={'numeric'}
             />
             <GridColumn
@@ -110,18 +106,22 @@ export const Agenda: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
               columnMenu={ColumnMenu}
               width={140}
-              cell={FullNameCell}
+              cell={FullNameCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn
               field={'customerGender'}
               title={localizationService.toLanguageString('custom.gender', 'Gender')}
               columnMenu={ColumnMenu}
-              cell={GenderCell}
+              cell={GenderCell as CustomGridCell}
               filter={'text'}
               width={120}
             />
-            <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} width={140} cell={ActionsControlCell} />
+            <GridColumn
+              title={localizationService.toLanguageString('custom.actions', 'Actions')}
+              width={140}
+              cell={ActionsControlCell as CustomGridCell}
+            />
           </Grid>
         </div>
       </div>

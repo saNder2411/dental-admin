@@ -8,7 +8,7 @@ import SaraKhan from '../_assets/stylists/Sara-Khan-Portrait-85x85.png';
 
 export const TeamStaffGridData = [
   {
-    id: 1,
+    ID: 1,
     teamID: 1,
     photo: Amelia,
     firstName: 'Amelia',
@@ -21,7 +21,7 @@ export const TeamStaffGridData = [
     gender: 'Female' as const,
   },
   {
-    id: 2,
+    ID: 2,
     teamID: 4,
     photo: GraceRobinson,
     firstName: 'Grace',
@@ -34,7 +34,7 @@ export const TeamStaffGridData = [
     gender: 'Female' as const,
   },
   {
-    id: 3,
+    ID: 3,
     teamID: 3,
     photo: ChristinaRomanov,
     firstName: 'Christina',
@@ -47,7 +47,7 @@ export const TeamStaffGridData = [
     gender: 'Female' as const,
   },
   {
-    id: 4,
+    ID: 4,
     teamID: 2,
     photo: DavidWenger,
     firstName: 'David',
@@ -60,7 +60,7 @@ export const TeamStaffGridData = [
     gender: 'Male' as const,
   },
   {
-    id: 5,
+    ID: 5,
     teamID: 5,
     photo: AlexLocatelli,
     firstName: 'Alex',
@@ -73,7 +73,7 @@ export const TeamStaffGridData = [
     gender: 'Male' as const,
   },
   {
-    id: 6,
+    ID: 6,
     teamID: 6,
     photo: SaraKhan,
     firstName: 'Sara',

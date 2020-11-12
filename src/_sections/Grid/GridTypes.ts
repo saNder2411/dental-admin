@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
-import { AgendaDataItem } from '../../Agenda';
-import { TeamStaffDataItem } from '../../TeamStaff';
-import { CustomersDataItem } from '../../Customers';
-import { ServicesDataItem } from '../../Services';
+import { AgendaDataItem, AgendaDataItemKeys, AgendaDataItemValues } from '../../Agenda';
+import { TeamStaffDataItem, TeamStaffDataItemKeys, TeamStaffDataItemValues } from '../../TeamStaff';
+import { CustomersDataItem, CustomersDataItemKeys, CustomersDataItemValues } from '../../Customers';
+import { ServicesDataItem, ServicesDataItemKeys, ServicesDataItemValues } from '../../Services';
 // Actions
 import * as actions from './GridAC';
 
@@ -25,6 +25,22 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
 export type GridDataItem = InferValueTypes<{ type1: AgendaDataItem; type2: TeamStaffDataItem; type3: CustomersDataItem; type4: ServicesDataItem }>;
+
+export type GridDataItemKeys = InferValueTypes<{
+  type1: AgendaDataItemKeys;
+  type2: TeamStaffDataItemKeys;
+  type3: CustomersDataItemKeys;
+  type4: ServicesDataItemKeys;
+}>;
+
+export type GridDataItemValues = InferValueTypes<{
+  type1: AgendaDataItemValues;
+  type2: TeamStaffDataItemValues;
+  type3: CustomersDataItemValues;
+  type4: ServicesDataItemValues;
+}>;
+
+export type GridDataItemDynamicIndex = {[key in GridDataItemKeys]: GridDataItemValues}
 
 export enum GridDataName {
   Default = 'Empty',

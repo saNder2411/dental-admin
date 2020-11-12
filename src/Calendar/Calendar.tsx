@@ -42,10 +42,10 @@ export const Calendar = () => {
         <div className="card-control-wrapper">
           {employees.map((employee) => (
             <CalendarTopControlItem
-              key={employee.id}
-              isFiltered={!filterEmployee[employee.id]}
+              key={employee.ID}
+              isFiltered={!filterEmployee[employee.ID]}
               cardColor={teams.find(({ teamID }) => teamID === employee.teamID)?.teamColor ?? ''}
-              onEmployeeClick={() => onEmployeeClick(employee.id)}
+              onEmployeeClick={() => onEmployeeClick(employee.ID)}
               fullName={employee.fullName}
             />
           ))}

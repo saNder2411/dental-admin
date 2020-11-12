@@ -1,5 +1,5 @@
 export interface TeamStaffDataItem {
-  id: number;
+  ID: number;
   teamID: number;
   photo: string;
   firstName: string;
@@ -23,6 +23,10 @@ export interface TeamStaffTeamData {
   jobTitle: string;
   managerID: number;
 }
+
+export type TeamStaffDataItemKeys = keyof TeamStaffDataItem;
+
+export type TeamStaffDataItemValues = TeamStaffDataItem[TeamStaffDataItemKeys];
 
 export interface TeamStaffState {
   data: TeamStaffDataItem[];

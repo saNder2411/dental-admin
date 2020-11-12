@@ -2,9 +2,6 @@ import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../_init';
 
-export const selectServicesState = ({ ServicesState }: GlobalState) => ServicesState;
+export const selectServicesData = ({ ServicesState }: GlobalState) => ServicesState.data;
 
-export const selectServicesReferences = createSelector(
-  ({ ServicesState: { data } }: GlobalState) => data,
-  (data) => data.map(({ references }) => references)
-);
+export const selectServicesReferences = () => createSelector(selectServicesData, (data) => data.map(({ OfferingsName_Edit }) => OfferingsName_Edit));

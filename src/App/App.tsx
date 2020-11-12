@@ -43,6 +43,7 @@ import { TeamStaff } from '../TeamStaff';
 import { Customers } from '../Customers';
 import { Services } from '../Services';
 // Styles
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './AppStyles.scss';
 // Selectors
 import { selectLocaleId } from './AppSelectors';

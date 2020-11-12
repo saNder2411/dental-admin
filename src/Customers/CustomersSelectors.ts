@@ -1,3 +1,4 @@
 // Types
 import { GlobalState } from '../_init';
-export const selectCustomersState = ({ CustomersState }: GlobalState) => CustomersState;
+
+export const selectCustomersData = ({ CustomersState }: GlobalState) => CustomersState.data;

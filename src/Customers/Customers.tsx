@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -7,13 +7,16 @@ import { DateCell, AvatarCell, ActionsControlCell, GenderCell } from '../_sectio
 // Mock
 import { CustomersGridData } from './CustomersMockData';
 // Selectors
-import { selectGridState } from '../_sections/Grid';
+import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
 // Types
 import { GridDataName } from '../_sections/Grid';
+import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
 
 export const Customers: FC = (): JSX.Element => {
+  const data = useSelector(selectGridData);
+  const dataName = useSelector(selectGridDataName);
   const dispatch = useDispatch();
-  const { data, editField, setData, onItemChange, onAddNewItem, titleForAddNewItemSection, dataName } = useSelector(selectGridState);
+  const { setData } = useSelector(selectGridActions, shallowEqual);
   const localizationService = useLocalization();
 
   useEffect(() => {
@@ -24,24 +27,16 @@ export const Customers: FC = (): JSX.Element => {
 
   const hasCustomersData = dataName === GridDataName.Customers;
 
-  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
-  const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
-
   return (
     <div id="Grid" className="stylists-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid
-            data={hasCustomersData ? data : []}
-            editField={editField}
-            addItemTitle={titleForAddNewItemSection}
-            onItemChange={onGridItemChange}
-            onAddNewItem={onAddNewGridItem}>
+          <Grid data={hasCustomersData ? data : []}>
             <GridColumn
               field={'teamID'}
               title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
               columnMenu={ColumnMenu}
-              width={130}
+              width={120}
               filter={'numeric'}
             />
             <GridColumn
@@ -60,7 +55,7 @@ export const Customers: FC = (): JSX.Element => {
               field={'gender'}
               title={localizationService.toLanguageString('custom.gender', 'Gender')}
               columnMenu={ColumnMenu}
-              cell={GenderCell}
+              cell={GenderCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn
@@ -86,16 +81,27 @@ export const Customers: FC = (): JSX.Element => {
               title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
               columnMenu={ColumnMenu}
               filter={'numeric'}
+              width={140}
             />
             <GridColumn
               field={'lastUpdate'}
               title={localizationService.toLanguageString('custom.lastUpdate', 'Last Update')}
               columnMenu={ColumnMenu}
-              cell={DateCell}
+              cell={DateCell as CustomGridCell}
               filter={'date'}
+              width={140}
             />
-            <GridColumn field={'photo'} title={localizationService.toLanguageString('custom.photo', 'Photo')} cell={AvatarCell} width={120} />
-            <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />
+            <GridColumn
+              field={'photo'}
+              title={localizationService.toLanguageString('custom.photo', 'Photo')}
+              cell={AvatarCell as CustomGridCell}
+              width={120}
+            />
+            <GridColumn
+              title={localizationService.toLanguageString('custom.actions', 'Actions')}
+              cell={ActionsControlCell as CustomGridCell}
+              width={140}
+            />
           </Grid>
         </div>
       </div>

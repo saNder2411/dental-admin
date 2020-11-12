@@ -6,7 +6,7 @@ const hour = 3.6e6;
 
 export const AgendaGridData: AgendaDataItem[] = [
   {
-    id: 1,
+    ID: 1,
     status: StatusNames.Pending,
     references: 'S.Pye-0635',
     start: now,
@@ -23,7 +23,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Male',
   },
   {
-    id: 2,
+    ID: 2,
     status: StatusNames.Booked,
     references: 'C.Wong-0499',
     start: now,
@@ -40,7 +40,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Male',
   },
   {
-    id: 3,
+    ID: 3,
     status: StatusNames.Cancelled,
     references: 'S.Pye-0500',
     start: now,
@@ -57,7 +57,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Male',
   },
   {
-    id: 4,
+    ID: 4,
     status: StatusNames.Checking,
     references: 'S.Pye-0501',
     start: now,
@@ -74,7 +74,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Male',
   },
   {
-    id: 5,
+    ID: 5,
     status: StatusNames.Closed,
     references: 'S.Pye-0502',
     start: now,
@@ -91,7 +91,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Male',
   },
   {
-    id: 6,
+    ID: 6,
     status: StatusNames.Consultation,
     references: 'C.A.Female-0640',
     start: now,
@@ -108,7 +108,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Female',
   },
   {
-    id: 7,
+    ID: 7,
     status: StatusNames.Other,
     references: 'S.Pye-0503',
     start: now,
@@ -125,7 +125,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Female',
   },
   {
-    id: 8,
+    ID: 8,
     status: StatusNames.Paid,
     references: 'S.Pye-0504',
     start: now,
@@ -142,7 +142,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Female',
   },
   {
-    id: 9,
+    ID: 9,
     status: StatusNames.Reserved,
     references: 'S.Pye-0504',
     start: now,
@@ -159,7 +159,7 @@ export const AgendaGridData: AgendaDataItem[] = [
     customerGender: 'Female',
   },
   {
-    id: 10,
+    ID: 10,
     status: StatusNames.Unavailable,
     references: 'S.Pye-0504',
     start: now,

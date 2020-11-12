@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { SchedulerFormProps } from '@progress/kendo-react-scheduler';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
@@ -67,7 +67,8 @@ const genders = [
 ];
 
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
-  const serviceReferences = useSelector(selectServicesReferences);
+  const selectMemoServicesReferences = useMemo(selectServicesReferences, [])
+  const serviceReferences = useSelector(selectMemoServicesReferences);
   // console.log(`formDataItem`, dataItem);
 
   return (

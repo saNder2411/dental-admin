@@ -37,7 +37,7 @@ export const enMessages = {
     discount: 'Discount %',
     price: 'Price',
     consultation: 'Consultation',
-    duration: 'Duration(mins)',
+    duration: 'Duration (mins)',
     category: 'Category',
     offeringId: 'Offering ID',
     teamCalendar: 'Team Calendar',

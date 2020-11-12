@@ -11,7 +11,7 @@ import { orders } from '../../Calendar/CalendarMockData';
 
 const initialState = {
   data: orders,
-  filterEmployee: TeamStaffGridData.reduce((prevVal, employee) => ({ ...prevVal, [employee.id]: true }), {}),
+  filterEmployee: TeamStaffGridData.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}),
   teams,
   employees: TeamStaffGridData,
   formItemID: null,

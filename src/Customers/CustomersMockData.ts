@@ -8,7 +8,7 @@ import { CustomersDataItem } from './CustomersTypes';
 
 export const CustomersGridData: CustomersDataItem[] = [
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '1269',
     lastName: 'Smith',
     firstName: 'Jon',
@@ -21,7 +21,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: '',
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '1270',
     lastName: 'Maldini',
     firstName: 'Paulo',
@@ -34,7 +34,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: '',
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '54',
     lastName: 'Abraham',
     firstName: 'Corinne',
@@ -47,7 +47,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: AbrahamCorinne,
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '290',
     lastName: 'Abraham',
     firstName: 'Oliver',
@@ -60,7 +60,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: AbrahamOliver,
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '77',
     lastName: 'Acciardi',
     firstName: 'Ilona',
@@ -73,7 +73,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: Ilona,
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '200',
     lastName: 'Acciardi',
     firstName: 'Tom',
@@ -86,7 +86,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: Tom,
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '1142',
     lastName: 'Adame',
     firstName: 'TJ',
@@ -99,7 +99,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: '',
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '1268',
     lastName: 'Adame',
     firstName: 'Elizabete',
@@ -112,7 +112,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: Elizabete,
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '201',
     lastName: 'Adamson',
     firstName: 'Tatiana',
@@ -125,7 +125,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: '',
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '476',
     lastName: 'Adamson',
     firstName: 'Cindia',
@@ -138,7 +138,7 @@ export const CustomersGridData: CustomersDataItem[] = [
     photo: Cindia,
   },
   {
-    id: Math.random() * Math.random(),
+    ID: Math.random() * Math.random(),
     teamID: '477',
     lastName: 'Pye',
     firstName: 'Stephen',

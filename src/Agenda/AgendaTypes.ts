@@ -13,7 +13,7 @@ export enum StatusNames {
 }
 
 export interface AgendaDataItem {
-  id: number;
+  ID: number;
   status: StatusNames;
   references: string;
   start: number;
@@ -30,6 +30,38 @@ export interface AgendaDataItem {
   inEdit?: boolean;
   customerGender: 'Female' | 'Male';
   isNew?: boolean;
+}
+
+export type AgendaDataItemKeys = keyof AgendaDataItem;
+
+export type AgendaDataItemValues = AgendaDataItem[AgendaDataItemKeys];
+
+export interface AgDataItem {
+  __metadata: {
+    id: string;
+    uri: string;
+    etag: string;
+    type: string;
+  };
+  Id: number;
+  Title: string;
+  FirstName: string;
+  FullName: string;
+  TeamProfilePhoto: {
+    __metadata: { type: string };
+    Description: string;
+    Url: string;
+  };
+  ShowOnline: boolean;
+  Email: string;
+  CellPhone: string;
+  JobTitle: string;
+  Department: null | string;
+  ProfilesStatus: string;
+  WorkingWeekDays: null | string;
+  CalendarColour: string;
+  CalendarColHex: string;
+  ID: number;
 }
 
 export interface AgendaState {

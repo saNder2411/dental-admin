@@ -1,5 +1,5 @@
 export interface CustomersDataItem {
-  id: number;
+  ID: number;
   teamID: string;
   lastName: string;
   firstName: string;
@@ -13,6 +13,10 @@ export interface CustomersDataItem {
   inEdit?: boolean;
   isNew?: boolean;
 }
+
+export type CustomersDataItemKeys = keyof CustomersDataItem;
+
+export type CustomersDataItemValues = CustomersDataItem[CustomersDataItemKeys];
 
 export interface CustomersState {
   data: CustomersDataItem[];

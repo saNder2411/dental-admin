@@ -1,5 +1,5 @@
-import React, { FC, useEffect, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -13,42 +13,43 @@ import {
   ActionsControlCell,
   DurationCell,
 } from '../_sections';
-// Mock
-import { ServicesGridData } from './ServicesMockData';
 // Selectors
-import { selectGridState } from '../_sections/Grid';
+import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
 // Types
 import { GridDataName } from '../_sections/Grid';
+import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+import { OfferIcons } from './ServicesTypes';
 
 export const Services: FC = (): JSX.Element | null => {
+  const data = useSelector(selectGridData);
+  const dataName = useSelector(selectGridDataName);
   const dispatch = useDispatch();
-  const { data, editField, setData, onItemChange, onAddNewItem, titleForAddNewItemSection, dataName } = useSelector(selectGridState);
+  const { setData } = useSelector(selectGridActions, shallowEqual);
   const localizationService = useLocalization();
 
   useEffect(() => {
     if (dataName === GridDataName.Services) return;
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:4200/services`);
+      const result = await response.json();
+      const data = result.results.map((item: any) => ({ ...item, OfferIconName: OfferIcons.Tooth }));
+      setData(dispatch, data);
+      console.log(data);
+    };
 
-    setData(dispatch, ServicesGridData.slice());
+    fetchData();
   }, [dataName, setData, dispatch]);
 
   const hasServicesData = dataName === GridDataName.Services;
-
-  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
-  const onAddNewGridItem = useCallback(() => onAddNewItem(dispatch), [dispatch, onAddNewItem]);
 
   return (
     <div id="Grid" className="stylists-page main-content">
       <div className="card-container grid">
         <div className="card-component">
-          <Grid
-            data={hasServicesData ? data : []}
-            editField={editField}
-            addItemTitle={titleForAddNewItemSection}
-            onItemChange={onGridItemChange}
-            onAddNewItem={onAddNewGridItem}>
-            <GridColumn width={100} cell={ServicesIconCell} field={`offerIconName`} title={` `} />
+          <Grid data={hasServicesData ? data : []}>
+            <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`OfferIconName`} title={` `} />
             <GridColumn
-              field={'offerID'}
+              field={'ID'}
               title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}
               columnMenu={ColumnMenu}
               filter={'numeric'}
@@ -56,63 +57,71 @@ export const Services: FC = (): JSX.Element | null => {
               width={120}
             />
             <GridColumn
-              field={'references'}
+              field={'OfferingsName_Edit'}
               title={localizationService.toLanguageString('custom.references', 'References')}
               columnMenu={ColumnMenu}
-              cell={ReferenceCell}
+              cell={ReferenceCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn
-              field={'category'}
+              field={'OfferingCatType'}
               title={localizationService.toLanguageString('custom.category', 'Category')}
               columnMenu={ColumnMenu}
               filter={'text'}
             />
             <GridColumn
-              field={'duration'}
+              field={'MinutesDuration'}
               title={localizationService.toLanguageString('custom.duration', 'Duration (mins)')}
               columnMenu={ColumnMenu}
-              cell={DurationCell}
+              cell={DurationCell as CustomGridCell}
               filter={'numeric'}
+              width={150}
             />
             <GridColumn
-              field={'isShowOnline'}
+              field={'ShowOnline'}
               title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
               columnMenu={ColumnMenu}
-              cell={BooleanFlagCell}
+              cell={BooleanFlagCell as CustomGridCell}
+              width={160}
               filter={'boolean'}
             />
             <GridColumn
-              field={'isConsultation'}
+              field={'ConsultReq'}
               title={localizationService.toLanguageString('custom.consultation', 'Consultation')}
               columnMenu={ColumnMenu}
-              cell={BooleanFlagCell}
+              cell={BooleanFlagCell as CustomGridCell}
+              width={160}
               filter={'boolean'}
             />
             <GridColumn
-              field={'price'}
+              field={'Amount'}
               title={localizationService.toLanguageString('custom.price', 'Price')}
               columnMenu={ColumnMenu}
               width={90}
-              cell={CurrencyCell}
+              cell={CurrencyCell as CustomGridCell}
               filter={'numeric'}
             />
             <GridColumn
-              field={'discount'}
+              field={'OfferingDiscount'}
               title={localizationService.toLanguageString('custom.discount', 'Discount %')}
               columnMenu={ColumnMenu}
-              cell={DiscountCell}
+              cell={DiscountCell as CustomGridCell}
               filter={'numeric'}
+              width={140}
             />
             <GridColumn
-              field={''}
+              field={'Amount'}
               title={localizationService.toLanguageString('custom.total', 'Total')}
               columnMenu={ColumnMenu}
               width={90}
-              cell={TotalPriceCell}
+              cell={TotalPriceCell as CustomGridCell}
               filter={'numeric'}
             />
-            <GridColumn title={localizationService.toLanguageString('custom.actions', 'Actions')} cell={ActionsControlCell} />
+            <GridColumn
+              title={localizationService.toLanguageString('custom.actions', 'Actions')}
+              cell={ActionsControlCell as CustomGridCell}
+              width={140}
+            />
           </Grid>
         </div>
       </div>
