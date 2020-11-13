@@ -32,15 +32,17 @@ const initialState = {
   dataName: GridDataName.Default,
   editField: 'inEdit' as const,
   titleForAddNewItemSection: '',
-  setData: (dispatch: Dispatch, data: GridDataItem[]) => dispatch(setDataAC(data)),
-  onItemEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(addItemToEditAC(ID)),
-  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(updateItemAfterEditAC(dataItem)),
-  onItemRemove: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(removeItemFromDataAC(ID)),
-  onCancelEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(cancelEditAC(ID)),
-  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => dispatch(changeItemAC(evt)),
-  onAddNewItem: (dispatch: Dispatch) => dispatch(addNewItemToEditAC()),
-  onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(addNewItemToDataAC(dataItem)),
-  onDiscardNewItemToData: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(discardAddNewItemToDataAC(ID)),
+  actions: {
+    setData: (dispatch: Dispatch, data: GridDataItem[]) => dispatch(setDataAC(data)),
+    onItemEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(addItemToEditAC(ID)),
+    onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(updateItemAfterEditAC(dataItem)),
+    onItemRemove: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(removeItemFromDataAC(ID)),
+    onCancelEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(cancelEditAC(ID)),
+    onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => dispatch(changeItemAC(evt)),
+    onAddNewItem: (dispatch: Dispatch) => dispatch(addNewItemToEditAC()),
+    onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(addNewItemToDataAC(dataItem)),
+    onDiscardNewItemToData: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(discardAddNewItemToDataAC(ID)),
+  },
 };
 
 export const reducer = (state: GridState = initialState, action: Actions): GridState => {

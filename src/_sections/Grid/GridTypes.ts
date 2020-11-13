@@ -40,7 +40,7 @@ export type GridDataItemValues = InferValueTypes<{
   type4: ServicesDataItemValues;
 }>;
 
-export type GridDataItemDynamicIndex = {[key in GridDataItemKeys]: GridDataItemValues}
+export type GridDataItemDynamicIndex = { [key in GridDataItemKeys]: GridDataItemValues };
 
 export enum GridDataName {
   Default = 'Empty',
@@ -56,13 +56,15 @@ export interface GridState {
   dataName: GridDataName;
   editField: 'inEdit';
   titleForAddNewItemSection: string;
-  setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
-  onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onCancelEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
-  onAddNewItem: (dispatch: Dispatch) => void;
-  onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onDiscardNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  actions: {
+    setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
+    onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+    onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+    onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+    onCancelEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+    onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
+    onAddNewItem: (dispatch: Dispatch) => void;
+    onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+    onDiscardNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  };
 }

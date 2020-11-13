@@ -8,7 +8,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mock": "json-server -w db.json -p 4200 -d 1000",
-    "serve": "concurrently \"npm run start\" \"npm run mock\""
+    "server": "concurrently \"npm run start\" \"npm run mock\""
   },
   "eslintConfig": {
     "extends": "react-app"

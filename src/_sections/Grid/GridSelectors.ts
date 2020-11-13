@@ -9,26 +9,4 @@ export const selectGridEditField = ({ GridState }: GlobalState) => GridState.edi
 
 export const selectGridTitleForAddNewItemSection = ({ GridState }: GlobalState) => GridState.titleForAddNewItemSection;
 
-export const selectGridActions = ({
-  GridState: {
-    setData,
-    onItemEdit,
-    onItemUpdatedAfterEdit,
-    onItemRemove,
-    onCancelEdit,
-    onAddNewItemToData,
-    onDiscardNewItemToData,
-    onAddNewItem,
-    onItemChange,
-  },
-}: GlobalState) => ({
-  setData,
-  onItemEdit,
-  onItemUpdatedAfterEdit,
-  onItemRemove,
-  onCancelEdit,
-  onItemChange,
-  onAddNewItem,
-  onAddNewItemToData,
-  onDiscardNewItemToData,
-});
+export const selectGridActions = ({ GridState }: GlobalState) => GridState.actions;

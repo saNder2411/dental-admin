@@ -15,30 +15,30 @@ import {
 } from '../_sections';
 // Selectors
 import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
+import { selectServicesActions, selectServicesData } from './ServicesSelectors';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
-import { OfferIcons } from './ServicesTypes';
 
 export const Services: FC = (): JSX.Element | null => {
   const data = useSelector(selectGridData);
+  const servicesData = useSelector(selectServicesData);
   const dataName = useSelector(selectGridDataName);
   const dispatch = useDispatch();
   const { setData } = useSelector(selectGridActions, shallowEqual);
+  const { fetchServicesData } = useSelector(selectServicesActions);
   const localizationService = useLocalization();
 
   useEffect(() => {
-    if (dataName === GridDataName.Services) return;
-    const fetchData = async () => {
-      const response = await fetch(`http://localhost:4200/services`);
-      const result = await response.json();
-      const data = result.results.map((item: any) => ({ ...item, OfferIconName: OfferIcons.Tooth }));
-      setData(dispatch, data);
-      console.log(data);
-    };
+    if (servicesData.length > 0) return;
+    fetchServicesData(dispatch);
+  }, [dispatch, fetchServicesData, servicesData.length]);
 
-    fetchData();
-  }, [dataName, setData, dispatch]);
+  useEffect(() => {
+    if (dataName !== GridDataName.Services && servicesData.length > 0) {
+      setData(dispatch, servicesData);
+    }
+  }, [dataName, setData, dispatch, servicesData]);
 
   const hasServicesData = dataName === GridDataName.Services;
 

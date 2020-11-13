@@ -1,1160 +1,1382 @@
 {
-  "services": {
+  "services": [
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
+        "etag": "\"27\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 1,
+      "Title": "01-Ladies Wash+Cut+Dry S1_001",
+      "OfferingsName_Edit": "Ladies Wash+Cut+Dry S1",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 60,
+      "Amount": 55,
+      "AmountTotal": "46.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "6.31125000000000",
+      "OfferingCatType": "(01) Ladies Hair Cut",
+      "OfferingDiscount": 0.15,
+      "ID": 1,
+      "id": 1
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(2)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(2)",
+        "etag": "\"21\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 2,
+      "Title": "01-Ladies Wash+Cut+Dry S2_002",
+      "OfferingsName_Edit": "Ladies Wash+Cut+Dry S2",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 50,
+      "Amount": 55,
+      "AmountTotal": "49.5000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "6.68250000000000",
+      "OfferingCatType": "(01) Ladies Hair Cut",
+      "OfferingDiscount": 0.1,
+      "ID": 2,
+      "id": 2
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(3)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(3)",
+        "etag": "\"21\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 3,
+      "Title": "01-Ladies Wash+Cut+Dry S3_003",
+      "OfferingsName_Edit": "Ladies Wash+Cut+Dry S3",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 45,
+      "Amount": 65,
+      "AmountTotal": "55.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "7.45875000000000",
+      "OfferingCatType": "(01) Ladies Hair Cut",
+      "OfferingDiscount": 0.15,
+      "ID": 3,
+      "id": 3
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(4)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(4)",
+        "etag": "\"20\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 4,
+      "Title": "02-Mens Wash+Cut+Dry S1_004",
+      "OfferingsName_Edit": "Mens Wash+Cut+Dry S1",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 45,
+      "Amount": 35,
+      "AmountTotal": "29.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "4.01625000000000",
+      "OfferingCatType": "(02) Mens Hair Cut",
+      "OfferingDiscount": 0.15,
+      "ID": 4,
+      "id": 4
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(5)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(5)",
+        "etag": "\"23\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 5,
+      "Title": "02-Mens Wash+Cut+Dry S2_005",
+      "OfferingsName_Edit": "Mens Wash+Cut+Dry S2",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 40,
+      "Amount": 40,
+      "AmountTotal": "34.0000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "4.59000000000000",
+      "OfferingCatType": "(02) Mens Hair Cut",
+      "OfferingDiscount": 0.15,
+      "ID": 5,
+      "id": 5
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(6)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(6)",
+        "etag": "\"19\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 6,
+      "Title": "02-Mens Wash+Cut+Dry S3_006",
+      "OfferingsName_Edit": "Mens Wash+Cut+Dry S3",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 35,
+      "Amount": 45,
+      "AmountTotal": "38.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "5.16375000000000",
+      "OfferingCatType": "(02) Mens Hair Cut",
+      "OfferingDiscount": 0.15,
+      "ID": 6,
+      "id": 6
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(7)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(7)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 7,
+      "Title": "02-Mens Wash+Cut+Dry S4_007",
+      "OfferingsName_Edit": "Mens Wash+Cut+Dry S4",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 35,
+      "Amount": 55,
+      "AmountTotal": "46.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "6.31125000000000",
+      "OfferingCatType": "(02) Mens Hair Cut",
+      "OfferingDiscount": 0.15,
+      "ID": 7,
+      "id": 7
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(8)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(8)",
+        "etag": "\"17\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 8,
+      "Title": "03-Girls Wash+Cut+Dry_008",
+      "OfferingsName_Edit": "Girls Wash+Cut+Dry",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 40,
+      "Amount": 35,
+      "AmountTotal": "28.0000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "3.78000000000000",
+      "OfferingCatType": "(03) Kids Hair Cut",
+      "OfferingDiscount": 0.2,
+      "ID": 8,
+      "id": 8
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(9)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(9)",
+        "etag": "\"21\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 9,
+      "Title": "03-Boys Wash+Cut+Dry_009",
+      "OfferingsName_Edit": "Boys Wash+Cut+Dry",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 25,
+      "Amount": 25,
+      "AmountTotal": "20.0000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "2.70000000000000",
+      "OfferingCatType": "(03) Kids Hair Cut",
+      "OfferingDiscount": 0.2,
+      "ID": 9,
+      "id": 9
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(10)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(10)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 10,
+      "Title": "04-Girl Student Wash+Cut_010",
+      "OfferingsName_Edit": "Girl Student Wash+Cut",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 40,
+      "Amount": 35,
+      "AmountTotal": "28.0000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "3.78000000000000",
+      "OfferingCatType": "(04) Students Hair Cut",
+      "OfferingDiscount": 0.2,
+      "ID": 10,
+      "id": 10
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(11)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(11)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 11,
+      "Title": "04-Boy Student Wash+Cut_011",
+      "OfferingsName_Edit": "Boy Student Wash+Cut",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 25,
+      "Amount": 30,
+      "AmountTotal": "24.0000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "3.24000000000000",
+      "OfferingCatType": "(04) Students Hair Cut",
+      "OfferingDiscount": 0.2,
+      "ID": 11,
+      "id": 11
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(12)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(12)",
+        "etag": "\"17\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 12,
+      "Title": "05-Highlights 1/1 S3_012",
+      "OfferingsName_Edit": "Highlights 1/1 S3",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 90,
+      "Amount": 95,
+      "AmountTotal": "71.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "9.61875000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 12,
+      "id": 12
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(13)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(13)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 13,
+      "Title": "05-Highlights 1/1 S4_013",
+      "OfferingsName_Edit": "Highlights 1/1 S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 90,
+      "Amount": 105,
+      "AmountTotal": "78.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "10.6312500000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 13,
+      "id": 13
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(14)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(14)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 14,
+      "Title": "05-Highlights 1/2 S3_014",
+      "OfferingsName_Edit": "Highlights 1/2 S3",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 75,
+      "Amount": 75,
+      "AmountTotal": "56.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "7.59375000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 14,
+      "id": 14
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(15)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(15)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 15,
+      "Title": "05-Highlights 1/2 S4_015",
+      "OfferingsName_Edit": "Highlights 1/2 S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 75,
+      "Amount": 85,
+      "AmountTotal": "63.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "8.60625000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 15,
+      "id": 15
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(16)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(16)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 16,
+      "Title": "05-Highlights T-Section S3_016",
+      "OfferingsName_Edit": "Highlights T-Section S3",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 45,
+      "Amount": 55,
+      "AmountTotal": "41.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "5.56875000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 16,
+      "id": 16
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(17)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(17)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 17,
+      "Title": "05-Highlights T-Section S4_017",
+      "OfferingsName_Edit": "Highlights T-Section S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 45,
+      "Amount": 65,
+      "AmountTotal": "48.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "6.58125000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 17,
+      "id": 17
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(18)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(18)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 18,
+      "Title": "05-Tint+Regrowth S3_018",
+      "OfferingsName_Edit": "Tint+Regrowth S3",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 55,
+      "Amount": 65,
+      "AmountTotal": "48.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "6.58125000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 18,
+      "id": 18
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(19)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(19)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 19,
+      "Title": "05-Tint+Regrowth S4_019",
+      "OfferingsName_Edit": "Tint+Regrowth S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 55,
+      "Amount": 70,
+      "AmountTotal": "52.5000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "7.08750000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 19,
+      "id": 19
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(20)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(20)",
+        "etag": "\"20\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 20,
+      "Title": "05-Mens Colour Tint 1/1 S3_020",
+      "OfferingsName_Edit": "Mens Colour Tint 1/1 S3",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 40,
+      "Amount": 50,
+      "AmountTotal": "37.5000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "5.06250000000000",
+      "OfferingCatType": "(05) Colouring",
+      "OfferingDiscount": 0.25,
+      "ID": 20,
+      "id": 20
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(21)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(21)",
+        "etag": "\"13\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 21,
+      "Title": "06-Ladies Blow Dry S1_021",
+      "OfferingsName_Edit": "Ladies Blow Dry S1",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 15,
+      "Amount": 15,
+      "AmountTotal": "11.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "1.51875000000000",
+      "OfferingCatType": "(06) Dry Styling",
+      "OfferingDiscount": 0.25,
+      "ID": 21,
+      "id": 21
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(22)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(22)",
+        "etag": "\"13\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 22,
+      "Title": "06-Ladies Long Blow Dry S1_022",
+      "OfferingsName_Edit": "Ladies Long Blow Dry S1",
+      "ShowOnline": true,
+      "ConsultReq": false,
+      "MinutesDuration": 20,
+      "Amount": 20,
+      "AmountTotal": "15.0000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "2.02500000000000",
+      "OfferingCatType": "(06) Dry Styling",
+      "OfferingDiscount": 0.25,
+      "ID": 22,
+      "id": 22
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(23)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(23)",
+        "etag": "\"16\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 23,
+      "Title": "07-Moisture Treatment S3_023",
+      "OfferingsName_Edit": "Moisture Treatment S3",
+      "ShowOnline": false,
+      "ConsultReq": true,
+      "MinutesDuration": 40,
+      "Amount": 27,
+      "AmountTotal": "20.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "2.73375000000000",
+      "OfferingCatType": "(07) Treatments",
+      "OfferingDiscount": 0.25,
+      "ID": 23,
+      "id": 23
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(24)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(24)",
+        "etag": "\"18\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 24,
+      "Title": "07-Protein Treatment S3_024",
+      "OfferingsName_Edit": "Protein Treatment S3",
+      "ShowOnline": false,
+      "ConsultReq": true,
+      "MinutesDuration": 60,
+      "Amount": 42,
+      "AmountTotal": "31.5000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "4.25250000000000",
+      "OfferingCatType": "(07) Treatments",
+      "OfferingDiscount": 0.25,
+      "ID": 24,
+      "id": 24
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(25)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(25)",
+        "etag": "\"16\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 25,
+      "Title": "07-Reconstructive Treatment S4_025",
+      "OfferingsName_Edit": "Reconstructive Treatment S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 45,
+      "Amount": 47,
+      "AmountTotal": "35.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "4.75875000000000",
+      "OfferingCatType": "(07) Treatments",
+      "OfferingDiscount": 0.25,
+      "ID": 25,
+      "id": 25
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(26)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(26)",
+        "etag": "\"16\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 26,
+      "Title": "08-Keratin Smoothening S4_026",
+      "OfferingsName_Edit": "Keratin Smoothening S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 100,
+      "Amount": 127,
+      "AmountTotal": "95.2500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "12.8587500000000",
+      "OfferingCatType": "(08) Technical",
+      "OfferingDiscount": 0.25,
+      "ID": 26,
+      "id": 26
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(27)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(27)",
+        "etag": "\"13\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 27,
+      "Title": "08-Balayage Natural S4_027",
+      "OfferingsName_Edit": "Balayage Natural S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 150,
+      "Amount": 147,
+      "AmountTotal": "110.250000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "14.8837500000000",
+      "OfferingCatType": "(08) Technical",
+      "OfferingDiscount": 0.25,
+      "ID": 27,
+      "id": 27
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(28)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(28)",
+        "etag": "\"13\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 28,
+      "Title": "08-Texture-Perm S3_028",
+      "OfferingsName_Edit": "Texture-Perm S3",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 90,
+      "Amount": 97,
+      "AmountTotal": "72.7500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "9.82125000000000",
+      "OfferingCatType": "(08) Technical",
+      "OfferingDiscount": 0.25,
+      "ID": 28,
+      "id": 28
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(29)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(29)",
+        "etag": "\"10\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 29,
+      "Title": "09-Extensions-FH16 S4_029",
+      "OfferingsName_Edit": "Extensions-FH16 S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 180,
+      "Amount": 670,
+      "AmountTotal": "502.500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "67.8375000000000",
+      "OfferingCatType": "(09) Special Services",
+      "OfferingDiscount": 0.25,
+      "ID": 29,
+      "id": 29
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(30)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(30)",
+        "etag": "\"13\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 30,
+      "Title": "09-Extensions-FH20 S4_030",
+      "OfferingsName_Edit": "Extensions-FH20 S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 180,
+      "Amount": 770,
+      "AmountTotal": "577.500000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "77.9625000000000",
+      "OfferingCatType": "(09) Special Services",
+      "OfferingDiscount": 0.25,
+      "ID": 30,
+      "id": 30
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(31)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(31)",
+        "etag": "\"6\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 31,
+      "Title": "09-Bridal Head S4_031",
+      "OfferingsName_Edit": "Bridal Head S4",
+      "ShowOnline": true,
+      "ConsultReq": true,
+      "MinutesDuration": 120,
+      "Amount": 147,
+      "AmountTotal": "147.000000000000",
+      "SalesTaxRate": 0.135,
+      "AmountSalesTaxLocal": "19.8450000000000",
+      "OfferingCatType": "(09) Special Services",
+      "OfferingDiscount": 0,
+      "ID": 31,
+      "id": 31
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(32)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(32)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 32,
+      "Title": "20-Bed Head Mens Shampoo-250ml_032",
+      "OfferingsName_Edit": "Bed Head Mens Shampoo-250ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 4.99,
+      "AmountTotal": "4.24150000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "0.975545000000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 32,
+      "id": 32
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(33)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(33)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 33,
+      "Title": "20-Bed Head Recovery-250ml_033",
+      "OfferingsName_Edit": "Bed Head Recovery-250ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 11.99,
+      "AmountTotal": "10.1915000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "2.34404500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 33,
+      "id": 33
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(34)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(34)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 34,
+      "Title": "20-Bed Head Resurrection-250ml_034",
+      "OfferingsName_Edit": "Bed Head Resurrection-250ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 11.99,
+      "AmountTotal": "10.1915000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "2.34404500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 34,
+      "id": 34
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(35)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(35)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 35,
+      "Title": "20-Clarifying Shampoo-Two 1l_035",
+      "OfferingsName_Edit": "Clarifying Shampoo-Two 1l",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 18.99,
+      "AmountTotal": "16.1415000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.71254500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 35,
+      "id": 35
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(36)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(36)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 36,
+      "Title": "20-Original Shampoo-One 1l_036",
+      "OfferingsName_Edit": "Original Shampoo-One 1l",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 17.99,
+      "AmountTotal": "15.2915000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.51704500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 36,
+      "id": 36
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(37)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(37)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 37,
+      "Title": "20-Shea Butter Shampoo 300ml_037",
+      "OfferingsName_Edit": "Shea Butter Shampoo 300ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 5.95,
+      "AmountTotal": "5.05750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "1.16322500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 37,
+      "id": 37
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(38)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(38)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 38,
+      "Title": "20-Obsessed Antioxidants Shampoo 300ml_038",
+      "OfferingsName_Edit": "Obsessed Antioxidants Shampoo 300ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 4.95,
+      "AmountTotal": "4.20750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "0.967725000000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 38,
+      "id": 38
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(39)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(39)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 39,
+      "Title": "20-Amplify Protein Shampoo 300ml_039",
+      "OfferingsName_Edit": "Amplify Protein Shampoo 300ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 4.95,
+      "AmountTotal": "4.20750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "0.967725000000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 39,
+      "id": 39
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(40)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(40)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 40,
+      "Title": "20-Color Freeze Silver Shampoo 1L_040",
+      "OfferingsName_Edit": "Color Freeze Silver Shampoo 1L",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 16.95,
+      "AmountTotal": "14.4075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.31372500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 40,
+      "id": 40
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(41)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(41)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 41,
+      "Title": "20-Hyaluronic Moisture Shampoo 1L_041",
+      "OfferingsName_Edit": "Hyaluronic Moisture Shampoo 1L",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 16.95,
+      "AmountTotal": "14.4075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.31372500000000",
+      "OfferingCatType": "(20) Shampoo",
+      "OfferingDiscount": 0.15,
+      "ID": 41,
+      "id": 41
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(42)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(42)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 42,
+      "Title": "21-Original The Conditioner 300ml_042",
+      "OfferingsName_Edit": "Original The Conditioner 300ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 17.99,
+      "AmountTotal": "15.2915000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.51704500000000",
+      "OfferingCatType": "(21) Conditioner",
+      "OfferingDiscount": 0.15,
+      "ID": 42,
+      "id": 42
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(43)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(43)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 43,
+      "Title": "21-Strong Daily Conditioner 1L_043",
+      "OfferingsName_Edit": "Strong Daily Conditioner 1L",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 19.99,
+      "AmountTotal": "16.9915000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.90804500000000",
+      "OfferingCatType": "(21) Conditioner",
+      "OfferingDiscount": 0.15,
+      "ID": 43,
+      "id": 43
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(44)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(44)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 44,
+      "Title": "21-Amplify Protein Conditioner 300ml_044",
+      "OfferingsName_Edit": "Amplify Protein Conditioner 300ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 4.75,
+      "AmountTotal": "4.03750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "0.928625000000000",
+      "OfferingCatType": "(21) Conditioner",
+      "OfferingDiscount": 0.15,
+      "ID": 44,
+      "id": 44
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(45)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(45)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 45,
+      "Title": "21-Obsessed Antioxidants Conditioner 300ml_045",
+      "OfferingsName_Edit": "Obsessed Antioxidants Conditioner 300ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 4.95,
+      "AmountTotal": "4.20750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "0.967725000000000",
+      "OfferingCatType": "(21) Conditioner",
+      "OfferingDiscount": 0.15,
+      "ID": 45,
+      "id": 45
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(46)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(46)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 46,
+      "Title": "21-Color Freeze Silver Conditioner 1L_046",
+      "OfferingsName_Edit": "Color Freeze Silver Conditioner 1L",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 16.95,
+      "AmountTotal": "14.4075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.31372500000000",
+      "OfferingCatType": "(21) Conditioner",
+      "OfferingDiscount": 0.15,
+      "ID": 46,
+      "id": 46
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(47)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(47)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 47,
+      "Title": "21-Ageless Taming Conditioner 1L_047",
+      "OfferingsName_Edit": "Ageless Taming Conditioner 1L",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 16.95,
+      "AmountTotal": "14.4075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.31372500000000",
+      "OfferingCatType": "(21) Conditioner",
+      "OfferingDiscount": 0.15,
+      "ID": 47,
+      "id": 47
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(48)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(48)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 48,
+      "Title": "22-Fast Dry Sculpting Spray 250ml_048",
+      "OfferingsName_Edit": "Fast Dry Sculpting Spray 250ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 12.99,
+      "AmountTotal": "11.0415000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "2.53954500000000",
+      "OfferingCatType": "(22) Hairspray",
+      "OfferingDiscount": 0.15,
+      "ID": 48,
+      "id": 48
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(49)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(49)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 49,
+      "Title": "22-Freeze+Shine Super Spray 500ml_049",
+      "OfferingsName_Edit": "Freeze+Shine Super Spray 500ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 18.99,
+      "AmountTotal": "16.1415000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "3.71254500000000",
+      "OfferingCatType": "(22) Hairspray",
+      "OfferingDiscount": 0.15,
+      "ID": 49,
+      "id": 49
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(50)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(50)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 50,
+      "Title": "23-Firm Finish Gel 200ml_050",
+      "OfferingsName_Edit": "Firm Finish Gel 200ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 7.75,
+      "AmountTotal": "6.58750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "1.51512500000000",
+      "OfferingCatType": "(23) Hair Gel",
+      "OfferingDiscount": 0.15,
+      "ID": 50,
+      "id": 50
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(51)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(51)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 51,
+      "Title": "24-Over Achiever 3-In-1 50ml_051",
+      "OfferingsName_Edit": "Over Achiever 3-In-1 50ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 6.95,
+      "AmountTotal": "5.90750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "1.35872500000000",
+      "OfferingCatType": "(24) Hair Creams",
+      "OfferingDiscount": 0.15,
+      "ID": 51,
+      "id": 51
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(52)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(52)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 52,
+      "Title": "25-Firm Style Dry Wax 50g_052",
+      "OfferingsName_Edit": "Firm Style Dry Wax 50g",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 9.95,
+      "AmountTotal": "8.45750000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "1.94522500000000",
+      "OfferingCatType": "(25) Hair Wax+Clay",
+      "OfferingDiscount": 0.15,
+      "ID": 52,
+      "id": 52
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(53)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(53)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 53,
+      "Title": "26-Style Sculpting Foam 200ml_053",
+      "OfferingsName_Edit": "Style Sculpting Foam 200ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 14.95,
+      "AmountTotal": "12.7075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "2.92272500000000",
+      "OfferingCatType": "(26) Hair Mousse+Foam",
+      "OfferingDiscount": 0.15,
+      "ID": 53,
+      "id": 53
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(54)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(54)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 54,
+      "Title": "27-Hyaluronic Treatment 200ml_054",
+      "OfferingsName_Edit": "Hyaluronic Treatment 200ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 12.95,
+      "AmountTotal": "11.0075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "2.53172500000000",
+      "OfferingCatType": "(27) Finishing",
+      "OfferingDiscount": 0.15,
+      "ID": 54,
+      "id": 54
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(55)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(55)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      },
+      "Id": 55,
+      "Title": "27-Color Freeze Treatment 200ml_055",
+      "OfferingsName_Edit": "Color Freeze Treatment 200ml",
+      "ShowOnline": false,
+      "ConsultReq": false,
+      "MinutesDuration": null,
+      "Amount": 12.95,
+      "AmountTotal": "11.0075000000000",
+      "SalesTaxRate": 0.23,
+      "AmountSalesTaxLocal": "2.53172500000000",
+      "OfferingCatType": "(27) Finishing",
+      "OfferingDiscount": 0.15,
+      "ID": 55,
+      "id": 55
+    }
+  ],
+  "serviceReferenceList": {
     "results": [
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
-          "etag": "\"27\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 1,
-        "Title": "01-Ladies Wash+Cut+Dry S1_001",
-        "OfferingsName_Edit": "Ladies Wash+Cut+Dry S1",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 60,
-        "Amount": 55,
-        "AmountTotal": "46.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "6.31125000000000",
-        "OfferingCatType": "(01) Ladies Hair Cut",
-        "OfferingDiscount": 0.15,
-        "ID": 1
+        "serviceRef": "Ladies Wash+Cut+Dry S1"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(2)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(2)",
-          "etag": "\"21\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 2,
-        "Title": "01-Ladies Wash+Cut+Dry S2_002",
-        "OfferingsName_Edit": "Ladies Wash+Cut+Dry S2",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 50,
-        "Amount": 55,
-        "AmountTotal": "49.5000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "6.68250000000000",
-        "OfferingCatType": "(01) Ladies Hair Cut",
-        "OfferingDiscount": 0.1,
-        "ID": 2
+        "serviceRef": "Ladies Wash+Cut+Dry S2"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(3)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(3)",
-          "etag": "\"21\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 3,
-        "Title": "01-Ladies Wash+Cut+Dry S3_003",
-        "OfferingsName_Edit": "Ladies Wash+Cut+Dry S3",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 45,
-        "Amount": 65,
-        "AmountTotal": "55.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "7.45875000000000",
-        "OfferingCatType": "(01) Ladies Hair Cut",
-        "OfferingDiscount": 0.15,
-        "ID": 3
+        "serviceRef": "Ladies Wash+Cut+Dry S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(4)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(4)",
-          "etag": "\"20\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 4,
-        "Title": "02-Mens Wash+Cut+Dry S1_004",
-        "OfferingsName_Edit": "Mens Wash+Cut+Dry S1",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 45,
-        "Amount": 35,
-        "AmountTotal": "29.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "4.01625000000000",
-        "OfferingCatType": "(02) Mens Hair Cut",
-        "OfferingDiscount": 0.15,
-        "ID": 4
+        "serviceRef": "Mens Wash+Cut+Dry S1"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(5)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(5)",
-          "etag": "\"23\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 5,
-        "Title": "02-Mens Wash+Cut+Dry S2_005",
-        "OfferingsName_Edit": "Mens Wash+Cut+Dry S2",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 40,
-        "Amount": 40,
-        "AmountTotal": "34.0000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "4.59000000000000",
-        "OfferingCatType": "(02) Mens Hair Cut",
-        "OfferingDiscount": 0.15,
-        "ID": 5
+        "serviceRef": "Mens Wash+Cut+Dry S2"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(6)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(6)",
-          "etag": "\"19\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 6,
-        "Title": "02-Mens Wash+Cut+Dry S3_006",
-        "OfferingsName_Edit": "Mens Wash+Cut+Dry S3",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 35,
-        "Amount": 45,
-        "AmountTotal": "38.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "5.16375000000000",
-        "OfferingCatType": "(02) Mens Hair Cut",
-        "OfferingDiscount": 0.15,
-        "ID": 6
+        "serviceRef": "Mens Wash+Cut+Dry S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(7)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(7)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 7,
-        "Title": "02-Mens Wash+Cut+Dry S4_007",
-        "OfferingsName_Edit": "Mens Wash+Cut+Dry S4",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 35,
-        "Amount": 55,
-        "AmountTotal": "46.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "6.31125000000000",
-        "OfferingCatType": "(02) Mens Hair Cut",
-        "OfferingDiscount": 0.15,
-        "ID": 7
+        "serviceRef": "Mens Wash+Cut+Dry S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(8)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(8)",
-          "etag": "\"17\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 8,
-        "Title": "03-Girls Wash+Cut+Dry_008",
-        "OfferingsName_Edit": "Girls Wash+Cut+Dry",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 40,
-        "Amount": 35,
-        "AmountTotal": "28.0000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "3.78000000000000",
-        "OfferingCatType": "(03) Kids Hair Cut",
-        "OfferingDiscount": 0.2,
-        "ID": 8
+        "serviceRef": "Girls Wash+Cut+Dry"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(9)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(9)",
-          "etag": "\"21\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 9,
-        "Title": "03-Boys Wash+Cut+Dry_009",
-        "OfferingsName_Edit": "Boys Wash+Cut+Dry",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 25,
-        "Amount": 25,
-        "AmountTotal": "20.0000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "2.70000000000000",
-        "OfferingCatType": "(03) Kids Hair Cut",
-        "OfferingDiscount": 0.2,
-        "ID": 9
+        "serviceRef": "Boys Wash+Cut+Dry"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(10)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(10)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 10,
-        "Title": "04-Girl Student Wash+Cut_010",
-        "OfferingsName_Edit": "Girl Student Wash+Cut",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 40,
-        "Amount": 35,
-        "AmountTotal": "28.0000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "3.78000000000000",
-        "OfferingCatType": "(04) Students Hair Cut",
-        "OfferingDiscount": 0.2,
-        "ID": 10
+        "serviceRef": "Girl Student Wash+Cut"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(11)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(11)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 11,
-        "Title": "04-Boy Student Wash+Cut_011",
-        "OfferingsName_Edit": "Boy Student Wash+Cut",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 25,
-        "Amount": 30,
-        "AmountTotal": "24.0000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "3.24000000000000",
-        "OfferingCatType": "(04) Students Hair Cut",
-        "OfferingDiscount": 0.2,
-        "ID": 11
+        "serviceRef": "Boy Student Wash+Cut"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(12)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(12)",
-          "etag": "\"17\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 12,
-        "Title": "05-Highlights 1/1 S3_012",
-        "OfferingsName_Edit": "Highlights 1/1 S3",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 90,
-        "Amount": 95,
-        "AmountTotal": "71.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "9.61875000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 12
+        "serviceRef": "Highlights 1/1 S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(13)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(13)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 13,
-        "Title": "05-Highlights 1/1 S4_013",
-        "OfferingsName_Edit": "Highlights 1/1 S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 90,
-        "Amount": 105,
-        "AmountTotal": "78.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "10.6312500000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 13
+        "serviceRef": "Highlights 1/1 S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(14)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(14)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 14,
-        "Title": "05-Highlights 1/2 S3_014",
-        "OfferingsName_Edit": "Highlights 1/2 S3",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 75,
-        "Amount": 75,
-        "AmountTotal": "56.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "7.59375000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 14
+        "serviceRef": "Highlights 1/2 S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(15)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(15)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 15,
-        "Title": "05-Highlights 1/2 S4_015",
-        "OfferingsName_Edit": "Highlights 1/2 S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 75,
-        "Amount": 85,
-        "AmountTotal": "63.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "8.60625000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 15
+        "serviceRef": "Highlights 1/2 S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(16)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(16)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 16,
-        "Title": "05-Highlights T-Section S3_016",
-        "OfferingsName_Edit": "Highlights T-Section S3",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 45,
-        "Amount": 55,
-        "AmountTotal": "41.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "5.56875000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 16
+        "serviceRef": "Highlights T-Section S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(17)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(17)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 17,
-        "Title": "05-Highlights T-Section S4_017",
-        "OfferingsName_Edit": "Highlights T-Section S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 45,
-        "Amount": 65,
-        "AmountTotal": "48.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "6.58125000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 17
+        "serviceRef": "Highlights T-Section S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(18)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(18)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 18,
-        "Title": "05-Tint+Regrowth S3_018",
-        "OfferingsName_Edit": "Tint+Regrowth S3",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 55,
-        "Amount": 65,
-        "AmountTotal": "48.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "6.58125000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 18
+        "serviceRef": "Tint+Regrowth S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(19)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(19)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 19,
-        "Title": "05-Tint+Regrowth S4_019",
-        "OfferingsName_Edit": "Tint+Regrowth S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 55,
-        "Amount": 70,
-        "AmountTotal": "52.5000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "7.08750000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 19
+        "serviceRef": "Tint+Regrowth S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(20)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(20)",
-          "etag": "\"20\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 20,
-        "Title": "05-Mens Colour Tint 1/1 S3_020",
-        "OfferingsName_Edit": "Mens Colour Tint 1/1 S3",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 40,
-        "Amount": 50,
-        "AmountTotal": "37.5000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "5.06250000000000",
-        "OfferingCatType": "(05) Colouring",
-        "OfferingDiscount": 0.25,
-        "ID": 20
+        "serviceRef": "Mens Colour Tint 1/1 S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(21)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(21)",
-          "etag": "\"13\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 21,
-        "Title": "06-Ladies Blow Dry S1_021",
-        "OfferingsName_Edit": "Ladies Blow Dry S1",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 15,
-        "Amount": 15,
-        "AmountTotal": "11.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "1.51875000000000",
-        "OfferingCatType": "(06) Dry Styling",
-        "OfferingDiscount": 0.25,
-        "ID": 21
+        "serviceRef": "Ladies Blow Dry S1"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(22)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(22)",
-          "etag": "\"13\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 22,
-        "Title": "06-Ladies Long Blow Dry S1_022",
-        "OfferingsName_Edit": "Ladies Long Blow Dry S1",
-        "ShowOnline": true,
-        "ConsultReq": false,
-        "MinutesDuration": 20,
-        "Amount": 20,
-        "AmountTotal": "15.0000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "2.02500000000000",
-        "OfferingCatType": "(06) Dry Styling",
-        "OfferingDiscount": 0.25,
-        "ID": 22
+        "serviceRef": "Ladies Long Blow Dry S1"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(23)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(23)",
-          "etag": "\"16\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 23,
-        "Title": "07-Moisture Treatment S3_023",
-        "OfferingsName_Edit": "Moisture Treatment S3",
-        "ShowOnline": false,
-        "ConsultReq": true,
-        "MinutesDuration": 40,
-        "Amount": 27,
-        "AmountTotal": "20.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "2.73375000000000",
-        "OfferingCatType": "(07) Treatments",
-        "OfferingDiscount": 0.25,
-        "ID": 23
+        "serviceRef": "Moisture Treatment S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(24)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(24)",
-          "etag": "\"18\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 24,
-        "Title": "07-Protein Treatment S3_024",
-        "OfferingsName_Edit": "Protein Treatment S3",
-        "ShowOnline": false,
-        "ConsultReq": true,
-        "MinutesDuration": 60,
-        "Amount": 42,
-        "AmountTotal": "31.5000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "4.25250000000000",
-        "OfferingCatType": "(07) Treatments",
-        "OfferingDiscount": 0.25,
-        "ID": 24
+        "serviceRef": "Protein Treatment S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(25)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(25)",
-          "etag": "\"16\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 25,
-        "Title": "07-Reconstructive Treatment S4_025",
-        "OfferingsName_Edit": "Reconstructive Treatment S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 45,
-        "Amount": 47,
-        "AmountTotal": "35.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "4.75875000000000",
-        "OfferingCatType": "(07) Treatments",
-        "OfferingDiscount": 0.25,
-        "ID": 25
+        "serviceRef": "Reconstructive Treatment S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(26)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(26)",
-          "etag": "\"16\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 26,
-        "Title": "08-Keratin Smoothening S4_026",
-        "OfferingsName_Edit": "Keratin Smoothening S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 100,
-        "Amount": 127,
-        "AmountTotal": "95.2500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "12.8587500000000",
-        "OfferingCatType": "(08) Technical",
-        "OfferingDiscount": 0.25,
-        "ID": 26
+        "serviceRef": "Keratin Smoothening S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(27)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(27)",
-          "etag": "\"13\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 27,
-        "Title": "08-Balayage Natural S4_027",
-        "OfferingsName_Edit": "Balayage Natural S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 150,
-        "Amount": 147,
-        "AmountTotal": "110.250000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "14.8837500000000",
-        "OfferingCatType": "(08) Technical",
-        "OfferingDiscount": 0.25,
-        "ID": 27
+        "serviceRef": "Balayage Natural S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(28)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(28)",
-          "etag": "\"13\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 28,
-        "Title": "08-Texture-Perm S3_028",
-        "OfferingsName_Edit": "Texture-Perm S3",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 90,
-        "Amount": 97,
-        "AmountTotal": "72.7500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "9.82125000000000",
-        "OfferingCatType": "(08) Technical",
-        "OfferingDiscount": 0.25,
-        "ID": 28
+        "serviceRef": "Texture-Perm S3"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(29)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(29)",
-          "etag": "\"10\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 29,
-        "Title": "09-Extensions-FH16 S4_029",
-        "OfferingsName_Edit": "Extensions-FH16 S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 180,
-        "Amount": 670,
-        "AmountTotal": "502.500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "67.8375000000000",
-        "OfferingCatType": "(09) Special Services",
-        "OfferingDiscount": 0.25,
-        "ID": 29
+        "serviceRef": "Extensions-FH16 S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(30)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(30)",
-          "etag": "\"13\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 30,
-        "Title": "09-Extensions-FH20 S4_030",
-        "OfferingsName_Edit": "Extensions-FH20 S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 180,
-        "Amount": 770,
-        "AmountTotal": "577.500000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "77.9625000000000",
-        "OfferingCatType": "(09) Special Services",
-        "OfferingDiscount": 0.25,
-        "ID": 30
+        "serviceRef": "Extensions-FH20 S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(31)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(31)",
-          "etag": "\"6\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 31,
-        "Title": "09-Bridal Head S4_031",
-        "OfferingsName_Edit": "Bridal Head S4",
-        "ShowOnline": true,
-        "ConsultReq": true,
-        "MinutesDuration": 120,
-        "Amount": 147,
-        "AmountTotal": "147.000000000000",
-        "SalesTaxRate": 0.135,
-        "AmountSalesTaxLocal": "19.8450000000000",
-        "OfferingCatType": "(09) Special Services",
-        "OfferingDiscount": 0,
-        "ID": 31
+        "serviceRef": "Bridal Head S4"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(32)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(32)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 32,
-        "Title": "20-Bed Head Mens Shampoo-250ml_032",
-        "OfferingsName_Edit": "Bed Head Mens Shampoo-250ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 4.99,
-        "AmountTotal": "4.24150000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "0.975545000000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 32
+        "serviceRef": "Bed Head Mens Shampoo-250ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(33)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(33)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 33,
-        "Title": "20-Bed Head Recovery-250ml_033",
-        "OfferingsName_Edit": "Bed Head Recovery-250ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 11.99,
-        "AmountTotal": "10.1915000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "2.34404500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 33
+        "serviceRef": "Bed Head Recovery-250ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(34)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(34)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 34,
-        "Title": "20-Bed Head Resurrection-250ml_034",
-        "OfferingsName_Edit": "Bed Head Resurrection-250ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 11.99,
-        "AmountTotal": "10.1915000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "2.34404500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 34
+        "serviceRef": "Bed Head Resurrection-250ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(35)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(35)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 35,
-        "Title": "20-Clarifying Shampoo-Two 1l_035",
-        "OfferingsName_Edit": "Clarifying Shampoo-Two 1l",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 18.99,
-        "AmountTotal": "16.1415000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.71254500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 35
+        "serviceRef": "Clarifying Shampoo-Two 1l"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(36)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(36)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 36,
-        "Title": "20-Original Shampoo-One 1l_036",
-        "OfferingsName_Edit": "Original Shampoo-One 1l",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 17.99,
-        "AmountTotal": "15.2915000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.51704500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 36
+        "serviceRef": "Original Shampoo-One 1l"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(37)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(37)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 37,
-        "Title": "20-Shea Butter Shampoo 300ml_037",
-        "OfferingsName_Edit": "Shea Butter Shampoo 300ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 5.95,
-        "AmountTotal": "5.05750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "1.16322500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 37
+        "serviceRef": "Shea Butter Shampoo 300ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(38)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(38)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 38,
-        "Title": "20-Obsessed Antioxidants Shampoo 300ml_038",
-        "OfferingsName_Edit": "Obsessed Antioxidants Shampoo 300ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 4.95,
-        "AmountTotal": "4.20750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "0.967725000000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 38
+        "serviceRef": "Obsessed Antioxidants Shampoo 300ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(39)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(39)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 39,
-        "Title": "20-Amplify Protein Shampoo 300ml_039",
-        "OfferingsName_Edit": "Amplify Protein Shampoo 300ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 4.95,
-        "AmountTotal": "4.20750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "0.967725000000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 39
+        "serviceRef": "Amplify Protein Shampoo 300ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(40)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(40)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 40,
-        "Title": "20-Color Freeze Silver Shampoo 1L_040",
-        "OfferingsName_Edit": "Color Freeze Silver Shampoo 1L",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 16.95,
-        "AmountTotal": "14.4075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.31372500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 40
+        "serviceRef": "Color Freeze Silver Shampoo 1L"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(41)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(41)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 41,
-        "Title": "20-Hyaluronic Moisture Shampoo 1L_041",
-        "OfferingsName_Edit": "Hyaluronic Moisture Shampoo 1L",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 16.95,
-        "AmountTotal": "14.4075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.31372500000000",
-        "OfferingCatType": "(20) Shampoo",
-        "OfferingDiscount": 0.15,
-        "ID": 41
+        "serviceRef": "Hyaluronic Moisture Shampoo 1L"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(42)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(42)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 42,
-        "Title": "21-Original The Conditioner 300ml_042",
-        "OfferingsName_Edit": "Original The Conditioner 300ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 17.99,
-        "AmountTotal": "15.2915000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.51704500000000",
-        "OfferingCatType": "(21) Conditioner",
-        "OfferingDiscount": 0.15,
-        "ID": 42
+        "serviceRef": "Original The Conditioner 300ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(43)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(43)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 43,
-        "Title": "21-Strong Daily Conditioner 1L_043",
-        "OfferingsName_Edit": "Strong Daily Conditioner 1L",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 19.99,
-        "AmountTotal": "16.9915000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.90804500000000",
-        "OfferingCatType": "(21) Conditioner",
-        "OfferingDiscount": 0.15,
-        "ID": 43
+        "serviceRef": "Strong Daily Conditioner 1L"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(44)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(44)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 44,
-        "Title": "21-Amplify Protein Conditioner 300ml_044",
-        "OfferingsName_Edit": "Amplify Protein Conditioner 300ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 4.75,
-        "AmountTotal": "4.03750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "0.928625000000000",
-        "OfferingCatType": "(21) Conditioner",
-        "OfferingDiscount": 0.15,
-        "ID": 44
+        "serviceRef": "Amplify Protein Conditioner 300ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(45)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(45)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 45,
-        "Title": "21-Obsessed Antioxidants Conditioner 300ml_045",
-        "OfferingsName_Edit": "Obsessed Antioxidants Conditioner 300ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 4.95,
-        "AmountTotal": "4.20750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "0.967725000000000",
-        "OfferingCatType": "(21) Conditioner",
-        "OfferingDiscount": 0.15,
-        "ID": 45
+        "serviceRef": "Obsessed Antioxidants Conditioner 300ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(46)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(46)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 46,
-        "Title": "21-Color Freeze Silver Conditioner 1L_046",
-        "OfferingsName_Edit": "Color Freeze Silver Conditioner 1L",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 16.95,
-        "AmountTotal": "14.4075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.31372500000000",
-        "OfferingCatType": "(21) Conditioner",
-        "OfferingDiscount": 0.15,
-        "ID": 46
+        "serviceRef": "Color Freeze Silver Conditioner 1L"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(47)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(47)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 47,
-        "Title": "21-Ageless Taming Conditioner 1L_047",
-        "OfferingsName_Edit": "Ageless Taming Conditioner 1L",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 16.95,
-        "AmountTotal": "14.4075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.31372500000000",
-        "OfferingCatType": "(21) Conditioner",
-        "OfferingDiscount": 0.15,
-        "ID": 47
+        "serviceRef": "Ageless Taming Conditioner 1L"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(48)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(48)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 48,
-        "Title": "22-Fast Dry Sculpting Spray 250ml_048",
-        "OfferingsName_Edit": "Fast Dry Sculpting Spray 250ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 12.99,
-        "AmountTotal": "11.0415000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "2.53954500000000",
-        "OfferingCatType": "(22) Hairspray",
-        "OfferingDiscount": 0.15,
-        "ID": 48
+        "serviceRef": "Fast Dry Sculpting Spray 250ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(49)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(49)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 49,
-        "Title": "22-Freeze+Shine Super Spray 500ml_049",
-        "OfferingsName_Edit": "Freeze+Shine Super Spray 500ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 18.99,
-        "AmountTotal": "16.1415000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "3.71254500000000",
-        "OfferingCatType": "(22) Hairspray",
-        "OfferingDiscount": 0.15,
-        "ID": 49
+        "serviceRef": "Freeze+Shine Super Spray 500ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(50)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(50)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 50,
-        "Title": "23-Firm Finish Gel 200ml_050",
-        "OfferingsName_Edit": "Firm Finish Gel 200ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 7.75,
-        "AmountTotal": "6.58750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "1.51512500000000",
-        "OfferingCatType": "(23) Hair Gel",
-        "OfferingDiscount": 0.15,
-        "ID": 50
+        "serviceRef": "Firm Finish Gel 200ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(51)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(51)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 51,
-        "Title": "24-Over Achiever 3-In-1 50ml_051",
-        "OfferingsName_Edit": "Over Achiever 3-In-1 50ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 6.95,
-        "AmountTotal": "5.90750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "1.35872500000000",
-        "OfferingCatType": "(24) Hair Creams",
-        "OfferingDiscount": 0.15,
-        "ID": 51
+        "serviceRef": "Over Achiever 3-In-1 50ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(52)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(52)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 52,
-        "Title": "25-Firm Style Dry Wax 50g_052",
-        "OfferingsName_Edit": "Firm Style Dry Wax 50g",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 9.95,
-        "AmountTotal": "8.45750000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "1.94522500000000",
-        "OfferingCatType": "(25) Hair Wax+Clay",
-        "OfferingDiscount": 0.15,
-        "ID": 52
+        "serviceRef": "Firm Style Dry Wax 50g"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(53)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(53)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 53,
-        "Title": "26-Style Sculpting Foam 200ml_053",
-        "OfferingsName_Edit": "Style Sculpting Foam 200ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 14.95,
-        "AmountTotal": "12.7075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "2.92272500000000",
-        "OfferingCatType": "(26) Hair Mousse+Foam",
-        "OfferingDiscount": 0.15,
-        "ID": 53
+        "serviceRef": "Style Sculpting Foam 200ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(54)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(54)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 54,
-        "Title": "27-Hyaluronic Treatment 200ml_054",
-        "OfferingsName_Edit": "Hyaluronic Treatment 200ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 12.95,
-        "AmountTotal": "11.0075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "2.53172500000000",
-        "OfferingCatType": "(27) Finishing",
-        "OfferingDiscount": 0.15,
-        "ID": 54
+        "serviceRef": "Hyaluronic Treatment 200ml"
       },
       {
-        "__metadata": {
-          "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(55)",
-          "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(55)",
-          "etag": "\"4\"",
-          "type": "SP.Data.MetroBP02ListItem"
-        },
-        "Id": 55,
-        "Title": "27-Color Freeze Treatment 200ml_055",
-        "OfferingsName_Edit": "Color Freeze Treatment 200ml",
-        "ShowOnline": false,
-        "ConsultReq": false,
-        "MinutesDuration": null,
-        "Amount": 12.95,
-        "AmountTotal": "11.0075000000000",
-        "SalesTaxRate": 0.23,
-        "AmountSalesTaxLocal": "2.53172500000000",
-        "OfferingCatType": "(27) Finishing",
-        "OfferingDiscount": 0.15,
-        "ID": 55
+        "serviceRef": "Color Freeze Treatment 200ml"
       }
     ]
   }
