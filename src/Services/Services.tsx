@@ -12,6 +12,7 @@ import {
   ReferenceCell,
   ActionsControlCell,
   DurationCell,
+  MultiSelectCell,
 } from '../_sections';
 // Selectors
 import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
@@ -67,6 +68,13 @@ export const Services: FC = (): JSX.Element | null => {
               field={'OfferingCatType'}
               title={localizationService.toLanguageString('custom.category', 'Category')}
               columnMenu={ColumnMenu}
+              filter={'text'}
+            />
+            <GridColumn
+              field={'RoleSkills'}
+              title={localizationService.toLanguageString('custom.skills', 'Skills')}
+              columnMenu={ColumnMenu}
+              cell={MultiSelectCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn

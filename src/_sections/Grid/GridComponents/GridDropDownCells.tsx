@@ -9,10 +9,12 @@ import { StatusNames, AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { GridDataName } from '../GridTypes';
 // Selectors
 import { selectTeamStaffData } from '../../../TeamStaff';
 import { selectCustomersData } from '../../../Customers';
-import { selectServicesReferences } from '../../../Services';
+import { selectServicesReferences, selectServicesRoleSkills } from '../../../Services';
+import { selectGridDataName } from '../GridSelectors';
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
 
@@ -59,11 +61,25 @@ export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
   );
 };
 
-export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const data = useSelector(selectServicesReferences());
-  const serviceReferenceList = Array.from(new Set(data)).map((OfferingsName_Edit) => ({ [field]: OfferingsName_Edit, value: OfferingsName_Edit }));
-  const value = dataItem[field] as string;
-  const dropDownListValue = value ? value.split(`, `).map((value) => ({ [field]: value, value })) : [{ [field]: value, value }];
+export const MultiSelectCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
+  const gridDataName = useSelector(selectGridDataName);
+  const roleSkills = useSelector(selectServicesRoleSkills);
+  const servicesReferences = useSelector(selectServicesReferences());
+  let data: string[] = [];
+
+  switch (gridDataName) {
+    case GridDataName.Agenda:
+      data = servicesReferences;
+      break;
+
+    case GridDataName.Services:
+      data = roleSkills;
+      break;
+  }
+
+  const multiSelectData = Array.from(new Set(data)).map((value) => ({ [field]: value, value }));
+  const value = dataItem[field] as any;
+  const dropDownListValue = value ? value.split(`, `).map((value: string) => ({ [field]: value, value })) : [{ [field]: value, value }];
   const [multiSelectValue, setMultiSelectValue] = useState<{ [key: string]: string; value: string }[]>(dropDownListValue);
 
   useEffect(() => {
@@ -80,9 +96,7 @@ export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
     onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value).join(', ') });
   };
   return (
-    <td>
-      {dataItem.inEdit ? <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={serviceReferenceList} textField={field} /> : value}
-    </td>
+    <td>{dataItem.inEdit ? <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} /> : value}</td>
   );
 };
 

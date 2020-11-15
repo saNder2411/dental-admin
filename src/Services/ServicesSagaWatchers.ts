@@ -5,19 +5,19 @@ import { ActionTypes } from './ServicesTypes';
 import { fetchServices, createService, updateService, deleteService } from './ServicesSagaWorkers';
 
 function* watchFetchServices() {
-  yield takeEvery(ActionTypes.FETCH_INIT_ASYNC, fetchServices);
+  yield takeEvery(ActionTypes.FETCH_DATA_INIT_ASYNC, fetchServices);
 }
 
 function* watchCreateService() {
-  yield takeEvery(ActionTypes.CREATE_INIT_ASYNC, createService);
+  yield takeEvery(ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC, createService);
 }
 
 function* watchUpdateService() {
-  yield takeEvery(ActionTypes.UPDATE_INIT_ASYNC, updateService);
+  yield takeEvery(ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC, updateService);
 }
 
 function* watchDeleteService() {
-  yield takeEvery(ActionTypes.DELETE_INIT_ASYNC, deleteService);
+  yield takeEvery(ActionTypes.DELETE_DATA_ITEM_INIT_ASYNC, deleteService);
 }
 
 export function* watchServices() {

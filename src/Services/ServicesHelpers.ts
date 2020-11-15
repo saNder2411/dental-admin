@@ -2,13 +2,12 @@
 import { APIServicesDataItem, ServicesDataItem, OfferIcons } from './ServicesTypes';
 
 export const transformServicesData = (apiResults: APIServicesDataItem[]): ServicesDataItem[] =>
-  apiResults.map((item) => ({ ...item, id: item.Id, OfferIconName: OfferIcons.Tooth, RoleSkills: '' }));
+  apiResults.map((item) => ({ ...item, id: item.Id, OfferIconName: OfferIcons.Tooth }));
 
 export const transformServiceDataItem = (apiResult: APIServicesDataItem): ServicesDataItem => ({
   ...apiResult,
   id: apiResult.Id,
   OfferIconName: OfferIcons.Tooth,
-  RoleSkills: '',
 });
 
 export const roleSkills = [

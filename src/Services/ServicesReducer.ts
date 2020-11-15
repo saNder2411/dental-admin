@@ -16,7 +16,7 @@ const initialState = {
   roleSkills,
   actions: {
     fetchServicesData: (dispatch: Dispatch) => dispatch(servicesFetchInitAsyncAC()),
-    createService: (dispatch: Dispatch, createdService: ServicesDataItem) => dispatch(serviceCreateInitAsyncAC(createdService)),
+    createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) => dispatch(serviceCreateInitAsyncAC(createdService, onAddDataItemToGRidData)),
     updateService: (dispatch: Dispatch, updatedService: ServicesDataItem) => dispatch(serviceUpdateInitAsyncAC(updatedService)),
     deleteService: (dispatch: Dispatch, deletedServiceID: number) => dispatch(serviceDeleteInitAsyncAC(deletedServiceID)),
   },
@@ -24,54 +24,54 @@ const initialState = {
 
 export const reducer = (state: ServicesState = initialState, action: Actions): ServicesState => {
   switch (action.type) {
-    case ActionTypes.FETCH_REQUEST:
+    case ActionTypes.FETCH_DATA_REQUEST:
       return { ...state, isDataLoading: true, data: [], dataError: `` };
 
-    case ActionTypes.FETCH_SUCCESS:
+    case ActionTypes.FETCH_DATA_SUCCESS:
       return { ...state, data: action.payload, dataError: `` };
 
-    case ActionTypes.FETCH_FAILURE:
+    case ActionTypes.FETCH_DATA_FAILURE:
       return { ...state, data: [], dataError: action.payload };
 
-    case ActionTypes.FETCH_FINALLY:
+    case ActionTypes.FETCH_DATA_FINALLY:
       return { ...state, isDataLoading: false };
 
-    case ActionTypes.CREATE_REQUEST:
+    case ActionTypes.CREATE_DATA_ITEM_REQUEST:
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
-    case ActionTypes.CREATE_SUCCESS:
+    case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
       return { ...state, data: [action.payload, ...state.data], dataItemError: `` };
 
-    case ActionTypes.CREATE_FAILURE:
+    case ActionTypes.CREATE_DATA_ITEM_FAILURE:
       return { ...state, dataItemError: action.payload };
 
-    case ActionTypes.CREATE_FINALLY:
+    case ActionTypes.CREATE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
 
-    case ActionTypes.UPDATE_REQUEST:
+    case ActionTypes.UPDATE_DATA_ITEM_REQUEST:
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
-    case ActionTypes.UPDATE_SUCCESS:
+    case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
       const updatedData = updateDataAfterEditItem(state.data, action.payload) as ServicesDataItem[];
       return { ...state, data: updatedData, dataItemError: `` };
 
-    case ActionTypes.UPDATE_FAILURE:
+    case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
       return { ...state, dataItemError: action.payload };
 
-    case ActionTypes.UPDATE_FINALLY:
+    case ActionTypes.UPDATE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
 
-    case ActionTypes.DELETE_REQUEST:
+    case ActionTypes.DELETE_DATA_ITEM_REQUEST:
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
-    case ActionTypes.DELETE_SUCCESS:
+    case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
       const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as ServicesDataItem[];
       return { ...state, data: updatedDataAfterDeleteDataItem, dataItemError: `` };
 
-    case ActionTypes.DELETE_FAILURE:
+    case ActionTypes.DELETE_DATA_ITEM_FAILURE:
       return { ...state, dataItemError: action.payload };
 
-    case ActionTypes.DELETE_FINALLY:
+    case ActionTypes.DELETE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
 
     default:

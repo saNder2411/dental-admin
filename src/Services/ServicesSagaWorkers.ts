@@ -23,7 +23,7 @@ export function* fetchServices(): SagaIterator {
   }
 }
 
-export function* createService({ payload: createdService }: ServiceCreateInitAsyncAC): SagaIterator {
+export function* createService({ payload: createdService, meta: onAddDataItemToGRidData }: ServiceCreateInitAsyncAC): SagaIterator {
   try {
     yield put(actions.serviceCreateRequestAC());
 
@@ -34,6 +34,7 @@ export function* createService({ payload: createdService }: ServiceCreateInitAsy
     yield put(actions.serviceCreateFailureAC(error.message));
   } finally {
     yield put(actions.serviceCreateFinallyAC());
+    onAddDataItemToGRidData();
   }
 }
 

@@ -20,7 +20,9 @@
       "OfferingCatType": "(01) Ladies Hair Cut",
       "OfferingDiscount": 0.15,
       "ID": 1,
-      "id": 1
+      "id": 1,
+      "OfferIconName": "Tooth",
+      "RoleSkills": "Artistic & Creative"
     },
     {
       "__metadata": {
@@ -42,7 +44,9 @@
       "OfferingCatType": "(01) Ladies Hair Cut",
       "OfferingDiscount": 0.1,
       "ID": 2,
-      "id": 2
+      "id": 2,
+      "OfferIconName": "Tooth",
+      "RoleSkills": "Artistic & Creative"
     },
     {
       "__metadata": {
@@ -64,7 +68,9 @@
       "OfferingCatType": "(01) Ladies Hair Cut",
       "OfferingDiscount": 0.15,
       "ID": 3,
-      "id": 3
+      "id": 3,
+      "OfferIconName": "Tooth",
+      "RoleSkills": "Colouring-Balayage"
     },
     {
       "__metadata": {
@@ -86,7 +92,9 @@
       "OfferingCatType": "(02) Mens Hair Cut",
       "OfferingDiscount": 0.15,
       "ID": 4,
-      "id": 4
+      "id": 4,
+      "OfferIconName": "Tooth",
+      "RoleSkills": "Colouring-Balayage"
     },
     {
       "__metadata": {
@@ -108,7 +116,9 @@
       "OfferingCatType": "(02) Mens Hair Cut",
       "OfferingDiscount": 0.15,
       "ID": 5,
-      "id": 5
+      "id": 5,
+      "OfferIconName": "Tooth",
+      "RoleSkills": "Artistic & Creative"
     },
     {
       "__metadata": {
@@ -130,7 +140,9 @@
       "OfferingCatType": "(02) Mens Hair Cut",
       "OfferingDiscount": 0.15,
       "ID": 6,
-      "id": 6
+      "id": 6,
+      "OfferIconName": "Tooth",
+      "RoleSkills": "Active Listening, Colouring-Balayage"
     },
     {
       "__metadata": {
@@ -1209,6 +1221,54 @@
       "OfferingDiscount": 0.15,
       "ID": 55,
       "id": 55
+    },
+    {
+      "Amount": 50,
+      "AmountSalesTaxLocal": "",
+      "AmountTotal": "",
+      "ConsultReq": true,
+      "ID": 56,
+      "Id": 56,
+      "id": 56,
+      "MinutesDuration": 60,
+      "OfferingCatType": "Test",
+      "OfferingDiscount": 0.01,
+      "OfferingsName_Edit": "Test",
+      "OfferIconName": "Tooth",
+      "RoleSkills": "",
+      "SalesTaxRate": 0,
+      "ShowOnline": true,
+      "Title": "",
+      "__metadata": {
+        "etag": "",
+        "id": "",
+        "type": "",
+        "uri": ""
+      }
+    },
+    {
+      "Amount": 50,
+      "AmountSalesTaxLocal": "",
+      "AmountTotal": "",
+      "ConsultReq": false,
+      "ID": 57,
+      "Id": 57,
+      "id": 57,
+      "MinutesDuration": 50,
+      "OfferingCatType": "Test 2",
+      "OfferingDiscount": 0.02,
+      "OfferingsName_Edit": "Test 2",
+      "OfferIconName": "Tooth",
+      "RoleSkills": "",
+      "SalesTaxRate": 0,
+      "ShowOnline": true,
+      "Title": "",
+      "__metadata": {
+        "etag": "",
+        "id": "",
+        "type": "",
+        "uri": ""
+      }
     }
   ],
   "serviceReferenceList": {

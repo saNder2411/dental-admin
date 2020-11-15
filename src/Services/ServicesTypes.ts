@@ -43,7 +43,7 @@ export interface ServicesDataItem {
   OfferingDiscount: number;
   OfferingsName_Edit: string;
   OfferIconName: OfferIcons;
-  RoleSkills: string;
+  RoleSkills?: string;
   SalesTaxRate: number;
   ShowOnline: boolean;
   Title: string;
@@ -70,33 +70,33 @@ export interface ServicesState {
   roleSkills: string[];
   actions: {
     fetchServicesData: (dispatch: Dispatch) => void;
-    createService: (dispatch: Dispatch, createdService: ServicesDataItem) => void;
+    createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) => void;
     updateService: (dispatch: Dispatch, updatedService: ServicesDataItem) => void;
     deleteService: (dispatch: Dispatch, deletedServiceID: number) => void;
   };
 }
 
 export const ActionTypes = {
-  FETCH_INIT_ASYNC: 'SERVICES/FETCH_INIT_ASYNC' as const,
-  FETCH_REQUEST: `SERVICES/FETCH_REQUEST` as const,
-  FETCH_SUCCESS: `SERVICES/FETCH_SUCCESS` as const,
-  FETCH_FAILURE: `SERVICES/FETCH_FAILURE` as const,
-  FETCH_FINALLY: `SERVICES/FETCH_FINALLY` as const,
-  CREATE_INIT_ASYNC: 'SERVICES/CREATE_INIT_ASYNC' as const,
-  CREATE_REQUEST: `SERVICE/CREATE_REQUEST` as const,
-  CREATE_SUCCESS: `SERVICE/CREATE_SUCCESS` as const,
-  CREATE_FAILURE: `SERVICE/CREATE_FAILURE` as const,
-  CREATE_FINALLY: `SERVICE/CREATE_FINALLY` as const,
-  UPDATE_INIT_ASYNC: 'SERVICES/UPDATE_INIT_ASYNC' as const,
-  UPDATE_REQUEST: `SERVICE/UPDATE_REQUEST` as const,
-  UPDATE_SUCCESS: `SERVICE/UPDATE_SUCCESS` as const,
-  UPDATE_FAILURE: `SERVICE/UPDATE_FAILURE` as const,
-  UPDATE_FINALLY: `SERVICE/UPDATE_FINALLY` as const,
-  DELETE_INIT_ASYNC: 'SERVICES/DELETE_INIT_ASYNC' as const,
-  DELETE_REQUEST: `SERVICE/DELETE_REQUEST` as const,
-  DELETE_SUCCESS: `SERVICE/DELETE_SUCCESS` as const,
-  DELETE_FAILURE: `SERVICE/DELETE_FAILURE` as const,
-  DELETE_FINALLY: `SERVICE/DELETE_FINALLY` as const,
+  FETCH_DATA_INIT_ASYNC: 'SERVICES/FETCH_DATA_INIT_ASYNC' as const,
+  FETCH_DATA_REQUEST: `SERVICES/FETCH_DATA_REQUEST` as const,
+  FETCH_DATA_SUCCESS: `SERVICES/FETCH_DATA_SUCCESS` as const,
+  FETCH_DATA_FAILURE: `SERVICES/FETCH_DATA_FAILURE` as const,
+  FETCH_DATA_FINALLY: `SERVICES/FETCH_DATA_FINALLY` as const,
+  CREATE_DATA_ITEM_INIT_ASYNC: 'SERVICES/CREATE_DATA_ITEM_INIT_ASYNC' as const,
+  CREATE_DATA_ITEM_REQUEST: `SERVICE/CREATE_DATA_ITEM_REQUEST` as const,
+  CREATE_DATA_ITEM_SUCCESS: `SERVICE/CREATE_DATA_ITEM_SUCCESS` as const,
+  CREATE_DATA_ITEM_FAILURE: `SERVICE/CREATE_DATA_ITEM_FAILURE` as const,
+  CREATE_DATA_ITEM_FINALLY: `SERVICE/CREATE_DATA_ITEM_FINALLY` as const,
+  UPDATE_DATA_ITEM_INIT_ASYNC: 'SERVICES/UPDATE_DATA_ITEM_INIT_ASYNC' as const,
+  UPDATE_DATA_ITEM_REQUEST: `SERVICE/UPDATE_DATA_ITEM_REQUEST` as const,
+  UPDATE_DATA_ITEM_SUCCESS: `SERVICE/UPDATE_DATA_ITEM_SUCCESS` as const,
+  UPDATE_DATA_ITEM_FAILURE: `SERVICE/UPDATE_DATA_ITEM_FAILURE` as const,
+  UPDATE_DATA_ITEM_FINALLY: `SERVICE/UPDATE_DATA_ITEM_FINALLY` as const,
+  DELETE_DATA_ITEM_INIT_ASYNC: 'SERVICES/DELETE_DATA_ITEM_INIT_ASYNC' as const,
+  DELETE_DATA_ITEM_REQUEST: `SERVICE/DELETE_DATA_ITEM_REQUEST` as const,
+  DELETE_DATA_ITEM_SUCCESS: `SERVICE/DELETE_DATA_ITEM_SUCCESS` as const,
+  DELETE_DATA_ITEM_FAILURE: `SERVICE/DELETE_DATA_ITEM_FAILURE` as const,
+  DELETE_DATA_ITEM_FINALLY: `SERVICE/DELETE_DATA_ITEM_FINALLY` as const,
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;

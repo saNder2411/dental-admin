@@ -13,7 +13,7 @@ import {
   StatusCell,
   SvcStaffCell,
   FullNameCell,
-  ServicesCell,
+  MultiSelectCell,
   GenderCell,
   ReferenceCell,
 } from '../_sections';
@@ -90,7 +90,7 @@ export const Agenda: FC = (): JSX.Element => {
               field={'services'}
               title={localizationService.toLanguageString('custom.services', 'Services')}
               columnMenu={ColumnMenu}
-              cell={ServicesCell as CustomGridCell}
+              cell={MultiSelectCell as CustomGridCell}
               filter={'text'}
             />
             <GridColumn

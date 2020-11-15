@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
@@ -11,6 +11,7 @@ import { selectGridActions, selectGridEditField, selectGridDataName } from '../G
 import { selectServicesActions } from '../../../Services/ServicesSelectors';
 
 export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }): JSX.Element => {
+  const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const { onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData, onDiscardNewItemToData } = useSelector(
     selectGridActions,
     shallowEqual
@@ -22,15 +23,20 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
   const inEdit = dataItem[editField];
   const isNewItem = dataItem.isNew;
 
+  const onFinallyRequestDataItem = () => {
+    setIsDataItemLoading(false);
+    onAddNewItemToData(dispatch, dataItem);
+  };
+
   const onAddItemToData = () => {
     const { inEdit, isNew, ...others } = dataItem;
     const newDataItemForApi = others;
 
-    onAddNewItemToData(dispatch, dataItem);
+    setIsDataItemLoading(true);
 
     switch (gridDataName) {
       case GridDataName.Services:
-        createService(dispatch, newDataItemForApi as ServicesDataItem);
+        createService(dispatch, newDataItemForApi as ServicesDataItem, onFinallyRequestDataItem);
         break;
     }
   };
@@ -60,10 +66,13 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
 
   return inEdit ? (
     <SC.ActionsControlCell className="k-command-cell">
-      <button className="k-button" onClick={() => (isNewItem ? onAddItemToData() : onItemUpdated())}>
+      <button className="k-button" onClick={() => (isNewItem ? onAddItemToData() : onItemUpdated())} disabled={isDataItemLoading}>
         {isNewItem ? <span className="k-icon k-i-checkmark" /> : <span className="k-icon k-i-reload" />}
       </button>
-      <button className="k-button" onClick={() => (isNewItem ? onDiscardNewItemToData(dispatch, dataItem) : onCancelEdit(dispatch, dataItem))}>
+      <button
+        className="k-button"
+        onClick={() => (isNewItem ? onDiscardNewItemToData(dispatch, dataItem) : onCancelEdit(dispatch, dataItem))}
+        disabled={isDataItemLoading}>
         <span className="k-icon k-i-x" />
       </button>
     </SC.ActionsControlCell>
