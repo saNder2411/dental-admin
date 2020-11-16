@@ -6,6 +6,8 @@ import { Popup } from '@progress/kendo-react-popup';
 import { IconBook } from '../../../_instruments';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
+// Components
+import { ViewInputCellWithDataItemLoading } from './ViewInputCellWithDataItemLoading';
 // Types
 import { GridCellProps, InputChangeEvent } from './GridComponentsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
@@ -28,7 +30,9 @@ export const ReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>>
 
   return dataItem.inEdit ? (
     <td>
-      <Input value={strValue} placeholder="Ref: TBA-000" onChange={onReferenceChange} />
+      <ViewInputCellWithDataItemLoading>
+        <Input value={strValue} placeholder="Ref: TBA-000" onChange={onReferenceChange} />
+      </ViewInputCellWithDataItemLoading>
     </td>
   ) : (
     <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
@@ -55,7 +59,9 @@ export const AvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDataItem>
 
   return dataItem.inEdit ? (
     <td>
-      <Input value={strValue} onChange={onAvatarChange} />
+      <ViewInputCellWithDataItemLoading>
+        <Input value={strValue} onChange={onAvatarChange} />
+      </ViewInputCellWithDataItemLoading>
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
@@ -73,7 +79,9 @@ export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem
 
   return dataItem.inEdit ? (
     <td>
-      <Input value={strValue} onChange={onServicesIconChange} />
+      <ViewInputCellWithDataItemLoading>
+        <Input value={strValue} onChange={onServicesIconChange} />
+      </ViewInputCellWithDataItemLoading>
     </td>
   ) : isImageUrl ? (
     <SC.ServicesImageCell imageUrl={strValue}>

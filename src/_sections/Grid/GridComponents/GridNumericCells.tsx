@@ -3,6 +3,8 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
+// Components
+import { ViewInputCellWithDataItemLoading } from './ViewInputCellWithDataItemLoading';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
@@ -20,7 +22,9 @@ export const DiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, fi
   return (
     <td>
       {dataItem.inEdit ? (
-        <NumericTextBox value={numValue} step={0.01} min={0} onChange={onDiscountChange} />
+        <ViewInputCellWithDataItemLoading>
+          <NumericTextBox value={numValue} step={0.01} min={0} onChange={onDiscountChange} />
+        </ViewInputCellWithDataItemLoading>
       ) : (
         <span>{`${value ? numValue * 100 : `0`}%`}</span>
       )}
@@ -34,7 +38,17 @@ export const DurationCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, fi
 
   const onDurationChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
 
-  return <td>{dataItem.inEdit ? <NumericTextBox value={numValue} step={5} min={5} onChange={onDurationChange} /> : <span>{value}</span>}</td>;
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <ViewInputCellWithDataItemLoading>
+          <NumericTextBox value={numValue} step={5} min={5} onChange={onDurationChange} />
+        </ViewInputCellWithDataItemLoading>
+      ) : (
+        <span>{value}</span>
+      )}
+    </td>
+  );
 };
 
 export const CurrencyCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem, field }): JSX.Element => {

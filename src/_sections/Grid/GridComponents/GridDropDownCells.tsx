@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
+// Components
+import { ViewInputCellWithDataItemLoading } from './ViewInputCellWithDataItemLoading';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { StatusNames, AgendaDataItem } from '../../../Agenda/AgendaTypes';
@@ -24,7 +26,15 @@ export const StatusCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field,
   const onStatusChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
 
   return (
-    <td>{dataItem.inEdit ? <DropDownList onChange={onStatusChange} value={dropDownListValue} data={statusList} textField={field} /> : value}</td>
+    <td>
+      {dataItem.inEdit ? (
+        <ViewInputCellWithDataItemLoading>
+          <DropDownList onChange={onStatusChange} value={dropDownListValue} data={statusList} textField={field} />
+        </ViewInputCellWithDataItemLoading>
+      ) : (
+        value
+      )}
+    </td>
   );
 };
 
@@ -37,7 +47,13 @@ export const SvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
 
   return (
     <td>
-      {dataItem.inEdit ? <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={teamStaffNameList} textField={field} /> : value}
+      {dataItem.inEdit ? (
+        <ViewInputCellWithDataItemLoading>
+          <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={teamStaffNameList} textField={field} />
+        </ViewInputCellWithDataItemLoading>
+      ) : (
+        value
+      )}
     </td>
   );
 };
@@ -54,7 +70,13 @@ export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
 
   return (
     <td>
-      {dataItem.inEdit ? <DropDownList onChange={onLastNameChange} value={dropDownListValue} data={customerNameList} textField={field} /> : value}
+      {dataItem.inEdit ? (
+        <ViewInputCellWithDataItemLoading>
+          <DropDownList onChange={onLastNameChange} value={dropDownListValue} data={customerNameList} textField={field} />
+        </ViewInputCellWithDataItemLoading>
+      ) : (
+        value
+      )}
     </td>
   );
 };
@@ -80,7 +102,15 @@ export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
     onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value).join(', ') });
   };
   return (
-    <td>{dataItem.inEdit ? <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} /> : value}</td>
+    <td>
+      {dataItem.inEdit ? (
+        <ViewInputCellWithDataItemLoading>
+          <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} />
+        </ViewInputCellWithDataItemLoading>
+      ) : (
+        value
+      )}
+    </td>
   );
 };
 
@@ -105,7 +135,15 @@ export const RoleSkillsCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>
     onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value).join(', ') });
   };
   return (
-    <td>{dataItem.inEdit ? <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} /> : value}</td>
+    <td>
+      {dataItem.inEdit ? (
+        <ViewInputCellWithDataItemLoading>
+          <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} />
+        </ViewInputCellWithDataItemLoading>
+      ) : (
+        value
+      )}
+    </td>
   );
 };
 
@@ -121,7 +159,9 @@ export const BooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamStaffDataI
 
   return dataItem.inEdit ? (
     <td>
-      <DropDownList onChange={onBooleanFlagChange} value={dropDownListValue} data={localizedDataForFlagCell} textField={field} />
+      <ViewInputCellWithDataItemLoading>
+        <DropDownList onChange={onBooleanFlagChange} value={dropDownListValue} data={localizedDataForFlagCell} textField={field} />
+      </ViewInputCellWithDataItemLoading>
     </td>
   ) : (
     <SC.BooleanFlagCell isOnline={flag}>
@@ -143,7 +183,9 @@ export const GenderCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> =
   return (
     <td>
       {dataItem.inEdit ? (
-        <DropDownList onChange={onGenderChange} value={dropDownListValue} data={localizedDataForGenderCell} textField={field} />
+        <ViewInputCellWithDataItemLoading>
+          <DropDownList onChange={onGenderChange} value={dropDownListValue} data={localizedDataForGenderCell} textField={field} />
+        </ViewInputCellWithDataItemLoading>
       ) : (
         value
       )}

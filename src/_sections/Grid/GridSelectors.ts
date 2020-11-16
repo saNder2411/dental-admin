@@ -10,3 +10,5 @@ export const selectGridEditField = ({ GridState }: GlobalState) => GridState.edi
 export const selectGridTitleForAddNewItemSection = ({ GridState }: GlobalState) => GridState.titleForAddNewItemSection;
 
 export const selectGridActions = ({ GridState }: GlobalState) => GridState.actions;
+
+export const selectGridDataItemIsLoading = ({ GridState }: GlobalState) => GridState.isDataItemLoading;
