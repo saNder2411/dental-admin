@@ -35,12 +35,20 @@ export const serviceDeleteFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITE
 // Async
 export const servicesFetchInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_ASYNC });
 
-export const serviceCreateInitAsyncAC = (createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) => ({
+export const serviceCreateInitAsyncAC = (createdService: ServicesDataItem, onAddDataItemToGridData: () => void) => ({
   type: ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC,
   payload: createdService,
-  meta: onAddDataItemToGRidData,
+  meta: onAddDataItemToGridData,
 });
 
-export const serviceUpdateInitAsyncAC = (updatedService: ServicesDataItem) => ({ type: ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC, payload: updatedService });
+export const serviceUpdateInitAsyncAC = (updatedService: ServicesDataItem, onUpdateDataItemInGridData: () => void) => ({
+  type: ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC,
+  payload: updatedService,
+  meta: onUpdateDataItemInGridData,
+});
 
-export const serviceDeleteInitAsyncAC = (deletedServiceID: number) => ({ type: ActionTypes.DELETE_DATA_ITEM_INIT_ASYNC, payload: deletedServiceID });
+export const serviceDeleteInitAsyncAC = (deletedServiceID: number, onDeleteDataItemInGridData: () => void) => ({
+  type: ActionTypes.DELETE_DATA_ITEM_INIT_ASYNC,
+  payload: deletedServiceID,
+  meta: onDeleteDataItemInGridData,
+});

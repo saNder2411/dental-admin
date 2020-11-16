@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "mock": "json-server -w db.json -p 4200 -d 1000",
+    "mock": "json-server -w db.json -p 4200 -d 1500",
     "server": "concurrently \"npm run start\" \"npm run mock\""
   },
   "eslintConfig": {
@@ -47,6 +47,7 @@
     "@progress/kendo-react-excel-export": "^3.17.0",
     "@progress/kendo-react-form": "^3.17.0",
     "@progress/kendo-react-grid": "^3.17.0",
+    "@progress/kendo-react-indicators": "^4.1.0",
     "@progress/kendo-react-inputs": "^3.17.0",
     "@progress/kendo-react-intl": "^3.17.0",
     "@progress/kendo-react-layout": "^3.17.0",

@@ -11,3 +11,5 @@ export const isNumber = (arg: any): arg is number => typeof arg === 'number';
 export const isString = (arg: any): arg is string => typeof arg === 'string';
 
 export const isStatusNames = (arg: any): arg is StatusNames => arg === StatusNames;
+
+export const getOnFinallyRequestDataItem = (...handlers: Array<() => void>) => () => handlers.forEach((handler) => handler());

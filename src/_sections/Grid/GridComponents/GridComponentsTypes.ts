@@ -11,6 +11,7 @@ export type GridOnChange<T> = (evt: {
 }) => void;
 
 export interface GridCellProps<T = GridDataItem> {
+  rowType: string;
   dataItem: T;
   field: keyof T;
   onChange: GridOnChange<T>;

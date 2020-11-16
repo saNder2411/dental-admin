@@ -16,9 +16,12 @@ const initialState = {
   roleSkills,
   actions: {
     fetchServicesData: (dispatch: Dispatch) => dispatch(servicesFetchInitAsyncAC()),
-    createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) => dispatch(serviceCreateInitAsyncAC(createdService, onAddDataItemToGRidData)),
-    updateService: (dispatch: Dispatch, updatedService: ServicesDataItem) => dispatch(serviceUpdateInitAsyncAC(updatedService)),
-    deleteService: (dispatch: Dispatch, deletedServiceID: number) => dispatch(serviceDeleteInitAsyncAC(deletedServiceID)),
+    createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) =>
+      dispatch(serviceCreateInitAsyncAC(createdService, onAddDataItemToGRidData)),
+    updateService: (dispatch: Dispatch, updatedService: ServicesDataItem, onUpdateDataItemInGridData: () => void) =>
+      dispatch(serviceUpdateInitAsyncAC(updatedService, onUpdateDataItemInGridData)),
+    deleteService: (dispatch: Dispatch, deletedServiceID: number, onDeleteDataItemInGridData: () => void) =>
+      dispatch(serviceDeleteInitAsyncAC(deletedServiceID, onDeleteDataItemInGridData)),
   },
 };
 

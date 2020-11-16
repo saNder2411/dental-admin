@@ -9,3 +9,5 @@ export const selectServicesReferences = () => createSelector(selectServicesData,
 export const selectServicesActions = ({ ServicesState }: GlobalState) => ServicesState.actions;
 
 export const selectServicesRoleSkills = ({ ServicesState }: GlobalState) => ServicesState.roleSkills;
+
+export const selectServicesIsDataLoading = ({ ServicesState }: GlobalState) => ServicesState.isDataLoading;

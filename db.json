@@ -1245,30 +1245,6 @@
         "type": "",
         "uri": ""
       }
-    },
-    {
-      "Amount": 50,
-      "AmountSalesTaxLocal": "",
-      "AmountTotal": "",
-      "ConsultReq": false,
-      "ID": 57,
-      "Id": 57,
-      "id": 57,
-      "MinutesDuration": 50,
-      "OfferingCatType": "Test 2",
-      "OfferingDiscount": 0.02,
-      "OfferingsName_Edit": "Test 2",
-      "OfferIconName": "Tooth",
-      "RoleSkills": "",
-      "SalesTaxRate": 0,
-      "ShowOnline": true,
-      "Title": "",
-      "__metadata": {
-        "etag": "",
-        "id": "",
-        "type": "",
-        "uri": ""
-      }
     }
   ],
   "serviceReferenceList": {

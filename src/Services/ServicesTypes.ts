@@ -71,8 +71,8 @@ export interface ServicesState {
   actions: {
     fetchServicesData: (dispatch: Dispatch) => void;
     createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) => void;
-    updateService: (dispatch: Dispatch, updatedService: ServicesDataItem) => void;
-    deleteService: (dispatch: Dispatch, deletedServiceID: number) => void;
+    updateService: (dispatch: Dispatch, updatedService: ServicesDataItem, onUpdateDataItemInGridData: () => void) => void;
+    deleteService: (dispatch: Dispatch, deletedServiceID: number, onDeleteDataItemInGridData: () => void) => void;
   };
 }
 

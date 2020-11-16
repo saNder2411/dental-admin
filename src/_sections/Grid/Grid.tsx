@@ -34,7 +34,6 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
 
-
   const [isPdfExporting, setIsPdfExporting] = useState(false);
   const [take, setTake] = useState(10);
   const [skip, setSkip] = useState(0);
@@ -155,7 +154,7 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
   }, [processedData, onPdfExportDone]);
 
   const GridElement = (
-    <SC.Grid>
+    <SC.Grid className="position-relative">
       <KendoGrid
         {...dataState}
         {...others}

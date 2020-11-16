@@ -38,7 +38,7 @@ export function* createService({ payload: createdService, meta: onAddDataItemToG
   }
 }
 
-export function* updateService({ payload: updatedService }: ServiceUpdateInitAsyncAC): SagaIterator {
+export function* updateService({ payload: updatedService, meta: onUpdateDataItemInGridData }: ServiceUpdateInitAsyncAC): SagaIterator {
   try {
     yield put(actions.serviceUpdateRequestAC());
 
@@ -49,10 +49,11 @@ export function* updateService({ payload: updatedService }: ServiceUpdateInitAsy
     yield put(actions.serviceUpdateFailureAC(error.message));
   } finally {
     yield put(actions.serviceUpdateFinallyAC());
+    onUpdateDataItemInGridData();
   }
 }
 
-export function* deleteService({ payload: deletedServiceID }: ServiceDeleteInitAsyncAC): SagaIterator {
+export function* deleteService({ payload: deletedServiceID, meta: onDeleteDataItemInGridData }: ServiceDeleteInitAsyncAC): SagaIterator {
   try {
     yield put(actions.serviceDeleteRequestAC());
 
@@ -62,5 +63,6 @@ export function* deleteService({ payload: deletedServiceID }: ServiceDeleteInitA
     yield put(actions.serviceDeleteFailureAC(error.message));
   } finally {
     yield put(actions.serviceDeleteFinallyAC());
+    onDeleteDataItemInGridData();
   }
 }
