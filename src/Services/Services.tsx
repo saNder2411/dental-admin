@@ -56,7 +56,7 @@ export const Services: FC = (): JSX.Element | null => {
             columnMenu={ColumnMenu}
             filter={'numeric'}
             editable={false}
-            width={120}
+            // width={120}
           />
           <GridColumn
             field={'OfferingsName_Edit'}
@@ -84,14 +84,14 @@ export const Services: FC = (): JSX.Element | null => {
             columnMenu={ColumnMenu}
             cell={DurationCell as CustomGridCell}
             filter={'numeric'}
-            width={150}
+            // width={150}
           />
           <GridColumn
             field={'ShowOnline'}
             title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
             columnMenu={ColumnMenu}
             cell={BooleanFlagCell as CustomGridCell}
-            width={160}
+            // width={160}
             filter={'boolean'}
           />
           <GridColumn
@@ -99,14 +99,14 @@ export const Services: FC = (): JSX.Element | null => {
             title={localizationService.toLanguageString('custom.consultation', 'Consultation')}
             columnMenu={ColumnMenu}
             cell={BooleanFlagCell as CustomGridCell}
-            width={160}
+            // width={160}
             filter={'boolean'}
           />
           <GridColumn
             field={'Amount'}
             title={localizationService.toLanguageString('custom.price', 'Price')}
             columnMenu={ColumnMenu}
-            width={90}
+            // width={90}
             cell={CurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
@@ -116,20 +116,20 @@ export const Services: FC = (): JSX.Element | null => {
             columnMenu={ColumnMenu}
             cell={DiscountCell as CustomGridCell}
             filter={'numeric'}
-            width={140}
+            // width={100}
           />
           <GridColumn
             field={'Amount'}
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
-            width={90}
+            // width={90}
             cell={TotalPriceCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
             cell={ActionsControlCell as CustomGridCell}
-            width={140}
+            // width={140}
           />
         </Grid>
       </div>

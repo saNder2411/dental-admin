@@ -16,7 +16,7 @@ import { getOnFinallyRequestDataItem } from './GridComponentsHelpers';
 
 export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
-  const { onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData, onDiscardNewItemToData } = useSelector(
+  const { onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData, onDiscardNewItemToData, setIsGridDataItemLoading } = useSelector(
     selectGridActions,
     shallowEqual
   );
@@ -37,6 +37,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
     );
 
     setIsDataItemLoading(true);
+    setIsGridDataItemLoading(dispatch, true)
 
     switch (gridDataName) {
       case GridDataName.Services:
@@ -55,6 +56,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
     );
 
     setIsDataItemLoading(true);
+    setIsGridDataItemLoading(dispatch, true)
 
     switch (gridDataName) {
       case GridDataName.Services:
@@ -70,6 +72,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
     );
 
     setIsDataItemLoading(true);
+    setIsGridDataItemLoading(dispatch, true)
 
     switch (gridDataName) {
       case GridDataName.Services:

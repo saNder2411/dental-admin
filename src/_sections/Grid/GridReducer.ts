@@ -13,6 +13,7 @@ import {
   addNewItemToEditAC,
   addNewItemToDataAC,
   discardAddNewItemToDataAC,
+  dataItemFetchingAC,
 } from './GridAC';
 // Helpers
 import {
@@ -30,10 +31,12 @@ const initialState = {
   data: [],
   originData: [],
   dataName: GridDataName.Default,
+  isDataItemLoading: false,
   editField: 'inEdit' as const,
   titleForAddNewItemSection: '',
   actions: {
     setData: (dispatch: Dispatch, data: GridDataItem[]) => dispatch(setDataAC(data)),
+    setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => dispatch(dataItemFetchingAC(isLoading)),
     onItemEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(addItemToEditAC(ID)),
     onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(updateItemAfterEditAC(dataItem)),
     onItemRemove: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(removeItemFromDataAC(ID)),
@@ -60,11 +63,11 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
 
     case ActionTypes.UPDATE_ITEM_AFTER_EDIT:
       const newDataAfterEditItem = updateDataAfterEditItem(state.data, action.payload);
-      return { ...state, data: newDataAfterEditItem, originData: [...newDataAfterEditItem] };
+      return { ...state, data: newDataAfterEditItem, originData: [...newDataAfterEditItem], isDataItemLoading: false };
 
     case ActionTypes.REMOVE_ITEM_FROM_DATA:
       const newDataAfterRemoveItem = updateDataAfterRemoveItem(state.data, action.payload);
-      return { ...state, data: newDataAfterRemoveItem, originData: [...newDataAfterRemoveItem] };
+      return { ...state, data: newDataAfterRemoveItem, originData: [...newDataAfterRemoveItem], isDataItemLoading: false };
 
     case ActionTypes.CANCEL_EDIT:
       return { ...state, data: updateDataAfterCancelEdit(state.data, state.originData, action.payload) };
@@ -77,11 +80,14 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
 
     case ActionTypes.ADD_NEW_ITEM_TO_DATA:
       const newDataAfterEditNewItem = updateDataAfterEditNewItem(state.data, action.payload);
-      return { ...state, data: newDataAfterEditNewItem, originData: [...newDataAfterEditNewItem] };
+      return { ...state, data: newDataAfterEditNewItem, originData: [...newDataAfterEditNewItem], isDataItemLoading: false };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.data, action.payload);
       return { ...state, data: newDataAfterDiscardAddNewItem, originData: [...newDataAfterDiscardAddNewItem] };
+
+    case ActionTypes.DATA_ITEM_FETCHING:
+      return { ...state, isDataItemLoading: action.payload };
 
     default:
       return state;

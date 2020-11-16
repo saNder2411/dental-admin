@@ -10,6 +10,7 @@ import * as actions from './GridAC';
 
 export const ActionTypes = {
   SET_DATA: 'GRID/SET_DATA' as const,
+  DATA_ITEM_FETCHING: 'GRID/DATA_ITEM_FETCHING' as const,
   ADD_ITEM_TO_EDIT: 'GRID/ADD_ITEM_TO_EDIT' as const,
   UPDATE_ITEM_AFTER_EDIT: 'GRID/UPDATE_ITEM_AFTER_EDIT' as const,
   REMOVE_ITEM_FROM_DATA: 'GRID/REMOVE_ITEM_FROM_DATA' as const,
@@ -54,10 +55,12 @@ export interface GridState {
   data: GridDataItem[];
   originData: GridDataItem[];
   dataName: GridDataName;
+  isDataItemLoading: boolean;
   editField: 'inEdit';
   titleForAddNewItemSection: string;
   actions: {
     setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
+    setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => void;
     onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
     onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
     onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;

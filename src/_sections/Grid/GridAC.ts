@@ -19,3 +19,5 @@ export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDI
 export const addNewItemToDataAC = (dataItem: GridDataItem) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_DATA, payload: dataItem });
 
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
+
+export const dataItemFetchingAC = (isLoading: boolean) => ({ type: ActionTypes.DATA_ITEM_FETCHING, payload: isLoading });
