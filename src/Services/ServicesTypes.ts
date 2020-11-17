@@ -2,8 +2,6 @@
 import { InferValueTypes, DomainStateActionsType } from '../_sections/Grid/GridTypes';
 // Actions
 import * as actions from './ServicesAC';
-// Other
-// import { initialState } from './ServicesReducer';
 
 export enum OfferIcons {
   Tooth = 'Tooth',
