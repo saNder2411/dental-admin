@@ -1,5 +1,5 @@
-import React, { useRef, useState, useCallback, useEffect } from 'react';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import React, { useRef, useState, useCallback, useEffect, useMemo } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Grid as KendoGrid, GridColumn, GridColumnMenuSort, GridColumnMenuFilter, GridToolbar } from '@progress/kendo-react-grid';
 import { Button } from '@progress/kendo-react-buttons';
 import { GridPDFExport } from '@progress/kendo-react-pdf';
@@ -10,7 +10,7 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Styled Components
 import * as SC from './GridStyledComponents/GridStyled';
 // Selectors
-import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridActions } from './GridSelectors';
+import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoActions } from './GridSelectors';
 
 export { GridColumn };
 
@@ -26,11 +26,12 @@ export const ColumnMenu = (props: any) => {
 export const Grid = ({ data, onDataChange, children, ...others }: any) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
+  const selectGridActions = useMemo(selectGridMemoActions, []);
 
   const editField = useSelector(selectGridEditField);
   const addItemTitle = useSelector(selectGridTitleForAddNewItemSection);
   const dispatch = useDispatch();
-  const { onItemChange, onAddNewItem } = useSelector(selectGridActions, shallowEqual);
+  const { onItemChange, onAddNewItem } = useSelector(selectGridActions);
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
 

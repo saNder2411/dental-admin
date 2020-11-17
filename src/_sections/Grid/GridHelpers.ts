@@ -70,7 +70,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           teamID: '',
           lastName: '',
           firstName: '',
-          gender: 'Female' as const,
+          Gender: 'Female' as const,
           svcStaff: '',
           upcoming: '',
           email: '',
@@ -117,17 +117,36 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.TeamStaff:
       return [
         {
+          CalendarColHex: '',
+          CalendarColour: '',
+          CellPhone: '',
+          Department: null,
+          Email: '',
+          FirstName: '',
+          FullName: '',
           ID: generateId(data),
-          teamID: generateId(data),
-          photo: '',
-          firstName: '',
-          lastName: '',
-          fullName: '',
-          jobTitle: '',
-          isShowOnline: false,
-          mobilePhone: '',
-          email: '',
-          gender: 'Female' as const,
+          Id: generateId(data),
+          JobTitle: '',
+          ProfilesStatus: '',
+          ShowOnline: false,
+          TeamProfilePhoto: {
+            Description: '',
+            Url: '',
+            __metadata: {
+              type: '',
+            },
+          },
+          TeamProfilePhotoUrl: '',
+          Title: '',
+          WorkingWeekDays: null,
+          id: generateId(data),
+          __metadata: {
+            etag: '',
+            id: '',
+            type: '',
+            uri: '',
+          },
+          Gender: 'Female',
           inEdit: true,
           isNew: true,
         },
@@ -140,7 +159,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
 };
 
 export const updateDataAfterEditNewItem = (data: GridDataItem[], dataItem: GridDataItem): GridDataItem[] => {
-  const newItem = { ...dataItem, inEdit: false, isNew: false, id: generateId(data) };
+  const newItem = { ...dataItem, inEdit: false, isNew: false };
   const index = data.findIndex(({ ID }) => ID === dataItem.ID);
 
   if (index < 0) return data;
@@ -157,7 +176,7 @@ export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem):
     return { titleForAddNewItemSection: 'New Service', dataName: GridDataName.Services };
   } else if ('upcoming' in dataItem) {
     return { titleForAddNewItemSection: 'New Customer', dataName: GridDataName.Customers };
-  } else if ('isShowOnline' in dataItem) {
+  } else if ('JobTitle' in dataItem) {
     return { titleForAddNewItemSection: 'New Staff', dataName: GridDataName.TeamStaff };
   }
   return { titleForAddNewItemSection: '', dataName: GridDataName.Default };

@@ -21,7 +21,7 @@ interface IconStyle extends CSSProperties {
   '--fa-secondary-color': string;
 }
 
-type TIconBook = {
+type IconMapType = {
   [key in StatusNames]: {
     icon: IconDefinition;
     style: IconStyle;
@@ -29,7 +29,7 @@ type TIconBook = {
   };
 };
 
-export const IconBook: TIconBook = {
+export const IconMap: IconMapType = {
   Consultation: {
     icon: faUserHeadset,
     statusColor: '#9FA91E',

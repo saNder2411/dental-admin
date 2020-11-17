@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Styled Components
@@ -12,9 +12,9 @@ import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 // Selectors
-import { selectTeamStaffData } from '../../../TeamStaff';
+import { selectStaffMemoLastNameList } from '../../../TeamStaff/TeamStaffSelectors';
 import { selectCustomersData } from '../../../Customers';
-import { selectServicesReferences, selectServicesRoleSkills } from '../../../Services';
+import { selectServicesMemoReferences, selectServicesMemoRoleSkills } from '../../../Services';
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
 
@@ -39,17 +39,18 @@ export const StatusCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field,
 };
 
 export const SvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const data = useSelector(selectTeamStaffData);
-  const teamStaffNameList = data.map(({ lastName }) => ({ [field]: lastName, value: lastName }));
+  const selectStaffLastNames = useMemo(selectStaffMemoLastNameList, []);
+  const staffNameList = useSelector(selectStaffLastNames);
+  const dataForDropdownList = staffNameList.map((lastName) => ({ [field]: lastName, value: lastName }));
   const value = dataItem[field];
-  const dropDownListValue = teamStaffNameList.find((item) => item.value === value);
+  const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
   const onSvcStaffChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
 
   return (
     <td>
       {dataItem.inEdit ? (
         <ViewInputCellWithDataItemLoading>
-          <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={teamStaffNameList} textField={field} />
+          <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} />
         </ViewInputCellWithDataItemLoading>
       ) : (
         value
@@ -82,7 +83,8 @@ export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
 };
 
 export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const servicesReferences = useSelector(selectServicesReferences());
+  const selectServicesReferences = useMemo(selectServicesMemoReferences, [])
+  const servicesReferences = useSelector(selectServicesReferences);
   const multiSelectData = servicesReferences.map((value) => ({ [field]: value, value }));
   const value = dataItem[field] as string;
   const dropDownListValue = value ? value.split(`, `).map((value: string) => ({ [field]: value, value })) : [{ [field]: value, value }];
@@ -115,6 +117,7 @@ export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
 };
 
 export const RoleSkillsCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
+  const selectServicesRoleSkills = useMemo(selectServicesMemoRoleSkills, [])
   const roleSkills = useSelector(selectServicesRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ [field]: value, value }));
   const value = dataItem[field] as any;

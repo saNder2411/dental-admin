@@ -3,7 +3,7 @@ import { Input } from '@progress/kendo-react-inputs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Popup } from '@progress/kendo-react-popup';
 // Instruments
-import { IconBook } from '../../../_instruments';
+import { IconMap } from '../../../_instruments';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
@@ -52,7 +52,7 @@ export const ReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>>
 export const AvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
   const value = dataItem[field];
   const strValue = isString(value) ? value : '';
-  const placeholderImageUrl = dataItem.gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const placeholderImageUrl = dataItem.Gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
@@ -89,7 +89,7 @@ export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem
     </SC.ServicesImageCell>
   ) : (
     <SC.ServicesIconCell>
-      <FontAwesomeIcon className="grid__icon" icon={IconBook[StatusNames.Tooth].icon} color={IconBook[StatusNames.Tooth].statusColor} />
+      <FontAwesomeIcon className="grid__icon" icon={IconMap[StatusNames.Tooth].icon} color={IconMap[StatusNames.Tooth].statusColor} />
     </SC.ServicesIconCell>
   );
 };
@@ -100,7 +100,7 @@ export const StatusIcon: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = 
 
   return (
     <SC.StatusIcon>
-      <FontAwesomeIcon className="grid__icon" icon={IconBook[iconName as StatusNames].icon} style={IconBook[iconName as StatusNames].style} />
+      <FontAwesomeIcon className="grid__icon" icon={IconMap[iconName as StatusNames].icon} style={IconMap[iconName as StatusNames].style} />
     </SC.StatusIcon>
   );
 };

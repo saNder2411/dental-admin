@@ -3,7 +3,7 @@ export interface CustomersDataItem {
   teamID: string;
   lastName: string;
   firstName: string;
-  gender: 'Female' | 'Male';
+  Gender: 'Female' | 'Male';
   svcStaff: string;
   upcoming: string;
   email: string;
@@ -13,10 +13,6 @@ export interface CustomersDataItem {
   inEdit?: boolean;
   isNew?: boolean;
 }
-
-export type CustomersDataItemKeys = keyof CustomersDataItem;
-
-export type CustomersDataItemValues = CustomersDataItem[CustomersDataItemKeys];
 
 export interface CustomersState {
   data: CustomersDataItem[];

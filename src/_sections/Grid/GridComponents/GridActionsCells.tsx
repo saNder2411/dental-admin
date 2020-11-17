@@ -1,84 +1,65 @@
 import React, { FC, useState } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
 import { Loader } from '../../../_components';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
-import { GridDataItem, GridDataName } from '../GridTypes';
+import { GridDataItem } from '../GridTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
-// Selectors
-import { selectGridActions, selectGridEditField, selectGridDataName } from '../GridSelectors';
-import { selectServicesActions } from '../../../Services/ServicesSelectors';
+import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Helpers
 import { getOnFinallyRequestDataItem } from './GridComponentsHelpers';
+// Hooks
+import { useGridStateForActionsCell, useDomainActions } from '../GridHooks';
 
 export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
-  const { onItemEdit, onItemUpdatedAfterEdit, onItemRemove, onCancelEdit, onAddNewItemToData, onDiscardNewItemToData, setIsGridDataItemLoading } = useSelector(
-    selectGridActions,
-    shallowEqual
-  );
-  const editField = useSelector(selectGridEditField);
-  const { createService, updateService, deleteService } = useSelector(selectServicesActions, shallowEqual);
-  const gridDataName = useSelector(selectGridDataName);
+  const { editField, gridDataName, GridActions } = useGridStateForActionsCell();
+  const DomainActions = useDomainActions(gridDataName);
   const dispatch = useDispatch();
+
   const inEdit = dataItem[editField];
   const isNewItem = dataItem.isNew;
 
   const onAddItemToData = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const newDataItemForApi = others;
+    const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
-      () => onAddNewItemToData(dispatch, dataItem)
+      () => GridActions.onAddNewItemToData(dispatch, dataItem)
     );
 
     setIsDataItemLoading(true);
-    setIsGridDataItemLoading(dispatch, true)
-
-    switch (gridDataName) {
-      case GridDataName.Services:
-        createService(dispatch, newDataItemForApi as ServicesDataItem, onFinallyRequestDataItem);
-        break;
-    }
+    GridActions.setIsGridDataItemLoading(dispatch, true);
+    DomainActions.createDataItem(dispatch, newDataItemForApi, onFinallyRequestDataItem);
   };
 
   const onItemUpdated = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const updatedDataItemForApi = others;
+    const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
-      () => onItemUpdatedAfterEdit(dispatch, dataItem)
+      () => GridActions.onItemUpdatedAfterEdit(dispatch, dataItem)
     );
 
     setIsDataItemLoading(true);
-    setIsGridDataItemLoading(dispatch, true)
-
-    switch (gridDataName) {
-      case GridDataName.Services:
-        updateService(dispatch, updatedDataItemForApi as ServicesDataItem, onFinallyRequestDataItem);
-        break;
-    }
+    GridActions.setIsGridDataItemLoading(dispatch, true);
+    DomainActions.updateDataItem(dispatch, updatedDataItemForApi, onFinallyRequestDataItem);
   };
 
   const onDeleteItem = () => {
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
-      () => onItemRemove(dispatch, dataItem)
+      () => GridActions.onItemRemove(dispatch, dataItem)
     );
 
     setIsDataItemLoading(true);
-    setIsGridDataItemLoading(dispatch, true)
-
-    switch (gridDataName) {
-      case GridDataName.Services:
-        deleteService(dispatch, dataItem.ID, onFinallyRequestDataItem);
-        break;
-    }
+    GridActions.setIsGridDataItemLoading(dispatch, true);
+    DomainActions.deleteDataItem(dispatch, dataItem.ID, onFinallyRequestDataItem);
   };
 
   return inEdit ? (
@@ -92,7 +73,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
           </button>
           <button
             className="k-button"
-            onClick={() => (isNewItem ? onDiscardNewItemToData(dispatch, dataItem) : onCancelEdit(dispatch, dataItem))}
+            onClick={() => (isNewItem ? GridActions.onDiscardNewItemToData(dispatch, dataItem) : GridActions.onCancelEdit(dispatch, dataItem))}
             disabled={isDataItemLoading}>
             <span className="k-icon k-i-x" />
           </button>
@@ -105,7 +86,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
         <Loader className="d-flex justify-content-center align-items-center" isLoading={isDataItemLoading} themeColor="tertiary" />
       ) : (
         <>
-          <button className="k-button" onClick={() => onItemEdit(dispatch, dataItem)}>
+          <button className="k-button" onClick={() => GridActions.onItemEdit(dispatch, dataItem)}>
             <span className="k-icon k-i-edit" />
           </button>
           <button className="k-button" onClick={onDeleteItem}>

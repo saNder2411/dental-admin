@@ -1,1 +1,1 @@
-export * from './IconBook';
+export * from './IconMap';

@@ -1,29 +1,27 @@
 import React, { FC, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import { DateCell, AvatarCell, ActionsControlCell, GenderCell } from '../_sections';
 // Mock
 import { CustomersGridData } from './CustomersMockData';
-// Selectors
-import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Hooks
+import { useGridStateForDomain } from '../_sections/Grid/GridHooks';
 
 export const Customers: FC = (): JSX.Element => {
-  const data = useSelector(selectGridData);
-  const dataName = useSelector(selectGridDataName);
+  const { data, dataName, GridActions } = useGridStateForDomain();
   const dispatch = useDispatch();
-  const { setData } = useSelector(selectGridActions, shallowEqual);
   const localizationService = useLocalization();
 
   useEffect(() => {
     if (dataName === GridDataName.Customers) return;
 
-    setData(dispatch, CustomersGridData.slice());
-  }, [dataName, setData, dispatch]);
+    GridActions.setData(dispatch, CustomersGridData.slice());
+  }, [dataName, GridActions, dispatch]);
 
   const hasCustomersData = dataName === GridDataName.Customers;
 

@@ -17,7 +17,7 @@ import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
 import * as SC from './SchedulerStyledComponents/SchedulerItemStyled';
 // Instruments
-import { IconBook } from '../../_instruments';
+import { IconMap } from '../../_instruments';
 // Types
 import { StatusNames } from '../../Agenda/AgendaTypes';
 // Selectors
@@ -87,10 +87,10 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
             {width && width > 120 && children}
             <div className="SchedulerItem__icons">
               <div className="SchedulerItem__icon">
-                <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} />
+                <FontAwesomeIcon icon={IconMap[iconDentalName].icon} color={IconMap[iconDentalName].statusColor} />
               </div>
               <div className="SchedulerItem__icon">
-                <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
+                <FontAwesomeIcon icon={IconMap[iconName].icon} style={IconMap[iconName].style} />
               </div>
             </div>
           </SC.SchedulerItemTopWrapper>
@@ -122,10 +122,10 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
                   <span className="col-md-9">Status: {dataItem.status}</span>
                   <div className="col-md-4 row">
                     <div className="col-md-6">
-                      <FontAwesomeIcon icon={IconBook[iconDentalName].icon} color={IconBook[iconDentalName].statusColor} />
+                      <FontAwesomeIcon icon={IconMap[iconDentalName].icon} color={IconMap[iconDentalName].statusColor} />
                     </div>
                     <div className="col-md-6">
-                      <FontAwesomeIcon icon={IconBook[iconName].icon} style={IconBook[iconName].style} />
+                      <FontAwesomeIcon icon={IconMap[iconName].icon} style={IconMap[iconName].style} />
                     </div>
                   </div>
                 </div>

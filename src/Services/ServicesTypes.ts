@@ -1,8 +1,9 @@
-import { Dispatch } from 'redux';
 // Types
-import { InferValueTypes } from '../_sections/Grid/GridTypes';
+import { InferValueTypes, DomainStateActionsType } from '../_sections/Grid/GridTypes';
 // Actions
 import * as actions from './ServicesAC';
+// Other
+// import { initialState } from './ServicesReducer';
 
 export enum OfferIcons {
   Tooth = 'Tooth',
@@ -15,6 +16,7 @@ export interface APIServicesDataItem {
   ConsultReq: boolean;
   ID: number;
   Id: number;
+  id: number;
   MinutesDuration: number;
   OfferingCatType: string;
   OfferingDiscount: number;
@@ -57,10 +59,6 @@ export interface ServicesDataItem {
   isNew?: boolean;
 }
 
-export type ServicesDataItemKeys = keyof ServicesDataItem;
-
-export type ServicesDataItemValues = ServicesDataItem[ServicesDataItemKeys];
-
 export interface ServicesState {
   isDataLoading: boolean;
   data: ServicesDataItem[];
@@ -68,12 +66,7 @@ export interface ServicesState {
   isDataItemLoading: boolean;
   dataItemError: string;
   roleSkills: string[];
-  actions: {
-    fetchServicesData: (dispatch: Dispatch) => void;
-    createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) => void;
-    updateService: (dispatch: Dispatch, updatedService: ServicesDataItem, onUpdateDataItemInGridData: () => void) => void;
-    deleteService: (dispatch: Dispatch, deletedServiceID: number, onDeleteDataItemInGridData: () => void) => void;
-  };
+  actions: DomainStateActionsType<ServicesDataItem>;
 }
 
 export const ActionTypes = {
@@ -101,8 +94,8 @@ export const ActionTypes = {
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type ServiceCreateInitAsyncAC = ReturnType<typeof actions.serviceCreateInitAsyncAC>;
+export type CreateDataItemInitAsyncActionType = ReturnType<typeof actions.createDataItemInitAsyncAC>;
 
-export type ServiceUpdateInitAsyncAC = ReturnType<typeof actions.serviceUpdateInitAsyncAC>;
+export type UpdateDataItemInitAsyncActionType = ReturnType<typeof actions.updateDataItemInitAsyncAC>;
 
-export type ServiceDeleteInitAsyncAC = ReturnType<typeof actions.serviceDeleteInitAsyncAC>;
+export type DeleteDataItemInitAsyncActionType = ReturnType<typeof actions.deleteDataItemInitAsyncAC>;

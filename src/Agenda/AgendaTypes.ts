@@ -32,10 +32,6 @@ export interface AgendaDataItem {
   isNew?: boolean;
 }
 
-export type AgendaDataItemKeys = keyof AgendaDataItem;
-
-export type AgendaDataItemValues = AgendaDataItem[AgendaDataItemKeys];
-
 export interface AgDataItem {
   __metadata: {
     id: string;

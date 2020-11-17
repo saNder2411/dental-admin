@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import {
@@ -19,25 +19,24 @@ import {
 } from '../_sections';
 // Mock
 import { AgendaGridData } from './AgendaMockData';
-// Selectors
-import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Hooks
+import { useGridStateForDomain } from '../_sections/Grid/GridHooks';
 
 export const Agenda: FC = (): JSX.Element => {
-  const data = useSelector(selectGridData);
-  const dataName = useSelector(selectGridDataName);
+  const { data, dataName, GridActions } = useGridStateForDomain();
+
   const dispatch = useDispatch();
-  const { setData } = useSelector(selectGridActions, shallowEqual);
 
   const localizationService = useLocalization();
 
   useEffect(() => {
     if (dataName === GridDataName.Agenda) return;
 
-    setData(dispatch, AgendaGridData.slice());
-  }, [dataName, setData, dispatch]);
+    GridActions.setData(dispatch, AgendaGridData.slice());
+  }, [dataName, GridActions, dispatch]);
 
   const hasAgendaData = dataName === GridDataName.Agenda;
 

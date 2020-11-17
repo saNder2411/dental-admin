@@ -3,23 +3,23 @@ import { put, apply } from 'redux-saga/effects';
 // API
 import { API } from '../_REST';
 // Actions
-import * as actions from './ServicesAC';
+import * as actions from './TeamStaffAC';
 // Types
 import {
-  APIServicesDataItem,
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-} from './ServicesTypes';
+  APITeamStaffDataItem,
+} from './TeamStaffTypes';
 // Helpers
-import { transformServicesData, transformServiceDataItem } from './ServicesHelpers';
+import { transformTeamStaffData, transformTeamStaffDataItem } from './TeamStaffHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APIServicesDataItem[] = yield apply(API, API.services.getData, []);
-    const data = transformServicesData(result);
+    const result: APITeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
+    const data = transformTeamStaffData(result);
     yield put(actions.fetchDataSuccessAC(data));
   } catch (error) {
     yield put(actions.fetchDataFailureAC(error.message));
@@ -32,9 +32,9 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APIServicesDataItem = yield apply(API, API.services.createDataItem, [createdDataItem]);
-    const dataItem = transformServiceDataItem(result);
-    yield put(actions.createDataItemSuccessAC(dataItem));
+    const result: APITeamStaffDataItem = yield apply(API, API.staff.createDataItem, [createdDataItem]);
+    const data = transformTeamStaffDataItem(result);
+    yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(error.message));
   } finally {
@@ -50,9 +50,9 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APIServicesDataItem = yield apply(API, API.services.updateDataItem, [updatedDataItem]);
-    const dataItem = transformServiceDataItem(result);
-    yield put(actions.updateDataItemSuccessAC(dataItem));
+    const result: APITeamStaffDataItem = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
+    const data = transformTeamStaffDataItem(result);
+    yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
   } finally {
@@ -68,7 +68,7 @@ export function* workerDeleteDataItem({
   try {
     yield put(actions.deleteDataItemRequestAC());
 
-    yield apply(API, API.services.deleteDataItem, [deletedDataItemID]);
+    yield apply(API, API.staff.deleteDataItem, [deletedDataItemID]);
     yield put(actions.deleteDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(error.message));

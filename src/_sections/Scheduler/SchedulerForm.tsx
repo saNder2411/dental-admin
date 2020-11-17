@@ -19,7 +19,7 @@ import {
   FormMultiSelect,
 } from './SchedulerFormComponents';
 // Selectors
-import { selectServicesReferences } from '../../Services';
+import { selectServicesMemoReferences } from '../../Services/ServicesSelectors';
 // Mock
 import { CustomersGridData } from '../../Customers/CustomersMockData';
 import { TeamStaffGridData } from '../../TeamStaff/TeamStaffMockData';
@@ -67,8 +67,8 @@ const genders = [
 ];
 
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
-  const selectMemoServicesReferences = useMemo(selectServicesReferences, [])
-  const serviceReferences = useSelector(selectMemoServicesReferences);
+  const selectServicesReferences = useMemo(selectServicesMemoReferences, []);
+  const serviceReferences = useSelector(selectServicesReferences);
   // console.log(`formDataItem`, dataItem);
 
   return (

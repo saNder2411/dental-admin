@@ -2,12 +2,12 @@ import { Dispatch } from 'redux';
 // Types
 import { ActionTypes, ServicesState, Actions, ServicesDataItem } from './ServicesTypes';
 // Actions
-import { servicesFetchInitAsyncAC, serviceCreateInitAsyncAC, serviceUpdateInitAsyncAC, serviceDeleteInitAsyncAC } from './ServicesAC';
+import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './ServicesAC';
 // Helpers
 import { roleSkills } from './ServicesHelpers';
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
 
-const initialState = {
+export const initialState = {
   isDataLoading: false,
   data: [],
   dataError: ``,
@@ -15,13 +15,13 @@ const initialState = {
   dataItemError: ``,
   roleSkills,
   actions: {
-    fetchServicesData: (dispatch: Dispatch) => dispatch(servicesFetchInitAsyncAC()),
-    createService: (dispatch: Dispatch, createdService: ServicesDataItem, onAddDataItemToGRidData: () => void) =>
-      dispatch(serviceCreateInitAsyncAC(createdService, onAddDataItemToGRidData)),
-    updateService: (dispatch: Dispatch, updatedService: ServicesDataItem, onUpdateDataItemInGridData: () => void) =>
-      dispatch(serviceUpdateInitAsyncAC(updatedService, onUpdateDataItemInGridData)),
-    deleteService: (dispatch: Dispatch, deletedServiceID: number, onDeleteDataItemInGridData: () => void) =>
-      dispatch(serviceDeleteInitAsyncAC(deletedServiceID, onDeleteDataItemInGridData)),
+    fetchData: (dispatch: Dispatch) => dispatch(fetchDataInitAsyncAC()),
+    createDataItem: (dispatch: Dispatch, createdDataItem: ServicesDataItem, onAddDataItemToGRidData: () => void) =>
+      dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGRidData)),
+    updateDataItem: (dispatch: Dispatch, updatedDataItem: ServicesDataItem, onUpdateDataItemInGridData: () => void) =>
+      dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
+    deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
+      dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
   },
 };
 

@@ -1,5 +1,5 @@
-import React, { FC, useEffect } from 'react';
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import React, { FC } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -15,34 +15,21 @@ import {
   RoleSkillsCell,
 } from '../_sections/Grid/GridComponents';
 import { Loader } from '../_components';
-
-// Selectors
-import { selectGridData, selectGridDataName, selectGridActions } from '../_sections/Grid';
-import { selectServicesActions, selectServicesData, selectServicesIsDataLoading } from './ServicesSelectors';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Hooks
+import { useGridStateForDomain, useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
+import { useServicesStateForDomain } from './ServicesHooks';
 
 export const Services: FC = (): JSX.Element | null => {
-  const data = useSelector(selectGridData);
-  const servicesData = useSelector(selectServicesData);
-  const servicesIsDataLoading = useSelector(selectServicesIsDataLoading);
-  const dataName = useSelector(selectGridDataName);
+  const { data, dataName, GridActions } = useGridStateForDomain();
+  const { servicesData, servicesIsDataLoading, ServicesActions } = useServicesStateForDomain();
   const dispatch = useDispatch();
-  const { setData } = useSelector(selectGridActions, shallowEqual);
-  const { fetchServicesData } = useSelector(selectServicesActions);
   const localizationService = useLocalization();
 
-  useEffect(() => {
-    if (servicesData.length > 0) return;
-    fetchServicesData(dispatch);
-  }, [dispatch, fetchServicesData, servicesData.length]);
-
-  useEffect(() => {
-    if (dataName !== GridDataName.Services && servicesData.length > 0) {
-      setData(dispatch, servicesData);
-    }
-  }, [dataName, setData, dispatch, servicesData]);
+  useFetchDataForDomain(servicesData.length, ServicesActions, dispatch);
+  useSetGridData(dataName, GridDataName.Services, servicesData, GridActions, dispatch);
 
   const hasServicesData = dataName === GridDataName.Services;
   const contentTSX = hasServicesData && !servicesIsDataLoading && (

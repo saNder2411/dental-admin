@@ -13,7 +13,7 @@ const initialState = {
   data: orders,
   filterEmployee: TeamStaffGridData.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}),
   teams,
-  employees: TeamStaffGridData,
+  employees: [],
   formItemID: null,
   selectedItemID: null,
   setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => dispatch(setDataAC(data)),

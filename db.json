@@ -1221,175 +1221,335 @@
       "OfferingDiscount": 0.15,
       "ID": 55,
       "id": 55
+    },
+    {
+      "Amount": 50,
+      "AmountSalesTaxLocal": "",
+      "AmountTotal": "",
+      "ConsultReq": false,
+      "ID": 57,
+      "Id": 57,
+      "id": 57,
+      "MinutesDuration": 60,
+      "OfferingCatType": "",
+      "OfferingDiscount": 0,
+      "OfferingsName_Edit": "",
+      "OfferIconName": "Tooth",
+      "RoleSkills": "",
+      "SalesTaxRate": 0,
+      "ShowOnline": false,
+      "Title": "",
+      "__metadata": {
+        "etag": "",
+        "id": "",
+        "type": "",
+        "uri": ""
+      }
+    },
+    {
+      "Amount": 50,
+      "AmountSalesTaxLocal": "",
+      "AmountTotal": "",
+      "ConsultReq": false,
+      "ID": 56,
+      "Id": 56,
+      "id": 56,
+      "MinutesDuration": 60,
+      "OfferingCatType": "",
+      "OfferingDiscount": 0,
+      "OfferingsName_Edit": "",
+      "OfferIconName": "Tooth",
+      "RoleSkills": "",
+      "SalesTaxRate": 0,
+      "ShowOnline": false,
+      "Title": "",
+      "__metadata": {
+        "etag": "",
+        "id": "",
+        "type": "",
+        "uri": ""
+      }
     }
   ],
-  "serviceReferenceList": {
-    "results": [
-      {
-        "serviceRef": "Ladies Wash+Cut+Dry S1"
+  "staff": [
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(1)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(1)",
+        "etag": "\"20\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Ladies Wash+Cut+Dry S2"
+      "Id": 1,
+      "Title": "Stylist--",
+      "FirstName": "--Team",
+      "FullName": "--Team Stylist--",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Ladies Wash+Cut+Dry S3"
+      "ShowOnline": true,
+      "Email": "any.stylist@metroapps.online",
+      "CellPhone": "+89 7955 99888",
+      "JobTitle": "Various",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Khaki",
+      "CalendarColHex": "#b55717",
+      "ID": 1,
+      "id": 1,
+      "Gender": "Female"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(2)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(2)",
+        "etag": "\"12\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Mens Wash+Cut+Dry S1"
+      "Id": 2,
+      "Title": "Giroud",
+      "FirstName": "Amelia",
+      "FullName": "Amelia Giroud",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Mens Wash+Cut+Dry S2"
+      "ShowOnline": true,
+      "Email": "amelia.giroud@metroapps.online",
+      "CellPhone": "+89 7955 99888",
+      "JobTitle": "Art Director",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Rose",
+      "CalendarColHex": "#457d30",
+      "ID": 2,
+      "id": 2,
+      "Gender": "Female"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(3)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(3)",
+        "etag": "\"6\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Mens Wash+Cut+Dry S3"
+      "Id": 3,
+      "Title": "Robinson",
+      "FirstName": "Grace",
+      "FullName": "Grace Robinson",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Grace-Robinson-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Grace-Robinson-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Mens Wash+Cut+Dry S4"
+      "ShowOnline": true,
+      "Email": "grace.robinson@metroapps.online",
+      "CellPhone": "+89 7955 99444",
+      "JobTitle": "Junior Stylist",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Salmon",
+      "CalendarColHex": "#39a9e0",
+      "ID": 3,
+      "id": 3,
+      "Gender": "Female"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(4)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(4)",
+        "etag": "\"8\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Girls Wash+Cut+Dry"
+      "Id": 4,
+      "Title": "Romanov",
+      "FirstName": "Christina",
+      "FullName": "Christina Romanov",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Boys Wash+Cut+Dry"
+      "ShowOnline": true,
+      "Email": "christine.romanov@metroapps.online",
+      "CellPhone": "+89 7955 99666",
+      "JobTitle": "Senior Stylist",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Yellow",
+      "CalendarColHex": "#9fa91e",
+      "ID": 4,
+      "id": 4,
+      "Gender": "Female"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(5)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(5)",
+        "etag": "\"8\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Girl Student Wash+Cut"
+      "Id": 5,
+      "Title": "Wenger",
+      "FirstName": "David",
+      "FullName": "David Wenger",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Boy Student Wash+Cut"
+      "ShowOnline": false,
+      "Email": "david.wenger@metroapps.online",
+      "CellPhone": "+89 7955 99555",
+      "JobTitle": "Senior Stylist",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Cyan",
+      "CalendarColHex": "#ef7e26",
+      "ID": 5,
+      "id": 5,
+      "Gender": "Male"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(6)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(6)",
+        "etag": "\"6\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Highlights 1/1 S3"
+      "Id": 6,
+      "Title": "Locatelli",
+      "FirstName": "Alex",
+      "FullName": "Alex Locatelli",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Highlights 1/1 S4"
+      "ShowOnline": true,
+      "Email": "alex.locatelli@metroapps.online",
+      "CellPhone": "+89 7955 99777",
+      "JobTitle": "Stylist Director",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Purple",
+      "CalendarColHex": "#b2c7d9",
+      "ID": 6,
+      "id": 6,
+      "Gender": "Male"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(7)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(7)",
+        "etag": "\"4\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
-      {
-        "serviceRef": "Highlights 1/2 S3"
+      "Id": 7,
+      "Title": "Khan",
+      "FirstName": "Sara",
+      "FullName": "Sara Khan",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png"
       },
-      {
-        "serviceRef": "Highlights 1/2 S4"
+      "ShowOnline": true,
+      "Email": "sara.khan@metroapps.online",
+      "CellPhone": "+89 7955 99333",
+      "JobTitle": "Senior Stylist",
+      "Department": null,
+      "ProfilesStatus": "Active",
+      "WorkingWeekDays": null,
+      "CalendarColour": "Pink",
+      "CalendarColHex": "#a51a22",
+      "ID": 7,
+      "id": 7,
+      "Gender": "Female"
+    },
+    {
+      "CalendarColHex": "",
+      "CalendarColour": "",
+      "CellPhone": "+89 7955 99333",
+      "Department": null,
+      "Email": "testEmail",
+      "FirstName": "",
+      "FullName": "Full Name",
+      "ID": 8,
+      "Id": 8,
+      "JobTitle": "JobTitle",
+      "ProfilesStatus": "",
+      "ShowOnline": true,
+      "Title": "",
+      "WorkingWeekDays": null,
+      "id": 8,
+      "__metadata": {
+        "etag": "",
+        "id": "",
+        "type": "",
+        "uri": ""
       },
-      {
-        "serviceRef": "Highlights T-Section S3"
-      },
-      {
-        "serviceRef": "Highlights T-Section S4"
-      },
-      {
-        "serviceRef": "Tint+Regrowth S3"
-      },
-      {
-        "serviceRef": "Tint+Regrowth S4"
-      },
-      {
-        "serviceRef": "Mens Colour Tint 1/1 S3"
-      },
-      {
-        "serviceRef": "Ladies Blow Dry S1"
-      },
-      {
-        "serviceRef": "Ladies Long Blow Dry S1"
-      },
-      {
-        "serviceRef": "Moisture Treatment S3"
-      },
-      {
-        "serviceRef": "Protein Treatment S3"
-      },
-      {
-        "serviceRef": "Reconstructive Treatment S4"
-      },
-      {
-        "serviceRef": "Keratin Smoothening S4"
-      },
-      {
-        "serviceRef": "Balayage Natural S4"
-      },
-      {
-        "serviceRef": "Texture-Perm S3"
-      },
-      {
-        "serviceRef": "Extensions-FH16 S4"
-      },
-      {
-        "serviceRef": "Extensions-FH20 S4"
-      },
-      {
-        "serviceRef": "Bridal Head S4"
-      },
-      {
-        "serviceRef": "Bed Head Mens Shampoo-250ml"
-      },
-      {
-        "serviceRef": "Bed Head Recovery-250ml"
-      },
-      {
-        "serviceRef": "Bed Head Resurrection-250ml"
-      },
-      {
-        "serviceRef": "Clarifying Shampoo-Two 1l"
-      },
-      {
-        "serviceRef": "Original Shampoo-One 1l"
-      },
-      {
-        "serviceRef": "Shea Butter Shampoo 300ml"
-      },
-      {
-        "serviceRef": "Obsessed Antioxidants Shampoo 300ml"
-      },
-      {
-        "serviceRef": "Amplify Protein Shampoo 300ml"
-      },
-      {
-        "serviceRef": "Color Freeze Silver Shampoo 1L"
-      },
-      {
-        "serviceRef": "Hyaluronic Moisture Shampoo 1L"
-      },
-      {
-        "serviceRef": "Original The Conditioner 300ml"
-      },
-      {
-        "serviceRef": "Strong Daily Conditioner 1L"
-      },
-      {
-        "serviceRef": "Amplify Protein Conditioner 300ml"
-      },
-      {
-        "serviceRef": "Obsessed Antioxidants Conditioner 300ml"
-      },
-      {
-        "serviceRef": "Color Freeze Silver Conditioner 1L"
-      },
-      {
-        "serviceRef": "Ageless Taming Conditioner 1L"
-      },
-      {
-        "serviceRef": "Fast Dry Sculpting Spray 250ml"
-      },
-      {
-        "serviceRef": "Freeze+Shine Super Spray 500ml"
-      },
-      {
-        "serviceRef": "Firm Finish Gel 200ml"
-      },
-      {
-        "serviceRef": "Over Achiever 3-In-1 50ml"
-      },
-      {
-        "serviceRef": "Firm Style Dry Wax 50g"
-      },
-      {
-        "serviceRef": "Style Sculpting Foam 200ml"
-      },
-      {
-        "serviceRef": "Hyaluronic Treatment 200ml"
-      },
-      {
-        "serviceRef": "Color Freeze Treatment 200ml"
+      "Gender": "Female",
+      "TeamProfilePhoto": {
+        "Description": "",
+        "Url": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
+        "__metadata": {
+          "type": ""
+        }
       }
-    ]
-  }
+    },
+    {
+      "CalendarColHex": "",
+      "CalendarColour": "",
+      "CellPhone": "+89 795 99887",
+      "Department": null,
+      "Email": "july@mail.com",
+      "FirstName": "",
+      "FullName": "July Jordan",
+      "ID": 9,
+      "Id": 9,
+      "JobTitle": "Junior",
+      "ProfilesStatus": "",
+      "ShowOnline": false,
+      "Title": "",
+      "WorkingWeekDays": null,
+      "id": 9,
+      "__metadata": {
+        "etag": "",
+        "id": "",
+        "type": "",
+        "uri": ""
+      },
+      "Gender": "Female",
+      "TeamProfilePhoto": {
+        "Description": "",
+        "Url": "https://i.etsystatic.com/5346957/r/il/c30cff/2161750413/il_570xN.2161750413_1eul.jpg",
+        "__metadata": {
+          "type": ""
+        }
+      }
+    }
+  ]
 }

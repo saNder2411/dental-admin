@@ -1,7 +1,8 @@
 // Config
 import { ROOT_URL } from './config';
 // Types
-import { ServicesDataItem } from '../Services/ServicesTypes';
+import { APIServicesDataItem, ServicesDataItem } from '../Services/ServicesTypes';
+import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 
 export type FetchData<T> = () => Promise<T>;
 export type CreateDataItem<T> = (createdDataItem: T) => Promise<T>;
@@ -10,37 +11,69 @@ export type DeleteDataItem = (deletedItemID: number) => Promise<number>;
 
 interface API {
   services: {
-    getServicesData: FetchData<ServicesDataItem[]>;
-    createService: CreateDataItem<ServicesDataItem>;
-    updateService: UpdateDataItem<ServicesDataItem>;
-    deleteService: DeleteDataItem;
+    getData: FetchData<APIServicesDataItem[]>;
+    createDataItem: CreateDataItem<ServicesDataItem>;
+    updateDataItem: UpdateDataItem<ServicesDataItem>;
+    deleteDataItem: DeleteDataItem;
+  };
+  staff: {
+    getData: FetchData<APITeamStaffDataItem[]>;
+    createDataItem: CreateDataItem<APITeamStaffDataItem>;
+    updateDataItem: UpdateDataItem<APITeamStaffDataItem>;
+    deleteDataItem: DeleteDataItem;
   };
 }
 
 export const API: API = {
   services: {
-    getServicesData: () => fetch(`${ROOT_URL}/services`).then((response) => response.json()),
+    getData: () => fetch(`${ROOT_URL}/services`).then((response) => response.json()),
 
-    createService: (createdService: ServicesDataItem) =>
+    createDataItem: (createdDataItem: ServicesDataItem) =>
       fetch(`${ROOT_URL}/services`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(createdService),
+        body: JSON.stringify(createdDataItem),
       }).then((response) => response.json()),
 
-    updateService: (updatedService: ServicesDataItem) =>
-      fetch(`${ROOT_URL}/services/${updatedService.id}`, {
+    updateDataItem: (updatedDataItem: ServicesDataItem) =>
+      fetch(`${ROOT_URL}/services/${updatedDataItem.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(updatedService),
+        body: JSON.stringify(updatedDataItem),
       }).then((response) => response.json()),
 
-    deleteService: (deletedServiceID: number) =>
-      fetch(`${ROOT_URL}/services/${deletedServiceID}`, {
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/services/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
+  },
+  staff: {
+    getData: () => fetch(`${ROOT_URL}/staff`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: APITeamStaffDataItem) =>
+      fetch(`${ROOT_URL}/staff`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: APITeamStaffDataItem) =>
+      fetch(`${ROOT_URL}/staff/${updatedDataItem.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/staff/${deletedDataItemID}`, {
         method: 'DELETE',
       }).then((response) => response.json()),
   },

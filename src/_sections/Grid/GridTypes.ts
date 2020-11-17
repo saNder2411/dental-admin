@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
-import { AgendaDataItem, AgendaDataItemKeys, AgendaDataItemValues } from '../../Agenda';
-import { TeamStaffDataItem, TeamStaffDataItemKeys, TeamStaffDataItemValues } from '../../TeamStaff';
-import { CustomersDataItem, CustomersDataItemKeys, CustomersDataItemValues } from '../../Customers';
-import { ServicesDataItem, ServicesDataItemKeys, ServicesDataItemValues } from '../../Services';
+import { AgendaDataItem } from '../../Agenda';
+import { TeamStaffDataItem } from '../../TeamStaff';
+import { CustomersDataItem } from '../../Customers';
+import { ServicesDataItem } from '../../Services';
 // Actions
 import * as actions from './GridAC';
 
@@ -27,28 +27,32 @@ export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
 export type GridDataItem = InferValueTypes<{ type1: AgendaDataItem; type2: TeamStaffDataItem; type3: CustomersDataItem; type4: ServicesDataItem }>;
 
-export type GridDataItemKeys = InferValueTypes<{
-  type1: AgendaDataItemKeys;
-  type2: TeamStaffDataItemKeys;
-  type3: CustomersDataItemKeys;
-  type4: ServicesDataItemKeys;
-}>;
-
-export type GridDataItemValues = InferValueTypes<{
-  type1: AgendaDataItemValues;
-  type2: TeamStaffDataItemValues;
-  type3: CustomersDataItemValues;
-  type4: ServicesDataItemValues;
-}>;
-
-export type GridDataItemDynamicIndex = { [key in GridDataItemKeys]: GridDataItemValues };
-
 export enum GridDataName {
   Default = 'Empty',
   Agenda = 'Agenda',
   TeamStaff = 'TeamStaff',
   Customers = 'Customers',
   Services = 'Services',
+}
+
+export interface DomainStateActionsType<T> {
+  fetchData: (dispatch: Dispatch) => void;
+  createDataItem: (dispatch: Dispatch, createdDataItem: T, onAddDataItemToGridData: () => void) => void;
+  updateDataItem: (dispatch: Dispatch, updatedDataItem: T, onUpdateDataItemInGridData: () => void) => void;
+  deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => void;
+}
+
+export interface GridStateActions {
+  setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
+  setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => void;
+  onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onCancelEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
+  onAddNewItem: (dispatch: Dispatch) => void;
+  onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onDiscardNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
 }
 
 export interface GridState {
@@ -58,16 +62,10 @@ export interface GridState {
   isDataItemLoading: boolean;
   editField: 'inEdit';
   titleForAddNewItemSection: string;
-  actions: {
-    setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
-    setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => void;
-    onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-    onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-    onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-    onCancelEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-    onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
-    onAddNewItem: (dispatch: Dispatch) => void;
-    onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-    onDiscardNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  };
+  actions: GridStateActions;
 }
+
+export type DomainsStateActions = InferValueTypes<{
+  type1: DomainStateActionsType<ServicesDataItem>;
+  type2: DomainStateActionsType<TeamStaffDataItem>;
+}>;
