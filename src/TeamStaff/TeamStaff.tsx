@@ -14,15 +14,15 @@ import { useTeamStaffStateForDomain } from './TeamStaffHooks';
 
 export const TeamStaff: FC = (): JSX.Element => {
   const { data, dataName, GridActions } = useGridStateForDomain();
-  const { staffData, staffIsDataLoading, StaffActions } = useTeamStaffStateForDomain();
+  const { teamStaffData, teamStaffIsDataLoading, TeamStaffActions } = useTeamStaffStateForDomain();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchDataForDomain(staffData.length, StaffActions, dispatch);
-  useSetGridData(dataName, GridDataName.TeamStaff, staffData, GridActions, dispatch);
+  useFetchDataForDomain(teamStaffData.length, TeamStaffActions, dispatch);
+  useSetGridData(dataName, GridDataName.TeamStaff, teamStaffData, GridActions, dispatch);
 
   const hasTeamStaffData = dataName === GridDataName.TeamStaff;
-  const contentTSX = hasTeamStaffData && !staffIsDataLoading && (
+  const contentTSX = hasTeamStaffData && !teamStaffIsDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={data}>
@@ -87,7 +87,7 @@ export const TeamStaff: FC = (): JSX.Element => {
   return (
     <div id="Grid" className="stylists-page main-content">
       {contentTSX}
-      <Loader className="mt-5" isLoading={staffIsDataLoading} size={'large'} type="infinite-spinner" />
+      <Loader className="mt-5" isLoading={teamStaffIsDataLoading} size={'large'} type="infinite-spinner" />
     </div>
   );
 };

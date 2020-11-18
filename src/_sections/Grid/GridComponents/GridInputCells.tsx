@@ -7,7 +7,7 @@ import { IconMap } from '../../../_instruments';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
-import { ViewInputCellWithDataItemLoading } from './ViewInputCellWithDataItemLoading';
+import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWithDataItemLoadingState';
 // Types
 import { GridCellProps, InputChangeEvent } from './GridComponentsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
@@ -30,9 +30,9 @@ export const ReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>>
 
   return dataItem.inEdit ? (
     <td>
-      <ViewInputCellWithDataItemLoading>
+      <GridCellDecoratorWithDataItemLoadingState>
         <Input value={strValue} placeholder="Ref: TBA-000" onChange={onReferenceChange} />
-      </ViewInputCellWithDataItemLoading>
+      </GridCellDecoratorWithDataItemLoadingState>
     </td>
   ) : (
     <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
@@ -52,16 +52,16 @@ export const ReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>>
 export const AvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
   const value = dataItem[field];
   const strValue = isString(value) ? value : '';
-  const placeholderImageUrl = dataItem.Gender === 'Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const placeholderImageUrl = dataItem.Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
 
   return dataItem.inEdit ? (
     <td>
-      <ViewInputCellWithDataItemLoading>
+      <GridCellDecoratorWithDataItemLoadingState>
         <Input value={strValue} onChange={onAvatarChange} />
-      </ViewInputCellWithDataItemLoading>
+      </GridCellDecoratorWithDataItemLoadingState>
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
@@ -79,9 +79,9 @@ export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem
 
   return dataItem.inEdit ? (
     <td>
-      <ViewInputCellWithDataItemLoading>
+      <GridCellDecoratorWithDataItemLoadingState>
         <Input value={strValue} onChange={onServicesIconChange} />
-      </ViewInputCellWithDataItemLoading>
+      </GridCellDecoratorWithDataItemLoadingState>
     </td>
   ) : isImageUrl ? (
     <SC.ServicesImageCell imageUrl={strValue}>

@@ -15,7 +15,7 @@ export interface APITeamStaffDataItem {
   Id: number;
   JobTitle: string;
   ProfilesStatus: string;
-  RoleSkills: string,
+  RoleSkills: string;
   ShowOnline: boolean;
   TeamProfilePhoto: {
     Description: string;
@@ -33,7 +33,7 @@ export interface APITeamStaffDataItem {
     type: string;
     uri: string;
   };
-  Gender: 'Male' | 'Female';
+  Gender: '(2) Male' | '(1) Female';
 }
 
 export interface TeamStaffDataItem {
@@ -48,7 +48,7 @@ export interface TeamStaffDataItem {
   Id: number;
   JobTitle: string;
   ProfilesStatus: string;
-  RoleSkills: string,
+  RoleSkills: string;
   ShowOnline: boolean;
   TeamProfilePhoto: {
     Description: string;
@@ -67,7 +67,7 @@ export interface TeamStaffDataItem {
     type: string;
     uri: string;
   };
-  Gender: 'Male' | 'Female';
+  Gender: '(2) Male' | '(1) Female';
   inEdit?: boolean;
   isNew?: boolean;
 }

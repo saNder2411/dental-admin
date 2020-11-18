@@ -68,4 +68,5 @@ export interface GridState {
 export type DomainsStateActions = InferValueTypes<{
   type1: DomainStateActionsType<ServicesDataItem>;
   type2: DomainStateActionsType<TeamStaffDataItem>;
+  type3: DomainStateActionsType<CustomersDataItem>;
 }>;

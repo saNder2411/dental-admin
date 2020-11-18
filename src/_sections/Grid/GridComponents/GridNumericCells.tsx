@@ -4,7 +4,7 @@ import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
-import { ViewInputCellWithDataItemLoading } from './ViewInputCellWithDataItemLoading';
+import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWithDataItemLoadingState';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
@@ -22,9 +22,9 @@ export const DiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, fi
   return (
     <td>
       {dataItem.inEdit ? (
-        <ViewInputCellWithDataItemLoading>
+        <GridCellDecoratorWithDataItemLoadingState>
           <NumericTextBox value={numValue} step={0.01} min={0} onChange={onDiscountChange} />
-        </ViewInputCellWithDataItemLoading>
+        </GridCellDecoratorWithDataItemLoadingState>
       ) : (
         <span>{`${value ? numValue * 100 : `0`}%`}</span>
       )}
@@ -41,9 +41,9 @@ export const DurationCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, fi
   return (
     <td>
       {dataItem.inEdit ? (
-        <ViewInputCellWithDataItemLoading>
+        <GridCellDecoratorWithDataItemLoadingState>
           <NumericTextBox value={numValue} step={5} min={5} onChange={onDurationChange} />
-        </ViewInputCellWithDataItemLoading>
+        </GridCellDecoratorWithDataItemLoadingState>
       ) : (
         <span>{value}</span>
       )}

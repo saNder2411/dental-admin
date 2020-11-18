@@ -9,6 +9,7 @@ import { GridCellProps } from './GridComponentsTypes';
 import { GridDataItem } from '../GridTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 // Helpers
 import { getOnFinallyRequestDataItem } from './GridComponentsHelpers';
 // Hooks
@@ -25,7 +26,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
 
   const onAddItemToData = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem;
+    const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
@@ -39,7 +40,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem }
 
   const onItemUpdated = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem;
+    const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),

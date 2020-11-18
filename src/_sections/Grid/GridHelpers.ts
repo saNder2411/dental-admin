@@ -66,17 +66,37 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Customers:
       return [
         {
+          AgeGroup: null,
+          CellPhone: '',
+          ClientPhoto: {
+            Description: '',
+            Url: '',
+            __metadata: { type: '' },
+          },
+          ClientPhotoUrl: '',
+          Created: new Date().toISOString(),
+          Email: '',
+          FirstName: ``,
+          FullName: '',
+          Gender: '(1) Female',
+          HomePhone: ``,
           ID: generateId(data),
-          teamID: '',
-          lastName: '',
-          firstName: '',
-          Gender: 'Female' as const,
-          svcStaff: '',
-          upcoming: '',
-          email: '',
-          mobilePhone: '',
-          lastUpdate: new Date(),
-          photo: '',
+          Id: generateId(data),
+          LookupMultiHR01team: { results: [] },
+          LookupMultiAppointments: [],
+          Modified: new Date().toISOString(),
+          SvcStaff: '',
+          Title: '',
+          TrackingComments: null,
+          WorkPhone: null,
+          id: generateId(data),
+          __metadata: {
+            id: '',
+            uri: '',
+            etag: '',
+            type: '',
+          },
+          Upcoming: new Date().toISOString(),
           inEdit: true,
           isNew: true,
         },
@@ -147,7 +167,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
             type: '',
             uri: '',
           },
-          Gender: 'Female',
+          Gender: '(1) Female' as const,
           inEdit: true,
           isNew: true,
         },
@@ -175,7 +195,7 @@ export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem):
     return { titleForAddNewItemSection: 'New Appointment', dataName: GridDataName.Agenda };
   } else if ('OfferingCatType' in dataItem) {
     return { titleForAddNewItemSection: 'New Service', dataName: GridDataName.Services };
-  } else if ('upcoming' in dataItem) {
+  } else if ('Upcoming' in dataItem) {
     return { titleForAddNewItemSection: 'New Customer', dataName: GridDataName.Customers };
   } else if ('JobTitle' in dataItem) {
     return { titleForAddNewItemSection: 'New Staff', dataName: GridDataName.TeamStaff };

@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectStaffMemoActions, selectStaffMemoData, selectStaffIsDataLoading } from '../TeamStaffSelectors';
+import { selectTeamStaffMemoActions, selectTeamStaffMemoData, selectTeamStaffIsDataLoading } from '../TeamStaffSelectors';
 
 export const useTeamStaffStateForDomain = () => {
-  const selectStaffData = useMemo(selectStaffMemoData, []);
-  const selectStaffActions = useMemo(selectStaffMemoActions, []);
+  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
+  const selectTeamStaffActions = useMemo(selectTeamStaffMemoActions, []);
 
-  const staffData = useSelector(selectStaffData);
-  const staffIsDataLoading = useSelector(selectStaffIsDataLoading);
-  const StaffActions = useSelector(selectStaffActions);
+  const teamStaffData = useSelector(selectTeamStaffData);
+  const teamStaffIsDataLoading = useSelector(selectTeamStaffIsDataLoading);
+  const TeamStaffActions = useSelector(selectTeamStaffActions);
 
-  return { staffData, staffIsDataLoading, StaffActions };
+  return { teamStaffData, teamStaffIsDataLoading, TeamStaffActions };
 };

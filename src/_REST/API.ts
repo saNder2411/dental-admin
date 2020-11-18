@@ -3,6 +3,7 @@ import { ROOT_URL } from './config';
 // Types
 import { APIServicesDataItem, ServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { APICustomersDataItem } from '../Customers/CustomersTypes';
 
 export type FetchData<T> = () => Promise<T>;
 export type CreateDataItem<T> = (createdDataItem: T) => Promise<T>;
@@ -20,6 +21,12 @@ interface API {
     getData: FetchData<APITeamStaffDataItem[]>;
     createDataItem: CreateDataItem<APITeamStaffDataItem>;
     updateDataItem: UpdateDataItem<APITeamStaffDataItem>;
+    deleteDataItem: DeleteDataItem;
+  };
+  customers: {
+    getData: FetchData<APICustomersDataItem[]>;
+    createDataItem: CreateDataItem<APICustomersDataItem>;
+    updateDataItem: UpdateDataItem<APICustomersDataItem>;
     deleteDataItem: DeleteDataItem;
   };
 }
@@ -74,6 +81,32 @@ export const API: API = {
 
     deleteDataItem: (deletedDataItemID: number) =>
       fetch(`${ROOT_URL}/staff/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
+  },
+  customers: {
+    getData: () => fetch(`${ROOT_URL}/customers`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: APICustomersDataItem) =>
+      fetch(`${ROOT_URL}/customers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: APICustomersDataItem) =>
+      fetch(`${ROOT_URL}/customers/${updatedDataItem.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/customers/${deletedDataItemID}`, {
         method: 'DELETE',
       }).then((response) => response.json()),
   },
