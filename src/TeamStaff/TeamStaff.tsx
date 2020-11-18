@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { Grid, GridColumn, ColumnMenu, RoleSkillsCell } from '../_sections';
 import { AvatarCell, BooleanFlagCell, ActionsControlCell } from '../_sections';
 import { Loader } from '../_components';
 // Types
@@ -49,6 +49,13 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'JobTitle'}
             title={localizationService.toLanguageString('custom.jobTitle', 'Job Title')}
             columnMenu={ColumnMenu}
+            filter={'text'}
+          />
+          <GridColumn
+            field={'RoleSkills'}
+            title={localizationService.toLanguageString('custom.skills', 'Skills')}
+            columnMenu={ColumnMenu}
+            cell={RoleSkillsCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn

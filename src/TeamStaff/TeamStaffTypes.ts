@@ -15,6 +15,7 @@ export interface APITeamStaffDataItem {
   Id: number;
   JobTitle: string;
   ProfilesStatus: string;
+  RoleSkills: string,
   ShowOnline: boolean;
   TeamProfilePhoto: {
     Description: string;
@@ -47,6 +48,7 @@ export interface TeamStaffDataItem {
   Id: number;
   JobTitle: string;
   ProfilesStatus: string;
+  RoleSkills: string,
   ShowOnline: boolean;
   TeamProfilePhoto: {
     Description: string;

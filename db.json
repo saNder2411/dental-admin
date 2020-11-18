@@ -1283,25 +1283,26 @@
       "Title": "Stylist--",
       "FirstName": "--Team",
       "FullName": "--Team Stylist--",
-      "TeamProfilePhoto": {
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        },
-        "Description": "/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png"
-      },
       "ShowOnline": true,
       "Email": "any.stylist@metroapps.online",
       "CellPhone": "+89 7955 99888",
       "JobTitle": "Various",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "",
       "WorkingWeekDays": null,
       "CalendarColour": "Khaki",
       "CalendarColHex": "#b55717",
       "ID": 1,
       "id": 1,
-      "Gender": "Female"
+      "Gender": "Female",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png"
+      }
     },
     {
       "__metadata": {
@@ -1314,25 +1315,26 @@
       "Title": "Giroud",
       "FirstName": "Amelia",
       "FullName": "Amelia Giroud",
-      "TeamProfilePhoto": {
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        },
-        "Description": "/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png"
-      },
       "ShowOnline": true,
       "Email": "amelia.giroud@metroapps.online",
       "CellPhone": "+89 7955 99888",
       "JobTitle": "Art Director",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "Personal Dexterity",
       "WorkingWeekDays": null,
       "CalendarColour": "Rose",
       "CalendarColHex": "#457d30",
       "ID": 2,
       "id": 2,
-      "Gender": "Female"
+      "Gender": "Female",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png"
+      }
     },
     {
       "__metadata": {
@@ -1358,6 +1360,7 @@
       "JobTitle": "Junior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "Artistic & Creative",
       "WorkingWeekDays": null,
       "CalendarColour": "Salmon",
       "CalendarColHex": "#39a9e0",
@@ -1376,25 +1379,26 @@
       "Title": "Romanov",
       "FirstName": "Christina",
       "FullName": "Christina Romanov",
-      "TeamProfilePhoto": {
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        },
-        "Description": "/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png"
-      },
       "ShowOnline": true,
       "Email": "christine.romanov@metroapps.online",
       "CellPhone": "+89 7955 99666",
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "Artistic & Creative, Patience & Tolerance",
       "WorkingWeekDays": null,
       "CalendarColour": "Yellow",
       "CalendarColHex": "#9fa91e",
       "ID": 4,
       "id": 4,
-      "Gender": "Female"
+      "Gender": "Female",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png"
+      }
     },
     {
       "__metadata": {
@@ -1407,25 +1411,26 @@
       "Title": "Wenger",
       "FirstName": "David",
       "FullName": "David Wenger",
-      "TeamProfilePhoto": {
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        },
-        "Description": "/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png"
-      },
       "ShowOnline": false,
       "Email": "david.wenger@metroapps.online",
       "CellPhone": "+89 7955 99555",
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "Styling-Chunky",
       "WorkingWeekDays": null,
       "CalendarColour": "Cyan",
       "CalendarColHex": "#ef7e26",
       "ID": 5,
       "id": 5,
-      "Gender": "Male"
+      "Gender": "Male",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png"
+      }
     },
     {
       "__metadata": {
@@ -1438,25 +1443,26 @@
       "Title": "Locatelli",
       "FirstName": "Alex",
       "FullName": "Alex Locatelli",
-      "TeamProfilePhoto": {
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        },
-        "Description": "/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png"
-      },
       "ShowOnline": true,
       "Email": "alex.locatelli@metroapps.online",
       "CellPhone": "+89 7955 99777",
       "JobTitle": "Stylist Director",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "Physical Stamina, Colouring-Balayage, Rapport Building",
       "WorkingWeekDays": null,
       "CalendarColour": "Purple",
       "CalendarColHex": "#b2c7d9",
       "ID": 6,
       "id": 6,
-      "Gender": "Male"
+      "Gender": "Male",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png"
+      }
     },
     {
       "__metadata": {
@@ -1469,25 +1475,26 @@
       "Title": "Khan",
       "FirstName": "Sara",
       "FullName": "Sara Khan",
-      "TeamProfilePhoto": {
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        },
-        "Description": "/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png"
-      },
       "ShowOnline": true,
       "Email": "sara.khan@metroapps.online",
       "CellPhone": "+89 7955 99333",
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
+      "RoleSkills": "Patience & Tolerance",
       "WorkingWeekDays": null,
       "CalendarColour": "Pink",
       "CalendarColHex": "#a51a22",
       "ID": 7,
       "id": 7,
-      "Gender": "Female"
+      "Gender": "Female",
+      "TeamProfilePhoto": {
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        },
+        "Description": "/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png",
+        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png"
+      }
     },
     {
       "CalendarColHex": "",
@@ -1501,6 +1508,7 @@
       "Id": 8,
       "JobTitle": "JobTitle",
       "ProfilesStatus": "",
+      "RoleSkills": "Personal Dexterity",
       "ShowOnline": true,
       "Title": "",
       "WorkingWeekDays": null,
@@ -1532,6 +1540,7 @@
       "Id": 9,
       "JobTitle": "Junior",
       "ProfilesStatus": "",
+      "RoleSkills": "Styling-Layering",
       "ShowOnline": true,
       "Title": "",
       "WorkingWeekDays": null,
@@ -1563,6 +1572,7 @@
       "Id": 10,
       "JobTitle": "none test",
       "ProfilesStatus": "",
+      "RoleSkills": "Colouring-Ombré, Personal Dexterity, Problem Solving, Rapport Building",
       "ShowOnline": true,
       "Title": "",
       "WorkingWeekDays": null,

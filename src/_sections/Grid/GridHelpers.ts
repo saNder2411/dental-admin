@@ -128,6 +128,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Id: generateId(data),
           JobTitle: '',
           ProfilesStatus: '',
+          RoleSkills: '',
           ShowOnline: false,
           TeamProfilePhoto: {
             Description: '',
