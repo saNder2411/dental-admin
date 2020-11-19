@@ -123,7 +123,7 @@ export const LastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dat
     }
   }, [value]);
 
-  const onServicesChange = (evt: MultiSelectChangeEvent) => {
+  const onAppointmentChange = (evt: MultiSelectChangeEvent) => {
     setMultiSelectValue([...evt.target.value]);
     console.log(evt.target.value);
     onChange({
@@ -137,7 +137,7 @@ export const LastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dat
     <td>
       {dataItem.inEdit ? (
         <GridCellDecoratorWithDataItemLoadingState>
-          <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} />
+          <MultiSelect onChange={onAppointmentChange} value={multiSelectValue} data={multiSelectData} textField={field} />
         </GridCellDecoratorWithDataItemLoadingState>
       ) : (
         value[0]
