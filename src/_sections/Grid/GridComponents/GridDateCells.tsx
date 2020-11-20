@@ -10,10 +10,10 @@ import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 
 export const DateCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
   const intlService = useInternationalization();
-  const value = new Date(dataItem[field] as any) as any;
+  const value = new Date(dataItem[field] as string);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
-    onChange && onChange({ dataItem, field, syntheticEvent, value: value as any });
+    onChange && onChange({ dataItem, field, syntheticEvent, value: value?.toISOString() });
 
   return (
     <td>

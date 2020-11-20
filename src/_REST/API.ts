@@ -4,6 +4,7 @@ import { ROOT_URL } from './config';
 import { APIServicesDataItem, ServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 import { APICustomersDataItem } from '../Customers/CustomersTypes';
+import { APIAgendaDataItem } from '../Agenda/AgendaTypes';
 
 export type FetchData<T> = () => Promise<T>;
 export type CreateDataItem<T> = (createdDataItem: T) => Promise<T>;
@@ -27,6 +28,12 @@ interface API {
     getData: FetchData<APICustomersDataItem[]>;
     createDataItem: CreateDataItem<APICustomersDataItem>;
     updateDataItem: UpdateDataItem<APICustomersDataItem>;
+    deleteDataItem: DeleteDataItem;
+  };
+  agenda: {
+    getData: FetchData<APIAgendaDataItem[]>;
+    createDataItem: CreateDataItem<APIAgendaDataItem>;
+    updateDataItem: UpdateDataItem<APIAgendaDataItem>;
     deleteDataItem: DeleteDataItem;
   };
 }
@@ -107,6 +114,32 @@ export const API: API = {
 
     deleteDataItem: (deletedDataItemID: number) =>
       fetch(`${ROOT_URL}/customers/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
+  },
+  agenda: {
+    getData: () => fetch(`${ROOT_URL}/scheduler-events`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: APIAgendaDataItem) =>
+      fetch(`${ROOT_URL}/scheduler-events`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: APIAgendaDataItem) =>
+      fetch(`${ROOT_URL}/scheduler-events/${updatedDataItem.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/scheduler-events/${deletedDataItemID}`, {
         method: 'DELETE',
       }).then((response) => response.json()),
   },

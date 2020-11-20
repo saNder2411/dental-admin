@@ -30,7 +30,7 @@ type IconMapType = {
 };
 
 export const IconMap: IconMapType = {
-  Consultation: {
+  '(1) Consultation': {
     icon: faUserHeadset,
     statusColor: '#9FA91E',
     style: {
@@ -38,7 +38,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#A51A22',
     },
   },
-  Pending: {
+  '(2) Pending': {
     icon: faCalendarEdit,
     statusColor: '#DEA91A',
     style: {
@@ -46,7 +46,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#FDD245',
     },
   },
-  Reserved: {
+  '(3) Reserved': {
     icon: faCalendarPlus,
     statusColor: '#EF7E26',
     style: {
@@ -54,7 +54,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#FDD245',
     },
   },
-  Booked: {
+  '(4) Booked': {
     icon: faCalendarCheck,
     statusColor: '#DC0E24',
     style: {
@@ -62,7 +62,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#FDD245',
     },
   },
-  Paid: {
+  '(5) Paid': {
     icon: faBagsShopping,
     statusColor: '#39A9E0',
     style: {
@@ -70,7 +70,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#9FA91E',
     },
   },
-  Checking: {
+  '(6) Checking': {
     icon: faCalendarExclamation,
     statusColor: '#B55717',
     style: {
@@ -78,7 +78,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#FDD245',
     },
   },
-  Cancelled: {
+  '(7) Cancelled': {
     icon: faCalendarTimes,
     statusColor: '#A877B2',
     style: {
@@ -86,7 +86,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#FDD245',
     },
   },
-  Closed: {
+  '(8) Closed': {
     icon: faDoorClosed,
     statusColor: '#7F94A6',
     style: {
@@ -94,7 +94,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#FDD245',
     },
   },
-  Unavailable: {
+  '(9) Unavailable': {
     icon: faUserTimes,
     statusColor: '#B2B4D9',
     style: {
@@ -102,7 +102,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#8A3F7C',
     },
   },
-  Other: {
+  '(10) Other': {
     icon: faCalendar,
     statusColor: '#D9B2B4',
     style: {
@@ -110,7 +110,7 @@ export const IconMap: IconMapType = {
       '--fa-secondary-color': '#B2C7D9',
     },
   },
-  Tooth: {
+  '(11) Tooth': {
     icon: faTooth,
     statusColor: '#17325f',
     style: {

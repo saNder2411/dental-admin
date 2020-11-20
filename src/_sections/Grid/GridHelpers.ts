@@ -43,21 +43,59 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Agenda:
       return [
         {
+          AppointmentSource: null,
+          AppointmentStatus: StatusNames.Consultation,
+          CellPhone: ``,
+          Description: ``,
+          Duration: 60,
+          Email: ``,
+          EndDate: ``,
+          EventDate: ``,
+          EventType: 0,
+          FilterEnd: ``,
+          FilterStart: ``,
+          FirstName: ``,
+          Gender: '(1) Female',
           ID: generateId(data),
-          status: StatusNames.Consultation,
-          references: '',
-          start: Date.now(),
-          end: Date.now(),
-          svcStaff: '',
-          services: '',
-          totalPrice: 0,
-          lastName: '',
-          firstName: '',
-          fullName: '',
-          phone: '',
-          lastUpdate: new Date(),
-          eventId: Math.random() * 100,
-          customerGender: 'Female' as const,
+          Id: generateId(data),
+          LastNameAppt: ``,
+          LookupCM102customers: {
+            Id: -1,
+            __metadata: {
+              id: ``,
+              type: ``,
+            },
+          },
+          LookupHR01team: {
+            Id: -1,
+            __metadata: {
+              id: ``,
+              type: ``,
+            },
+          },
+          LookupMultiBP01offerings: {
+            results: [],
+          },
+          MasterSeriesItemID: null,
+          MetroRRule: null,
+          MetroRecException: null,
+          Notes: null,
+          RecurrenceID: null,
+          ServiceCharge: 40,
+          SubmissionIdUIT: null,
+          Title: ``,
+          TrackingComments: null,
+          fAllDayEvent: null,
+          id: generateId(data),
+          __metadata: {
+            etag: ``,
+            id: ``,
+            type: ``,
+            uri: ``,
+          },
+          FullName: '',
+          LookupMultiServices: [],
+          LastUpdate: ``,
           inEdit: true,
           isNew: true,
         },
@@ -191,7 +229,7 @@ export const updateDataAfterEditNewItem = (data: GridDataItem[], dataItem: GridD
 export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem): { titleForAddNewItemSection: string; dataName: GridDataName } => {
   if (!dataItem) return { titleForAddNewItemSection: '', dataName: GridDataName.Default };
 
-  if ('status' in dataItem) {
+  if ('AppointmentStatus' in dataItem) {
     return { titleForAddNewItemSection: 'New Appointment', dataName: GridDataName.Agenda };
   } else if ('OfferingCatType' in dataItem) {
     return { titleForAddNewItemSection: 'New Service', dataName: GridDataName.Services };

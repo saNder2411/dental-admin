@@ -6,7 +6,6 @@ import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWi
 import { Loader } from '../../../_components';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
@@ -14,7 +13,7 @@ import { onGridDropDownChange } from './GridComponentsHelpers';
 import { useTeamStaffStateForDomain } from '../../../TeamStaff/TeamStaffHooks';
 import { useFetchDataForDomain } from '../GridHooks';
 
-export const GridCellDecoratorWithFetchingData: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({
+export const GridCellDecoratorWithFetchingData: FC<GridCellProps<CustomersDataItem>> = ({
   dataItem,
   field,
   onChange,
@@ -25,9 +24,9 @@ export const GridCellDecoratorWithFetchingData: FC<GridCellProps<AgendaDataItem 
 
   const staffNameList = teamStaffData.map(({ FullName }) => FullName.split(' ').slice(-1)[0]);
   const dataForDropdownList = staffNameList.map((lastName) => ({ [field]: lastName, value: lastName }));
-  const value = dataItem[field] as any;
+  const value = dataItem[field] as string;
   const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
-  const onSvcStaffChange = onGridDropDownChange<AgendaDataItem | CustomersDataItem>(dataItem, field, onChange);
+  const onSvcStaffChange = onGridDropDownChange<CustomersDataItem>(dataItem, field, onChange);
 
   return (
     <GridCellDecoratorWithDataItemLoadingState>

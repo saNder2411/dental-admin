@@ -1,26 +1,50 @@
 import { SagaIterator } from '@redux-saga/core';
-import { put, apply } from 'redux-saga/effects';
+import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../_REST';
 // Actions
-import * as actions from './TeamStaffAC';
+import * as actions from './AgendaAC';
+import * as servicesActions from '../Services/ServicesAC';
+import * as teamStaffActions from '../TeamStaff/TeamStaffAC';
 // Types
 import {
+  FetchDataInitAsyncActionType,
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  APITeamStaffDataItem,
-} from './TeamStaffTypes';
+  APIAgendaDataItem,
+} from './AgendaTypes';
+import { APIServicesDataItem } from '../Services/ServicesTypes';
+import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 // Helpers
-import { transformData, transformDataItem } from './TeamStaffHelpers';
+import { transformData, transformDataItem } from './AgendaHelpers';
+import { transformData as transformServicesData } from '../Services/ServicesHelpers';
+import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
 
-export function* workerFetchData(): SagaIterator {
+type Results = [APIAgendaDataItem[], APIServicesDataItem[] | null, APITeamStaffDataItem[] | null];
+
+export function* workerFetchData({ meta: { servicesDataLength, teamStaffDataLength } }: FetchDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APITeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
-    const data = transformData(result);
+    const [agendaResult, servicesResult, teamStaffResult]: Results = yield all([
+      apply(API, API.agenda.getData, []),
+      servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
+      teamStaffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
+    ]);
+
+    const data = transformData(agendaResult);
     yield put(actions.fetchDataSuccessAC(data));
+
+    if (servicesResult) {
+      const data = transformServicesData(servicesResult);
+      yield put(servicesActions.fetchDataSuccessAC(data));
+    }
+
+    if (teamStaffResult) {
+      const data = transformTeamStaffData(teamStaffResult);
+      yield put(teamStaffActions.fetchDataSuccessAC(data));
+    }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(error.message));
   } finally {
@@ -32,7 +56,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APITeamStaffDataItem = yield apply(API, API.staff.createDataItem, [createdDataItem]);
+    const result: APIAgendaDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
     const data = transformDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
@@ -50,7 +74,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APITeamStaffDataItem = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
+    const result: APIAgendaDataItem = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
     const data = transformDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
@@ -68,7 +92,7 @@ export function* workerDeleteDataItem({
   try {
     yield put(actions.deleteDataItemRequestAC());
 
-    yield apply(API, API.staff.deleteDataItem, [deletedDataItemID]);
+    yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
     yield put(actions.deleteDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(error.message));

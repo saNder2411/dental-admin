@@ -1,10 +1,10 @@
 // Types
-import { AgendaDataItem, StatusNames } from './AgendaTypes';
+import { StatusNames } from './AgendaTypes';
 
 const now = Date.now();
 const hour = 3.6e6;
 
-export const AgendaGridData: AgendaDataItem[] = [
+export const AgendaGridData = [
   {
     ID: 1,
     status: StatusNames.Pending,

@@ -1,7 +1,7 @@
 // Types
 import { ActionTypes, TeamStaffDataItem } from './TeamStaffTypes';
 // Helpers
-import { transformTeamStaffDataItemForAPI } from './TeamStaffHelpers';
+import { transformDataItemForAPI } from './TeamStaffHelpers';
 // Sync
 export const fetchDataRequestAC = () => ({ type: ActionTypes.FETCH_DATA_REQUEST });
 
@@ -39,13 +39,13 @@ export const fetchDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_A
 
 export const createDataItemInitAsyncAC = (createdDataItem: TeamStaffDataItem, onAddDataItemToGridData: () => void) => ({
   type: ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC,
-  payload: transformTeamStaffDataItemForAPI(createdDataItem),
+  payload: transformDataItemForAPI(createdDataItem),
   meta: onAddDataItemToGridData,
 });
 
 export const updateDataItemInitAsyncAC = (updatedDataItem: TeamStaffDataItem, onUpdateDataItemInGridData: () => void) => ({
   type: ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC,
-  payload: transformTeamStaffDataItemForAPI(updatedDataItem),
+  payload: transformDataItemForAPI(updatedDataItem),
   meta: onUpdateDataItemInGridData,
 });
 

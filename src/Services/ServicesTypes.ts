@@ -19,6 +19,7 @@ export interface APIServicesDataItem {
   OfferingCatType: string;
   OfferingDiscount: number;
   OfferingsName_Edit: string;
+  RoleSkills: string;
   SalesTaxRate: number;
   ShowOnline: boolean;
   Title: string;
@@ -30,29 +31,8 @@ export interface APIServicesDataItem {
   };
 }
 
-export interface ServicesDataItem {
-  Amount: number;
-  AmountSalesTaxLocal: string;
-  AmountTotal: string;
-  ConsultReq: boolean;
-  ID: number;
-  Id: number;
-  id: number;
-  MinutesDuration: number;
-  OfferingCatType: string;
-  OfferingDiscount: number;
-  OfferingsName_Edit: string;
+export interface ServicesDataItem extends APIServicesDataItem {
   OfferIconName: OfferIcons;
-  RoleSkills?: string;
-  SalesTaxRate: number;
-  ShowOnline: boolean;
-  Title: string;
-  __metadata: {
-    etag: string;
-    id: string;
-    type: string;
-    uri: string;
-  };
   inEdit?: boolean;
   isNew?: boolean;
 }

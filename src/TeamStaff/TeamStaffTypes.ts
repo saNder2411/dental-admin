@@ -36,38 +36,8 @@ export interface APITeamStaffDataItem {
   Gender: '(2) Male' | '(1) Female';
 }
 
-export interface TeamStaffDataItem {
-  CalendarColHex: string;
-  CalendarColour: string;
-  CellPhone: string;
-  Department: null | string;
-  Email: string;
-  FirstName: string;
-  FullName: string;
-  ID: number;
-  Id: number;
-  JobTitle: string;
-  ProfilesStatus: string;
-  RoleSkills: string;
-  ShowOnline: boolean;
-  TeamProfilePhoto: {
-    Description: string;
-    Url: string;
-    __metadata: {
-      type: string;
-    };
-  };
+export interface TeamStaffDataItem extends APITeamStaffDataItem {
   TeamProfilePhotoUrl: string;
-  Title: string;
-  WorkingWeekDays: null | string;
-  id: number;
-  __metadata: {
-    etag: string;
-    id: string;
-    type: string;
-    uri: string;
-  };
-  Gender: '(2) Male' | '(1) Female';
   inEdit?: boolean;
   isNew?: boolean;
 }

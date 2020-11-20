@@ -1,16 +1,16 @@
 // Types
 import { APICustomersDataItem, CustomersDataItem } from './CustomersTypes';
 
-export const transformCustomersData = (apiResults: APICustomersDataItem[]): CustomersDataItem[] =>
+export const transformData = (apiResults: APICustomersDataItem[]): CustomersDataItem[] =>
   apiResults.map((item) => ({ ...item, ClientPhotoUrl: item.ClientPhoto?.Url ?? '', LookupMultiAppointments: item.LookupMultiHR01team.results }));
 
-export const transformCustomersDataItem = (apiResult: APICustomersDataItem): CustomersDataItem => ({
+export const transformDataItem = (apiResult: APICustomersDataItem): CustomersDataItem => ({
   ...apiResult,
   ClientPhotoUrl: apiResult.ClientPhoto?.Url ?? '',
   LookupMultiAppointments: apiResult.LookupMultiHR01team.results,
 });
 
-export const transformCustomersDataItemForAPI = ({
+export const transformDataItemForAPI = ({
   ClientPhoto,
   ClientPhotoUrl,
   LookupMultiHR01team,

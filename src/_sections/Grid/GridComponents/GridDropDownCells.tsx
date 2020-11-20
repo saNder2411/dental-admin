@@ -1,6 +1,6 @@
-import React, { FC, useState, useEffect, useMemo } from 'react';
+import React, { FC, useState, useEffect, useMemo, ReactText } from 'react';
 import { useSelector } from 'react-redux';
-import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
+import { DropDownList, MultiSelect, MultiSelectChangeEvent, DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
@@ -14,7 +14,8 @@ import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 // Selectors
 import { selectCustomersMemoFullNameList } from '../../../Customers/CustomersSelectors';
-import { selectServicesMemoReferences, selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
+import { selectServicesMemoData, selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
+import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
 
@@ -38,11 +39,51 @@ export const StatusCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field,
   );
 };
 
-export const SvcStaffCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = (props): JSX.Element => {
+export const SvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
   const value = dataItem[field];
 
   return <td>{dataItem.inEdit ? <GridCellDecoratorWithFetchingData {...props} /> : value}</td>;
+};
+
+export const AgendaSvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
+  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
+  const teamStaffData = useSelector(selectTeamStaffData);
+  const currentEmployee = teamStaffData.find(({ Id }) => Id === dataItem.LookupHR01team.Id);
+  const value = currentEmployee ? currentEmployee.FullName.split(' ').slice(-1)[0] : '';
+
+  const dataForDropdownList = teamStaffData.map(({ FullName, Id, __metadata }) => ({
+    [field]: FullName.split(' ').slice(-1)[0],
+    value: FullName.split(' ').slice(-1)[0],
+    meta: {
+      Id,
+      __metadata: {
+        id: __metadata.id,
+        type: __metadata.type,
+      },
+    },
+  }));
+  const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
+  const onSvcStaffChange = (evt: DropDownListChangeEvent) => {
+    onChange({
+      dataItem,
+      field,
+      syntheticEvent: evt.syntheticEvent,
+      value: evt.target.value.meta,
+    });
+  };
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <GridCellDecoratorWithDataItemLoadingState>
+          <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} />
+        </GridCellDecoratorWithDataItemLoadingState>
+      ) : (
+        value
+      )}
+    </td>
+  );
 };
 
 export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
@@ -71,12 +112,16 @@ export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
 };
 
 export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const selectServicesReferences = useMemo(selectServicesMemoReferences, []);
-  const servicesReferences = useSelector(selectServicesReferences);
-  const multiSelectData = servicesReferences.map((value) => ({ [field]: value, value }));
-  const value = dataItem[field] as string;
-  const dropDownListValue = value ? value.split(`, `).map((value: string) => ({ [field]: value, value })) : [{ [field]: value, value }];
-  const [multiSelectValue, setMultiSelectValue] = useState<{ [key: string]: string; value: string }[]>(dropDownListValue);
+  const selectServicesData = useMemo(selectServicesMemoData, []);
+  const servicesData = useSelector(selectServicesData);
+  const multiSelectData = servicesData.map(({ OfferingsName_Edit, Id }) => ({ [field]: OfferingsName_Edit, value: Id }));
+  const dropDownListValue = dataItem.LookupMultiBP01offerings.results
+    .map(({ Id }) => multiSelectData.find(({ value }) => value === Id))
+    .map((item) => (item ? item : { [field]: '', value: -1 }));
+
+  const value = dropDownListValue.map((item) => item[field]).join(`, `);
+
+  const [multiSelectValue, setMultiSelectValue] = useState<{ [key: string]: ReactText; value: number }[]>(dropDownListValue);
 
   useEffect(() => {
     let isNewItem = !!!value;
@@ -89,7 +134,12 @@ export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, fiel
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
     setMultiSelectValue([...evt.target.value]);
-    onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value).join(', ') });
+    onChange({
+      dataItem,
+      field,
+      syntheticEvent: evt.syntheticEvent,
+      value: { results: evt.target.value.map(({ value }) => ({ Id: value, __metadata: { id: '', type: '' } })) },
+    });
   };
   return (
     <td>
@@ -146,7 +196,7 @@ export const LastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dat
   );
 };
 
-export const RoleSkillsCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
+export const RoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServicesDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
   const selectServicesRoleSkills = useMemo(selectServicesMemoRoleSkills, []);
   const roleSkills = useSelector(selectServicesRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ [field]: value, value }));

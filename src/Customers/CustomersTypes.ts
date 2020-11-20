@@ -35,54 +35,9 @@ export interface APICustomersDataItem {
   Upcoming: null | string;
 }
 
-export interface CustomersDataItem {
-  AgeGroup: null | string;
-  CellPhone: string;
-  ClientPhoto?: {
-    Description: string;
-    Url: string;
-    __metadata: { type: string };
-  };
+export interface CustomersDataItem extends APICustomersDataItem {
   ClientPhotoUrl: string;
-  Created: string;
-  Email: string;
-  FirstName: string;
-  FullName: string;
-  Gender: '(1) Female' | '(2) Male';
-  HomePhone: null | string;
-  ID: number;
-  Id: number;
-  LookupMultiHR01team: { results: string[] };
   LookupMultiAppointments: string[];
-  Modified: string;
-  SvcStaff: string;
-  Title: string;
-  TrackingComments: null | string;
-  WorkPhone: null | string;
-  id: number;
-  __metadata: {
-    id: string;
-    uri: string;
-    etag: string;
-    type: string;
-  };
-  Upcoming: null | string;
-  inEdit?: boolean;
-  isNew?: boolean;
-}
-
-export interface CustomersDataItemOld {
-  ID: number;
-  teamID: string;
-  lastName: string;
-  firstName: string;
-  Gender: '(1) Female' | '(2) Male';
-  svcStaff: string;
-  upcoming: string;
-  email: string;
-  mobilePhone: string;
-  lastUpdate: Date;
-  photo: string;
   inEdit?: boolean;
   isNew?: boolean;
 }

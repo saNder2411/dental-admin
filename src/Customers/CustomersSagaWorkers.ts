@@ -12,14 +12,14 @@ import {
   APICustomersDataItem,
 } from './CustomersTypes';
 // Helpers
-import { transformCustomersData, transformCustomersDataItem } from './CustomersHelpers';
+import { transformData, transformDataItem } from './CustomersHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
     const result: APICustomersDataItem[] = yield apply(API, API.customers.getData, []);
-    const data = transformCustomersData(result);
+    const data = transformData(result);
     yield put(actions.fetchDataSuccessAC(data));
   } catch (error) {
     yield put(actions.fetchDataFailureAC(error.message));
@@ -33,7 +33,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
     yield put(actions.createDataItemRequestAC());
 
     const result: APICustomersDataItem = yield apply(API, API.customers.createDataItem, [createdDataItem]);
-    const data = transformCustomersDataItem(result);
+    const data = transformDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(error.message));
@@ -51,7 +51,7 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemRequestAC());
 
     const result: APICustomersDataItem = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
-    const data = transformCustomersDataItem(result);
+    const data = transformDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
