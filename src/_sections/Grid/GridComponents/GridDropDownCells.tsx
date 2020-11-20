@@ -16,6 +16,7 @@ import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { selectCustomersMemoFullNameList } from '../../../Customers/CustomersSelectors';
 import { selectServicesMemoData, selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
+import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
 
@@ -52,38 +53,35 @@ export const AgendaSvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem
   const currentEmployee = teamStaffData.find(({ Id }) => Id === dataItem.LookupHR01team.Id);
   const value = currentEmployee ? currentEmployee.FullName.split(' ').slice(-1)[0] : '';
 
-  const dataForDropdownList = teamStaffData.map(({ FullName, Id, __metadata }) => ({
-    [field]: FullName.split(' ').slice(-1)[0],
-    value: FullName.split(' ').slice(-1)[0],
-    meta: {
-      Id,
-      __metadata: {
-        id: __metadata.id,
-        type: __metadata.type,
+  const AgendaSvcStaffCellDropDownList = () => {
+    const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+    const dataForDropdownList = teamStaffData.map(({ FullName, Id, __metadata }) => ({
+      [field]: FullName.split(' ').slice(-1)[0],
+      value: FullName.split(' ').slice(-1)[0],
+      meta: {
+        Id,
+        __metadata: {
+          id: __metadata.id,
+          type: __metadata.type,
+        },
       },
-    },
-  }));
-  const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
-  const onSvcStaffChange = (evt: DropDownListChangeEvent) => {
-    onChange({
-      dataItem,
-      field,
-      syntheticEvent: evt.syntheticEvent,
-      value: evt.target.value.meta,
-    });
+    }));
+    const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
+    const onSvcStaffChange = (evt: DropDownListChangeEvent) => {
+      onChange({
+        dataItem,
+        field,
+        syntheticEvent: evt.syntheticEvent,
+        value: evt.target.value.meta,
+      });
+    };
+
+    return (
+      <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} disabled={isDataItemLoading} />
+    );
   };
 
-  return (
-    <td>
-      {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
-          <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} />
-        </GridCellDecoratorWithDataItemLoadingState>
-      ) : (
-        value
-      )}
-    </td>
-  );
+  return <td>{dataItem.inEdit ? <AgendaSvcStaffCellDropDownList /> : value}</td>;
 };
 
 export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
