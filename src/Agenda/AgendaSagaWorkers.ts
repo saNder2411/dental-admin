@@ -6,6 +6,7 @@ import { API } from '../_REST';
 import * as actions from './AgendaAC';
 import * as servicesActions from '../Services/ServicesAC';
 import * as teamStaffActions from '../TeamStaff/TeamStaffAC';
+import * as customersActions from '../Customers/CustomersAC';
 // Types
 import {
   FetchDataInitAsyncActionType,
@@ -16,21 +17,26 @@ import {
 } from './AgendaTypes';
 import { APIServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { APICustomersDataItem } from '../Customers/CustomersTypes';
 // Helpers
 import { transformData, transformDataItem } from './AgendaHelpers';
 import { transformData as transformServicesData } from '../Services/ServicesHelpers';
 import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
+import { transformData as transformCustomersData } from '../Customers/CustomersHelpers';
 
-type Results = [APIAgendaDataItem[], APIServicesDataItem[] | null, APITeamStaffDataItem[] | null];
+type Results = [APIAgendaDataItem[], APIServicesDataItem[] | null, APITeamStaffDataItem[] | null, APICustomersDataItem[] | null];
 
-export function* workerFetchData({ meta: { servicesDataLength, teamStaffDataLength } }: FetchDataInitAsyncActionType): SagaIterator {
+export function* workerFetchData({
+  meta: { servicesDataLength, teamStaffDataLength, customersDataLength },
+}: FetchDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const [agendaResult, servicesResult, teamStaffResult]: Results = yield all([
+    const [agendaResult, servicesResult, teamStaffResult, customersResult]: Results = yield all([
       apply(API, API.agenda.getData, []),
       servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
       teamStaffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
+      customersDataLength === 0 ? apply(API, API.customers.getData, []) : call(() => null),
     ]);
 
     const data = transformData(agendaResult);
@@ -44,6 +50,11 @@ export function* workerFetchData({ meta: { servicesDataLength, teamStaffDataLeng
     if (teamStaffResult) {
       const data = transformTeamStaffData(teamStaffResult);
       yield put(teamStaffActions.fetchDataSuccessAC(data));
+    }
+
+    if (customersResult) {
+      const data = transformCustomersData(customersResult);
+      yield put(customersActions.fetchDataSuccessAC(data));
     }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(error.message));

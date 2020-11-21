@@ -35,7 +35,7 @@ export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: Action
 
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
 // Async
-export const fetchDataInitAsyncAC = (meta: { servicesDataLength: number; teamStaffDataLength: number }) => ({
+export const fetchDataInitAsyncAC = (meta: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) => ({
   type: ActionTypes.FETCH_DATA_INIT_ASYNC,
   meta,
 });

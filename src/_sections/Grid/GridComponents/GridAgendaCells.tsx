@@ -1,102 +1,57 @@
 import React, { FC, useState, useEffect, useMemo, ReactText } from 'react';
 import { useSelector } from 'react-redux';
-import { DropDownList, MultiSelect, MultiSelectChangeEvent, DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
+import { MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // Components
 import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWithDataItemLoadingState';
+import { AgendaSvcStaffDropDownList, AgendaStatusDropDownList, AgendaFullNameDropDownList } from './GridAgendaDropDownCells';
+// Styled Components
+import * as SC from '../GridStyledComponents/GridCellsStyled';
+// Instruments
+import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
-import { StatusNames, AgendaDataItem } from '../../../Agenda/AgendaTypes';
+import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 // Selectors
-import { selectCustomersMemoFullNameList } from '../../../Customers/CustomersSelectors';
 import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
-import { selectGridDataItemIsLoading } from '../GridSelectors';
-// Helpers
-import { onGridDropDownChange } from './GridComponentsHelpers';
 
-const statusList = Object.values(StatusNames).map((status) => ({ status, value: status }));
-
-export const StatusCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const value = dataItem[field];
-  const dropDownListValue = statusList.find(({ status }) => status === value);
-  const onStatusChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
+export const AgendaStatusIcon: FC<GridCellProps<AgendaDataItem>> = ({ dataItem }): JSX.Element => {
+  const value = dataItem.AppointmentStatus;
+  const iconName = value ? value : StatusNames.Consultation;
 
   return (
-    <td>
-      {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
-          <DropDownList onChange={onStatusChange} value={dropDownListValue} data={statusList} textField={field} />
-        </GridCellDecoratorWithDataItemLoadingState>
-      ) : (
-        value
-      )}
-    </td>
+    <SC.StatusIcon>
+      <FontAwesomeIcon className="grid__icon" icon={IconMap[iconName as StatusNames].icon} style={IconMap[iconName as StatusNames].style} />
+    </SC.StatusIcon>
   );
 };
 
-export const AgendaSvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
+export const AgendaStatusCell: FC<GridCellProps<AgendaDataItem>> = (props): JSX.Element => {
+  const { dataItem } = props;
+  const value = dataItem.AppointmentStatus;
+
+  return <td>{dataItem.inEdit ? <AgendaStatusDropDownList {...props} value={value} /> : value}</td>;
+};
+
+export const AgendaSvcStaffCell: FC<GridCellProps<AgendaDataItem>> = (props): JSX.Element => {
+  const { dataItem } = props;
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
   const currentEmployee = teamStaffData.find(({ Id }) => Id === dataItem.LookupHR01team.Id);
   const value = currentEmployee ? currentEmployee.FullName.split(' ').slice(-1)[0] : '';
 
-  const AgendaSvcStaffCellDropDownList = () => {
-    const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
-    const dataForDropdownList = teamStaffData.map(({ FullName, Id, __metadata }) => ({
-      [field]: FullName.split(' ').slice(-1)[0],
-      value: FullName.split(' ').slice(-1)[0],
-      meta: {
-        Id,
-        __metadata: {
-          id: __metadata.id,
-          type: __metadata.type,
-        },
-      },
-    }));
-    const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
-    const onSvcStaffChange = (evt: DropDownListChangeEvent) => {
-      onChange({
-        dataItem,
-        field,
-        syntheticEvent: evt.syntheticEvent,
-        value: evt.target.value.meta,
-      });
-    };
-
-    return (
-      <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} disabled={isDataItemLoading} />
-    );
-  };
-
-  return <td>{dataItem.inEdit ? <AgendaSvcStaffCellDropDownList /> : value}</td>;
+  return <td>{dataItem.inEdit ? <AgendaSvcStaffDropDownList {...props} domainData={teamStaffData} value={value} /> : value}</td>;
 };
 
-export const FullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const selectCustomersFullNameList = useMemo(selectCustomersMemoFullNameList, []);
-  const customersFullNameList = useSelector(selectCustomersFullNameList);
-  const dataForDropdownList = customersFullNameList.map((fullName) => ({
-    [field]: fullName,
-    value: fullName,
-  }));
-  const value = dataItem[field];
+export const AgendaFullNameCell: FC<GridCellProps<AgendaDataItem>> = (props): JSX.Element => {
+  const { dataItem } = props;
+  const value = dataItem.FullName;
 
-  const dropDownListValue = dataForDropdownList.find((item) => item.value === value);
-  const onLastNameChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
-
-  return (
-    <td>
-      {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
-          <DropDownList onChange={onLastNameChange} value={dropDownListValue} data={dataForDropdownList} textField={field} />
-        </GridCellDecoratorWithDataItemLoadingState>
-      ) : (
-        value
-      )}
-    </td>
-  );
+  return <td>{dataItem.inEdit ? <AgendaFullNameDropDownList {...props} value={value} /> : value}</td>;
 };
 
-export const ServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
+export const AgendaServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
   const selectServicesData = useMemo(selectServicesMemoData, []);
   const servicesData = useSelector(selectServicesData);
   const multiSelectData = servicesData.map(({ OfferingsName_Edit, Id }) => ({ [field]: OfferingsName_Edit, value: Id }));

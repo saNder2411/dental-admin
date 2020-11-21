@@ -36,7 +36,7 @@ export enum GridDataName {
 }
 
 export interface DomainStateActionsType<T> {
-  fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number }) => void;
+  fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) => void;
   createDataItem: (dispatch: Dispatch, createdDataItem: T, onAddDataItemToGridData: () => void) => void;
   updateDataItem: (dispatch: Dispatch, updatedDataItem: T, onUpdateDataItemInGridData: () => void) => void;
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => void;

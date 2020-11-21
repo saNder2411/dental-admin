@@ -1675,7 +1675,13 @@
         }
       },
       "LookupMultiHR01team": {
-        "results": ["Ladies Wash+Cut+Dry S1", "Ladies Wash+Cut+Dry S2", "Ladies Wash+Cut+Dry S1", "Highlights T-Section S4", "Tint+Regrowth S4"]
+        "results": [
+          "Ladies Wash+Cut+Dry S1",
+          "Ladies Wash+Cut+Dry S2",
+          "Ladies Wash+Cut+Dry S1",
+          "Highlights T-Section S4",
+          "Tint+Regrowth S4"
+        ]
       }
     },
     {
@@ -1848,7 +1854,13 @@
         "Url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAoADwDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAABwAEBQYIAgP/xAAvEAABAgQFAgUCBwAAAAAAAAABAgMABAURBgcSITETURUiQWGBFKEjUnGxwdHx/8QAGQEAAwEBAQAAAAAAAAAAAAAAAgQFAwEA/8QAHREAAgICAwEAAAAAAAAAAAAAAAECEQMEEiExIv/aAAwDAQACEQMRAD8A0aYZVefapdNmJyYNm2UlR357CHpiiZzVU0zA04EDU7MfhJAFz3JHwIIV9ALmpmFN4jftq+nk2r6ENm2rfvyftAmenlhesFSdIum97g97xxWp0rmfMSQON+YJ+XOXNMrFKXUa6/5ynUlgK02R+YxjOairY5jxX0gZIq78sUll9SSCF+Q2sRxGhciszvEGTR64+szA3ZecXcEdiTve5/iAzmPhmnUgszFHUsy7i9BStKk29RbUBeIzBdmsRU1QeUyS8kBwC+gk7K+DvaCxzUlaAz4qtM3Kp4XjzLo7xGImCUje5tzHXVMb0TeRcSQIg8X07xfD09KJCeqtpQbJF7KsbRLKVALzczUmpGov0vDkyGhLK6b8wkBRU56pSTewHr63v8+SsY7fhnPGFDm6RV3JWdYcZdSbaVixJjTkq5Q5PBzdVabWv62RQA2p4WGpN9kqUB/kZ/xHiCsYmUluqzKXykA9QsNhfKgLqCQT8n1gm4dqFNl8GsU+mvNOuIa87E04UqQrfVbcXTe/G0KbMHFJlLVdupFSzhcpTUrJytLZShx9/rvK16rkA7X+Yr2V8kifxbIqW2FstLKlXTccbfeJCfYor9Xl5fEa3WnVEqD0uvytpOwQob2Hvz323gr4XoNMozY8NZQlKwDrB1atubxprw+UxTe2OMnGi9sP7C5h2l3aIqWIIG8Pk8QyS0z0zVxo3hLDzimnE+JTAKJdHJHdf6D97RkZDq50MI1anHXtSiTz5iTeFCjsV4Uca6sk1yYZcdKCCbBCbdgLf3DNxailwNoQpQV09x6349uIUKDYSGIk1o1OO6Tquo24i25d4pfpdRlac8tTklMKDYSTfpqUdiPa53EKFAtUDNKUWmHOVeKSAYl2nQUCFCjjJcWf/9k="
       },
       "LookupMultiHR01team": {
-        "results": ["Ladies Wash+Cut+Dry S1", "Ladies Wash+Cut+Dry S2", "Ladies Wash+Cut+Dry S1", "Highlights T-Section S4", "Tint+Regrowth S4"]
+        "results": [
+          "Ladies Wash+Cut+Dry S1",
+          "Ladies Wash+Cut+Dry S2",
+          "Ladies Wash+Cut+Dry S1",
+          "Highlights T-Section S4",
+          "Tint+Regrowth S4"
+        ]
       }
     },
     {
@@ -1929,7 +1941,13 @@
         }
       },
       "LookupMultiHR01team": {
-        "results": ["Mens Wash+Cut+Dry S1", "Mens Wash+Cut+Dry S4", "Balayage Natural S4", "Tint+Regrowth S4", "Highlights T-Section S4"]
+        "results": [
+          "Mens Wash+Cut+Dry S1",
+          "Mens Wash+Cut+Dry S4",
+          "Balayage Natural S4",
+          "Tint+Regrowth S4",
+          "Highlights T-Section S4"
+        ]
       }
     },
     {
@@ -1964,7 +1982,13 @@
         "Url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABBADwDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAACAACAwUHBgT/xABAEAABAwMCAgYFBBMAAAAAAAABAAIDBAURBiESMQcTMkFhcVGBkaHBFEKxsggVFiIlMzU2N0NEUnJzdcLR4fD/xAAZAQADAQEBAAAAAAAAAAAAAAACAwQFAQD/xAAmEQACAgECBQQDAAAAAAAAAAAAAQIDERIhMTIzQXEEIjSBQ1HR/9oADAMBAAIRAxEAPwAmUkzi3XP681E3S+lK+6ubxvhZiJme08nDR7TnyCoJuLwP1TrXT+leAXy5w08rxlkIy+Rw9IY0E48eS9GltW2PVEJfZLjDUloy+MHhkZ5tO4QQXKtr75epau4TST1dS50kj3c8cseA7vABaNpvS950xUUGo6WsZ1FIQ+ZrBwnh7wT6Pcla13KVQ2soLdPavPSzNqKaKZhy17A4HzCmacFeYlEgUg5KMc08clwNFRx7lY99klfKan05SWfiDquplExaPmxtB3PmfoK1zP3yE/pxqZfu+qBVScRdnDOLPC0ZDR4bNB9ada8R2OUxzPc4myytdXSSvOGmMwj1jH0kIgoKCEaWq7lUVk8tHNawfkwOWtcWYORyOSfd5ob7FmUvEQIc0guOdznnjx3CKLSVB1NhtDWNkmp+vjkqGSPL8syTsDyw7hOPQFE37sM060lW5GnaRglpdL2iCpyJoqSJj8/vBgBVx3qONwcAQQQeRCk8FSzKzuSBOTGnLU9CEjm5Z2xh7nHAGST6Agv6ZL6L3reuq6Jx+ThwiHq29mUWeqJpBY69sLuGV0ZY0+gnZA5copoKyeKQEvEjg/PcR/wR2y30jaobai+0+RR1tIxzciokj383f63RQ2GpNOx8cbuCn2LD3gY5IYLBW00t/tsTnMbHGRxcew4tgPL/ACURUFQKV7WPIDGsB3OwCis4o0aMOLL69X+oob1p6CmmkjFa+aMgPIyWxlw25Hce9aNZK011AyV/b7LjjG6EK866deOkyz1NM4m3W6oayLh+e0uHG71jbyARV6JkdLaOscMcT849QTopxkk+6Jb9MoSkuzOkaU8FRt5p5TWRIzvUZ/BlTn0j6wQudIVD1NbdKqlp2mOINE7scjISA72j3on9SOH2rqd+8fWCxm7QU83R70h1U+P2dgd4scHNHtcENkdVy8FlU9Pp21+/4D1GMOz3jbKuTqW7i1ut5r5nUjmCPgc7OGD5oPPHgqRpw0A80n9lMwhCk1wLzTM3V3OBx7ntA80eOhHcWn4ndxPwCAayAfKack/rW/FHV0XVTKrSNLIw5BHwCB868DH0H5OzapMqFpCkBGNyiZKjMNU/kqo8x9KwvVX6KNW/1Kn/ALUkkMut9FUfj/Zhx7QSf2UkkYosrR+Nh/mD4o1+hf8AMyl/gakkgfOhv4ZGgsTkkkTJEf/Z"
       },
       "LookupMultiHR01team": {
-        "results": ["Ladies Wash+Cut+Dry S1", "Ladies Wash+Cut+Dry S2", "Ladies Wash+Cut+Dry S1", "Highlights T-Section S4", "Tint+Regrowth S4"]
+        "results": [
+          "Ladies Wash+Cut+Dry S1",
+          "Ladies Wash+Cut+Dry S2",
+          "Ladies Wash+Cut+Dry S1",
+          "Highlights T-Section S4",
+          "Tint+Regrowth S4"
+        ]
       }
     },
     {
@@ -1999,7 +2023,13 @@
         }
       },
       "LookupMultiHR01team": {
-        "results": ["Ladies Wash+Cut+Dry S1", "Ladies Wash+Cut+Dry S2", "Ladies Wash+Cut+Dry S1", "Highlights T-Section S4", "Tint+Regrowth S4"]
+        "results": [
+          "Ladies Wash+Cut+Dry S1",
+          "Ladies Wash+Cut+Dry S2",
+          "Ladies Wash+Cut+Dry S1",
+          "Highlights T-Section S4",
+          "Tint+Regrowth S4"
+        ]
       }
     },
     {
@@ -2034,7 +2064,13 @@
         "Url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABHADwDASIAAhEBAxEB/8QAHQAAAgEFAQEAAAAAAAAAAAAABgcAAgMEBQgBCf/EADUQAAIBAwMCAwYFAgcAAAAAAAECAwAEEQUGIRIxQVFhBxMicYGhFCNCkdEysQgzYnLB4fD/xAAZAQADAQEBAAAAAAAAAAAAAAACAwQFAAH/xAAkEQACAgEDBAIDAAAAAAAAAAABAgARAwQSIRMxQVEFYSMkcf/aAAwDAQACEQMRAD8A6VSry1aSsTWtVtdG02a8vZAkUS59SfIDzrwmoQFzzcGv6Zt7T3vdZvIrS2X9cjYyfIDuT6Cl7B7e9ly3YhMl+iE4ErW56fn3zj6Ug/ahq2q7rv5NUvGkZXdo7W2GemFBznHnzS7jsLpUDyiQLgsfPAP/AF96ScoMb0jO/tB3TomvFl0jU7W7kQAskUoLKPUdxW779q+fugXV7pV7b31pcNFds5aKdD0tFIP0nzB7eXNdmeyPeS7z2pBdydK30f5dyg8HHj9aNXB4gshHMNSK8Iq4RxVOKOBMAHpUmlp7Ur5YoLdJsO79T9J8AOAB9cfvTKf/ACm5xXOHtq3RanVWiW6VBEekhWwWxngY9an1DUte47TrbX6gTe6myXMdonTI8asWLHPxu2Tz6DA+lS5miuHNqixAgKhckBQFxkn0yM1TsnTLndUt8dEMMDQMUmmmXAB9B3J8u2PWjGD2eWmm7fL6hctfSTXC+8m4UYGcqAOwHl6VGeO80ESxwIttbgtYT7pJQY7jDxTKvw9a+p+f2pqf4c9WbTt03FrKQkOoDt2AkA7D6/3oQ3jsjTLPSdQvEuGkkMXVEqscJgcY59KBtja/qOi65ZypNIVikHvIX5wQeMZpiGhantFZlN0wq59BGkVRzVv3y1obXUvx9pDcRn4JY1cfIjNVe9YeNX3czjM2Y4gf5VytuLYyw7ymvdV6mtmYSIzeJz1H7DH1roq9l1GTqWBZV/qUZAwTz39MUnPa0dSmMEM0RQMHLNjgAdII+WWOT5CkagcWI7Aeaik2traW+8dbsobtrS31F8ROMYDBjx8yCf2pq7g0x49NtoFF5JCoVg0RlKcf6Q2P7ZNIe/t/w1890FGWuVmiBHb4+B9qbd9d7ln0lE0G4jaBk6xDN3UEdg381HkI3AjzNPTMQpBF1Bret5HpOjyiaVjM6sqxZ4GeFAGT28aXm2o5BqJabqkVgOrnLdsk+uK225NM1CRGl1MvJdZy2QQFGfCtnt7TerUre9gVVtpmCsDz7s9ivpwAc/xRhgqH7icoLuD6nUmztYhg23psbNNclYgpaOMsVVeOpseHai7OaAdm2Fxb6ag0y4SMZZGeVOvI45XBHIwe/HNHIYgDJyasxG0Ez8gpjL2pXhtofy+n3jdursKU+/LaW8hee8uW6EZXYnwXPxKB6+njRtuG/VdRjhJ54UD1NaTcGiTT301tPcK4FukvuOgYRmZsc984X7+lSZyzE12EuwKqqL7mc+6rZRX2se8jj6ljP5Nsqklm7DJ8gCP3Pypt7T0VrLSYY7xVe4VeRnzOeTW20zadvYTEonVczHqkmI7cdh6UQaZt6efpVc5PfJ4FTbWYgASwFcYLE1B2906C5gaK5tYSjcduo0Krsn8GzLZSqqNIX6Sn6T4HzweaL7G31iwlvLfcJtHuopehXtQwQqQCODz4jy/5O9tnhS3MjAMcVzLztnisCN3uW9sTR2dtFaSNhweGP6iaJ80tNbnZhIyfCPDHhRpt7UPx+jWlwxy7Jh/9w4P3FXafISNp8TP1WEIdy+ZiW1v+P3taNLnpjmZ+/fpU4++KydyRSR7kvLhezxRKOfLq/mpUrmH4j/Zyn9hR9S5tdpNTnlTHSI/6mPgKNII47dQEXAqVKbpEATd5kvyGRjk2eBAXfS9Mq3Kjhvhb59x/70pbaruZrWaOBUYl26alSpdSo6hl2hc9EXMi5mle2z0nkeYqxtvXrjTrOeDoYj3zMOR5CpUoMfBsR+amWjP/2Q=="
       },
       "LookupMultiHR01team": {
-        "results": ["Ladies Wash+Cut+Dry S1", "Ladies Wash+Cut+Dry S2", "Ladies Wash+Cut+Dry S1", "Highlights T-Section S4", "Tint+Regrowth S4"]
+        "results": [
+          "Ladies Wash+Cut+Dry S1",
+          "Ladies Wash+Cut+Dry S2",
+          "Ladies Wash+Cut+Dry S1",
+          "Highlights T-Section S4",
+          "Tint+Regrowth S4"
+        ]
       }
     },
     {
@@ -2092,6 +2128,41 @@
           "Tint+Regrowth S4",
           "Highlights T-Section S4"
         ]
+      }
+    },
+    {
+      "AgeGroup": null,
+      "CellPhone": "",
+      "Created": "2020-11-21T14:33:59.291Z",
+      "Email": "",
+      "FirstName": "Stephen",
+      "FullName": "Stephen Pye",
+      "Gender": "(2) Male",
+      "HomePhone": "",
+      "ID": 1272,
+      "Id": 1272,
+      "Modified": "2020-11-21T14:33:59.291Z",
+      "SvcStaff": "Robinson",
+      "Title": "Pye",
+      "TrackingComments": null,
+      "WorkPhone": null,
+      "id": 1272,
+      "__metadata": {
+        "id": "",
+        "uri": "",
+        "etag": "",
+        "type": ""
+      },
+      "Upcoming": "2020-11-21T14:33:59.292Z",
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": ""
+        }
+      },
+      "LookupMultiHR01team": {
+        "results": []
       }
     }
   ],
@@ -7020,20 +7091,20 @@
         "Id": 3
       },
       "Id": 533,
-      "Title": "A.L\u00f6tscher-0533",
+      "Title": "A.Lötscher-0533",
       "EventDate": "2020-11-07T10:00:00Z",
       "EndDate": "2020-11-07T11:30:00Z",
       "Duration": 5400,
-      "Description": " | Stylist-Grace Robinson | Customer-Amiee L\u00f6tscher_+189796168794-Amiee.L\u00f6tscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist-Grace Robinson | Customer-Amiee Lötscher_+189796168794-Amiee.Lötscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "MasterSeriesItemID": null,
       "RecurrenceID": null,
       "EventType": 0,
-      "Email": "Amiee.L\u00f6tscher@schedulingtoday.local",
+      "Email": "Amiee.Lötscher@schedulingtoday.local",
       "AppointmentStatus": "(2) Pending",
       "AppointmentSource": null,
       "SubmissionIdUIT": null,
-      "LastNameAppt": "L\u00f6tscher",
+      "LastNameAppt": "Lötscher",
       "Gender": "(1) Female",
       "Notes": null,
       "TrackingComments": null,
@@ -7514,20 +7585,20 @@
         "Id": 1
       },
       "Id": 565,
-      "Title": "A.L\u00f6tscher-0565",
+      "Title": "A.Lötscher-0565",
       "EventDate": "2020-11-08T08:15:00Z",
       "EndDate": "2020-11-08T08:55:00Z",
       "Duration": 2400,
-      "Description": " | Stylist-Any Stylist | Customer-Alexey L\u00f6tscher_+189763613091-Alexey.L\u00f6tscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist-Any Stylist | Customer-Alexey Lötscher_+189763613091-Alexey.Lötscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "MasterSeriesItemID": null,
       "RecurrenceID": null,
       "EventType": 0,
-      "Email": "Alexey.L\u00f6tscher@schedulingtoday.local",
+      "Email": "Alexey.Lötscher@schedulingtoday.local",
       "AppointmentStatus": "(2) Pending",
       "AppointmentSource": null,
       "SubmissionIdUIT": null,
-      "LastNameAppt": "L\u00f6tscher",
+      "LastNameAppt": "Lötscher",
       "Gender": "(2) Male",
       "Notes": null,
       "TrackingComments": null,
@@ -7848,7 +7919,9 @@
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       },
-      "LookupMultiBP01offerings": { "results": [] },
+      "LookupMultiBP01offerings": {
+        "results": []
+      },
       "LookupCM102customers": {
         "__metadata": {
           "id": "8e4b19ca-311b-42fb-982b-b5fb6f5552a1",
@@ -8565,7 +8638,9 @@
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       },
-      "LookupMultiBP01offerings": { "results": [] },
+      "LookupMultiBP01offerings": {
+        "results": []
+      },
       "LookupCM102customers": {
         "__metadata": {
           "id": "48b187fd-5649-4d0c-9cd2-99d57019f48b",
@@ -9949,7 +10024,9 @@
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       },
-      "LookupMultiBP01offerings": { "results": [] },
+      "LookupMultiBP01offerings": {
+        "results": []
+      },
       "LookupCM102customers": {
         "__metadata": {
           "id": "26b9877c-d778-4e87-9df4-a9c090389aca",
@@ -10745,20 +10822,20 @@
         "Id": 1
       },
       "Id": 579,
-      "Title": "A.L\u00f6tscher-0579",
+      "Title": "A.Lötscher-0579",
       "EventDate": "2020-11-27T08:00:00Z",
       "EndDate": "2020-11-27T18:30:00Z",
       "Duration": 37800,
-      "Description": " | Stylist-Any Stylist | Customer-Anna L\u00f6tscher_+189799346937-Anna.L\u00f6tscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist-Any Stylist | Customer-Anna Lötscher_+189799346937-Anna.Lötscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "MasterSeriesItemID": null,
       "RecurrenceID": null,
       "EventType": 0,
-      "Email": "Anna.L\u00f6tscher@schedulingtoday.local",
+      "Email": "Anna.Lötscher@schedulingtoday.local",
       "AppointmentStatus": "(2) Pending",
       "AppointmentSource": null,
       "SubmissionIdUIT": null,
-      "LastNameAppt": "L\u00f6tscher",
+      "LastNameAppt": "Lötscher",
       "Gender": "(1) Female",
       "Notes": null,
       "TrackingComments": null,
@@ -10985,20 +11062,20 @@
         "Id": 1
       },
       "Id": 585,
-      "Title": "A.B\u00fcschi-0585",
+      "Title": "A.Büschi-0585",
       "EventDate": "2020-11-29T10:30:00Z",
       "EndDate": "2020-11-29T11:15:00Z",
       "Duration": 2700,
-      "Description": " | Stylist-Any Stylist | Customer-Angelina B\u00fcschi_+189798657749-angelina.B\u00fcschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist-Any Stylist | Customer-Angelina Büschi_+189798657749-angelina.Büschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "MasterSeriesItemID": null,
       "RecurrenceID": null,
       "EventType": 0,
-      "Email": "angelina.B\u00fcschi@schedulingtoday.local",
+      "Email": "angelina.Büschi@schedulingtoday.local",
       "AppointmentStatus": "(2) Pending",
       "AppointmentSource": null,
       "SubmissionIdUIT": null,
-      "LastNameAppt": "B\u00fcschi",
+      "LastNameAppt": "Büschi",
       "Gender": "(1) Female",
       "Notes": null,
       "TrackingComments": null,
@@ -11615,7 +11692,9 @@
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       },
-      "LookupMultiBP01offerings": { "results": [] },
+      "LookupMultiBP01offerings": {
+        "results": []
+      },
       "LookupCM102customers": {
         "__metadata": {
           "id": "47c9c679-26e9-4876-aa3f-c923c97cc2fd",
@@ -11751,20 +11830,20 @@
         "Id": 5
       },
       "Id": 598,
-      "Title": "A.B\u00fcschi-0598",
+      "Title": "A.Büschi-0598",
       "EventDate": "2020-12-07T16:00:00Z",
       "EndDate": "2020-12-07T17:30:00Z",
       "Duration": 5400,
-      "Description": " | Stylist-David Wenger | Customer-Angelina B\u00fcschi_+189798657749-angelina.B\u00fcschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist-David Wenger | Customer-Angelina Büschi_+189798657749-angelina.Büschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "MasterSeriesItemID": null,
       "RecurrenceID": null,
       "EventType": 0,
-      "Email": "angelina.B\u00fcschi@schedulingtoday.local",
+      "Email": "angelina.Büschi@schedulingtoday.local",
       "AppointmentStatus": "(2) Pending",
       "AppointmentSource": null,
       "SubmissionIdUIT": null,
-      "LastNameAppt": "B\u00fcschi",
+      "LastNameAppt": "Büschi",
       "Gender": "(1) Female",
       "Notes": null,
       "TrackingComments": null,
@@ -11785,7 +11864,9 @@
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       },
-      "LookupMultiBP01offerings": { "results": [] },
+      "LookupMultiBP01offerings": {
+        "results": []
+      },
       "LookupCM102customers": {
         "__metadata": {
           "id": "2c0eeb88-269d-47df-a5b4-063ce5604349",

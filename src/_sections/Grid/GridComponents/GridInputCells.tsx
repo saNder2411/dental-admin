@@ -93,14 +93,3 @@ export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem
     </SC.ServicesIconCell>
   );
 };
-
-export const StatusIcon: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem, field }): JSX.Element => {
-  const value = dataItem[field];
-  const iconName = value ? value : StatusNames.Consultation;
-
-  return (
-    <SC.StatusIcon>
-      <FontAwesomeIcon className="grid__icon" icon={IconMap[iconName as StatusNames].icon} style={IconMap[iconName as StatusNames].style} />
-    </SC.StatusIcon>
-  );
-};

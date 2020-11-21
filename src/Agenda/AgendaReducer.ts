@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 // Types
-import { ActionTypes, AgendaState, Actions, AgendaDataItem } from './AgendaTypes';
+import { ActionTypes, AgendaState, Actions, AgendaDataItem, StatusNames } from './AgendaTypes';
 // Actions
 import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './AgendaAC';
 // Helpers
@@ -12,9 +12,10 @@ export const initialState = {
   dataError: ``,
   isDataItemLoading: false,
   dataItemError: ``,
+  statusNameList: Object.values(StatusNames),
   actions: {
-    fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number }) =>
-      dispatch(fetchDataInitAsyncAC(meta ?? { servicesDataLength: 0, teamStaffDataLength: 0 })),
+    fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
+      dispatch(fetchDataInitAsyncAC(meta ?? { servicesDataLength: 0, teamStaffDataLength: 0 , customersDataLength: 0})),
     createDataItem: (dispatch: Dispatch, createdDataItem: AgendaDataItem, onAddDataItemToGridData: () => void) =>
       dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
     updateDataItem: (dispatch: Dispatch, updatedDataItem: AgendaDataItem, onUpdateDataItemInGridData: () => void) =>

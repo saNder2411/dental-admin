@@ -8,12 +8,13 @@ export const useFetchAgendaData = (
   agendaDataLength: number,
   servicesDataLength: number,
   teamStaffDataLength: number,
+  customersDataLength: number,
   agendaStateActions: DomainStateActionsType<AgendaDataItem>,
   dispatch: Dispatch
 ) => {
   useEffect(() => {
     if (agendaDataLength > 0) return;
 
-    agendaStateActions.fetchData(dispatch, { servicesDataLength, teamStaffDataLength });
-  }, [dispatch, agendaStateActions, agendaDataLength, servicesDataLength, teamStaffDataLength]);
+    agendaStateActions.fetchData(dispatch, { servicesDataLength, teamStaffDataLength, customersDataLength });
+  }, [dispatch, agendaStateActions, agendaDataLength, servicesDataLength, teamStaffDataLength, customersDataLength]);
 };

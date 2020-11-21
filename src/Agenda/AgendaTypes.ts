@@ -84,6 +84,7 @@ export interface AgendaState {
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;
+  statusNameList: StatusNames[]
   actions: DomainStateActionsType<AgendaDataItem>;
 }
 

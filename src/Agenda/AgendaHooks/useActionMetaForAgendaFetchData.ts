@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 // Selectors
 import { selectServicesMemoData } from '../../Services/ServicesSelectors';
 import { selectTeamStaffMemoData } from '../../TeamStaff/TeamStaffSelectors';
+import {selectCustomersMemoData} from '../../Customers/CustomersSelectors';
 
 export const useActionMetaForAgendaFetchData = () => {
   const selectServicesData = useMemo(selectServicesMemoData, []);
@@ -11,5 +12,8 @@ export const useActionMetaForAgendaFetchData = () => {
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
 
-  return { servicesDataLength: servicesData.length, teamStaffDataLength: teamStaffData.length };
+  const selectCustomersData = useMemo(selectCustomersMemoData, []);
+  const customersData = useSelector(selectCustomersData);
+
+  return { servicesDataLength: servicesData.length, teamStaffDataLength: teamStaffData.length, customersDataLength: customersData.length };
 };

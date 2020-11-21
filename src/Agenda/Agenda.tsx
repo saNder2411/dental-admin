@@ -6,17 +6,18 @@ import {
   Grid,
   GridColumn,
   ColumnMenu,
-  CurrencyCell,
-  StatusIcon,
-  ActionsControlCell,
+  AgendaStatusIcon,
+  AgendaStatusCell,
+  GenericReferenceCell,
   DateCell,
-  StatusCell,
-  FullNameCell,
-  ServicesCell,
-  GenderCell,
-  ReferenceCell,
   AgendaSvcStaffCell,
-} from '../_sections';
+  AgendaServicesCell,
+  CurrencyCell,
+  AgendaFullNameCell,
+  GenderCell,
+  ActionsControlCell,
+} from '../_sections/Grid';
+
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
@@ -28,11 +29,11 @@ import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgend
 export const Agenda: FC = (): JSX.Element => {
   const { data, dataName, GridActions } = useGridStateForDomain();
   const { agendaData, agendaIsDataLoading, AgendaActions } = useAgendaStateForDomain();
-  const { servicesDataLength, teamStaffDataLength } = useActionMetaForAgendaFetchData();
+  const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, AgendaActions, dispatch);
+  useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetGridDataForAgenda(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, GridActions, dispatch);
 
   const hasAgendaData = dataName === GridDataName.Agenda;
@@ -40,12 +41,12 @@ export const Agenda: FC = (): JSX.Element => {
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={data}>
-          <GridColumn field={'AppointmentStatus'} title={` `} width={100} cell={StatusIcon as CustomGridCell} />
+          <GridColumn field={'AppointmentStatus'} title={` `} width={100} editable={false} cell={AgendaStatusIcon as CustomGridCell} />
           <GridColumn
             field={'AppointmentStatus'}
             title={localizationService.toLanguageString('custom.status', 'Status')}
             columnMenu={ColumnMenu}
-            cell={StatusCell as CustomGridCell}
+            cell={AgendaStatusCell as CustomGridCell}
             width={130}
             filter={'text'}
           />
@@ -53,7 +54,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Title'}
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
-            cell={ReferenceCell as CustomGridCell}
+            cell={GenericReferenceCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -84,7 +85,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'LookupMultiBP01offerings'}
             title={localizationService.toLanguageString('custom.services', 'Services')}
             columnMenu={ColumnMenu}
-            cell={ServicesCell as CustomGridCell}
+            cell={AgendaServicesCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -100,7 +101,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
             width={140}
-            cell={FullNameCell as CustomGridCell}
+            cell={AgendaFullNameCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
