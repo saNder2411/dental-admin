@@ -4,10 +4,9 @@ import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
-import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWithDataItemLoadingState';
+import { CellDecoratorWithDataItemLoadingState } from './CellDecoratorWithDataItemLoadingState';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 
 // Helpers
@@ -22,9 +21,9 @@ export const DiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, fi
   return (
     <td>
       {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
+        <CellDecoratorWithDataItemLoadingState>
           <NumericTextBox value={numValue} step={0.01} min={0} onChange={onDiscountChange} />
-        </GridCellDecoratorWithDataItemLoadingState>
+        </CellDecoratorWithDataItemLoadingState>
       ) : (
         <span>{`${value ? numValue * 100 : `0`}%`}</span>
       )}
@@ -41,22 +40,14 @@ export const DurationCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, fi
   return (
     <td>
       {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
+        <CellDecoratorWithDataItemLoadingState>
           <NumericTextBox value={numValue} step={5} min={5} onChange={onDurationChange} />
-        </GridCellDecoratorWithDataItemLoadingState>
+        </CellDecoratorWithDataItemLoadingState>
       ) : (
         <span>{value}</span>
       )}
     </td>
   );
-};
-
-export const CurrencyCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem, field }): JSX.Element => {
-  const intlService = useInternationalization();
-  const value = dataItem[field];
-  const numValue = isNumber(value) ? value : 50;
-
-  return <SC.CurrencyCell isNegativeAmount={numValue < 0}>{intlService.formatNumber(numValue, 'c')}</SC.CurrencyCell>;
 };
 
 export const TotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, field }): JSX.Element => {
@@ -66,8 +57,8 @@ export const TotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, 
   const calcValue = numValue > 0 ? numValue - numValue * dataItem.OfferingDiscount : 0;
 
   return (
-    <SC.CurrencyCell isNegativeAmount={calcValue < 0}>
+    <SC.GenericCurrencyCell isNegativeAmount={calcValue < 0}>
       <span>{intlService.formatNumber(calcValue, 'c')}</span>
-    </SC.CurrencyCell>
+    </SC.GenericCurrencyCell>
   );
 };

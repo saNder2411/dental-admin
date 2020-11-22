@@ -71,8 +71,6 @@ export interface APIAgendaDataItem {
 }
 
 export interface AgendaDataItem extends APIAgendaDataItem {
-  FullName: string;
-  LookupMultiServices: number[];
   LastUpdate: string;
   inEdit?: boolean;
   isNew?: boolean;

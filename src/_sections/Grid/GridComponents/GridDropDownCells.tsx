@@ -4,14 +4,13 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
-import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWithDataItemLoadingState';
-import { GridCellDecoratorWithFetchingData } from './GridCellDecoratorWithFetchingData';
+import { CellDecoratorWithDataItemLoadingState } from './CellDecoratorWithDataItemLoadingState';
+import { CellDecoratorWithFetchingData } from './CellDecoratorWithFetchingData';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
 // Helpers
@@ -21,7 +20,7 @@ export const SvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.E
   const { dataItem, field } = props;
   const value = dataItem[field];
 
-  return <td>{dataItem.inEdit ? <GridCellDecoratorWithFetchingData {...props} /> : value}</td>;
+  return <td>{dataItem.inEdit ? <CellDecoratorWithFetchingData {...props} /> : value}</td>;
 };
 
 export const LastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
@@ -56,9 +55,9 @@ export const LastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dat
   return (
     <td>
       {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
+        <CellDecoratorWithDataItemLoadingState>
           <MultiSelect onChange={onAppointmentChange} value={multiSelectValue} data={multiSelectData} textField={field} />
-        </GridCellDecoratorWithDataItemLoadingState>
+        </CellDecoratorWithDataItemLoadingState>
       ) : (
         value[0]
       )}
@@ -90,9 +89,9 @@ export const RoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServicesDataIt
   return (
     <td>
       {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
+        <CellDecoratorWithDataItemLoadingState>
           <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField={field} />
-        </GridCellDecoratorWithDataItemLoadingState>
+        </CellDecoratorWithDataItemLoadingState>
       ) : (
         value
       )}
@@ -112,9 +111,9 @@ export const BooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamStaffDataI
 
   return dataItem.inEdit ? (
     <td>
-      <GridCellDecoratorWithDataItemLoadingState>
+      <CellDecoratorWithDataItemLoadingState>
         <DropDownList onChange={onBooleanFlagChange} value={dropDownListValue} data={localizedDataForFlagCell} textField={field} />
-      </GridCellDecoratorWithDataItemLoadingState>
+      </CellDecoratorWithDataItemLoadingState>
     </td>
   ) : (
     <SC.BooleanFlagCell isOnline={flag}>
@@ -123,25 +122,3 @@ export const BooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamStaffDataI
   );
 };
 
-export const GenderCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const value = dataItem[field] ? dataItem[field] : '(1) Female';
-  const localizedDataForGenderCell = [
-    { [field]: '(1) Female', value: '(1) Female' },
-    { [field]: '(2) Male', value: '(2) Male' },
-  ];
-  const dropDownListValue = localizedDataForGenderCell.find((item) => item.value === value);
-
-  const onGenderChange = onGridDropDownChange<AgendaDataItem | CustomersDataItem>(dataItem, field, onChange);
-
-  return (
-    <td>
-      {dataItem.inEdit ? (
-        <GridCellDecoratorWithDataItemLoadingState>
-          <DropDownList onChange={onGenderChange} value={dropDownListValue} data={localizedDataForGenderCell} textField={field} />
-        </GridCellDecoratorWithDataItemLoadingState>
-      ) : (
-        value
-      )}
-    </td>
-  );
-};

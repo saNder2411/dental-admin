@@ -9,12 +9,12 @@ import {
   AgendaStatusIcon,
   AgendaStatusCell,
   GenericReferenceCell,
-  DateCell,
+  GenericDateCell,
   AgendaSvcStaffCell,
   AgendaServicesCell,
-  CurrencyCell,
+  GenericCurrencyCell,
   AgendaFullNameCell,
-  GenderCell,
+  GenericGenderCell,
   ActionsControlCell,
 } from '../_sections/Grid';
 
@@ -63,7 +63,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             width={120}
-            cell={DateCell as CustomGridCell}
+            cell={GenericDateCell as CustomGridCell}
           />
           <GridColumn
             field={'FilterEnd'}
@@ -71,7 +71,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             width={120}
-            cell={DateCell as CustomGridCell}
+            cell={GenericDateCell as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01team'}
@@ -93,11 +93,11 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
             width={90}
-            cell={CurrencyCell as CustomGridCell}
+            cell={GenericCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn
-            field={'FullName'}
+            field={'LookupCM102customers'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
             width={140}
@@ -108,7 +108,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={GenderCell as CustomGridCell}
+            cell={GenericGenderCell as CustomGridCell}
             filter={'text'}
             width={120}
           />

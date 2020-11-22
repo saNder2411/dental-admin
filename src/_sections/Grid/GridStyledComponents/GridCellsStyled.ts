@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 // Images
 
-export const CurrencyCell = styled.td<{ isNegativeAmount: boolean }>`
+export const GenericCurrencyCell = styled.td<{ isNegativeAmount: boolean }>`
   & span {
     ${({ isNegativeAmount }) =>
       isNegativeAmount &&

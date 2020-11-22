@@ -7,7 +7,7 @@ interface Props {
   children: ReactElement;
 }
 
-export const GridCellDecoratorWithDataItemLoadingState = ({ children }: Props): JSX.Element => {
+export const CellDecoratorWithDataItemLoadingState = ({ children }: Props): JSX.Element => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   return <>{Children.map(children, (child) => cloneElement(child, { disabled: isDataItemLoading }))}</>;
 };

@@ -5,11 +5,11 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
   BooleanFlagCell,
-  CurrencyCell,
+  GenericCurrencyCell,
   DiscountCell,
   TotalPriceCell,
   ServicesIconCell,
-  ReferenceCell,
+  GenericReferenceCell,
   ActionsControlCell,
   DurationCell,
   RoleSkillsCell,
@@ -49,7 +49,7 @@ export const Services: FC = (): JSX.Element | null => {
             field={'OfferingsName_Edit'}
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
-            cell={ReferenceCell as CustomGridCell}
+            cell={GenericReferenceCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -94,7 +94,7 @@ export const Services: FC = (): JSX.Element | null => {
             title={localizationService.toLanguageString('custom.price', 'Price')}
             columnMenu={ColumnMenu}
             // width={90}
-            cell={CurrencyCell as CustomGridCell}
+            cell={GenericCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn

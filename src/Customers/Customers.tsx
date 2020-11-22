@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
-import { DateCell, AvatarCell, ActionsControlCell, GenderCell, SvcStaffCell, LastAppointmentsCell } from '../_sections';
+import { GenericDateCell, AvatarCell, ActionsControlCell, GenericGenderCell, SvcStaffCell, LastAppointmentsCell } from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
@@ -49,7 +49,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={GenderCell as CustomGridCell}
+            cell={GenericGenderCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -63,7 +63,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Upcoming'}
             title={localizationService.toLanguageString('custom.upcoming', 'Upcoming')}
             columnMenu={ColumnMenu}
-            cell={DateCell as CustomGridCell}
+            cell={GenericDateCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -85,7 +85,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Modified'}
             title={localizationService.toLanguageString('custom.lastUpdate', 'Last Update')}
             columnMenu={ColumnMenu}
-            cell={DateCell as CustomGridCell}
+            cell={GenericDateCell as CustomGridCell}
             filter={'date'}
             width={140}
           />

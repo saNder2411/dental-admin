@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 // Components
-import { GridCellDecoratorWithDataItemLoadingState } from './GridCellDecoratorWithDataItemLoadingState';
+import { CellDecoratorWithDataItemLoadingState } from './CellDecoratorWithDataItemLoadingState';
 import { Loader } from '../../../_components';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
@@ -13,7 +13,7 @@ import { onGridDropDownChange } from './GridComponentsHelpers';
 import { useTeamStaffStateForDomain } from '../../../TeamStaff/TeamStaffHooks';
 import { useFetchDataForDomain } from '../GridHooks';
 
-export const GridCellDecoratorWithFetchingData: FC<GridCellProps<CustomersDataItem>> = ({
+export const CellDecoratorWithFetchingData: FC<GridCellProps<CustomersDataItem>> = ({
   dataItem,
   field,
   onChange,
@@ -29,12 +29,12 @@ export const GridCellDecoratorWithFetchingData: FC<GridCellProps<CustomersDataIt
   const onSvcStaffChange = onGridDropDownChange<CustomersDataItem>(dataItem, field, onChange);
 
   return (
-    <GridCellDecoratorWithDataItemLoadingState>
+    <CellDecoratorWithDataItemLoadingState>
       {teamStaffIsDataLoading ? (
         <Loader className="d-flex justify-content-center align-items-center" isLoading={teamStaffIsDataLoading} themeColor="tertiary" size="small" />
       ) : (
         <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} />
       )}
-    </GridCellDecoratorWithDataItemLoadingState>
+    </CellDecoratorWithDataItemLoadingState>
   );
 };

@@ -85,11 +85,13 @@
     "@types/redux-saga": "^0.10.5",
     "@types/reselect": "^2.2.0",
     "@types/styled-components": "^5.1.4",
+    "@types/uuid": "^8.3.0",
     "classnames": "^2.2.6",
     "concurrently": "^5.3.0",
     "redux-devtools-extension": "^2.13.8",
     "reselect": "^4.0.0",
     "styled-components": "^5.2.0",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "uuid": "^8.3.1"
   }
 }

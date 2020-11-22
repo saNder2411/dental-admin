@@ -2,6 +2,7 @@ import { SyntheticEvent, ChangeEvent, FC } from 'react';
 import { GridCellProps as KendoGridCellProps } from '@progress/kendo-react-grid';
 // Types
 import { GridDataItem } from '../GridTypes';
+import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 
 export type GridOnChange<T> = (evt: {
   dataItem: T;
@@ -26,4 +27,18 @@ export interface InputChangeEvent extends ChangeEvent<HTMLInputElement> {
 
 export interface CustomGridCell extends FC<KendoGridCellProps> {
   (props: GridCellProps): JSX.Element;
+}
+
+export interface AgendaDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<AgendaDataItem> {
+  value: T;
+  domainData?: U[];
+}
+
+export interface GenericInputProps<T = string, U = GridDataItem> extends GridCellProps<U> {
+  value: T;
+}
+
+export interface GenericDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<U> {
+  value: T;
+  domainData?: U[];
 }

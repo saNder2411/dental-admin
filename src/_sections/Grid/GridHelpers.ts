@@ -1,4 +1,5 @@
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
+import { v4 as uuidV4 } from 'uuid';
 // Types
 import { StatusNames } from '../../Agenda';
 import { GridDataItem, GridDataName } from './GridTypes';
@@ -39,6 +40,11 @@ export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, 
 };
 
 export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: GridDataName): GridDataItem[] => {
+  const ID = generateId(data);
+  const guid = uuidV4();
+  const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
+  const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
+
   switch (dataName) {
     case GridDataName.Agenda:
       return [
@@ -49,28 +55,28 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Description: ``,
           Duration: 60,
           Email: ``,
-          EndDate: ``,
-          EventDate: ``,
+          EndDate: new Date().toISOString(),
+          EventDate: new Date().toISOString(),
           EventType: 0,
-          FilterEnd: ``,
-          FilterStart: ``,
+          FilterEnd: new Date().toISOString(),
+          FilterStart: new Date().toISOString(),
           FirstName: ``,
           Gender: '(1) Female',
-          ID: generateId(data),
-          Id: generateId(data),
+          ID,
+          Id: ID,
           LastNameAppt: ``,
           LookupCM102customers: {
             Id: -1,
             __metadata: {
-              id: ``,
-              type: ``,
+              id: guid,
+              type: 'SP.Data.MetroBP02ListItem',
             },
           },
           LookupHR01team: {
             Id: -1,
             __metadata: {
-              id: ``,
-              type: ``,
+              id: guid,
+              type: 'SP.Data.MetroHR01ListItem',
             },
           },
           LookupMultiBP01offerings: {
@@ -86,15 +92,13 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Title: ``,
           TrackingComments: null,
           fAllDayEvent: null,
-          id: generateId(data),
+          id: ID,
           __metadata: {
-            etag: ``,
-            id: ``,
-            type: ``,
-            uri: ``,
+            id: metadataId,
+            uri: metadataUri,
+            etag: `"2"`,
+            type: `SP.Data.MetroHR03ListItem`,
           },
-          FullName: '',
-          LookupMultiServices: [],
           LastUpdate: ``,
           inEdit: true,
           isNew: true,
@@ -109,7 +113,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           ClientPhoto: {
             Description: '',
             Url: '',
-            __metadata: { type: '' },
+            __metadata: { type: 'SP.FieldUrlValue' },
           },
           ClientPhotoUrl: '',
           Created: new Date().toISOString(),
@@ -118,8 +122,8 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           FullName: '',
           Gender: '(1) Female',
           HomePhone: ``,
-          ID: generateId(data),
-          Id: generateId(data),
+          ID,
+          Id: ID,
           LookupMultiHR01team: { results: [] },
           LookupMultiAppointments: [],
           Modified: new Date().toISOString(),
@@ -127,12 +131,12 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Title: '',
           TrackingComments: null,
           WorkPhone: null,
-          id: generateId(data),
+          id: ID,
           __metadata: {
-            id: '',
-            uri: '',
-            etag: '',
-            type: '',
+            id: metadataId,
+            uri: metadataUri,
+            etag: '""',
+            type: 'SP.Data.MetroCM102ListItem',
           },
           Upcoming: new Date().toISOString(),
           inEdit: true,
@@ -148,9 +152,9 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           AmountSalesTaxLocal: '',
           AmountTotal: '',
           ConsultReq: false,
-          ID: generateId(data),
-          Id: generateId(data),
-          id: generateId(data),
+          ID,
+          Id: ID,
+          id: ID,
           MinutesDuration: 60,
           OfferingCatType: '',
           OfferingDiscount: 0,
@@ -161,10 +165,10 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           ShowOnline: false,
           Title: '',
           __metadata: {
-            etag: '',
-            id: '',
-            type: '',
-            uri: '',
+            id: metadataId,
+            uri: metadataUri,
+            etag: '""',
+            type: 'SP.Data.MetroBP02ListItem',
           },
           inEdit: true,
           isNew: true,
@@ -182,8 +186,8 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Email: '',
           FirstName: '',
           FullName: '',
-          ID: generateId(data),
-          Id: generateId(data),
+          ID,
+          Id: ID,
           JobTitle: '',
           ProfilesStatus: '',
           RoleSkills: '',
@@ -192,18 +196,18 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
             Description: '',
             Url: '',
             __metadata: {
-              type: '',
+              type: 'SP.FieldUrlValue',
             },
           },
           TeamProfilePhotoUrl: '',
           Title: '',
           WorkingWeekDays: null,
-          id: generateId(data),
+          id: ID,
           __metadata: {
-            etag: '',
-            id: '',
-            type: '',
-            uri: '',
+            id: metadataId,
+            uri: metadataUri,
+            etag: '""',
+            type: 'SP.Data.MetroHR01ListItem',
           },
           Gender: '(1) Female' as const,
           inEdit: true,
