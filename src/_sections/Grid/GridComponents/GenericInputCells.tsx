@@ -7,6 +7,8 @@ import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { InputChangeEvent, GenericInputProps } from './GridComponentsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 
 export const GenericReferenceInput: FC<GenericInputProps<string, AgendaDataItem | ServicesDataItem>> = ({ dataItem, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
@@ -18,9 +20,16 @@ export const GenericReferenceInput: FC<GenericInputProps<string, AgendaDataItem 
 
 export const GenericTextInput: FC<GenericInputProps<string | number>> = ({ dataItem, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
-  console.log(value);
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
 
   return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
+};
+
+export const GenericAvatarInput: FC<GenericInputProps<string, TeamStaffDataItem | CustomersDataItem>> = ({ dataItem, field, onChange, value }) => {
+  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+
+  const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
+
+  return <Input value={value} onChange={onAvatarChange} disabled={isDataItemLoading} />;
 };

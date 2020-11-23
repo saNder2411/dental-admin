@@ -8,9 +8,9 @@ import {
   GenericGenderCell,
   CustomersSvcStaffCell,
   GenericDateCell,
-  AvatarCell,
-  ActionsControlCell,
   CustomersLastAppointmentsCell,
+  GenericAvatarCell,
+  ActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
@@ -111,7 +111,7 @@ export const Customers: FC = (): JSX.Element => {
           <GridColumn
             field={'ClientPhotoUrl'}
             title={localizationService.toLanguageString('custom.photo', 'Photo')}
-            cell={AvatarCell as CustomGridCell}
+            cell={GenericAvatarCell as CustomGridCell}
             width={120}
           />
           <GridColumn

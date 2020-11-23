@@ -4,7 +4,7 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
-import { GenericReferenceInput, GenericTextInput } from './GenericInputCells';
+import { GenericReferenceInput, GenericTextInput, GenericAvatarInput } from './GenericInputCells';
 import { GenericDateInput } from './GenericDateCells';
 import { GenericGenderDropDownList } from './GenericDropDownCells';
 // Types
@@ -12,8 +12,12 @@ import { GridCellProps } from './GridComponentsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Helpers
 import { isString, isNumber } from './GridComponentsHelpers';
+// Images
+import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jpg';
+import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 
 export const GenericTextCell: FC<GridCellProps> = (props): JSX.Element => {
   const { dataItem, field } = props;
@@ -72,4 +76,22 @@ export const GenericGenderCell: FC<GridCellProps<AgendaDataItem | CustomersDataI
   const value = dataItem[field] ? (dataItem[field] as string) : '(1) Female';
 
   return <td>{dataItem.inEdit ? <GenericGenderDropDownList {...props} value={value} /> : value}</td>;
+};
+
+export const GenericAvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDataItem>> = (props): JSX.Element => {
+  const { dataItem, field } = props;
+  const value = dataItem[field];
+  const strValue = isString(value) ? value : '';
+  const placeholderImageUrl = dataItem.Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
+
+  return dataItem.inEdit ? (
+    <td>
+      <GenericAvatarInput {...props} value={strValue} />
+    </td>
+  ) : (
+    <SC.PhotoCell imageUrl={imageUrl}>
+      <div className="Grid__avatar" />
+    </SC.PhotoCell>
+  );
 };

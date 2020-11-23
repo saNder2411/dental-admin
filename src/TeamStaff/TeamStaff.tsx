@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu, RoleSkillsCell } from '../_sections';
-import { AvatarCell, BooleanFlagCell, ActionsControlCell } from '../_sections';
+import { GenericAvatarCell, BooleanFlagCell, ActionsControlCell } from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
@@ -36,7 +36,7 @@ export const TeamStaff: FC = (): JSX.Element => {
           <GridColumn
             field={'TeamProfilePhotoUrl'}
             title={localizationService.toLanguageString('custom.photo', 'Photo')}
-            cell={AvatarCell as CustomGridCell}
+            cell={GenericAvatarCell as CustomGridCell}
             width={120}
           />
           <GridColumn
