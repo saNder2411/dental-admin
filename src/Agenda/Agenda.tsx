@@ -23,8 +23,8 @@ import { Loader } from '../_components';
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
 // Hooks
-import { useGridStateForDomain } from '../_sections/Grid/GridHooks';
-import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData, useSetGridDataForAgenda } from './AgendaHooks';
+import { useGridStateForDomain, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
+import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
   const { data, dataName, GridActions } = useGridStateForDomain();
@@ -34,7 +34,7 @@ export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
-  useSetGridDataForAgenda(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, GridActions, dispatch);
+  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, GridActions, dispatch);
 
   const hasAgendaData = dataName === GridDataName.Agenda;
   const contentTSX = hasAgendaData && !agendaIsDataLoading && (

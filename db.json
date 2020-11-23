@@ -1644,12 +1644,6 @@
   ],
   "customers": [
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1269)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1269)",
-        "etag": "\"17\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 1269,
       "Title": "A.Female",
       "FirstName": "Consultation",
@@ -1661,12 +1655,48 @@
       "TrackingComments": null,
       "WorkPhone": null,
       "HomePhone": null,
-      "ID": 1269,
       "id": 1269,
       "Modified": "2019-10-18T05:24:48Z",
       "Created": "2019-09-18T16:01:34Z",
       "Upcoming": "2020-11-30T07:00:00.000Z",
       "SvcStaff": "Giroud",
+      "LookupMultiHR01team": {
+        "results": [
+          {
+            "Id": 3,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 4,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 6,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          }
+        ]
+      },
+      "LookupMultiAppointments": {
+        "results": [
+          {
+            "Id": 4,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          }
+        ]
+      },
+      "ID": 1269,
       "ClientPhoto": {
         "Description": "",
         "Url": "",
@@ -1674,23 +1704,14 @@
           "type": ""
         }
       },
-      "LookupMultiHR01team": {
-        "results": [
-          "Ladies Wash+Cut+Dry S1",
-          "Ladies Wash+Cut+Dry S2",
-          "Ladies Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Tint+Regrowth S4"
-        ]
+      "__metadata": {
+        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1269)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1269)",
+        "etag": "\"17\"",
+        "type": "SP.Data.MetroCM102ListItem"
       }
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1270)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1270)",
-        "etag": "\"12\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 1270,
       "Title": "A.Male",
       "FirstName": "Consultation",
@@ -1702,12 +1723,44 @@
       "TrackingComments": null,
       "WorkPhone": null,
       "HomePhone": null,
-      "ID": 1270,
       "id": 1270,
       "Modified": "2019-10-17T19:06:59Z",
       "Created": "2019-09-23T14:45:30Z",
       "Upcoming": "2020-11-27T07:00:00.000Z",
       "SvcStaff": "Wenger",
+      "LookupMultiHR01team": {
+        "results": [
+          {
+            "Id": 3,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 4,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 5,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 6,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          }
+        ]
+      },
+      "ID": 1270,
       "ClientPhoto": {
         "Description": "",
         "Url": "",
@@ -1715,28 +1768,14 @@
           "type": ""
         }
       },
-      "LookupMultiHR01team": {
-        "results": [
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4"
-        ]
+      "__metadata": {
+        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1270)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1270)",
+        "etag": "\"12\"",
+        "type": "SP.Data.MetroCM102ListItem"
       }
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(54)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(54)",
-        "etag": "\"12\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 54,
       "Title": "Abraham",
       "FirstName": "Corinne",
@@ -1748,12 +1787,58 @@
       "TrackingComments": null,
       "WorkPhone": null,
       "HomePhone": null,
-      "ID": 54,
       "id": 54,
       "Modified": "2019-07-23T07:42:39Z",
       "Created": "2019-07-23T07:17:02Z",
       "Upcoming": "2020-12-02T11:15:00.000Z",
       "SvcStaff": "Romanov",
+      "LookupMultiHR01team": {
+        "results": [
+          {
+            "Id": 2,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 3,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 5,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 6,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 7,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          },
+          {
+            "Id": 4,
+            "__metadata": {
+              "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+              "type": "SP.Data.MetroHR01ListItem"
+            }
+          }
+        ]
+      },
+      "ID": 54,
       "ClientPhoto": {
         "__metadata": {
           "type": "SP.FieldUrlValue"
@@ -1761,19 +1846,11 @@
         "Description": "https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(14).jpg",
         "Url": "data:image/jpeg;base64,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"
       },
-      "LookupMultiHR01team": {
-        "results": [
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4"
-        ]
+      "__metadata": {
+        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(54)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(54)",
+        "etag": "\"12\"",
+        "type": "SP.Data.MetroCM102ListItem"
       }
     },
     {
@@ -1808,18 +1885,7 @@
         "Url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAA8ADwDASIAAhEBAxEB/8QAHQAAAQQDAQEAAAAAAAAAAAAABwAFBggBAwQCCf/EADIQAAIBAwMBBwIEBwEAAAAAAAECAwAEEQUGIRIHEzFBUWFxIoEIkbHBFCMyQlJygqH/xAAZAQACAwEAAAAAAAAAAAAAAAAEBQABAwL/xAAgEQACAwADAAIDAAAAAAAAAAAAAQIDERITIQQiMUFx/9oADAMBAAIRAxEAPwC0dKlSqEIt2kbmG1NrzagOjviwiiD+HUc/nwCaAd32w7stWVor61lByfqgXHrRG/E63T2f22fO+TB/4f8AbNVHu7+USOquQCapnSDHH2+brQZkexcryR3HiPzp80f8R+oRsiapoUFyCw6ntpTGen2Bzk/cVW1Zn7zrySfGt0FyyNlScY4xzippD6E7O3Pp27dEi1TSJWe3clSrjpeNh4qw8jT0TiqtfhU3LPHuzUdFZSbe8gNx/q6Ec/cMR9hVozVp6U1h7rBNIVioURTtM29FunbD6XPJ3YeRWV8ZwQD5UBNY7BZxIDZTxSrjnD9OT9wasHuzV00qS1N1FILR+omZAWCEDP1ADgYB5ptu9asY7RLh7uBIJFDJIzgKwI4IND2zafgRVDUV0TsX1KFwJ7SIDyY3AOPnHjTdc7On0m/aDojhK8MY+c59/irFQ6lZ34c2l3b3GBk93IGx+VRrXNPSdmlAPWeDWHdLfQhURzwHnYfpUtj2uafIi4QxzB/XHdN++KtYTzQg7MdJit93CcL/ADEtnOfTJUfvReJ9qMqlyjoHbHjLDaPCkaXhSrszGrXYUuIUilUMjZyDUG17TLLUUSyniQQqOhE9B7VOdwl0tVkRGfpbBCkZ5+aH13eQLfiK4lu1Zm464T0Zz/kBj/2gvkfkYfFWxOOy2VBZXImhuJYogcmHIaNuMeBHHrxjmu3UVSOMqOQKdbi4JhVc84ph1CdUb6mAPiT6AUNOWhEEPG1tNaTV4XVAkcREjSKMFiARgnz5OPtRAYc0w7EvNOvtBjm0y4FxyRMxJLB8nIOfAA5x5Y8KkBHNMqYcI4Lb7OyX8NlLypAcUq0MTmv4f4i1kjP9w4+fKoNqSpZY7/rhdjhQ+fqPoPWiCaC/blqd1BuDblrE+IFkFx048X7xUBPwGbHzWN1SmtN6bXB4Y1PVrkSiG1gck8dTDAFMOu3sdhYs9/NhpP6ifE+wFSuU9cYcgdRHpQM3Zezahr14LlupYJGSNfJQPb7Uuor7pZ+hhbZ1Q3B82ZvGfbm4HvLBStvK/XLAThZF4yPY+efX5NWssLqG/soLu2YPBMgkRvUEZFUogUI6keg/SrTdjNxJP2f6eJTnu2eNT7Bjj9abpcfEK5Pl9mf/2Q=="
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4"
-        ]
+        "results": []
       }
     },
     {
@@ -1854,13 +1920,7 @@
         "Url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAoADwDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAABwAEBQYIAgP/xAAvEAABAgQFAgUCBwAAAAAAAAABAgMABAURBgcSITETURUiQWGBFKEjUnGxwdHx/8QAGQEAAwEBAQAAAAAAAAAAAAAAAgQFAwEA/8QAHREAAgICAwEAAAAAAAAAAAAAAAECEQMEEiExIv/aAAwDAQACEQMRAD8A0aYZVefapdNmJyYNm2UlR357CHpiiZzVU0zA04EDU7MfhJAFz3JHwIIV9ALmpmFN4jftq+nk2r6ENm2rfvyftAmenlhesFSdIum97g97xxWp0rmfMSQON+YJ+XOXNMrFKXUa6/5ynUlgK02R+YxjOairY5jxX0gZIq78sUll9SSCF+Q2sRxGhciszvEGTR64+szA3ZecXcEdiTve5/iAzmPhmnUgszFHUsy7i9BStKk29RbUBeIzBdmsRU1QeUyS8kBwC+gk7K+DvaCxzUlaAz4qtM3Kp4XjzLo7xGImCUje5tzHXVMb0TeRcSQIg8X07xfD09KJCeqtpQbJF7KsbRLKVALzczUmpGov0vDkyGhLK6b8wkBRU56pSTewHr63v8+SsY7fhnPGFDm6RV3JWdYcZdSbaVixJjTkq5Q5PBzdVabWv62RQA2p4WGpN9kqUB/kZ/xHiCsYmUluqzKXykA9QsNhfKgLqCQT8n1gm4dqFNl8GsU+mvNOuIa87E04UqQrfVbcXTe/G0KbMHFJlLVdupFSzhcpTUrJytLZShx9/rvK16rkA7X+Yr2V8kifxbIqW2FstLKlXTccbfeJCfYor9Xl5fEa3WnVEqD0uvytpOwQob2Hvz323gr4XoNMozY8NZQlKwDrB1atubxprw+UxTe2OMnGi9sP7C5h2l3aIqWIIG8Pk8QyS0z0zVxo3hLDzimnE+JTAKJdHJHdf6D97RkZDq50MI1anHXtSiTz5iTeFCjsV4Uca6sk1yYZcdKCCbBCbdgLf3DNxailwNoQpQV09x6349uIUKDYSGIk1o1OO6Tquo24i25d4pfpdRlac8tTklMKDYSTfpqUdiPa53EKFAtUDNKUWmHOVeKSAYl2nQUCFCjjJcWf/9k="
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Ladies Wash+Cut+Dry S1",
-          "Ladies Wash+Cut+Dry S2",
-          "Ladies Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Tint+Regrowth S4"
-        ]
+        "results": []
       }
     },
     {
@@ -1895,18 +1955,7 @@
         "Url": "data:image/jpeg;base64,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"
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4"
-        ]
+        "results": []
       }
     },
     {
@@ -1941,13 +1990,7 @@
         }
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4"
-        ]
+        "results": []
       }
     },
     {
@@ -1982,13 +2025,7 @@
         "Url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCABBADwDASIAAhEBAxEB/8QAGwAAAQUBAQAAAAAAAAAAAAAACAACAwUHBgT/xABAEAABAwMCAgYFBBMAAAAAAAABAAIDBAURBiESMQcTMkFhcVGBkaHBFEKxsggVFiIlMzU2N0NEUnJzdcLR4fD/xAAZAQADAQEBAAAAAAAAAAAAAAACAwQFAQD/xAAmEQACAgECBQQDAAAAAAAAAAAAAQIDERIhMTIzQXEEIjSBQ1HR/9oADAMBAAIRAxEAPwAmUkzi3XP681E3S+lK+6ubxvhZiJme08nDR7TnyCoJuLwP1TrXT+leAXy5w08rxlkIy+Rw9IY0E48eS9GltW2PVEJfZLjDUloy+MHhkZ5tO4QQXKtr75epau4TST1dS50kj3c8cseA7vABaNpvS950xUUGo6WsZ1FIQ+ZrBwnh7wT6Pcla13KVQ2soLdPavPSzNqKaKZhy17A4HzCmacFeYlEgUg5KMc08clwNFRx7lY99klfKan05SWfiDquplExaPmxtB3PmfoK1zP3yE/pxqZfu+qBVScRdnDOLPC0ZDR4bNB9ada8R2OUxzPc4myytdXSSvOGmMwj1jH0kIgoKCEaWq7lUVk8tHNawfkwOWtcWYORyOSfd5ob7FmUvEQIc0guOdznnjx3CKLSVB1NhtDWNkmp+vjkqGSPL8syTsDyw7hOPQFE37sM060lW5GnaRglpdL2iCpyJoqSJj8/vBgBVx3qONwcAQQQeRCk8FSzKzuSBOTGnLU9CEjm5Z2xh7nHAGST6Agv6ZL6L3reuq6Jx+ThwiHq29mUWeqJpBY69sLuGV0ZY0+gnZA5copoKyeKQEvEjg/PcR/wR2y30jaobai+0+RR1tIxzciokj383f63RQ2GpNOx8cbuCn2LD3gY5IYLBW00t/tsTnMbHGRxcew4tgPL/ACURUFQKV7WPIDGsB3OwCis4o0aMOLL69X+oob1p6CmmkjFa+aMgPIyWxlw25Hce9aNZK011AyV/b7LjjG6EK866deOkyz1NM4m3W6oayLh+e0uHG71jbyARV6JkdLaOscMcT849QTopxkk+6Jb9MoSkuzOkaU8FRt5p5TWRIzvUZ/BlTn0j6wQudIVD1NbdKqlp2mOINE7scjISA72j3on9SOH2rqd+8fWCxm7QU83R70h1U+P2dgd4scHNHtcENkdVy8FlU9Pp21+/4D1GMOz3jbKuTqW7i1ut5r5nUjmCPgc7OGD5oPPHgqRpw0A80n9lMwhCk1wLzTM3V3OBx7ntA80eOhHcWn4ndxPwCAayAfKack/rW/FHV0XVTKrSNLIw5BHwCB868DH0H5OzapMqFpCkBGNyiZKjMNU/kqo8x9KwvVX6KNW/1Kn/ALUkkMut9FUfj/Zhx7QSf2UkkYosrR+Nh/mD4o1+hf8AMyl/gakkgfOhv4ZGgsTkkkTJEf/Z"
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Ladies Wash+Cut+Dry S1",
-          "Ladies Wash+Cut+Dry S2",
-          "Ladies Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Tint+Regrowth S4"
-        ]
+        "results": []
       }
     },
     {
@@ -2023,13 +2060,7 @@
         }
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Ladies Wash+Cut+Dry S1",
-          "Ladies Wash+Cut+Dry S2",
-          "Ladies Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Tint+Regrowth S4"
-        ]
+        "results": []
       }
     },
     {
@@ -2064,13 +2095,7 @@
         "Url": "data:image/jpeg;base64,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"
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Ladies Wash+Cut+Dry S1",
-          "Ladies Wash+Cut+Dry S2",
-          "Ladies Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Tint+Regrowth S4"
-        ]
+        "results": []
       }
     },
     {
@@ -2105,29 +2130,7 @@
         }
       },
       "LookupMultiHR01team": {
-        "results": [
-          "Mens Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Balayage Natural S4",
-          "Mens Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Balayage Natural S4",
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Balayage Natural S4",
-          "Mens Wash+Cut+Dry S1",
-          "Highlights T-Section S4",
-          "Mens Wash+Cut+Dry S1",
-          "Mens Wash+Cut+Dry S4",
-          "Balayage Natural S4",
-          "Tint+Regrowth S4",
-          "Highlights T-Section S4"
-        ]
+        "results": []
       }
     },
     {

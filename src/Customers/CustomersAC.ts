@@ -35,7 +35,10 @@ export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: Action
 
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
 // Async
-export const fetchDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_ASYNC });
+export const fetchDataInitAsyncAC = (meta: { teamStaffDataLength: number }) => ({
+  type: ActionTypes.FETCH_DATA_INIT_ASYNC,
+  meta,
+});
 
 export const createDataItemInitAsyncAC = (createdDataItem: CustomersDataItem, onAddDataItemToGridData: () => void) => ({
   type: ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC,

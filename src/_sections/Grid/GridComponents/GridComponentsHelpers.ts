@@ -54,3 +54,21 @@ export const transformDomainDataToMultiSelectData = (domainData: ServicesDataIte
       },
     };
   });
+
+export const transformTeamStaffDataToMultiSelectData = (domainData: TeamStaffDataItem[]) =>
+  domainData.map(({ Title, Id, __metadata }) => {
+    const startGuid = __metadata.id.indexOf(`'`) + 1;
+    const endGuid = __metadata.id.lastIndexOf(`'`);
+    const id = __metadata.id.slice(startGuid, endGuid);
+
+    return {
+      text: Title,
+      value: {
+        Id,
+        __metadata: {
+          id,
+          type: __metadata.type,
+        },
+      },
+    };
+  });

@@ -9,12 +9,12 @@ export const useFetchAgendaData = (
   servicesDataLength: number,
   teamStaffDataLength: number,
   customersDataLength: number,
-  agendaStateActions: DomainStateActionsType<AgendaDataItem>,
+  AgendaActions: DomainStateActionsType<AgendaDataItem>,
   dispatch: Dispatch
 ) => {
   useEffect(() => {
     if (agendaDataLength > 0) return;
 
-    agendaStateActions.fetchData(dispatch, { servicesDataLength, teamStaffDataLength, customersDataLength });
-  }, [dispatch, agendaStateActions, agendaDataLength, servicesDataLength, teamStaffDataLength, customersDataLength]);
+    AgendaActions.fetchData(dispatch, { servicesDataLength, teamStaffDataLength, customersDataLength });
+  }, [dispatch, AgendaActions, agendaDataLength, servicesDataLength, teamStaffDataLength, customersDataLength]);
 };

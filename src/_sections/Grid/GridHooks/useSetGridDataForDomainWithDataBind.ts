@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Types
-import { GridDataName, GridStateActions } from '../../_sections/Grid/GridTypes';
-import { AgendaDataItem } from '../AgendaTypes';
+import { GridDataName, GridStateActions, GridDataItem } from '../GridTypes';
 
-export const useSetGridDataForAgenda = (
+export const useSetGridDataForDomainWithDataBind = (
   dataName: GridDataName,
-  domainDataName: GridDataName.Agenda,
-  domainData: AgendaDataItem[],
+  domainDataName: GridDataName,
+  domainData: GridDataItem[],
   domainIsDataLoading: boolean,
   gridActions: GridStateActions,
   dispatch: Dispatch

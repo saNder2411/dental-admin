@@ -1,26 +1,41 @@
 import { SagaIterator } from '@redux-saga/core';
-import { put, apply } from 'redux-saga/effects';
+import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../_REST';
 // Actions
 import * as actions from './CustomersAC';
+import * as teamStaffActions from '../TeamStaff/TeamStaffAC';
 // Types
 import {
+  FetchDataInitAsyncActionType,
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
   APICustomersDataItem,
 } from './CustomersTypes';
+import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 // Helpers
 import { transformData, transformDataItem } from './CustomersHelpers';
+import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
 
-export function* workerFetchData(): SagaIterator {
+type Results = [APICustomersDataItem[], APITeamStaffDataItem[] | null];
+
+export function* workerFetchData({ meta: { teamStaffDataLength } }: FetchDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APICustomersDataItem[] = yield apply(API, API.customers.getData, []);
-    const data = transformData(result);
+    const [customersResult, teamStaffResult]: Results = yield all([
+      apply(API, API.customers.getData, []),
+      teamStaffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
+    ]);
+
+    const data = transformData(customersResult);
     yield put(actions.fetchDataSuccessAC(data));
+
+    if (teamStaffResult) {
+      const data = transformTeamStaffData(teamStaffResult);
+      yield put(teamStaffActions.fetchDataSuccessAC(data));
+    }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(error.message));
   } finally {

@@ -3,6 +3,7 @@ import { GridCellProps as KendoGridCellProps } from '@progress/kendo-react-grid'
 // Types
 import { GridDataItem } from '../GridTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
+import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 
 export type GridOnChange<T> = (evt: {
   dataItem: T;
@@ -30,6 +31,11 @@ export interface CustomGridCell extends FC<KendoGridCellProps> {
 }
 
 export interface AgendaDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<AgendaDataItem> {
+  value: T;
+  domainData?: U[];
+}
+
+export interface CustomersDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<CustomersDataItem> {
   value: T;
   domainData?: U[];
 }

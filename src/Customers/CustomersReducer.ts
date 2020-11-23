@@ -13,7 +13,8 @@ export const initialState = {
   isDataItemLoading: false,
   dataItemError: ``,
   actions: {
-    fetchData: (dispatch: Dispatch) => dispatch(fetchDataInitAsyncAC()),
+    fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
+      dispatch(fetchDataInitAsyncAC({ teamStaffDataLength: meta?.teamStaffDataLength ?? 0 })),
     createDataItem: (dispatch: Dispatch, createdDataItem: CustomersDataItem, onAddDataItemToGridData: () => void) =>
       dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
     updateDataItem: (dispatch: Dispatch, updatedDataItem: CustomersDataItem, onUpdateDataItemInGridData: () => void) =>

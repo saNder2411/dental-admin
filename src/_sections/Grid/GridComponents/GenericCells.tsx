@@ -4,7 +4,7 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
-import { GenericReferenceInput } from './GenericInputCells';
+import { GenericReferenceInput, GenericTextInput } from './GenericInputCells';
 import { GenericDateInput } from './GenericDateCells';
 import { GenericGenderDropDownList } from './GenericDropDownCells';
 // Types
@@ -14,6 +14,16 @@ import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 // Helpers
 import { isString, isNumber } from './GridComponentsHelpers';
+
+export const GenericTextCell: FC<GridCellProps> = (props): JSX.Element => {
+  const { dataItem, field } = props;
+  const value = dataItem[field];
+  const strValue = isString(value) ? value : '';
+  const numValue = isNumber(value) ? value : '';
+  const resultValue = strValue ? strValue : numValue;
+
+  return <td>{dataItem.inEdit ? <GenericTextInput {...props} value={resultValue} /> : resultValue}</td>;
+};
 
 export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;

@@ -19,7 +19,7 @@ export interface APICustomersDataItem {
   HomePhone: null | string;
   ID: number;
   Id: number;
-  LookupMultiHR01team: { results: string[] };
+  LookupMultiHR01team: { results: Array<{ Id: number; __metadata: { id: string; type: string } }> };
   Modified: string;
   SvcStaff: string;
   Title: string;
@@ -37,7 +37,6 @@ export interface APICustomersDataItem {
 
 export interface CustomersDataItem extends APICustomersDataItem {
   ClientPhotoUrl: string;
-  LookupMultiAppointments: string[];
   inEdit?: boolean;
   isNew?: boolean;
 }
@@ -75,6 +74,8 @@ export const ActionTypes = {
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
+
+export type FetchDataInitAsyncActionType = ReturnType<typeof actions.fetchDataInitAsyncAC>;
 
 export type CreateDataItemInitAsyncActionType = ReturnType<typeof actions.createDataItemInitAsyncAC>;
 

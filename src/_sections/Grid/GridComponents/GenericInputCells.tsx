@@ -15,3 +15,12 @@ export const GenericReferenceInput: FC<GenericInputProps<string, AgendaDataItem 
 
   return <Input value={value} placeholder="Ref: TBA-000" onChange={onReferenceChange} disabled={isDataItemLoading} />;
 };
+
+export const GenericTextInput: FC<GenericInputProps<string | number>> = ({ dataItem, field, onChange, value }) => {
+  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  console.log(value);
+
+  const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
+
+  return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
+};

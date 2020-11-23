@@ -5,65 +5,14 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
 import { CellDecoratorWithDataItemLoadingState } from './CellDecoratorWithDataItemLoadingState';
-import { CellDecoratorWithFetchingData } from './CellDecoratorWithFetchingData';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 // Selectors
 import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
-
-export const SvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
-  const { dataItem, field } = props;
-  const value = dataItem[field];
-
-  return <td>{dataItem.inEdit ? <CellDecoratorWithFetchingData {...props} /> : value}</td>;
-};
-
-export const LastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
-  const multiSelectData = Array.from(new Set(dataItem.LookupMultiAppointments))
-    .slice(0, 5)
-    .map((value) => ({ [field]: value, value }));
-  const value = dataItem[field] as string[];
-  const dropDownListValue = value[0]
-    ? value[0].split(`, `).map((value: string) => ({ [field]: value, value }))
-    : [{ [field]: value[0], value: value[0] }];
-  const [multiSelectValue, setMultiSelectValue] = useState<{ [key: string]: string; value: string }[]>(dropDownListValue);
-
-  useEffect(() => {
-    let isNewItem = !!!value;
-
-    if (isNewItem) {
-      setMultiSelectValue([]);
-      isNewItem = false;
-    }
-  }, [value]);
-
-  const onAppointmentChange = (evt: MultiSelectChangeEvent) => {
-    setMultiSelectValue([...evt.target.value]);
-    console.log(evt.target.value);
-    onChange({
-      dataItem,
-      field,
-      syntheticEvent: evt.syntheticEvent,
-      value: [...evt.target.value.map(({ value }) => value), ...dataItem.LookupMultiAppointments],
-    });
-  };
-  return (
-    <td>
-      {dataItem.inEdit ? (
-        <CellDecoratorWithDataItemLoadingState>
-          <MultiSelect onChange={onAppointmentChange} value={multiSelectValue} data={multiSelectData} textField={field} />
-        </CellDecoratorWithDataItemLoadingState>
-      ) : (
-        value[0]
-      )}
-    </td>
-  );
-};
 
 export const RoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServicesDataItem>> = ({ dataItem, field, onChange }): JSX.Element => {
   const selectServicesRoleSkills = useMemo(selectServicesMemoRoleSkills, []);
@@ -121,4 +70,3 @@ export const BooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamStaffDataI
     </SC.BooleanFlagCell>
   );
 };
-

@@ -79,9 +79,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
               type: 'SP.Data.MetroHR01ListItem',
             },
           },
-          LookupMultiBP01offerings: {
-            results: [],
-          },
+          LookupMultiBP01offerings: { results: [] },
           MasterSeriesItemID: null,
           MetroRRule: null,
           MetroRecException: null,
@@ -125,7 +123,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           ID,
           Id: ID,
           LookupMultiHR01team: { results: [] },
-          LookupMultiAppointments: [],
           Modified: new Date().toISOString(),
           SvcStaff: '',
           Title: '',

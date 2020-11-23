@@ -3,23 +3,32 @@ import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
-import { GenericDateCell, AvatarCell, ActionsControlCell, GenericGenderCell, SvcStaffCell, LastAppointmentsCell } from '../_sections';
+import {
+  GenericTextCell,
+  GenericGenderCell,
+  CustomersSvcStaffCell,
+  GenericDateCell,
+  AvatarCell,
+  ActionsControlCell,
+  CustomersLastAppointmentsCell,
+} from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
 // Hooks
-import { useGridStateForDomain, useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
-import { useCustomersStateForDomain } from './CustomersHooks';
+import { useGridStateForDomain, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
+import { useCustomersStateForDomain, useActionMetaForCustomersFetchData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
   const { data, dataName, GridActions } = useGridStateForDomain();
   const { customersData, customersIsDataLoading, CustomersActions } = useCustomersStateForDomain();
+  const teamStaffDataLength = useActionMetaForCustomersFetchData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchDataForDomain(customersData.length, CustomersActions, dispatch);
-  useSetGridData(dataName, GridDataName.Customers, customersData, GridActions, dispatch);
+  useFetchCustomersData(customersData.length, teamStaffDataLength, CustomersActions, dispatch);
+  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Customers, customersData, customersIsDataLoading, GridActions, dispatch);
 
   const hasCustomersData = dataName === GridDataName.Customers;
   const contentTSX = hasCustomersData && !customersIsDataLoading && (
@@ -30,18 +39,21 @@ export const Customers: FC = (): JSX.Element => {
             field={'ID'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
             columnMenu={ColumnMenu}
+            cell={GenericTextCell as CustomGridCell}
             width={120}
             filter={'numeric'}
           />
           <GridColumn
             field={'Title'}
             title={localizationService.toLanguageString('custom.lastName', 'Last Name')}
+            cell={GenericTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
           <GridColumn
             field={'FirstName'}
             title={localizationService.toLanguageString('custom.firstName', 'First Name')}
+            cell={GenericTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
@@ -56,7 +68,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'SvcStaff'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
-            cell={SvcStaffCell as CustomGridCell}
+            cell={CustomersSvcStaffCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -67,18 +79,25 @@ export const Customers: FC = (): JSX.Element => {
             filter={'text'}
           />
           <GridColumn
-            field={'LookupMultiAppointments'}
+            field={'LookupMultiHR01team'}
             title={localizationService.toLanguageString('custom.lastAppointments', 'Last Appointments')}
             columnMenu={ColumnMenu}
-            cell={LastAppointmentsCell as CustomGridCell}
+            cell={CustomersLastAppointmentsCell as CustomGridCell}
             filter={'text'}
           />
-          <GridColumn field={'Email'} title={localizationService.toLanguageString('custom.email', 'Email')} columnMenu={ColumnMenu} filter={'text'} />
+          <GridColumn
+            field={'Email'}
+            title={localizationService.toLanguageString('custom.email', 'Email')}
+            columnMenu={ColumnMenu}
+            cell={GenericTextCell as CustomGridCell}
+            filter={'text'}
+          />
           <GridColumn
             field={'CellPhone'}
             title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
             columnMenu={ColumnMenu}
-            filter={'numeric'}
+            cell={GenericTextCell as CustomGridCell}
+            filter={'text'}
             width={140}
           />
           <GridColumn

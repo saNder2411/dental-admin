@@ -2,29 +2,29 @@
 import { APICustomersDataItem, CustomersDataItem } from './CustomersTypes';
 
 export const transformData = (apiResults: APICustomersDataItem[]): CustomersDataItem[] =>
-  apiResults.map((item) => ({ ...item, ClientPhotoUrl: item.ClientPhoto?.Url ?? '', LookupMultiAppointments: item.LookupMultiHR01team.results }));
+  apiResults.map((item) => ({ ...item, ClientPhotoUrl: item.ClientPhoto?.Url ?? '' }));
 
 export const transformDataItem = (apiResult: APICustomersDataItem): CustomersDataItem => ({
   ...apiResult,
   ClientPhotoUrl: apiResult.ClientPhoto?.Url ?? '',
-  LookupMultiAppointments: apiResult.LookupMultiHR01team.results,
 });
 
-export const transformDataItemForAPI = ({
-  ClientPhoto,
-  ClientPhotoUrl,
-  LookupMultiHR01team,
-  LookupMultiAppointments,
-  ...others
-}: CustomersDataItem): APICustomersDataItem => ({
-  ...others,
-  ClientPhoto: ClientPhoto
-    ? { ...ClientPhoto, Url: ClientPhotoUrl }
-    : {
-        Description: '',
-        Url: ClientPhotoUrl,
-        __metadata: { type: '' },
-      },
-  LookupMultiHR01team: { results: LookupMultiAppointments },
-  FullName: `${others.FirstName} ${others.Title}`,
-});
+export const transformDataItemForAPI = ({ ClientPhoto, ClientPhotoUrl, ID, __metadata, ...others }: CustomersDataItem): APICustomersDataItem => {
+  const startID = __metadata.id.lastIndexOf(`(`) + 1;
+  const newID = `${__metadata.id.slice(0, startID)}${ID})`;
+  return {
+    ...others,
+    ID,
+    Id: ID,
+    id: ID,
+    ClientPhoto: ClientPhoto
+      ? { ...ClientPhoto, Url: ClientPhotoUrl }
+      : {
+          Description: '',
+          Url: ClientPhotoUrl,
+          __metadata: { type: '' },
+        },
+    FullName: `${others.FirstName} ${others.Title}`,
+    __metadata: { ...__metadata, id: newID },
+  };
+};
