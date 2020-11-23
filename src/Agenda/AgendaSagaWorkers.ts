@@ -20,7 +20,6 @@ import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 import { APICustomersDataItem } from '../Customers/CustomersTypes';
 // Helpers
 import { transformData, transformDataItem } from './AgendaHelpers';
-import { transformData as transformServicesData } from '../Services/ServicesHelpers';
 import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
 import { transformData as transformCustomersData } from '../Customers/CustomersHelpers';
 
@@ -43,8 +42,7 @@ export function* workerFetchData({
     yield put(actions.fetchDataSuccessAC(data));
 
     if (servicesResult) {
-      const data = transformServicesData(servicesResult);
-      yield put(servicesActions.fetchDataSuccessAC(data));
+      yield put(servicesActions.fetchDataSuccessAC(servicesResult));
     }
 
     if (teamStaffResult) {

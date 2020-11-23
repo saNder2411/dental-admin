@@ -1,5 +1,7 @@
 // Types
 import { ActionTypes, ServicesDataItem } from './ServicesTypes';
+// Helpers
+import { transformDataItemForAPI } from './ServicesHelpers';
 // Sync
 export const fetchDataRequestAC = () => ({ type: ActionTypes.FETCH_DATA_REQUEST });
 
@@ -37,13 +39,13 @@ export const fetchDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_A
 
 export const createDataItemInitAsyncAC = (createdDataItem: ServicesDataItem, onAddDataItemToGridData: () => void) => ({
   type: ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC,
-  payload: createdDataItem,
+  payload: transformDataItemForAPI(createdDataItem),
   meta: onAddDataItemToGridData,
 });
 
 export const updateDataItemInitAsyncAC = (updatedDataItem: ServicesDataItem, onUpdateDataItemInGridData: () => void) => ({
   type: ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC,
-  payload: updatedDataItem,
+  payload: transformDataItemForAPI(updatedDataItem),
   meta: onUpdateDataItemInGridData,
 });
 

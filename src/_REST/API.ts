@@ -1,7 +1,7 @@
 // Config
 import { ROOT_URL } from './config';
 // Types
-import { APIServicesDataItem, ServicesDataItem } from '../Services/ServicesTypes';
+import { APIServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 import { APICustomersDataItem } from '../Customers/CustomersTypes';
 import { APIAgendaDataItem } from '../Agenda/AgendaTypes';
@@ -14,8 +14,8 @@ export type DeleteDataItem = (deletedItemID: number) => Promise<number>;
 interface API {
   services: {
     getData: FetchData<APIServicesDataItem[]>;
-    createDataItem: CreateDataItem<ServicesDataItem>;
-    updateDataItem: UpdateDataItem<ServicesDataItem>;
+    createDataItem: CreateDataItem<APIServicesDataItem>;
+    updateDataItem: UpdateDataItem<APIServicesDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   staff: {
@@ -42,7 +42,7 @@ export const API: API = {
   services: {
     getData: () => fetch(`${ROOT_URL}/services`).then((response) => response.json()),
 
-    createDataItem: (createdDataItem: ServicesDataItem) =>
+    createDataItem: (createdDataItem: APIServicesDataItem) =>
       fetch(`${ROOT_URL}/services`, {
         method: 'POST',
         headers: {
@@ -51,7 +51,7 @@ export const API: API = {
         body: JSON.stringify(createdDataItem),
       }).then((response) => response.json()),
 
-    updateDataItem: (updatedDataItem: ServicesDataItem) =>
+    updateDataItem: (updatedDataItem: APIServicesDataItem) =>
       fetch(`${ROOT_URL}/services/${updatedDataItem.id}`, {
         method: 'PUT',
         headers: {

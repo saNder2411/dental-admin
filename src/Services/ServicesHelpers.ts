@@ -1,13 +1,17 @@
 // Types
-import { APIServicesDataItem, ServicesDataItem, OfferIcons } from './ServicesTypes';
+import { APIServicesDataItem, ServicesDataItem } from './ServicesTypes';
 
-export const transformData = (apiResults: APIServicesDataItem[]): ServicesDataItem[] =>
-  apiResults.map((item) => ({ ...item, OfferIconName: OfferIcons.Tooth }));
-
-export const transformDataItem = (apiResult: APIServicesDataItem): ServicesDataItem => ({
-  ...apiResult,
-  OfferIconName: OfferIcons.Tooth,
-});
+export const transformDataItemForAPI = ({ ID, __metadata, ...others }: ServicesDataItem): APIServicesDataItem => {
+  const startID = __metadata.id.lastIndexOf(`(`) + 1;
+  const newID = `${__metadata.id.slice(0, startID)}${ID})`;
+  return {
+    ...others,
+    ID,
+    Id: ID,
+    id: ID,
+    __metadata: { ...__metadata, id: newID },
+  };
+};
 
 export const roleSkills = [
   `Active Listening`,

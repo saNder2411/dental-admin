@@ -48,3 +48,9 @@ export interface GenericDropDownListProps<T = string, U = GridDataItem> extends 
   value: T;
   domainData?: U[];
 }
+
+export interface ServicesNumericProps<T = number, U = GridDataItem> extends GridCellProps<U> {
+  value: T;
+  step: number;
+  min: number;
+}

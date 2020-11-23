@@ -19,6 +19,7 @@ export interface APIServicesDataItem {
   OfferingCatType: string;
   OfferingDiscount: number;
   OfferingsName_Edit: string;
+  OfferingIconName: OfferIcons;
   RoleSkills: string[];
   SalesTaxRate: number;
   ShowOnline: boolean;
@@ -32,7 +33,6 @@ export interface APIServicesDataItem {
 }
 
 export interface ServicesDataItem extends APIServicesDataItem {
-  OfferIconName: OfferIcons;
   inEdit?: boolean;
   isNew?: boolean;
 }

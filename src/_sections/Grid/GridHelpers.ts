@@ -156,7 +156,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           OfferingCatType: '',
           OfferingDiscount: 0,
           OfferingsName_Edit: '',
-          OfferIconName: OfferIcons.Tooth,
+          OfferingIconName: OfferIcons.Tooth,
           RoleSkills: [],
           SalesTaxRate: 0,
           ShowOnline: false,

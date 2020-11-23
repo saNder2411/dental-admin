@@ -1,12 +1,6 @@
 {
   "services": [
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
-        "etag": "\"27\"",
-        "type": "SP.Data.MetroBP02ListItem"
-      },
       "Id": 1,
       "Title": "01-Ladies Wash+Cut+Dry S1_001",
       "OfferingsName_Edit": "Ladies Wash+Cut+Dry S1",
@@ -19,10 +13,18 @@
       "AmountSalesTaxLocal": "6.31125000000000",
       "OfferingCatType": "(01) Ladies Hair Cut",
       "OfferingDiscount": 0.16,
-      "ID": 1,
+      "OfferingIconName": "https://images.squarespace-cdn.com/content/v1/599b36dbc534a5ed9df81f50/1503353791787-8YBMQCKA7TAM1ZWOYOCF/ke17ZwdGBToddI8pDm48kGZpU91TES1fBHkv3DuvBJ5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIU_ehG8J1Rbt6Yc6Ofq7G8txSyFN6v5IF77bav_25vXc/cosmetic-dentistry-icon.png",
       "id": 1,
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Artistic & Creative"
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
+      "ID": 1,
+      "__metadata": {
+        "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
+        "etag": "\"27\"",
+        "type": "SP.Data.MetroBP02ListItem"
+      }
     },
     {
       "__metadata": {
@@ -45,8 +47,10 @@
       "OfferingDiscount": 0.1,
       "ID": 2,
       "id": 2,
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Artistic & Creative"
+      "OfferingIconName": "Tooth",
+      "RoleSkills": [
+        "Artistic & Creative"
+      ]
     },
     {
       "__metadata": {
@@ -69,8 +73,10 @@
       "OfferingDiscount": 0.15,
       "ID": 3,
       "id": 3,
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Colouring-Balayage"
+      "OfferingIconName": "Tooth",
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ]
     },
     {
       "__metadata": {
@@ -93,8 +99,10 @@
       "OfferingDiscount": 0.15,
       "ID": 4,
       "id": 4,
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Colouring-Balayage"
+      "OfferingIconName": "Tooth",
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ]
     },
     {
       "__metadata": {
@@ -117,8 +125,10 @@
       "OfferingDiscount": 0.15,
       "ID": 5,
       "id": 5,
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Artistic & Creative"
+      "OfferingIconName": "Tooth",
+      "RoleSkills": [
+        "Artistic & Creative"
+      ]
     },
     {
       "__metadata": {
@@ -141,8 +151,11 @@
       "OfferingDiscount": 0.15,
       "ID": 6,
       "id": 6,
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Active Listening, Colouring-Balayage"
+      "OfferingIconName": "Tooth",
+      "RoleSkills": [
+        "Active Listening",
+        "Colouring-Balayage"
+      ]
     },
     {
       "__metadata": {
@@ -163,9 +176,13 @@
       "AmountSalesTaxLocal": "6.31125000000000",
       "OfferingCatType": "(02) Mens Hair Cut",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 7,
       "id": 7,
-      "RoleSkills": ""
+      "RoleSkills": [
+        "Colouring-Base"
+      ],
+      "OfferIconName": "Tooth"
     },
     {
       "__metadata": {
@@ -186,9 +203,10 @@
       "AmountSalesTaxLocal": "3.78000000000000",
       "OfferingCatType": "(03) Kids Hair Cut",
       "OfferingDiscount": 0.2,
+      "OfferingIconName": "Tooth",
       "ID": 8,
       "id": 8,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -209,9 +227,10 @@
       "AmountSalesTaxLocal": "2.70000000000000",
       "OfferingCatType": "(03) Kids Hair Cut",
       "OfferingDiscount": 0.2,
+      "OfferingIconName": "Tooth",
       "ID": 9,
       "id": 9,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -232,9 +251,10 @@
       "AmountSalesTaxLocal": "3.78000000000000",
       "OfferingCatType": "(04) Students Hair Cut",
       "OfferingDiscount": 0.2,
+      "OfferingIconName": "Tooth",
       "ID": 10,
       "id": 10,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -255,9 +275,10 @@
       "AmountSalesTaxLocal": "3.24000000000000",
       "OfferingCatType": "(04) Students Hair Cut",
       "OfferingDiscount": 0.2,
+      "OfferingIconName": "Tooth",
       "ID": 11,
       "id": 11,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -278,9 +299,10 @@
       "AmountSalesTaxLocal": "9.61875000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 12,
       "id": 12,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -301,9 +323,10 @@
       "AmountSalesTaxLocal": "10.6312500000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 13,
       "id": 13,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -324,9 +347,10 @@
       "AmountSalesTaxLocal": "7.59375000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 14,
       "id": 14,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -347,9 +371,10 @@
       "AmountSalesTaxLocal": "8.60625000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 15,
       "id": 15,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -370,9 +395,10 @@
       "AmountSalesTaxLocal": "5.56875000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 16,
       "id": 16,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -393,9 +419,10 @@
       "AmountSalesTaxLocal": "6.58125000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 17,
       "id": 17,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -416,9 +443,10 @@
       "AmountSalesTaxLocal": "6.58125000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 18,
       "id": 18,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -439,9 +467,10 @@
       "AmountSalesTaxLocal": "7.08750000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 19,
       "id": 19,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -462,9 +491,10 @@
       "AmountSalesTaxLocal": "5.06250000000000",
       "OfferingCatType": "(05) Colouring",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 20,
       "id": 20,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -485,9 +515,10 @@
       "AmountSalesTaxLocal": "1.51875000000000",
       "OfferingCatType": "(06) Dry Styling",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 21,
       "id": 21,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -508,9 +539,10 @@
       "AmountSalesTaxLocal": "2.02500000000000",
       "OfferingCatType": "(06) Dry Styling",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 22,
       "id": 22,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -531,9 +563,10 @@
       "AmountSalesTaxLocal": "2.73375000000000",
       "OfferingCatType": "(07) Treatments",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 23,
       "id": 23,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -554,9 +587,10 @@
       "AmountSalesTaxLocal": "4.25250000000000",
       "OfferingCatType": "(07) Treatments",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 24,
       "id": 24,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -577,9 +611,10 @@
       "AmountSalesTaxLocal": "4.75875000000000",
       "OfferingCatType": "(07) Treatments",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 25,
       "id": 25,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -600,9 +635,10 @@
       "AmountSalesTaxLocal": "12.8587500000000",
       "OfferingCatType": "(08) Technical",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 26,
       "id": 26,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -623,9 +659,10 @@
       "AmountSalesTaxLocal": "14.8837500000000",
       "OfferingCatType": "(08) Technical",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 27,
       "id": 27,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -646,9 +683,10 @@
       "AmountSalesTaxLocal": "9.82125000000000",
       "OfferingCatType": "(08) Technical",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 28,
       "id": 28,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -669,9 +707,10 @@
       "AmountSalesTaxLocal": "67.8375000000000",
       "OfferingCatType": "(09) Special Services",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 29,
       "id": 29,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -692,9 +731,10 @@
       "AmountSalesTaxLocal": "77.9625000000000",
       "OfferingCatType": "(09) Special Services",
       "OfferingDiscount": 0.25,
+      "OfferingIconName": "Tooth",
       "ID": 30,
       "id": 30,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -715,9 +755,10 @@
       "AmountSalesTaxLocal": "19.8450000000000",
       "OfferingCatType": "(09) Special Services",
       "OfferingDiscount": 0,
+      "OfferingIconName": "Tooth",
       "ID": 31,
       "id": 31,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -738,9 +779,10 @@
       "AmountSalesTaxLocal": "0.975545000000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 32,
       "id": 32,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -761,9 +803,10 @@
       "AmountSalesTaxLocal": "2.34404500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 33,
       "id": 33,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -784,9 +827,10 @@
       "AmountSalesTaxLocal": "2.34404500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 34,
       "id": 34,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -807,9 +851,10 @@
       "AmountSalesTaxLocal": "3.71254500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 35,
       "id": 35,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -830,9 +875,10 @@
       "AmountSalesTaxLocal": "3.51704500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 36,
       "id": 36,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -853,9 +899,10 @@
       "AmountSalesTaxLocal": "1.16322500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 37,
       "id": 37,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -876,9 +923,10 @@
       "AmountSalesTaxLocal": "0.967725000000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 38,
       "id": 38,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -899,9 +947,10 @@
       "AmountSalesTaxLocal": "0.967725000000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 39,
       "id": 39,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -922,9 +971,10 @@
       "AmountSalesTaxLocal": "3.31372500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 40,
       "id": 40,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -945,9 +995,10 @@
       "AmountSalesTaxLocal": "3.31372500000000",
       "OfferingCatType": "(20) Shampoo",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 41,
       "id": 41,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -968,9 +1019,10 @@
       "AmountSalesTaxLocal": "3.51704500000000",
       "OfferingCatType": "(21) Conditioner",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 42,
       "id": 42,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -991,9 +1043,10 @@
       "AmountSalesTaxLocal": "3.90804500000000",
       "OfferingCatType": "(21) Conditioner",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 43,
       "id": 43,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1014,9 +1067,10 @@
       "AmountSalesTaxLocal": "0.928625000000000",
       "OfferingCatType": "(21) Conditioner",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 44,
       "id": 44,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1037,9 +1091,10 @@
       "AmountSalesTaxLocal": "0.967725000000000",
       "OfferingCatType": "(21) Conditioner",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 45,
       "id": 45,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1060,9 +1115,10 @@
       "AmountSalesTaxLocal": "3.31372500000000",
       "OfferingCatType": "(21) Conditioner",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 46,
       "id": 46,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1083,9 +1139,10 @@
       "AmountSalesTaxLocal": "3.31372500000000",
       "OfferingCatType": "(21) Conditioner",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 47,
       "id": 47,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1106,9 +1163,10 @@
       "AmountSalesTaxLocal": "2.53954500000000",
       "OfferingCatType": "(22) Hairspray",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 48,
       "id": 48,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1129,9 +1187,10 @@
       "AmountSalesTaxLocal": "3.71254500000000",
       "OfferingCatType": "(22) Hairspray",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 49,
       "id": 49,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1152,9 +1211,10 @@
       "AmountSalesTaxLocal": "1.51512500000000",
       "OfferingCatType": "(23) Hair Gel",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 50,
       "id": 50,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1175,9 +1235,10 @@
       "AmountSalesTaxLocal": "1.35872500000000",
       "OfferingCatType": "(24) Hair Creams",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 51,
       "id": 51,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1198,9 +1259,10 @@
       "AmountSalesTaxLocal": "1.94522500000000",
       "OfferingCatType": "(25) Hair Wax+Clay",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 52,
       "id": 52,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1221,9 +1283,10 @@
       "AmountSalesTaxLocal": "2.92272500000000",
       "OfferingCatType": "(26) Hair Mousse+Foam",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 53,
       "id": 53,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1244,9 +1307,10 @@
       "AmountSalesTaxLocal": "2.53172500000000",
       "OfferingCatType": "(27) Finishing",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 54,
       "id": 54,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "__metadata": {
@@ -1267,9 +1331,10 @@
       "AmountSalesTaxLocal": "2.53172500000000",
       "OfferingCatType": "(27) Finishing",
       "OfferingDiscount": 0.15,
+      "OfferingIconName": "Tooth",
       "ID": 55,
       "id": 55,
-      "RoleSkills": ""
+      "RoleSkills": []
     },
     {
       "Amount": 50,
@@ -1282,9 +1347,11 @@
       "MinutesDuration": 60,
       "OfferingCatType": "None",
       "OfferingDiscount": 0.1,
+      "OfferingIconName": "Tooth",
       "OfferingsName_Edit": "TBA-400",
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Colouring-Balayage",
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ],
       "SalesTaxRate": 0,
       "ShowOnline": true,
       "Title": "",
@@ -1306,9 +1373,11 @@
       "MinutesDuration": 75,
       "OfferingCatType": "Test None",
       "OfferingDiscount": 0.05,
+      "OfferingIconName": "Tooth",
       "OfferingsName_Edit": "TBA-200",
-      "OfferIconName": "Tooth",
-      "RoleSkills": "Artistic & Creative",
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
       "SalesTaxRate": 0,
       "ShowOnline": true,
       "Title": "",
@@ -1317,6 +1386,32 @@
         "id": "",
         "type": "",
         "uri": ""
+      }
+    },
+    {
+      "Amount": 50,
+      "AmountSalesTaxLocal": "",
+      "AmountTotal": "",
+      "ConsultReq": true,
+      "Id": 60,
+      "id": 60,
+      "MinutesDuration": 60,
+      "OfferingCatType": "(01) Ladies Hair Cut",
+      "OfferingDiscount": 0.01,
+      "OfferingsName_Edit": "Ladies Hair Cut",
+      "OfferingIconName": "Tooth",
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
+      "SalesTaxRate": 0,
+      "ShowOnline": true,
+      "Title": "",
+      "ID": 60,
+      "__metadata": {
+        "id": "Web/Lists(guid'e2d96c1c-ad09-4b37-a96b-296fe68bfac8')/Items(60)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'e2d96c1c-ad09-4b37-a96b-296fe68bfac8')/Items(60)",
+        "etag": "\"\"",
+        "type": "SP.Data.MetroBP02ListItem"
       }
     }
   ],
