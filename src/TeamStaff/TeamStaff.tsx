@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { Grid, GridColumn, ColumnMenu, RoleSkillsCell } from '../_sections';
-import { GenericAvatarCell, BooleanFlagCell, ActionsControlCell } from '../_sections';
+import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { GenericTextCell, GenericAvatarCell, GenericRoleSkillsCell, GenericBooleanFlagCell, ActionsControlCell } from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
@@ -29,6 +29,7 @@ export const TeamStaff: FC = (): JSX.Element => {
           <GridColumn
             field={'ID'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
+            cell={GenericTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
             width={130}
             filter={'numeric'}
@@ -42,6 +43,7 @@ export const TeamStaff: FC = (): JSX.Element => {
           <GridColumn
             field={'FullName'}
             title={localizationService.toLanguageString('custom.fullName', 'Name')}
+            cell={GenericTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
@@ -49,20 +51,21 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'JobTitle'}
             title={localizationService.toLanguageString('custom.jobTitle', 'Job Title')}
             columnMenu={ColumnMenu}
+            cell={GenericTextCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'RoleSkills'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
             columnMenu={ColumnMenu}
-            cell={RoleSkillsCell as CustomGridCell}
+            cell={GenericRoleSkillsCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'ShowOnline'}
             title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
             columnMenu={ColumnMenu}
-            cell={BooleanFlagCell as CustomGridCell}
+            cell={GenericBooleanFlagCell as CustomGridCell}
             width={160}
             filter={'boolean'}
           />
@@ -70,7 +73,8 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'CellPhone'}
             title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
             columnMenu={ColumnMenu}
-            filter={'numeric'}
+            cell={GenericTextCell as CustomGridCell}
+            filter={'text'}
             width={140}
           />
           <GridColumn field={'Email'} title={localizationService.toLanguageString('custom.email', 'Email')} columnMenu={ColumnMenu} filter={'text'} />

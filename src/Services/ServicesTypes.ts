@@ -19,7 +19,7 @@ export interface APIServicesDataItem {
   OfferingCatType: string;
   OfferingDiscount: number;
   OfferingsName_Edit: string;
-  RoleSkills: string;
+  RoleSkills: string[];
   SalesTaxRate: number;
   ShowOnline: boolean;
   Title: string;

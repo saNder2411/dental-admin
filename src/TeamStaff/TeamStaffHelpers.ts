@@ -9,7 +9,10 @@ export const transformDataItem = (apiResult: APITeamStaffDataItem): TeamStaffDat
   TeamProfilePhotoUrl: apiResult.TeamProfilePhoto.Url,
 });
 
-export const transformDataItemForAPI = ({ TeamProfilePhotoUrl, TeamProfilePhoto, ...others }: TeamStaffDataItem): APITeamStaffDataItem => ({
+export const transformDataItemForAPI = ({ TeamProfilePhotoUrl, TeamProfilePhoto, FullName, ...others }: TeamStaffDataItem): APITeamStaffDataItem => ({
   ...others,
-  TeamProfilePhoto: { ...TeamProfilePhoto, Url: TeamProfilePhotoUrl },
+  TeamProfilePhoto: { ...TeamProfilePhoto, Url: TeamProfilePhotoUrl, Description: TeamProfilePhotoUrl },
+  FullName,
+  FirstName: FullName.split(' ')[0],
+  Title: FullName.split(' ').slice(-1)[0],
 });

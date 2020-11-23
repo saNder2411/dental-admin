@@ -157,7 +157,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           OfferingDiscount: 0,
           OfferingsName_Edit: '',
           OfferIconName: OfferIcons.Tooth,
-          RoleSkills: '',
+          RoleSkills: [],
           SalesTaxRate: 0,
           ShowOnline: false,
           Title: '',
@@ -187,7 +187,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Id: ID,
           JobTitle: '',
           ProfilesStatus: '',
-          RoleSkills: '',
+          RoleSkills: [],
           ShowOnline: false,
           TeamProfilePhoto: {
             Description: '',

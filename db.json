@@ -1331,14 +1331,13 @@
       "Id": 1,
       "Title": "Stylist--",
       "FirstName": "--Team",
-      "FullName": "--Team Stylist--",
       "ShowOnline": true,
       "Email": "any.stylist@metroapps.online",
       "CellPhone": "+89 7955 99888",
       "JobTitle": "Various",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "",
+      "RoleSkills": [],
       "WorkingWeekDays": null,
       "CalendarColour": "Khaki",
       "CalendarColHex": "#b55717",
@@ -1349,9 +1348,10 @@
         "__metadata": {
           "type": "SP.FieldUrlValue"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
+        "Description": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
         "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png"
-      }
+      },
+      "FullName": "--Team Stylist--"
     },
     {
       "__metadata": {
@@ -1370,7 +1370,9 @@
       "JobTitle": "Art Director",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "Personal Dexterity",
+      "RoleSkills": [
+        "Personal Dexterity"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "Rose",
       "CalendarColHex": "#457d30",
@@ -1409,7 +1411,9 @@
       "JobTitle": "Junior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "Artistic & Creative",
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "Salmon",
       "CalendarColHex": "#39a9e0",
@@ -1434,7 +1438,10 @@
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "Artistic & Creative, Patience & Tolerance",
+      "RoleSkills": [
+        "Artistic & Creative",
+        "Patience & Tolerance"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "Yellow",
       "CalendarColHex": "#9fa91e",
@@ -1466,7 +1473,9 @@
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "Styling-Chunky",
+      "RoleSkills": [
+        "Styling-Chunky"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "Cyan",
       "CalendarColHex": "#ef7e26",
@@ -1498,7 +1507,11 @@
       "JobTitle": "Stylist Director",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "Physical Stamina, Colouring-Balayage, Rapport Building",
+      "RoleSkills": [
+        "Physical Stamina",
+        "Colouring-Balayage",
+        "Rapport Building"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "Purple",
       "CalendarColHex": "#b2c7d9",
@@ -1530,7 +1543,9 @@
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": "Patience & Tolerance",
+      "RoleSkills": [
+        "Patience & Tolerance"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "Pink",
       "CalendarColHex": "#a51a22",
@@ -1548,98 +1563,37 @@
     {
       "CalendarColHex": "",
       "CalendarColour": "",
-      "CellPhone": "+89 7955 99333",
+      "CellPhone": "+8 7777 99888",
       "Department": null,
-      "Email": "aneCollmane@gmail.com",
-      "FirstName": "Ane",
-      "FullName": "Ane Collman",
+      "Email": "jule.stilst@mtroapps.com",
+      "FirstName": "July",
       "ID": 8,
       "Id": 8,
-      "JobTitle": "JobTitle",
+      "JobTitle": "Senior Stylist",
       "ProfilesStatus": "",
-      "RoleSkills": "Personal Dexterity",
-      "ShowOnline": true,
-      "Title": "Collman",
-      "WorkingWeekDays": null,
-      "id": 8,
-      "__metadata": {
-        "etag": "",
-        "id": "",
-        "type": "",
-        "uri": ""
-      },
-      "Gender": "(1) Female",
-      "TeamProfilePhoto": {
-        "Description": "",
-        "Url": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
-        "__metadata": {
-          "type": ""
-        }
-      }
-    },
-    {
-      "CalendarColHex": "",
-      "CalendarColour": "",
-      "CellPhone": "+89 795 99887",
-      "Department": null,
-      "Email": "july@mail.com",
-      "FirstName": "July",
-      "FullName": "July Jordan",
-      "ID": 9,
-      "Id": 9,
-      "JobTitle": "Junior",
-      "ProfilesStatus": "",
-      "RoleSkills": "Styling-Layering",
+      "RoleSkills": [
+        "Artistic & Creative",
+        "Colouring-Ombré"
+      ],
       "ShowOnline": true,
       "Title": "Jordan",
       "WorkingWeekDays": null,
-      "id": 9,
+      "id": 8,
       "__metadata": {
-        "etag": "",
-        "id": "",
-        "type": "",
-        "uri": ""
+        "id": "Web/Lists(guid'4b51576c-53e1-4184-a96b-14ede8fcd9fc')/Items(8)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'4b51576c-53e1-4184-a96b-14ede8fcd9fc')/Items(8)",
+        "etag": "\"\"",
+        "type": "SP.Data.MetroHR01ListItem"
       },
       "Gender": "(1) Female",
       "TeamProfilePhoto": {
-        "Description": "",
-        "Url": "https://i.etsystatic.com/5346957/r/il/c30cff/2161750413/il_570xN.2161750413_1eul.jpg",
+        "Description": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
+        "Url": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
         "__metadata": {
-          "type": ""
+          "type": "SP.FieldUrlValue"
         }
-      }
-    },
-    {
-      "CalendarColHex": "",
-      "CalendarColour": "",
-      "CellPhone": "none",
-      "Department": null,
-      "Email": "none",
-      "FirstName": "Kelly",
-      "FullName": "Kelly Miran",
-      "ID": 10,
-      "Id": 10,
-      "JobTitle": "none test",
-      "ProfilesStatus": "",
-      "RoleSkills": "Colouring-Ombré, Personal Dexterity, Problem Solving, Rapport Building",
-      "ShowOnline": true,
-      "Title": "Miran",
-      "WorkingWeekDays": null,
-      "id": 10,
-      "__metadata": {
-        "etag": "",
-        "id": "",
-        "type": "",
-        "uri": ""
       },
-      "Gender": "(1) Female",
-      "TeamProfilePhoto": {
-        "Description": "",
-        "Url": "",
-        "__metadata": {
-          "type": ""
-        }
-      }
+      "FullName": "July Jordan"
     }
   ],
   "customers": [

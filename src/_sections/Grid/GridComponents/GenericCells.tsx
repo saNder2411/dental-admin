@@ -6,7 +6,7 @@ import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Components
 import { GenericReferenceInput, GenericTextInput, GenericAvatarInput } from './GenericInputCells';
 import { GenericDateInput } from './GenericDateCells';
-import { GenericGenderDropDownList } from './GenericDropDownCells';
+import { GenericGenderDropDownList, GenericBooleanFlagDropDownList, GenericRoleSkillsMultiSelect } from './GenericDropDownCells';
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
@@ -55,6 +55,24 @@ export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDat
   );
 };
 
+export const GenericAvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDataItem>> = (props): JSX.Element => {
+  const { dataItem, field } = props;
+  const value = dataItem[field];
+  const strValue = isString(value) ? value : '';
+  const placeholderImageUrl = dataItem.Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
+
+  return dataItem.inEdit ? (
+    <td>
+      <GenericAvatarInput {...props} value={strValue} />
+    </td>
+  ) : (
+    <SC.PhotoCell imageUrl={imageUrl}>
+      <div className="Grid__avatar" />
+    </SC.PhotoCell>
+  );
+};
+
 export const GenericDateCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
   const intlService = useInternationalization();
@@ -78,20 +96,26 @@ export const GenericGenderCell: FC<GridCellProps<AgendaDataItem | CustomersDataI
   return <td>{dataItem.inEdit ? <GenericGenderDropDownList {...props} value={value} /> : value}</td>;
 };
 
-export const GenericAvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDataItem>> = (props): JSX.Element => {
+export const GenericBooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamStaffDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
   const value = dataItem[field];
-  const strValue = isString(value) ? value : '';
-  const placeholderImageUrl = dataItem.Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
-  const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
+  const flag = !!value;
 
   return dataItem.inEdit ? (
     <td>
-      <GenericAvatarInput {...props} value={strValue} />
+      <GenericBooleanFlagDropDownList {...props} value={flag} />
     </td>
   ) : (
-    <SC.PhotoCell imageUrl={imageUrl}>
-      <div className="Grid__avatar" />
-    </SC.PhotoCell>
+    <SC.BooleanFlagCell isOnline={flag}>
+      <span className={flag ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
+    </SC.BooleanFlagCell>
   );
+};
+
+export const GenericRoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServicesDataItem>> = (props): JSX.Element => {
+  const { dataItem } = props;
+  const currentRoleSkills = dataItem.RoleSkills;
+  const value = currentRoleSkills.join(' | ');
+
+  return <td>{dataItem.inEdit ? <GenericRoleSkillsMultiSelect {...props} value={currentRoleSkills} /> : value}</td>;
 };

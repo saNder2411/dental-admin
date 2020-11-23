@@ -4,7 +4,7 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
-  BooleanFlagCell,
+  GenericBooleanFlagCell,
   GenericCurrencyCell,
   DiscountCell,
   TotalPriceCell,
@@ -12,7 +12,7 @@ import {
   GenericReferenceCell,
   ActionsControlCell,
   DurationCell,
-  RoleSkillsCell,
+  GenericRoleSkillsCell,
 } from '../_sections/Grid/GridComponents';
 import { Loader } from '../_components';
 // Types
@@ -62,7 +62,7 @@ export const Services: FC = (): JSX.Element | null => {
             field={'RoleSkills'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
             columnMenu={ColumnMenu}
-            cell={RoleSkillsCell as CustomGridCell}
+            cell={GenericRoleSkillsCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -77,7 +77,7 @@ export const Services: FC = (): JSX.Element | null => {
             field={'ShowOnline'}
             title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
             columnMenu={ColumnMenu}
-            cell={BooleanFlagCell as CustomGridCell}
+            cell={GenericBooleanFlagCell as CustomGridCell}
             // width={160}
             filter={'boolean'}
           />
@@ -85,7 +85,7 @@ export const Services: FC = (): JSX.Element | null => {
             field={'ConsultReq'}
             title={localizationService.toLanguageString('custom.consultation', 'Consultation')}
             columnMenu={ColumnMenu}
-            cell={BooleanFlagCell as CustomGridCell}
+            cell={GenericBooleanFlagCell as CustomGridCell}
             // width={160}
             filter={'boolean'}
           />

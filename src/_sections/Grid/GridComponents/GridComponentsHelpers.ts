@@ -5,8 +5,9 @@ import { StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { GridDataItem } from '../GridTypes';
 
-export const onGridDropDownChange = <T>(dataItem: T, field: keyof T, onChange: GridOnChange<T>) => (evt: DropDownListChangeEvent) =>
+export const onGridDropDownChange = <T = GridDataItem>(dataItem: T, field: keyof T, onChange: GridOnChange<T>) => (evt: DropDownListChangeEvent) =>
   onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
 
 export const isNumber = (arg: any): arg is number => typeof arg === 'number';

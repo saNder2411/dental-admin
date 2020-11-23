@@ -20,9 +20,9 @@ export const transformDataItemForAPI = ({ ClientPhoto, ClientPhotoUrl, ID, __met
     ClientPhoto: ClientPhoto
       ? { ...ClientPhoto, Url: ClientPhotoUrl }
       : {
-          Description: '',
+          Description: ClientPhotoUrl,
           Url: ClientPhotoUrl,
-          __metadata: { type: '' },
+          __metadata: { type: 'SP.FieldUrlValue' },
         },
     FullName: `${others.FirstName} ${others.Title}`,
     __metadata: { ...__metadata, id: newID },
