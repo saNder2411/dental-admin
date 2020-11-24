@@ -1689,6 +1689,40 @@
         }
       },
       "FullName": "July Jordan"
+    },
+    {
+      "CalendarColHex": "",
+      "CalendarColour": "",
+      "CellPhone": "789487389798",
+      "Department": null,
+      "Email": "789847398745",
+      "FirstName": "Test",
+      "Id": 9,
+      "JobTitle": "test",
+      "ProfilesStatus": "",
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ],
+      "ShowOnline": false,
+      "Title": "Test",
+      "WorkingWeekDays": null,
+      "id": 9,
+      "Gender": "(1) Female",
+      "ID": 9,
+      "__metadata": {
+        "id": "Web/Lists(guid'9f94e063-78f5-4d7b-b883-8eb1f6bf7928')/Items(9)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'9f94e063-78f5-4d7b-b883-8eb1f6bf7928')/Items(9)",
+        "etag": "\"\"",
+        "type": "SP.Data.MetroHR01ListItem"
+      },
+      "TeamProfilePhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "FullName": "Test"
     }
   ],
   "customers": [
@@ -2245,11 +2279,11 @@
         "Id": 511
       },
       "LookupHR01team": {
+        "Id": 9,
         "__metadata": {
-          "id": "76bdb33d-24d6-43fc-b90b-6744706281c0",
+          "id": "9f94e063-78f5-4d7b-b883-8eb1f6bf7928",
           "type": "SP.Data.MetroHR01ListItem"
-        },
-        "Id": 7
+        }
       },
       "Id": 462,
       "Title": "C.Emmerson-0462",
