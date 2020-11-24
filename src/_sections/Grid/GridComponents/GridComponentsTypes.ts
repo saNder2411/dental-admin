@@ -19,6 +19,10 @@ export interface GridCellProps<T = GridDataItem> {
   onChange: GridOnChange<T>;
 }
 
+export interface CustomGridCell extends FC<KendoGridCellProps> {
+  (props: GridCellProps): JSX.Element;
+}
+
 export interface InputChangeEvent extends ChangeEvent<HTMLInputElement> {
   nativeEvent: Event;
   syntheticEvent: SyntheticEvent<HTMLInputElement>;
@@ -26,9 +30,6 @@ export interface InputChangeEvent extends ChangeEvent<HTMLInputElement> {
   value: string;
 }
 
-export interface CustomGridCell extends FC<KendoGridCellProps> {
-  (props: GridCellProps): JSX.Element;
-}
 
 export interface AgendaDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<AgendaDataItem> {
   value: T;

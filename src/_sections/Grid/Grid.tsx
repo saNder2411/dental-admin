@@ -10,7 +10,8 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Styled Components
 import * as SC from './GridStyledComponents/GridStyled';
 // Selectors
-import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoActions } from './GridSelectors';
+import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoOriginalData } from './GridSelectors';
+import { GridActions } from './GridActions';
 
 export { GridColumn };
 
@@ -23,15 +24,17 @@ export const ColumnMenu = (props: any) => {
   );
 };
 
-export const Grid = ({ data, onDataChange, children, ...others }: any) => {
+export const Grid = ({ onDataChange, children, ...others }: any) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
-  const selectGridActions = useMemo(selectGridMemoActions, []);
+  const selectedOriginalData = useMemo(selectGridMemoOriginalData, []);
 
+  const originalData = useSelector(selectedOriginalData);
   const editField = useSelector(selectGridEditField);
   const addItemTitle = useSelector(selectGridTitleForAddNewItemSection);
   const dispatch = useDispatch();
-  const { onItemChange, onAddNewItem } = useSelector(selectGridActions);
+  const { onItemChange, onAddNewItem } = GridActions;
+  console.log(`originalData`, originalData)
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
 
@@ -73,10 +76,10 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
   const onSelectionChange = useCallback(
     (evt) => {
       let last = lastSelectedIndexRef.current;
-      const updatedData = data.map((dataItem: any) => {
+      const updatedData = originalData.map((dataItem: any) => {
         return { ...dataItem };
       });
-      const current = data.findIndex((dataItem: any) => dataItem === evt.dataItem);
+      const current = originalData.findIndex((dataItem: any) => dataItem === evt.dataItem);
 
       if (!evt.nativeEvent.shiftKey) {
         lastSelectedIndexRef.current = last = current;
@@ -92,13 +95,13 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
 
       onDataChange(updatedData);
     },
-    [data, onDataChange]
+    [originalData, onDataChange]
   );
 
   const onHeaderSelectionChange = useCallback(
     (evt) => {
       const checked = evt.syntheticEvent.target.checked;
-      const updatedData = data.map((item: any) => {
+      const updatedData = originalData.map((item: any) => {
         return {
           ...item,
           selected: checked,
@@ -107,7 +110,7 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
 
       onDataChange(updatedData);
     },
-    [data, onDataChange]
+    [originalData, onDataChange]
   );
 
   const textColumns = children
@@ -137,7 +140,7 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
     value: allColumnFilter,
   }));
 
-  const allColumnFilteredData = allColumnFilter ? process(data, { filter: { logic: 'or', filters: allColumnsFilters } }).data : data;
+  const allColumnFilteredData = allColumnFilter ? process(originalData, { filter: { logic: 'or', filters: allColumnsFilters } }).data : originalData;
 
   const processedData = process(allColumnFilteredData, dataState as any);
 
@@ -195,7 +198,7 @@ export const Grid = ({ data, onDataChange, children, ...others }: any) => {
 
   return (
     <>
-      <ExcelExport data={data} ref={excelExportRef}>
+      <ExcelExport data={originalData} ref={excelExportRef}>
         {GridElement}
       </ExcelExport>
       <GridPDFExport ref={pdfExportRef}>{GridElement}</GridPDFExport>

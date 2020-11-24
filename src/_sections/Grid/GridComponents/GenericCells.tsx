@@ -1,4 +1,5 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 // Styled Components
@@ -18,6 +19,8 @@ import { isString, isNumber } from './GridComponentsHelpers';
 // Images
 import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
+// Selectors
+import { selectGridMemoDataItem } from '../GridSelectors';
 
 export const GenericTextCell: FC<GridCellProps> = (props): JSX.Element => {
   const { dataItem, field } = props;
@@ -29,8 +32,12 @@ export const GenericTextCell: FC<GridCellProps> = (props): JSX.Element => {
   return <td>{dataItem.inEdit ? <GenericTextInput {...props} value={resultValue} /> : resultValue}</td>;
 };
 
-export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = (props): JSX.Element => {
-  const { dataItem, field } = props;
+export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem: { ID }, onChange }): JSX.Element => {
+  const selectDataItem = useMemo(() => selectGridMemoDataItem(ID), [ID]);
+  const gridDataItem = useSelector(selectDataItem);
+  const dataItem = gridDataItem ? (gridDataItem as AgendaDataItem | ServicesDataItem) : ({ Title: '', OfferingsName_Edit: '', inEdit: false } as any);
+  const field = 'OfferingsName_Edit' in dataItem ? 'OfferingsName_Edit' : 'Title';
+
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const value = dataItem[field];
@@ -38,7 +45,13 @@ export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDat
 
   return dataItem.inEdit ? (
     <td>
-      <GenericReferenceInput {...props} value={strValue} />
+      <GenericReferenceInput
+        rowType=""
+        dataItem={dataItem as AgendaDataItem | ServicesDataItem}
+        field={field as keyof (AgendaDataItem | ServicesDataItem)}
+        onChange={onChange}
+        value={strValue}
+      />
     </td>
   ) : (
     <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
@@ -52,6 +65,91 @@ export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDat
         {strValue}...
       </Popup>
     </SC.ReferenceCell>
+  );
+};
+
+export const GenericStartDateIDCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem: { ID }, onChange }): JSX.Element => {
+  const selectDataItem = useMemo(() => selectGridMemoDataItem(ID), [ID]);
+  const gridDataItem = useSelector(selectDataItem);
+  const dataItem = gridDataItem ? (gridDataItem as AgendaDataItem) : { FilterStart: new Date().toISOString(), inEdit: false };
+  const intlService = useInternationalization();
+  const value = new Date(dataItem.FilterStart);
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <GenericDateInput
+          rowType=""
+          dataItem={dataItem as AgendaDataItem | CustomersDataItem}
+          field={'FilterStart' as keyof (AgendaDataItem | CustomersDataItem)}
+          onChange={onChange}
+          value={value}
+        />
+      ) : (
+        intlService.formatDate(value, 'H:mm | dd.MM')
+      )}
+    </td>
+  );
+};
+
+export const GenericEndDateIDCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem: { ID }, onChange }): JSX.Element => {
+  const selectDataItem = useMemo(() => selectGridMemoDataItem(ID), [ID]);
+  const gridDataItem = useSelector(selectDataItem);
+  const dataItem = gridDataItem ? (gridDataItem as AgendaDataItem) : { FilterEnd: new Date().toISOString(), inEdit: false };
+
+  const intlService = useInternationalization();
+  const value = new Date(dataItem.FilterEnd);
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <GenericDateInput
+          rowType=""
+          dataItem={dataItem as AgendaDataItem | CustomersDataItem}
+          field={'FilterEnd' as keyof (AgendaDataItem | CustomersDataItem)}
+          onChange={onChange}
+          value={value}
+        />
+      ) : (
+        intlService.formatDate(value, 'H:mm | dd.MM')
+      )}
+    </td>
+  );
+};
+
+export const GenericCurrencyIDCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
+  const selectDataItem = useMemo(() => selectGridMemoDataItem(ID), [ID]);
+  const gridDataItem = useSelector(selectDataItem);
+  const dataItem = gridDataItem ? (gridDataItem as AgendaDataItem) : { ServiceCharge: 50 };
+
+  const intlService = useInternationalization();
+  const value = dataItem.ServiceCharge;
+  const numValue = isNumber(value) ? value : 50;
+
+  return <SC.GenericCurrencyCell isNegativeAmount={numValue < 0}>{intlService.formatNumber(numValue, 'c')}</SC.GenericCurrencyCell>;
+};
+
+export const GenericGenderIDCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem: { ID }, onChange }): JSX.Element => {
+  const selectDataItem = useMemo(() => selectGridMemoDataItem(ID), [ID]);
+  const gridDataItem = useSelector(selectDataItem);
+  const dataItem = gridDataItem ? (gridDataItem as AgendaDataItem) : { Gender: '(1) Female', inEdit: false };
+
+  const value = dataItem.Gender ? dataItem.Gender : '(1) Female';
+
+  return (
+    <td>
+      {dataItem.inEdit ? (
+        <GenericGenderDropDownList
+          rowType=""
+          dataItem={dataItem as AgendaDataItem | CustomersDataItem}
+          field="Gender"
+          onChange={onChange}
+          value={value}
+        />
+      ) : (
+        value
+      )}
+    </td>
   );
 };
 

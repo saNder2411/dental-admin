@@ -9,29 +9,37 @@ import {
   AgendaStatusIcon,
   AgendaStatusCell,
   GenericReferenceCell,
-  GenericDateCell,
+  // GenericDateCell,
   AgendaSvcStaffCell,
   AgendaServicesCell,
-  GenericCurrencyCell,
+  // GenericCurrencyCell,
   AgendaFullNameCell,
-  GenericGenderCell,
-  ActionsControlCell,
+  // GenericGenderCell,
+  // ActionsControlCell,
+  GenericStartDateIDCell,
+  GenericEndDateIDCell,
+  GenericCurrencyIDCell,
+  GenericGenderIDCell,
+  ActionsControlIDCell,
 } from '../_sections/Grid';
 
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Actions
+import { GridActions } from '../_sections/Grid/GridActions';
 // Hooks
-import { useGridStateForDomain, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
+import { useGridStateForDomainID, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
-  const { data, dataName, GridActions } = useGridStateForDomain();
+  const { dataName } = useGridStateForDomainID();
   const { agendaData, agendaIsDataLoading, AgendaActions } = useAgendaStateForDomain();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
+  console.log(`Agenda render`);
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetGridDataForDomainWithDataBind(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, GridActions, dispatch);
@@ -40,7 +48,7 @@ export const Agenda: FC = (): JSX.Element => {
   const contentTSX = hasAgendaData && !agendaIsDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={data}>
+        <Grid>
           <GridColumn field={'AppointmentStatus'} title={` `} width={100} editable={false} cell={AgendaStatusIcon as CustomGridCell} />
           <GridColumn
             field={'AppointmentStatus'}
@@ -63,7 +71,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             width={120}
-            cell={GenericDateCell as CustomGridCell}
+            cell={GenericStartDateIDCell as CustomGridCell}
           />
           <GridColumn
             field={'FilterEnd'}
@@ -71,7 +79,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             width={120}
-            cell={GenericDateCell as CustomGridCell}
+            cell={GenericEndDateIDCell as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01team'}
@@ -93,11 +101,11 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
             width={90}
-            cell={GenericCurrencyCell as CustomGridCell}
+            cell={GenericCurrencyIDCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn
-            field={'LookupCM102customers'}
+            field={'LookupCM102customerCustomGridCells'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
             width={140}
@@ -108,14 +116,14 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={GenericGenderCell as CustomGridCell}
+            cell={GenericGenderIDCell as CustomGridCell}
             filter={'text'}
             width={120}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
             width={140}
-            cell={ActionsControlCell as CustomGridCell}
+            cell={ActionsControlIDCell as CustomGridCell}
           />
         </Grid>
       </div>

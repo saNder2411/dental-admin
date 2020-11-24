@@ -8,7 +8,7 @@ import { OfferIcons } from '../../Services';
 export const generateId = (data: GridDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
 export const updateDataAfterAddItemToEdit = (data: GridDataItem[], editItemID: number): GridDataItem[] => {
-  return [...data.map((item) => (item.ID === editItemID ? { ...item, inEdit: true } : item))];
+  return data.map((item) => (item.ID === editItemID ? { ...item, inEdit: true } : item));
 };
 
 export const updateDataAfterEditItem = (data: GridDataItem[], dataItem: GridDataItem): GridDataItem[] => {
@@ -28,15 +28,15 @@ export const updateDataAfterRemoveItem = (data: GridDataItem[], removeItemID: nu
   return [...data.slice(0, index), ...data.slice(index + 1)];
 };
 
-export const updateDataAfterCancelEdit = (data: GridDataItem[], originData: GridDataItem[], editItemID: number): GridDataItem[] => {
-  const originalItem = originData.find(({ ID }) => ID === editItemID);
+export const updateDataAfterCancelEdit = (data: GridDataItem[], originalData: GridDataItem[], editItemID: number): GridDataItem[] => {
+  const originalItem = originalData.find(({ ID }) => ID === editItemID);
 
-  return originalItem ? [...data.map((item) => (item.ID === originalItem.ID ? originalItem : item))] : data;
+  return originalItem ? data.map((item) => (item.ID === originalItem.ID ? originalItem : item)) : data;
 };
 
 export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, value, syntheticEvent }: GridItemChangeEvent): GridDataItem[] => {
   syntheticEvent.persist();
-  return [...data.map((item) => (item.ID === dataItem.ID ? { ...item, [field as string]: value } : item))];
+  return data.map((item) => (item.ID === dataItem.ID ? { ...item, [field as string]: value } : item));
 };
 
 export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: GridDataName): GridDataItem[] => {

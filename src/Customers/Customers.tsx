@@ -16,12 +16,14 @@ import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Actions
+import { GridActions } from '../_sections/Grid/GridActions';
 // Hooks
 import { useGridStateForDomain, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useCustomersStateForDomain, useActionMetaForCustomersFetchData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
-  const { data, dataName, GridActions } = useGridStateForDomain();
+  const { data, dataName } = useGridStateForDomain();
   const { customersData, customersIsDataLoading, CustomersActions } = useCustomersStateForDomain();
   const teamStaffDataLength = useActionMetaForCustomersFetchData();
   const dispatch = useDispatch();

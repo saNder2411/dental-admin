@@ -57,12 +57,12 @@ export interface GridStateActions {
 
 export interface GridState {
   data: GridDataItem[];
-  originData: GridDataItem[];
+  dataID: number[];
+  originalData: GridDataItem[];
   dataName: GridDataName;
   isDataItemLoading: boolean;
   editField: 'inEdit';
   titleForAddNewItemSection: string;
-  actions: GridStateActions;
 }
 
 export type DomainsStateActions = InferValueTypes<{

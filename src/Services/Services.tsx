@@ -19,12 +19,14 @@ import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Actions
+import { GridActions } from '../_sections/Grid/GridActions';
 // Hooks
 import { useGridStateForDomain, useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
 import { useServicesStateForDomain } from './ServicesHooks';
 
 export const Services: FC = (): JSX.Element => {
-  const { data, dataName, GridActions } = useGridStateForDomain();
+  const { data, dataName } = useGridStateForDomain();
   const { servicesData, servicesIsDataLoading, ServicesActions } = useServicesStateForDomain();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
