@@ -1,10 +1,10 @@
 import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
-import { AgendaDataItem } from '../../Agenda';
+// import { AgendaDataItem } from '../../Agenda';
 // import { GridDataItem } from './GridTypes';
 
-const selectGridData = ({ GridState }: GlobalState) => GridState.data;
+const selectGridEventDrivenData = ({ GridState }: GlobalState) => GridState.eventDrivenData;
 
 const selectGridOriginalData = ({ GridState }: GlobalState) => GridState.originalData;
 
@@ -16,10 +16,15 @@ export const selectGridTitleForAddNewItemSection = ({ GridState }: GlobalState) 
 
 export const selectGridDataItemIsLoading = ({ GridState }: GlobalState) => GridState.isDataItemLoading;
 
-export const selectGridMemoData = () => createSelector(selectGridData, (data) => data);
+export const selectGridMemoEventDrivenData = () => createSelector(selectGridEventDrivenData, (data) => data);
 
 export const selectGridMemoOriginalData = () => createSelector(selectGridOriginalData, (originalData) => originalData);
 
-export const selectGridMemoDataItem = (ID: number) => createSelector(selectGridData, (data) => data.find((dataItem) => dataItem.ID === ID));
+export const selectGridMemoDataItem = <T>(ID: number) =>
+  createSelector(selectGridEventDrivenData, (data) => (data.find((dataItem) => dataItem.ID === ID) as unknown as T));
 
-export const selectGridMemoCellValueForAgenda = (ID: number, field: keyof AgendaDataItem) => createSelector(selectGridData, (data) => data.find((dataItem) => dataItem.ID === ID));
+export const selectGridDataItemMemoValueForCell = <T>(ID: number, field: keyof T) =>
+  createSelector(
+    ({ GridState }: GlobalState) => (GridState.eventDrivenData.find((dataItem) => dataItem.ID === ID) as unknown as T)[field],
+    (value) => value
+  );

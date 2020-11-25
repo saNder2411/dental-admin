@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 // Selectors
-import { selectGridMemoData, selectGridDataName } from '../GridSelectors';
+import { selectGridMemoEventDrivenData, selectGridDataName } from '../GridSelectors';
 
 export const useGridStateForDomain = () => {
-  const selectGridData = useMemo(selectGridMemoData, []);
+  const selectGridData = useMemo(selectGridMemoEventDrivenData, []);
 
   const data = useSelector(selectGridData);
   const dataName = useSelector(selectGridDataName);

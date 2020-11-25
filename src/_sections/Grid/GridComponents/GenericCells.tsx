@@ -20,7 +20,7 @@ import { isString, isNumber } from './GridComponentsHelpers';
 import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 // Selectors
-import { selectGridMemoDataItem } from '../GridSelectors';
+import { selectGridMemoDataItem, selectGridDataItemMemoValueForCell } from '../GridSelectors';
 
 export const GenericTextCell: FC<GridCellProps> = (props): JSX.Element => {
   const { dataItem, field } = props;
@@ -32,30 +32,23 @@ export const GenericTextCell: FC<GridCellProps> = (props): JSX.Element => {
   return <td>{dataItem.inEdit ? <GenericTextInput {...props} value={resultValue} /> : resultValue}</td>;
 };
 
-export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem: { ID }, onChange }): JSX.Element => {
-  const selectDataItem = useMemo(() => selectGridMemoDataItem(ID), [ID]);
-  const gridDataItem = useSelector(selectDataItem);
-  const dataItem = gridDataItem ? (gridDataItem as AgendaDataItem | ServicesDataItem) : ({ Title: '', OfferingsName_Edit: '', inEdit: false } as any);
-  const field = 'OfferingsName_Edit' in dataItem ? 'OfferingsName_Edit' : 'Title';
+export const GenericReferenceCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<AgendaDataItem | ServicesDataItem>(ID, field), [ID, field]);
+  const gridDataItemValue = useSelector(selectDataItemValue);
+  const selectDataItem = useMemo(() => selectGridMemoDataItem<AgendaDataItem | ServicesDataItem>(ID), [ID]);
+  const dataItem = useSelector(selectDataItem);
 
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
-  const value = dataItem[field];
-  const strValue = isString(value) ? value : '';
+  const strValue = isString(gridDataItemValue) ? gridDataItemValue : '';
 
   return dataItem.inEdit ? (
     <td>
-      <GenericReferenceInput
-        rowType=""
-        dataItem={dataItem as AgendaDataItem | ServicesDataItem}
-        field={field as keyof (AgendaDataItem | ServicesDataItem)}
-        onChange={onChange}
-        value={strValue}
-      />
+      <GenericReferenceInput rowType="" dataItem={dataItem} field={field} onChange={onChange} value={strValue} />
     </td>
   ) : (
     <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
-      {value}
+      {gridDataItemValue}
       <Popup
         show={showPopup}
         anchor={anchorRef.current as HTMLTableDataCellElement}

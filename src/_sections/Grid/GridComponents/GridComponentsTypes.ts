@@ -6,7 +6,7 @@ import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 
 export type GridOnChange<T> = (evt: {
-  dataItem: T;
+  dataItem: number;
   syntheticEvent: React.SyntheticEvent<HTMLElement | HTMLInputElement>;
   field: keyof T;
   value: T[keyof T] | null | string | undefined;
@@ -30,10 +30,12 @@ export interface InputChangeEvent extends ChangeEvent<HTMLInputElement> {
   value: string;
 }
 
-
-export interface AgendaDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<AgendaDataItem> {
-  value: T;
-  domainData?: U[];
+export interface CellDropDownListProps<T = GridDataItem, V = string, D = GridDataItem, > {
+  dataItemID: number;
+  field: keyof T;
+  onChange: GridOnChange<T>;
+  value: V;
+  domainData?: D;
 }
 
 export interface CustomersDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<CustomersDataItem> {

@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { AgendaDropDownListProps } from './GridComponentsTypes';
+import { CellDropDownListProps } from './GridComponentsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
@@ -13,22 +13,22 @@ import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { onGridDropDownChange, transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from './GridComponentsHelpers';
 import { CustomersDataItem } from '../../../Customers';
 
-export const AgendaStatusDropDownList: FC<AgendaDropDownListProps<StatusNames>> = ({ dataItem, field, onChange, value }) => {
+export const AgendaStatusDropDownList: FC<CellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const selectStatusNameList = useMemo(selectAgendaMemoStatusNameList, []);
   const statusNameList = useSelector(selectStatusNameList);
   const dataForDropDownList = statusNameList.map((value) => ({ [field]: value, value }));
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
-  const onStatusChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
+  const onStatusChange = onGridDropDownChange<AgendaDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onStatusChange} value={dropDownListValue} data={dataForDropDownList} textField={field} disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaSvcStaffDropDownList: FC<AgendaDropDownListProps<string, TeamStaffDataItem>> = ({
-  dataItem,
+export const AgendaSvcStaffDropDownList: FC<CellDropDownListProps<AgendaDataItem, string, TeamStaffDataItem[]>> = ({
+  dataItemID,
   field,
   onChange,
   domainData,
@@ -38,15 +38,15 @@ export const AgendaSvcStaffDropDownList: FC<AgendaDropDownListProps<string, Team
   const dataForDropdownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
   const dropDownListValue = dataForDropdownList.find((item) => item.text === value);
 
-  const onSvcStaffChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
+  const onSvcStaffChange = onGridDropDownChange<AgendaDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField="text" disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaFullNameDropDownList: FC<AgendaDropDownListProps<string, CustomersDataItem>> = ({
-  dataItem,
+export const AgendaFullNameDropDownList: FC<CellDropDownListProps<AgendaDataItem, string, CustomersDataItem[]>> = ({
+  dataItemID,
   field,
   onChange,
   domainData,
@@ -56,15 +56,15 @@ export const AgendaFullNameDropDownList: FC<AgendaDropDownListProps<string, Cust
   const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
   const dropDownListValue = dataForDropDownList.find((item) => item.text === value);
 
-  const onFullNameChange = onGridDropDownChange<AgendaDataItem>(dataItem, field, onChange);
+  const onFullNameChange = onGridDropDownChange<AgendaDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onFullNameChange} value={dropDownListValue} data={dataForDropDownList} textField="text" disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaServicesMultiSelect: FC<AgendaDropDownListProps<ServicesDataItem[], ServicesDataItem>> = ({
-  dataItem,
+export const AgendaServicesMultiSelect: FC<CellDropDownListProps<AgendaDataItem, ServicesDataItem[], ServicesDataItem[]>> = ({
+  dataItemID,
   field,
   onChange,
   value,
@@ -76,7 +76,7 @@ export const AgendaServicesMultiSelect: FC<AgendaDropDownListProps<ServicesDataI
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
     onChange({
-      dataItem,
+      dataItem: dataItemID,
       field,
       syntheticEvent: evt.syntheticEvent,
       value: { results: evt.target.value.map(({ value }) => value) },

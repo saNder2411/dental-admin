@@ -36,7 +36,7 @@ export const updateDataAfterCancelEdit = (data: GridDataItem[], originalData: Gr
 
 export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, value, syntheticEvent }: GridItemChangeEvent): GridDataItem[] => {
   syntheticEvent.persist();
-  return data.map((item) => (item.ID === dataItem.ID ? { ...item, [field as string]: value } : item));
+  return data.map((item) => (item.ID === dataItem ? { ...item, [field as string]: value } : item));
 };
 
 export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: GridDataName): GridDataItem[] => {

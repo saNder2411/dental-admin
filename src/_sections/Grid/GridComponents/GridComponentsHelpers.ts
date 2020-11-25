@@ -7,8 +7,8 @@ import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { GridDataItem } from '../GridTypes';
 
-export const onGridDropDownChange = <T = GridDataItem>(dataItem: T, field: keyof T, onChange: GridOnChange<T>) => (evt: DropDownListChangeEvent) =>
-  onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+export const onGridDropDownChange = <T = GridDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (evt: DropDownListChangeEvent) =>
+  onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
 
 export const isNumber = (arg: any): arg is number => typeof arg === 'number';
 

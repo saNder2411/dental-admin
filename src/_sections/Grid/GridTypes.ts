@@ -56,8 +56,7 @@ export interface GridStateActions {
 }
 
 export interface GridState {
-  data: GridDataItem[];
-  dataID: number[];
+  eventDrivenData: GridDataItem[];
   originalData: GridDataItem[];
   dataName: GridDataName;
   isDataItemLoading: boolean;
