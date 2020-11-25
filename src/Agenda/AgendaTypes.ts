@@ -17,6 +17,11 @@ export enum StatusNames {
   Tooth = '(11) Tooth',
 }
 
+export interface LookupEntity {
+  Id: number;
+  __metadata: { id: string; type: string };
+}
+
 export interface APIAgendaDataItem {
   AppointmentSource: null | string;
   AppointmentStatus: StatusNames;
@@ -34,23 +39,9 @@ export interface APIAgendaDataItem {
   ID: number;
   Id: number;
   LastNameAppt: string;
-  LookupCM102customers: {
-    Id: number;
-    __metadata: {
-      id: string;
-      type: string;
-    };
-  };
-  LookupHR01team: {
-    Id: number;
-    __metadata: {
-      id: string;
-      type: string;
-    };
-  };
-  LookupMultiBP01offerings: {
-    results: Array<{ Id: number; __metadata: { id: string; type: string } }>;
-  };
+  LookupCM102customers: LookupEntity;
+  LookupHR01team: LookupEntity;
+  LookupMultiBP01offerings: { results: LookupEntity[] };
   MasterSeriesItemID: null | string;
   MetroRRule: null | string;
   MetroRecException: null | string;
@@ -82,7 +73,7 @@ export interface AgendaState {
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;
-  statusNameList: StatusNames[]
+  statusNameList: StatusNames[];
   actions: DomainStateActionsType<AgendaDataItem>;
 }
 
