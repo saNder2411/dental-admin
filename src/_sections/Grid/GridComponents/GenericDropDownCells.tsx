@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { GenericDropDownListProps } from './GridComponentsTypes';
+import { EditCellDropDownListProps } from './GridComponentsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
@@ -13,8 +13,8 @@ import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelector
 // Helpers
 import { onGridDropDownChange } from './GridComponentsHelpers';
 
-export const GenericGenderDropDownList: FC<GenericDropDownListProps<string, AgendaDataItem | CustomersDataItem>> = ({
-  dataItem,
+export const GenericGenderDropDownList: FC<EditCellDropDownListProps<AgendaDataItem | CustomersDataItem, string>> = ({
+  dataItemID,
   field,
   onChange,
   value,
@@ -26,15 +26,15 @@ export const GenericGenderDropDownList: FC<GenericDropDownListProps<string, Agen
   ];
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
-  const onGenderChange = onGridDropDownChange<AgendaDataItem | CustomersDataItem>(dataItem, field, onChange);
+  const onGenderChange = onGridDropDownChange<AgendaDataItem | CustomersDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onGenderChange} value={dropDownListValue} data={dataForDropDownList} textField={field} disabled={isDataItemLoading} />
   );
 };
 
-export const GenericBooleanFlagDropDownList: FC<GenericDropDownListProps<boolean, ServicesDataItem | TeamStaffDataItem>> = ({
-  dataItem,
+export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<ServicesDataItem | TeamStaffDataItem, boolean>> = ({
+  dataItemID,
   field,
   onChange,
   value,
@@ -47,7 +47,7 @@ export const GenericBooleanFlagDropDownList: FC<GenericDropDownListProps<boolean
   ];
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
-  const onBooleanFlagChange = onGridDropDownChange<ServicesDataItem | TeamStaffDataItem>(dataItem, field, onChange);
+  const onBooleanFlagChange = onGridDropDownChange<ServicesDataItem | TeamStaffDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList
@@ -60,8 +60,8 @@ export const GenericBooleanFlagDropDownList: FC<GenericDropDownListProps<boolean
   );
 };
 
-export const GenericRoleSkillsMultiSelect: FC<GenericDropDownListProps<string[], TeamStaffDataItem | ServicesDataItem>> = ({
-  dataItem,
+export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaffDataItem | ServicesDataItem, string[]>> = ({
+  dataItemID,
   field,
   onChange,
   value,
@@ -74,7 +74,8 @@ export const GenericRoleSkillsMultiSelect: FC<GenericDropDownListProps<string[],
   const dropDownListValue = value.map((value) => ({ text: value, value }));
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
-    onChange({ dataItem, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value) });
+    onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value) });
   };
+
   return <MultiSelect onChange={onServicesChange} value={dropDownListValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
 };

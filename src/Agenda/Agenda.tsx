@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import {
@@ -9,33 +9,30 @@ import {
   AgendaStatusIcon,
   AgendaStatusCell,
   GenericReferenceCell,
-  // GenericDateCell,
+  GenericDateCell,
   AgendaSvcStaffCell,
   AgendaServicesCell,
-  // GenericCurrencyCell,
+  GenericCurrencyCell,
   AgendaFullNameCell,
-  // GenericGenderCell,
-  // ActionsControlCell,
-  GenericStartDateIDCell,
-  GenericEndDateIDCell,
-  GenericCurrencyIDCell,
-  GenericGenderIDCell,
-  ActionsControlIDCell,
+  GenericGenderCell,
+  ActionsControlCell,
 } from '../_sections/Grid';
-
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Selectors
+import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { GridActions } from '../_sections/Grid/GridActions';
+import { AgendaActions } from './AgendaActions';
 // Hooks
-import { useGridStateForDomainID, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
+import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
-  const { dataName } = useGridStateForDomainID();
-  const { agendaData, agendaIsDataLoading, AgendaActions } = useAgendaStateForDomain();
+  const dataName = useSelector(selectGridDataName);
+  const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
@@ -71,7 +68,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             width={120}
-            cell={GenericStartDateIDCell as CustomGridCell}
+            cell={GenericDateCell as CustomGridCell}
           />
           <GridColumn
             field={'FilterEnd'}
@@ -79,7 +76,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             width={120}
-            cell={GenericEndDateIDCell as CustomGridCell}
+            cell={GenericDateCell as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01team'}
@@ -101,11 +98,11 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
             width={90}
-            cell={GenericCurrencyIDCell as CustomGridCell}
+            cell={GenericCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn
-            field={'LookupCM102customerCustomGridCells'}
+            field={'LookupCM102customers'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
             width={140}
@@ -116,14 +113,14 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={GenericGenderIDCell as CustomGridCell}
+            cell={GenericGenderCell as CustomGridCell}
             filter={'text'}
             width={120}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
             width={140}
-            cell={ActionsControlIDCell as CustomGridCell}
+            cell={ActionsControlCell as CustomGridCell}
           />
         </Grid>
       </div>

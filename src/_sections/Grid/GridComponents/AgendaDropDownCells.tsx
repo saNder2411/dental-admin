@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { CellDropDownListProps } from './GridComponentsTypes';
+import { EditCellDropDownListProps } from './GridComponentsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
@@ -13,7 +13,7 @@ import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { onGridDropDownChange, transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from './GridComponentsHelpers';
 import { CustomersDataItem } from '../../../Customers';
 
-export const AgendaStatusDropDownList: FC<CellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
+export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const selectStatusNameList = useMemo(selectAgendaMemoStatusNameList, []);
   const statusNameList = useSelector(selectStatusNameList);
@@ -27,7 +27,7 @@ export const AgendaStatusDropDownList: FC<CellDropDownListProps<AgendaDataItem, 
   );
 };
 
-export const AgendaSvcStaffDropDownList: FC<CellDropDownListProps<AgendaDataItem, string, TeamStaffDataItem[]>> = ({
+export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, string, TeamStaffDataItem[]>> = ({
   dataItemID,
   field,
   onChange,
@@ -45,7 +45,7 @@ export const AgendaSvcStaffDropDownList: FC<CellDropDownListProps<AgendaDataItem
   );
 };
 
-export const AgendaFullNameDropDownList: FC<CellDropDownListProps<AgendaDataItem, string, CustomersDataItem[]>> = ({
+export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, string, CustomersDataItem[]>> = ({
   dataItemID,
   field,
   onChange,
@@ -63,7 +63,7 @@ export const AgendaFullNameDropDownList: FC<CellDropDownListProps<AgendaDataItem
   );
 };
 
-export const AgendaServicesMultiSelect: FC<CellDropDownListProps<AgendaDataItem, ServicesDataItem[], ServicesDataItem[]>> = ({
+export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AgendaDataItem, ServicesDataItem[], ServicesDataItem[]>> = ({
   dataItemID,
   field,
   onChange,

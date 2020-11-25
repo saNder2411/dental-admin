@@ -14,15 +14,17 @@ import { StatusNames } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 // Helpers
 import { isNumber } from './GridComponentsHelpers';
+// Hooks
+import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
 
-export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = (props): JSX.Element => {
-  const { dataItem } = props;
-  const value = dataItem.OfferingIconName;
+export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+  const value = cellValue as string;
   const isImageUrl = value && (value.includes('png') || value.includes('jpg') || value.includes('jpeg'));
 
-  return dataItem.inEdit ? (
+  return dataItemInEditValue ? (
     <td>
-      <ServicesIconInput {...props} value={value} />
+      <ServicesIconInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
     </td>
   ) : isImageUrl ? (
     <SC.ServicesImageCell imageUrl={value}>
@@ -35,27 +37,43 @@ export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = (props): JS
   );
 };
 
-export const ServicesDiscountCell: FC<GridCellProps<ServicesDataItem>> = (props): JSX.Element => {
-  const { dataItem } = props;
-  const value = dataItem.OfferingDiscount;
+export const ServicesDiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+  const value = cellValue as number;
 
   return (
-    <td>{dataItem.inEdit ? <ServicesNumeric {...props} value={value} step={0.01} min={0} /> : <span>{`${value ? value * 100 : `0`}%`}</span>}</td>
+    <td>
+      {dataItemInEditValue ? (
+        <ServicesNumeric dataItemID={memoID} field={memoField} onChange={onChange} value={value} step={0.01} min={0} />
+      ) : (
+        <span>{`${value ? value * 100 : `0`}%`}</span>
+      )}
+    </td>
   );
 };
 
-export const ServicesDurationCell: FC<GridCellProps<ServicesDataItem>> = (props): JSX.Element => {
-  const { dataItem } = props;
-  const value = dataItem.MinutesDuration;
+export const ServicesDurationCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+  const value = cellValue as number;
 
-  return <td>{dataItem.inEdit ? <ServicesNumeric {...props} value={value} step={5} min={5} /> : <span>{value}</span>}</td>;
+  return (
+    <td>
+      {dataItemInEditValue ? (
+        <ServicesNumeric dataItemID={memoID} field={memoField} onChange={onChange} value={value} step={5} min={5} />
+      ) : (
+        <span>{value}</span>
+      )}
+    </td>
+  );
 };
 
-export const ServicesTotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem, field }): JSX.Element => {
+export const ServicesTotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { cellValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+  const { cellValue: OfferingDiscount } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, 'OfferingDiscount');
   const intlService = useInternationalization();
-  const value = dataItem[field];
-  const numValue = isNumber(value) ? value : 0;
-  const calcValue = numValue > 0 ? numValue - numValue * dataItem.OfferingDiscount : 0;
+  const numValue = isNumber(cellValue) ? cellValue : 0;
+  const numDiscount = isNumber(OfferingDiscount) ? OfferingDiscount : 0;
+  const calcValue = numValue > 0 ? numValue - numValue * numDiscount : 0;
 
   return (
     <SC.GenericCurrencyCell isNegativeAmount={calcValue < 0}>

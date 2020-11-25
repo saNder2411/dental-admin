@@ -1524,9 +1524,9 @@
         "type": "SP.Data.MetroHR01ListItem"
       },
       "Id": 4,
-      "Title": "Romanov",
+      "Title": "Romanova",
       "FirstName": "Christina",
-      "FullName": "Christina Romanov",
+      "FullName": "Christina Romanova",
       "ShowOnline": true,
       "Email": "christine.romanov@metroapps.online",
       "CellPhone": "+89 7955 99666",
@@ -1689,6 +1689,42 @@
         }
       },
       "FullName": "July Jordan"
+    },
+    {
+      "CalendarColHex": "",
+      "CalendarColour": "",
+      "CellPhone": "+89 7894 58938",
+      "Department": null,
+      "Email": "korin.@gmail.com",
+      "FirstName": "Korin",
+      "Id": 9,
+      "JobTitle": "Senior Stylist",
+      "ProfilesStatus": "",
+      "RoleSkills": [
+        "Colouring-Base",
+        "Active Listening",
+        "Styling-Blunt Cut"
+      ],
+      "ShowOnline": true,
+      "Title": "McLaren",
+      "WorkingWeekDays": null,
+      "id": 9,
+      "Gender": "(1) Female",
+      "ID": 9,
+      "__metadata": {
+        "id": "Web/Lists(guid'0443aa45-8b1b-43e9-819a-bfa24fb546ed')/Items(9)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'0443aa45-8b1b-43e9-819a-bfa24fb546ed')/Items(9)",
+        "etag": "\"\"",
+        "type": "SP.Data.MetroHR01ListItem"
+      },
+      "TeamProfilePhoto": {
+        "Description": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
+        "Url": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "FullName": "Korin McLaren"
     }
   ],
   "customers": [
@@ -2245,11 +2281,11 @@
         }
       },
       "LookupHR01team": {
+        "Id": 2,
         "__metadata": {
-          "id": "76bdb33d-24d6-43fc-b90b-6744706281c0",
+          "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
           "type": "SP.Data.MetroHR01ListItem"
-        },
-        "Id": 7
+        }
       },
       "Id": 462,
       "Title": "C.Emmerson-0462",

@@ -1,5 +1,5 @@
 // Types
-import { InferValueTypes, DomainStateActionsType } from '../_sections/Grid/GridTypes';
+import { InferValueTypes } from '../_sections/Grid/GridTypes';
 // Actions
 import * as actions from './CustomersAC';
 
@@ -47,7 +47,6 @@ export interface CustomersState {
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;
-  actions: DomainStateActionsType<CustomersDataItem>;
 }
 
 export const ActionTypes = {

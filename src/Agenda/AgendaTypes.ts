@@ -1,5 +1,5 @@
 // Types
-import { InferValueTypes, DomainStateActionsType } from '../_sections/Grid/GridTypes';
+import { InferValueTypes } from '../_sections/Grid/GridTypes';
 // Actions
 import * as actions from './AgendaAC';
 
@@ -74,7 +74,6 @@ export interface AgendaState {
   isDataItemLoading: boolean;
   dataItemError: string;
   statusNameList: StatusNames[];
-  actions: DomainStateActionsType<AgendaDataItem>;
 }
 
 export const ActionTypes = {

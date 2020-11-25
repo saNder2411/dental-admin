@@ -4,13 +4,21 @@ import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { ServicesNumericProps } from './GridComponentsTypes';
+import { EditCellNumericProps } from './GridComponentsTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 
-export const ServicesNumeric: FC<ServicesNumericProps<number, ServicesDataItem>> = ({ dataItem, field, onChange, value, step, min }): JSX.Element => {
+export const ServicesNumeric: FC<EditCellNumericProps<ServicesDataItem, number>> = ({
+  dataItemID,
+  field,
+  onChange,
+  value,
+  step,
+  min,
+}): JSX.Element => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
+  const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
+    onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
   return <NumericTextBox value={value} step={step} min={min} onChange={onNumericChange} disabled={isDataItemLoading} />;
 };

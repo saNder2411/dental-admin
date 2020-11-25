@@ -2,8 +2,6 @@ import { SyntheticEvent, ChangeEvent, FC } from 'react';
 import { GridCellProps as KendoGridCellProps } from '@progress/kendo-react-grid';
 // Types
 import { GridDataItem } from '../GridTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 
 export type GridOnChange<T> = (evt: {
   dataItem: number;
@@ -30,30 +28,18 @@ export interface InputChangeEvent extends ChangeEvent<HTMLInputElement> {
   value: string;
 }
 
-export interface CellDropDownListProps<T = GridDataItem, V = string, D = GridDataItem, > {
+export interface EditCellProps<T = GridDataItem, V = string> {
   dataItemID: number;
   field: keyof T;
   onChange: GridOnChange<T>;
   value: V;
+}
+
+export interface EditCellDropDownListProps<T = GridDataItem, V = string, D = GridDataItem> extends EditCellProps<T, V> {
   domainData?: D;
 }
 
-export interface CustomersDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<CustomersDataItem> {
-  value: T;
-  domainData?: U[];
-}
-
-export interface GenericInputProps<T = string, U = GridDataItem> extends GridCellProps<U> {
-  value: T;
-}
-
-export interface GenericDropDownListProps<T = string, U = GridDataItem> extends GridCellProps<U> {
-  value: T;
-  domainData?: U[];
-}
-
-export interface ServicesNumericProps<T = number, U = GridDataItem> extends GridCellProps<U> {
-  value: T;
+export interface EditCellNumericProps<T = GridDataItem, V = number> extends EditCellProps<T, V> {
   step: number;
   min: number;
 }

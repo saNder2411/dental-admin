@@ -5,8 +5,11 @@ import { CustomersSvcStaffDropDownList, CustomersLastAppointmentsMultiSelect } f
 // Types
 import { GridCellProps } from './GridComponentsTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { LookupEntity } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
+// Hooks
+import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
@@ -15,15 +18,28 @@ export const CustomersSvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (prop
   return <td>{dataItem.inEdit ? <CustomersSvcStaffDropDownList {...props} /> : value}</td>;
 };
 
-export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
-  const { dataItem } = props;
+export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<CustomersDataItem>(ID, field);
+  const LookupMultiHR01team = cellValue as { results: LookupEntity[] };
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
 
-  const currentAppointment = teamStaffData.filter(({ Id }) => dataItem.LookupMultiHR01team.results.find((item) => item.Id === Id));
+  const currentAppointment = teamStaffData.filter(({ Id }) => LookupMultiHR01team.results.find((item) => item.Id === Id));
   const value = currentAppointment.map(({ Title }) => Title).join(' | ');
 
   return (
-    <td>{dataItem.inEdit ? <CustomersLastAppointmentsMultiSelect {...props} value={currentAppointment} domainData={teamStaffData} /> : value}</td>
+    <td>
+      {dataItemInEditValue ? (
+        <CustomersLastAppointmentsMultiSelect
+          dataItemID={memoID}
+          field={memoField}
+          onChange={onChange}
+          value={currentAppointment}
+          domainData={teamStaffData}
+        />
+      ) : (
+        value
+      )}
+    </td>
   );
 };

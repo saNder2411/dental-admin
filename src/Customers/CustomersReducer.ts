@@ -1,8 +1,5 @@
-import { Dispatch } from 'redux';
 // Types
 import { ActionTypes, CustomersState, Actions, CustomersDataItem } from './CustomersTypes';
-// Actions
-import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './CustomersAC';
 // Helpers
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
 
@@ -12,16 +9,6 @@ export const initialState = {
   dataError: ``,
   isDataItemLoading: false,
   dataItemError: ``,
-  actions: {
-    fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
-      dispatch(fetchDataInitAsyncAC({ teamStaffDataLength: meta?.teamStaffDataLength ?? 0 })),
-    createDataItem: (dispatch: Dispatch, createdDataItem: CustomersDataItem, onAddDataItemToGridData: () => void) =>
-      dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
-    updateDataItem: (dispatch: Dispatch, updatedDataItem: CustomersDataItem, onUpdateDataItemInGridData: () => void) =>
-      dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
-    deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
-      dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
-  },
 };
 
 export const reducer = (state: CustomersState = initialState, action: Actions): CustomersState => {

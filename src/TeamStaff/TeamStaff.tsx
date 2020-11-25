@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -8,15 +8,18 @@ import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Selectors
+import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { GridActions } from '../_sections/Grid/GridActions';
+import { TeamStaffActions } from './TeamStaffActions';
 // Hooks
-import { useGridStateForDomain, useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
+import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
 import { useTeamStaffStateForDomain } from './TeamStaffHooks';
 
 export const TeamStaff: FC = (): JSX.Element => {
-  const { data, dataName } = useGridStateForDomain();
-  const { teamStaffData, teamStaffIsDataLoading, TeamStaffActions } = useTeamStaffStateForDomain();
+  const dataName = useSelector(selectGridDataName);
+  const { teamStaffData, teamStaffIsDataLoading } = useTeamStaffStateForDomain();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
@@ -27,9 +30,9 @@ export const TeamStaff: FC = (): JSX.Element => {
   const contentTSX = hasTeamStaffData && !teamStaffIsDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={data}>
+        <Grid>
           <GridColumn
-            field={'ID'}
+            field={'Id'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
             cell={GenericTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
@@ -79,7 +82,13 @@ export const TeamStaff: FC = (): JSX.Element => {
             filter={'text'}
             width={140}
           />
-          <GridColumn field={'Email'} title={localizationService.toLanguageString('custom.email', 'Email')} columnMenu={ColumnMenu} filter={'text'} />
+          <GridColumn
+            field={'Email'}
+            title={localizationService.toLanguageString('custom.email', 'Email')}
+            columnMenu={ColumnMenu}
+            filter={'text'}
+            cell={GenericTextCell as CustomGridCell}
+          />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
             cell={ActionsControlCell as CustomGridCell}

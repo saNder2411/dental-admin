@@ -5,14 +5,8 @@ import { selectGridDataItemMemoValueForCell } from '../../GridSelectors';
 // Types
 import { GridDataItem } from '../../GridTypes';
 
-export interface Result<T, U = T[keyof T]> {
-  memoID: number;
-  memoField: keyof T;
-  cellValue: U;
-  dataItemInEditValue: boolean;
-}
 
-export const useMemoDataItemValuesForCells = <U, T = GridDataItem>(ID: number, field: keyof T): Result<T, U> => {
+export const useMemoDataItemValuesForCells = <T = GridDataItem>(ID: number, field: keyof T) => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
 
@@ -20,7 +14,7 @@ export const useMemoDataItemValuesForCells = <U, T = GridDataItem>(ID: number, f
   const selectDataItemInEditValue = useMemo(() => selectGridDataItemMemoValueForCell<T>(memoID, (`inEdit` as unknown) as keyof T), [memoID]);
 
   const cellValue = useSelector(selectCellValue);
-  const dataItemInEditValue = useSelector(selectDataItemInEditValue);
+  const dataItemInEditValue = useSelector(selectDataItemInEditValue) as unknown as boolean;
 
-  return { memoID, memoField, cellValue, dataItemInEditValue } as { memoID: number, memoField, cellValue, dataItemInEditValue };
+  return { memoID, memoField, cellValue, dataItemInEditValue };
 };

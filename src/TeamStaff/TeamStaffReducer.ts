@@ -1,8 +1,5 @@
-import { Dispatch } from 'redux';
 // Types
 import { ActionTypes, TeamStaffState, Actions, TeamStaffDataItem } from './TeamStaffTypes';
-// Actions
-import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './TeamStaffAC';
 // Helpers
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
 
@@ -12,15 +9,6 @@ export const initialState = {
   dataError: ``,
   isDataItemLoading: false,
   dataItemError: ``,
-  actions: {
-    fetchData: (dispatch: Dispatch) => dispatch(fetchDataInitAsyncAC()),
-    createDataItem: (dispatch: Dispatch, createdDataItem: TeamStaffDataItem, onAddDataItemToGridData: () => void) =>
-      dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
-    updateDataItem: (dispatch: Dispatch, updatedDataItem: TeamStaffDataItem, onUpdateDataItemInGridData: () => void) =>
-      dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
-    deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
-      dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
-  },
 };
 
 export const reducer = (state: TeamStaffState = initialState, action: Actions): TeamStaffState => {

@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -19,15 +19,18 @@ import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Selectors
+import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { GridActions } from '../_sections/Grid/GridActions';
+import { ServicesActions } from './ServicesActions';
 // Hooks
-import { useGridStateForDomain, useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
+import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
 import { useServicesStateForDomain } from './ServicesHooks';
 
 export const Services: FC = (): JSX.Element => {
-  const { data, dataName } = useGridStateForDomain();
-  const { servicesData, servicesIsDataLoading, ServicesActions } = useServicesStateForDomain();
+  const dataName = useSelector(selectGridDataName);
+  const { servicesData, servicesIsDataLoading } = useServicesStateForDomain();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
@@ -38,10 +41,10 @@ export const Services: FC = (): JSX.Element => {
   const contentTSX = hasServicesData && !servicesIsDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={data}>
+        <Grid>
           <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`OfferingIconName`} title={` `} />
           <GridColumn
-            field={'ID'}
+            field={'Id'}
             title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}
             columnMenu={ColumnMenu}
             cell={GenericTextCell as CustomGridCell}

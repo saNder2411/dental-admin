@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -16,15 +16,18 @@ import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+// Selectors
+import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { GridActions } from '../_sections/Grid/GridActions';
+import { CustomersActions } from './CustomersActions';
 // Hooks
-import { useGridStateForDomain, useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
+import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useCustomersStateForDomain, useActionMetaForCustomersFetchData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
-  const { data, dataName } = useGridStateForDomain();
-  const { customersData, customersIsDataLoading, CustomersActions } = useCustomersStateForDomain();
+  const dataName = useSelector(selectGridDataName);
+  const { customersData, customersIsDataLoading } = useCustomersStateForDomain();
   const teamStaffDataLength = useActionMetaForCustomersFetchData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
@@ -36,9 +39,9 @@ export const Customers: FC = (): JSX.Element => {
   const contentTSX = hasCustomersData && !customersIsDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={data}>
+        <Grid>
           <GridColumn
-            field={'ID'}
+            field={'Id'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
             columnMenu={ColumnMenu}
             cell={GenericTextCell as CustomGridCell}

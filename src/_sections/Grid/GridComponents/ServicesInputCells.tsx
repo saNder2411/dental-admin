@@ -4,13 +4,13 @@ import { Input } from '@progress/kendo-react-inputs';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { InputChangeEvent, GenericInputProps } from './GridComponentsTypes';
+import { InputChangeEvent, EditCellProps } from './GridComponentsTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 
-export const ServicesIconInput: FC<GenericInputProps<string, ServicesDataItem>> = ({ dataItem, field, onChange, value }) => {
+export const ServicesIconInput: FC<EditCellProps<ServicesDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const onIconChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem, field, syntheticEvent, value });
+  const onIconChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
   return <Input value={value} onChange={onIconChange} disabled={isDataItemLoading} />;
 };

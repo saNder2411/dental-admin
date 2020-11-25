@@ -1,8 +1,5 @@
-import { Dispatch } from 'redux';
 // Types
 import { ActionTypes, ServicesState, Actions, ServicesDataItem } from './ServicesTypes';
-// Actions
-import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './ServicesAC';
 // Helpers
 import { roleSkills } from './ServicesHelpers';
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
@@ -14,15 +11,6 @@ export const initialState = {
   isDataItemLoading: false,
   dataItemError: ``,
   roleSkills,
-  actions: {
-    fetchData: (dispatch: Dispatch) => dispatch(fetchDataInitAsyncAC()),
-    createDataItem: (dispatch: Dispatch, createdDataItem: ServicesDataItem, onAddDataItemToGRidData: () => void) =>
-      dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGRidData)),
-    updateDataItem: (dispatch: Dispatch, updatedDataItem: ServicesDataItem, onUpdateDataItemInGridData: () => void) =>
-      dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
-    deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
-      dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
-  },
 };
 
 export const reducer = (state: ServicesState = initialState, action: Actions): ServicesState => {
