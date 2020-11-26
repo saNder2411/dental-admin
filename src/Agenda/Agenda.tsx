@@ -36,7 +36,6 @@ export const Agenda: FC = (): JSX.Element => {
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
-  console.log(`Agenda render`);
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetGridDataForDomainWithDataBind(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, GridActions, dispatch);

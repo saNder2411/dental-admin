@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
-// import { AgendaDataItem } from '../../Agenda';
-// import { GridDataItem } from './GridTypes';
 
 const selectGridEventDrivenData = ({ GridState }: GlobalState) => GridState.eventDrivenData;
 

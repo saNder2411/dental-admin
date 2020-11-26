@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect, useMemo } from 'react';
+import React, { FC, useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid as KendoGrid, GridColumn, GridColumnMenuSort, GridColumnMenuFilter, GridToolbar } from '@progress/kendo-react-grid';
 import { Button } from '@progress/kendo-react-buttons';
@@ -13,8 +13,6 @@ import * as SC from './GridStyledComponents/GridStyled';
 import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoOriginalData } from './GridSelectors';
 import { GridActions } from './GridActions';
 
-export { GridColumn };
-
 export const ColumnMenu = (props: any) => {
   return (
     <div>
@@ -24,7 +22,11 @@ export const ColumnMenu = (props: any) => {
   );
 };
 
-export const Grid = ({ onDataChange, children, ...others }: any) => {
+interface Props {
+  children: JSX.Element[];
+}
+
+export const Grid: FC<Props> = ({ children }) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
   const selectedOriginalData = useMemo(selectGridMemoOriginalData, []);
@@ -34,7 +36,6 @@ export const Grid = ({ onDataChange, children, ...others }: any) => {
   const addItemTitle = useSelector(selectGridTitleForAddNewItemSection);
   const dispatch = useDispatch();
   const { onItemChange, onAddNewItem } = GridActions;
-  console.log(`originalData`, originalData)
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
 
@@ -43,18 +44,11 @@ export const Grid = ({ onDataChange, children, ...others }: any) => {
   const [skip, setSkip] = useState(0);
   const [sort, setSort] = useState([]);
   const [group, setGroup] = useState([]);
-  const [filter, setFilter] = useState(null);
-  const lastSelectedIndexRef = useRef(0);
+  const [filter, setFilter] = useState();
   const [allColumnFilter, setAllColumnFilter] = useState('');
   const localizationService = useLocalization();
 
-  const dataState = {
-    take,
-    skip,
-    sort,
-    group,
-    filter,
-  };
+  const dataState = { take, skip, sort, group, filter };
 
   const onDataStateChange = useCallback(
     (event) => {
@@ -71,46 +65,12 @@ export const Grid = ({ onDataChange, children, ...others }: any) => {
 
   const onPdfExportDone = useCallback(() => setIsPdfExporting(false), []);
 
-  const onAllColumnFilterChange = useCallback((_evt) => setAllColumnFilter(``), [setAllColumnFilter]);
-
-  const onSelectionChange = useCallback(
+  const onAllColumnFilterChange = useCallback(
     (evt) => {
-      let last = lastSelectedIndexRef.current;
-      const updatedData = originalData.map((dataItem: any) => {
-        return { ...dataItem };
-      });
-      const current = originalData.findIndex((dataItem: any) => dataItem === evt.dataItem);
-
-      if (!evt.nativeEvent.shiftKey) {
-        lastSelectedIndexRef.current = last = current;
-      }
-
-      if (!evt.nativeEvent.ctrlKey) {
-        updatedData.forEach((item: any) => (item.selected = false));
-      }
-      const select = !evt.dataItem.selected;
-      for (let i = Math.min(last, current); i <= Math.max(last, current); i++) {
-        updatedData[i].selected = select;
-      }
-
-      onDataChange(updatedData);
+      console.log(evt);
+      setAllColumnFilter('');
     },
-    [originalData, onDataChange]
-  );
-
-  const onHeaderSelectionChange = useCallback(
-    (evt) => {
-      const checked = evt.syntheticEvent.target.checked;
-      const updatedData = originalData.map((item: any) => {
-        return {
-          ...item,
-          selected: checked,
-        };
-      });
-
-      onDataChange(updatedData);
-    },
-    [originalData, onDataChange]
+    [setAllColumnFilter]
   );
 
   const textColumns = children
@@ -161,16 +121,13 @@ export const Grid = ({ onDataChange, children, ...others }: any) => {
     <SC.Grid className="position-relative">
       <KendoGrid
         {...dataState}
-        {...others}
         rowHeight={40}
         pageable
         sortable
         data={processedData}
         editField={editField}
         onItemChange={onGridItemChange}
-        onDataStateChange={onDataStateChange}
-        onSelectionChange={onSelectionChange}
-        onHeaderSelectionChange={onHeaderSelectionChange}>
+        onDataStateChange={onDataStateChange}>
         <GridToolbar>
           <span className="Grid__addNewItemWrapper">
             <Input
@@ -205,3 +162,5 @@ export const Grid = ({ onDataChange, children, ...others }: any) => {
     </>
   );
 };
+
+export { GridColumn };
