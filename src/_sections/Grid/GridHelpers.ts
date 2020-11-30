@@ -73,7 +73,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
             },
           },
           LookupHR01team: {
-            Id: -1,
+            Id: 1,
             __metadata: {
               id: guid,
               type: 'SP.Data.MetroHR01ListItem',

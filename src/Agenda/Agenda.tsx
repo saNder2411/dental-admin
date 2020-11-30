@@ -9,7 +9,8 @@ import {
   AgendaStatusIcon,
   AgendaStatusCell,
   GenericReferenceCell,
-  GenericDateCell,
+  AgendaStartDateCell,
+  AgendaEndDateCell,
   AgendaSvcStaffCell,
   AgendaServicesCell,
   GenericCurrencyCell,
@@ -66,16 +67,16 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.start', 'Start')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            width={120}
-            cell={GenericDateCell as CustomGridCell}
+            // width={120}
+            cell={AgendaStartDateCell as CustomGridCell}
           />
           <GridColumn
             field={'FilterEnd'}
             title={localizationService.toLanguageString('custom.end', 'End')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            width={120}
-            cell={GenericDateCell as CustomGridCell}
+            // width={120}
+            cell={AgendaEndDateCell as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01team'}

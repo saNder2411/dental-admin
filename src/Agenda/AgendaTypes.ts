@@ -74,6 +74,8 @@ export interface AgendaState {
   isDataItemLoading: boolean;
   dataItemError: string;
   statusNameList: StatusNames[];
+  isValidStartDateEvent: boolean;
+  isValidEndDateEvent: boolean;
 }
 
 export const ActionTypes = {
@@ -97,6 +99,8 @@ export const ActionTypes = {
   DELETE_DATA_ITEM_SUCCESS: `AGENDA/DELETE_DATA_ITEM_SUCCESS` as const,
   DELETE_DATA_ITEM_FAILURE: `AGENDA/DELETE_DATA_ITEM_FAILURE` as const,
   DELETE_DATA_ITEM_FINALLY: `AGENDA/DELETE_DATA_ITEM_FINALLY` as const,
+  VALIDATE_START_DATE_EVENT: `AGENDA/VALIDATE_START_DATE_EVENT` as const,
+  VALIDATE_END_DATE_EVENT: `AGENDA/VALIDATE_END_DATE_EVENT` as const,
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;

@@ -13,7 +13,7 @@
       "AmountSalesTaxLocal": "6.31125000000000",
       "OfferingCatType": "(01) Ladies Hair Cut",
       "OfferingDiscount": 0.16,
-      "OfferingIconName": "https://images.squarespace-cdn.com/content/v1/599b36dbc534a5ed9df81f50/1503353791787-8YBMQCKA7TAM1ZWOYOCF/ke17ZwdGBToddI8pDm48kGZpU91TES1fBHkv3DuvBJ5Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIU_ehG8J1Rbt6Yc6Ofq7G8txSyFN6v5IF77bav_25vXc/cosmetic-dentistry-icon.png",
+      "OfferingIconName": "",
       "id": 1,
       "RoleSkills": [
         "Artistic & Creative"
@@ -2255,66 +2255,6 @@
     }
   ],
   "scheduler-events": [
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(462)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(462)",
-        "etag": "\"2\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "LookupMultiBP01offerings": {
-        "results": [
-          {
-            "Id": 3,
-            "__metadata": {
-              "id": "88f709c0-e906-4caf-bee4-1c61babc71f5",
-              "type": "SP.Data.MetroBP02ListItem"
-            }
-          }
-        ]
-      },
-      "LookupCM102customers": {
-        "Id": 54,
-        "__metadata": {
-          "id": "27f5d039-9c85-4e09-a869-45b65150829f",
-          "type": "SP.Data.MetroCM102ListItem"
-        }
-      },
-      "LookupHR01team": {
-        "Id": 2,
-        "__metadata": {
-          "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
-          "type": "SP.Data.MetroHR01ListItem"
-        }
-      },
-      "Id": 462,
-      "Title": "C.Emmerson-0462",
-      "EventDate": "2020-10-08T06:00:00Z",
-      "EndDate": "2020-10-08T18:00:00Z",
-      "Duration": 43200,
-      "Description": " | Stylist-Sara Khan | Customer-Carolyn Emmerson_+189768938219-Carolyn.Emmerson@schedulingtoday.local | Services-Mens Wash+Cut+Dry S4 46.75 (-15%) | Services Total=46.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "MasterSeriesItemID": null,
-      "RecurrenceID": null,
-      "EventType": 0,
-      "Email": "Carolyn.Emmerson@schedulingtoday.local",
-      "AppointmentStatus": "(2) Pending",
-      "AppointmentSource": null,
-      "SubmissionIdUIT": null,
-      "LastNameAppt": "Emmerson",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "TrackingComments": null,
-      "ServiceCharge": 46.75,
-      "FilterStart": "2020-10-08T04:00:00Z",
-      "FilterEnd": "2020-10-08T16:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Carolyn",
-      "CellPhone": "+189768938219",
-      "ID": 462,
-      "id": 462
-    },
     {
       "__metadata": {
         "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1360)",
@@ -13578,6 +13518,126 @@
       "__metadata": {
         "id": "Web/Lists(guid'be33e77c-f48c-4f35-86d1-bd87ec6cb768')/Items(1375)",
         "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'be33e77c-f48c-4f35-86d1-bd87ec6cb768')/Items(1375)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "AppointmentSource": null,
+      "AppointmentStatus": "(1) Consultation",
+      "CellPhone": "",
+      "Description": "",
+      "Duration": 60,
+      "Email": "",
+      "EndDate": "2020-11-26T13:24:24.802Z",
+      "EventDate": "2020-11-26T13:24:24.802Z",
+      "EventType": 0,
+      "FilterEnd": "2020-11-27T13:24:24.802Z",
+      "FilterStart": "2020-11-26T16:24:24.802Z",
+      "FirstName": "",
+      "Gender": "(2) Male",
+      "ID": 1376,
+      "Id": 1376,
+      "LastNameAppt": "",
+      "LookupCM102customers": {
+        "Id": 77,
+        "__metadata": {
+          "id": "27f5d039-9c85-4e09-a869-45b65150829f",
+          "type": "SP.Data.MetroCM102ListItem"
+        }
+      },
+      "LookupHR01team": {
+        "Id": 2,
+        "__metadata": {
+          "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+          "type": "SP.Data.MetroHR01ListItem"
+        }
+      },
+      "LookupMultiBP01offerings": {
+        "results": [
+          {
+            "Id": 4,
+            "__metadata": {
+              "id": "88f709c0-e906-4caf-bee4-1c61babc71f5",
+              "type": "SP.Data.MetroBP02ListItem"
+            }
+          }
+        ]
+      },
+      "MasterSeriesItemID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "Notes": null,
+      "RecurrenceID": null,
+      "ServiceCharge": 40,
+      "SubmissionIdUIT": null,
+      "Title": "",
+      "TrackingComments": null,
+      "fAllDayEvent": null,
+      "id": 1376,
+      "__metadata": {
+        "id": "Web/Lists(guid'7d15cd2c-b5ed-4453-b5c3-a3930b635971')/Items(1376)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d15cd2c-b5ed-4453-b5c3-a3930b635971')/Items(1376)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "AppointmentSource": null,
+      "AppointmentStatus": "(1) Consultation",
+      "CellPhone": "",
+      "Description": "",
+      "Duration": 60,
+      "Email": "",
+      "EndDate": "2020-11-30T12:41:20.280Z",
+      "EventDate": "2020-11-30T12:41:20.280Z",
+      "EventType": 0,
+      "FilterEnd": "2020-12-07T14:36:20.280Z",
+      "FilterStart": "2020-12-07T14:26:27.848Z",
+      "FirstName": "",
+      "Gender": "(1) Female",
+      "ID": 1377,
+      "Id": 1377,
+      "LastNameAppt": "",
+      "LookupCM102customers": {
+        "Id": 77,
+        "__metadata": {
+          "id": "27f5d039-9c85-4e09-a869-45b65150829f",
+          "type": "SP.Data.MetroCM102ListItem"
+        }
+      },
+      "LookupHR01team": {
+        "Id": 2,
+        "__metadata": {
+          "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+          "type": "SP.Data.MetroHR01ListItem"
+        }
+      },
+      "LookupMultiBP01offerings": {
+        "results": [
+          {
+            "Id": 1,
+            "__metadata": {
+              "id": "88f709c0-e906-4caf-bee4-1c61babc71f5",
+              "type": "SP.Data.MetroBP02ListItem"
+            }
+          }
+        ]
+      },
+      "MasterSeriesItemID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "Notes": null,
+      "RecurrenceID": null,
+      "ServiceCharge": 40,
+      "SubmissionIdUIT": null,
+      "Title": "",
+      "TrackingComments": null,
+      "fAllDayEvent": null,
+      "id": 1377,
+      "__metadata": {
+        "id": "Web/Lists(guid'31697642-bb72-4209-82ee-cacbfc4462da')/Items(1377)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'31697642-bb72-4209-82ee-cacbfc4462da')/Items(1377)",
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       }

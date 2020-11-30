@@ -10,6 +10,8 @@ export const initialState = {
   isDataItemLoading: false,
   dataItemError: ``,
   statusNameList: Object.values(StatusNames),
+  isValidStartDateEvent: true,
+  isValidEndDateEvent: true,
 };
 
 export const reducer = (state: AgendaState = initialState, action: Actions): AgendaState => {
@@ -63,6 +65,12 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
 
     case ActionTypes.DELETE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
+
+    case ActionTypes.VALIDATE_START_DATE_EVENT:
+      return { ...state, isValidStartDateEvent: action.payload };
+
+    case ActionTypes.VALIDATE_END_DATE_EVENT:
+      return { ...state, isValidEndDateEvent: action.payload };
 
     default:
       return state;

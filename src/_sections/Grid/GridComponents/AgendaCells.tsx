@@ -1,8 +1,10 @@
 import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useInternationalization } from '@progress/kendo-react-intl';
 // Components
 import { AgendaSvcStaffDropDownList, AgendaStatusDropDownList, AgendaFullNameDropDownList, AgendaServicesMultiSelect } from './AgendaDropDownCells';
+import { AgendaStartDateInput, AgendaEndDateInput } from './AgendaDateCells';
 // Styled Components
 import * as SC from '../GridStyledComponents/GridCellsStyled';
 // Instruments
@@ -103,6 +105,38 @@ export const AgendaFullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem
         <AgendaFullNameDropDownList dataItemID={memoID} field={memoField} onChange={onChange} domainData={customersData} value={value} />
       ) : (
         value
+      )}
+    </td>
+  );
+};
+
+export const AgendaStartDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+  const intlService = useInternationalization();
+  const value = new Date(cellValue as string);
+
+  return (
+    <td style={{ padding: '18px 12px' }}>
+      {dataItemInEditValue ? (
+        <AgendaStartDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+      ) : (
+        intlService.formatDate(value, 'H:mm | dd.MM')
+      )}
+    </td>
+  );
+};
+
+export const AgendaEndDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+  const intlService = useInternationalization();
+  const value = new Date(cellValue as string);
+
+  return (
+    <td>
+      {dataItemInEditValue ? (
+        <AgendaEndDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+      ) : (
+        intlService.formatDate(value, 'H:mm | dd.MM')
       )}
     </td>
   );

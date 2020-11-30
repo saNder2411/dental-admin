@@ -2,7 +2,14 @@ import { Dispatch } from 'redux';
 // Types
 import { AgendaDataItem } from './AgendaTypes';
 // ActionCreators
-import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './AgendaAC';
+import {
+  fetchDataInitAsyncAC,
+  createDataItemInitAsyncAC,
+  updateDataItemInitAsyncAC,
+  deleteDataItemInitAsyncAC,
+  validateStartDateEventAC,
+  validateEndDateEventAC,
+} from './AgendaAC';
 
 export const AgendaActions = {
   fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
@@ -13,4 +20,9 @@ export const AgendaActions = {
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
     dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
+};
+
+export const AgendaEditCellsActions = {
+  validateStartDateEvent: (dispatch: Dispatch, isValid: boolean) => dispatch(validateStartDateEventAC(isValid)),
+  validateEndDateEvent: (dispatch: Dispatch, isValid: boolean) => dispatch(validateEndDateEventAC(isValid)),
 };
