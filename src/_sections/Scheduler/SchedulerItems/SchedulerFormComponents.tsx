@@ -7,7 +7,7 @@ import { ButtonGroup, Button } from '@progress/kendo-react-buttons';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Helpers
-import { getFormInputOptionalProps } from './SchedulerHelpers';
+import { getFormInputOptionalProps } from '../SchedulerHelpers';
 
 export const FormInput = (fieldRenderProps: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, ...others } = fieldRenderProps;

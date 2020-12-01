@@ -4,7 +4,7 @@ import { SchedulerFormProps } from '@progress/kendo-react-scheduler';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 // Styled Components
-import * as SC from './SchedulerStyledComponents/SchedulerFormStyled';
+import * as SC from '../SchedulerStyledComponents/SchedulerFormStyled';
 // Form Inputs
 import {
   FormInput,
@@ -19,11 +19,11 @@ import {
   FormMultiSelect,
 } from './SchedulerFormComponents';
 // Selectors
-import { selectServicesMemoReferences } from '../../Services/ServicesSelectors';
+import { selectServicesMemoReferences } from '../../../Services/ServicesSelectors';
 // Mock
-import { CustomersGridData } from '../../Customers/CustomersMockData';
-import { TeamStaffGridData } from '../../TeamStaff/TeamStaffMockData';
-import { StatusNames } from '../../Agenda/AgendaTypes';
+import { CustomersGridData } from '../../../Customers/CustomersMockData';
+import { TeamStaffGridData } from '../../../TeamStaff/TeamStaffMockData';
+import { StatusNames } from '../../../Agenda/AgendaTypes';
 
 const customers = CustomersGridData.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
 const stuffs = TeamStaffGridData.map(({ fullName }) => fullName);

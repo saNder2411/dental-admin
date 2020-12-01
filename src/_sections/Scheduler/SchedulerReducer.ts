@@ -1,44 +1,74 @@
-import { Dispatch } from 'redux';
 // Types
-import { SchedulerState, ActionTypes, Actions, SchedulerDataItem } from './SchedulerTypes';
-// Actions
-import { setDataAC, setFilterEmployeeAC, changeFilterEmployeeAC, setFormItemAC, setSelectedItemIdAC } from './SchedulerAC';
-// Helpers
+import { SchedulerState, ActionTypes, Actions } from './SchedulerTypes';
 
-// Mock
-import { TeamStaffGridData, teams } from '../../TeamStaff/TeamStaffMockData';
-import { orders } from '../../Calendar/CalendarMockData';
+// Helpers
+import {
+  updateDataAfterAddItemToEdit,
+  updateDataAfterEditItem,
+  updateDataAfterRemoveItem,
+  updateDataOnChangeItem,
+  updateDataOnAddNewItemToChange,
+  updateDataAfterEditNewItem,
+  updateDataAfterCancelEdit,
+} from './SchedulerHelpers';
 
 const initialState = {
-  data: orders,
-  filterEmployee: TeamStaffGridData.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}),
-  teams,
-  employees: [],
+  eventDrivenData: [],
+  originalData: [],
+  mapTeamToFiltered: { '-1': false },
+  isDataItemLoading: false,
   formItemID: null,
   selectedItemID: null,
-  setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => dispatch(setDataAC(data)),
-  setFilterEmployee: (dispatch: Dispatch, data: { [key: string]: boolean }) => dispatch(setFilterEmployeeAC(data)),
-  onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeFilterEmployeeAC(employeeID)),
-  setFormItem: (dispatch: Dispatch, formItem: SchedulerDataItem | null) => dispatch(setFormItemAC(formItem ? formItem?.orderID : null)),
-  setSelectedItemID: (dispatch: Dispatch, selectedItemID: number | null) => dispatch(setSelectedItemIdAC(selectedItemID)),
 };
 
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
   switch (action.type) {
     case ActionTypes.SET_DATA:
-      return { ...state, data: action.payload };
+      return { ...state, eventDrivenData: action.payload, originalData: [...action.payload] };
 
     case ActionTypes.SET_FILTER_EMPLOYEE:
-      return { ...state, filterEmployee: action.payload };
+      return { ...state, mapTeamToFiltered: action.payload };
 
     case ActionTypes.CHANGE_FILTER_EMPLOYEE:
-      return { ...state, filterEmployee: { ...state.filterEmployee, [`${action.payload}`]: !state.filterEmployee[`${action.payload}`] } };
+      return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [`${action.payload}`]: !state.mapTeamToFiltered[`${action.payload}`] } };
 
     case ActionTypes.SET_FORM_ITEM:
       return { ...state, formItemID: action.payload };
 
     case ActionTypes.SET_SELECTED_ITEM_ID:
       return { ...state, selectedItemID: action.payload };
+
+    case ActionTypes.ADD_ITEM_TO_EDIT:
+      return { ...state, eventDrivenData: updateDataAfterAddItemToEdit(state.eventDrivenData, action.payload) };
+
+    case ActionTypes.UPDATE_ITEM_AFTER_EDIT:
+      const newDataAfterEditItem = updateDataAfterEditItem(state.eventDrivenData, action.payload);
+      return { ...state, eventDrivenData: newDataAfterEditItem, originalData: [...newDataAfterEditItem], isDataItemLoading: false };
+
+    case ActionTypes.REMOVE_ITEM_FROM_DATA:
+      const newDataAfterRemoveItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
+      return { ...state, eventDrivenData: newDataAfterRemoveItem, originalData: [...newDataAfterRemoveItem], isDataItemLoading: false };
+
+    case ActionTypes.CANCEL_EDIT:
+      return { ...state, eventDrivenData: updateDataAfterCancelEdit(state.eventDrivenData, state.originalData, action.payload) };
+
+    case ActionTypes.CHANGE_ITEM:
+      return { ...state, eventDrivenData: updateDataOnChangeItem(state.eventDrivenData, action.payload) };
+
+    case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
+      const newDataAfterAddNewItemToEdit = updateDataOnAddNewItemToChange(state.eventDrivenData);
+      return { ...state, eventDrivenData: newDataAfterAddNewItemToEdit, originalData: [...newDataAfterAddNewItemToEdit] };
+
+    case ActionTypes.ADD_NEW_ITEM_TO_DATA:
+      const newDataAfterEditNewItem = updateDataAfterEditNewItem(state.eventDrivenData, action.payload);
+      return { ...state, eventDrivenData: newDataAfterEditNewItem, originalData: [...newDataAfterEditNewItem], isDataItemLoading: false };
+
+    case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
+      const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
+      return { ...state, eventDrivenData: newDataAfterDiscardAddNewItem, originalData: [...newDataAfterDiscardAddNewItem] };
+
+    case ActionTypes.DATA_ITEM_FETCHING:
+      return { ...state, isDataItemLoading: action.payload };
 
     default:
       return state;

@@ -29,9 +29,9 @@ interface Props {
 export const Grid: FC<Props> = ({ children }) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
-  const selectedOriginalData = useMemo(selectGridMemoOriginalData, []);
+  const selectOriginalData = useMemo(selectGridMemoOriginalData, []);
 
-  const originalData = useSelector(selectedOriginalData);
+  const originalData = useSelector(selectOriginalData);
   const editField = useSelector(selectGridEditField);
   const addItemTitle = useSelector(selectGridTitleForAddNewItemSection);
   const dispatch = useDispatch();

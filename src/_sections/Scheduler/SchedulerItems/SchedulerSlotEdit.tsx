@@ -1,7 +1,7 @@
 import React, { FC, useCallback, useState } from 'react';
 import { SchedulerEditSlot, SchedulerSlotProps } from '@progress/kendo-react-scheduler';
 // Components
-import { SchedulerForm } from '.';
+import { SchedulerForm } from './SchedulerForm';
 
 export const SchedulerSlotEdit: FC<SchedulerSlotProps> = (props): JSX.Element => {
   const [formItem, setFormItem] = useState(null);

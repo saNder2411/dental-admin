@@ -2,18 +2,17 @@
 import { CalendarDataItem } from './CalendarTypes';
 import { StatusNames } from '../Agenda/AgendaTypes';
 
-
 export const ordersModelFields = {
-  id: 'orderID',
-  title: 'refID',
-  description: 'description',
-  start: 'start',
-  end: 'end',
-  isAllDay: 'isAllDay',
-  refID: 'refID',
-  mobilePhone: 'phone',
-  email: 'stevenp@metrobpm.com',
-  notes: '05-Mens Colour Tint 1/1 S3_020',
+  id: 'id',
+  title: 'Title',
+  description: 'Description',
+  start: 'FilterStart',
+  end: 'FilterEnd',
+  isAllDay: 'fAllDayEvent',
+  Title: 'Title',
+  CellPhone: 'CellPhone',
+  email: 'Email',
+  notes: 'Description',
 };
 
 const now = Date.now();

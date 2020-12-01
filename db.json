@@ -1469,8 +1469,8 @@
         "Personal Dexterity"
       ],
       "WorkingWeekDays": null,
-      "CalendarColour": "Rose",
-      "CalendarColHex": "#457d30",
+      "CalendarColour": "#55AB1D",
+      "CalendarColHex": "#55AB1D",
       "ID": 2,
       "id": 2,
       "Gender": "(1) Female",
@@ -1510,8 +1510,8 @@
         "Artistic & Creative"
       ],
       "WorkingWeekDays": null,
-      "CalendarColour": "Salmon",
-      "CalendarColHex": "#39a9e0",
+      "CalendarColour": "#28B4C8",
+      "CalendarColHex": "#28B4C8",
       "ID": 3,
       "id": 3,
       "Gender": "(1) Female"
@@ -1538,8 +1538,8 @@
         "Patience & Tolerance"
       ],
       "WorkingWeekDays": null,
-      "CalendarColour": "Yellow",
-      "CalendarColHex": "#9fa91e",
+      "CalendarColour": "#F7C62F",
+      "CalendarColHex": "#F7C62F",
       "ID": 4,
       "id": 4,
       "Gender": "(1) Female",
@@ -1572,8 +1572,8 @@
         "Styling-Chunky"
       ],
       "WorkingWeekDays": null,
-      "CalendarColour": "Cyan",
-      "CalendarColHex": "#ef7e26",
+      "CalendarColour": "#FF6358",
+      "CalendarColHex": "#FF6358",
       "ID": 5,
       "id": 5,
       "Gender": "(2) Male",
@@ -1608,8 +1608,8 @@
         "Rapport Building"
       ],
       "WorkingWeekDays": null,
-      "CalendarColour": "Purple",
-      "CalendarColHex": "#b2c7d9",
+      "CalendarColour": "#58F4FF",
+      "CalendarColHex": "#58F4FF",
       "ID": 6,
       "id": 6,
       "Gender": "(2) Male",
@@ -1642,8 +1642,8 @@
         "Patience & Tolerance"
       ],
       "WorkingWeekDays": null,
-      "CalendarColour": "Pink",
-      "CalendarColHex": "#a51a22",
+      "CalendarColour": "#C828B4",
+      "CalendarColHex": "#C828B4",
       "ID": 7,
       "id": 7,
       "Gender": "(1) Female",
@@ -1656,8 +1656,8 @@
       }
     },
     {
-      "CalendarColHex": "",
-      "CalendarColour": "",
+      "CalendarColHex": "#1e45d2",
+      "CalendarColour": "#1e45d2",
       "CellPhone": "+8 7777 99888",
       "Department": null,
       "Email": "jule.stilst@mtroapps.com",
@@ -1691,8 +1691,8 @@
       "FullName": "July Jordan"
     },
     {
-      "CalendarColHex": "",
-      "CalendarColour": "",
+      "CalendarColHex": "#7de736",
+      "CalendarColour": "#7de736",
       "CellPhone": "+89 7894 58938",
       "Department": null,
       "Email": "korin.@gmail.com",

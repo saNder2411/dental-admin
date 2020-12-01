@@ -1,8 +1,7 @@
 import React, { FC, useState, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   SchedulerItem as KendoSchedulerItem,
-  SchedulerItemProps,
   // useSchedulerEditItemFormItemContext,
   useSchedulerEditItemRemoveItemContext,
   useSchedulerEditItemShowOccurrenceDialogContext,
@@ -15,19 +14,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
-import * as SC from './SchedulerStyledComponents/SchedulerItemStyled';
+import * as SC from '../SchedulerStyledComponents/SchedulerItemStyled';
 // Instruments
-import { IconMap } from '../../_instruments';
+import { IconMap } from '../../../_instruments';
 // Types
-import { StatusNames } from '../../Agenda/AgendaTypes';
+import { StatusNames } from '../../../Agenda/AgendaTypes';
+import { CustomSchedulerItemProps } from './SchedulerItemTypes';
+import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
-import { selectSchedulerState } from './SchedulerSelectors';
 
-export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
+//Actions
+import { SchedulerActions } from '../SchedulerActions';
+
+export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   // console.log(`CustomItemProps`, props);
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
-  const { setFormItem } = useSelector(selectSchedulerState);
+  const { setFormItem } = SchedulerActions;
   const dispatch = useDispatch();
   // const [, setFormItem] = useSchedulerEditItemFormItemContext();
   const [, setRemoveItem] = useSchedulerEditItemRemoveItemContext();
@@ -35,10 +38,10 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
   const [, setShowRemoveDialog] = useSchedulerEditItemShowRemoveDialogContext();
 
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
-  const resource = group.resources[0] as any;
-  const color = resource.teamColor;
-  const iconName = dataItem.status as StatusNames;
-  const iconDentalName = dataItem.dentalStatus as StatusNames;
+  const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
+  const color = resource.CalendarColHex;
+  const iconName = dataItem.AppointmentStatus;
+  const iconDentalName = StatusNames.Tooth;
   const width = _ref.current?.element?.offsetWidth;
   const height = _ref.current?.element?.offsetHeight;
 
@@ -108,7 +111,7 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
             <CardHeader>
               <div className="d-flex align-items-center">
                 <div className="team-marker" style={{ backgroundColor: color }} />
-                <h5>{dataItem.staff}</h5>
+                <h5>{dataItem.Title}</h5>
                 <div className="ml-auto">
                   <Button iconClass="k-icon k-i-edit" look="flat" onClick={onEditBtnClick} />
                   <Button iconClass="k-icon k-i-delete" look="flat" onClick={onDeleteBtnClick} />
@@ -119,7 +122,7 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
             <CardBody>
               <CardHeader>
                 <div className="row">
-                  <span className="col-md-9">Status: {dataItem.status}</span>
+                  <span className="col-md-9">Status: {dataItem.AppointmentStatus}</span>
                   <div className="col-md-4 row">
                     <div className="col-md-6">
                       <FontAwesomeIcon icon={IconMap[iconDentalName].icon} color={IconMap[iconDentalName].statusColor} />
@@ -130,16 +133,16 @@ export const SchedulerItem: FC<SchedulerItemProps> = (props): JSX.Element => {
                   </div>
                 </div>
               </CardHeader>
-              <CardHeader>Ref ID: {dataItem.refID}</CardHeader>
+              <CardHeader>Ref ID: {dataItem.Title}</CardHeader>
               <CardHeader>
                 <span className="k-icon k-i-clock" /> Start: {intl.formatDate(zonedStart, 't')}
               </CardHeader>
               <CardHeader>
                 <span className="k-icon k-i-clock" /> End: {intl.formatDate(zonedEnd, 't')}
               </CardHeader>
-              <CardHeader>Mobile Phone: {dataItem.mobilePhone}</CardHeader>
-              <CardHeader>Email: {dataItem.email}</CardHeader>
-              <CardHeader>Notes: {dataItem.notes}</CardHeader>
+              <CardHeader>Mobile Phone: {dataItem.CellPhone}</CardHeader>
+              <CardHeader>Email: {dataItem.Email}</CardHeader>
+              <CardHeader>Notes: {dataItem.Description}</CardHeader>
             </CardBody>
           </Card>
         </div>

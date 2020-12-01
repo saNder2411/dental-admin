@@ -7,6 +7,8 @@ import { OfferIcons } from '../../Services';
 
 export const generateId = (data: GridDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
+export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
 export const updateDataAfterAddItemToEdit = (data: GridDataItem[], editItemID: number): GridDataItem[] => {
   return data.map((item) => (item.ID === editItemID ? { ...item, inEdit: true } : item));
 };
@@ -44,6 +46,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
   const guid = uuidV4();
   const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
   const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
+  const color = generateColor();
 
   switch (dataName) {
     case GridDataName.Agenda:
@@ -176,8 +179,8 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.TeamStaff:
       return [
         {
-          CalendarColHex: '',
-          CalendarColour: '',
+          CalendarColHex: color,
+          CalendarColour: color,
           CellPhone: '',
           Department: null,
           Email: '',
