@@ -113,7 +113,7 @@ export const AgendaFullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem
 export const AgendaStartDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
   const intlService = useInternationalization();
-  const value = new Date(cellValue as string);
+  const value = cellValue as Date;
 
   return (
     <td style={{ padding: '18px 12px' }}>
@@ -129,7 +129,7 @@ export const AgendaStartDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataIte
 export const AgendaEndDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
   const intlService = useInternationalization();
-  const value = new Date(cellValue as string);
+  const value = cellValue as Date;
 
   return (
     <td>

@@ -63,7 +63,7 @@ export const Agenda: FC = (): JSX.Element => {
             filter={'text'}
           />
           <GridColumn
-            field={'FilterStart'}
+            field={'Start'}
             title={localizationService.toLanguageString('custom.start', 'Start')}
             columnMenu={ColumnMenu}
             filter={'text'}
@@ -71,7 +71,7 @@ export const Agenda: FC = (): JSX.Element => {
             cell={AgendaStartDateCell as CustomGridCell}
           />
           <GridColumn
-            field={'FilterEnd'}
+            field={'End'}
             title={localizationService.toLanguageString('custom.end', 'End')}
             columnMenu={ColumnMenu}
             filter={'text'}

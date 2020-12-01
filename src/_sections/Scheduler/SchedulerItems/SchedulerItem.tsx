@@ -27,7 +27,7 @@ import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { SchedulerActions } from '../SchedulerActions';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
-  // console.log(`CustomItemProps`, props);
+  console.log(`CustomItemProps`, props);
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
   const { setFormItem } = SchedulerActions;

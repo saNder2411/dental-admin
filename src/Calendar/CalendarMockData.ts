@@ -2,18 +2,7 @@
 import { CalendarDataItem } from './CalendarTypes';
 import { StatusNames } from '../Agenda/AgendaTypes';
 
-export const ordersModelFields = {
-  id: 'ID',
-  title: 'Title',
-  description: 'Description',
-  start: 'FilterStart',
-  end: 'FilterEnd',
-  isAllDay: 'fAllDayEvent',
-  Title: 'Title',
-  CellPhone: 'CellPhone',
-  email: 'Email',
-  notes: 'Description',
-};
+
 
 const now = Date.now();
 const hour = 3.6e6;

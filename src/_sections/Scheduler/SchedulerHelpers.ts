@@ -6,6 +6,22 @@ import { guid } from '@progress/kendo-react-common';
 import { SchedulerDataItem } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
 
+export const ordersModelFields = {
+  id: 'ID',
+  title: 'Title',
+  description: 'Description',
+  start: 'Start',
+  end: 'End',
+  isAllDay: 'fAllDayEvent',
+  Title: 'Title',
+  CellPhone: 'CellPhone',
+  email: 'Email',
+  notes: 'Description',
+  recurrenceRule: 'MetroRRule',
+  recurrenceId: 'RecurrenceID',
+  recurrenceExceptions: 'MetroRecException',
+};
+
 export const getFormInputOptionalProps = ({ touched, validationMessage, showValidationMessage, hint, id, showHint, label }: FieldRenderProps) => ({
   showValidationMessage: touched && validationMessage,
   showHint: !showValidationMessage && hint,
@@ -111,6 +127,9 @@ export const updateDataOnAddNewItemToChange = (data: SchedulerDataItem[]): Sched
         etag: `"2"`,
         type: `SP.Data.MetroHR03ListItem`,
       },
+      TeamID: 1,
+      Start: new Date(),
+      End: new Date(),
       LastUpdate: ``,
       inEdit: true,
       isNew: true,

@@ -5,7 +5,7 @@ import { SchedulerForm } from './SchedulerForm';
 
 export const SchedulerSlotEdit: FC<SchedulerSlotProps> = (props): JSX.Element => {
   const [formItem, setFormItem] = useState(null);
-  // console.log(`SchedulerItemEdit`, props);
+  // console.log(`SchedulerEditItem`, props);
   // console.log(`formItemEdit`, formItem);
   // console.log(`setFormItemEdit`, setFormItem);
 

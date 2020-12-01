@@ -17,7 +17,7 @@ import { useTeamStaffDataForScheduler } from './CalendarHooks';
 import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from '../Agenda/AgendaHooks';
 import { useSetSchedulerDataForDomainWithDataBind } from '../_sections/Scheduler/SchedulerHooks';
 // Mocks
-import { ordersModelFields } from './CalendarMockData';
+import { ordersModelFields } from '../_sections/Scheduler/SchedulerHelpers';
 
 export const Calendar = () => {
   const localizationService = useLocalization();
@@ -81,7 +81,7 @@ export const Calendar = () => {
                     />
                   ),
                 })),
-              field: 'ID',
+              field: 'TeamID',
               valueField: 'ID',
               textField: 'text',
               colorField: 'CalendarColHex',

@@ -62,6 +62,9 @@ export interface APIAgendaDataItem {
 }
 
 export interface AgendaDataItem extends APIAgendaDataItem {
+  TeamID: number;
+  Start: Date;
+  End: Date;
   LastUpdate: string;
   inEdit?: boolean;
   isNew?: boolean;
