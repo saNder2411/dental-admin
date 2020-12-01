@@ -24,6 +24,7 @@ export const Calendar = () => {
   const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
+
   const dispatch = useDispatch();
   const selectOriginalData = useMemo(selectSchedulerMemoOriginalData, []);
 
@@ -52,65 +53,7 @@ export const Calendar = () => {
       </div>
       <div className="Calendar__addNewItemWrapper">
         <span className="Calendar__addNewItemTitle">New Appointment</span>
-        <button
-          title="Add new"
-          className="k-button"
-          onClick={
-            () => void 0
-            // SchedulerActions.setFormItem(dispatch, {
-            //   AppointmentSource: null,
-            //   AppointmentStatus: StatusNames.Consultation,
-            //   CellPhone: ``,
-            //   Description: ``,
-            //   Duration: 60,
-            //   Email: ``,
-            //   EndDate: new Date().toISOString(),
-            //   EventDate: new Date().toISOString(),
-            //   EventType: 0,
-            //   FilterEnd: new Date().toISOString(),
-            //   FilterStart: new Date().toISOString(),
-            //   FirstName: ``,
-            //   Gender: '(1) Female',
-            //   ID,
-            //   Id: ID,
-            //   LastNameAppt: ``,
-            //   LookupCM102customers: {
-            //     Id: -1,
-            //     __metadata: {
-            //       id: guid,
-            //       type: 'SP.Data.MetroBP02ListItem',
-            //     },
-            //   },
-            //   LookupHR01team: {
-            //     Id: 1,
-            //     __metadata: {
-            //       id: guid,
-            //       type: 'SP.Data.MetroHR01ListItem',
-            //     },
-            //   },
-            //   LookupMultiBP01offerings: { results: [] },
-            //   MasterSeriesItemID: null,
-            //   MetroRRule: null,
-            //   MetroRecException: null,
-            //   Notes: null,
-            //   RecurrenceID: null,
-            //   ServiceCharge: 40,
-            //   SubmissionIdUIT: null,
-            //   Title: ``,
-            //   TrackingComments: null,
-            //   fAllDayEvent: null,
-            //   id: ID,
-            //   __metadata: {
-            //     id: metadataId,
-            //     uri: metadataUri,
-            //     etag: `"2"`,
-            //     type: `SP.Data.MetroHR03ListItem`,
-            //   },
-            //   LastUpdate: ``,
-            //   inEdit: true,
-            //   isNew: true,
-            // })
-          }>
+        <button title="Add new" className="k-button" onClick={() => void 0}>
           <span className="k-icon k-i-plus-circle" />
         </button>
       </div>

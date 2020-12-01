@@ -5,6 +5,7 @@ import { SchedulerItem, SchedulerItemEdit, SchedulerSlotEdit, SchedulerAgendaTas
 
 export const Scheduler = ({ data, modelFields, group, resources, onDataChange }: any) => {
   const defaultDate = new Date();
+  console.log(data);
 
   return (
     <KendoScheduler

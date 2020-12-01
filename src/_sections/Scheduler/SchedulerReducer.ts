@@ -1,6 +1,6 @@
 // Types
 import { SchedulerState, ActionTypes, Actions } from './SchedulerTypes';
-
+import { ActionTypes as TeamStaffActionsTypes } from '../../TeamStaff/TeamStaffTypes';
 // Helpers
 import {
   updateDataAfterAddItemToEdit,
@@ -15,7 +15,7 @@ import {
 const initialState = {
   eventDrivenData: [],
   originalData: [],
-  mapTeamToFiltered: { '-1': false },
+  mapTeamToFiltered: { '1': false },
   isDataItemLoading: false,
   formItemID: null,
   selectedItemID: null,
@@ -26,10 +26,22 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
     case ActionTypes.SET_DATA:
       return { ...state, eventDrivenData: action.payload, originalData: [...action.payload] };
 
-    case ActionTypes.SET_FILTER_EMPLOYEE:
+    case TeamStaffActionsTypes.FETCH_DATA_SUCCESS:
+      return { ...state, mapTeamToFiltered: action.payload.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}) };
+
+    case TeamStaffActionsTypes.CREATE_DATA_ITEM_SUCCESS:
+      return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.payload.ID]: true } };
+
+    case TeamStaffActionsTypes.DELETE_DATA_ITEM_SUCCESS:
+      const swapMapTeamToFiltered = { ...state.mapTeamToFiltered };
+      delete swapMapTeamToFiltered[action.payload];
+
+      return { ...state, mapTeamToFiltered: swapMapTeamToFiltered };
+
+    case ActionTypes.SET_MAP_TEAM_TO_FILTERED:
       return { ...state, mapTeamToFiltered: action.payload };
 
-    case ActionTypes.CHANGE_FILTER_EMPLOYEE:
+    case ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED:
       return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [`${action.payload}`]: !state.mapTeamToFiltered[`${action.payload}`] } };
 
     case ActionTypes.SET_FORM_ITEM:

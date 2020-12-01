@@ -1,11 +1,16 @@
 import { ActionTypes, SchedulerDataItem } from './SchedulerTypes';
 import { SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
+import {
+  fetchDataSuccessAC as fetchTeamStaffDataTSuccessAC,
+  createDataItemSuccessAC as createTeamStaffDataDataItemSuccessAC,
+  deleteDataItemSuccessAC as deleteTeamStaffDataDataItemSuccessAC,
+} from '../../TeamStaff/TeamStaffAC';
 
 export const setDataAC = (data: SchedulerDataItem[]) => ({ type: ActionTypes.SET_DATA, payload: data });
 
-export const setFilterEmployeeAC = (data: { [key: string]: boolean }) => ({ type: ActionTypes.SET_FILTER_EMPLOYEE, payload: data });
+export const setMapTeamToFilteredAC = (data: { [key: string]: boolean }) => ({ type: ActionTypes.SET_MAP_TEAM_TO_FILTERED, payload: data });
 
-export const changeFilterEmployeeAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_FILTER_EMPLOYEE, payload: employeeID });
+export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, payload: employeeID });
 
 export const setFormItemAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM, payload: formItemID });
 
@@ -28,3 +33,5 @@ export const addNewItemToDataAC = (dataItem: SchedulerDataItem) => ({ type: Acti
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
 
 export const dataItemFetchingAC = (isLoading: boolean) => ({ type: ActionTypes.DATA_ITEM_FETCHING, payload: isLoading });
+
+export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };

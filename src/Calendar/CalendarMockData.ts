@@ -3,7 +3,7 @@ import { CalendarDataItem } from './CalendarTypes';
 import { StatusNames } from '../Agenda/AgendaTypes';
 
 export const ordersModelFields = {
-  id: 'id',
+  id: 'ID',
   title: 'Title',
   description: 'Description',
   start: 'FilterStart',

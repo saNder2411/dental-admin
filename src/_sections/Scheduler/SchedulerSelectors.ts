@@ -12,7 +12,13 @@ export const selectSchedulerMemoEventDrivenData = () => createSelector(selectSch
 export const selectSchedulerMemoOriginalData = () => createSelector(selectSchedulerOriginalData, (originalData) => originalData);
 
 export const selectSchedulerMemoDataItem = <T>(ID: number) =>
-  createSelector(selectSchedulerEventDrivenData, (data) => (data.find((dataItem) => dataItem.ID === ID) as unknown as T));
+  createSelector(selectSchedulerEventDrivenData, (data) => (data.find((dataItem) => dataItem.ID === ID) as unknown) as T);
+
+export const selectSchedulerMemoMapTeamToFiltered = () =>
+  createSelector(
+    ({ SchedulerState }: GlobalState) => SchedulerState.mapTeamToFiltered,
+    (mapTeamToFiltered) => mapTeamToFiltered
+  );
 
 export const selectFormItem = (dataItemID: number) => {
   console.log(`render ${dataItemID}`);

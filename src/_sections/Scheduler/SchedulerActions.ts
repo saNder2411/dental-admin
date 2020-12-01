@@ -5,8 +5,8 @@ import { SchedulerDataItem, SchedulerStateActions } from './SchedulerTypes';
 // Actions
 import {
   setDataAC,
-  setFilterEmployeeAC,
-  changeFilterEmployeeAC,
+  setMapTeamToFilteredAC,
+  changeMapTeamToFilteredAC,
   setFormItemAC,
   setSelectedItemIdAC,
   addItemToEditAC,
@@ -22,8 +22,8 @@ import {
 
 export const SchedulerActions: SchedulerStateActions = {
   setData: (dispatch: Dispatch, data: SchedulerDataItem[]) => dispatch(setDataAC(data)),
-  setMapTeamToFiltered: (dispatch: Dispatch, data: { [key: string]: boolean }) => dispatch(setFilterEmployeeAC(data)),
-  onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeFilterEmployeeAC(employeeID)),
+  setMapTeamToFiltered: (dispatch: Dispatch, data: { [key: string]: boolean }) => dispatch(setMapTeamToFilteredAC(data)),
+  onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeMapTeamToFilteredAC(employeeID)),
   setFormItem: (dispatch: Dispatch, formItem: SchedulerDataItem | null) => dispatch(setFormItemAC(formItem ? formItem?.ID : null)),
   setSelectedItemID: (dispatch: Dispatch, selectedItemID: number | null) => dispatch(setSelectedItemIdAC(selectedItemID)),
   setIsSchedulerDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => dispatch(dataItemFetchingAC(isLoading)),
