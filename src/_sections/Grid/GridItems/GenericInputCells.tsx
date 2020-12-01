@@ -4,7 +4,7 @@ import { Input } from '@progress/kendo-react-inputs';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { InputChangeEvent, EditCellProps } from './GridComponentsTypes';
+import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';

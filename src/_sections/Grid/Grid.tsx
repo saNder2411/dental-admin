@@ -8,7 +8,7 @@ import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Styled Components
-import * as SC from './GridStyledComponents/GridStyled';
+import * as SC from './GridItemsStyled/GridStyled';
 // Selectors
 import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoOriginalData } from './GridSelectors';
 import { GridActions } from './GridActions';

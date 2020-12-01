@@ -5,15 +5,15 @@ import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { Error } from '@progress/kendo-react-labels';
 // Styled Components
-import * as SC from '../GridStyledComponents/GridCellsStyled';
+import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { selectAgendaMemoData } from '../../../Agenda/AgendaSelectors';
 // Types
-import { EditCellProps } from './GridComponentsTypes';
+import { EditCellProps } from './GridItemsTypes';
 import { AgendaDataItem, LookupEntity } from '../../../Agenda/AgendaTypes';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
+import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
 export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);

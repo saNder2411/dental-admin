@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { EditCellDropDownListProps } from './GridComponentsTypes';
+import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
@@ -10,7 +10,7 @@ import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { selectAgendaMemoStatusNameList } from '../../../Agenda/AgendaSelectors';
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Helpers
-import { onGridDropDownChange, transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from './GridComponentsHelpers';
+import { onGridDropDownChange, transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from './GridItemsHelpers';
 import { CustomersDataItem } from '../../../Customers';
 
 export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {

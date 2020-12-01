@@ -4,18 +4,18 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Styled Components
-import * as SC from '../GridStyledComponents/GridCellsStyled';
+import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { ServicesIconInput } from './ServicesInputCells';
 import { ServicesNumeric } from './ServicesNumericCells';
 // Types
-import { GridCellProps } from './GridComponentsTypes';
+import { GridCellProps } from './GridItemsTypes';
 import { StatusNames } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 // Helpers
-import { isNumber } from './GridComponentsHelpers';
+import { isNumber } from './GridItemsHelpers';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
+import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
 export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);

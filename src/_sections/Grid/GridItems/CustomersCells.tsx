@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 // Components
 import { CustomersSvcStaffDropDownList, CustomersLastAppointmentsMultiSelect } from './CustomersDropDownCells';
 // Types
-import { GridCellProps } from './GridComponentsTypes';
+import { GridCellProps } from './GridItemsTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { LookupEntity } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
+import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;

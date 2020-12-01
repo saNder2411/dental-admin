@@ -1,11 +1,11 @@
 import React, { FC, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // Styled Components
-import * as SC from '../GridStyledComponents/GridCellsStyled';
+import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { Loader } from '../../../_components';
 // Types
-import { GridCellProps } from './GridComponentsTypes';
+import { GridCellProps } from './GridItemsTypes';
 import { GridDataItem } from '../GridTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
@@ -14,7 +14,7 @@ import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 // Actions
 import { GridActions } from '../GridActions';
 // Helpers
-import { getOnFinallyRequestDataItem } from './GridComponentsHelpers';
+import { getOnFinallyRequestDataItem } from './GridItemsHelpers';
 // Hooks
 import { useGridStateForActionsCell, useDomainActions } from '../GridHooks';
 // Selectors

@@ -2,24 +2,24 @@ import React, { FC, useState, useRef } from 'react';
 import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 // Styled Components
-import * as SC from '../GridStyledComponents/GridCellsStyled';
+import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { GenericReferenceInput, GenericTextInput, GenericAvatarInput } from './GenericInputCells';
 import { GenericDateInput } from './GenericDateCells';
 import { GenericGenderDropDownList, GenericBooleanFlagDropDownList, GenericRoleSkillsMultiSelect } from './GenericDropDownCells';
 // Types
-import { GridCellProps } from './GridComponentsTypes';
+import { GridCellProps } from './GridItemsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Helpers
-import { isString, isNumber } from './GridComponentsHelpers';
+import { isString, isNumber } from './GridItemsHelpers';
 // Images
 import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
+import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
 export const GenericTextCell: FC<GridCellProps> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);

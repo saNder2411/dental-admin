@@ -4,7 +4,7 @@ import { SchedulerFormProps } from '@progress/kendo-react-scheduler';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 // Styled Components
-import * as SC from '../SchedulerStyledComponents/SchedulerFormStyled';
+import * as SC from './SchedulerItemStyled/SchedulerFormStyled';
 // Form Inputs
 import {
   FormInput,
@@ -20,13 +20,11 @@ import {
 } from './SchedulerFormComponents';
 // Selectors
 import { selectServicesMemoReferences } from '../../../Services/ServicesSelectors';
-// Mock
-import { CustomersGridData } from '../../../Customers/CustomersMockData';
-import { TeamStaffGridData } from '../../../TeamStaff/TeamStaffMockData';
+import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
+import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
+// Types
 import { StatusNames } from '../../../Agenda/AgendaTypes';
 
-const customers = CustomersGridData.map(({ firstName, lastName }) => `${firstName} ${lastName}`);
-const stuffs = TeamStaffGridData.map(({ fullName }) => fullName);
 const statusList = Object.values(StatusNames);
 
 const recurrenceNames = ['Never', 'Daily', 'Weekly', 'Monthly', 'Yearly'];
@@ -67,9 +65,17 @@ const genders = [
 ];
 
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
+  // console.log(`formDataItem`, dataItem);
   const selectServicesReferences = useMemo(selectServicesMemoReferences, []);
   const serviceReferences = useSelector(selectServicesReferences);
-  // console.log(`formDataItem`, dataItem);
+
+  const selectCustomersData = useMemo(selectCustomersMemoData, []);
+  const customersData = useSelector(selectCustomersData);
+  const customers = customersData.map(({ FullName }) => FullName);
+
+  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
+  const teamStaffData = useSelector(selectTeamStaffData);
+  const stuffs = teamStaffData.map(({ Title }) => Title);
 
   return (
     <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={'73%'}>
@@ -78,7 +84,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
           initialValues={dataItem}
           onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
           render={(formRenderProps) => {
-            // console.log(`formRenderProps`, formRenderProps);
+            console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('repeat');
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {
@@ -102,38 +108,38 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                 <fieldset className="k-form-fieldset">
                   <Field
                     id={'customer'}
-                    name={'customer'}
+                    name={'LastNameAppt'}
                     label={'Customer'}
                     data={customers}
                     component={FormComboBox}
                     validator={requiredValidator}
                   />
-                  <Field id={'firstName'} name={'firstName'} label={'First Name'} component={FormInput} validator={requiredValidator} />
-                  <Field id={'lastName'} name={'lastName'} label={'Last Name'} component={FormInput} validator={requiredValidator} />
+                  <Field id={'firstName'} name={'FirstName'} label={'First Name'} component={FormInput} validator={requiredValidator} />
+                  <Field id={'lastName'} name={'LastNameAppt'} label={'Last Name'} component={FormInput} validator={requiredValidator} />
                   <Field
                     id={'mobilePhone'}
-                    name={'mobilePhone'}
+                    name={'CellPhone'}
                     label={'Mobile Phone'}
                     mask={'+1(999) 000-00-00-00'}
                     component={FormMaskedTextBox}
                     validator={phoneValidator}
                   />
-                  <Field id={'email'} name={'email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
+                  <Field id={'email'} name={'Email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
                   <Field
                     id={'customerGender'}
-                    name={'customerGender'}
+                    name={'Gender'}
                     label={'Gender'}
                     layout={'horizontal'}
                     component={FormRadioGroup}
                     data={genders}
                   />
-                  <Field id={'staff'} name={'staff'} label={'Support Stuff'} data={stuffs} component={FormComboBox} validator={requiredValidator} />
-                  <Field id={'start'} name={'start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
-                  <Field id={'end'} name={'end'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
-                  <Field id={'refID'} name={'refID'} label={'Services'} component={FormMultiSelect} data={serviceReferences} />
+                  <Field id={'staff'} name={'Email'} label={'Support Stuff'} data={stuffs} component={FormDropDownList} validator={requiredValidator} />
+                  <Field id={'start'} name={'Start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
+                  <Field id={'end'} name={'End'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
+                  <Field id={'refID'} name={'Title'} label={'Services'} component={FormMultiSelect} data={serviceReferences} />
                   <Field
                     id={'status'}
-                    name={'status'}
+                    name={'AppointmentStatus'}
                     label={'Status'}
                     data={statusList}
                     component={FormDropDownList}
@@ -315,7 +321,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                         />
                         <Field
                           id={'endOn'}
-                          name={'start'}
+                          name={'Start'}
                           disabled={formRenderProps.valueGetter('endRecurrence') !== 'on'}
                           component={FormDateTimePicker}
                           validator={requiredValidator}
@@ -324,7 +330,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     </div>
                   )}
 
-                  <Field id={'notes'} name={'notes'} label={'Notes'} component={FormTextArea} />
+                  <Field id={'notes'} name={'Notes'} label={'Notes'} component={FormTextArea} />
 
                   <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>

@@ -14,7 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
-import * as SC from '../SchedulerStyledComponents/SchedulerItemStyled';
+import * as SC from './SchedulerItemStyled/SchedulerItemStyled';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types

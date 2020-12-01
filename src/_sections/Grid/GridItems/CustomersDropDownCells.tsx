@@ -2,14 +2,14 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { GridCellProps, EditCellDropDownListProps } from './GridComponentsTypes';
+import { GridCellProps, EditCellDropDownListProps } from './GridItemsTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
 import { selectGridDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Helpers
-import { onGridDropDownChange, transformTeamStaffDataToMultiSelectData } from './GridComponentsHelpers';
+import { onGridDropDownChange, transformTeamStaffDataToMultiSelectData } from './GridItemsHelpers';
 
 export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomersDataItem>> = ({ dataItem: { ID }, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);

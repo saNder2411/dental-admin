@@ -30,7 +30,7 @@ export const FormInput = (fieldRenderProps: FieldRenderProps) => {
 export const FormComboBox = (fieldRenderProps: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, data, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-  // console.log(`fieldRenderPropsFormComboBox`, fieldRenderProps);
+  console.log(`fieldRenderPropsFormComboBox`, fieldRenderProps);
 
   return (
     <FieldWrapper style={wrapperStyle}>
@@ -45,6 +45,60 @@ export const FormComboBox = (fieldRenderProps: FieldRenderProps) => {
         disabled={disabled}
         value={value ? value : data[0]}
         data={data}
+        {...others}
+      />
+      {showHint && <Hint id={hintId}>{hint}</Hint>}
+      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+    </FieldWrapper>
+  );
+};
+
+export const FormDropDownList = (fieldRenderProps: FieldRenderProps) => {
+  const editorRef = React.useRef(null);
+  const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = fieldRenderProps;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+
+  return (
+    <FieldWrapper>
+      {label && (
+        <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
+          {label}
+        </Label>
+      )}
+      <DropDownList
+        ariaLabelledBy={labelId}
+        ariaDescribedBy={`${hintId} ${errorId}`}
+        ref={editorRef}
+        valid={valid}
+        id={id}
+        disabled={disabled}
+        {...others}
+      />
+      {showHint && <Hint id={hintId}>{hint}</Hint>}
+      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+    </FieldWrapper>
+  );
+};
+
+export const FormMultiSelect = (fieldRenderProps: FieldRenderProps) => {
+  const editorRef = React.useRef(null);
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, ...others } = fieldRenderProps;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+  const multiSelectValue = Array.isArray(value) ? value : [...value.split(`, `)];
+
+  return (
+    <FieldWrapper style={wrapperStyle}>
+      <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <MultiSelect
+        ariaLabelledBy={labelId}
+        ariaDescribedBy={`${hintId} ${errorId}`}
+        ref={editorRef}
+        valid={valid}
+        id={id}
+        value={multiSelectValue}
+        disabled={disabled}
         {...others}
       />
       {showHint && <Hint id={hintId}>{hint}</Hint>}
@@ -88,7 +142,7 @@ export const FormDateTimePicker = (fieldRenderProps: FieldRenderProps) => {
 };
 
 export const FormTextArea = (fieldRenderProps: FieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, hint, disabled, optional, ...others } = fieldRenderProps;
+  const { validationMessage, touched, label, id, valid, hint, disabled, optional, value, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
 
   return (
@@ -99,6 +153,7 @@ export const FormTextArea = (fieldRenderProps: FieldRenderProps) => {
       <TextArea
         valid={valid}
         id={id}
+        value={value ? value : ''}
         disabled={disabled}
         ariaDescribedBy={`${hintId} ${errorId}`}
         {...{ ...others, visited: `${others.visited}`, modified: `${`${others.modified}`}` }}
@@ -167,60 +222,6 @@ export const FormButtonGroup = (fieldRenderProps: FieldRenderProps) => {
           </Button>
         ))}
       </ButtonGroup>
-    </FieldWrapper>
-  );
-};
-
-export const FormDropDownList = (fieldRenderProps: FieldRenderProps) => {
-  const editorRef = React.useRef(null);
-  const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-
-  return (
-    <FieldWrapper>
-      {label && (
-        <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
-          {label}
-        </Label>
-      )}
-      <DropDownList
-        ariaLabelledBy={labelId}
-        ariaDescribedBy={`${hintId} ${errorId}`}
-        ref={editorRef}
-        valid={valid}
-        id={id}
-        disabled={disabled}
-        {...others}
-      />
-      {showHint && <Hint id={hintId}>{hint}</Hint>}
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
-    </FieldWrapper>
-  );
-};
-
-export const FormMultiSelect = (fieldRenderProps: FieldRenderProps) => {
-  const editorRef = React.useRef(null);
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-  const multiSelectValue = Array.isArray(value) ? value : [...value.split(`, `)];
-  
-  return (
-    <FieldWrapper style={wrapperStyle}>
-      <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
-        {label}
-      </Label>
-      <MultiSelect
-        ariaLabelledBy={labelId}
-        ariaDescribedBy={`${hintId} ${errorId}`}
-        ref={editorRef}
-        valid={valid}
-        id={id}
-        value={multiSelectValue}
-        disabled={disabled}
-        {...others}
-      />
-      {showHint && <Hint id={hintId}>{hint}</Hint>}
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
 };

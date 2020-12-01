@@ -4,7 +4,7 @@ import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { EditCellNumericProps } from './GridComponentsTypes';
+import { EditCellNumericProps } from './GridItemsTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 
 export const ServicesNumeric: FC<EditCellNumericProps<ServicesDataItem, number>> = ({

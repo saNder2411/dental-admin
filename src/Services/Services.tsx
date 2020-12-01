@@ -14,11 +14,11 @@ import {
   ServicesDiscountCell,
   ServicesTotalPriceCell,
   ActionsControlCell,
-} from '../_sections/Grid/GridComponents';
+} from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
-import { CustomGridCell } from '../_sections/Grid/GridComponents/GridComponentsTypes';
+import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions

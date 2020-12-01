@@ -4,7 +4,7 @@ import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { EditCellProps } from './GridComponentsTypes';
+import { EditCellProps } from './GridItemsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 

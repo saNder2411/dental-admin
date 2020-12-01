@@ -6,11 +6,11 @@ import { useInternationalization } from '@progress/kendo-react-intl';
 import { AgendaSvcStaffDropDownList, AgendaStatusDropDownList, AgendaFullNameDropDownList, AgendaServicesMultiSelect } from './AgendaDropDownCells';
 import { AgendaStartDateInput, AgendaEndDateInput } from './AgendaDateCells';
 // Styled Components
-import * as SC from '../GridStyledComponents/GridCellsStyled';
+import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
-import { GridCellProps } from './GridComponentsTypes';
+import { GridCellProps } from './GridItemsTypes';
 import { AgendaDataItem, StatusNames, LookupEntity } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectGridDataItemMemoValueForCell } from '../GridSelectors';
@@ -18,7 +18,7 @@ import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridComponentsHooks';
+import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
 export const AgendaStatusIcon: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);

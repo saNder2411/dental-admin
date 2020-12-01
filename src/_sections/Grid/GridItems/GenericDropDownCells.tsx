@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { EditCellDropDownListProps } from './GridComponentsTypes';
+import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
@@ -11,7 +11,7 @@ import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
 // Helpers
-import { onGridDropDownChange } from './GridComponentsHelpers';
+import { onGridDropDownChange } from './GridItemsHelpers';
 
 export const GenericGenderDropDownList: FC<EditCellDropDownListProps<AgendaDataItem | CustomersDataItem, string>> = ({
   dataItemID,

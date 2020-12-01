@@ -4,7 +4,7 @@ import { Input } from '@progress/kendo-react-inputs';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { InputChangeEvent, EditCellProps } from './GridComponentsTypes';
+import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 
 export const ServicesIconInput: FC<EditCellProps<ServicesDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
