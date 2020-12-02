@@ -17,7 +17,7 @@ import {
   FormButtonGroup,
   FormDropDownList,
   FormMultiSelect,
-} from './SchedulerFormComponents';
+} from './SchedulerFormItems';
 // Selectors
 import { selectServicesMemoReferences } from '../../../Services/ServicesSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';

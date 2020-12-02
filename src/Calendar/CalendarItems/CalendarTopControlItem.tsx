@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 // Styled Components
-import * as SC from '../CalendarStyledComponents/CalendarTopControlItemStyled';
+import * as SC from '../CalendarStyled/CalendarTopControlItemStyled';
 
 interface Props {
   isFiltered: boolean;

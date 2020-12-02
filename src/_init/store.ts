@@ -4,7 +4,7 @@ import { rootReducer } from './rootReducer';
 import { rootSaga } from './rootSaga';
 import { composeEnhancers, middleware, sagaMiddleware } from './middleware';
 // Types
-import { AppState } from '../App';
+import { AppState } from '../_App';
 import { GridState } from '../_sections/Grid';
 import { SchedulerState } from '../_sections/Scheduler/SchedulerTypes';
 import { AgendaState } from '../Agenda';

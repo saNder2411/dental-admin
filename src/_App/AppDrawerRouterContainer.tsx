@@ -3,7 +3,7 @@ import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { AppHeader } from './';
+import { AppHeader } from '.';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
 

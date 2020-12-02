@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Scheduler } from '../_sections';
-import { CalendarTopControlItem, CalendarHeaderCardCell } from './CalendarComponents';
+import { CalendarTopControlItem, CalendarHeaderCardCell } from './CalendarItems';
 import { Loader } from '../_components';
 // Styled Components
-import * as SC from './CalendarStyledComponents/CalendarStyled';
+import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
 import { selectSchedulerMemoOriginalData } from '../_sections/Scheduler/SchedulerSelectors';
 // Actions
