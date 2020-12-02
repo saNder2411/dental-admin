@@ -7,8 +7,10 @@ import { Form, Field, FormElement } from '@progress/kendo-react-form';
 import * as SC from './SchedulerItemStyled/SchedulerFormStyled';
 // Form Inputs
 import {
+  ServicesFormMultiSelect,
+  TeamStaffFormDropDownList,
+  CustomersFormDropDownList,
   FormInput,
-  FormComboBox,
   FormMaskedTextBox,
   FormDateTimePicker,
   FormTextArea,
@@ -16,11 +18,8 @@ import {
   FormRadioGroup,
   FormButtonGroup,
   FormDropDownList,
-  FormMultiSelect,
 } from './SchedulerFormItems';
 // Selectors
-import { selectServicesMemoReferences } from '../../../Services/ServicesSelectors';
-import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Types
 import { StatusNames } from '../../../Agenda/AgendaTypes';
@@ -66,19 +65,13 @@ const genders = [
 
 export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   // console.log(`formDataItem`, dataItem);
-  const selectServicesReferences = useMemo(selectServicesMemoReferences, []);
-  const serviceReferences = useSelector(selectServicesReferences);
-
-  const selectCustomersData = useMemo(selectCustomersMemoData, []);
-  const customersData = useSelector(selectCustomersData);
-  const customers = customersData.map(({ FullName }) => FullName);
 
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
   const stuffs = teamStaffData.map(({ Title }) => Title);
 
   return (
-    <Dialog title={'Event'} onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height={'73%'}>
+    <Dialog title="Event" onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height="73%">
       <SC.SchedulerForm>
         <Form
           initialValues={dataItem}
@@ -106,54 +99,40 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
             return (
               <FormElement horizontal={true}>
                 <fieldset className="k-form-fieldset">
+                  <Field id="services" name="LookupMultiBP01offerings" label="Services" component={ServicesFormMultiSelect} />
+
+                  <Field id="customer" name="LookupCM102customers" label="Customer" component={CustomersFormDropDownList} />
+
+                  <Field id="status" name="AppointmentStatus" label="Status" data={statusList} component={FormDropDownList} />
+
+                  <Field id="start" name="Start" label="Start" component={FormDateTimePicker} validator={requiredValidator} />
+
+                  <Field id="end" name="End" label="End" component={FormDateTimePicker} validator={requiredValidator} />
+
+                  <Field id="repeat" name="repeat" label="Repeat" defaultValue="Never" data={recurrenceNames} component={FormDropDownList} />
+
+                  <Field id="staff" name="LookupHR01team" label="Support Stuff" component={TeamStaffFormDropDownList} />
+
+                  <Field id="firstName" name="FirstName" label="First Name" component={FormInput} validator={requiredValidator} />
+                  <Field id="lastName" name="LastNameAppt" label="Last Name" component={FormInput} validator={requiredValidator} />
                   <Field
-                    id={'customer'}
-                    name={'LastNameAppt'}
-                    label={'Customer'}
-                    data={customers}
-                    component={FormComboBox}
-                    validator={requiredValidator}
-                  />
-                  <Field id={'firstName'} name={'FirstName'} label={'First Name'} component={FormInput} validator={requiredValidator} />
-                  <Field id={'lastName'} name={'LastNameAppt'} label={'Last Name'} component={FormInput} validator={requiredValidator} />
-                  <Field
-                    id={'mobilePhone'}
-                    name={'CellPhone'}
-                    label={'Mobile Phone'}
-                    mask={'+1(999) 000-00-00-00'}
+                    id="mobilePhone"
+                    name="CellPhone"
+                    label="Mobile Phone"
+                    mask="+1(999) 000-00-00-00"
                     component={FormMaskedTextBox}
                     validator={phoneValidator}
                   />
-                  <Field id={'email'} name={'Email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
-                  <Field id={'customerGender'} name={'Gender'} label={'Gender'} layout={'horizontal'} component={FormRadioGroup} data={genders} />
-                  <Field
-                    id={'staff'}
-                    name={'Email'}
-                    label={'Support Stuff'}
-                    data={stuffs}
-                    component={FormDropDownList}
-                    validator={requiredValidator}
-                  />
-                  <Field id={'start'} name={'Start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
-                  <Field id={'end'} name={'End'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
-                  <Field id={'refID'} name={'Title'} label={'Services'} component={FormMultiSelect} data={serviceReferences} />
-                  <Field
-                    id={'status'}
-                    name={'AppointmentStatus'}
-                    label={'Status'}
-                    data={statusList}
-                    component={FormDropDownList}
-                    validator={requiredValidator}
-                  />
-                  <Field id={'repeat'} name={'repeat'} label={'Repeat'} data={recurrenceNames} component={FormDropDownList} />
+                  <Field id="email" name="Email" label="Email" type="email" component={FormInput} validator={emailValidator} />
+                  <Field id="customerGender" name="Gender" label="Gender" layout="horizontal" component={FormRadioGroup} data={genders} />
 
                   {repeatValue !== 'Never' && (
                     <>
                       <Field
-                        id={'repeatEvery'}
-                        name={'repeatEvery'}
-                        label={'Repeat every'}
-                        format={'n0'}
+                        id="repeatEvery"
+                        name="repeatEvery"
+                        label="Repeat every"
+                        format="n0"
                         min={1}
                         defaultValue={1}
                         secondLabel={secondLabelForRepeatEvery}
@@ -163,32 +142,26 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                   )}
 
                   {repeatValue === 'Weekly' && (
-                    <Field
-                      id={'repeatOnWeekday'}
-                      name={'repeatOnWeekday'}
-                      label={'Repeat on'}
-                      data={recurrenceWeeklyData}
-                      component={FormButtonGroup}
-                    />
+                    <Field id="repeatOnWeekday" name="repeatOnWeekday" label="Repeat on" data={recurrenceWeeklyData} component={FormButtonGroup} />
                   )}
 
                   {repeatValue === 'Monthly' && (
                     <div className="row m-0">
                       <div className="col-md-4 p-0">
                         <Field
-                          id={'repeatOnMonthly'}
-                          name={'repeatOnMonthly'}
-                          label={'Repeat on'}
-                          defaultValue={'day'}
+                          id="repeatOnMonthly"
+                          name="repeatOnMonthly"
+                          label="Repeat on"
+                          defaultValue="day"
                           data={repeatOnMonthlyData}
                           component={FormRadioGroup}
                         />
                       </div>
                       <div className="col-md-6 monthly-group">
                         <Field
-                          id={'repeatOnMonthlyDay'}
-                          name={'repeatOnMonthlyDay'}
-                          format={'n0'}
+                          id="repeatOnMonthlyDay"
+                          name="repeatOnMonthlyDay"
+                          format="n0"
                           min={1}
                           max={31}
                           defaultValue={1}
@@ -198,8 +171,8 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                         <div className="row m-0 pt-1">
                           <div className="col-md-4 p-0">
                             <Field
-                              id={'monthlyWeekNumber'}
-                              name={'monthlyWeekNumber'}
+                              id="monthlyWeekNumber"
+                              name="monthlyWeekNumber"
                               component={FormDropDownList}
                               data={weekNumbers}
                               defaultValue={weekNumbers[0]}
@@ -208,8 +181,8 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           </div>
                           <div className="col-md-6 p-0">
                             <Field
-                              id={'monthlyWeekday'}
-                              name={'monthlyWeekday'}
+                              id="monthlyWeekday"
+                              name="monthlyWeekday"
                               component={FormDropDownList}
                               data={monthlyDayNames}
                               defaultValue={monthlyDayNames[3]}
@@ -225,10 +198,10 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     <div className="row m-0">
                       <div className="col-md-3 p-0">
                         <Field
-                          id={'repeatOnYearly'}
-                          name={'repeatOnYearly'}
-                          label={'Repeat on'}
-                          defaultValue={'month'}
+                          id="repeatOnYearly"
+                          name="repeatOnYearly"
+                          label="Repeat on"
+                          defaultValue="month"
                           data={repeatOnYearlyData}
                           component={FormRadioGroup}
                         />
@@ -237,8 +210,8 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                         <div className="row m-0 pt-1">
                           <div className="col-md-6 p-0">
                             <Field
-                              id={'monthNames'}
-                              name={'monthNames'}
+                              id="monthNames"
+                              name="monthNames"
                               data={monthName}
                               defaultValue={monthName[0]}
                               disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week'}
@@ -247,9 +220,9 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           </div>
                           <div className="col-md-4 p-0">
                             <Field
-                              id={'repeatOnYearlyDay'}
-                              name={'repeatOnYearlyDay'}
-                              format={'n0'}
+                              id="repeatOnYearlyDay"
+                              name="repeatOnYearlyDay"
+                              format="n0"
                               min={1}
                               max={31}
                               defaultValue={1}
@@ -261,8 +234,8 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                         <div className="row pt-1  yearly-group yearly-group-dropdown">
                           <div className="col-md-3 p-0 pr-1">
                             <Field
-                              id={'yearlyWeekNumber'}
-                              name={'yearlyWeekNumber'}
+                              id="yearlyWeekNumber"
+                              name="yearlyWeekNumber"
                               component={FormDropDownList}
                               data={weekNumbers}
                               defaultValue={weekNumbers[0]}
@@ -271,8 +244,8 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           </div>
                           <div className="col-md-4 p-0">
                             <Field
-                              id={'yearlyWeekday'}
-                              name={'yearlyWeekday'}
+                              id="yearlyWeekday"
+                              name="yearlyWeekday"
                               data={monthlyDayNames}
                               defaultValue={monthlyDayNames[3]}
                               disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
@@ -282,8 +255,8 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           <div className="col-md-1 p-1">of</div>
                           <div className="col-md-4 p-0">
                             <Field
-                              id={'monthNamess'}
-                              name={'monthNames'}
+                              id="monthNamess"
+                              name="monthNames"
                               data={monthName}
                               defaultValue={monthName[0]}
                               disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
@@ -299,28 +272,28 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     <div className="row m-0">
                       <div className="col-md-4 p-0">
                         <Field
-                          id={'endRecurrence'}
-                          name={'endRecurrence'}
-                          label={'End'}
-                          defaultValue={'after'}
+                          id="endRecurrence"
+                          name="endRecurrence"
+                          label="End"
+                          defaultValue="after"
                           component={FormRadioGroup}
                           data={endRecurrenceData}
                         />
                       </div>
                       <div className="col-md-6 p-0 pt-5 align-self-end">
                         <Field
-                          id={'endAfterRepeatDayCount'}
-                          name={'endAfterRepeatDayCount'}
-                          format={'n0'}
+                          id="endAfterRepeatDayCount"
+                          name="endAfterRepeatDayCount"
+                          format="n0"
                           min={1}
                           defaultValue={1}
                           disabled={formRenderProps.valueGetter('endRecurrence') === 'on' || formRenderProps.valueGetter('endRecurrence') === 'never'}
-                          secondLabel={'occurrence(s)'}
+                          secondLabel="occurrence(s)"
                           component={FormNumericTextBox}
                         />
                         <Field
-                          id={'endOn'}
-                          name={'Start'}
+                          id="endOn"
+                          name="Start"
                           disabled={formRenderProps.valueGetter('endRecurrence') !== 'on'}
                           component={FormDateTimePicker}
                           validator={requiredValidator}
@@ -329,7 +302,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     </div>
                   )}
 
-                  <Field id={'notes'} name={'Notes'} label={'Notes'} component={FormTextArea} />
+                  <Field id="notes" name="Notes" label="Notes" component={FormTextArea} />
 
                   <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>

@@ -7,8 +7,9 @@ import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { GridDataItem } from '../GridTypes';
 
-export const onGridDropDownChange = <T = GridDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (evt: DropDownListChangeEvent) =>
-  onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+export const onGridDropDownChange = <T = GridDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (
+  evt: DropDownListChangeEvent
+) => onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
 
 export const isNumber = (arg: any): arg is number => typeof arg === 'number';
 
@@ -21,7 +22,7 @@ export const getOnFinallyRequestDataItem = (...handlers: Array<() => void>) => (
 export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaffDataItem | CustomersDataItem>) =>
   domainData.map((item) => {
     const isTeamStaffDataItem = 'ShowOnline' in item;
-    const value = isTeamStaffDataItem ? item.FullName.split(' ').slice(-1)[0] : item.FullName;
+    const value = isTeamStaffDataItem ? item.Title : item.FullName;
     const startGuid = item.__metadata.id.indexOf(`'`) + 1;
     const endGuid = item.__metadata.id.lastIndexOf(`'`);
     const id = item.__metadata.id.slice(startGuid, endGuid);
