@@ -30,7 +30,7 @@ export const FormInput = (fieldRenderProps: FieldRenderProps) => {
 export const FormComboBox = (fieldRenderProps: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, data, ...others } = fieldRenderProps;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-  console.log(`fieldRenderPropsFormComboBox`, fieldRenderProps);
+  // console.log(`fieldRenderPropsFormComboBox`, fieldRenderProps);
 
   return (
     <FieldWrapper style={wrapperStyle}>

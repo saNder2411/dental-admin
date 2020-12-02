@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -19,7 +19,7 @@ import { useSetSchedulerDataForDomainWithDataBind } from '../_sections/Scheduler
 // Mocks
 import { ordersModelFields } from '../_sections/Scheduler/SchedulerHelpers';
 
-export const Calendar = () => {
+export const Calendar: FC = () => {
   const localizationService = useLocalization();
   const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
@@ -59,17 +59,18 @@ export const Calendar = () => {
       </div>
       <div className="card-component">
         <Scheduler
-          data={originalData.filter((event) => mapTeamToFiltered[event.LookupHR01team.Id])}
+          data={originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id])}
           onDataChange={onDataChange}
           modelFields={ordersModelFields}
           group={{
             resources: ['Teams'],
+            orientation: 'horizontal',
           }}
           resources={[
             {
               name: 'Teams',
               data: teamData
-                .filter((employee) => mapTeamToFiltered[employee.ID])
+                .filter(({ ID }) => mapTeamToFiltered[ID])
                 .map((item) => ({
                   ...item,
                   text: (

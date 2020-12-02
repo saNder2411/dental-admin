@@ -1,11 +1,10 @@
-import React from 'react';
-import { Scheduler as KendoScheduler, DayView, WeekView, MonthView } from '@progress/kendo-react-scheduler';
+import React, { FC } from 'react';
+import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerProps } from '@progress/kendo-react-scheduler';
 //Components
 import { SchedulerItem, SchedulerEditItem, SchedulerSlotEdit, SchedulerAgendaTask } from './SchedulerItems';
 
-export const Scheduler = ({ data, modelFields, group, resources, onDataChange }: any) => {
+export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resources, onDataChange }) => {
   const defaultDate = new Date();
-  // console.log(data);
 
   return (
     <KendoScheduler

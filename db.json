@@ -15,7 +15,9 @@
       "OfferingDiscount": 0.16,
       "OfferingIconName": "",
       "id": 1,
-      "RoleSkills": ["Artistic & Creative"],
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
       "ID": 1,
       "__metadata": {
         "id": "Web/Lists(guid'88f709c0-e906-4caf-bee4-1c61babc71f5')/Items(1)",
@@ -46,7 +48,9 @@
       "ID": 2,
       "id": 2,
       "OfferingIconName": "Tooth",
-      "RoleSkills": ["Artistic & Creative"]
+      "RoleSkills": [
+        "Artistic & Creative"
+      ]
     },
     {
       "__metadata": {
@@ -70,7 +74,9 @@
       "ID": 3,
       "id": 3,
       "OfferingIconName": "Tooth",
-      "RoleSkills": ["Colouring-Balayage"]
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ]
     },
     {
       "__metadata": {
@@ -94,7 +100,9 @@
       "ID": 4,
       "id": 4,
       "OfferingIconName": "Tooth",
-      "RoleSkills": ["Colouring-Balayage"]
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ]
     },
     {
       "__metadata": {
@@ -118,7 +126,9 @@
       "ID": 5,
       "id": 5,
       "OfferingIconName": "Tooth",
-      "RoleSkills": ["Artistic & Creative"]
+      "RoleSkills": [
+        "Artistic & Creative"
+      ]
     },
     {
       "__metadata": {
@@ -142,7 +152,10 @@
       "ID": 6,
       "id": 6,
       "OfferingIconName": "Tooth",
-      "RoleSkills": ["Active Listening", "Colouring-Balayage"]
+      "RoleSkills": [
+        "Active Listening",
+        "Colouring-Balayage"
+      ]
     },
     {
       "__metadata": {
@@ -166,7 +179,9 @@
       "OfferingIconName": "Tooth",
       "ID": 7,
       "id": 7,
-      "RoleSkills": ["Colouring-Base"],
+      "RoleSkills": [
+        "Colouring-Base"
+      ],
       "OfferIconName": "Tooth"
     },
     {
@@ -1334,7 +1349,9 @@
       "OfferingDiscount": 0.1,
       "OfferingIconName": "Tooth",
       "OfferingsName_Edit": "TBA-400",
-      "RoleSkills": ["Colouring-Balayage"],
+      "RoleSkills": [
+        "Colouring-Balayage"
+      ],
       "SalesTaxRate": 0,
       "ShowOnline": true,
       "Title": "",
@@ -1358,7 +1375,9 @@
       "OfferingDiscount": 0.05,
       "OfferingIconName": "Tooth",
       "OfferingsName_Edit": "TBA-200",
-      "RoleSkills": ["Artistic & Creative"],
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
       "SalesTaxRate": 0,
       "ShowOnline": true,
       "Title": "",
@@ -1381,7 +1400,9 @@
       "OfferingDiscount": 0.01,
       "OfferingsName_Edit": "Ladies Hair Cut",
       "OfferingIconName": "Tooth",
-      "RoleSkills": ["Artistic & Creative"],
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
       "SalesTaxRate": 0,
       "ShowOnline": true,
       "Title": "",
@@ -1444,7 +1465,9 @@
       "JobTitle": "Art Director",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": ["Personal Dexterity"],
+      "RoleSkills": [
+        "Personal Dexterity"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "#55AB1D",
       "CalendarColHex": "#55AB1D",
@@ -1483,7 +1506,9 @@
       "JobTitle": "Junior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": ["Artistic & Creative"],
+      "RoleSkills": [
+        "Artistic & Creative"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "#28B4C8",
       "CalendarColHex": "#28B4C8",
@@ -1508,7 +1533,10 @@
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": ["Artistic & Creative", "Patience & Tolerance"],
+      "RoleSkills": [
+        "Artistic & Creative",
+        "Patience & Tolerance"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "#F7C62F",
       "CalendarColHex": "#F7C62F",
@@ -1540,7 +1568,9 @@
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": ["Styling-Chunky"],
+      "RoleSkills": [
+        "Styling-Chunky"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "#FF6358",
       "CalendarColHex": "#FF6358",
@@ -1572,7 +1602,11 @@
       "JobTitle": "Stylist Director",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": ["Physical Stamina", "Colouring-Balayage", "Rapport Building"],
+      "RoleSkills": [
+        "Physical Stamina",
+        "Colouring-Balayage",
+        "Rapport Building"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "#58F4FF",
       "CalendarColHex": "#58F4FF",
@@ -1604,7 +1638,9 @@
       "JobTitle": "Senior Stylist",
       "Department": null,
       "ProfilesStatus": "Active",
-      "RoleSkills": ["Patience & Tolerance"],
+      "RoleSkills": [
+        "Patience & Tolerance"
+      ],
       "WorkingWeekDays": null,
       "CalendarColour": "#C828B4",
       "CalendarColHex": "#C828B4",
@@ -1630,7 +1666,10 @@
       "Id": 8,
       "JobTitle": "Senior Stylist",
       "ProfilesStatus": "",
-      "RoleSkills": ["Artistic & Creative", "Colouring-Ombré"],
+      "RoleSkills": [
+        "Artistic & Creative",
+        "Colouring-Ombré"
+      ],
       "ShowOnline": true,
       "Title": "Jordan",
       "WorkingWeekDays": null,
@@ -1650,38 +1689,6 @@
         }
       },
       "FullName": "July Jordan"
-    },
-    {
-      "CalendarColHex": "#7de736",
-      "CalendarColour": "#7de736",
-      "CellPhone": "+89 7894 58938",
-      "Department": null,
-      "Email": "korin.@gmail.com",
-      "FirstName": "Korin",
-      "Id": 9,
-      "JobTitle": "Senior Stylist",
-      "ProfilesStatus": "",
-      "RoleSkills": ["Colouring-Base", "Active Listening", "Styling-Blunt Cut"],
-      "ShowOnline": true,
-      "Title": "McLaren",
-      "WorkingWeekDays": null,
-      "id": 9,
-      "Gender": "(1) Female",
-      "ID": 9,
-      "__metadata": {
-        "id": "Web/Lists(guid'0443aa45-8b1b-43e9-819a-bfa24fb546ed')/Items(9)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'0443aa45-8b1b-43e9-819a-bfa24fb546ed')/Items(9)",
-        "etag": "\"\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "TeamProfilePhoto": {
-        "Description": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
-        "Url": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        }
-      },
-      "FullName": "Korin McLaren"
     }
   ],
   "customers": [

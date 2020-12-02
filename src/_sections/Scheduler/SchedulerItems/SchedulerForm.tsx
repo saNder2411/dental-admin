@@ -84,7 +84,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
           initialValues={dataItem}
           onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
           render={(formRenderProps) => {
-            console.log(`formRenderProps`, formRenderProps);
+            // console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('repeat');
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {
@@ -125,15 +125,15 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     validator={phoneValidator}
                   />
                   <Field id={'email'} name={'Email'} label={'Email'} type={'email'} component={FormInput} validator={emailValidator} />
+                  <Field id={'customerGender'} name={'Gender'} label={'Gender'} layout={'horizontal'} component={FormRadioGroup} data={genders} />
                   <Field
-                    id={'customerGender'}
-                    name={'Gender'}
-                    label={'Gender'}
-                    layout={'horizontal'}
-                    component={FormRadioGroup}
-                    data={genders}
+                    id={'staff'}
+                    name={'Email'}
+                    label={'Support Stuff'}
+                    data={stuffs}
+                    component={FormDropDownList}
+                    validator={requiredValidator}
                   />
-                  <Field id={'staff'} name={'Email'} label={'Support Stuff'} data={stuffs} component={FormDropDownList} validator={requiredValidator} />
                   <Field id={'start'} name={'Start'} label={'Start'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'end'} name={'End'} label={'End'} component={FormDateTimePicker} validator={requiredValidator} />
                   <Field id={'refID'} name={'Title'} label={'Services'} component={FormMultiSelect} data={serviceReferences} />
@@ -297,7 +297,6 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
 
                   {repeatValue !== 'Never' && (
                     <div className="row m-0">
-                      {console.log(formRenderProps.valueGetter('endRecurrence'))}
                       <div className="col-md-4 p-0">
                         <Field
                           id={'endRecurrence'}
