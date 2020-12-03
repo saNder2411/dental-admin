@@ -65,7 +65,7 @@ export const BooleanFlagCell = styled.td<{ isOnline: boolean }>`
 `;
 
 export const ActionsControlCell = styled.td`
-  && button {
+  && button.k-button.btn-custom {
     background: transparent;
     border: none;
     border-radius: 50%;
@@ -73,7 +73,7 @@ export const ActionsControlCell = styled.td`
     height: 50px;
   }
 
-  && span {
+  && span.custom-icon {
     display: block;
     margin: auto;
     font-size: 2rem;

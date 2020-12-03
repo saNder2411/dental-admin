@@ -1,5 +1,6 @@
 import React, { FC, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 // Styled Components
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
@@ -25,6 +26,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
   const dataItem = useSelector(selectDataItem);
 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
+  const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const { editField, gridDataName } = useGridStateForActionsCell();
   const DomainActions = useDomainActions(gridDataName);
   const dispatch = useDispatch();
@@ -66,6 +68,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
       () => GridActions.onItemRemove(dispatch, dataItem)
     );
 
+    setShowRemoveDialog(false);
     setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.deleteDataItem(dispatch, dataItem.ID, onFinallyRequestDataItem);
@@ -95,12 +98,25 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
         <Loader className="d-flex justify-content-center align-items-center" isLoading={isDataItemLoading} themeColor="tertiary" />
       ) : (
         <>
-          <button className="k-button" onClick={() => GridActions.onItemEdit(dispatch, dataItem)}>
-            <span className="k-icon k-i-edit" />
+          <button className="k-button btn-custom" onClick={() => GridActions.onItemEdit(dispatch, dataItem)}>
+            <span className="k-icon k-i-edit custom-icon" />
           </button>
-          <button className="k-button" onClick={onDeleteItem}>
-            <span className="k-icon k-i-trash" />
+          <button className="k-button btn-custom" onClick={() => setShowRemoveDialog(true)}>
+            <span className="k-icon k-i-trash custom-icon" />
           </button>
+          {showRemoveDialog && (
+            <Dialog title="Please confirm" onClose={() => setShowRemoveDialog(false)}>
+              <p style={{ margin: '25px', textAlign: 'center' }}>Are you sure you want to delete this item?</p>
+              <DialogActionsBar>
+                <button className="k-button" onClick={() => setShowRemoveDialog(false)}>
+                  Cancel
+                </button>
+                <button className="k-button" onClick={onDeleteItem}>
+                  Delete
+                </button>
+              </DialogActionsBar>
+            </Dialog>
+          )}
         </>
       )}
     </SC.ActionsControlCell>
