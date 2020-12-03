@@ -1,41 +1,35 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  SchedulerItem as KendoSchedulerItem,
-  // useSchedulerEditItemFormItemContext,
-  useSchedulerEditItemRemoveItemContext,
-  useSchedulerEditItemShowOccurrenceDialogContext,
-  useSchedulerEditItemShowRemoveDialogContext,
-} from '@progress/kendo-react-scheduler';
+import { SchedulerItem as KendoSchedulerItem, useSchedulerEditItemShowOccurrenceDialogContext } from '@progress/kendo-react-scheduler';
 import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
+import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
 import * as SC from './SchedulerItemStyled/SchedulerItemStyled';
+// Components
+import { Loader } from '../../../_components';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
 import { StatusNames } from '../../../Agenda/AgendaTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-// Selectors
-
 //Actions
 import { SchedulerActions } from '../SchedulerActions';
+import { AgendaActions } from '../../../Agenda/AgendaActions';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
-  // console.log(`CustomItemProps`, props);
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
   const { setFormItemID } = SchedulerActions;
   const dispatch = useDispatch();
-  // const [, setFormItem] = useSchedulerEditItemFormItemContext();
-  const [, setRemoveItem] = useSchedulerEditItemRemoveItemContext();
   const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
-  const [, setShowRemoveDialog] = useSchedulerEditItemShowRemoveDialogContext();
+  const [showRemoveDialog, setShowRemoveDialog] = useState(false);
+  const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
   const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
@@ -44,6 +38,14 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const iconDentalName = StatusNames.Tooth;
   const width = _ref.current?.element?.offsetWidth;
   const height = _ref.current?.element?.offsetHeight;
+
+  useEffect(
+    () => () => {
+      setIsDataItemLoading(false);
+      setShowRemoveDialog(false);
+    },
+    []
+  );
 
   const onSchedulerItemClick = useCallback(
     (evt) => {
@@ -71,20 +73,30 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const onDeleteBtnClick = useCallback(() => {
     setShowPopup(false);
-    setRemoveItem(dataItem);
 
     if (isRecurring) {
       setShowOccurrenceDialog(true);
     } else {
       setShowRemoveDialog(true);
     }
-  }, [setRemoveItem, setShowPopup, dataItem, isRecurring, setShowOccurrenceDialog, setShowRemoveDialog]);
+  }, [setShowPopup, isRecurring, setShowOccurrenceDialog, setShowRemoveDialog]);
 
   const { onFocus: onFocusAsync, onBlur: onBlurAsync } = useAsyncFocusBlur({ onFocus, onBlur: onSchedulerItemBlur });
 
+  const onConfirmDeleteDataItem = () => {
+    setIsDataItemLoading(true);
+    AgendaActions.deleteDataItem(dispatch, dataItem.ID, () => {});
+  };
+
   return (
     <>
-      <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onDoubleClick={onEditBtnClick} onFocus={onFocusAsync} onBlur={onBlurAsync}>
+      <KendoSchedulerItem
+        {...props}
+        onClick={onSchedulerItemClick}
+        onDoubleClick={onEditBtnClick}
+        onFocus={onFocusAsync}
+        onBlur={onBlurAsync}
+        onRemoveClick={onDeleteBtnClick}>
         {height && height > 25 && (
           <SC.SchedulerItemTopWrapper isSmallDisplay={!!(width && width < 120)}>
             {width && width > 120 && children}
@@ -147,6 +159,28 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           </Card>
         </div>
       </Popup>
+      {showRemoveDialog && (
+        <Dialog title={'Delete Event'} onClose={() => !isDataItemLoading && setShowRemoveDialog(false)}>
+          <p style={{ margin: '25px', textAlign: 'center' }}>Are you sure you want to delete this event?</p>
+          <DialogActionsBar>
+            <button className="k-button" onClick={() => setShowRemoveDialog(false)} disabled={isDataItemLoading}>
+              Cancel
+            </button>
+            <button className="k-button" onClick={onConfirmDeleteDataItem} disabled={isDataItemLoading}>
+              {isDataItemLoading ? (
+                <Loader
+                  className="d-flex justify-content-center align-items-center"
+                  type="pulsing"
+                  isLoading={isDataItemLoading}
+                  themeColor="primary"
+                />
+              ) : (
+                `Delete`
+              )}
+            </button>
+          </DialogActionsBar>
+        </Dialog>
+      )}
     </>
   );
 };
