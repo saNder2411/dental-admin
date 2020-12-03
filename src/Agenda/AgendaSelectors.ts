@@ -12,4 +12,6 @@ export const selectAgendaMemoData = () => createSelector(selectAgendaData, (data
 
 export const selectAgendaMemoStatusNameList = () => createSelector(selectAgendaStatusNameList, (statusNameList) => statusNameList);
 
-export const selectAgendaIsValidStartDateEvent = ({ AgendaState }: GlobalState) => AgendaState.isValidStartDateEvent;
+export const selectIsValidStartDateEvent = ({ AgendaState }: GlobalState) => AgendaState.isValidStartDateEvent;
+
+export const selectIsValidEndDateEvent = ({ AgendaState }: GlobalState) => AgendaState.isValidEndDateEvent;

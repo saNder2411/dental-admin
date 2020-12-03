@@ -34,6 +34,10 @@ export const deleteDataItemSuccessAC = (deletedDataItemID: number) => ({ type: A
 export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.DELETE_DATA_ITEM_FAILURE, payload: errorMessage });
 
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
+
+export const validateFullNameFieldAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_FULL_NAME_FIELD, payload: isValid });
+
+export const validateJobTitleFieldAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_JOB_TITLE_FIELD, payload: isValid });
 // Async
 export const fetchDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_ASYNC });
 

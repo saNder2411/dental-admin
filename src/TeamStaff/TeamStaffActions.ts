@@ -2,7 +2,14 @@ import { Dispatch } from 'redux';
 // Types
 import { TeamStaffDataItem } from './TeamStaffTypes';
 // ActionCreators
-import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './TeamStaffAC';
+import {
+  fetchDataInitAsyncAC,
+  createDataItemInitAsyncAC,
+  updateDataItemInitAsyncAC,
+  deleteDataItemInitAsyncAC,
+  validateFullNameFieldAC,
+  validateJobTitleFieldAC,
+} from './TeamStaffAC';
 
 export const TeamStaffActions = {
   fetchData: (dispatch: Dispatch) => dispatch(fetchDataInitAsyncAC()),
@@ -12,4 +19,9 @@ export const TeamStaffActions = {
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
     dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
+};
+
+export const TeamStaffEditCellsActions = {
+  validateFullNameField: (dispatch: Dispatch, isValid: boolean) => dispatch(validateFullNameFieldAC(isValid)),
+  validateJobTitleField: (dispatch: Dispatch, isValid: boolean) => dispatch(validateJobTitleFieldAC(isValid)),
 };

@@ -9,6 +9,8 @@ export const initialState = {
   dataError: ``,
   isDataItemLoading: false,
   dataItemError: ``,
+  isValidFullNameField: true,
+  isValidJobTitleField: true,
 };
 
 export const reducer = (state: TeamStaffState = initialState, action: Actions): TeamStaffState => {
@@ -62,6 +64,12 @@ export const reducer = (state: TeamStaffState = initialState, action: Actions): 
 
     case ActionTypes.DELETE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
+
+    case ActionTypes.VALIDATE_FULL_NAME_FIELD:
+      return { ...state, isValidFullNameField: action.payload };
+
+    case ActionTypes.VALIDATE_JOB_TITLE_FIELD:
+      return { ...state, isValidJobTitleField: action.payload };
 
     default:
       return state;

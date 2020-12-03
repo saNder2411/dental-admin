@@ -7,3 +7,7 @@ const selectTeamStaffData = ({ TeamStaffState }: GlobalState) => TeamStaffState.
 export const selectTeamStaffIsDataLoading = ({ TeamStaffState }: GlobalState) => TeamStaffState.isDataLoading;
 
 export const selectTeamStaffMemoData = () => createSelector(selectTeamStaffData, (data) => data);
+
+export const selectIsValidFullNameField = ({ TeamStaffState }: GlobalState) => TeamStaffState.isValidFullNameField;
+
+export const selectIsValidJobTitleField = ({ TeamStaffState }: GlobalState) => TeamStaffState.isValidJobTitleField;

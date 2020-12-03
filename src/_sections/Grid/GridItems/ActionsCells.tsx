@@ -18,15 +18,16 @@ import { GridActions } from '../GridActions';
 import { getOnFinallyRequestDataItem } from './GridItemsHelpers';
 // Hooks
 import { useGridStateForActionsCell, useDomainActions } from '../GridHooks';
+import { useSelectValidateField } from './GridItemsHooks';
 // Selectors
-import { selectGridMemoDataItem, selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectGridMemoDataItem } from '../GridSelectors';
 
 export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectGridMemoDataItem<GridDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isValidFields = useSelectValidateField();
 
-  // const [isDataItemLoading, setIsDataItemLoading] = useState(false);
+  const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const { editField, gridDataName } = useGridStateForActionsCell();
   const DomainActions = useDomainActions(gridDataName);
@@ -40,11 +41,11 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
     const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem & AgendaDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
-      // () => setIsDataItemLoading(false),
+      () => setIsDataItemLoading(false),
       () => GridActions.onAddNewItemToData(dispatch, dataItem)
     );
 
-    // setIsDataItemLoading(true);
+    setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.createDataItem(dispatch, newDataItemForApi, onFinallyRequestDataItem);
   };
@@ -54,23 +55,23 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
     const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem & AgendaDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
-      // () => setIsDataItemLoading(false),
+      () => setIsDataItemLoading(false),
       () => GridActions.onItemUpdatedAfterEdit(dispatch, dataItem)
     );
 
-    // setIsDataItemLoading(true);
+    setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.updateDataItem(dispatch, updatedDataItemForApi, onFinallyRequestDataItem);
   };
 
   const onDeleteItem = () => {
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
-      // () => setIsDataItemLoading(false),
+      () => setIsDataItemLoading(false),
       () => GridActions.onItemRemove(dispatch, dataItem)
     );
 
     setShowRemoveDialog(false);
-    // setIsDataItemLoading(true);
+    setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.deleteDataItem(dispatch, dataItem.ID, onFinallyRequestDataItem);
   };
@@ -81,7 +82,10 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
         <Loader className="d-flex justify-content-center align-items-center" isLoading={isDataItemLoading} themeColor="tertiary" />
       ) : (
         <>
-          <button className="k-button btn-custom" onClick={() => (isNewItem ? onAddItemToData() : onItemUpdated())} disabled={isDataItemLoading}>
+          <button
+            className="k-button btn-custom"
+            onClick={() => (isNewItem ? onAddItemToData() : onItemUpdated())}
+            disabled={isDataItemLoading || !isValidFields}>
             {isNewItem ? <span className="k-icon k-i-checkmark custom-icon" /> : <span className="k-icon k-i-reload custom-icon" />}
           </button>
           <button
@@ -106,7 +110,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
             <span className="k-icon k-i-trash custom-icon" />
           </button>
           {showRemoveDialog && (
-            <Dialog title="Please confirm" onClose={() => setShowRemoveDialog(false)}>
+            <Dialog title="Please Confirm" onClose={() => setShowRemoveDialog(false)}>
               <p style={{ margin: '25px', textAlign: 'center' }}>Are you sure you want to delete this item?</p>
               <DialogActionsBar>
                 <button className="k-button" onClick={() => setShowRemoveDialog(false)}>

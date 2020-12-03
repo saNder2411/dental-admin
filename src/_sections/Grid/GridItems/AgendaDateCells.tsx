@@ -1,6 +1,6 @@
 import React, { FC, useMemo, useState, useRef, useEffect } from 'react';
 import { Popup } from '@progress/kendo-react-popup';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react-dateinputs';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { Error } from '@progress/kendo-react-labels';
@@ -8,18 +8,25 @@ import { Error } from '@progress/kendo-react-labels';
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
-import { selectAgendaMemoData } from '../../../Agenda/AgendaSelectors';
+import { selectAgendaMemoData, selectIsValidStartDateEvent, selectIsValidEndDateEvent } from '../../../Agenda/AgendaSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { AgendaDataItem, LookupEntity } from '../../../Agenda/AgendaTypes';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
+// Actions
+import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 
 export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+
   const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(dataItemID, 'LookupHR01team');
   const LookupHR01team = cellValue as LookupEntity;
+
   const intlService = useInternationalization();
+
+  const isValidStartDateEvent = useSelector(selectIsValidStartDateEvent);
+  const dispatch = useDispatch();
 
   const selectAgendaData = useMemo(selectAgendaMemoData, []);
   const agendaData = useSelector(selectAgendaData);
@@ -28,8 +35,7 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
   const scheduledAppointments = employeeEvents.filter(({ Start }) => Date.now() < Start.getTime());
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [isValid, setIsValid] = useState(true);
-  const [showPopup, setShowPopup] = useState(!isValid);
+  const [showPopup, setShowPopup] = useState(!isValidStartDateEvent);
 
   useEffect(() => {
     if (scheduledAppointments.length === 0) return;
@@ -38,27 +44,31 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
       const inputStartDateInTimestamp = value.getTime();
 
       if (inputStartDateInTimestamp > Start.getTime() && inputStartDateInTimestamp < End.getTime()) {
-        setIsValid(false);
+        AgendaEditCellsActions.validateStartDateEvent(dispatch, false);
         break;
-      } else if (!isValid) {
+      } else if (!isValidStartDateEvent) {
         setShowPopup(false);
-        setIsValid(true);
+        AgendaEditCellsActions.validateStartDateEvent(dispatch, true);
       }
     }
-  }, [isValid, scheduledAppointments, scheduledAppointments.length, value]);
+  }, [dispatch, isValidStartDateEvent, scheduledAppointments, scheduledAppointments.length, value]);
 
   useEffect(() => {
-    if (!isValid) {
+    if (!isValidStartDateEvent) {
       setShowPopup(true);
     }
-  }, [isValid]);
+
+    return () => {
+      AgendaEditCellsActions.validateStartDateEvent(dispatch, true);
+    }
+  }, [dispatch, isValidStartDateEvent]);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value: value });
 
   return (
     <>
-      <DateTimePicker value={value} valid={isValid} onChange={onDateChange} min={new Date()} disabled={isDataItemLoading} />
+      <DateTimePicker value={value} valid={isValidStartDateEvent} onChange={onDateChange} min={new Date()} disabled={isDataItemLoading} />
       <SC.AgendaValidDatePopup ref={anchorRef} onClick={() => setShowPopup((prevState) => !prevState)}>
         <div className="popupControl">Show reserved time!</div>
         <Popup
@@ -67,11 +77,11 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
           style={{ width: anchorRef.current?.offsetWidth }}
           popupClass="validate-date-popup">
           <Error>Reserved time!</Error>
-          {scheduledAppointments.map(({ FilterStart, FilterEnd }) => (
-            <Error key={FilterStart}>
-              {intlService.formatDate(new Date(FilterStart), 'dd.MM')}:{' '}
+          {scheduledAppointments.map(({ Start, End, ID }) => (
+            <Error key={ID}>
+              {intlService.formatDate(Start, 'dd.MM')}:{' '}
               <div className="appointment-time">
-                {intlService.formatDate(new Date(FilterStart), 'H:mm')} - {intlService.formatDate(new Date(FilterEnd), 'H:mm')}
+                {intlService.formatDate(Start, 'H:mm')} - {intlService.formatDate(End, 'H:mm')}
               </div>
             </Error>
           ))}
@@ -86,7 +96,11 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
 
   const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(dataItemID, 'LookupHR01team');
   const LookupHR01team = cellValue as LookupEntity;
+
   const intlService = useInternationalization();
+
+  const isValidEndDateEvent = useSelector(selectIsValidEndDateEvent);
+  const dispatch = useDispatch();
 
   const selectAgendaData = useMemo(selectAgendaMemoData, []);
   const agendaData = useSelector(selectAgendaData);
@@ -95,8 +109,7 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
   const scheduledAppointments = employeeEvents.filter(({ Start }) => Date.now() < Start.getTime());
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
-  const [isValid, setIsValid] = useState(true);
-  const [showPopup, setShowPopup] = useState(!isValid);
+  const [showPopup, setShowPopup] = useState(!isValidEndDateEvent);
 
   useEffect(() => {
     if (scheduledAppointments.length === 0) return;
@@ -105,27 +118,33 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
       const inputEndDateInTimestamp = value.getTime();
 
       if (inputEndDateInTimestamp > Start.getTime() && inputEndDateInTimestamp < End.getTime()) {
-        setIsValid(false);
+        AgendaEditCellsActions.validateEndDateEvent(dispatch, false);
         break;
-      } else if (!isValid) {
+      } else if (!isValidEndDateEvent) {
         setShowPopup(false);
-        setIsValid(true);
+        AgendaEditCellsActions.validateEndDateEvent(dispatch, true);
       }
     }
-  }, [isValid, scheduledAppointments, scheduledAppointments.length, value]);
+  }, [dispatch, isValidEndDateEvent, scheduledAppointments, scheduledAppointments.length, value]);
 
   useEffect(() => {
-    if (!isValid) {
+    if (!isValidEndDateEvent) {
       setShowPopup(true);
     }
-  }, [isValid]);
+
+    return () => {
+      AgendaEditCellsActions.validateEndDateEvent(dispatch, true);
+    }
+  }, [dispatch, isValidEndDateEvent]);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value: value });
 
+    console.log(`isValidEndDateEvent`, isValidEndDateEvent);
+
   return (
     <>
-      <DateTimePicker value={value} valid={isValid} onChange={onDateChange} min={new Date()} disabled={isDataItemLoading} />
+      <DateTimePicker value={value} valid={isValidEndDateEvent} onChange={onDateChange} min={new Date()} disabled={isDataItemLoading} />
       <SC.AgendaValidDatePopup ref={anchorRef} onClick={() => setShowPopup((prevState) => !prevState)}>
         <div className="popupControl">Show reserved time!</div>
         <Popup
@@ -134,11 +153,11 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
           style={{ width: anchorRef.current?.offsetWidth }}
           popupClass="validate-date-popup">
           <Error>Reserved time!</Error>
-          {scheduledAppointments.map(({ FilterStart, FilterEnd }) => (
-            <Error key={FilterStart}>
-              {intlService.formatDate(new Date(FilterStart), 'dd.MM')}:{' '}
+          {scheduledAppointments.map(({ Start, End, ID }) => (
+            <Error key={ID}>
+              {intlService.formatDate(Start, 'dd.MM')}:{' '}
               <div className="appointment-time">
-                {intlService.formatDate(new Date(FilterStart), 'H:mm')} - {intlService.formatDate(new Date(FilterEnd), 'H:mm')}
+                {intlService.formatDate(Start, 'H:mm')} - {intlService.formatDate(End, 'H:mm')}
               </div>
             </Error>
           ))}
