@@ -16,13 +16,7 @@ export const SchedulerEditItem: FC<CustomSchedulerItemProps> = ({ dataItem, ...o
   const dispatch = useDispatch();
   const formItem = formItemID && !dataItem.isNew ? dataItem : null;
 
-  const onFormItemChange = useCallback(
-    ({ value }) => {
-      console.log(`changeFormItem`, value);
-      SchedulerActions.setFormItemID(dispatch, value);
-    },
-    [dispatch]
-  );
+  const onFormItemChange = useCallback(({ value }) => SchedulerActions.setFormItemID(dispatch, value), [dispatch]);
 
   return <KendoSchedulerEditItem {...{ ...others, dataItem }} formItem={formItem} onFormItemChange={onFormItemChange} form={SchedulerForm} />;
 };

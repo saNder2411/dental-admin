@@ -60,7 +60,7 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
 
     return () => {
       AgendaEditCellsActions.validateStartDateEvent(dispatch, true);
-    }
+    };
   }, [dispatch, isValidStartDateEvent]);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
@@ -134,13 +134,11 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
 
     return () => {
       AgendaEditCellsActions.validateEndDateEvent(dispatch, true);
-    }
+    };
   }, [dispatch, isValidEndDateEvent]);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value: value });
-
-    console.log(`isValidEndDateEvent`, isValidEndDateEvent);
 
   return (
     <>

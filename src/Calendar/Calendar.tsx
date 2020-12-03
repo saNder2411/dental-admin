@@ -37,6 +37,16 @@ export const Calendar: FC = () => {
 
   const onEmployeeClick = useCallback((employeeID: number) => SchedulerActions.onEmployeeChange(dispatch, employeeID), [dispatch]);
 
+  const onAddNewItemClick = useCallback(
+    () =>
+      SchedulerActions.onAddNewItem(dispatch, {
+        Start: new Date(new Date().setHours(10, 0, 0, 0)),
+        End: new Date(new Date().setHours(11, 0, 0, 0)),
+        TeamID: 1,
+      }),
+    [dispatch]
+  );
+
   const contentTSX = agendaData.length > 0 && !agendaIsDataLoading && (
     <div className="card-container grid">
       <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
@@ -53,7 +63,7 @@ export const Calendar: FC = () => {
       </div>
       <div className="Calendar__addNewItemWrapper">
         <span className="Calendar__addNewItemTitle">New Appointment</span>
-        <button title="Add new" className="k-button" onClick={() => void 0}>
+        <button title="Add new" className="k-button" onClick={onAddNewItemClick}>
           <span className="k-icon k-i-plus-circle" />
         </button>
       </div>

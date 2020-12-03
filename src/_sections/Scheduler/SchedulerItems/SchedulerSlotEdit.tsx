@@ -17,15 +17,8 @@ export const SchedulerSlotEdit: FC<SchedulerSlotProps> = (props): JSX.Element =>
   const selectFormItem = useMemo(() => selectMemoFormItemForSlot(start, resource.ID), [resource.ID, start]);
   const formItem = useSelector(selectFormItem);
   const dispatch = useDispatch();
-  // console.log(`SchedulerSlotEditFormItem`, props);
 
-  const onFormItemChange = useCallback(
-    ({ value }) => {
-      console.log(`changeFormItem`, value);
-      SchedulerActions.setFormItemID(dispatch, value);
-    },
-    [dispatch]
-  );
+  const onFormItemChange = useCallback(({ value }) => SchedulerActions.setFormItemID(dispatch, value), [dispatch]);
 
   return <SchedulerEditSlot {...props} formItem={formItem} onFormItemChange={onFormItemChange} form={SchedulerForm} />;
 };

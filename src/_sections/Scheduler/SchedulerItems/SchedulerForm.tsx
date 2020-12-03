@@ -87,7 +87,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   }, [onSubmit]);
 
   const onFormSubmit = (dataItem: AgendaDataItem) => {
-    console.log(`onSubmitDataItem`, dataItem);
+    // console.log(`onSubmitDataItem`, dataItem);
     setIsDataItemLoading(true);
     dataItem.isNew ? AgendaActions.createDataItem(dispatch, dataItem, () => {}) : AgendaActions.updateDataItem(dispatch, dataItem, () => {});
   };
