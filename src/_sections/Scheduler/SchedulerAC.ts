@@ -8,31 +8,17 @@ import {
 
 export const setDataAC = (data: SchedulerDataItem[]) => ({ type: ActionTypes.SET_DATA, payload: data });
 
-export const setMapTeamToFilteredAC = (data: { [key: string]: boolean }) => ({ type: ActionTypes.SET_MAP_TEAM_TO_FILTERED, payload: data });
-
 export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, payload: employeeID });
 
 export const setFormItemIdAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM_ID, payload: formItemID });
-
-// export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
-
-export const updateItemAfterEditAC = (dataItem: SchedulerDataItem) => ({ type: ActionTypes.UPDATE_ITEM_AFTER_EDIT, payload: dataItem });
 
 export const addNewItemToEditAC = (defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) => ({
   type: ActionTypes.ADD_NEW_ITEM_TO_EDIT,
   payload: defaultDataForFormItem,
 });
 
-export const removeItemFromDataAC = (removeItemID: number) => ({ type: ActionTypes.REMOVE_ITEM_FROM_DATA, payload: removeItemID });
-
-// export const cancelEditAC = (editItemID: number) => ({ type: ActionTypes.CANCEL_EDIT, payload: editItemID });
-
-export const changeItemAC = (schedulerEvent: SchedulerDataChangeEvent) => ({ type: ActionTypes.CHANGE_ITEM, payload: schedulerEvent });
-
-export const addNewItemToDataAC = (dataItem: SchedulerDataItem) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_DATA, payload: dataItem });
-
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
 
-export const dataItemFetchingAC = (isLoading: boolean) => ({ type: ActionTypes.DATA_ITEM_FETCHING, payload: isLoading });
+export const changeItemAC = (schedulerEvent: SchedulerDataChangeEvent) => ({ type: ActionTypes.CHANGE_ITEM, payload: schedulerEvent });
 
 export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };

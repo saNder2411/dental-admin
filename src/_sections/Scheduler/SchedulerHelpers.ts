@@ -32,18 +32,6 @@ export const getFormInputOptionalProps = ({ touched, validationMessage, showVali
 
 export const generateId = (data: SchedulerDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
-export const updateDataAfterAddItemToEdit = (data: SchedulerDataItem[], editItemID: number): SchedulerDataItem[] => {
-  return data.map((item) => (item.ID === editItemID ? { ...item, inEdit: true } : item));
-};
-
-export const updateDataAfterEditItem = (data: SchedulerDataItem[], dataItem: SchedulerDataItem): SchedulerDataItem[] => {
-  const updatedItem = { ...dataItem, inEdit: false, isNew: false };
-  const index = data.findIndex(({ ID }) => ID === dataItem.ID);
-
-  if (index < 0) return data;
-
-  return [...data.slice(0, index), updatedItem, ...data.slice(index + 1)];
-};
 
 export const updateDataAfterRemoveItem = (data: SchedulerDataItem[], removeItemID: number): SchedulerDataItem[] => {
   const index = data.findIndex(({ ID }) => ID === removeItemID);
@@ -51,12 +39,6 @@ export const updateDataAfterRemoveItem = (data: SchedulerDataItem[], removeItemI
   if (index < 0) return data;
 
   return [...data.slice(0, index), ...data.slice(index + 1)];
-};
-
-export const updateDataAfterCancelEdit = (data: SchedulerDataItem[], originalData: SchedulerDataItem[], editItemID: number): SchedulerDataItem[] => {
-  const originalItem = originalData.find(({ ID }) => ID === editItemID);
-
-  return originalItem ? data.map((item) => (item.ID === originalItem.ID ? originalItem : item)) : data;
 };
 
 export const updateDataOnChangeItem = (data: SchedulerDataItem[], { created, updated, deleted }: SchedulerDataChangeEvent): SchedulerDataItem[] => {
@@ -144,11 +126,3 @@ export const updateDataOnAddNewItemToChange = (
   ];
 };
 
-export const updateDataAfterEditNewItem = (data: SchedulerDataItem[], dataItem: SchedulerDataItem): SchedulerDataItem[] => {
-  const newItem = { ...dataItem, inEdit: false, isNew: false };
-  const index = data.findIndex(({ ID }) => ID === dataItem.ID);
-
-  if (index < 0) return data;
-
-  return [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-};

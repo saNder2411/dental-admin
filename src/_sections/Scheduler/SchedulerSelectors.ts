@@ -7,14 +7,10 @@ const selectSchedulerOriginalData = ({ SchedulerState }: GlobalState) => Schedul
 
 const selectSchedulerFormItemID = ({ SchedulerState: { formItemID } }: GlobalState) => formItemID;
 
-export const selectSchedulerDataItemIsLoading = ({ SchedulerState }: GlobalState) => SchedulerState.isDataItemLoading;
 
 export const selectSchedulerMemoEventDrivenData = () => createSelector(selectSchedulerEventDrivenData, (eventDrivenData) => eventDrivenData);
 
 export const selectSchedulerMemoOriginalData = () => createSelector(selectSchedulerOriginalData, (originalData) => originalData);
-
-export const selectSchedulerMemoDataItem = <T>(ID: number) =>
-  createSelector(selectSchedulerEventDrivenData, (data) => (data.find((dataItem) => dataItem.ID === ID) as unknown) as T);
 
 export const selectSchedulerMemoMapTeamToFiltered = () =>
   createSelector(
