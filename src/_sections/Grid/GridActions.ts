@@ -6,6 +6,7 @@ import { GridStateActions } from './GridTypes';
 // ActionCreators
 import {
   setDataAC,
+  setDataNameDefaultAC,
   addItemToEditAC,
   updateItemAfterEditAC,
   removeItemFromDataAC,
@@ -19,6 +20,7 @@ import {
 
 export const GridActions: GridStateActions = {
   setData: (dispatch: Dispatch, data: GridDataItem[]) => dispatch(setDataAC(data)),
+  setDataNameDefault: (dispatch: Dispatch) => dispatch(setDataNameDefaultAC()),
   setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => dispatch(dataItemFetchingAC(isLoading)),
   onItemEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(addItemToEditAC(ID)),
   onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(updateItemAfterEditAC(dataItem)),

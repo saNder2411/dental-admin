@@ -1,9 +1,12 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { AppHeader } from '.';
+// Actions
+import { GridActions } from '../_sections/Grid/GridActions';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
 
@@ -25,8 +28,12 @@ const getSelectedItemName = (pathname: string): string => {
 };
 
 export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ...others }): JSX.Element => {
+  const isCalendar = route === '/calendar';
+  const dispatch = useDispatch();
+  const onClick = () => isCalendar && GridActions.setDataNameDefault(dispatch);
+
   return (
-    <NavLink to={route}>
+    <NavLink to={route} onClick={onClick}>
       <DrawerItem {...others}>
         <span className={`k-icon ${iconSvg}`} />
         <span className="k-item-text">{text}</span>

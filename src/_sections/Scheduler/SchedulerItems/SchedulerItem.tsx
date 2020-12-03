@@ -30,7 +30,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   // console.log(`CustomItemProps`, props);
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
-  const { setFormItem } = SchedulerActions;
+  const { setFormItemID } = SchedulerActions;
   const dispatch = useDispatch();
   // const [, setFormItem] = useSchedulerEditItemFormItemContext();
   const [, setRemoveItem] = useSchedulerEditItemRemoveItemContext();
@@ -65,9 +65,9 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const onEditBtnClick = useCallback(() => {
     setShowPopup(false);
-    setFormItem(dispatch, dataItem);
+    setFormItemID(dispatch, dataItem.ID);
     isRecurring && setShowOccurrenceDialog(true);
-  }, [setFormItem, dispatch, dataItem, isRecurring, setShowOccurrenceDialog]);
+  }, [setFormItemID, dispatch, dataItem.ID, isRecurring, setShowOccurrenceDialog]);
 
   const onDeleteBtnClick = useCallback(() => {
     setShowPopup(false);
@@ -84,7 +84,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   return (
     <>
-      <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onFocus={onFocusAsync} onBlur={onBlurAsync}>
+      <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onDoubleClick={onEditBtnClick} onFocus={onFocusAsync} onBlur={onBlurAsync}>
         {height && height > 25 && (
           <SC.SchedulerItemTopWrapper isSmallDisplay={!!(width && width < 120)}>
             {width && width > 120 && children}

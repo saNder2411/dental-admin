@@ -1,15 +1,15 @@
-import React, { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { SchedulerFormProps } from '@progress/kendo-react-scheduler';
+import React, { FC, useMemo, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 // Styled Components
 import * as SC from './SchedulerItemStyled/SchedulerFormStyled';
+// Components
+import { Loader } from '../../../_components';
 // Form Inputs
 import {
   ServicesFormMultiSelect,
-  TeamStaffFormDropDownList,
-  CustomersFormDropDownList,
+  LookupEntityFormDropDownList,
   FormInput,
   FormMaskedTextBox,
   FormDateTimePicker,
@@ -21,8 +21,13 @@ import {
 } from './SchedulerFormItems';
 // Selectors
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
+import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
 // Types
-import { StatusNames } from '../../../Agenda/AgendaTypes';
+import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
+import { CustomSchedulerFormProps } from './SchedulerItemTypes';
+// Actions
+import { AgendaActions } from '../../../Agenda/AgendaActions';
+import { SchedulerActions } from '../SchedulerActions';
 
 const statusList = Object.values(StatusNames);
 
@@ -59,26 +64,52 @@ const repeatOnYearlyData = [
 const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 const genders = [
-  { label: 'Male', value: 'Male' },
-  { label: 'Female', value: 'Female' },
+  { label: 'Male', value: '(2) Male' },
+  { label: 'Female', value: '(1) Female' },
 ];
 
-export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
+export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   // console.log(`formDataItem`, dataItem);
+  const [isDataItemLoading, setIsDataItemLoading] = useState(false);
+  const dispatch = useDispatch();
 
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
-  const stuffs = teamStaffData.map(({ Title }) => Title);
+
+  const selectCustomersData = useMemo(selectCustomersMemoData, []);
+  const customersData = useSelector(selectCustomersData);
+
+  useEffect(() => {
+    return () => {
+      setIsDataItemLoading(false);
+      onSubmit({ value: -1 });
+    };
+  }, [onSubmit]);
+
+  const onFormSubmit = (dataItem: AgendaDataItem) => {
+    console.log(`onSubmitDataItem`, dataItem);
+    setIsDataItemLoading(true);
+    dataItem.isNew ? AgendaActions.createDataItem(dispatch, dataItem, () => {}) : AgendaActions.updateDataItem(dispatch, dataItem, () => {});
+  };
+
+  const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
+    if (dataItem.isNew) {
+      SchedulerActions.onDiscardNewItemToData(dispatch, dataItem);
+    }
+
+    onDiscardAction && onDiscardAction({ value: null });
+  };
 
   return (
-    <Dialog title="Event" onClose={() => onClose && onClose({ value: dataItem })} minWidth={700} height="73%">
+    <Dialog title="Event" onClose={() => onDialogClose(onClose)} minWidth={700} height="73%">
       <SC.SchedulerForm>
         <Form
           initialValues={dataItem}
-          onSubmit={(dataItem) => onSubmit({ value: dataItem } as any)}
+          onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
             // console.log(`formRenderProps`, formRenderProps);
-            const repeatValue = formRenderProps.valueGetter('repeat');
+            const repeatValue = formRenderProps.valueGetter('repeat') ?? 'Never';
+            const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {
               case 'Daily':
@@ -99,32 +130,43 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
             return (
               <FormElement horizontal={true}>
                 <fieldset className="k-form-fieldset">
-                  <Field id="services" name="LookupMultiBP01offerings" label="Services" component={ServicesFormMultiSelect} />
-
-                  <Field id="customer" name="LookupCM102customers" label="Customer" component={CustomersFormDropDownList} />
-
-                  <Field id="status" name="AppointmentStatus" label="Status" data={statusList} component={FormDropDownList} />
-
-                  <Field id="start" name="Start" label="Start" component={FormDateTimePicker} validator={requiredValidator} />
-
-                  <Field id="end" name="End" label="End" component={FormDateTimePicker} validator={requiredValidator} />
-
-                  <Field id="repeat" name="repeat" label="Repeat" defaultValue="Never" data={recurrenceNames} component={FormDropDownList} />
-
-                  <Field id="staff" name="LookupHR01team" label="Support Stuff" component={TeamStaffFormDropDownList} />
-
-                  <Field id="firstName" name="FirstName" label="First Name" component={FormInput} validator={requiredValidator} />
-                  <Field id="lastName" name="LastNameAppt" label="Last Name" component={FormInput} validator={requiredValidator} />
                   <Field
-                    id="mobilePhone"
-                    name="CellPhone"
-                    label="Mobile Phone"
-                    mask="+1(999) 000-00-00-00"
-                    component={FormMaskedTextBox}
-                    validator={phoneValidator}
+                    id="services"
+                    name="LookupMultiBP01offerings"
+                    label="Services"
+                    component={ServicesFormMultiSelect}
+                    disabled={isDataItemLoading}
                   />
-                  <Field id="email" name="Email" label="Email" type="email" component={FormInput} validator={emailValidator} />
-                  <Field id="customerGender" name="Gender" label="Gender" layout="horizontal" component={FormRadioGroup} data={genders} />
+
+                  <Field
+                    id="status"
+                    name="AppointmentStatus"
+                    label="Status"
+                    data={statusList}
+                    component={FormDropDownList}
+                    disabled={isDataItemLoading}
+                  />
+
+                  <Field
+                    id="start"
+                    name="Start"
+                    label="Start"
+                    component={FormDateTimePicker}
+                    validator={requiredValidator}
+                    disabled={isDataItemLoading}
+                  />
+
+                  <Field id="end" name="End" label="End" component={FormDateTimePicker} validator={requiredValidator} disabled={isDataItemLoading} />
+
+                  <Field
+                    id="repeat"
+                    name="repeat"
+                    label="Repeat"
+                    defaultValue="Never"
+                    data={recurrenceNames}
+                    component={FormDropDownList}
+                    disabled={isDataItemLoading}
+                  />
 
                   {repeatValue !== 'Never' && (
                     <>
@@ -137,12 +179,20 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                         defaultValue={1}
                         secondLabel={secondLabelForRepeatEvery}
                         component={FormNumericTextBox}
+                        disabled={isDataItemLoading}
                       />
                     </>
                   )}
 
                   {repeatValue === 'Weekly' && (
-                    <Field id="repeatOnWeekday" name="repeatOnWeekday" label="Repeat on" data={recurrenceWeeklyData} component={FormButtonGroup} />
+                    <Field
+                      id="repeatOnWeekday"
+                      name="repeatOnWeekday"
+                      label="Repeat on"
+                      data={recurrenceWeeklyData}
+                      component={FormButtonGroup}
+                      disabled={isDataItemLoading}
+                    />
                   )}
 
                   {repeatValue === 'Monthly' && (
@@ -155,6 +205,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           defaultValue="day"
                           data={repeatOnMonthlyData}
                           component={FormRadioGroup}
+                          disabled={isDataItemLoading}
                         />
                       </div>
                       <div className="col-md-6 monthly-group">
@@ -165,7 +216,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           min={1}
                           max={31}
                           defaultValue={1}
-                          disabled={formRenderProps.valueGetter('repeatOnMonthly') === 'week'}
+                          disabled={formRenderProps.valueGetter('repeatOnMonthly') === 'week' || isDataItemLoading}
                           component={FormNumericTextBox}
                         />
                         <div className="row m-0 pt-1">
@@ -176,7 +227,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               component={FormDropDownList}
                               data={weekNumbers}
                               defaultValue={weekNumbers[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week' || isDataItemLoading}
                             />
                           </div>
                           <div className="col-md-6 p-0">
@@ -186,7 +237,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               component={FormDropDownList}
                               data={monthlyDayNames}
                               defaultValue={monthlyDayNames[3]}
-                              disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnMonthly') !== 'week' || isDataItemLoading}
                             />
                           </div>
                         </div>
@@ -204,6 +255,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           defaultValue="month"
                           data={repeatOnYearlyData}
                           component={FormRadioGroup}
+                          disabled={isDataItemLoading}
                         />
                       </div>
                       <div className="col-md-6 yearly-group">
@@ -214,7 +266,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               name="monthNames"
                               data={monthName}
                               defaultValue={monthName[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week' || isDataItemLoading}
                               component={FormDropDownList}
                             />
                           </div>
@@ -226,7 +278,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               min={1}
                               max={31}
                               defaultValue={1}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week' || isDataItemLoading}
                               component={FormNumericTextBox}
                             />
                           </div>
@@ -239,7 +291,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               component={FormDropDownList}
                               data={weekNumbers}
                               defaultValue={weekNumbers[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week' || isDataItemLoading}
                             />
                           </div>
                           <div className="col-md-4 p-0">
@@ -248,7 +300,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               name="yearlyWeekday"
                               data={monthlyDayNames}
                               defaultValue={monthlyDayNames[3]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week' || isDataItemLoading}
                               component={FormDropDownList}
                             />
                           </div>
@@ -259,7 +311,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                               name="monthNames"
                               data={monthName}
                               defaultValue={monthName[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week'}
+                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week' || isDataItemLoading}
                               component={FormDropDownList}
                             />
                           </div>
@@ -278,6 +330,7 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           defaultValue="after"
                           component={FormRadioGroup}
                           data={endRecurrenceData}
+                          disabled={isDataItemLoading}
                         />
                       </div>
                       <div className="col-md-6 p-0 pt-5 align-self-end">
@@ -287,14 +340,18 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                           format="n0"
                           min={1}
                           defaultValue={1}
-                          disabled={formRenderProps.valueGetter('endRecurrence') === 'on' || formRenderProps.valueGetter('endRecurrence') === 'never'}
+                          disabled={
+                            formRenderProps.valueGetter('endRecurrence') === 'on' ||
+                            formRenderProps.valueGetter('endRecurrence') === 'never' ||
+                            isDataItemLoading
+                          }
                           secondLabel="occurrence(s)"
                           component={FormNumericTextBox}
                         />
                         <Field
                           id="endOn"
                           name="Start"
-                          disabled={formRenderProps.valueGetter('endRecurrence') !== 'on'}
+                          disabled={formRenderProps.valueGetter('endRecurrence') !== 'on' || isDataItemLoading}
                           component={FormDateTimePicker}
                           validator={requiredValidator}
                         />
@@ -302,14 +359,93 @@ export const SchedulerForm: FC<SchedulerFormProps> = ({ dataItem, onSubmit, onCa
                     </div>
                   )}
 
-                  <Field id="notes" name="Notes" label="Notes" component={FormTextArea} />
+                  <Field
+                    id="staff"
+                    name="LookupHR01team"
+                    label="Support Stuff"
+                    domainData={teamStaffData}
+                    component={LookupEntityFormDropDownList}
+                    disabled={isDataItemLoading}
+                  />
+
+                  {isStatusConsultation ? null : (
+                    <>
+                      <Field
+                        id="customer"
+                        name="LookupCM102customers"
+                        label="Customer"
+                        domainData={customersData}
+                        component={LookupEntityFormDropDownList}
+                        disabled={isDataItemLoading}
+                      />
+
+                      <Field
+                        id="firstName"
+                        name="FirstName"
+                        label="First Name"
+                        component={FormInput}
+                        validator={requiredValidator}
+                        disabled={isDataItemLoading}
+                      />
+
+                      <Field
+                        id="lastName"
+                        name="LastNameAppt"
+                        label="Last Name"
+                        component={FormInput}
+                        validator={requiredValidator}
+                        disabled={isDataItemLoading}
+                      />
+
+                      <Field
+                        id="gender"
+                        name="Gender"
+                        label="Gender"
+                        layout="horizontal"
+                        component={FormRadioGroup}
+                        data={genders}
+                        disabled={isDataItemLoading}
+                      />
+
+                      <Field
+                        id="email"
+                        name="Email"
+                        label="Email"
+                        type="email"
+                        component={FormInput}
+                        validator={emailValidator}
+                        disabled={isDataItemLoading}
+                      />
+
+                      <Field
+                        id="phone"
+                        name="CellPhone"
+                        label="Mobile Phone"
+                        mask="+1(999) 000-00-00-00"
+                        component={FormMaskedTextBox}
+                        validator={phoneValidator}
+                        disabled={isDataItemLoading}
+                      />
+                    </>
+                  )}
+
+                  <Field id="notes" name="Notes" label="Notes" component={FormTextArea} disabled={isDataItemLoading} />
 
                   <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>
-                      <button className="k-button" type="submit" disabled={!formRenderProps.allowSubmit}>
-                        Save
+                      <button className="k-button" type="submit" disabled={!formRenderProps.allowSubmit || isDataItemLoading}>
+                        {isDataItemLoading ? (
+                          <Loader
+                            className="d-flex justify-content-center align-items-center"
+                            type="pulsing"
+                            isLoading={isDataItemLoading}
+                            themeColor="primary"
+                          />
+                        ) : (
+                          `Save`
+                        )}
                       </button>
-                      <button className="k-button" onClick={() => onCancel && onCancel({ value: dataItem })}>
+                      <button className="k-button" onClick={() => onDialogClose(onCancel)} disabled={isDataItemLoading}>
                         Cancel
                       </button>
                     </DialogActionsBar>

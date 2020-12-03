@@ -9,17 +9,16 @@ import { Label, Error, Hint } from '@progress/kendo-react-labels';
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
 import { LookupEntity } from '../../../Agenda/AgendaTypes';
+import { CustomFieldRenderProps } from './SchedulerItemTypes';
 // Selectors
-import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
 import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
-import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Helpers
 import { getFormInputOptionalProps } from '../SchedulerHelpers';
 import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../Grid/GridItems/GridItemsHelpers';
 
-export const ServicesFormMultiSelect: FC<FieldRenderProps> = (fieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const LookupMultiBP01offerings = value as { results: LookupEntity[] | [] };
 
   const selectServicesData = useMemo(selectServicesMemoData, []);
@@ -56,55 +55,17 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = (fieldRenderProps) 
   );
 };
 
-export const TeamStaffFormDropDownList: FC<FieldRenderProps> = (fieldRenderProps) => {
-  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = fieldRenderProps;
-  const LookupHR01team = value as LookupEntity;
+export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) => {
+  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, ...others } = props;
+  const LookupEntity = value as LookupEntity;
 
-  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
-  const teamStaffData = useSelector(selectTeamStaffData);
-
-  const currentEmployee = teamStaffData.find(({ Id }) => Id === LookupHR01team.Id);
-  const dataForDropDownList = transformDomainDataToDropDownListData(teamStaffData);
-  const dropDownListValue = dataForDropDownList.find((item) => item.text === currentEmployee?.Title) ?? dataForDropDownList[0];
-
-  const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
-
-  return (
-    <FieldWrapper>
-      {label && (
-        <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
-          {label}
-        </Label>
-      )}
-      <DropDownList
-        ariaLabelledBy={labelId}
-        ariaDescribedBy={`${hintId} ${errorId}`}
-        valid={valid}
-        id={id}
-        value={dropDownListValue}
-        data={dataForDropDownList}
-        onChange={onDropDownListValueChange}
-        disabled={disabled}
-        textField="text"
-        {...others}
-      />
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
-    </FieldWrapper>
-  );
-};
-
-export const CustomersFormDropDownList: FC<FieldRenderProps> = (fieldRenderProps) => {
-  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = fieldRenderProps;
-  const LookupCM102customers = value as LookupEntity;
-
-  const selectCustomersData = useMemo(selectCustomersMemoData, []);
-  const customersData = useSelector(selectCustomersData);
-
-  const currentCustomer = customersData.find(({ Id }) => Id === LookupCM102customers.Id);
-  const dataForDropDownList = transformDomainDataToDropDownListData(customersData);
-  const dropDownListValue = dataForDropDownList.find((item) => item.text === currentCustomer?.FullName) ?? dataForDropDownList[0];
+  const currentEntity = domainData.find(({ Id }) => Id === LookupEntity.Id);
+  const isTeamStaffDataItem = 'ShowOnline' in (currentEntity ? currentEntity : {});
+  const dataForDropDownList = transformDomainDataToDropDownListData(domainData);
+  const dropDownListValue =
+    dataForDropDownList.find((item) => item.text === (isTeamStaffDataItem ? currentEntity?.Title : currentEntity?.FullName)) ??
+    dataForDropDownList[0];
 
   const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
 
@@ -132,9 +93,9 @@ export const CustomersFormDropDownList: FC<FieldRenderProps> = (fieldRenderProps
   );
 };
 
-export const FormInput: FC<FieldRenderProps> = (fieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormInput: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
@@ -150,9 +111,9 @@ export const FormInput: FC<FieldRenderProps> = (fieldRenderProps) => {
   );
 };
 
-export const FormDropDownList: FC<FieldRenderProps> = (fieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = fieldRenderProps;
-  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormDropDownList: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = props;
+  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
@@ -167,10 +128,10 @@ export const FormDropDownList: FC<FieldRenderProps> = (fieldRenderProps) => {
   );
 };
 
-export const FormMultiSelect = (fieldRenderProps: FieldRenderProps) => {
+export const FormMultiSelect = (props: FieldRenderProps) => {
   const editorRef = React.useRef(null);
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const multiSelectValue = Array.isArray(value) ? value : [...value.split(`, `)];
 
   return (
@@ -194,9 +155,9 @@ export const FormMultiSelect = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormMaskedTextBox = (fieldRenderProps: FieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, hint, optional, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormMaskedTextBox = (props: FieldRenderProps) => {
+  const { validationMessage, touched, label, id, valid, hint, optional, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
@@ -212,9 +173,9 @@ export const FormMaskedTextBox = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormDateTimePicker = (fieldRenderProps: FieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormDateTimePicker = (props: FieldRenderProps) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper style={wrapperStyle}>
@@ -228,9 +189,9 @@ export const FormDateTimePicker = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormTextArea = (fieldRenderProps: FieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, hint, disabled, optional, value, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormTextArea = (props: FieldRenderProps) => {
+  const { validationMessage, touched, label, id, valid, hint, disabled, optional, value, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
@@ -251,9 +212,9 @@ export const FormTextArea = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormNumericTextBox = (fieldRenderProps: FieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, secondLabel, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormNumericTextBox = (props: FieldRenderProps) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, secondLabel, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
@@ -270,10 +231,10 @@ export const FormNumericTextBox = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormRadioGroup = (fieldRenderProps: FieldRenderProps) => {
+export const FormRadioGroup = (props: FieldRenderProps) => {
   const editorRef = useRef(null);
-  const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = fieldRenderProps;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(fieldRenderProps);
+  const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
@@ -287,9 +248,9 @@ export const FormRadioGroup = (fieldRenderProps: FieldRenderProps) => {
   );
 };
 
-export const FormButtonGroup = (fieldRenderProps: FieldRenderProps) => {
-  const { id, label, valid, disabled, data } = fieldRenderProps;
-  const { labelId } = getFormInputOptionalProps(fieldRenderProps);
+export const FormButtonGroup = (props: FieldRenderProps) => {
+  const { id, label, valid, disabled, data } = props;
+  const { labelId } = getFormInputOptionalProps(props);
   const [btnData, setBtnData] = useState<{ name: string; isSelected: boolean }[]>(data);
 
   const onBtnClick = ({ name, isSelected }: { name: string; isSelected: boolean }) => {

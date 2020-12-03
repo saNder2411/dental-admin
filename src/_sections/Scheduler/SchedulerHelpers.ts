@@ -71,70 +71,76 @@ export const updateDataOnChangeItem = (data: SchedulerDataItem[], { created, upd
   );
 };
 
-export const updateDataOnAddNewItemToChange = (data: SchedulerDataItem[]): SchedulerDataItem[] => {
+export const updateDataOnAddNewItemToChange = (
+  data: SchedulerDataItem[],
+  { Start, End, TeamID }: { Start: Date; End: Date, TeamID: number }
+): [number, SchedulerDataItem[]] => {
   const ID = generateId(data);
   const guid = uuidV4();
   const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
   const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
 
   return [
-    {
-      AppointmentSource: null,
-      AppointmentStatus: StatusNames.Consultation,
-      CellPhone: ``,
-      Description: ``,
-      Duration: 60,
-      Email: ``,
-      EndDate: new Date().toISOString(),
-      EventDate: new Date().toISOString(),
-      EventType: 0,
-      FilterEnd: new Date().toISOString(),
-      FilterStart: new Date().toISOString(),
-      FirstName: ``,
-      Gender: '(1) Female',
-      ID,
-      Id: ID,
-      LastNameAppt: ``,
-      LookupCM102customers: {
-        Id: -1,
-        __metadata: {
-          id: guid,
-          type: 'SP.Data.MetroBP02ListItem',
+    ID,
+    [
+      {
+        AppointmentSource: null,
+        AppointmentStatus: StatusNames.Consultation,
+        CellPhone: ``,
+        Description: ``,
+        Duration: 60,
+        Email: ``,
+        EndDate: End.toISOString(),
+        EventDate: Start.toISOString(),
+        EventType: 0,
+        FilterEnd: End.toISOString(),
+        FilterStart: Start.toISOString(),
+        FirstName: ``,
+        Gender: '(1) Female',
+        ID,
+        Id: ID,
+        LastNameAppt: ``,
+        LookupCM102customers: {
+          Id: -1,
+          __metadata: {
+            id: guid,
+            type: 'SP.Data.MetroBP02ListItem',
+          },
         },
-      },
-      LookupHR01team: {
-        Id: 1,
-        __metadata: {
-          id: guid,
-          type: 'SP.Data.MetroHR01ListItem',
+        LookupHR01team: {
+          Id: TeamID,
+          __metadata: {
+            id: guid,
+            type: 'SP.Data.MetroHR01ListItem',
+          },
         },
+        LookupMultiBP01offerings: { results: [] },
+        MasterSeriesItemID: null,
+        MetroRRule: null,
+        MetroRecException: null,
+        Notes: null,
+        RecurrenceID: null,
+        ServiceCharge: 40,
+        SubmissionIdUIT: null,
+        Title: `Consultation`,
+        TrackingComments: null,
+        fAllDayEvent: null,
+        id: ID,
+        __metadata: {
+          id: metadataId,
+          uri: metadataUri,
+          etag: `"2"`,
+          type: `SP.Data.MetroHR03ListItem`,
+        },
+        TeamID,
+        Start,
+        End,
+        LastUpdate: ``,
+        inEdit: true,
+        isNew: true,
       },
-      LookupMultiBP01offerings: { results: [] },
-      MasterSeriesItemID: null,
-      MetroRRule: null,
-      MetroRecException: null,
-      Notes: null,
-      RecurrenceID: null,
-      ServiceCharge: 40,
-      SubmissionIdUIT: null,
-      Title: ``,
-      TrackingComments: null,
-      fAllDayEvent: null,
-      id: ID,
-      __metadata: {
-        id: metadataId,
-        uri: metadataUri,
-        etag: `"2"`,
-        type: `SP.Data.MetroHR03ListItem`,
-      },
-      TeamID: 1,
-      Start: new Date(),
-      End: new Date(),
-      LastUpdate: ``,
-      inEdit: true,
-      isNew: true,
-    },
-    ...data,
+      ...data,
+    ],
   ];
 };
 

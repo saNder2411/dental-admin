@@ -18,8 +18,8 @@ export const transformDataItem = (apiResult: APIAgendaDataItem): AgendaDataItem 
   LastUpdate: new Date().toISOString(),
 });
 
-export const transformDataItemForAPI = ({ LastUpdate, TeamID, Start, End, ...others }: AgendaDataItem): APIAgendaDataItem => ({
+export const transformDataItemForAPI = ({ LastUpdate, TeamID, Start, End, isNew, inEdit, ...others }: AgendaDataItem): APIAgendaDataItem => ({
   ...others,
   FilterStart: Start.toISOString(),
-  FilterEnd: Start.toISOString(),
+  FilterEnd: End.toISOString(),
 });

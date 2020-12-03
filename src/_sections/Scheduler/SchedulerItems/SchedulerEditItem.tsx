@@ -6,27 +6,23 @@ import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Selectors
-import { selectFormItem } from '../SchedulerSelectors';
+import { selectMemoFormItemID } from '../SchedulerSelectors';
 // Actions
 import { SchedulerActions } from '../SchedulerActions';
 
 export const SchedulerEditItem: FC<CustomSchedulerItemProps> = ({ dataItem, ...others }): JSX.Element | null => {
-  const dataItemID = useMemo(() => dataItem.ID, [dataItem.ID]);
-  // const tr = useCallback((dataItemId) => selectFormItem(dataItemId), []);
-  const formItemID = useSelector(selectFormItem(dataItemID));
+  const selectFormItemID = useMemo(() => selectMemoFormItemID(dataItem.ID), [dataItem.ID]);
+  const formItemID = useSelector(selectFormItemID);
   const dispatch = useDispatch();
-  // console.log(`SchedulerEditItem`, formItem);
-  // console.log(`formItemEdit`, formItem);
-  // console.log(`setFormItemEdit`, setFormItem);
+  const formItem = formItemID && !dataItem.isNew ? dataItem : null;
 
-  const onFormItemChange = useCallback(({ value }) => SchedulerActions.setFormItem(dispatch, value), [dispatch]);
-
-  return (
-    <KendoSchedulerEditItem
-      {...{ ...others, dataItem }}
-      formItem={formItemID ? dataItem : null}
-      onFormItemChange={onFormItemChange}
-      form={SchedulerForm}
-    />
+  const onFormItemChange = useCallback(
+    ({ value }) => {
+      console.log(`changeFormItem`, value);
+      SchedulerActions.setFormItemID(dispatch, value);
+    },
+    [dispatch]
   );
+
+  return <KendoSchedulerEditItem {...{ ...others, dataItem }} formItem={formItem} onFormItemChange={onFormItemChange} form={SchedulerForm} />;
 };

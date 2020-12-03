@@ -37,7 +37,7 @@ export const Calendar: FC = () => {
 
   const onEmployeeClick = useCallback((employeeID: number) => SchedulerActions.onEmployeeChange(dispatch, employeeID), [dispatch]);
 
-  const contentTSX = originalData.length > 0 && !agendaIsDataLoading && (
+  const contentTSX = agendaData.length > 0 && !agendaIsDataLoading && (
     <div className="card-container grid">
       <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
       <div className="card-control-wrapper">

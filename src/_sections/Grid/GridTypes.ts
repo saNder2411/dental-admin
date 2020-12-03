@@ -10,6 +10,7 @@ import * as actions from './GridAC';
 
 export const ActionTypes = {
   SET_DATA: 'GRID/SET_DATA' as const,
+  SET_DATA_NAME_DEFAULT: 'GRID/SET_DATA_NAME_DEFAULT' as const,
   DATA_ITEM_FETCHING: 'GRID/DATA_ITEM_FETCHING' as const,
   ADD_ITEM_TO_EDIT: 'GRID/ADD_ITEM_TO_EDIT' as const,
   UPDATE_ITEM_AFTER_EDIT: 'GRID/UPDATE_ITEM_AFTER_EDIT' as const,
@@ -44,6 +45,7 @@ export interface DomainStateActionsType<T> {
 
 export interface GridStateActions {
   setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
+  setDataNameDefault: (dispatch: Dispatch) => void;
   setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => void;
   onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
   onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;

@@ -12,21 +12,22 @@ export const setMapTeamToFilteredAC = (data: { [key: string]: boolean }) => ({ t
 
 export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, payload: employeeID });
 
-export const setFormItemAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM, payload: formItemID });
+export const setFormItemIdAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM_ID, payload: formItemID });
 
-export const setSelectedItemIdAC = (selectedItemID: number | null) => ({ type: ActionTypes.SET_SELECTED_ITEM_ID, payload: selectedItemID });
-
-export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
+// export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
 
 export const updateItemAfterEditAC = (dataItem: SchedulerDataItem) => ({ type: ActionTypes.UPDATE_ITEM_AFTER_EDIT, payload: dataItem });
 
+export const addNewItemToEditAC = (defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) => ({
+  type: ActionTypes.ADD_NEW_ITEM_TO_EDIT,
+  payload: defaultDataForFormItem,
+});
+
 export const removeItemFromDataAC = (removeItemID: number) => ({ type: ActionTypes.REMOVE_ITEM_FROM_DATA, payload: removeItemID });
 
-export const cancelEditAC = (editItemID: number) => ({ type: ActionTypes.CANCEL_EDIT, payload: editItemID });
+// export const cancelEditAC = (editItemID: number) => ({ type: ActionTypes.CANCEL_EDIT, payload: editItemID });
 
 export const changeItemAC = (schedulerEvent: SchedulerDataChangeEvent) => ({ type: ActionTypes.CHANGE_ITEM, payload: schedulerEvent });
-
-export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT });
 
 export const addNewItemToDataAC = (dataItem: SchedulerDataItem) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_DATA, payload: dataItem });
 

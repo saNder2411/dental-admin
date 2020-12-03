@@ -4,6 +4,8 @@ import { ActionTypes, GridDataItem } from './GridTypes';
 
 export const setDataAC = (data: GridDataItem[]) => ({ type: ActionTypes.SET_DATA, payload: data });
 
+export const setDataNameDefaultAC = () => ({ type: ActionTypes.SET_DATA_NAME_DEFAULT });
+
 export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
 
 export const updateItemAfterEditAC = (dataItem: GridDataItem) => ({ type: ActionTypes.UPDATE_ITEM_AFTER_EDIT, payload: dataItem });

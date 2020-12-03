@@ -31,6 +31,9 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         ...setTitleForAddNewItemSectionAndDataName(action.payload[0]),
       };
 
+    case ActionTypes.SET_DATA_NAME_DEFAULT:
+      return { ...state, dataName: GridDataName.Default };
+
     case ActionTypes.ADD_ITEM_TO_EDIT:
       return { ...state, eventDrivenData: updateDataAfterAddItemToEdit(state.eventDrivenData, action.payload) };
 
