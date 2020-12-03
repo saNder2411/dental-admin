@@ -1654,41 +1654,6 @@
         "Description": "/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png",
         "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png"
       }
-    },
-    {
-      "CalendarColHex": "#1e45d2",
-      "CalendarColour": "#1e45d2",
-      "CellPhone": "+8 7777 99888",
-      "Department": null,
-      "Email": "jule.stilst@mtroapps.com",
-      "FirstName": "July",
-      "ID": 8,
-      "Id": 8,
-      "JobTitle": "Senior Stylist",
-      "ProfilesStatus": "",
-      "RoleSkills": [
-        "Artistic & Creative",
-        "Colouring-Ombré"
-      ],
-      "ShowOnline": true,
-      "Title": "Jordan",
-      "WorkingWeekDays": null,
-      "id": 8,
-      "__metadata": {
-        "id": "Web/Lists(guid'4b51576c-53e1-4184-a96b-14ede8fcd9fc')/Items(8)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'4b51576c-53e1-4184-a96b-14ede8fcd9fc')/Items(8)",
-        "etag": "\"\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Gender": "(1) Female",
-      "TeamProfilePhoto": {
-        "Description": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
-        "Url": "https://cdn4.iconfinder.com/data/icons/diversity-v2-0-volume-06/64/hairdresser-black-female-512.png",
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        }
-      },
-      "FullName": "July Jordan"
     }
   ],
   "customers": [

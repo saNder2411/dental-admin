@@ -19,13 +19,14 @@ import { getOnFinallyRequestDataItem } from './GridItemsHelpers';
 // Hooks
 import { useGridStateForActionsCell, useDomainActions } from '../GridHooks';
 // Selectors
-import { selectGridMemoDataItem } from '../GridSelectors';
+import { selectGridMemoDataItem, selectGridDataItemIsLoading } from '../GridSelectors';
 
 export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectGridMemoDataItem<GridDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
+  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const [isDataItemLoading, setIsDataItemLoading] = useState(false);
+  // const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const { editField, gridDataName } = useGridStateForActionsCell();
   const DomainActions = useDomainActions(gridDataName);
@@ -39,11 +40,11 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
     const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem & AgendaDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
-      () => setIsDataItemLoading(false),
+      // () => setIsDataItemLoading(false),
       () => GridActions.onAddNewItemToData(dispatch, dataItem)
     );
 
-    setIsDataItemLoading(true);
+    // setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.createDataItem(dispatch, newDataItemForApi, onFinallyRequestDataItem);
   };
@@ -53,23 +54,23 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
     const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem & AgendaDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
-      () => setIsDataItemLoading(false),
+      // () => setIsDataItemLoading(false),
       () => GridActions.onItemUpdatedAfterEdit(dispatch, dataItem)
     );
 
-    setIsDataItemLoading(true);
+    // setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.updateDataItem(dispatch, updatedDataItemForApi, onFinallyRequestDataItem);
   };
 
   const onDeleteItem = () => {
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
-      () => setIsDataItemLoading(false),
+      // () => setIsDataItemLoading(false),
       () => GridActions.onItemRemove(dispatch, dataItem)
     );
 
     setShowRemoveDialog(false);
-    setIsDataItemLoading(true);
+    // setIsDataItemLoading(true);
     GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.deleteDataItem(dispatch, dataItem.ID, onFinallyRequestDataItem);
   };
@@ -80,14 +81,14 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
         <Loader className="d-flex justify-content-center align-items-center" isLoading={isDataItemLoading} themeColor="tertiary" />
       ) : (
         <>
-          <button className="k-button" onClick={() => (isNewItem ? onAddItemToData() : onItemUpdated())} disabled={isDataItemLoading}>
-            {isNewItem ? <span className="k-icon k-i-checkmark" /> : <span className="k-icon k-i-reload" />}
+          <button className="k-button btn-custom" onClick={() => (isNewItem ? onAddItemToData() : onItemUpdated())} disabled={isDataItemLoading}>
+            {isNewItem ? <span className="k-icon k-i-checkmark custom-icon" /> : <span className="k-icon k-i-reload custom-icon" />}
           </button>
           <button
-            className="k-button"
+            className="k-button btn-custom"
             onClick={() => (isNewItem ? GridActions.onDiscardNewItemToData(dispatch, dataItem) : GridActions.onCancelEdit(dispatch, dataItem))}
             disabled={isDataItemLoading}>
-            <span className="k-icon k-i-x" />
+            <span className="k-icon k-i-x custom-icon" />
           </button>
         </>
       )}

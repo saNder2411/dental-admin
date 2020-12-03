@@ -25,8 +25,7 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
   const agendaData = useSelector(selectAgendaData);
 
   const employeeEvents = agendaData.filter((event) => event.LookupHR01team.Id === LookupHR01team.Id);
-  const scheduledAppointments = employeeEvents.filter(({ FilterStart }) => Date.now() < new Date(FilterStart).getTime());
-  console.log(`scheduledAppointments`, scheduledAppointments);
+  const scheduledAppointments = employeeEvents.filter(({ Start }) => Date.now() < Start.getTime());
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const [isValid, setIsValid] = useState(true);
@@ -35,10 +34,10 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
   useEffect(() => {
     if (scheduledAppointments.length === 0) return;
 
-    for (const { FilterStart, FilterEnd } of scheduledAppointments) {
+    for (const { Start, End } of scheduledAppointments) {
       const inputStartDateInTimestamp = value.getTime();
 
-      if (inputStartDateInTimestamp > new Date(FilterStart).getTime() && inputStartDateInTimestamp < new Date(FilterEnd).getTime()) {
+      if (inputStartDateInTimestamp > Start.getTime() && inputStartDateInTimestamp < End.getTime()) {
         setIsValid(false);
         break;
       } else if (!isValid) {
@@ -55,7 +54,7 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
   }, [isValid]);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
-    onChange({ dataItem: dataItemID, field, syntheticEvent, value: value?.toISOString() });
+    onChange({ dataItem: dataItemID, field, syntheticEvent, value: value });
 
   return (
     <>
@@ -93,7 +92,7 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
   const agendaData = useSelector(selectAgendaData);
 
   const employeeEvents = agendaData.filter((event) => event.LookupHR01team.Id === LookupHR01team.Id);
-  const scheduledAppointments = employeeEvents.filter(({ FilterStart }) => Date.now() < new Date(FilterStart).getTime());
+  const scheduledAppointments = employeeEvents.filter(({ Start }) => Date.now() < Start.getTime());
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const [isValid, setIsValid] = useState(true);
@@ -102,10 +101,10 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
   useEffect(() => {
     if (scheduledAppointments.length === 0) return;
 
-    for (const { FilterStart, FilterEnd } of scheduledAppointments) {
+    for (const { Start, End } of scheduledAppointments) {
       const inputEndDateInTimestamp = value.getTime();
 
-      if (inputEndDateInTimestamp > new Date(FilterStart).getTime() && inputEndDateInTimestamp < new Date(FilterEnd).getTime()) {
+      if (inputEndDateInTimestamp > Start.getTime() && inputEndDateInTimestamp < End.getTime()) {
         setIsValid(false);
         break;
       } else if (!isValid) {
@@ -122,7 +121,7 @@ export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ da
   }, [isValid]);
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
-    onChange({ dataItem: dataItemID, field, syntheticEvent, value: value?.toISOString() });
+    onChange({ dataItem: dataItemID, field, syntheticEvent, value: value });
 
   return (
     <>
