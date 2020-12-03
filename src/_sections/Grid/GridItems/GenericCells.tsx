@@ -92,6 +92,14 @@ export const GenericDateCell: FC<GridCellProps<AgendaDataItem | CustomersDataIte
   );
 };
 
+export const GenericDateCellNoEditable: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem | CustomersDataItem>(ID, field);
+  const intlService = useInternationalization();
+  const value = new Date(cellValue as string);
+
+  return <td>{intlService.formatDate(value, 'H:mm | dd.MM')}</td>;
+};
+
 export const GenericCurrencyCell: FC<GridCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
   const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem | ServicesDataItem>(ID, field);
   const intlService = useInternationalization();

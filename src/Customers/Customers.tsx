@@ -8,6 +8,7 @@ import {
   GenericGenderCell,
   CustomersSvcStaffCell,
   GenericDateCell,
+  GenericDateCellNoEditable,
   CustomersLastAppointmentsCell,
   GenericAvatarCell,
   ActionsControlCell,
@@ -109,7 +110,8 @@ export const Customers: FC = (): JSX.Element => {
             field={'Modified'}
             title={localizationService.toLanguageString('custom.lastUpdate', 'Last Update')}
             columnMenu={ColumnMenu}
-            cell={GenericDateCell as CustomGridCell}
+            cell={GenericDateCellNoEditable as CustomGridCell}
+            editable={false}
             filter={'date'}
             width={140}
           />

@@ -11,6 +11,14 @@ import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { GridDataItem } from '../GridTypes';
 
+export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> = ({ dataItemID, field, onChange, value }) => {
+  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+
+  const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
+
+  return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
+};
+
 export const GenericReferenceInput: FC<EditCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
@@ -18,14 +26,6 @@ export const GenericReferenceInput: FC<EditCellProps<AgendaDataItem | ServicesDa
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
   return <Input value={value} placeholder="Ref: TBA-000" onChange={onReferenceChange} disabled={isDataItemLoading} />;
-};
-
-export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
-
-  const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
-
-  return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
 };
 
 export const GenericAvatarInput: FC<EditCellProps<TeamStaffDataItem | CustomersDataItem>> = ({ dataItemID, field, onChange, value }) => {

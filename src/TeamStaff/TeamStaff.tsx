@@ -3,7 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
-import { GenericTextCell, GenericAvatarCell, GenericRoleSkillsCell, GenericBooleanFlagCell, ActionsControlCell } from '../_sections';
+import {
+  GenericTextCell,
+  GenericAvatarCell,
+  TeamStaffFullNameCell,
+  TeamStaffJobTitleCell,
+  GenericRoleSkillsCell,
+  GenericBooleanFlagCell,
+  ActionsControlCell,
+} from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
@@ -48,7 +56,7 @@ export const TeamStaff: FC = (): JSX.Element => {
           <GridColumn
             field={'FullName'}
             title={localizationService.toLanguageString('custom.fullName', 'Name')}
-            cell={GenericTextCell as CustomGridCell}
+            cell={TeamStaffFullNameCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
@@ -56,7 +64,7 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'JobTitle'}
             title={localizationService.toLanguageString('custom.jobTitle', 'Job Title')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
+            cell={TeamStaffJobTitleCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
