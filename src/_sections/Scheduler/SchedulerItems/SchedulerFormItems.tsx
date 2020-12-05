@@ -57,7 +57,7 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
 
 export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) => {
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, ...others } = props;
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, setCustomerField, ...others } = props;
   const LookupEntity = value as LookupEntity;
 
   const currentEntity = domainData.find(({ Id }) => Id === LookupEntity.Id);
@@ -67,7 +67,15 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) 
     dataForDropDownList.find((item) => item.text === (isTeamStaffDataItem ? currentEntity?.Title : currentEntity?.FullName)) ??
     dataForDropDownList[0];
 
-  const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
+  const onDropDownListValueChange = useCallback(
+    (evt: DropDownListChangeEvent) => {
+      if (!isTeamStaffDataItem) {
+        setCustomerField(domainData.find(({ Id }) => Id === evt.value.value.Id));
+      }
+      onChange({ value: evt.value.value });
+    },
+    [domainData, isTeamStaffDataItem, onChange, setCustomerField]
+  );
 
   return (
     <FieldWrapper>
@@ -93,8 +101,8 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) 
   );
 };
 
-export const FormInput: FC<FieldRenderProps> = (props) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, ...others } = props;
+export const CustomerFormInput: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, modified, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
@@ -111,51 +119,21 @@ export const FormInput: FC<FieldRenderProps> = (props) => {
   );
 };
 
-export const FormDropDownList: FC<FieldRenderProps> = (props) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = props;
-  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
+export const CustomerFormRadioGroup = (props: FieldRenderProps) => {
+  const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = props;
+  const { hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
-      {label && (
-        <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
-          {label}
-        </Label>
-      )}
-      <DropDownList ariaLabelledBy={labelId} ariaDescribedBy={`${hintId} ${errorId}`} valid={valid} id={id} disabled={disabled} {...others} />
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
-    </FieldWrapper>
-  );
-};
-
-export const FormMultiSelect = (props: FieldRenderProps) => {
-  const editorRef = React.useRef(null);
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, ...others } = props;
-  const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const multiSelectValue = Array.isArray(value) ? value : [...value.split(`, `)];
-
-  return (
-    <FieldWrapper style={wrapperStyle}>
-      <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
+      <Label id={labelId} editorId={id} editorDisabled={disabled}>
         {label}
       </Label>
-      <MultiSelect
-        ariaLabelledBy={labelId}
-        ariaDescribedBy={`${hintId} ${errorId}`}
-        ref={editorRef}
-        valid={valid}
-        id={id}
-        value={multiSelectValue}
-        disabled={disabled}
-        {...others}
-      />
-      {showHint && <Hint id={hintId}>{hint}</Hint>}
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+      <RadioGroup ariaDescribedBy={`${hintId} ${errorId}`} ariaLabelledBy={labelId} disabled={disabled} {...others} />
     </FieldWrapper>
   );
 };
 
-export const FormMaskedTextBox = (props: FieldRenderProps) => {
+export const CustomerFormMaskedTextBox = (props: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, hint, optional, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
@@ -169,6 +147,21 @@ export const FormMaskedTextBox = (props: FieldRenderProps) => {
         {showHint && <Hint id={hintId}>{hint}</Hint>}
         {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
       </div>
+    </FieldWrapper>
+  );
+};
+
+export const FormDropDownList: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = props;
+  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
+
+  return (
+    <FieldWrapper>
+      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <DropDownList ariaLabelledBy={labelId} ariaDescribedBy={`${hintId} ${errorId}`} valid={valid} id={id} disabled={disabled} {...others} />
+      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
 };
@@ -190,7 +183,7 @@ export const FormDateTimePicker = (props: FieldRenderProps) => {
 };
 
 export const FormTextArea = (props: FieldRenderProps) => {
-  const { validationMessage, touched, label, id, valid, hint, disabled, optional, value, ...others } = props;
+  const { validationMessage, touched, label, id, valid, hint, disabled, optional, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
@@ -201,7 +194,6 @@ export const FormTextArea = (props: FieldRenderProps) => {
       <TextArea
         valid={valid}
         id={id}
-        value={value ? value : ''}
         disabled={disabled}
         ariaDescribedBy={`${hintId} ${errorId}`}
         {...{ ...others, visited: `${others.visited}`, modified: `${`${others.modified}`}` }}

@@ -5,14 +5,14 @@ import * as actions from './CustomersAC';
 
 export interface APICustomersDataItem {
   AgeGroup: null | string;
-  CellPhone: string;
+  CellPhone: string | null;
   ClientPhoto?: {
     Description: string;
     Url: string;
     __metadata: { type: string };
   };
   Created: string;
-  Email: string;
+  Email: string | null;
   FirstName: string;
   FullName: string;
   Gender: '(1) Female' | '(2) Male';

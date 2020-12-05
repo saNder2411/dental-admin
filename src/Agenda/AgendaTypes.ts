@@ -25,10 +25,10 @@ export interface LookupEntity {
 export interface APIAgendaDataItem {
   AppointmentSource: null | string;
   AppointmentStatus: StatusNames;
-  CellPhone: string;
+  CellPhone: string | null;
   Description: string;
   Duration: number;
-  Email: string;
+  Email: string | null;
   EndDate: string;
   EventDate: string;
   EventType: number;

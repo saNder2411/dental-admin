@@ -10,12 +10,13 @@ import { Loader } from '../../../_components';
 import {
   ServicesFormMultiSelect,
   LookupEntityFormDropDownList,
-  FormInput,
-  FormMaskedTextBox,
+  CustomerFormInput,
+  CustomerFormRadioGroup,
+  FormRadioGroup,
+  CustomerFormMaskedTextBox,
   FormDateTimePicker,
   FormTextArea,
   FormNumericTextBox,
-  FormRadioGroup,
   FormButtonGroup,
   FormDropDownList,
 } from './SchedulerFormItems';
@@ -28,6 +29,7 @@ import { CustomSchedulerFormProps } from './SchedulerItemTypes';
 // Actions
 import { AgendaActions } from '../../../Agenda/AgendaActions';
 import { SchedulerActions } from '../SchedulerActions';
+import { CustomersDataItem } from '../../../Customers';
 
 const statusList = Object.values(StatusNames);
 
@@ -69,7 +71,6 @@ const genders = [
 ];
 
 export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
-  // console.log(`formDataItem`, dataItem);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -79,17 +80,33 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
 
-  useEffect(() => {
-    return () => {
+  const { FirstName, Title, Email, Gender, CellPhone } = useMemo(
+    () => customersData.find(({ Id }) => Id === dataItem.LookupCM102customers.Id) ?? customersData[0],
+    [customersData, dataItem.LookupCM102customers.Id]
+  );
+  const initialValue: AgendaDataItem = {
+    ...dataItem,
+    FirstName,
+    LastNameAppt: Title,
+    Email: Email ?? '',
+    Gender,
+    CellPhone: CellPhone ?? '',
+    Notes: dataItem.Notes ?? '',
+  };
+
+  useEffect(
+    () => () => {
       setIsDataItemLoading(false);
       onSubmit({ value: -1 });
-    };
-  }, [onSubmit]);
+    },
+    [onSubmit]
+  );
 
-  const onFormSubmit = (dataItem: AgendaDataItem) => {
-    // console.log(`onSubmitDataItem`, dataItem);
+  const onFormSubmit = ({ FirstName, LastNameAppt, ...others }: AgendaDataItem) => {
+    const newDataItem: AgendaDataItem = { ...others, FirstName, LastNameAppt, Title: `${FirstName[0]}.${LastNameAppt}-0000` };
+    console.log(`onSubmitDataItem`, newDataItem);
     setIsDataItemLoading(true);
-    dataItem.isNew ? AgendaActions.createDataItem(dispatch, dataItem, () => {}) : AgendaActions.updateDataItem(dispatch, dataItem, () => {});
+    dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
   };
 
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
@@ -104,10 +121,10 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose(onClose)} minWidth={700} height="73%">
       <SC.SchedulerForm>
         <Form
-          initialValues={dataItem}
+          initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            // console.log(`formRenderProps`, formRenderProps);
+            console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('repeat') ?? 'Never';
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             let secondLabelForRepeatEvery: string;
@@ -127,6 +144,15 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
               default:
                 secondLabelForRepeatEvery = '';
             }
+
+            const setCustomerField = (dataItem: CustomersDataItem | undefined) => {
+              formRenderProps.onChange(`FirstName`, { value: dataItem?.FirstName });
+              formRenderProps.onChange(`LastNameAppt`, { value: dataItem?.Title });
+              formRenderProps.onChange(`Email`, { value: dataItem?.Email ?? '' });
+              formRenderProps.onChange(`Gender`, { value: dataItem?.Gender ?? '(1) Female' });
+              formRenderProps.onChange(`CellPhone`, { value: dataItem?.CellPhone ?? '' });
+            };
+
             return (
               <FormElement horizontal={true}>
                 <fieldset className="k-form-fieldset">
@@ -374,6 +400,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         id="customer"
                         name="LookupCM102customers"
                         label="Customer"
+                        setCustomerField={setCustomerField}
                         domainData={customersData}
                         component={LookupEntityFormDropDownList}
                         disabled={isDataItemLoading}
@@ -383,7 +410,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         id="firstName"
                         name="FirstName"
                         label="First Name"
-                        component={FormInput}
+                        component={CustomerFormInput}
                         validator={requiredValidator}
                         disabled={isDataItemLoading}
                       />
@@ -392,7 +419,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         id="lastName"
                         name="LastNameAppt"
                         label="Last Name"
-                        component={FormInput}
+                        component={CustomerFormInput}
                         validator={requiredValidator}
                         disabled={isDataItemLoading}
                       />
@@ -402,7 +429,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         name="Gender"
                         label="Gender"
                         layout="horizontal"
-                        component={FormRadioGroup}
+                        component={CustomerFormRadioGroup}
                         data={genders}
                         disabled={isDataItemLoading}
                       />
@@ -412,7 +439,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         name="Email"
                         label="Email"
                         type="email"
-                        component={FormInput}
+                        component={CustomerFormInput}
                         validator={emailValidator}
                         disabled={isDataItemLoading}
                       />
@@ -421,8 +448,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         id="phone"
                         name="CellPhone"
                         label="Mobile Phone"
-                        mask="+1(999) 000-00-00-00"
-                        component={FormMaskedTextBox}
+                        mask="+(000) 000-00-00"
+                        component={CustomerFormMaskedTextBox}
                         validator={phoneValidator}
                         disabled={isDataItemLoading}
                       />
@@ -433,7 +460,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
                   <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>
-                      <button className="k-button" type="submit" disabled={!formRenderProps.allowSubmit || isDataItemLoading}>
+                      <button className="k-button" type="submit" disabled={isDataItemLoading}>
                         {isDataItemLoading ? (
                           <Loader
                             className="d-flex justify-content-center align-items-center"

@@ -32,7 +32,6 @@ export const getFormInputOptionalProps = ({ touched, validationMessage, showVali
 
 export const generateId = (data: SchedulerDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
-
 export const updateDataAfterRemoveItem = (data: SchedulerDataItem[], removeItemID: number): SchedulerDataItem[] => {
   const index = data.findIndex(({ ID }) => ID === removeItemID);
 
@@ -55,7 +54,7 @@ export const updateDataOnChangeItem = (data: SchedulerDataItem[], { created, upd
 
 export const updateDataOnAddNewItemToChange = (
   data: SchedulerDataItem[],
-  { Start, End, TeamID }: { Start: Date; End: Date, TeamID: number }
+  { Start, End, TeamID }: { Start: Date; End: Date; TeamID: number }
 ): [number, SchedulerDataItem[]] => {
   const ID = generateId(data);
   const guid = uuidV4();
@@ -68,10 +67,10 @@ export const updateDataOnAddNewItemToChange = (
       {
         AppointmentSource: null,
         AppointmentStatus: StatusNames.Consultation,
-        CellPhone: ``,
+        CellPhone: null,
         Description: ``,
         Duration: 60,
-        Email: ``,
+        Email: null,
         EndDate: End.toISOString(),
         EventDate: Start.toISOString(),
         EventType: 0,
@@ -117,7 +116,7 @@ export const updateDataOnAddNewItemToChange = (
         TeamID,
         Start,
         End,
-        LastUpdate: ``,
+        LastUpdate: new Date().toISOString(),
         inEdit: true,
         isNew: true,
       },
@@ -125,4 +124,3 @@ export const updateDataOnAddNewItemToChange = (
     ],
   ];
 };
-

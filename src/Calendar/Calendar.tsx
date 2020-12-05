@@ -24,11 +24,14 @@ export const Calendar: FC = () => {
   const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
+  const selectOriginalData = useMemo(selectSchedulerMemoOriginalData, []);
+  const originalData = useSelector(selectOriginalData);
+  const calendarData = useMemo(() => originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [mapTeamToFiltered, originalData])
 
   const dispatch = useDispatch();
-  const selectOriginalData = useMemo(selectSchedulerMemoOriginalData, []);
+  
 
-  const originalData = useSelector(selectOriginalData);
+  
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetSchedulerDataForDomainWithDataBind(agendaData, agendaIsDataLoading, SchedulerActions, dispatch);
@@ -69,7 +72,7 @@ export const Calendar: FC = () => {
       </div>
       <div className="card-component">
         <Scheduler
-          data={originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id])}
+          data={calendarData}
           onDataChange={onDataChange}
           modelFields={ordersModelFields}
           group={{
