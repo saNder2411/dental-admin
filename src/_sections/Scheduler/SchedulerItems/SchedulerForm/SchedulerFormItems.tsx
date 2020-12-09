@@ -8,21 +8,15 @@ import { ButtonGroup, Button } from '@progress/kendo-react-buttons';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
-import { LookupEntity } from '../../../Agenda/AgendaTypes';
-import { CustomFieldRenderProps } from './SchedulerItemTypes';
+import { LookupEntity } from '../../../../Agenda/AgendaTypes';
+import { CustomFieldRenderProps } from '../SchedulerItemTypes';
 // Selectors
-import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
+import { selectServicesMemoData } from '../../../../Services/ServicesSelectors';
 // Helpers
-import { getFormInputOptionalProps } from '../SchedulerHelpers';
-import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../Grid/GridItems/GridItemsHelpers';
-
-const RepeatData = [
-  { text: 'Never', value: null },
-  { text: 'Daily', value: 'FREQ=DAILY' },
-  { text: 'Weekly', value: 'FREQ=WEEKLY' },
-  { text: 'Monthly', value: 'FREQ=MONTHLY' },
-  { text: 'Yearly', value: 'FREQ=YEARLY' },
-];
+import { getFormInputOptionalProps } from '../../SchedulerHelpers';
+import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../../Grid/GridItems/GridItemsHelpers';
+// Instruments
+import { RepeatDropDownListData } from './SchedulerFormInstruments';
 
 export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
@@ -112,7 +106,7 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) 
 export const RepeatFormDropDownList: FC<FieldRenderProps> = (props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = props;
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const dropDownListValue = RepeatData.find((item) => item.value === value);
+  const dropDownListValue = RepeatDropDownListData.find((item) => item.value === value);
 
   const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
   // console.log(`RepeatFormDropDownListValue`, value);
@@ -128,7 +122,7 @@ export const RepeatFormDropDownList: FC<FieldRenderProps> = (props) => {
         valid={valid}
         id={id}
         textField="text"
-        data={RepeatData}
+        data={RepeatDropDownListData}
         disabled={disabled}
         onChange={onDropDownListValueChange}
         {...others}

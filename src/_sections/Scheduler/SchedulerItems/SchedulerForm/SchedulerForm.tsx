@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 // Styled Components
-import * as SC from '../SchedulerItemsStyled/SchedulerFormStyled';
+import * as SC from '../../SchedulerItemsStyled/SchedulerFormStyled';
 // Components
-import { Loader } from '../../../_components';
+import { Loader } from '../../../../_components';
 // Form Inputs
 import {
   ServicesFormMultiSelect,
@@ -21,23 +21,22 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
-import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
+import { selectTeamStaffMemoData } from '../../../../TeamStaff/TeamStaffSelectors';
+import { selectCustomersMemoData } from '../../../../Customers/CustomersSelectors';
 // Types
-import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
-import { CustomSchedulerFormProps } from './SchedulerItemTypes';
+import { AgendaDataItem, StatusNames } from '../../../../Agenda/AgendaTypes';
+import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
+import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
-import { AgendaActions } from '../../../Agenda/AgendaActions';
-import { SchedulerActions } from '../SchedulerActions';
-import { CustomersDataItem } from '../../../Customers';
+// import { AgendaActions } from '../../../../Agenda/AgendaActions';
+import { SchedulerActions } from '../../SchedulerActions';
+import { CustomersDataItem } from '../../../../Customers';
+// Instruments
+import { RepeatTypes, EndRepeatRadioGroupData, EndRepeatTypes } from './SchedulerFormInstruments';
+// Helpers
+import { getEndRepeatRule } from './SchedulerFormHelpers';
 
-const statusList = Object.values(StatusNames);
-
-const endRecurrenceData = [
-  { label: 'Never', value: 'never' },
-  { label: 'After', value: 'after' },
-  { label: 'On', value: 'on' },
-];
+const StatusList = Object.values(StatusNames);
 
 const recurrenceWeeklyData = [
   { name: 'Sun', isSelected: false },
@@ -83,7 +82,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     () => customersData.find(({ Id }) => Id === dataItem.LookupCM102customers.Id) ?? customersData[0],
     [customersData, dataItem.LookupCM102customers.Id]
   );
-  const initialValue = {
+
+  const initialValue: InitialFormValue = {
     ...dataItem,
     FirstName,
     LastNameAppt: Title,
@@ -92,6 +92,10 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     CellPhone: CellPhone ?? '',
     Notes: dataItem.Notes ?? '',
     Repeat: null,
+    RepeatInterval: 1,
+    EndRepeat: EndRepeatTypes.After,
+    EndCount: 1,
+    EndUntil: new Date(),
   };
 
   useEffect(
@@ -102,11 +106,17 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     [onSubmit]
   );
 
-  const onFormSubmit = ({ FirstName, LastNameAppt, ...others }: AgendaDataItem) => {
+  const onFormSubmit = (
+    { FirstName, LastNameAppt, Repeat, EndRepeat, RepeatInterval, EndCount, EndUntil, ...others }: InitialFormValue,
+    evt: any
+  ) => {
     const newDataItem: AgendaDataItem = { ...others, FirstName, LastNameAppt, Title: `${FirstName[0]}.${LastNameAppt}-0000` };
     console.log(`onSubmitDataItem`, newDataItem);
-    setIsDataItemLoading(true);
-    dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
+    const endRule = getEndRepeatRule(EndRepeat, RepeatInterval, EndCount, EndUntil);
+    console.log(`${Repeat};${endRule}`);
+    // console.log(`evt`, evt);
+    // setIsDataItemLoading(true);
+    // dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
   };
 
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
@@ -124,21 +134,22 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
           initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            // console.log(`formRenderProps`, formRenderProps);
+            console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('Repeat');
+            const endRepeatValue = formRenderProps.valueGetter('EndRepeat');
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {
-              case 'Daily':
+              case RepeatTypes.Daily:
                 secondLabelForRepeatEvery = 'day(s)';
                 break;
-              case 'Weekly':
+              case RepeatTypes.Weekly:
                 secondLabelForRepeatEvery = 'week(s)';
                 break;
-              case 'Monthly':
+              case RepeatTypes.Monthly:
                 secondLabelForRepeatEvery = 'month(s)';
                 break;
-              case 'Yearly':
+              case RepeatTypes.Yearly:
                 secondLabelForRepeatEvery = 'year(s)';
                 break;
               default:
@@ -168,7 +179,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     id="status"
                     name="AppointmentStatus"
                     label="Status"
-                    data={statusList}
+                    data={StatusList}
                     component={FormDropDownList}
                     disabled={isDataItemLoading}
                   />
@@ -194,7 +205,6 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Repeat every"
                         format="n0"
                         min={1}
-                        defaultValue={1}
                         secondLabel={secondLabelForRepeatEvery}
                         component={FormNumericTextBox}
                         disabled={isDataItemLoading}
@@ -345,9 +355,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                           id="endRepeat"
                           name="EndRepeat"
                           label="End"
-                          defaultValue="after"
                           component={FormRadioGroup}
-                          data={endRecurrenceData}
+                          data={EndRepeatRadioGroupData}
                           disabled={isDataItemLoading}
                         />
                       </div>
@@ -358,20 +367,15 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                           format="n0"
                           min={1}
                           defaultValue={1}
-                          disabled={
-                            formRenderProps.valueGetter('EndRepeat') === 'on' ||
-                            formRenderProps.valueGetter('EndRepeat') === 'never' ||
-                            isDataItemLoading
-                          }
+                          disabled={endRepeatValue !== EndRepeatTypes.After || isDataItemLoading}
                           secondLabel="occurrence(s)"
                           component={FormNumericTextBox}
                         />
                         <Field
-                          id="endOn"
+                          id="endUntil"
                           name="EndUntil"
-                          disabled={formRenderProps.valueGetter('EndRepeat') !== 'on' || isDataItemLoading}
+                          disabled={endRepeatValue !== EndRepeatTypes.On || isDataItemLoading}
                           component={FormDateTimePicker}
-                          validator={requiredValidator}
                         />
                       </div>
                     </div>
