@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerProps } from '@progress/kendo-react-scheduler';
 //Components
-import { SchedulerItem, SchedulerEditItem, SchedulerSlot, SchedulerSlotEdit, SchedulerAgendaTask } from './SchedulerItems';
+import { SchedulerItem, SchedulerEditItem, SchedulerSlot, SchedulerEditSlot, SchedulerAgendaTask } from './SchedulerItems';
 
 export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resources }) => {
   const defaultDate = new Date();
@@ -18,7 +18,7 @@ export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resour
       item={SchedulerItem}
       editItem={SchedulerEditItem}
       slot={SchedulerSlot}
-      editSlot={SchedulerSlotEdit}
+      editSlot={SchedulerEditSlot}
       task={SchedulerAgendaTask}
       defaultView={'day'}
       editable={{

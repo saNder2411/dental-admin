@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
-import * as SC from './SchedulerItemStyled/SchedulerItemStyled';
+import * as SC from '../SchedulerItemsStyled/SchedulerItemStyled';
 // Components
 import { Loader } from '../../../_components';
 // Instruments

@@ -3,17 +3,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
 // Styled Components
-import * as SC from './SchedulerItemStyled/SchedulerFormStyled';
+import * as SC from '../SchedulerItemsStyled/SchedulerFormStyled';
 // Components
 import { Loader } from '../../../_components';
 // Form Inputs
 import {
   ServicesFormMultiSelect,
   LookupEntityFormDropDownList,
-  CustomerFormInput,
-  CustomerFormRadioGroup,
+  RepeatFormDropDownList,
+  FormInput,
   FormRadioGroup,
-  CustomerFormMaskedTextBox,
+  FormMaskedTextBox,
   FormDateTimePicker,
   FormTextArea,
   FormNumericTextBox,
@@ -33,7 +33,6 @@ import { CustomersDataItem } from '../../../Customers';
 
 const statusList = Object.values(StatusNames);
 
-const recurrenceNames = ['Never', 'Daily', 'Weekly', 'Monthly', 'Yearly'];
 const endRecurrenceData = [
   { label: 'Never', value: 'never' },
   { label: 'After', value: 'after' },
@@ -84,7 +83,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     () => customersData.find(({ Id }) => Id === dataItem.LookupCM102customers.Id) ?? customersData[0],
     [customersData, dataItem.LookupCM102customers.Id]
   );
-  const initialValue: AgendaDataItem = {
+  const initialValue = {
     ...dataItem,
     FirstName,
     LastNameAppt: Title,
@@ -92,6 +91,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     Gender,
     CellPhone: CellPhone ?? '',
     Notes: dataItem.Notes ?? '',
+    Repeat: null,
   };
 
   useEffect(
@@ -124,8 +124,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
           initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            console.log(`formRenderProps`, formRenderProps);
-            const repeatValue = formRenderProps.valueGetter('repeat') ?? 'Never';
+            // console.log(`formRenderProps`, formRenderProps);
+            const repeatValue = formRenderProps.valueGetter('Repeat');
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             let secondLabelForRepeatEvery: string;
             switch (repeatValue) {
@@ -184,21 +184,13 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
                   <Field id="end" name="End" label="End" component={FormDateTimePicker} validator={requiredValidator} disabled={isDataItemLoading} />
 
-                  <Field
-                    id="repeat"
-                    name="repeat"
-                    label="Repeat"
-                    defaultValue="Never"
-                    data={recurrenceNames}
-                    component={FormDropDownList}
-                    disabled={isDataItemLoading}
-                  />
+                  <Field id="repeat" name="Repeat" label="Repeat" component={RepeatFormDropDownList} disabled={isDataItemLoading} />
 
-                  {repeatValue !== 'Never' && (
+                  {repeatValue && (
                     <>
                       <Field
                         id="repeatEvery"
-                        name="repeatEvery"
+                        name="RepeatInterval"
                         label="Repeat every"
                         format="n0"
                         min={1}
@@ -346,12 +338,12 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     </div>
                   )}
 
-                  {repeatValue !== 'Never' && (
+                  {repeatValue && (
                     <div className="row m-0">
                       <div className="col-md-4 p-0">
                         <Field
-                          id="endRecurrence"
-                          name="endRecurrence"
+                          id="endRepeat"
+                          name="EndRepeat"
                           label="End"
                           defaultValue="after"
                           component={FormRadioGroup}
@@ -361,14 +353,14 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                       </div>
                       <div className="col-md-6 p-0 pt-5 align-self-end">
                         <Field
-                          id="endAfterRepeatDayCount"
-                          name="endAfterRepeatDayCount"
+                          id="endCount"
+                          name="EndCount"
                           format="n0"
                           min={1}
                           defaultValue={1}
                           disabled={
-                            formRenderProps.valueGetter('endRecurrence') === 'on' ||
-                            formRenderProps.valueGetter('endRecurrence') === 'never' ||
+                            formRenderProps.valueGetter('EndRepeat') === 'on' ||
+                            formRenderProps.valueGetter('EndRepeat') === 'never' ||
                             isDataItemLoading
                           }
                           secondLabel="occurrence(s)"
@@ -376,8 +368,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         />
                         <Field
                           id="endOn"
-                          name="Start"
-                          disabled={formRenderProps.valueGetter('endRecurrence') !== 'on' || isDataItemLoading}
+                          name="EndUntil"
+                          disabled={formRenderProps.valueGetter('EndRepeat') !== 'on' || isDataItemLoading}
                           component={FormDateTimePicker}
                           validator={requiredValidator}
                         />
@@ -410,7 +402,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         id="firstName"
                         name="FirstName"
                         label="First Name"
-                        component={CustomerFormInput}
+                        component={FormInput}
                         validator={requiredValidator}
                         disabled={isDataItemLoading}
                       />
@@ -419,7 +411,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         id="lastName"
                         name="LastNameAppt"
                         label="Last Name"
-                        component={CustomerFormInput}
+                        component={FormInput}
                         validator={requiredValidator}
                         disabled={isDataItemLoading}
                       />
@@ -429,7 +421,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         name="Gender"
                         label="Gender"
                         layout="horizontal"
-                        component={CustomerFormRadioGroup}
+                        component={FormRadioGroup}
                         data={genders}
                         disabled={isDataItemLoading}
                       />
@@ -439,7 +431,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         name="Email"
                         label="Email"
                         type="email"
-                        component={CustomerFormInput}
+                        component={FormInput}
                         validator={emailValidator}
                         disabled={isDataItemLoading}
                       />
@@ -449,7 +441,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         name="CellPhone"
                         label="Mobile Phone"
                         mask="+(000) 000-00-00"
-                        component={CustomerFormMaskedTextBox}
+                        component={FormMaskedTextBox}
                         validator={phoneValidator}
                         disabled={isDataItemLoading}
                       />

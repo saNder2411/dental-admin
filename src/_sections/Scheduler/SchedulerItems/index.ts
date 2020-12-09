@@ -4,4 +4,4 @@ export * from './SchedulerFormItems';
 export * from './SchedulerItem';
 export * from './SchedulerEditItem';
 export * from './SchedulerSlot';
-export * from './SchedulerSlotEdit';
+export * from './SchedulerEditSlot';

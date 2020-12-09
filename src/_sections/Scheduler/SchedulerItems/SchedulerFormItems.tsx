@@ -1,4 +1,4 @@
-import React, { FC, useState, useRef, useMemo, useCallback } from 'react';
+import React, { FC, useState, useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldWrapper } from '@progress/kendo-react-form';
 import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup } from '@progress/kendo-react-inputs';
@@ -15,6 +15,14 @@ import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
 // Helpers
 import { getFormInputOptionalProps } from '../SchedulerHelpers';
 import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../Grid/GridItems/GridItemsHelpers';
+
+const RepeatData = [
+  { text: 'Never', value: null },
+  { text: 'Daily', value: 'FREQ=DAILY' },
+  { text: 'Weekly', value: 'FREQ=WEEKLY' },
+  { text: 'Monthly', value: 'FREQ=MONTHLY' },
+  { text: 'Yearly', value: 'FREQ=YEARLY' },
+];
 
 export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
@@ -101,7 +109,36 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) 
   );
 };
 
-export const CustomerFormInput: FC<FieldRenderProps> = (props) => {
+export const RepeatFormDropDownList: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = props;
+  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
+  const dropDownListValue = RepeatData.find((item) => item.value === value);
+
+  const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
+  // console.log(`RepeatFormDropDownListValue`, value);
+  return (
+    <FieldWrapper>
+      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <DropDownList
+        value={dropDownListValue}
+        ariaLabelledBy={labelId}
+        ariaDescribedBy={`${hintId} ${errorId}`}
+        valid={valid}
+        id={id}
+        textField="text"
+        data={RepeatData}
+        disabled={disabled}
+        onChange={onDropDownListValueChange}
+        {...others}
+      />
+      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+    </FieldWrapper>
+  );
+};
+
+export const FormInput: FC<FieldRenderProps> = (props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, modified, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
@@ -119,21 +156,7 @@ export const CustomerFormInput: FC<FieldRenderProps> = (props) => {
   );
 };
 
-export const CustomerFormRadioGroup = (props: FieldRenderProps) => {
-  const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = props;
-  const { hintId, errorId, labelId } = getFormInputOptionalProps(props);
-
-  return (
-    <FieldWrapper>
-      <Label id={labelId} editorId={id} editorDisabled={disabled}>
-        {label}
-      </Label>
-      <RadioGroup ariaDescribedBy={`${hintId} ${errorId}`} ariaLabelledBy={labelId} disabled={disabled} {...others} />
-    </FieldWrapper>
-  );
-};
-
-export const CustomerFormMaskedTextBox = (props: FieldRenderProps) => {
+export const FormMaskedTextBox = (props: FieldRenderProps) => {
   const { validationMessage, touched, label, id, valid, hint, optional, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
@@ -224,16 +247,15 @@ export const FormNumericTextBox = (props: FieldRenderProps) => {
 };
 
 export const FormRadioGroup = (props: FieldRenderProps) => {
-  const editorRef = useRef(null);
   const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
-      <Label id={labelId} editorRef={editorRef} editorId={id} editorValid={valid} editorDisabled={disabled}>
+      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
         {label}
       </Label>
-      <RadioGroup ref={editorRef} ariaDescribedBy={`${hintId} ${errorId}`} ariaLabelledBy={labelId} valid={valid} disabled={disabled} {...others} />
+      <RadioGroup ariaDescribedBy={`${hintId} ${errorId}`} ariaLabelledBy={labelId} valid={valid} disabled={disabled} {...others} />
       {showHint && <Hint id={hintId}>{hint}</Hint>}
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
