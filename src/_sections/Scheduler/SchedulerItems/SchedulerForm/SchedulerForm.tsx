@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState, useEffect } from 'react';
+import React, { FC, useMemo, useState, useEffect, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, Field, FormElement } from '@progress/kendo-react-form';
@@ -28,13 +28,13 @@ import { AgendaDataItem, StatusNames } from '../../../../Agenda/AgendaTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
-// import { AgendaActions } from '../../../../Agenda/AgendaActions';
+import { AgendaActions } from '../../../../Agenda/AgendaActions';
 import { SchedulerActions } from '../../SchedulerActions';
 import { CustomersDataItem } from '../../../../Customers';
 // Instruments
 import { RepeatTypes, EndRepeatRadioGroupData, EndRepeatTypes } from './SchedulerFormInstruments';
 // Helpers
-import { getEndRepeatRule } from './SchedulerFormHelpers';
+import { getDataItemForApi } from './SchedulerFormHelpers';
 
 const StatusList = Object.values(StatusNames);
 
@@ -106,17 +106,14 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     [onSubmit]
   );
 
-  const onFormSubmit = (
-    { FirstName, LastNameAppt, Repeat, EndRepeat, RepeatInterval, EndCount, EndUntil, ...others }: InitialFormValue,
-    evt: any
-  ) => {
-    const newDataItem: AgendaDataItem = { ...others, FirstName, LastNameAppt, Title: `${FirstName[0]}.${LastNameAppt}-0000` };
+  const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+    const newDataItem: AgendaDataItem = getDataItemForApi(formDataItem);
     console.log(`onSubmitDataItem`, newDataItem);
-    const endRule = getEndRepeatRule(EndRepeat, RepeatInterval, EndCount, EndUntil);
-    console.log(`${Repeat};${endRule}`);
+
     // console.log(`evt`, evt);
-    // setIsDataItemLoading(true);
-    // dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
+    setIsDataItemLoading(true);
+    dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
   };
 
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
