@@ -17,7 +17,7 @@ import {
   FormDateTimePicker,
   FormTextArea,
   FormNumericTextBox,
-  FormButtonGroup,
+  WeekdayFormButtonGroup,
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
@@ -37,16 +37,6 @@ import { RepeatTypes, EndRepeatRadioGroupData, EndRepeatTypes } from './Schedule
 import { getDataItemForApi } from './SchedulerFormHelpers';
 
 const StatusList = Object.values(StatusNames);
-
-const recurrenceWeeklyData = [
-  { name: 'Sun', isSelected: false },
-  { name: 'Mon', isSelected: false },
-  { name: 'Tue', isSelected: true },
-  { name: 'Wed', isSelected: false },
-  { name: 'Thu', isSelected: false },
-  { name: 'Fri', isSelected: false },
-  { name: 'Sat', isSelected: false },
-];
 
 const repeatOnMonthlyData = [
   { label: 'Day', value: 'day' },
@@ -83,7 +73,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     [customersData, dataItem.LookupCM102customers.Id]
   );
 
-  const initialValue: InitialFormValue = {
+  const initialValue = {
     ...dataItem,
     FirstName,
     LastNameAppt: Title,
@@ -96,6 +86,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     EndRepeat: EndRepeatTypes.After,
     EndCount: 1,
     EndUntil: new Date(),
+    RepeatOnWeekday: ['TU'],
   };
 
   useEffect(
@@ -111,7 +102,6 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     const newDataItem: AgendaDataItem = getDataItemForApi(formDataItem);
     console.log(`onSubmitDataItem`, newDataItem);
 
-    // console.log(`evt`, evt);
     setIsDataItemLoading(true);
     dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
   };
@@ -131,7 +121,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
           initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            console.log(`formRenderProps`, formRenderProps);
+            // console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('Repeat');
             const endRepeatValue = formRenderProps.valueGetter('EndRepeat');
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
@@ -209,13 +199,12 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     </>
                   )}
 
-                  {repeatValue === 'Weekly' && (
+                  {repeatValue === RepeatTypes.Weekly && (
                     <Field
-                      id="repeatOnWeekday"
-                      name="repeatOnWeekday"
+                      id="RepeatOnWeekday"
+                      name="RepeatOnWeekday"
                       label="Repeat on"
-                      data={recurrenceWeeklyData}
-                      component={FormButtonGroup}
+                      component={WeekdayFormButtonGroup}
                       disabled={isDataItemLoading}
                     />
                   )}

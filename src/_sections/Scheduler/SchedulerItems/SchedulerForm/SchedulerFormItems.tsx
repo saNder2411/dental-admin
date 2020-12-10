@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo, useCallback } from 'react';
+import React, { FC, useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldWrapper } from '@progress/kendo-react-form';
 import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup } from '@progress/kendo-react-inputs';
@@ -10,13 +10,14 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
 import { LookupEntity } from '../../../../Agenda/AgendaTypes';
 import { CustomFieldRenderProps } from '../SchedulerItemTypes';
+import { WeekdayTypesType } from './SchedulerFormTypes';
 // Selectors
 import { selectServicesMemoData } from '../../../../Services/ServicesSelectors';
 // Helpers
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
 import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../../Grid/GridItems/GridItemsHelpers';
 // Instruments
-import { RepeatDropDownListData } from './SchedulerFormInstruments';
+import { RepeatDropDownListData, WeekdayButtonGroupData } from './SchedulerFormInstruments';
 
 export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
@@ -128,6 +129,35 @@ export const RepeatFormDropDownList: FC<FieldRenderProps> = (props) => {
         {...others}
       />
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+    </FieldWrapper>
+  );
+};
+
+export const WeekdayFormButtonGroup = (props: FieldRenderProps) => {
+  const { id, label, valid, disabled, value, onChange } = props;
+  const { labelId } = getFormInputOptionalProps(props);
+  const btnData = WeekdayButtonGroupData.map((item) => ({ ...item, isSelected: value.includes(item.value) }));
+
+  const onBtnClick = useCallback(
+    (clickedBtn: { label: string; isSelected: boolean; value: WeekdayTypesType }) => {
+      const updatedBtnData = btnData.map((item) => (item.value === clickedBtn.value ? { ...item, isSelected: !item.isSelected } : item));
+      onChange({ value: updatedBtnData.filter(({ isSelected }) => isSelected).map(({ value }) => value) });
+    },
+    [btnData, onChange]
+  );
+
+  return (
+    <FieldWrapper>
+      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <ButtonGroup>
+        {btnData.map((item) => (
+          <Button key={item.label} type="button" togglable={true} selected={item.isSelected} onClick={() => onBtnClick(item)}>
+            {item.label}
+          </Button>
+        ))}
+      </ButtonGroup>
     </FieldWrapper>
   );
 };
@@ -252,32 +282,6 @@ export const FormRadioGroup = (props: FieldRenderProps) => {
       <RadioGroup ariaDescribedBy={`${hintId} ${errorId}`} ariaLabelledBy={labelId} valid={valid} disabled={disabled} {...others} />
       {showHint && <Hint id={hintId}>{hint}</Hint>}
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
-    </FieldWrapper>
-  );
-};
-
-export const FormButtonGroup = (props: FieldRenderProps) => {
-  const { id, label, valid, disabled, data } = props;
-  const { labelId } = getFormInputOptionalProps(props);
-  const [btnData, setBtnData] = useState<{ name: string; isSelected: boolean }[]>(data);
-
-  const onBtnClick = ({ name, isSelected }: { name: string; isSelected: boolean }) => {
-    const updatedBtnData = btnData.map((btn) => (btn.name === name ? { name, isSelected: !isSelected } : btn));
-    setBtnData(updatedBtnData);
-  };
-
-  return (
-    <FieldWrapper>
-      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
-        {label}
-      </Label>
-      <ButtonGroup>
-        {btnData.map(({ name, isSelected }) => (
-          <Button key={Math.random()} togglable={true} selected={isSelected} onClick={() => onBtnClick({ name, isSelected })}>
-            {name}
-          </Button>
-        ))}
-      </ButtonGroup>
     </FieldWrapper>
   );
 };
