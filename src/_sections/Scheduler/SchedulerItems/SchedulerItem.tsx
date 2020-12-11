@@ -1,6 +1,6 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { SchedulerItem as KendoSchedulerItem, useSchedulerEditItemShowOccurrenceDialogContext } from '@progress/kendo-react-scheduler';
+import { SchedulerItem as KendoSchedulerItem } from '@progress/kendo-react-scheduler';
 import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
@@ -27,11 +27,11 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const [showPopup, setShowPopup] = useState(false);
   const { setFormItemID } = SchedulerActions;
   const dispatch = useDispatch();
-  const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
+  // const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
-  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
+  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus } = props;
   const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
   const color = resource.CalendarColHex;
   const iconName = dataItem.AppointmentStatus;
@@ -68,18 +68,18 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const onEditBtnClick = useCallback(() => {
     setShowPopup(false);
     setFormItemID(dispatch, dataItem.ID);
-    isRecurring && setShowOccurrenceDialog(true);
-  }, [setFormItemID, dispatch, dataItem.ID, isRecurring, setShowOccurrenceDialog]);
+    // isRecurring && setShowOccurrenceDialog(true);
+  }, [setFormItemID, dispatch, dataItem.ID]);
 
   const onDeleteBtnClick = useCallback(() => {
     setShowPopup(false);
 
-    if (isRecurring) {
-      setShowOccurrenceDialog(true);
-    } else {
+    // if (isRecurring) {
+    //   setShowOccurrenceDialog(true);
+    // } else {
       setShowRemoveDialog(true);
-    }
-  }, [setShowPopup, isRecurring, setShowOccurrenceDialog, setShowRemoveDialog]);
+    // }
+  }, [setShowPopup, setShowRemoveDialog]);
 
   const { onFocus: onFocusAsync, onBlur: onBlurAsync } = useAsyncFocusBlur({ onFocus, onBlur: onSchedulerItemBlur });
 

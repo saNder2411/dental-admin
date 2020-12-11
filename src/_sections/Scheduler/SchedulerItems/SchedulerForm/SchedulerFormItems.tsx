@@ -17,7 +17,7 @@ import { selectServicesMemoData } from '../../../../Services/ServicesSelectors';
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
 import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../../Grid/GridItems/GridItemsHelpers';
 // Instruments
-import { RepeatDropDownListData, WeekdayButtonGroupData } from './SchedulerFormInstruments';
+import { WeekdayButtonGroupData } from './SchedulerFormInstruments';
 
 export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
@@ -104,13 +104,13 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) 
   );
 };
 
-export const RepeatFormDropDownList: FC<FieldRenderProps> = (props) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = props;
+export const FormDropDownListWithCustomData: FC<FieldRenderProps> = (props) => {
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, data, ...others } = props;
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const dropDownListValue = RepeatDropDownListData.find((item) => item.value === value);
+  const dropDownListValue = data.find((item: { text: string; value: typeof value }) => item.value === value);
 
   const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
-  // console.log(`RepeatFormDropDownListValue`, value);
+
   return (
     <FieldWrapper>
       <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
@@ -123,7 +123,7 @@ export const RepeatFormDropDownList: FC<FieldRenderProps> = (props) => {
         valid={valid}
         id={id}
         textField="text"
-        data={RepeatDropDownListData}
+        data={data}
         disabled={disabled}
         onChange={onDropDownListValueChange}
         {...others}
