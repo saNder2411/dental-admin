@@ -1,5 +1,5 @@
 // Types
-import { EndRepeatTypes, RepeatTypes, WeekdayTypes, MonthlyTypes, MonthlyDayTypes } from './SchedulerFormInstruments';
+import { EndRepeatTypes, RepeatTypes, WeekdayTypes, MonthlyTypes, MonthlyDayTypes, WeekNumberTypes, YearlyTypes, MonthNameTypes } from './SchedulerFormInstruments';
 import { InferValueTypes } from '../../../Grid/GridTypes';
 import { SchedulerDataItem } from '../../SchedulerTypes';
 
@@ -11,7 +11,13 @@ export type WeekdayTypesType = InferValueTypes<typeof WeekdayTypes>;
 
 export type MonthlyTypesType = InferValueTypes<typeof MonthlyTypes>;
 
-export type MonthlyDayTypesType = InferValueTypes<typeof MonthlyDayTypes>
+export type MonthlyDayTypesType = InferValueTypes<typeof MonthlyDayTypes>;
+
+export type MonthlyWeekNumberType = InferValueTypes<typeof WeekNumberTypes>
+
+export type YearlyTypesType = InferValueTypes<typeof YearlyTypes>;
+
+export type MonthNameTypesType = InferValueTypes<typeof MonthNameTypes>;
 
 export interface RepeatOptions {
   Repeat: RepeatTypesType;
@@ -22,8 +28,13 @@ export interface RepeatOptions {
   RepeatOnWeekday: Array<WeekdayTypesType>;
   RepeatOnMonthly: MonthlyTypesType;
   MonthlyDay: number;
-  MonthlyWeekNumber: number;
+  MonthlyWeekNumber: MonthlyWeekNumberType;
   MonthlyDayType: MonthlyDayTypesType;
+  RepeatOnYearly: YearlyTypesType;
+  YearlyMonth: MonthNameTypesType;
+  YearlyMonthDay: number;
+  YearlyWeekNumber: MonthlyWeekNumberType;
+  YearlyDayType: MonthlyDayTypesType;
 }
 
 export interface InitialFormValue extends SchedulerDataItem, RepeatOptions {}

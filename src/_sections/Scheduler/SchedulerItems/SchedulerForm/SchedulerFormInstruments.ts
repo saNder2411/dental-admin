@@ -1,3 +1,8 @@
+// Types
+import { StatusNames } from '../../../../Agenda/AgendaTypes';
+
+export const StatusDropDownListData = Object.values(StatusNames);
+
 export const RepeatTypes = {
   Never: null,
   Daily: 'FREQ=DAILY' as const,
@@ -59,3 +64,32 @@ export const MonthlyDayTypes = {
 };
 
 export const MonthlyDayTypeDropDownListData = Object.entries(MonthlyDayTypes).map(([text, value]) => ({ text, value }));
+
+export const YearlyTypes = {
+  Day: 'BYMONTHDAY' as const,
+  Week: 'BYDAY' as const,
+};
+
+export const RepeatOnYearlyRadioGroupData = Object.entries(MonthlyTypes).map(([, value]) => ({ label: '', value }));
+
+export const MonthNameTypes = {
+  January: 1 as const,
+  February: 2 as const,
+  March: 3 as const,
+  April: 4 as const,
+  May: 5 as const,
+  June: 6 as const,
+  July: 7 as const,
+  August: 8 as const,
+  September: 9 as const,
+  October: 10 as const,
+  November: 11 as const,
+  December: 12 as const,
+};
+
+export const YearlyMonthTypeDropDownListData = Object.entries(MonthNameTypes).map(([text, value]) => ({ text, value }));
+
+export const GendersRadioGroupData = [
+  { label: 'Male', value: '(2) Male' },
+  { label: 'Female', value: '(1) Female' },
+];

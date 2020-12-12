@@ -86,17 +86,42 @@ export const SchedulerForm = styled.section`
     height: 30px;
   }
 
-  .monthly-group .k-dropdown,
-  .yearly-group .k-dropdown {
+  .monthly-group .k-dropdown {
     width: 80%;
+  }
+
+  .RepeatOnYearly {
+    display: flex;
+
+    .RepeatOnYearly__fields {
+      width: 400px;
+      padding-top: 12px;
+
+      & .k-form-field {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .yearly-group__label {
+    width: 160px;
+  }
+
+  .yearly-group .k-dropdown {
+    width: 70%;
+  }
+
+  .yearly-group {
+    & .k-label.k-label-empty {
+      padding-top: 0;
+    }
+
+    & .k-widget.k-dropdown.k-header {
+      width: 95%;
+    }
   }
 
   .yearly-group-dropdown {
     margin: 0;
-    margin-right: -30px;
-  }
-
-  .yearly-group-dropdown .k-dropdown {
-    width: 100%;
   }
 `;

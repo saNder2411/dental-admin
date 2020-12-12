@@ -26,13 +26,14 @@ import { selectCustomersMemoData } from '../../../../Customers/CustomersSelector
 // Types
 import { AgendaDataItem, StatusNames } from '../../../../Agenda/AgendaTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
-import { InitialFormValue } from './SchedulerFormTypes';
+import { InitialFormValue, MonthNameTypesType } from './SchedulerFormTypes';
 // Actions
 import { AgendaActions } from '../../../../Agenda/AgendaActions';
 import { SchedulerActions } from '../../SchedulerActions';
 import { CustomersDataItem } from '../../../../Customers';
 // Instruments
 import {
+  StatusDropDownListData,
   RepeatTypes,
   RepeatDropDownListData,
   EndRepeatRadioGroupData,
@@ -41,26 +42,13 @@ import {
   MonthlyTypes,
   WeekNumberDropDownListData,
   MonthlyDayTypeDropDownListData,
+  RepeatOnYearlyRadioGroupData,
+  YearlyTypes,
+  YearlyMonthTypeDropDownListData,
+  GendersRadioGroupData,
 } from './SchedulerFormInstruments';
 // Helpers
-import { getDataItemForApi } from './SchedulerFormHelpers';
-
-const StatusList = Object.values(StatusNames);
-
-const weekNumbers = ['First', 'Second', 'Third', 'Fourth', 'Last'];
-const monthlyDayNames = ['Day', 'Weekday', 'Weekend Day', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-const repeatOnYearlyData = [
-  { label: '', value: 'month' },
-  { label: '', value: 'week' },
-];
-
-const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-const genders = [
-  { label: 'Male', value: '(2) Male' },
-  { label: 'Female', value: '(1) Female' },
-];
+import { getDataItemForApi, requiredValidator, phoneValidator, emailValidator, getSecondLabelForRepeatEvery } from './SchedulerFormHelpers';
 
 export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
@@ -91,10 +79,15 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     EndCount: 1,
     EndUntil: new Date(),
     RepeatOnWeekday: ['TU'],
-    RepeatOnMonthly: 'BYMONTHDAY',
+    RepeatOnMonthly: RepeatOnMonthlyRadioGroupData[0].value,
     MonthlyDay: new Date().getDate(),
     MonthlyWeekNumber: WeekNumberDropDownListData[0].value,
     MonthlyDayType: MonthlyDayTypeDropDownListData[0].value,
+    RepeatOnYearly: RepeatOnYearlyRadioGroupData[0].value,
+    YearlyMonth: (new Date().getMonth() + 1) as MonthNameTypesType,
+    YearlyMonthDay: new Date().getDate(),
+    YearlyWeekNumber: WeekNumberDropDownListData[0].value,
+    YearlyDayType: MonthlyDayTypeDropDownListData[0].value,
   };
 
   useEffect(
@@ -133,24 +126,9 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
             const repeatValue = formRenderProps.valueGetter('Repeat');
             const endRepeatValue = formRenderProps.valueGetter('EndRepeat');
             const repeatOnMonthlyValue = formRenderProps.valueGetter('RepeatOnMonthly');
+            const repeatOnYearlyValue = formRenderProps.valueGetter('RepeatOnYearly');
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
-            let secondLabelForRepeatEvery: string;
-            switch (repeatValue) {
-              case RepeatTypes.Daily:
-                secondLabelForRepeatEvery = 'day(s)';
-                break;
-              case RepeatTypes.Weekly:
-                secondLabelForRepeatEvery = 'week(s)';
-                break;
-              case RepeatTypes.Monthly:
-                secondLabelForRepeatEvery = 'month(s)';
-                break;
-              case RepeatTypes.Yearly:
-                secondLabelForRepeatEvery = 'year(s)';
-                break;
-              default:
-                secondLabelForRepeatEvery = '';
-            }
+            const secondLabelForRepeatEvery = getSecondLabelForRepeatEvery(repeatValue);
 
             const setCustomerField = (dataItem: CustomersDataItem | undefined) => {
               formRenderProps.onChange(`FirstName`, { value: dataItem?.FirstName });
@@ -175,7 +153,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     id="status"
                     name="AppointmentStatus"
                     label="Status"
-                    data={StatusList}
+                    data={StatusDropDownListData}
                     component={FormDropDownList}
                     disabled={isDataItemLoading}
                   />
@@ -271,74 +249,68 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     </div>
                   )}
 
-                  {repeatValue === 'Yearly' && (
-                    <div className="row m-0">
-                      <div className="col-md-3 p-0">
+                  {repeatValue === RepeatTypes.Yearly && (
+                    <div className="RepeatOnYearly" >
+                      <div className="yearly-group__label">
                         <Field
-                          id="repeatOnYearly"
-                          name="repeatOnYearly"
+                          id="RepeatOnYearly"
+                          name="RepeatOnYearly"
                           label="Repeat on"
-                          defaultValue="month"
-                          data={repeatOnYearlyData}
+                          data={RepeatOnYearlyRadioGroupData}
                           component={FormRadioGroup}
                           disabled={isDataItemLoading}
                         />
                       </div>
-                      <div className="col-md-6 yearly-group">
-                        <div className="row m-0 pt-1">
-                          <div className="col-md-6 p-0">
-                            <Field
-                              id="monthNames"
-                              name="monthNames"
-                              data={monthName}
-                              defaultValue={monthName[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week' || isDataItemLoading}
-                              component={FormDropDownList}
-                            />
-                          </div>
+                      <div className="RepeatOnYearly__fields yearly-group">
+                        <div className="row m-0">
                           <div className="col-md-4 p-0">
                             <Field
-                              id="repeatOnYearlyDay"
-                              name="repeatOnYearlyDay"
+                              id="YearlyMonth"
+                              name="YearlyMonth"
+                              data={YearlyMonthTypeDropDownListData}
+                              disabled={repeatOnYearlyValue === YearlyTypes.Week || isDataItemLoading}
+                              component={FormDropDownListWithCustomData}
+                            />
+                          </div>
+                          <div className="col-md-3 p-0">
+                            <Field
+                              id="YearlyMonthDay"
+                              name="YearlyMonthDay"
                               format="n0"
                               min={1}
                               max={31}
-                              defaultValue={1}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') === 'week' || isDataItemLoading}
+                              disabled={repeatOnYearlyValue === YearlyTypes.Week || isDataItemLoading}
                               component={FormNumericTextBox}
                             />
                           </div>
                         </div>
-                        <div className="row pt-1  yearly-group yearly-group-dropdown">
-                          <div className="col-md-3 p-0 pr-1">
+                        <div className="row m-0 pt-1  yearly-group yearly-group-dropdown">
+                          <div className="col-md-3 p-0">
                             <Field
-                              id="yearlyWeekNumber"
-                              name="yearlyWeekNumber"
-                              component={FormDropDownList}
-                              data={weekNumbers}
-                              defaultValue={weekNumbers[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week' || isDataItemLoading}
+                              id="YearlyWeekNumber"
+                              name="YearlyWeekNumber"
+                              component={FormDropDownListWithCustomData}
+                              data={WeekNumberDropDownListData}
+                              disabled={repeatOnYearlyValue === YearlyTypes.Day || isDataItemLoading}
                             />
                           </div>
                           <div className="col-md-4 p-0">
                             <Field
-                              id="yearlyWeekday"
-                              name="yearlyWeekday"
-                              data={monthlyDayNames}
-                              defaultValue={monthlyDayNames[3]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week' || isDataItemLoading}
-                              component={FormDropDownList}
+                              id="YearlyDayType"
+                              name="YearlyDayType"
+                              data={MonthlyDayTypeDropDownListData}
+                              disabled={repeatOnYearlyValue === YearlyTypes.Day || isDataItemLoading}
+                              component={FormDropDownListWithCustomData}
                             />
                           </div>
-                          <div className="col-md-1 p-1">of</div>
+                          <div className="d-flex align-items-center mr-2">of</div>
                           <div className="col-md-4 p-0">
                             <Field
-                              id="monthNamess"
-                              name="monthNames"
-                              data={monthName}
-                              defaultValue={monthName[0]}
-                              disabled={formRenderProps.valueGetter('repeatOnYearly') !== 'week' || isDataItemLoading}
-                              component={FormDropDownList}
+                              id="yearlyMonth"
+                              name="YearlyMonth"
+                              data={YearlyMonthTypeDropDownListData}
+                              disabled={repeatOnYearlyValue === YearlyTypes.Day || isDataItemLoading}
+                              component={FormDropDownListWithCustomData}
                             />
                           </div>
                         </div>
@@ -424,7 +396,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Gender"
                         layout="horizontal"
                         component={FormRadioGroup}
-                        data={genders}
+                        data={GendersRadioGroupData}
                         disabled={isDataItemLoading}
                       />
 
@@ -480,10 +452,3 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     </Dialog>
   );
 };
-
-const phoneRegex = new RegExp(/^[0-9 ()+-]+$/);
-const emailRegex = new RegExp(/\S+@\S+\.\S+/);
-
-const requiredValidator = (value: string) => (value ? '' : 'Error: This field is required.');
-const phoneValidator = (value: string) => (!value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.');
-const emailValidator = (value: string) => (!value ? 'Email field is required.' : emailRegex.test(value) ? '' : 'Email is not valid format.');

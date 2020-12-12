@@ -1,8 +1,34 @@
 // Types
-import { EndRepeatTypesType, InitialFormValue, RepeatOptions, MonthlyTypesType, MonthlyDayTypesType } from './SchedulerFormTypes';
+import { EndRepeatTypesType, RepeatTypesType, InitialFormValue, RepeatOptions, MonthlyTypesType, MonthlyDayTypesType } from './SchedulerFormTypes';
 import { SchedulerDataItem } from '../../SchedulerTypes';
 // Instruments
 import { EndRepeatTypes, RepeatTypes, MonthlyTypes, MonthlyDayTypes } from './SchedulerFormInstruments';
+
+const phoneRegex = new RegExp(/^[0-9 ()+-]+$/);
+const emailRegex = new RegExp(/\S+@\S+\.\S+/);
+
+export const requiredValidator = (value: string) => (value ? '' : 'Error: This field is required.');
+export const phoneValidator = (value: string) => (!value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.');
+export const emailValidator = (value: string) => (!value ? 'Email field is required.' : emailRegex.test(value) ? '' : 'Email is not valid format.');
+
+export const getSecondLabelForRepeatEvery = (Repeat: RepeatTypesType) => {
+  switch (Repeat) {
+    case RepeatTypes.Daily:
+      return 'day(s)';
+
+    case RepeatTypes.Weekly:
+      return 'week(s)';
+
+    case RepeatTypes.Monthly:
+      return 'month(s)';
+
+    case RepeatTypes.Yearly:
+      return 'year(s)';
+
+    default:
+      return '';
+  }
+};
 
 const setTitleProp = <T = string>(firstName: string, lastName: string, ID: T) => `${firstName[0]}.${lastName}-${ID}`;
 
@@ -58,6 +84,11 @@ const setRecurrenceRule = ({
   MonthlyDay,
   MonthlyWeekNumber,
   MonthlyDayType,
+  RepeatOnYearly,
+  YearlyMonth,
+  YearlyMonthDay,
+  YearlyWeekNumber,
+  YearlyDayType,
 }: RepeatOptions) => {
   switch (Repeat) {
     case RepeatTypes.Never:
@@ -74,6 +105,14 @@ const setRecurrenceRule = ({
         MonthlyDay,
         MonthlyWeekNumber,
         MonthlyDayType
+      )}`;
+
+    case RepeatTypes.Yearly:
+      return `${Repeat};${getEndRepeatRule(EndRepeat, RepeatInterval, EndCount, EndUntil)};BYMONTH=${YearlyMonth};${getMonthlyRepeatRule(
+        RepeatOnYearly,
+        YearlyMonthDay,
+        YearlyWeekNumber,
+        YearlyDayType
       )}`;
     default:
       return null;
@@ -96,6 +135,11 @@ export const getDataItemForApi: GetDataItemForApi = (formDataItem) => {
     MonthlyDay,
     MonthlyWeekNumber,
     MonthlyDayType,
+    RepeatOnYearly,
+    YearlyMonth,
+    YearlyMonthDay,
+    YearlyWeekNumber,
+    YearlyDayType,
     ...others
   } = formDataItem;
   return {
@@ -114,6 +158,11 @@ export const getDataItemForApi: GetDataItemForApi = (formDataItem) => {
       MonthlyDay,
       MonthlyWeekNumber,
       MonthlyDayType,
+      RepeatOnYearly,
+      YearlyMonth,
+      YearlyMonthDay,
+      YearlyWeekNumber,
+      YearlyDayType,
     }),
   };
 };
