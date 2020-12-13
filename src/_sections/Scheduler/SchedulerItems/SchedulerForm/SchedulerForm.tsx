@@ -6,27 +6,29 @@ import { Form, Field, FormElement } from '@progress/kendo-react-form';
 import * as SC from '../../SchedulerItemsStyled/SchedulerFormStyled';
 // Components
 import { Loader } from '../../../../_components';
-// Form Inputs
+// Form Items
 import {
   ServicesFormMultiSelect,
   LookupEntityFormDropDownList,
   FormDropDownListWithCustomData,
+  WeekdayFormButtonGroup,
+} from './SchedulerFormItemsCustom';
+import {
   FormInput,
   FormRadioGroup,
   FormMaskedTextBox,
   FormDateTimePicker,
   FormTextArea,
   FormNumericTextBox,
-  WeekdayFormButtonGroup,
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
 import { selectTeamStaffMemoData } from '../../../../TeamStaff/TeamStaffSelectors';
 import { selectCustomersMemoData } from '../../../../Customers/CustomersSelectors';
 // Types
-import { AgendaDataItem, StatusNames } from '../../../../Agenda/AgendaTypes';
+import { StatusNames } from '../../../../Agenda/AgendaTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
-import { InitialFormValue, MonthNameTypesType } from './SchedulerFormTypes';
+import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
 import { AgendaActions } from '../../../../Agenda/AgendaActions';
 import { SchedulerActions } from '../../SchedulerActions';
@@ -48,7 +50,14 @@ import {
   GendersRadioGroupData,
 } from './SchedulerFormInstruments';
 // Helpers
-import { getDataItemForApi, requiredValidator, phoneValidator, emailValidator, getSecondLabelForRepeatEvery } from './SchedulerFormHelpers';
+import {
+  getInitialFormValue,
+  getDataItemForApi,
+  requiredValidator,
+  phoneValidator,
+  emailValidator,
+  getSecondLabelForRepeatEvery,
+} from './SchedulerFormHelpers';
 
 export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
@@ -65,30 +74,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     [customersData, dataItem.LookupCM102customers.Id]
   );
 
-  const initialValue: InitialFormValue = {
-    ...dataItem,
-    FirstName,
-    LastNameAppt: Title,
-    Email: Email ?? '',
-    Gender,
-    CellPhone: CellPhone ?? '',
-    Notes: dataItem.Notes ?? '',
-    Repeat: null,
-    RepeatInterval: 1,
-    EndRepeat: EndRepeatTypes.After,
-    EndCount: 1,
-    EndUntil: new Date(),
-    RepeatOnWeekday: ['TU'],
-    RepeatOnMonthly: RepeatOnMonthlyRadioGroupData[0].value,
-    MonthlyDay: new Date().getDate(),
-    MonthlyWeekNumber: WeekNumberDropDownListData[0].value,
-    MonthlyDayType: MonthlyDayTypeDropDownListData[0].value,
-    RepeatOnYearly: RepeatOnYearlyRadioGroupData[0].value,
-    YearlyMonth: (new Date().getMonth() + 1) as MonthNameTypesType,
-    YearlyMonthDay: new Date().getDate(),
-    YearlyWeekNumber: WeekNumberDropDownListData[0].value,
-    YearlyDayType: MonthlyDayTypeDropDownListData[0].value,
-  };
+  const initialValue = getInitialFormValue(dataItem, { FirstName, Title, Email, Gender, CellPhone });
 
   useEffect(
     () => () => {
@@ -100,7 +86,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const newDataItem: AgendaDataItem = getDataItemForApi(formDataItem);
+    const newDataItem = getDataItemForApi(formDataItem);
     console.log(`onSubmitDataItem`, newDataItem);
 
     setIsDataItemLoading(true);
@@ -250,7 +236,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                   )}
 
                   {repeatValue === RepeatTypes.Yearly && (
-                    <div className="RepeatOnYearly" >
+                    <div className="RepeatOnYearly">
                       <div className="yearly-group__label">
                         <Field
                           id="RepeatOnYearly"
