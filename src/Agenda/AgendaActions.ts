@@ -9,6 +9,7 @@ import {
   deleteDataItemInitAsyncAC,
   validateStartDateEventAC,
   validateEndDateEventAC,
+  validateFullNameValueAC,
 } from './AgendaAC';
 
 export const AgendaActions = {
@@ -25,4 +26,5 @@ export const AgendaActions = {
 export const AgendaEditCellsActions = {
   validateStartDateEvent: (dispatch: Dispatch, isValid: boolean) => dispatch(validateStartDateEventAC(isValid)),
   validateEndDateEvent: (dispatch: Dispatch, isValid: boolean) => dispatch(validateEndDateEventAC(isValid)),
+  validateFullNameValue: (dispatch: Dispatch, isValid: boolean) => dispatch(validateFullNameValueAC(isValid)),
 };

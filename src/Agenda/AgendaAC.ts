@@ -38,6 +38,8 @@ export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_IT
 export const validateStartDateEventAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_START_DATE_EVENT, payload: isValid });
 
 export const validateEndDateEventAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_END_DATE_EVENT, payload: isValid });
+
+export const validateFullNameValueAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_FULL_NAME_VALUE, payload: isValid });
 // Async
 export const fetchDataInitAsyncAC = (meta: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) => ({
   type: ActionTypes.FETCH_DATA_INIT_ASYNC,

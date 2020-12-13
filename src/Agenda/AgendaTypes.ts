@@ -79,6 +79,7 @@ export interface AgendaState {
   statusNameList: StatusNames[];
   isValidStartDateEvent: boolean;
   isValidEndDateEvent: boolean;
+  isValidFullNameValue: boolean;
 }
 
 export const ActionTypes = {
@@ -104,6 +105,7 @@ export const ActionTypes = {
   DELETE_DATA_ITEM_FINALLY: `AGENDA/DELETE_DATA_ITEM_FINALLY` as const,
   VALIDATE_START_DATE_EVENT: `AGENDA/VALIDATE_START_DATE_EVENT` as const,
   VALIDATE_END_DATE_EVENT: `AGENDA/VALIDATE_END_DATE_EVENT` as const,
+  VALIDATE_FULL_NAME_VALUE: `AGENDA/VALIDATE_FULL_NAME_VALUE` as const,
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;

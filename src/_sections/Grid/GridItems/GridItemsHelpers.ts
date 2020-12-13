@@ -75,7 +75,7 @@ export const transformTeamStaffDataToMultiSelectData = (domainData: TeamStaffDat
     };
   });
 
-export const EmptyDropDownListData = {
+export const EmptyDropDownListDataItem = {
   text: '',
   value: {
     Id: -1,

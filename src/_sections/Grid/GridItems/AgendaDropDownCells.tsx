@@ -1,17 +1,24 @@
-import React, { FC, useMemo } from 'react';
-import { useSelector } from 'react-redux';
-import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
+import React, { FC, useMemo, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { DropDownList, MultiSelect, ComboBox, MultiSelectChangeEvent, ComboBoxChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
-// Selectors
-import { selectAgendaMemoStatusNameList } from '../../../Agenda/AgendaSelectors';
-import { selectGridDataItemIsLoading } from '../GridSelectors';
-// Helpers
-import { onGridDropDownChange, transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from './GridItemsHelpers';
 import { CustomersDataItem } from '../../../Customers';
+// Selectors
+import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
+import { selectGridDataItemIsLoading } from '../GridSelectors';
+// Actions
+import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
+// Helpers
+import {
+  onGridDropDownChange,
+  transformDomainDataToDropDownListData,
+  transformDomainDataToMultiSelectData,
+  EmptyDropDownListDataItem,
+} from './GridItemsHelpers';
 
 export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
@@ -53,13 +60,36 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
   value,
 }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const dispatch = useDispatch();
+  const isValidFullName = useSelector(selectIsValidFullNameValue);
   const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
-  const dropDownListValue = dataForDropDownList.find((item) => item.text === value);
+  const dropDownListValue = dataForDropDownList.find((item) => item.text === value) ?? EmptyDropDownListDataItem;
 
-  const onFullNameChange = onGridDropDownChange<AgendaDataItem>(dataItemID, field, onChange);
+  useEffect(() => {
+    if (value) return;
+    AgendaEditCellsActions.validateFullNameValue(dispatch, false);
+
+    return () => {
+      AgendaEditCellsActions.validateFullNameValue(dispatch, true);
+    };
+  }, [dispatch, value]);
+
+  const onFullNameChange = (evt: ComboBoxChangeEvent) => {
+    const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
+    onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evtValue.value });
+  };
 
   return (
-    <DropDownList onChange={onFullNameChange} value={dropDownListValue} data={dataForDropDownList} textField="text" disabled={isDataItemLoading} />
+    <ComboBox
+      onChange={onFullNameChange}
+      value={dropDownListValue}
+      data={dataForDropDownList}
+      textField="text"
+      dataItemKey="value"
+      disabled={isDataItemLoading}
+      valid={isValidFullName}
+      placeholder="This field is required."
+    />
   );
 };
 

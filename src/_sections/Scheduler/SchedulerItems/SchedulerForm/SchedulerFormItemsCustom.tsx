@@ -23,7 +23,7 @@ import { getFormInputOptionalProps } from '../../SchedulerHelpers';
 import {
   transformDomainDataToDropDownListData,
   transformDomainDataToMultiSelectData,
-  EmptyDropDownListData,
+  EmptyDropDownListDataItem,
 } from '../../../Grid/GridItems/GridItemsHelpers';
 // Instruments
 import { WeekdayButtonGroupData } from './SchedulerFormInstruments';
@@ -78,13 +78,13 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = memo((pr
   const isTeamStaffDataItem = 'ShowOnline' in (currentEntity ? currentEntity : {});
   const dataForDropDownList = transformDomainDataToDropDownListData(domainData);
   const dropDownListValue = dataForDropDownList.find((item) => item.text === currentEntity?.Title) ?? dataForDropDownList[0];
-  const comboBoxValue = dataForDropDownList.find((item) => item.text === currentEntity?.FullName) ?? EmptyDropDownListData;
+  const comboBoxValue = dataForDropDownList.find((item) => item.text === currentEntity?.FullName) ?? EmptyDropDownListDataItem;
 
   const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
 
   const onComboBoxValueChange = useCallback(
     (evt: ComboBoxChangeEvent) => {
-      const evtValue = evt.value ? evt.value : EmptyDropDownListData;
+      const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
       setCustomerField(domainData.find(({ Id }) => Id === evtValue.value.Id));
 
       onChange({ value: evtValue.value });

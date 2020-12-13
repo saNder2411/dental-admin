@@ -12,6 +12,7 @@ export const initialState = {
   statusNameList: Object.values(StatusNames),
   isValidStartDateEvent: true,
   isValidEndDateEvent: true,
+  isValidFullNameValue: true,
 };
 
 export const reducer = (state: AgendaState = initialState, action: Actions): AgendaState => {
@@ -71,6 +72,9 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
 
     case ActionTypes.VALIDATE_END_DATE_EVENT:
       return { ...state, isValidEndDateEvent: action.payload };
+
+    case ActionTypes.VALIDATE_FULL_NAME_VALUE:
+      return { ...state, isValidFullNameValue: action.payload };
 
     default:
       return state;
