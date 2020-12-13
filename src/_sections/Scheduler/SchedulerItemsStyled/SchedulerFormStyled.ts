@@ -49,6 +49,15 @@ export const SchedulerForm = styled.section`
     width: 70px;
   }
 
+  & .k-form-field-wrap .k-widget.k-dropdown.k-header,
+  .k-form-field-wrap .k-widget.k-combobox.k-header.k-combobox-clearable {
+    width: calc(80% - 23px);
+  }
+
+  & .k-form-field-wrap .k-dropdown-wrap.k-state-default {
+    width: 100%;
+  }
+
   & .k-combobox .k-dropdown-wrap,
   && .k-multiselect-wrap,
   .k-picker-wrap.k-state-default {

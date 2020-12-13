@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import { FieldWrapper } from '@progress/kendo-react-form';
 import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup } from '@progress/kendo-react-inputs';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
@@ -26,7 +26,7 @@ export const FormInput: FC<FieldRenderProps> = (props) => {
   );
 };
 
-export const FormMaskedTextBox = (props: FieldRenderProps) => {
+export const FormMaskedTextBox: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, hint, optional, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
@@ -42,9 +42,9 @@ export const FormMaskedTextBox = (props: FieldRenderProps) => {
       </div>
     </FieldWrapper>
   );
-};
+});
 
-export const FormDropDownList: FC<FieldRenderProps> = (props) => {
+export const FormDropDownList: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, ...others } = props;
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
@@ -57,9 +57,9 @@ export const FormDropDownList: FC<FieldRenderProps> = (props) => {
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});
 
-export const FormDateTimePicker = (props: FieldRenderProps) => {
+export const FormDateTimePicker: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
@@ -73,9 +73,9 @@ export const FormDateTimePicker = (props: FieldRenderProps) => {
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});
 
-export const FormTextArea = (props: FieldRenderProps) => {
+export const FormTextArea: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, hint, disabled, optional, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
@@ -95,28 +95,26 @@ export const FormTextArea = (props: FieldRenderProps) => {
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});
 
-export const FormNumericTextBox = (props: FieldRenderProps) => {
+export const FormNumericTextBox: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, secondLabel, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
   return (
     <FieldWrapper>
-      {label && (
-        <Label editorId={id} editorValid={valid} editorDisabled={disabled}>
-          {label}
-        </Label>
-      )}
+      <Label editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
       <NumericTextBox ariaDescribedBy={`${hintId} ${errorId}`} valid={valid} id={id} disabled={disabled} {...others} />
       <span style={{ margin: 'auto 0' }}>&nbsp;{secondLabel}</span>
       {showHint && <Hint id={hintId}>{hint}</Hint>}
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});
 
-export const FormRadioGroup = (props: FieldRenderProps) => {
+export const FormRadioGroup: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
 
@@ -130,4 +128,4 @@ export const FormRadioGroup = (props: FieldRenderProps) => {
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});

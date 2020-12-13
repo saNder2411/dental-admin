@@ -1,10 +1,17 @@
-import React, { FC, useMemo, useCallback } from 'react';
+import React, { FC, useMemo, useCallback, memo } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldWrapper } from '@progress/kendo-react-form';
-import { DropDownList, MultiSelect, MultiSelectChangeEvent, DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
+import {
+  DropDownList,
+  MultiSelect,
+  ComboBox,
+  MultiSelectChangeEvent,
+  DropDownListChangeEvent,
+  ComboBoxChangeEvent,
+} from '@progress/kendo-react-dropdowns';
 import { ButtonGroup, Button } from '@progress/kendo-react-buttons';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
-import { FieldRenderProps } from '@progress/kendo-react-form';
+import { FieldRenderProps, Field, FieldProps } from '@progress/kendo-react-form';
 // Types
 import { LookupEntity } from '../../../../Agenda/AgendaTypes';
 import { CustomFieldRenderProps } from '../SchedulerItemTypes';
@@ -13,11 +20,17 @@ import { WeekdayTypesType } from './SchedulerFormTypes';
 import { selectServicesMemoData } from '../../../../Services/ServicesSelectors';
 // Helpers
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
-import { transformDomainDataToDropDownListData, transformDomainDataToMultiSelectData } from '../../../Grid/GridItems/GridItemsHelpers';
+import {
+  transformDomainDataToDropDownListData,
+  transformDomainDataToMultiSelectData,
+  EmptyDropDownListData,
+} from '../../../Grid/GridItems/GridItemsHelpers';
 // Instruments
 import { WeekdayButtonGroupData } from './SchedulerFormInstruments';
 
-export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
+export const CustomMemoField: FC<FieldProps> = memo((props) => <Field {...props} />);
+
+export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const LookupMultiBP01offerings = value as { results: LookupEntity[] | [] };
@@ -54,9 +67,9 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = (props) => {
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});
 
-export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) => {
+export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = memo((props) => {
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, setCustomerField, ...others } = props;
   const LookupEntity = value as LookupEntity;
@@ -64,45 +77,62 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = (props) 
   const currentEntity = domainData.find(({ Id }) => Id === LookupEntity.Id);
   const isTeamStaffDataItem = 'ShowOnline' in (currentEntity ? currentEntity : {});
   const dataForDropDownList = transformDomainDataToDropDownListData(domainData);
-  const dropDownListValue =
-    dataForDropDownList.find((item) => item.text === (isTeamStaffDataItem ? currentEntity?.Title : currentEntity?.FullName)) ??
-    dataForDropDownList[0];
+  const dropDownListValue = dataForDropDownList.find((item) => item.text === currentEntity?.Title) ?? dataForDropDownList[0];
+  const comboBoxValue = dataForDropDownList.find((item) => item.text === currentEntity?.FullName) ?? EmptyDropDownListData;
 
-  const onDropDownListValueChange = useCallback(
-    (evt: DropDownListChangeEvent) => {
-      if (!isTeamStaffDataItem) {
-        setCustomerField(domainData.find(({ Id }) => Id === evt.value.value.Id));
-      }
-      onChange({ value: evt.value.value });
+  const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
+
+  const onComboBoxValueChange = useCallback(
+    (evt: ComboBoxChangeEvent) => {
+      const evtValue = evt.value ? evt.value : EmptyDropDownListData;
+      setCustomerField(domainData.find(({ Id }) => Id === evtValue.value.Id));
+
+      onChange({ value: evtValue.value });
     },
-    [domainData, isTeamStaffDataItem, onChange, setCustomerField]
+    [domainData, onChange, setCustomerField]
   );
 
   return (
     <FieldWrapper>
-      {label && (
-        <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
-          {label}
-        </Label>
-      )}
-      <DropDownList
-        ariaLabelledBy={labelId}
-        ariaDescribedBy={`${hintId} ${errorId}`}
-        valid={valid}
-        id={id}
-        value={dropDownListValue}
-        data={dataForDropDownList}
-        onChange={onDropDownListValueChange}
-        disabled={disabled}
-        textField="text"
-        {...others}
-      />
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <div className={'k-form-field-wrap'}>
+        {isTeamStaffDataItem ? (
+          <DropDownList
+            ariaLabelledBy={labelId}
+            ariaDescribedBy={`${hintId} ${errorId}`}
+            valid={valid}
+            id={id}
+            value={dropDownListValue}
+            data={dataForDropDownList}
+            onChange={onDropDownListValueChange}
+            disabled={disabled}
+            textField="text"
+            {...others}
+          />
+        ) : (
+          <ComboBox
+            ariaLabelledBy={labelId}
+            ariaDescribedBy={`${hintId} ${errorId}`}
+            valid={valid}
+            id={id}
+            value={comboBoxValue}
+            data={dataForDropDownList}
+            onChange={onComboBoxValueChange}
+            disabled={disabled}
+            textField="text"
+            dataItemKey="value"
+            {...others}
+          />
+        )}
+        {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+      </div>
     </FieldWrapper>
   );
-};
+});
 
-export const FormDropDownListWithCustomData: FC<FieldRenderProps> = (props) => {
+export const FormDropDownListWithCustomData: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, data, ...others } = props;
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const dropDownListValue = data.find((item: { text: string; value: typeof value }) => item.value === value);
@@ -129,9 +159,9 @@ export const FormDropDownListWithCustomData: FC<FieldRenderProps> = (props) => {
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
-};
+});
 
-export const WeekdayFormButtonGroup = (props: FieldRenderProps) => {
+export const WeekdayFormButtonGroup: FC<FieldRenderProps> = memo((props) => {
   const { id, label, valid, disabled, value, onChange } = props;
   const { labelId } = getFormInputOptionalProps(props);
   const btnData = WeekdayButtonGroupData.map((item) => ({ ...item, isSelected: value.includes(item.value) }));
@@ -158,4 +188,4 @@ export const WeekdayFormButtonGroup = (props: FieldRenderProps) => {
       </ButtonGroup>
     </FieldWrapper>
   );
-};
+});

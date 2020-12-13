@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerProps } from '@progress/kendo-react-scheduler';
+import { formatDate } from '@telerik/kendo-intl';
 //Components
 import { SchedulerItem, SchedulerEditItem, SchedulerSlot, SchedulerEditSlot, SchedulerAgendaTask } from './SchedulerItems';
 
 export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resources }) => {
-  const defaultDate = new Date();
+  // const defaultDate = new Date();
 
   return (
     <KendoScheduler
@@ -14,7 +15,7 @@ export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resour
       group={group}
       resources={resources}
       timezone={'Etc/UTC'}
-      defaultDate={defaultDate}
+      // defaultDate={defaultDate}
       item={SchedulerItem}
       editItem={SchedulerEditItem}
       slot={SchedulerSlot}
@@ -30,7 +31,7 @@ export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resour
         select: false,
       }}>
       <DayView workDayStart={'08:00'} workDayEnd={'20:00'} slotDuration={60} slotDivisions={4} />
-      <WeekView slotDuration={60} slotDivisions={4} />
+      <WeekView slotDuration={60} slotDivisions={4} selectedShortDateFormat={formatDate(new Date(), 'EEEEE')} />
       <MonthView />
       {/* <AgendaView /> */}
     </KendoScheduler>

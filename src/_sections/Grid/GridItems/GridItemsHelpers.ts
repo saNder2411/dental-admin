@@ -74,3 +74,14 @@ export const transformTeamStaffDataToMultiSelectData = (domainData: TeamStaffDat
       },
     };
   });
+
+export const EmptyDropDownListData = {
+  text: '',
+  value: {
+    Id: -1,
+    __metadata: {
+      id: -1,
+      type: '',
+    },
+  },
+};

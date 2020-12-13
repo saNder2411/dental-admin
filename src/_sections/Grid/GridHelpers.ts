@@ -69,7 +69,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Id: ID,
           LastNameAppt: ``,
           LookupCM102customers: {
-            Id: -1,
+            Id: 1,
             __metadata: {
               id: guid,
               type: 'SP.Data.MetroBP02ListItem',

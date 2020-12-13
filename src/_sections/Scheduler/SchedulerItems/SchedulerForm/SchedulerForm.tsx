@@ -1,13 +1,14 @@
 import React, { FC, useMemo, useState, useEffect, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
-import { Form, Field, FormElement } from '@progress/kendo-react-form';
+import { Form, FormElement } from '@progress/kendo-react-form';
 // Styled Components
 import * as SC from '../../SchedulerItemsStyled/SchedulerFormStyled';
 // Components
 import { Loader } from '../../../../_components';
 // Form Items
 import {
+  CustomMemoField,
   ServicesFormMultiSelect,
   LookupEntityFormDropDownList,
   FormDropDownListWithCustomData,
@@ -54,6 +55,7 @@ import {
   getInitialFormValue,
   getDataItemForApi,
   requiredValidator,
+  requiredDropDownListValidator,
   phoneValidator,
   emailValidator,
   getSecondLabelForRepeatEvery,
@@ -127,7 +129,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
             return (
               <FormElement horizontal={true}>
                 <fieldset className="k-form-fieldset">
-                  <Field
+                  <CustomMemoField
                     id="services"
                     name="LookupMultiBP01offerings"
                     label="Services"
@@ -135,7 +137,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     disabled={isDataItemLoading}
                   />
 
-                  <Field
+                  <CustomMemoField
                     id="status"
                     name="AppointmentStatus"
                     label="Status"
@@ -144,7 +146,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     disabled={isDataItemLoading}
                   />
 
-                  <Field
+                  <CustomMemoField
                     id="start"
                     name="Start"
                     label="Start"
@@ -153,9 +155,16 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     disabled={isDataItemLoading}
                   />
 
-                  <Field id="end" name="End" label="End" component={FormDateTimePicker} validator={requiredValidator} disabled={isDataItemLoading} />
+                  <CustomMemoField
+                    id="end"
+                    name="End"
+                    label="End"
+                    component={FormDateTimePicker}
+                    validator={requiredValidator}
+                    disabled={isDataItemLoading}
+                  />
 
-                  <Field
+                  <CustomMemoField
                     id="repeat"
                     name="Repeat"
                     label="Repeat"
@@ -166,7 +175,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
                   {repeatValue && (
                     <>
-                      <Field
+                      <CustomMemoField
                         id="repeatEvery"
                         name="RepeatInterval"
                         label="Repeat every"
@@ -180,7 +189,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                   )}
 
                   {repeatValue === RepeatTypes.Weekly && (
-                    <Field
+                    <CustomMemoField
                       id="RepeatOnWeekday"
                       name="RepeatOnWeekday"
                       label="Repeat on"
@@ -192,7 +201,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                   {repeatValue === RepeatTypes.Monthly && (
                     <div className="row m-0">
                       <div className="col-md-4 p-0">
-                        <Field
+                        <CustomMemoField
                           id="RepeatOnMonthly"
                           name="RepeatOnMonthly"
                           label="Repeat on"
@@ -202,7 +211,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         />
                       </div>
                       <div className="col-md-6 monthly-group">
-                        <Field
+                        <CustomMemoField
                           id="MonthlyDay"
                           name="MonthlyDay"
                           format="n0"
@@ -213,7 +222,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         />
                         <div className="row m-0 pt-1">
                           <div className="col-md-4 p-0">
-                            <Field
+                            <CustomMemoField
                               id="MonthlyWeekNumber"
                               name="MonthlyWeekNumber"
                               component={FormDropDownListWithCustomData}
@@ -222,7 +231,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                             />
                           </div>
                           <div className="col-md-6 p-0">
-                            <Field
+                            <CustomMemoField
                               id="MonthlyDayType"
                               name="MonthlyDayType"
                               component={FormDropDownListWithCustomData}
@@ -238,7 +247,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                   {repeatValue === RepeatTypes.Yearly && (
                     <div className="RepeatOnYearly">
                       <div className="yearly-group__label">
-                        <Field
+                        <CustomMemoField
                           id="RepeatOnYearly"
                           name="RepeatOnYearly"
                           label="Repeat on"
@@ -250,7 +259,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                       <div className="RepeatOnYearly__fields yearly-group">
                         <div className="row m-0">
                           <div className="col-md-4 p-0">
-                            <Field
+                            <CustomMemoField
                               id="YearlyMonth"
                               name="YearlyMonth"
                               data={YearlyMonthTypeDropDownListData}
@@ -259,7 +268,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                             />
                           </div>
                           <div className="col-md-3 p-0">
-                            <Field
+                            <CustomMemoField
                               id="YearlyMonthDay"
                               name="YearlyMonthDay"
                               format="n0"
@@ -272,7 +281,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         </div>
                         <div className="row m-0 pt-1  yearly-group yearly-group-dropdown">
                           <div className="col-md-3 p-0">
-                            <Field
+                            <CustomMemoField
                               id="YearlyWeekNumber"
                               name="YearlyWeekNumber"
                               component={FormDropDownListWithCustomData}
@@ -281,7 +290,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                             />
                           </div>
                           <div className="col-md-4 p-0">
-                            <Field
+                            <CustomMemoField
                               id="YearlyDayType"
                               name="YearlyDayType"
                               data={MonthlyDayTypeDropDownListData}
@@ -291,7 +300,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                           </div>
                           <div className="d-flex align-items-center mr-2">of</div>
                           <div className="col-md-4 p-0">
-                            <Field
+                            <CustomMemoField
                               id="yearlyMonth"
                               name="YearlyMonth"
                               data={YearlyMonthTypeDropDownListData}
@@ -307,7 +316,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                   {repeatValue && (
                     <div className="row m-0">
                       <div className="col-md-4 p-0">
-                        <Field
+                        <CustomMemoField
                           id="endRepeat"
                           name="EndRepeat"
                           label="End"
@@ -317,7 +326,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         />
                       </div>
                       <div className="col-md-6 p-0 pt-5 align-self-end">
-                        <Field
+                        <CustomMemoField
                           id="endCount"
                           name="EndCount"
                           format="n0"
@@ -327,7 +336,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                           secondLabel="occurrence(s)"
                           component={FormNumericTextBox}
                         />
-                        <Field
+                        <CustomMemoField
                           id="endUntil"
                           name="EndUntil"
                           disabled={endRepeatValue !== EndRepeatTypes.On || isDataItemLoading}
@@ -337,7 +346,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     </div>
                   )}
 
-                  <Field
+                  <CustomMemoField
                     id="staff"
                     name="LookupHR01team"
                     label="Support Stuff"
@@ -348,7 +357,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
                   {isStatusConsultation ? null : (
                     <>
-                      <Field
+                      <CustomMemoField
                         id="customer"
                         name="LookupCM102customers"
                         label="Customer"
@@ -356,9 +365,10 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         domainData={customersData}
                         component={LookupEntityFormDropDownList}
                         disabled={isDataItemLoading}
+                        validator={requiredDropDownListValidator}
                       />
 
-                      <Field
+                      <CustomMemoField
                         id="firstName"
                         name="FirstName"
                         label="First Name"
@@ -367,7 +377,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         disabled={isDataItemLoading}
                       />
 
-                      <Field
+                      <CustomMemoField
                         id="lastName"
                         name="LastNameAppt"
                         label="Last Name"
@@ -376,7 +386,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         disabled={isDataItemLoading}
                       />
 
-                      <Field
+                      <CustomMemoField
                         id="gender"
                         name="Gender"
                         label="Gender"
@@ -386,7 +396,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         disabled={isDataItemLoading}
                       />
 
-                      <Field
+                      <CustomMemoField
                         id="email"
                         name="Email"
                         label="Email"
@@ -396,7 +406,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         disabled={isDataItemLoading}
                       />
 
-                      <Field
+                      <CustomMemoField
                         id="phone"
                         name="CellPhone"
                         label="Mobile Phone"
@@ -408,7 +418,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     </>
                   )}
 
-                  <Field id="notes" name="Notes" label="Notes" component={FormTextArea} disabled={isDataItemLoading} />
+                  <CustomMemoField id="notes" name="Notes" label="Notes" component={FormTextArea} disabled={isDataItemLoading} />
 
                   <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>
