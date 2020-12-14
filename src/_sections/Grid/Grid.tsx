@@ -103,6 +103,7 @@ export const Grid: FC<Props> = ({ children }) => {
   const allColumnFilteredData = allColumnFilter ? process(originalData, { filter: { logic: 'or', filters: allColumnsFilters } }).data : originalData;
 
   const processedData = process(allColumnFilteredData, dataState as any);
+  console.log(`processedData`, processedData);
 
   useEffect(() => {
     if (!processedData.data.length) {
@@ -118,7 +119,7 @@ export const Grid: FC<Props> = ({ children }) => {
   }, [processedData, onPdfExportDone]);
 
   const GridElement = (
-    <SC.Grid className="position-relative">
+    // <SC.Grid className="position-relative">
       <KendoGrid
         {...dataState}
         rowHeight={40}
@@ -150,7 +151,7 @@ export const Grid: FC<Props> = ({ children }) => {
         </GridToolbar>
         {children}
       </KendoGrid>
-    </SC.Grid>
+    // </SC.Grid>
   );
 
   return (
