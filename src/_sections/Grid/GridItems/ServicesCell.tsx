@@ -8,6 +8,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { ServicesIconInput } from './ServicesInputCells';
 import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCells';
+import { ServicesCategoryMultiSelect } from './ServicesDropDownCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StatusNames } from '../../../Agenda/AgendaTypes';
@@ -79,5 +80,20 @@ export const ServicesTotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ da
     <SC.GenericCurrencyCell isNegativeAmount={calcValue < 0}>
       <span>{intlService.formatNumber(calcValue, 'c')}</span>
     </SC.GenericCurrencyCell>
+  );
+};
+
+export const ServicesCategoryCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+  const value = cellValue as string;
+
+  return (
+    <td>
+      {dataItemInEditValue ? (
+        <ServicesCategoryMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+      ) : (
+        value
+      )}
+    </td>
   );
 };

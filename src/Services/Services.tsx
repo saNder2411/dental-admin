@@ -5,8 +5,8 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
   ServicesIconCell,
-  GenericTextCell,
   GenericReferenceCell,
+  ServicesCategoryCell,
   GenericRoleSkillsCell,
   ServicesDurationCell,
   GenericBooleanFlagCell,
@@ -49,6 +49,7 @@ export const Services: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             editable={false}
+            width={120}
           />
           <GridColumn
             field={'OfferingsName_Edit'}
@@ -61,7 +62,7 @@ export const Services: FC = (): JSX.Element => {
             field={'OfferingCatType'}
             title={localizationService.toLanguageString('custom.category', 'Category')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
+            cell={ServicesCategoryCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn

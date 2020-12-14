@@ -71,11 +71,11 @@ export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaf
   const roleSkills = useSelector(selectServicesRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
-  const dropDownListValue = value.map((value) => ({ text: value, value }));
+  const multiSelectValue = value.map((value) => ({ text: value, value }));
 
-  const onServicesChange = (evt: MultiSelectChangeEvent) => {
+  const onValueChange = (evt: MultiSelectChangeEvent) => {
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value) });
   };
 
-  return <MultiSelect onChange={onServicesChange} value={dropDownListValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
+  return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
 };
