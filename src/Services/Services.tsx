@@ -47,7 +47,6 @@ export const Services: FC = (): JSX.Element => {
             field={'Id'}
             title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
             filter={'text'}
             editable={false}
           />

@@ -7,7 +7,7 @@ import { IconMap } from '../../../_instruments';
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { ServicesIconInput } from './ServicesInputCells';
-import { ServicesNumeric } from './ServicesNumericCells';
+import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StatusNames } from '../../../Agenda/AgendaTypes';
@@ -44,7 +44,7 @@ export const ServicesDiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ data
   return (
     <td>
       {dataItemInEditValue ? (
-        <ServicesNumeric dataItemID={memoID} field={memoField} onChange={onChange} value={value} step={0.01} min={0} />
+        <ServicesNumericForDiscount dataItemID={memoID} field={memoField} onChange={onChange} value={value} step={1} min={0} />
       ) : (
         <span>{`${value ? value * 100 : `0`}%`}</span>
       )}

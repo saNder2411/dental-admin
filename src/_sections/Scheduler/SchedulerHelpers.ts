@@ -103,7 +103,7 @@ export const updateDataOnAddNewItemToChange = (
         RecurrenceID: null,
         ServiceCharge: 40,
         SubmissionIdUIT: null,
-        Title: `Consultation`,
+        Title: ``,
         TrackingComments: null,
         fAllDayEvent: null,
         id: ID,

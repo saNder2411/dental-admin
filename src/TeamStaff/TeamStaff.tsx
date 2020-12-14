@@ -42,8 +42,8 @@ export const TeamStaff: FC = (): JSX.Element => {
           <GridColumn
             field={'Id'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
-            cell={GenericTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
+            editable={false}
             width={130}
             filter={'numeric'}
           />

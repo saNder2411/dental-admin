@@ -43,9 +43,9 @@ export const Customers: FC = (): JSX.Element => {
         <Grid>
           <GridColumn
             field={'Id'}
-            title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
+            title={localizationService.toLanguageString('custom.ID', 'ID')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
+            editable={false}
             width={120}
             filter={'numeric'}
           />
