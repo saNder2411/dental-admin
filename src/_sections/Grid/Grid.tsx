@@ -2,7 +2,7 @@ import React, { FC, useRef, useState, useCallback, useEffect, useMemo } from 're
 import { useSelector, useDispatch } from 'react-redux';
 import { Grid as KendoGrid, GridColumn, GridColumnMenuSort, GridColumnMenuFilter, GridToolbar } from '@progress/kendo-react-grid';
 import { Button } from '@progress/kendo-react-buttons';
-import { GridPDFExport } from '@progress/kendo-react-pdf';
+import { PDFExport } from '@progress/kendo-react-pdf';
 import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
@@ -11,7 +11,7 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoOriginalData } from './GridSelectors';
 import { GridActions } from './GridActions';
 
-export const ColumnMenu = (props: any) => {
+export const ColumnMenu: FC<any> = (props) => {
   return (
     <div>
       <GridColumnMenuSort {...props} />
@@ -37,7 +37,6 @@ export const Grid: FC<Props> = ({ children }) => {
 
   const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
 
-  const [isPdfExporting, setIsPdfExporting] = useState(false);
   const [take, setTake] = useState(10);
   const [skip, setSkip] = useState(0);
   const [sort, setSort] = useState([]);
@@ -60,8 +59,6 @@ export const Grid: FC<Props> = ({ children }) => {
   );
 
   const onExcelExport = useCallback(() => excelExportRef?.current.save(), []);
-
-  const onPdfExportDone = useCallback(() => setIsPdfExporting(false), []);
 
   const onAllColumnFilterChange = useCallback(
     (evt) => {
@@ -101,7 +98,6 @@ export const Grid: FC<Props> = ({ children }) => {
   const allColumnFilteredData = allColumnFilter ? process(originalData, { filter: { logic: 'or', filters: allColumnsFilters } }).data : originalData;
 
   const processedData = process(allColumnFilteredData, dataState as any);
-  console.log(`processedData`, processedData);
 
   useEffect(() => {
     if (!processedData.data.length) {
@@ -111,10 +107,9 @@ export const Grid: FC<Props> = ({ children }) => {
 
   const onPdfExport = useCallback(() => {
     if (pdfExportRef.current) {
-      setIsPdfExporting(true);
-      pdfExportRef.current.save(processedData.data, onPdfExportDone);
+      pdfExportRef.current.save(processedData.data);
     }
-  }, [processedData, onPdfExportDone]);
+  }, [processedData]);
 
   const GridElement = (
     <KendoGrid
@@ -142,7 +137,7 @@ export const Grid: FC<Props> = ({ children }) => {
         <Button icon="excel" onClick={onExcelExport}>
           {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
         </Button>
-        <Button icon="pdf" onClick={onPdfExport} disabled={isPdfExporting}>
+        <Button icon="pdf" onClick={onPdfExport}>
           {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
         </Button>
       </GridToolbar>
@@ -153,10 +148,14 @@ export const Grid: FC<Props> = ({ children }) => {
 
   return (
     <>
-      <ExcelExport data={originalData} ref={excelExportRef}>
+      <div style={{ display: 'none' }}>
+        <ExcelExport data={originalData} ref={excelExportRef}>
+          {GridElement}
+        </ExcelExport>
+      </div>
+      <PDFExport paperSize="auto" margin={40} fileName={`Report for ${new Date().getFullYear()}`} author="Silver Agenda" ref={pdfExportRef}>
         {GridElement}
-      </ExcelExport>
-      <GridPDFExport ref={pdfExportRef}>{GridElement}</GridPDFExport>
+      </PDFExport>
     </>
   );
 };
