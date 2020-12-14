@@ -7,8 +7,6 @@ import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
-// Styled Components
-import * as SC from './GridItemsStyled/GridStyled';
 // Selectors
 import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoOriginalData } from './GridSelectors';
 import { GridActions } from './GridActions';
@@ -119,39 +117,38 @@ export const Grid: FC<Props> = ({ children }) => {
   }, [processedData, onPdfExportDone]);
 
   const GridElement = (
-    // <SC.Grid className="position-relative">
-      <KendoGrid
-        {...dataState}
-        rowHeight={40}
-        pageable
-        sortable
-        data={processedData}
-        editField={editField}
-        onItemChange={onGridItemChange}
-        onDataStateChange={onDataStateChange}>
-        <GridToolbar>
-          <span className="Grid__addNewItemWrapper">
-            <Input
-              value={allColumnFilter}
-              onChange={onAllColumnFilterChange}
-              placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
-            />
-            <span className="Grid__addNewItemTitle">{addItemTitle}</span>
-            <button title="Add new" className="k-button" onClick={() => onAddNewItem(dispatch)}>
-              <span className="k-icon k-i-plus-circle" />
-            </button>
-          </span>
+    <KendoGrid
+      {...dataState}
+      rowHeight={40}
+      pageable
+      sortable
+      data={processedData}
+      editField={editField}
+      onItemChange={onGridItemChange}
+      onDataStateChange={onDataStateChange}>
+      <GridToolbar>
+        <span className="Grid__addNewItemWrapper">
+          <Input
+            value={allColumnFilter}
+            onChange={onAllColumnFilterChange}
+            placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
+          />
+          <span className="Grid__addNewItemTitle">{addItemTitle}</span>
+          <button title="Add new" className="k-button" onClick={() => onAddNewItem(dispatch)}>
+            <span className="k-icon k-i-plus-circle" />
+          </button>
+        </span>
 
-          <Button icon="excel" onClick={onExcelExport}>
-            {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
-          </Button>
-          <Button icon="pdf" onClick={onPdfExport} disabled={isPdfExporting}>
-            {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
-          </Button>
-        </GridToolbar>
-        {children}
-      </KendoGrid>
-    // </SC.Grid>
+        <Button icon="excel" onClick={onExcelExport}>
+          {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
+        </Button>
+        <Button icon="pdf" onClick={onPdfExport} disabled={isPdfExporting}>
+          {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
+        </Button>
+      </GridToolbar>
+
+      {children}
+    </KendoGrid>
   );
 
   return (
