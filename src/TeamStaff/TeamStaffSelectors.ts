@@ -11,3 +11,5 @@ export const selectTeamStaffMemoData = () => createSelector(selectTeamStaffData,
 export const selectIsValidFullNameField = ({ TeamStaffState }: GlobalState) => TeamStaffState.isValidFullNameField;
 
 export const selectIsValidJobTitleField = ({ TeamStaffState }: GlobalState) => TeamStaffState.isValidJobTitleField;
+
+export const selectIsValidMobilePhoneField = ({ TeamStaffState }: GlobalState) => TeamStaffState.isValidMobilePhoneField;

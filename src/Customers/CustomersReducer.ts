@@ -9,6 +9,7 @@ export const initialState = {
   dataError: ``,
   isDataItemLoading: false,
   dataItemError: ``,
+  isValidMobilePhoneField: true,
 };
 
 export const reducer = (state: CustomersState = initialState, action: Actions): CustomersState => {
@@ -62,6 +63,9 @@ export const reducer = (state: CustomersState = initialState, action: Actions): 
 
     case ActionTypes.DELETE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
+
+    case ActionTypes.VALIDATE_MOBILE_PHONE_FIELD:
+      return { ...state, isValidMobilePhoneField: action.payload };
 
     default:
       return state;

@@ -60,6 +60,7 @@ export interface TeamStaffState {
   dataItemError: string;
   isValidFullNameField: boolean;
   isValidJobTitleField: boolean;
+  isValidMobilePhoneField: boolean;
 }
 
 export const ActionTypes = {
@@ -85,6 +86,7 @@ export const ActionTypes = {
   DELETE_DATA_ITEM_FINALLY: `STAFF/DELETE_DATA_ITEM_FINALLY` as const,
   VALIDATE_FULL_NAME_FIELD: `STAFF/VALIDATE_FULL_NAME_FIELD` as const,
   VALIDATE_JOB_TITLE_FIELD: `STAFF/VALIDATE_JOB_TITLE_FIELD` as const,
+  VALIDATE_MOBILE_PHONE_FIELD: `STAFF/VALIDATE_MOBILE_PHONE_FIELD` as const,
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;

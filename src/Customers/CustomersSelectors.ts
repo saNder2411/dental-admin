@@ -7,3 +7,5 @@ const selectCustomersData = ({ CustomersState }: GlobalState) => CustomersState.
 export const selectCustomersIsDataLoading = ({ CustomersState }: GlobalState) => CustomersState.isDataLoading;
 
 export const selectCustomersMemoData = () => createSelector(selectCustomersData, (data) => data);
+
+export const selectCustomersIsValidMobilePhoneField = ({ CustomersState }: GlobalState) => CustomersState.isValidMobilePhoneField;

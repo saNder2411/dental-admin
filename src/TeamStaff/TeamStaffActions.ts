@@ -9,6 +9,7 @@ import {
   deleteDataItemInitAsyncAC,
   validateFullNameFieldAC,
   validateJobTitleFieldAC,
+  validateMobilePhoneFieldAC,
 } from './TeamStaffAC';
 
 export const TeamStaffActions = {
@@ -24,4 +25,5 @@ export const TeamStaffActions = {
 export const TeamStaffEditCellsActions = {
   validateFullNameField: (dispatch: Dispatch, isValid: boolean) => dispatch(validateFullNameFieldAC(isValid)),
   validateJobTitleField: (dispatch: Dispatch, isValid: boolean) => dispatch(validateJobTitleFieldAC(isValid)),
+  validateMobilePhoneField: (dispatch: Dispatch, isValid: boolean) => dispatch(validateMobilePhoneFieldAC(isValid)),
 };

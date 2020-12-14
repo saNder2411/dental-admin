@@ -24,7 +24,7 @@ export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomersDataItem>>
 
   const staffNameList = teamStaffData.map(({ Title }) => Title);
   const dataForDropdownList = staffNameList.map((lastName) => ({ [field]: lastName, value: lastName }));
-  const dropDownListValue = dataForDropdownList.find((item) => item.value === cellValue);
+  const dropDownListValue = dataForDropdownList.find((item) => item.value === cellValue) ?? dataForDropdownList[0];
   const onSvcStaffChange = onGridDropDownChange<CustomersDataItem>(memoID, field, onChange);
 
   return (

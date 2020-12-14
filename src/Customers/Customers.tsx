@@ -10,6 +10,7 @@ import {
   GenericDateCell,
   GenericDateCellNoEditable,
   CustomersLastAppointmentsCell,
+  CustomersMobilePhoneCell,
   GenericAvatarCell,
   ActionsControlCell,
 } from '../_sections';
@@ -102,7 +103,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'CellPhone'}
             title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
+            cell={CustomersMobilePhoneCell as CustomGridCell}
             filter={'text'}
             width={140}
           />

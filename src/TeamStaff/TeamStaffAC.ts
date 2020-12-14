@@ -38,6 +38,8 @@ export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_IT
 export const validateFullNameFieldAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_FULL_NAME_FIELD, payload: isValid });
 
 export const validateJobTitleFieldAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_JOB_TITLE_FIELD, payload: isValid });
+
+export const validateMobilePhoneFieldAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_MOBILE_PHONE_FIELD, payload: isValid });
 // Async
 export const fetchDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_ASYNC });
 

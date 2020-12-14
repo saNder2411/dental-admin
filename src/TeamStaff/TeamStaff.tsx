@@ -10,6 +10,7 @@ import {
   TeamStaffJobTitleCell,
   GenericRoleSkillsCell,
   GenericBooleanFlagCell,
+  TeamStaffMobilePhoneCell,
   ActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
@@ -86,7 +87,7 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'CellPhone'}
             title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
+            cell={TeamStaffMobilePhoneCell as CustomGridCell}
             filter={'text'}
             width={140}
           />

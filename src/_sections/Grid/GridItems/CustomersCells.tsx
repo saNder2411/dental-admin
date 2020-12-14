@@ -2,6 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Components
 import { CustomersSvcStaffDropDownList, CustomersLastAppointmentsMultiSelect } from './CustomersDropDownCells';
+import { CustomersMobilePhoneInput } from './CustomersInputCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
@@ -10,6 +11,8 @@ import { LookupEntity } from '../../../Agenda/AgendaTypes';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
+// Helpers
+import { isString } from './GridItemsHelpers';
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
@@ -40,6 +43,17 @@ export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomersDataItem>>
       ) : (
         value
       )}
+    </td>
+  );
+};
+
+export const CustomersMobilePhoneCell: FC<GridCellProps<CustomersDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
+  const strValue = isString(cellValue) ? cellValue : '';
+
+  return (
+    <td>
+      {dataItemInEditValue ? <CustomersMobilePhoneInput dataItemID={memoID} field={memoField} onChange={onChange} value={strValue} /> : strValue}
     </td>
   );
 };

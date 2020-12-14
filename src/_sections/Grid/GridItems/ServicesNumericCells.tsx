@@ -32,10 +32,9 @@ export const ServicesNumericForDiscount: FC<EditCellNumericProps<ServicesDataIte
   min,
 }): JSX.Element => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
-  console.log(`ServicesNumeric`, value)
 
   const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
-    onChange({ dataItem: dataItemID, field, syntheticEvent, value: value ? value / 100 : value});
+    onChange({ dataItem: dataItemID, field, syntheticEvent, value: value ? value / 100 : value });
 
   return <NumericTextBox value={value * 100} step={step} min={min} onChange={onNumericChange} disabled={isDataItemLoading} />;
 };

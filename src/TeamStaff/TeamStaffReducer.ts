@@ -11,6 +11,7 @@ export const initialState = {
   dataItemError: ``,
   isValidFullNameField: true,
   isValidJobTitleField: true,
+  isValidMobilePhoneField: true,
 };
 
 export const reducer = (state: TeamStaffState = initialState, action: Actions): TeamStaffState => {
@@ -70,6 +71,9 @@ export const reducer = (state: TeamStaffState = initialState, action: Actions): 
 
     case ActionTypes.VALIDATE_JOB_TITLE_FIELD:
       return { ...state, isValidJobTitleField: action.payload };
+
+    case ActionTypes.VALIDATE_MOBILE_PHONE_FIELD:
+      return { ...state, isValidMobilePhoneField: action.payload };
 
     default:
       return state;

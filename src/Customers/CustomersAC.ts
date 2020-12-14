@@ -34,6 +34,8 @@ export const deleteDataItemSuccessAC = (deletedDataItemID: number) => ({ type: A
 export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.DELETE_DATA_ITEM_FAILURE, payload: errorMessage });
 
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
+
+export const validateMobilePhoneFieldAC = (isValid: boolean) => ({ type: ActionTypes.VALIDATE_MOBILE_PHONE_FIELD, payload: isValid });
 // Async
 export const fetchDataInitAsyncAC = (meta: { teamStaffDataLength: number }) => ({
   type: ActionTypes.FETCH_DATA_INIT_ASYNC,

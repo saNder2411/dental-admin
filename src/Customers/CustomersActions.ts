@@ -2,7 +2,13 @@ import { Dispatch } from 'redux';
 // Types
 import { CustomersDataItem } from './CustomersTypes';
 // Actions
-import { fetchDataInitAsyncAC, createDataItemInitAsyncAC, updateDataItemInitAsyncAC, deleteDataItemInitAsyncAC } from './CustomersAC';
+import {
+  fetchDataInitAsyncAC,
+  createDataItemInitAsyncAC,
+  updateDataItemInitAsyncAC,
+  deleteDataItemInitAsyncAC,
+  validateMobilePhoneFieldAC,
+} from './CustomersAC';
 
 export const CustomersActions = {
   fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
@@ -13,4 +19,8 @@ export const CustomersActions = {
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
     dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
+};
+
+export const CustomersEditCellsActions = {
+  validateMobilePhoneField: (dispatch: Dispatch, isValid: boolean) => dispatch(validateMobilePhoneFieldAC(isValid)),
 };

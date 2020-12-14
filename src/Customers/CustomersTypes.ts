@@ -47,6 +47,7 @@ export interface CustomersState {
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;
+  isValidMobilePhoneField: boolean;
 }
 
 export const ActionTypes = {
@@ -70,6 +71,7 @@ export const ActionTypes = {
   DELETE_DATA_ITEM_SUCCESS: `CUSTOMERS/DELETE_DATA_ITEM_SUCCESS` as const,
   DELETE_DATA_ITEM_FAILURE: `CUSTOMERS/DELETE_DATA_ITEM_FAILURE` as const,
   DELETE_DATA_ITEM_FINALLY: `CUSTOMERS/DELETE_DATA_ITEM_FINALLY` as const,
+  VALIDATE_MOBILE_PHONE_FIELD: `CUSTOMERS/VALIDATE_MOBILE_PHONE_FIELD` as const,
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
