@@ -1,7 +1,8 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useInternationalization } from '@progress/kendo-react-intl';
+import { Popup } from '@progress/kendo-react-popup';
 // Components
 import { AgendaSvcStaffDropDownList, AgendaStatusDropDownList, AgendaFullNameDropDownList, AgendaServicesMultiSelect } from './AgendaDropDownCells';
 import { AgendaStartDateInput, AgendaEndDateInput } from './AgendaDateCells';
@@ -19,6 +20,29 @@ import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
+// Helpers
+import { isString } from './GridItemsHelpers';
+
+export const AgendaReferenceCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+  const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const strValue = isString(cellValue) ? cellValue : '';
+
+  return (
+    <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
+      {strValue}
+      <Popup
+        show={showPopup}
+        anchor={anchorRef.current as HTMLTableDataCellElement}
+        style={{ width: anchorRef.current?.offsetWidth }}
+        popupClass="popup-content">
+        <p>Details reference</p>
+        {strValue}
+      </Popup>
+    </SC.ReferenceCell>
+  );
+};
 
 export const AgendaStatusIcon: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);

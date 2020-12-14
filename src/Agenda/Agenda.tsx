@@ -8,7 +8,7 @@ import {
   ColumnMenu,
   AgendaStatusIcon,
   AgendaStatusCell,
-  GenericReferenceCell,
+  AgendaReferenceCell,
   AgendaStartDateCell,
   AgendaEndDateCell,
   AgendaSvcStaffCell,
@@ -59,7 +59,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Title'}
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
-            cell={GenericReferenceCell as CustomGridCell}
+            cell={AgendaReferenceCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn

@@ -42,13 +42,13 @@ export interface APIAgendaDataItem {
   LookupCM102customers: LookupEntity;
   LookupHR01team: LookupEntity;
   LookupMultiBP01offerings: { results: LookupEntity[] };
-  MasterSeriesItemID: null | string;
+  MasterSeriesItemID: null | number;
   MetroRRule: null | string;
   MetroRecException: null | string;
   Notes: null | string;
   RecurrenceID: null | number;
   ServiceCharge: number;
-  SubmissionIdUIT: null | string | number;
+  SubmissionIdUIT: null | string;
   Title: string;
   TrackingComments: null | string;
   fAllDayEvent: null | string;

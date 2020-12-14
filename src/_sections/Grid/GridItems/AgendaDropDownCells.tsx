@@ -9,7 +9,8 @@ import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { CustomersDataItem } from '../../../Customers';
 // Selectors
 import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
+import { selectGridDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
 // Actions
 import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 // Helpers
@@ -19,6 +20,7 @@ import {
   transformDomainDataToMultiSelectData,
   EmptyDropDownListDataItem,
 } from './GridItemsHelpers';
+import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
@@ -65,6 +67,11 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
   const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
   const dropDownListValue = dataForDropDownList.find((item) => item.text === value) ?? EmptyDropDownListDataItem;
 
+  const selectCustomersData = useMemo(selectCustomersMemoData, []);
+  const customersData = useSelector(selectCustomersData);
+  const selectDataItemInNewValue = useMemo(() => selectGridDataItemMemoValueForCell(dataItemID, 'isNew'), [dataItemID]);
+  const isNew = useSelector(selectDataItemInNewValue);
+
   useEffect(() => {
     if (value) return;
     AgendaEditCellsActions.validateFullNameValue(dispatch, false);
@@ -76,7 +83,11 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
+    const { FirstName, Title, ID } = customersData.find(({ Id }) => Id === evtValue.value.Id) ?? customersData[0];
+    const newTitle = setTitleProp<number>(FirstName, Title, ID);
+
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evtValue.value });
+    isNew && onChange({ dataItem: dataItemID, field: 'Title', syntheticEvent: evt.syntheticEvent, value: newTitle });
   };
 
   return (
