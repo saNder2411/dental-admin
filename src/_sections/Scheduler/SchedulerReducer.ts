@@ -2,7 +2,7 @@
 import { SchedulerState, ActionTypes, Actions } from './SchedulerTypes';
 import { ActionTypes as TeamStaffActionsTypes } from '../../TeamStaff/TeamStaffTypes';
 // Helpers
-import { updateDataAfterRemoveItem, updateDataOnChangeItem, updateDataOnAddNewItemToChange } from './SchedulerHelpers';
+import { updateDataAfterRemoveItem, updateDataOnAddNewItemToChange } from './SchedulerHelpers';
 
 const initialState = {
   eventDrivenData: [],
@@ -45,9 +45,6 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
       return { ...state, eventDrivenData: newDataAfterDiscardAddNewItem, originalData: [...newDataAfterDiscardAddNewItem] };
-
-    case ActionTypes.CHANGE_ITEM:
-      return { ...state, eventDrivenData: updateDataOnChangeItem(state.eventDrivenData, action.payload) };
 
     default:
       return state;

@@ -28,12 +28,12 @@ import { selectTeamStaffMemoData } from '../../../../TeamStaff/TeamStaffSelector
 import { selectCustomersMemoData } from '../../../../Customers/CustomersSelectors';
 // Types
 import { StatusNames } from '../../../../Agenda/AgendaTypes';
+import { CustomersDataItem } from '../../../../Customers';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
 import { AgendaActions } from '../../../../Agenda/AgendaActions';
 import { SchedulerActions } from '../../SchedulerActions';
-import { CustomersDataItem } from '../../../../Customers';
 // Instruments
 import {
   StatusDropDownListData,

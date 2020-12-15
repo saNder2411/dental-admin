@@ -1,5 +1,4 @@
 import { ActionTypes, SchedulerDataItem } from './SchedulerTypes';
-import { SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 import {
   fetchDataSuccessAC as fetchTeamStaffDataTSuccessAC,
   createDataItemSuccessAC as createTeamStaffDataDataItemSuccessAC,
@@ -18,7 +17,5 @@ export const addNewItemToEditAC = (defaultDataForFormItem: { Start: Date; End: D
 });
 
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
-
-export const changeItemAC = (schedulerEvent: SchedulerDataChangeEvent) => ({ type: ActionTypes.CHANGE_ITEM, payload: schedulerEvent });
 
 export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };

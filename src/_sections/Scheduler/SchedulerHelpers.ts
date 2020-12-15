@@ -1,7 +1,5 @@
 import { FieldRenderProps } from '@progress/kendo-react-form';
-import { SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 import { v4 as uuidV4 } from 'uuid';
-import { guid } from '@progress/kendo-react-common';
 // Types
 import { SchedulerDataItem } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
@@ -38,18 +36,6 @@ export const updateDataAfterRemoveItem = (data: SchedulerDataItem[], removeItemI
   if (index < 0) return data;
 
   return [...data.slice(0, index), ...data.slice(index + 1)];
-};
-
-export const updateDataOnChangeItem = (data: SchedulerDataItem[], { created, updated, deleted }: SchedulerDataChangeEvent): SchedulerDataItem[] => {
-  return (
-    data
-      // Filter the deleted items
-      .filter((item) => deleted.find((current) => current.id === item.ID) === undefined)
-      // Find and replace the updated items
-      .map((item) => updated.find((current) => current.id === item.ID) || item)
-      // Add the newly created items and assign an `id`.
-      .concat(created.map((item) => ({ ...item, ID: guid() })))
-  );
 };
 
 export const updateDataOnAddNewItemToChange = (
@@ -123,4 +109,11 @@ export const updateDataOnAddNewItemToChange = (
       ...data,
     ],
   ];
+};
+
+export const extractGuidFromString = (metadataID: string) => {
+  const startGuid = metadataID.indexOf(`'`) + 1;
+  const endGuid = metadataID.lastIndexOf(`'`);
+
+  return metadataID.slice(startGuid, endGuid);
 };

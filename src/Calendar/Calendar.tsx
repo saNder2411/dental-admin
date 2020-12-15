@@ -26,17 +26,15 @@ export const Calendar: FC = () => {
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
   const selectOriginalData = useMemo(selectSchedulerMemoOriginalData, []);
   const originalData = useSelector(selectOriginalData);
-  const calendarData = useMemo(() => originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [mapTeamToFiltered, originalData])
+  const calendarData = useMemo(() => originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [
+    mapTeamToFiltered,
+    originalData,
+  ]);
 
   const dispatch = useDispatch();
-  
-
-  
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetSchedulerDataForDomainWithDataBind(agendaData, agendaIsDataLoading, SchedulerActions, dispatch);
-
-  const onDataChange = useCallback(SchedulerActions.onItemChange(dispatch), [dispatch]);
 
   const onEmployeeClick = useCallback((employeeID: number) => SchedulerActions.onEmployeeChange(dispatch, employeeID), [dispatch]);
 
@@ -73,7 +71,6 @@ export const Calendar: FC = () => {
       <div className="card-component">
         <Scheduler
           data={calendarData}
-          onDataChange={onDataChange}
           modelFields={ordersModelFields}
           group={{
             resources: ['Teams'],

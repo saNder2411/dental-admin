@@ -1,5 +1,4 @@
 import { Dispatch } from 'redux';
-import { SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 // Types
 import { AgendaDataItem } from '../../Agenda/AgendaTypes';
 // Actions
@@ -12,7 +11,6 @@ export const ActionTypes = {
 
   ADD_NEW_ITEM_TO_EDIT: 'SCHEDULER/ADD_NEW_ITEM_TO_EDIT' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'SCHEDULER/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
-  CHANGE_ITEM: 'SCHEDULER/CHANGE_ITEM' as const,
 };
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -28,7 +26,6 @@ export interface SchedulerStateActions {
 
   onAddNewItem: (dispatch: Dispatch, defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) => void;
   onDiscardNewItemToData: (dispatch: Dispatch, dataItem: SchedulerDataItem) => void;
-  onItemChange: (dispatch: Dispatch) => (evt: SchedulerDataChangeEvent) => void;
 }
 
 export interface SchedulerState {
