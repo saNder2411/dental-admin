@@ -1,5 +1,5 @@
 import React, { FC, useState, useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerItem as KendoSchedulerItem } from '@progress/kendo-react-scheduler';
 import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
@@ -21,13 +21,17 @@ import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 //Actions
 import { SchedulerActions } from '../SchedulerActions';
 import { AgendaActions } from '../../../Agenda/AgendaActions';
+// Selectors
+import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
   const { setFormItemID } = SchedulerActions;
   const dispatch = useDispatch();
+  const agendaIsDataItemLoading = useSelector(selectAgendaIsDataItemLoading);
   // const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
+
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
@@ -49,10 +53,12 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const onSchedulerItemClick = useCallback(
     (evt) => {
+      if (agendaIsDataItemLoading) return;
+
       setShowPopup((prevState) => !prevState);
       onClick && onClick(evt);
     },
-    [onClick]
+    [agendaIsDataItemLoading, onClick]
   );
 
   const onSchedulerItemBlur = useCallback(
@@ -77,7 +83,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     // if (isRecurring) {
     //   setShowOccurrenceDialog(true);
     // } else {
-      setShowRemoveDialog(true);
+    setShowRemoveDialog(true);
     // }
   }, [setShowPopup, setShowRemoveDialog]);
 

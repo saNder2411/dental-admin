@@ -1,4 +1,5 @@
 import { Dispatch } from 'redux';
+import { SchedulerProps } from '@progress/kendo-react-scheduler';
 // Types
 import { AgendaDataItem } from '../../Agenda/AgendaTypes';
 // Actions
@@ -33,4 +34,8 @@ export interface SchedulerState {
   originalData: SchedulerDataItem[];
   mapTeamToFiltered: { [key: string]: boolean };
   formItemID: number | null;
+}
+
+export interface CustomSchedulerProps extends SchedulerProps {
+  setIsAgendaDataItemLoading: (isLoading: boolean) => void;
 }

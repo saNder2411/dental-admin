@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-export const Calendar = styled.div`
+export const Calendar = styled.section`
+  & .DataItemLoader {
+    z-index: 2;
+    background-color: rgba(246, 246, 246, 0.4);
+  }
+
   & .card-title {
     margin-top: auto;
     margin-bottom: auto;

@@ -20,3 +20,14 @@ export const Loader: FC<Props> = ({
     <KendoLoader size={size} type={type} themeColor={themeColor} className={`d-flex justify-content-center align-items-center ${className}`} />
   ) : null;
 };
+
+interface LoaderDataItemProps {
+  isLoading: boolean;
+}
+
+export const LoaderDataItem: FC<LoaderDataItemProps> = ({ isLoading }) =>
+  isLoading ? (
+    <div className="position-absolute w-100 h-100 d-flex z-index-3 DataItemLoader">
+      <Loader className="m-auto" isLoading={isLoading} size={'large'} type="converging-spinner" />
+    </div>
+  ) : null;

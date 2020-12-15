@@ -56,8 +56,8 @@ import {
   getDataItemForApi,
   requiredValidator,
   requiredDropDownListValidator,
-  phoneValidator,
-  emailValidator,
+  // phoneValidator,
+  // emailValidator,
   getSecondLabelForRepeatEvery,
 } from './SchedulerFormHelpers';
 
@@ -110,7 +110,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
           initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            // console.log(`formRenderProps`, formRenderProps);
+            console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('Repeat');
             const endRepeatValue = formRenderProps.valueGetter('EndRepeat');
             const repeatOnMonthlyValue = formRenderProps.valueGetter('RepeatOnMonthly');
@@ -402,7 +402,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Email"
                         type="email"
                         component={FormInput}
-                        validator={emailValidator}
+                        // validator={emailValidator}
                         disabled={isDataItemLoading}
                       />
 
@@ -412,7 +412,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Mobile Phone"
                         mask="+(000) 000-00-00"
                         component={FormMaskedTextBox}
-                        validator={phoneValidator}
+                        // validator={phoneValidator}
                         disabled={isDataItemLoading}
                       />
                     </>

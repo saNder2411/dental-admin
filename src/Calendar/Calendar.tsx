@@ -1,10 +1,10 @@
-import React, { FC, useCallback, useMemo } from 'react';
+import React, { FC, useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Scheduler } from '../_sections';
 import { CalendarTopControlItem, CalendarHeaderCardCell } from './CalendarItems';
-import { Loader } from '../_components';
+import { Loader, LoaderDataItem } from '../_components';
 // Styled Components
 import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
@@ -22,6 +22,8 @@ import { ordersModelFields } from '../_sections/Scheduler/SchedulerHelpers';
 export const Calendar: FC = () => {
   const localizationService = useLocalization();
   const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
+  const [isAgendaDataItemLoading, setIsAgendaDataItemLoading] = useState(false);
+  const dispatch = useDispatch();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
   const selectOriginalData = useMemo(selectSchedulerMemoOriginalData, []);
@@ -31,25 +33,21 @@ export const Calendar: FC = () => {
     originalData,
   ]);
 
-  const dispatch = useDispatch();
-
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetSchedulerDataForDomainWithDataBind(agendaData, agendaIsDataLoading, SchedulerActions, dispatch);
 
   const onEmployeeClick = useCallback((employeeID: number) => SchedulerActions.onEmployeeChange(dispatch, employeeID), [dispatch]);
 
-  const onAddNewItemClick = useCallback(
-    () =>
-      SchedulerActions.onAddNewItem(dispatch, {
-        Start: new Date(new Date().setHours(10, 0, 0, 0)),
-        End: new Date(new Date().setHours(11, 0, 0, 0)),
-        TeamID: 1,
-      }),
-    [dispatch]
-  );
+  const onAddNewItemClick = () =>
+    SchedulerActions.onAddNewItem(dispatch, {
+      Start: new Date(new Date().setHours(10, 0, 0, 0)),
+      End: new Date(new Date().setHours(11, 0, 0, 0)),
+      TeamID: 1,
+    });
 
   const contentTSX = agendaData.length > 0 && !agendaIsDataLoading && (
-    <div className="card-container grid">
+    <div className="card-container grid position-relative">
+      <LoaderDataItem isLoading={isAgendaDataItemLoading} />
       <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
       <div className="card-control-wrapper">
         {teamData.map((employee) => (
@@ -72,6 +70,7 @@ export const Calendar: FC = () => {
         <Scheduler
           data={calendarData}
           modelFields={ordersModelFields}
+          setIsAgendaDataItemLoading={setIsAgendaDataItemLoading}
           group={{
             resources: ['Teams'],
             orientation: 'horizontal',

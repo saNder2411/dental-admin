@@ -1,11 +1,11 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerProps, SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
+import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 import { formatDate } from '@telerik/kendo-intl';
 //Components
 import { SchedulerItem, SchedulerEditItem, SchedulerSlot, SchedulerEditSlot, SchedulerAgendaTask } from './SchedulerItems';
 // Types
-import { SchedulerDataItem } from './SchedulerTypes';
+import { SchedulerDataItem, CustomSchedulerProps } from './SchedulerTypes';
 // Selectors
 import { selectTeamStaffMemoData } from '../../TeamStaff/TeamStaffSelectors';
 // Actions
@@ -13,26 +13,29 @@ import { AgendaActions } from '../../Agenda/AgendaActions';
 // Helpers
 import { extractGuidFromString } from './SchedulerHelpers';
 
-export const Scheduler: FC<SchedulerProps> = ({ data, modelFields, group, resources }) => {
+export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
   const dispatch = useDispatch();
 
-  const onDataChange = ({ updated }: SchedulerDataChangeEvent) => {
-    if (typeof updated[0] === 'number' || !updated[0]) return;
+  const onDataChange = useCallback(
+    ({ updated }: SchedulerDataChangeEvent) => {
+      if (typeof updated[0] === 'number' || !updated[0]) return;
+      setIsAgendaDataItemLoading(true);
 
-    const [updatedDataItem] = updated as SchedulerDataItem[];
+      const [updatedDataItem] = updated as SchedulerDataItem[];
 
-    if (updatedDataItem.TeamID !== updatedDataItem.LookupHR01team.Id) {
-      const newStaff = teamStaffData.find(({ Id }) => Id === updatedDataItem.TeamID)!;
-      const guidNewStaff = extractGuidFromString(newStaff.__metadata.id);
-      updatedDataItem.LookupHR01team.Id = updatedDataItem.TeamID;
-      updatedDataItem.LookupHR01team.__metadata.id = guidNewStaff;
-    }
-    console.log(`updated`, updatedDataItem);
+      if (updatedDataItem.TeamID !== updatedDataItem.LookupHR01team.Id) {
+        const newStaff = teamStaffData.find(({ Id }) => Id === updatedDataItem.TeamID)!;
+        const guidNewStaff = extractGuidFromString(newStaff.__metadata.id);
+        updatedDataItem.LookupHR01team.Id = updatedDataItem.TeamID;
+        updatedDataItem.LookupHR01team.__metadata.id = guidNewStaff;
+      }
 
-    AgendaActions.updateDataItem(dispatch, updatedDataItem, () => {});
-  };
+      AgendaActions.updateDataItem(dispatch, updatedDataItem, () => setIsAgendaDataItemLoading(false));
+    },
+    [dispatch, setIsAgendaDataItemLoading, teamStaffData]
+  );
   // const defaultDate = new Date();
 
   return (

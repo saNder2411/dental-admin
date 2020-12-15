@@ -8,6 +8,8 @@ const selectAgendaStatusNameList = ({ AgendaState }: GlobalState) => AgendaState
 
 export const selectAgendaIsDataLoading = ({ AgendaState }: GlobalState) => AgendaState.isDataLoading;
 
+export const selectAgendaIsDataItemLoading = ({ AgendaState }: GlobalState) => AgendaState.isDataItemLoading;
+
 export const selectAgendaMemoData = () => createSelector(selectAgendaData, (data) => data);
 
 export const selectAgendaMemoStatusNameList = () => createSelector(selectAgendaStatusNameList, (statusNameList) => statusNameList);
