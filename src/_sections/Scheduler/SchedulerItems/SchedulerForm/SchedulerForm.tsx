@@ -56,8 +56,8 @@ import {
   getDataItemForApi,
   requiredValidator,
   requiredDropDownListValidator,
-  // phoneValidator,
-  // emailValidator,
+  phoneValidator,
+  emailValidator,
   getSecondLabelForRepeatEvery,
 } from './SchedulerFormHelpers';
 
@@ -88,6 +88,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    console.log(evt)
     const newDataItem = getDataItemForApi(formDataItem);
     console.log(`onSubmitDataItem`, newDataItem);
 
@@ -402,7 +403,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Email"
                         type="email"
                         component={FormInput}
-                        // validator={emailValidator}
+                        validator={emailValidator}
                         disabled={isDataItemLoading}
                       />
 
@@ -412,7 +413,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Mobile Phone"
                         mask="+(000) 000-00-00"
                         component={FormMaskedTextBox}
-                        // validator={phoneValidator}
+                        validator={phoneValidator}
                         disabled={isDataItemLoading}
                       />
                     </>
@@ -422,7 +423,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
                   <div className="form__actions-bar-wrapper">
                     <DialogActionsBar>
-                      <button className="k-button" type="submit" disabled={isDataItemLoading}>
+                      <button className="k-button" type="submit" disabled={isDataItemLoading || !formRenderProps.allowSubmit}>
                         {isDataItemLoading ? (
                           <Loader
                             className="d-flex justify-content-center align-items-center"
