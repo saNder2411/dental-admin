@@ -13657,7 +13657,7 @@
         }
       },
       "LookupHR01team": {
-        "Id": 3,
+        "Id": 4,
         "__metadata": {
           "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
           "type": "SP.Data.MetroHR01ListItem"
@@ -13685,58 +13685,6 @@
       "FirstName": "Stephen",
       "LastNameAppt": "Pye",
       "Title": "S.Pye-1383"
-    },
-    {
-      "AppointmentSource": null,
-      "AppointmentStatus": "(2) Pending",
-      "CellPhone": "+(890) 985-43-23",
-      "Description": "",
-      "Duration": 60,
-      "Email": "stephen@gamil.com",
-      "EndDate": "2020-12-15T08:45:00.000Z",
-      "EventDate": "2020-12-15T08:30:00.000Z",
-      "EventType": 0,
-      "FilterEnd": "2020-12-15T09:45:00.000Z",
-      "FilterStart": "2020-12-15T08:30:00.000Z",
-      "Gender": "(2) Male",
-      "ID": 1384,
-      "Id": 1384,
-      "LookupCM102customers": {
-        "Id": 1,
-        "__metadata": {
-          "id": "5149261c-b03d-495d-960f-71cdfee87285",
-          "type": "SP.Data.MetroBP02ListItem"
-        }
-      },
-      "LookupHR01team": {
-        "Id": 5,
-        "__metadata": {
-          "id": "5149261c-b03d-495d-960f-71cdfee87285",
-          "type": "SP.Data.MetroHR01ListItem"
-        }
-      },
-      "LookupMultiBP01offerings": {
-        "results": []
-      },
-      "MasterSeriesItemID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "Notes": "",
-      "RecurrenceID": null,
-      "ServiceCharge": 40,
-      "SubmissionIdUIT": null,
-      "TrackingComments": null,
-      "fAllDayEvent": null,
-      "id": 1384,
-      "__metadata": {
-        "id": "Web/Lists(guid'5149261c-b03d-495d-960f-71cdfee87285')/Items(1384)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'5149261c-b03d-495d-960f-71cdfee87285')/Items(1384)",
-        "etag": "\"2\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "FirstName": "Stephen",
-      "LastNameAppt": "Pye",
-      "Title": "S.Pye-1384"
     }
   ]
 }

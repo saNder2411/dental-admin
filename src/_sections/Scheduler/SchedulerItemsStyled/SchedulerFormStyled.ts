@@ -54,13 +54,13 @@ export const SchedulerForm = styled.section`
     width: calc(80% - 23px);
   }
 
-  & .k-form-field-wrap .k-dropdown-wrap.k-state-default {
+  & .k-form-field-wrap .k-dropdown-wrap {
     width: 100%;
   }
 
-  & .k-combobox .k-dropdown-wrap,
   && .k-multiselect-wrap,
-  .k-picker-wrap.k-state-default {
+  .k-picker-wrap,
+  .k-picker-wrap {
     width: calc(80% - 1px);
   }
 
