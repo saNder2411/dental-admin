@@ -10,7 +10,7 @@ import { CustomersDataItem } from '../../../Customers';
 // Selectors
 import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
-import { selectGridDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
+import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Actions
 import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 // Helpers
@@ -69,8 +69,6 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
 
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
-  const selectDataItemInNewValue = useMemo(() => selectGridDataItemMemoValueForCell(dataItemID, 'isNew'), [dataItemID]);
-  const isNew = useSelector(selectDataItemInNewValue);
 
   useEffect(() => {
     if (value) return;
@@ -83,11 +81,11 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
-    const { FirstName, Title, ID } = customersData.find(({ Id }) => Id === evtValue.value.Id) ?? customersData[0];
-    const newTitle = setTitleProp<number>(FirstName, Title, ID);
+    const selectedCustomer = customersData.find(({ Id }) => Id === evtValue.value.Id);
+    const newTitle = selectedCustomer ? setTitleProp<number>(selectedCustomer.FirstName, selectedCustomer.Title, dataItemID) : '';
 
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evtValue.value });
-    isNew && onChange({ dataItem: dataItemID, field: 'Title', syntheticEvent: evt.syntheticEvent, value: newTitle });
+    onChange({ dataItem: dataItemID, field: 'Title', syntheticEvent: evt.syntheticEvent, value: newTitle });
   };
 
   return (

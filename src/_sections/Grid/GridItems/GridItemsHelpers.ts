@@ -80,7 +80,7 @@ export const EmptyDropDownListDataItem = {
   value: {
     Id: -1,
     __metadata: {
-      id: -1,
+      id: '',
       type: '',
     },
   },

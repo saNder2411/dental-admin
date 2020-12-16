@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 
 export const Calendar = styled.section`
+  min-width: 1500px;
+  overflow: auto;
+
+  && .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
   & .DataItemLoader {
     z-index: 2;
     background-color: rgba(246, 246, 246, 0.4);

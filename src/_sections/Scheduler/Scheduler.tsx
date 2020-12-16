@@ -40,7 +40,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
 
   return (
     <KendoScheduler
-      style={{ minHeight: 700 }}
+      style={{ minHeight: 700, minWidth: 1300, overflow: 'auto' }}
       data={data}
       modelFields={modelFields}
       onDataChange={onDataChange}

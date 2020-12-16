@@ -68,9 +68,9 @@ export const updateDataOnAddNewItemToChange = (
         Id: ID,
         LastNameAppt: ``,
         LookupCM102customers: {
-          Id: 1,
+          Id: 1269,
           __metadata: {
-            id: guid,
+            id: '27f5d039-9c85-4e09-a869-45b65150829f',
             type: 'SP.Data.MetroBP02ListItem',
           },
         },

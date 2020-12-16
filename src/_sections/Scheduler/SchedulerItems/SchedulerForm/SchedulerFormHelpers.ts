@@ -167,7 +167,7 @@ export const getDataItemForApi = (formDataItem: InitialFormValue): SchedulerData
     ...others,
     FirstName,
     LastNameAppt,
-    Title: formDataItem.isNew ? setTitleProp<number>(FirstName, LastNameAppt, formDataItem.ID) : Title,
+    Title: setTitleProp<number>(FirstName, LastNameAppt, formDataItem.ID),
     MetroRRule: setRecurrenceRule({
       Repeat,
       EndRepeat,

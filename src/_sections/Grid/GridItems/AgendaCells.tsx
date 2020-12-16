@@ -23,7 +23,7 @@ import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isString } from './GridItemsHelpers';
 
-export const AgendaReferenceCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+export const AgendaReferenceCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
   const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
