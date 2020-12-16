@@ -12531,66 +12531,6 @@
     },
     {
       "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(613)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(613)",
-        "etag": "\"2\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "LookupMultiBP01offerings": {
-        "results": [
-          {
-            "__metadata": {
-              "id": "3ea8bb68-a2e5-4a47-ada5-656340a23691",
-              "type": "SP.Data.MetroBP02ListItem"
-            },
-            "Id": 2
-          }
-        ]
-      },
-      "LookupCM102customers": {
-        "__metadata": {
-          "id": "8c28d6e8-609e-475b-9952-5f2875cd1849",
-          "type": "SP.Data.MetroCM102ListItem"
-        },
-        "Id": 1167
-      },
-      "LookupHR01team": {
-        "__metadata": {
-          "id": "a2aeb927-3cfd-43e3-b17c-511cbc709de9",
-          "type": "SP.Data.MetroHR01ListItem"
-        },
-        "Id": 1
-      },
-      "Id": 613,
-      "Title": "A.Gloggner-0613",
-      "EventDate": "2020-12-21T16:00:00Z",
-      "EndDate": "2020-12-21T16:18:00Z",
-      "Duration": 1080,
-      "Description": " | Stylist-Any Stylist | Customer-Annina  Gloggner_+189795752363-Annina-.Gloggner@schedulingtoday.local | Services-Ladies Wash+Cut+Dry S2 49.50 (-10%) | Services Total=49.50(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "MasterSeriesItemID": null,
-      "RecurrenceID": null,
-      "EventType": 0,
-      "Email": "Annina-.Gloggner@schedulingtoday.local",
-      "AppointmentStatus": "(1) Consultation",
-      "AppointmentSource": null,
-      "SubmissionIdUIT": null,
-      "LastNameAppt": "Gloggner",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "TrackingComments": null,
-      "ServiceCharge": 49.5,
-      "FilterStart": "2020-12-21T15:00:00Z",
-      "FilterEnd": "2020-12-21T15:18:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Annina ",
-      "CellPhone": "+189795752363",
-      "ID": 613,
-      "id": 613
-    },
-    {
-      "__metadata": {
         "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(614)",
         "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(614)",
         "etag": "\"2\"",
@@ -13641,7 +13581,7 @@
       "Description": "",
       "Duration": 60,
       "Email": "test12@gmail.com",
-      "EndDate": "2020-12-15T08:45:00.000Z",
+      "EndDate": "2020-12-15T10:30:00.000Z",
       "EventDate": "2020-12-15T08:30:00.000Z",
       "EventType": 0,
       "FilterEnd": "2020-12-16T10:30:00.000Z",
@@ -13695,7 +13635,7 @@
       "Description": "",
       "Duration": 60,
       "Email": "Coralie.Abraham@schedulingtoday.local",
-      "EndDate": "2020-12-15T09:15:00.000Z",
+      "EndDate": "2020-12-15T10:30:00.000Z",
       "EventDate": "2020-12-15T09:00:00.000Z",
       "EventType": 0,
       "FilterEnd": "2020-12-15T10:45:00.000Z",
@@ -13747,7 +13687,7 @@
       "Description": "",
       "Duration": 60,
       "Email": "Tom.Acciardi@schedulingtoday.local",
-      "EndDate": "2020-12-16T08:30:00.000Z",
+      "EndDate": "2020-12-16T09:45:00.000Z",
       "EventDate": "2020-12-16T08:15:00.000Z",
       "EventType": 0,
       "FilterEnd": "2020-12-16T09:30:00.000Z",
@@ -13799,7 +13739,7 @@
       "Description": "",
       "Duration": 60,
       "Email": "Ilona.Acciardi@schedulingtoday.local",
-      "EndDate": "2020-12-16T09:15:00.000Z",
+      "EndDate": "2020-12-16T10:15:00.000Z",
       "EventDate": "2020-12-16T09:00:00.000Z",
       "EventType": 0,
       "FilterEnd": "2020-12-16T10:00:00.000Z",
@@ -13851,7 +13791,7 @@
       "Description": "",
       "Duration": 60,
       "Email": "test12@gmail.com",
-      "EndDate": "2020-12-16T08:45:00.000Z",
+      "EndDate": "2020-12-16T10:00:00.000Z",
       "EventDate": "2020-12-16T08:30:00.000Z",
       "EventType": 0,
       "FilterEnd": "2020-12-16T09:45:00.000Z",
@@ -13903,7 +13843,7 @@
       "Description": "",
       "Duration": 60,
       "Email": "test12@gmail.com",
-      "EndDate": "2020-12-16T11:15:00.000Z",
+      "EndDate": "2020-12-16T12:30:00.000Z",
       "EventDate": "2020-12-16T11:00:00.000Z",
       "EventType": 0,
       "FilterEnd": "2020-12-16T12:15:00.000Z",
@@ -13947,6 +13887,118 @@
       "FirstName": "Consultation",
       "LastNameAppt": "A.Female",
       "Title": "C.A.Female-1388"
+    },
+    {
+      "AppointmentSource": null,
+      "AppointmentStatus": "(2) Pending",
+      "CellPhone": "+(890) 983-04-98",
+      "Description": "",
+      "Duration": 60,
+      "Email": "test12@gmail.com",
+      "EndDate": "2020-12-16T08:30:00.000Z",
+      "EventDate": "2020-12-16T07:15:00.000Z",
+      "EventType": 0,
+      "FilterEnd": "2020-12-16T07:30:00.000Z",
+      "FilterStart": "2020-12-16T07:15:00.000Z",
+      "Gender": "(1) Female",
+      "ID": 1389,
+      "Id": 1389,
+      "LookupCM102customers": {
+        "Id": 1269,
+        "__metadata": {
+          "id": "27f5d039-9c85-4e09-a869-45b65150829f",
+          "type": "SP.Data.MetroBP02ListItem"
+        }
+      },
+      "LookupHR01team": {
+        "Id": 3,
+        "__metadata": {
+          "id": "1e6af3c1-ef2c-47ac-9db0-26851d90adc4",
+          "type": "SP.Data.MetroHR01ListItem"
+        }
+      },
+      "LookupMultiBP01offerings": {
+        "results": []
+      },
+      "MasterSeriesItemID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "Notes": "",
+      "RecurrenceID": null,
+      "ServiceCharge": 40,
+      "SubmissionIdUIT": null,
+      "TrackingComments": null,
+      "fAllDayEvent": null,
+      "id": 1389,
+      "__metadata": {
+        "id": "Web/Lists(guid'1e6af3c1-ef2c-47ac-9db0-26851d90adc4')/Items(1389)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'1e6af3c1-ef2c-47ac-9db0-26851d90adc4')/Items(1389)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR03ListItem"
+      },
+      "FirstName": "Consultation",
+      "LastNameAppt": "A.Female",
+      "Title": "C.A.Female-1389"
+    },
+    {
+      "AppointmentSource": null,
+      "AppointmentStatus": "(2) Pending",
+      "CellPhone": "",
+      "Description": "",
+      "Duration": 60,
+      "Email": "",
+      "EndDate": "2020-12-17T12:20:48.255Z",
+      "EventDate": "2020-12-17T08:45:48.251Z",
+      "EventType": 0,
+      "FilterEnd": "2020-12-16T18:45:48.172Z",
+      "FilterStart": "2020-12-16T18:45:48.172Z",
+      "FirstName": "",
+      "Gender": "(1) Female",
+      "ID": 1390,
+      "Id": 1390,
+      "LastNameAppt": "",
+      "LookupCM102customers": {
+        "Id": 54,
+        "__metadata": {
+          "id": "27f5d039-9c85-4e09-a869-45b65150829f",
+          "type": "SP.Data.MetroCM102ListItem"
+        }
+      },
+      "LookupHR01team": {
+        "Id": 6,
+        "__metadata": {
+          "id": "7d03d3f4-87da-4c2c-b288-3177bd0d5f44",
+          "type": "SP.Data.MetroHR01ListItem"
+        }
+      },
+      "LookupMultiBP01offerings": {
+        "results": [
+          {
+            "Id": 1,
+            "__metadata": {
+              "id": "88f709c0-e906-4caf-bee4-1c61babc71f5",
+              "type": "SP.Data.MetroBP02ListItem"
+            }
+          }
+        ]
+      },
+      "MasterSeriesItemID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "Notes": null,
+      "RecurrenceID": null,
+      "ServiceCharge": 40,
+      "SubmissionIdUIT": null,
+      "Title": "C.Abraham-1390",
+      "TrackingComments": null,
+      "fAllDayEvent": null,
+      "id": 1390,
+      "__metadata": {
+        "id": "Web/Lists(guid'2485184e-d91e-4382-9251-1222b106a968')/Items(1390)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'2485184e-d91e-4382-9251-1222b106a968')/Items(1390)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR03ListItem"
+      }
     }
   ]
 }

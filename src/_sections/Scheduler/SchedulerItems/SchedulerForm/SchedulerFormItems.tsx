@@ -8,7 +8,7 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 // Helpers
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
 
-export const FormInput: FC<FieldRenderProps> = (props) => {
+export const FormInput: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, disabled, hint, type, optional, modified, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
 
@@ -24,7 +24,7 @@ export const FormInput: FC<FieldRenderProps> = (props) => {
       </div>
     </FieldWrapper>
   );
-};
+});
 
 export const FormMaskedTextBox: FC<FieldRenderProps> = memo((props) => {
   const { validationMessage, touched, label, id, valid, hint, optional, ...others } = props;

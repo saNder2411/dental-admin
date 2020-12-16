@@ -36,7 +36,6 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
     },
     [dispatch, setIsAgendaDataItemLoading, teamStaffData]
   );
-  // const defaultDate = new Date();
 
   return (
     <KendoScheduler
@@ -46,8 +45,6 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
       onDataChange={onDataChange}
       group={group}
       resources={resources}
-      timezone={'Etc/UTC'}
-      // defaultDate={defaultDate}
       item={SchedulerItem}
       editItem={SchedulerEditItem}
       slot={SchedulerSlot}
