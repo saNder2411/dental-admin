@@ -39,7 +39,7 @@ export const Calendar: FC = () => {
   const onEmployeeClick = useCallback((employeeID: number) => SchedulerActions.onEmployeeChange(dispatch, employeeID), [dispatch]);
 
   const onAddNewItemClick = () =>
-    SchedulerActions.onAddNewItem(dispatch, {
+    SchedulerActions.addNewItemToEdit(dispatch, {
       Start: new Date(new Date().setHours(10, 0, 0, 0)),
       End: new Date(new Date().setHours(11, 0, 0, 0)),
       TeamID: 1,

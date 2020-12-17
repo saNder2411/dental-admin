@@ -61,12 +61,16 @@ export function* workerFetchData({
   }
 }
 
-export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDataItemToGridData }: CreateDataItemInitAsyncActionType): SagaIterator {
+export function* workerCreateDataItem({
+  payload: createdDataItem,
+  meta: { onAddDataItemToGridData, onAddDataItemToSchedulerData },
+}: CreateDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.createDataItemRequestAC());
 
     const result: APIAgendaDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
     const data = transformDataItem(result);
+    onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(error.message));

@@ -2,13 +2,14 @@
 import { SchedulerState, ActionTypes, Actions } from './SchedulerTypes';
 import { ActionTypes as TeamStaffActionsTypes } from '../../TeamStaff/TeamStaffTypes';
 // Helpers
-import { updateDataAfterRemoveItem, updateDataOnAddNewItemToChange } from './SchedulerHelpers';
+import { updateStateOnAddNewItemToChange } from './SchedulerHelpers';
 
 const initialState = {
   eventDrivenData: [],
   originalData: [],
   mapTeamToFiltered: { '1': false },
   formItemID: null,
+  newFormItem: null,
 };
 
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
@@ -34,17 +35,10 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
       return { ...state, formItemID: action.payload };
 
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
-      const [formItemID, newDataAfterAddNewItemToEdit] = updateDataOnAddNewItemToChange(state.eventDrivenData, action.payload);
-      return {
-        ...state,
-        eventDrivenData: newDataAfterAddNewItemToEdit,
-        originalData: [...newDataAfterAddNewItemToEdit],
-        formItemID,
-      };
+      return { ...state, newFormItem: updateStateOnAddNewItemToChange(state.eventDrivenData, action.payload) };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
-      const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
-      return { ...state, eventDrivenData: newDataAfterDiscardAddNewItem, originalData: [...newDataAfterDiscardAddNewItem] };
+      return { ...state, newFormItem: null };
 
     default:
       return state;

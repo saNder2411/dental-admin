@@ -25,8 +25,8 @@ export interface SchedulerStateActions {
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => void;
   setFormItemID: (dispatch: Dispatch, formItemID: number | null) => void;
 
-  onAddNewItem: (dispatch: Dispatch, defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) => void;
-  onDiscardNewItemToData: (dispatch: Dispatch, dataItem: SchedulerDataItem) => void;
+  addNewItemToEdit: (dispatch: Dispatch, defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) => void;
+  discardNewItemToData: (dispatch: Dispatch) => void;
 }
 
 export interface SchedulerState {
@@ -34,6 +34,7 @@ export interface SchedulerState {
   originalData: SchedulerDataItem[];
   mapTeamToFiltered: { [key: string]: boolean };
   formItemID: number | null;
+  newFormItem: null | SchedulerDataItem;
 }
 
 export interface CustomSchedulerProps extends SchedulerProps {

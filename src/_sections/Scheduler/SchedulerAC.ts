@@ -16,6 +16,6 @@ export const addNewItemToEditAC = (defaultDataForFormItem: { Start: Date; End: D
   payload: defaultDataForFormItem,
 });
 
-export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
+export const discardAddNewItemToDataAC = () => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA });
 
 export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };

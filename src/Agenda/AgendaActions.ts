@@ -15,8 +15,12 @@ import {
 export const AgendaActions = {
   fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
     dispatch(fetchDataInitAsyncAC(meta ?? { servicesDataLength: 0, teamStaffDataLength: 0, customersDataLength: 0 })),
-  createDataItem: (dispatch: Dispatch, createdDataItem: AgendaDataItem, onAddDataItemToGridData: () => void) =>
-    dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
+  createDataItem: (
+    dispatch: Dispatch,
+    createdDataItem: AgendaDataItem,
+    onAddDataItemToGridData: () => void,
+    onAddDataItemToSchedulerData?: () => void
+  ) => dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData, onAddDataItemToSchedulerData)),
   updateDataItem: (dispatch: Dispatch, updatedDataItem: AgendaDataItem, onUpdateDataItemInGridData: () => void) =>
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>

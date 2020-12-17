@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
 import { formatDate } from '@telerik/kendo-intl';
 //Components
-import { SchedulerItem, SchedulerEditItem, SchedulerSlot, SchedulerEditSlot, SchedulerAgendaTask } from './SchedulerItems';
+import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask } from './SchedulerItems';
 // Types
 import { SchedulerDataItem, CustomSchedulerProps } from './SchedulerTypes';
 // Selectors
@@ -46,9 +46,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
       group={group}
       resources={resources}
       item={SchedulerItem}
-      editItem={SchedulerEditItem}
       slot={SchedulerSlot}
-      editSlot={SchedulerEditSlot}
       task={SchedulerAgendaTask}
       defaultView={'day'}
       editable={{

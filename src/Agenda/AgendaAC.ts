@@ -46,10 +46,14 @@ export const fetchDataInitAsyncAC = (meta: { servicesDataLength: number; teamSta
   meta,
 });
 
-export const createDataItemInitAsyncAC = (createdDataItem: AgendaDataItem, onAddDataItemToGridData: () => void) => ({
+export const createDataItemInitAsyncAC = (
+  createdDataItem: AgendaDataItem,
+  onAddDataItemToGridData: () => void,
+  onAddDataItemToSchedulerData?: () => void
+) => ({
   type: ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC,
   payload: transformDataItemForAPI(createdDataItem),
-  meta: onAddDataItemToGridData,
+  meta: { onAddDataItemToGridData, onAddDataItemToSchedulerData },
 });
 
 export const updateDataItemInitAsyncAC = (updatedDataItem: AgendaDataItem, onUpdateDataItemInGridData: () => void) => ({

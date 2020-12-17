@@ -89,17 +89,23 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    console.log(evt);
     const newDataItem = getDataItemForApi(formDataItem);
-    console.log(`onSubmitDataItem`, newDataItem);
+    // console.log(`onSubmitDataItem`, newDataItem);
 
     setIsDataItemLoading(true);
-    dataItem.isNew ? AgendaActions.createDataItem(dispatch, newDataItem, () => {}) : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
+    dataItem.isNew
+      ? AgendaActions.createDataItem(
+          dispatch,
+          newDataItem,
+          () => {},
+          () => SchedulerActions.discardNewItemToData(dispatch)
+        )
+      : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
   };
 
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
     if (dataItem.isNew) {
-      SchedulerActions.onDiscardNewItemToData(dispatch, dataItem);
+      SchedulerActions.discardNewItemToData(dispatch);
     }
 
     onDiscardAction && onDiscardAction({ value: null });
@@ -112,7 +118,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
           initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            console.log(`formRenderProps`, formRenderProps);
+            // console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('Repeat');
             const endRepeatValue = formRenderProps.valueGetter('EndRepeat');
             const repeatOnMonthlyValue = formRenderProps.valueGetter('RepeatOnMonthly');

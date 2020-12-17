@@ -9,7 +9,7 @@ export const SchedulerActions: SchedulerStateActions = {
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeMapTeamToFilteredAC(employeeID)),
   setFormItemID: (dispatch: Dispatch, formItemID: number | null) => dispatch(setFormItemIdAC(formItemID)),
 
-  onAddNewItem: (dispatch: Dispatch, defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) =>
+  addNewItemToEdit: (dispatch: Dispatch, defaultDataForFormItem: { Start: Date; End: Date; TeamID: number }) =>
     dispatch(addNewItemToEditAC(defaultDataForFormItem)),
-  onDiscardNewItemToData: (dispatch: Dispatch, { ID }: SchedulerDataItem) => dispatch(discardAddNewItemToDataAC(ID)),
+  discardNewItemToData: (dispatch: Dispatch) => dispatch(discardAddNewItemToDataAC()),
 };

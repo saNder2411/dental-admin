@@ -5,8 +5,7 @@ const selectSchedulerEventDrivenData = ({ SchedulerState }: GlobalState) => Sche
 
 const selectSchedulerOriginalData = ({ SchedulerState }: GlobalState) => SchedulerState.originalData;
 
-const selectSchedulerFormItemID = ({ SchedulerState: { formItemID } }: GlobalState) => formItemID;
-
+export const selectSchedulerFormItemID = ({ SchedulerState }: GlobalState) => SchedulerState.formItemID;
 
 export const selectSchedulerMemoEventDrivenData = () => createSelector(selectSchedulerEventDrivenData, (eventDrivenData) => eventDrivenData);
 
@@ -18,17 +17,12 @@ export const selectSchedulerMemoMapTeamToFiltered = () =>
     (mapTeamToFiltered) => mapTeamToFiltered
   );
 
-export const selectMemoFormItemID = (dataItemID: number) => {
-  // console.log(`render ${dataItemID}`);
-  return createSelector(selectSchedulerFormItemID, (formItemID) => (formItemID === dataItemID ? formItemID : null));
-};
+const selectNewFormItem = ({ SchedulerState }: GlobalState) => SchedulerState.newFormItem;
 
 export const selectMemoFormItemForSlot = (start: Date, TeamID: number) => {
-  return createSelector(selectSchedulerFormItemID, selectSchedulerEventDrivenData, (formItemID, eventDrivenData) => {
-    if (!formItemID) return null;
+  return createSelector(selectNewFormItem, (newFormItem) => {
+    if (!newFormItem) return null;
 
-    const formItem = eventDrivenData.find(({ ID }) => ID === formItemID);
-
-    return formItem?.Start.getTime() === start.getTime() && formItem.TeamID === TeamID && formItem.isNew ? formItem : null;
+    return newFormItem?.Start.getTime() === start.getTime() && newFormItem.TeamID === TeamID ? newFormItem : null;
   });
 };

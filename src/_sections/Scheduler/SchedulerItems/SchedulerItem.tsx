@@ -12,6 +12,7 @@ import { Button } from '@progress/kendo-react-buttons';
 import * as SC from '../SchedulerItemsStyled/SchedulerItemStyled';
 // Components
 import { Loader } from '../../../_components';
+import { SchedulerEditItem } from './SchedulerEditItem';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
@@ -23,19 +24,21 @@ import { SchedulerActions } from '../SchedulerActions';
 import { AgendaActions } from '../../../Agenda/AgendaActions';
 // Selectors
 import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
+import { selectSchedulerFormItemID } from '../SchedulerSelectors';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const intl = useInternationalization();
   const [showPopup, setShowPopup] = useState(false);
-  const { setFormItemID } = SchedulerActions;
   const dispatch = useDispatch();
   const agendaIsDataItemLoading = useSelector(selectAgendaIsDataItemLoading);
+  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus } = props;
+  const formItemID = useSelector(selectSchedulerFormItemID);
+  const inEdit = formItemID === dataItem.ID;
   // const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
 
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
-  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus } = props;
   const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
   const color = resource.CalendarColHex;
   const iconName = dataItem.AppointmentStatus;
@@ -73,9 +76,9 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const onEditBtnClick = useCallback(() => {
     setShowPopup(false);
-    setFormItemID(dispatch, dataItem.ID);
+    SchedulerActions.setFormItemID(dispatch, dataItem.ID);
     // isRecurring && setShowOccurrenceDialog(true);
-  }, [setFormItemID, dispatch, dataItem.ID]);
+  }, [dispatch, dataItem.ID]);
 
   const onDeleteBtnClick = useCallback(() => {
     setShowPopup(false);
@@ -187,6 +190,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           </DialogActionsBar>
         </Dialog>
       )}
+      {inEdit && <SchedulerEditItem {...props} />}
     </>
   );
 };
