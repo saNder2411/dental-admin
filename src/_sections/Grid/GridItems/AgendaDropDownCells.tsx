@@ -1,6 +1,13 @@
-import React, { FC, useMemo, useEffect } from 'react';
+import React, { FC, useMemo, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { DropDownList, MultiSelect, ComboBox, MultiSelectChangeEvent, ComboBoxChangeEvent } from '@progress/kendo-react-dropdowns';
+import {
+  DropDownList,
+  MultiSelect,
+  ComboBox,
+  MultiSelectChangeEvent,
+  ComboBoxChangeEvent,
+  ComboBoxFilterChangeEvent,
+} from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
@@ -64,8 +71,12 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidFullName = useSelector(selectIsValidFullNameValue);
+  const [filter, setFilter] = useState('');
   const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
-  const dropDownListValue = dataForDropDownList.find((item) => item.text === value) ?? EmptyDropDownListDataItem;
+  const filteredDataForDropDownList = !filter
+    ? dataForDropDownList
+    : dataForDropDownList.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
+  const dropDownListValue = filteredDataForDropDownList.find((item) => item.text === value) ?? EmptyDropDownListDataItem;
 
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
@@ -88,13 +99,17 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
     onChange({ dataItem: dataItemID, field: 'Title', syntheticEvent: evt.syntheticEvent, value: newTitle });
   };
 
+  const onFilterChange = (evt: ComboBoxFilterChangeEvent) => setFilter(evt.filter.value);
+
   return (
     <ComboBox
       onChange={onFullNameChange}
+      onFilterChange={onFilterChange}
       value={dropDownListValue}
-      data={dataForDropDownList}
+      data={filteredDataForDropDownList}
       textField="text"
       dataItemKey="value"
+      filterable
       disabled={isDataItemLoading}
       valid={isValidFullName}
       placeholder="This field is required."

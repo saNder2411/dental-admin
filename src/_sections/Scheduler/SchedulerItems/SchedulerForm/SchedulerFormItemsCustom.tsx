@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useCallback, memo } from 'react';
+import React, { FC, useMemo, useCallback, memo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldWrapper } from '@progress/kendo-react-form';
 import {
@@ -8,6 +8,7 @@ import {
   MultiSelectChangeEvent,
   DropDownListChangeEvent,
   ComboBoxChangeEvent,
+  ComboBoxFilterChangeEvent,
 } from '@progress/kendo-react-dropdowns';
 import { ButtonGroup, Button } from '@progress/kendo-react-buttons';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
@@ -69,18 +70,53 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   );
 });
 
-export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = memo((props) => {
+export const TeamStaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props) => {
+  const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, ...others } = props;
+  const LookupEntity = value as LookupEntity;
+
+  const currentEmployee = domainData.find(({ Id }) => Id === LookupEntity.Id);
+  const dataForDropDownList = transformDomainDataToDropDownListData(domainData);
+  const dropDownListValue = dataForDropDownList.find((item) => item.text === currentEmployee?.Title) ?? dataForDropDownList[0];
+
+  const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
+
+  return (
+    <FieldWrapper>
+      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
+        {label}
+      </Label>
+      <div className={'k-form-field-wrap'}>
+        <DropDownList
+          ariaLabelledBy={labelId}
+          ariaDescribedBy={`${hintId} ${errorId}`}
+          valid={valid}
+          id={id}
+          value={dropDownListValue}
+          data={dataForDropDownList}
+          onChange={onDropDownListValueChange}
+          disabled={disabled}
+          textField="text"
+          {...others}
+        />
+        {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+      </div>
+    </FieldWrapper>
+  );
+});
+
+export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) => {
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, setCustomerField, ...others } = props;
   const LookupEntity = value as LookupEntity;
 
-  const currentEntity = domainData.find(({ Id }) => Id === LookupEntity.Id);
-  const isTeamStaffDataItem = 'ShowOnline' in (currentEntity ? currentEntity : {});
-  const dataForDropDownList = transformDomainDataToDropDownListData(domainData);
-  const dropDownListValue = dataForDropDownList.find((item) => item.text === currentEntity?.Title) ?? dataForDropDownList[0];
-  const comboBoxValue = dataForDropDownList.find((item) => item.text === currentEntity?.FullName) ?? EmptyDropDownListDataItem;
-
-  const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
+  const [filter, setFilter] = useState('');
+  const currentCustomer = domainData.find(({ Id }) => Id === LookupEntity.Id);
+  const dataForComboBox = transformDomainDataToDropDownListData(domainData);
+  const filteredDataForComboBox = !filter
+    ? dataForComboBox
+    : dataForComboBox.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
+  const comboBoxValue = filteredDataForComboBox.find((item) => item.text === currentCustomer?.FullName) ?? EmptyDropDownListDataItem;
 
   const onComboBoxValueChange = useCallback(
     (evt: ComboBoxChangeEvent) => {
@@ -92,40 +128,29 @@ export const LookupEntityFormDropDownList: FC<CustomFieldRenderProps> = memo((pr
     [domainData, onChange, setCustomerField]
   );
 
+  const onFilterChange = (evt: ComboBoxFilterChangeEvent) => setFilter(evt.filter.value);
+
   return (
     <FieldWrapper>
       <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
         {label}
       </Label>
       <div className={'k-form-field-wrap'}>
-        {isTeamStaffDataItem ? (
-          <DropDownList
-            ariaLabelledBy={labelId}
-            ariaDescribedBy={`${hintId} ${errorId}`}
-            valid={valid}
-            id={id}
-            value={dropDownListValue}
-            data={dataForDropDownList}
-            onChange={onDropDownListValueChange}
-            disabled={disabled}
-            textField="text"
-            {...others}
-          />
-        ) : (
-          <ComboBox
-            ariaLabelledBy={labelId}
-            ariaDescribedBy={`${hintId} ${errorId}`}
-            valid={valid}
-            id={id}
-            value={comboBoxValue}
-            data={dataForDropDownList}
-            onChange={onComboBoxValueChange}
-            disabled={disabled}
-            textField="text"
-            dataItemKey="value"
-            {...others}
-          />
-        )}
+        <ComboBox
+          ariaLabelledBy={labelId}
+          ariaDescribedBy={`${hintId} ${errorId}`}
+          valid={valid}
+          id={id}
+          value={comboBoxValue}
+          data={filteredDataForComboBox}
+          onChange={onComboBoxValueChange}
+          onFilterChange={onFilterChange}
+          filterable
+          disabled={disabled}
+          textField="text"
+          dataItemKey="value"
+          {...others}
+        />
         {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
       </div>
     </FieldWrapper>

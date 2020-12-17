@@ -10,7 +10,8 @@ import { Loader } from '../../../../_components';
 import {
   CustomMemoField,
   ServicesFormMultiSelect,
-  LookupEntityFormDropDownList,
+  TeamStaffFormDropDownList,
+  CustomersFormComboBox,
   FormDropDownListWithCustomData,
   WeekdayFormButtonGroup,
 } from './SchedulerFormItemsCustom';
@@ -88,7 +89,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    console.log(evt)
+    console.log(evt);
     const newDataItem = getDataItemForApi(formDataItem);
     console.log(`onSubmitDataItem`, newDataItem);
 
@@ -352,7 +353,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     name="LookupHR01team"
                     label="Support Stuff"
                     domainData={teamStaffData}
-                    component={LookupEntityFormDropDownList}
+                    component={TeamStaffFormDropDownList}
                     disabled={isDataItemLoading}
                   />
 
@@ -364,7 +365,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         label="Customer"
                         setCustomerField={setCustomerField}
                         domainData={customersData}
-                        component={LookupEntityFormDropDownList}
+                        component={CustomersFormComboBox}
                         disabled={isDataItemLoading}
                         validator={requiredDropDownListValidator}
                       />
