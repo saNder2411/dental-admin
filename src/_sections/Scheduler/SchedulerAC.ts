@@ -1,4 +1,4 @@
-import { ActionTypes, SchedulerDataItem } from './SchedulerTypes';
+import { ActionTypes, SchedulerDataItem, DefaultDataForFormItem } from './SchedulerTypes';
 import {
   fetchDataSuccessAC as fetchTeamStaffDataTSuccessAC,
   createDataItemSuccessAC as createTeamStaffDataDataItemSuccessAC,
@@ -17,5 +17,7 @@ export const addNewItemToEditAC = (defaultDataForFormItem: { Start: Date; End: D
 });
 
 export const discardAddNewItemToDataAC = () => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA });
+
+export const setDefaultDataForFormItemAC = (data: DefaultDataForFormItem) => ({ type: ActionTypes.SET_DEFAULT_DATA_FOR_FORM_ITEM, payload: data });
 
 export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };

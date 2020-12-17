@@ -10,6 +10,11 @@ const initialState = {
   mapTeamToFiltered: { '1': false },
   formItemID: null,
   newFormItem: null,
+  defaultDataForFormItem: {
+    Start: new Date(new Date().setHours(10, 0, 0, 0)),
+    End: new Date(new Date().setHours(11, 0, 0, 0)),
+    TeamID: 1,
+  },
 };
 
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
@@ -40,6 +45,8 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       return { ...state, newFormItem: null };
 
+    case ActionTypes.SET_DEFAULT_DATA_FOR_FORM_ITEM:
+      return { ...state, defaultDataForFormItem: action.payload };
     default:
       return state;
   }

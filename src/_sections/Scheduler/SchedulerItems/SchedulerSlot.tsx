@@ -14,7 +14,9 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = (props) => {
   const { start: Start, end: End, group } = props;
   const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
   const dispatch = useDispatch();
-  console.log(`SchedulerSlotProps`, props);
+  if (props.row === 1 && props.col === 0) {
+    console.log(`SchedulerSlotProps`, props);
+  }
 
   const selectFormItem = useMemo(() => selectMemoFormItemForSlot(Start, resource.ID), [resource.ID, Start]);
   const formItem = useSelector(selectFormItem);

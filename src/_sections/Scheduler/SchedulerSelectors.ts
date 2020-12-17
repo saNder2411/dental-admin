@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+// Types
 import { GlobalState } from '../../_init';
 
 const selectSchedulerEventDrivenData = ({ SchedulerState }: GlobalState) => SchedulerState.eventDrivenData;
@@ -26,3 +27,14 @@ export const selectMemoFormItemForSlot = (start: Date, TeamID: number) => {
     return newFormItem?.Start.getTime() === start.getTime() && newFormItem.TeamID === TeamID ? newFormItem : null;
   });
 };
+
+export const selectDefaultDataForFormItem = ({ SchedulerState }: GlobalState) => SchedulerState.defaultDataForFormItem;
+
+export const selectMemoDefaultDataForFormItem = () =>
+  createSelector(selectDefaultDataForFormItem, (defaultDataForFormItem) => defaultDataForFormItem);
+
+
+export const selectForSlotMemoDefaultDataForFormItem = (start: Date, teamId: number) =>
+  createSelector(selectDefaultDataForFormItem, (defaultDataForFormItem) => {});
+
+
