@@ -2,39 +2,30 @@ import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
 
-const selectSchedulerEventDrivenData = ({ SchedulerState }: GlobalState) => SchedulerState.eventDrivenData;
+const selectEventDrivenData = ({ SchedulerState }: GlobalState) => SchedulerState.eventDrivenData;
 
-const selectSchedulerOriginalData = ({ SchedulerState }: GlobalState) => SchedulerState.originalData;
+const selectOriginalData = ({ SchedulerState }: GlobalState) => SchedulerState.originalData;
 
-export const selectSchedulerFormItemID = ({ SchedulerState }: GlobalState) => SchedulerState.formItemID;
+export const selectFormItemID = ({ SchedulerState }: GlobalState) => SchedulerState.formItemID;
 
-export const selectSchedulerMemoEventDrivenData = () => createSelector(selectSchedulerEventDrivenData, (eventDrivenData) => eventDrivenData);
+export const selectMemoEventDrivenData = () => createSelector(selectEventDrivenData, (eventDrivenData) => eventDrivenData);
 
-export const selectSchedulerMemoOriginalData = () => createSelector(selectSchedulerOriginalData, (originalData) => originalData);
+export const selectMemoOriginalData = () => createSelector(selectOriginalData, (originalData) => originalData);
 
-export const selectSchedulerMemoMapTeamToFiltered = () =>
-  createSelector(
-    ({ SchedulerState }: GlobalState) => SchedulerState.mapTeamToFiltered,
-    (mapTeamToFiltered) => mapTeamToFiltered
-  );
+const selectTeamToFiltered = ({ SchedulerState }: GlobalState) => SchedulerState.mapTeamToFiltered;
 
-const selectNewFormItem = ({ SchedulerState }: GlobalState) => SchedulerState.newFormItem;
+export const selectMemoMapTeamToFiltered = () => createSelector(selectTeamToFiltered, (mapTeamToFiltered) => mapTeamToFiltered);
 
-export const selectMemoFormItemForSlot = (start: Date, TeamID: number) => {
-  return createSelector(selectNewFormItem, (newFormItem) => {
-    if (!newFormItem) return null;
+const selectNewDataItem = ({ SchedulerState }: GlobalState) => SchedulerState.newDataItem;
 
-    return newFormItem?.Start.getTime() === start.getTime() && newFormItem.TeamID === TeamID ? newFormItem : null;
+export const selectMemoNewDataItem = (start: Date, TeamID: number) => {
+  return createSelector(selectNewDataItem, (newDataItem) => {
+    if (!newDataItem) return null;
+
+    return newDataItem?.Start.getTime() === start.getTime() && newDataItem.TeamID === TeamID ? newDataItem : null;
   });
 };
 
-export const selectDefaultDataForFormItem = ({ SchedulerState }: GlobalState) => SchedulerState.defaultDataForFormItem;
+export const selectSelectedDate = ({ SchedulerState }: GlobalState) => SchedulerState.selectedDate;
 
-export const selectMemoDefaultDataForFormItem = () =>
-  createSelector(selectDefaultDataForFormItem, (defaultDataForFormItem) => defaultDataForFormItem);
-
-
-export const selectForSlotMemoDefaultDataForFormItem = (start: Date, teamId: number) =>
-  createSelector(selectDefaultDataForFormItem, (defaultDataForFormItem) => {});
-
-
+export const selectSelectedView = ({ SchedulerState }: GlobalState) => SchedulerState.selectedView;

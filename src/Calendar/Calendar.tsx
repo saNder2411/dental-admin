@@ -8,7 +8,7 @@ import { Loader, LoaderDataItem } from '../_components';
 // Styled Components
 import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
-import { selectSchedulerMemoOriginalData } from '../_sections/Scheduler/SchedulerSelectors';
+import { selectMemoOriginalData, selectSelectedDate, selectSelectedView } from '../_sections/Scheduler/SchedulerSelectors';
 // Actions
 import { SchedulerActions } from '../_sections/Scheduler/SchedulerActions';
 import { AgendaActions } from '../Agenda/AgendaActions';
@@ -16,8 +16,8 @@ import { AgendaActions } from '../Agenda/AgendaActions';
 import { useTeamStaffDataForScheduler } from './CalendarHooks';
 import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from '../Agenda/AgendaHooks';
 import { useSetSchedulerDataForDomainWithDataBind } from '../_sections/Scheduler/SchedulerHooks';
-// Mocks
-import { ordersModelFields } from '../_sections/Scheduler/SchedulerHelpers';
+// Helpers
+import { ordersModelFields, getInitDataForNewDataItem } from '../_sections/Scheduler/SchedulerHelpers';
 
 export const Calendar: FC = () => {
   const localizationService = useLocalization();
@@ -26,24 +26,22 @@ export const Calendar: FC = () => {
   const dispatch = useDispatch();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
-  const selectOriginalData = useMemo(selectSchedulerMemoOriginalData, []);
+  const selectOriginalData = useMemo(selectMemoOriginalData, []);
   const originalData = useSelector(selectOriginalData);
   const calendarData = useMemo(() => originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [
     mapTeamToFiltered,
     originalData,
   ]);
+  const selectedDate = useSelector(selectSelectedDate);
+  const selectedView = useSelector(selectSelectedView);
+  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, calendarData[0]?.LookupHR01team.Id ?? 1);
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetSchedulerDataForDomainWithDataBind(agendaData, agendaIsDataLoading, SchedulerActions, dispatch);
 
   const onEmployeeClick = useCallback((employeeID: number) => SchedulerActions.onEmployeeChange(dispatch, employeeID), [dispatch]);
 
-  const onAddNewItemClick = () =>
-    SchedulerActions.addNewItemToEdit(dispatch, {
-      Start: new Date(new Date().setHours(10, 0, 0, 0)),
-      End: new Date(new Date().setHours(11, 0, 0, 0)),
-      TeamID: 1,
-    });
+  const onAddNewItemClick = () => SchedulerActions.addNewItemToEdit(dispatch, initDataForNewDataItem);
 
   const contentTSX = agendaData.length > 0 && !agendaIsDataLoading && (
     <div className="card-container grid position-relative">

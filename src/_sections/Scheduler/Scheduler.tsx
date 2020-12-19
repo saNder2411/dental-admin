@@ -1,15 +1,24 @@
 import React, { FC, useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Scheduler as KendoScheduler, DayView, WeekView, MonthView, SchedulerDataChangeEvent } from '@progress/kendo-react-scheduler';
+import {
+  Scheduler as KendoScheduler,
+  DayView,
+  WeekView,
+  MonthView,
+  SchedulerDataChangeEvent,
+  SchedulerDateChangeEvent,
+  SchedulerViewChangeEvent,
+} from '@progress/kendo-react-scheduler';
 import { formatDate } from '@telerik/kendo-intl';
 //Components
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask } from './SchedulerItems';
 // Types
-import { SchedulerDataItem, CustomSchedulerProps } from './SchedulerTypes';
+import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
 // Selectors
 import { selectTeamStaffMemoData } from '../../TeamStaff/TeamStaffSelectors';
 // Actions
 import { AgendaActions } from '../../Agenda/AgendaActions';
+import { SchedulerActions } from '../Scheduler/SchedulerActions';
 // Helpers
 import { extractGuidFromString } from './SchedulerHelpers';
 
@@ -37,12 +46,20 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
     [dispatch, setIsAgendaDataItemLoading, teamStaffData]
   );
 
+  const onDateChange = useCallback((evt: SchedulerDateChangeEvent) => SchedulerActions.changeSelectedDate(dispatch, evt.value), [dispatch]);
+
+  const onViewChange = useCallback((evt: SchedulerViewChangeEvent) => SchedulerActions.changeSelectedView(dispatch, evt.value as ViewType), [
+    dispatch,
+  ]);
+
   return (
     <KendoScheduler
       style={{ minHeight: 700, minWidth: 1300, overflow: 'auto' }}
       data={data}
       modelFields={modelFields}
       onDataChange={onDataChange}
+      onDateChange={onDateChange}
+      onViewChange={onViewChange}
       group={group}
       resources={resources}
       item={SchedulerItem}

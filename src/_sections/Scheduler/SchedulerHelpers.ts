@@ -1,7 +1,7 @@
 import { FieldRenderProps } from '@progress/kendo-react-form';
 import { v4 as uuidV4 } from 'uuid';
 // Types
-import { SchedulerDataItem } from './SchedulerTypes';
+import { SchedulerDataItem, ViewType } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
 
 export const ordersModelFields = {
@@ -102,4 +102,21 @@ export const extractGuidFromString = (metadataID: string) => {
   const endGuid = metadataID.lastIndexOf(`'`);
 
   return metadataID.slice(startGuid, endGuid);
+};
+
+export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: ViewType, TeamID: number ) => {
+  switch (selectedView) {
+    case 'month':
+      return {
+        Start: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 0),
+        End: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 1, 0),
+        TeamID,
+      }
+    default:
+      return {
+        Start: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 10),
+        End: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 11),
+        TeamID,
+      }
+  }
 };

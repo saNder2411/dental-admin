@@ -9,12 +9,9 @@ const initialState = {
   originalData: [],
   mapTeamToFiltered: { '1': false },
   formItemID: null,
-  newFormItem: null,
-  defaultDataForFormItem: {
-    Start: new Date(new Date().setHours(10, 0, 0, 0)),
-    End: new Date(new Date().setHours(11, 0, 0, 0)),
-    TeamID: 1,
-  },
+  newDataItem: null,
+  selectedDate: new Date(),
+  selectedView: 'day' as const,
 };
 
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
@@ -40,13 +37,16 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
       return { ...state, formItemID: action.payload };
 
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
-      return { ...state, newFormItem: updateStateOnAddNewItemToChange(state.eventDrivenData, action.payload) };
+      return { ...state, newDataItem: updateStateOnAddNewItemToChange(state.eventDrivenData, action.payload) };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
-      return { ...state, newFormItem: null };
+      return { ...state, newDataItem: null };
 
-    case ActionTypes.SET_DEFAULT_DATA_FOR_FORM_ITEM:
-      return { ...state, defaultDataForFormItem: action.payload };
+    case ActionTypes.CHANGE_SELECTED_DATE:
+      return { ...state, selectedDate: action.payload };
+
+    case ActionTypes.CHANGE_SELECTED_VIEW:
+      return { ...state, selectedView: action.payload };
     default:
       return state;
   }

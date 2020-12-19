@@ -24,7 +24,7 @@ import { SchedulerActions } from '../SchedulerActions';
 import { AgendaActions } from '../../../Agenda/AgendaActions';
 // Selectors
 import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
-import { selectSchedulerFormItemID } from '../SchedulerSelectors';
+import { selectFormItemID } from '../SchedulerSelectors';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const intl = useInternationalization();
@@ -32,7 +32,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const dispatch = useDispatch();
   const agendaIsDataItemLoading = useSelector(selectAgendaIsDataItemLoading);
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus } = props;
-  const formItemID = useSelector(selectSchedulerFormItemID);
+  const formItemID = useSelector(selectFormItemID);
   const inEdit = formItemID === dataItem.ID;
   // const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
 

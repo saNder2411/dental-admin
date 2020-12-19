@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 // Types
-import { SchedulerDataItem, SchedulerStateActions, DefaultDataForFormItem } from './SchedulerTypes';
+import { SchedulerDataItem, SchedulerStateActions, InitDataForNewDataItem, ViewType } from './SchedulerTypes';
 // Actions
 import {
   setDataAC,
@@ -8,7 +8,8 @@ import {
   setFormItemIdAC,
   addNewItemToEditAC,
   discardAddNewItemToDataAC,
-  setDefaultDataForFormItemAC,
+  changeSelectedDateAC,
+  changeSelectedViewAC,
 } from './SchedulerAC';
 
 export const SchedulerActions: SchedulerStateActions = {
@@ -16,9 +17,10 @@ export const SchedulerActions: SchedulerStateActions = {
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeMapTeamToFilteredAC(employeeID)),
   setFormItemID: (dispatch: Dispatch, formItemID: number | null) => dispatch(setFormItemIdAC(formItemID)),
 
-  addNewItemToEdit: (dispatch: Dispatch, defaultDataForFormItem: DefaultDataForFormItem) => dispatch(addNewItemToEditAC(defaultDataForFormItem)),
+  addNewItemToEdit: (dispatch: Dispatch, initDataForNewDataItem: InitDataForNewDataItem) =>
+    dispatch(addNewItemToEditAC(initDataForNewDataItem)),
   discardNewItemToData: (dispatch: Dispatch) => dispatch(discardAddNewItemToDataAC()),
 
-  setDefaultDataForFormItem: (dispatch: Dispatch, defaultDataForFormItem: DefaultDataForFormItem) =>
-    dispatch(setDefaultDataForFormItemAC(defaultDataForFormItem)),
+  changeSelectedDate: (dispatch: Dispatch, date: Date) => dispatch(changeSelectedDateAC(date)),
+  changeSelectedView: (dispatch: Dispatch, view: ViewType) => dispatch(changeSelectedViewAC(view)),
 };

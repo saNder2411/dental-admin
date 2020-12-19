@@ -8,18 +8,15 @@ import { SchedulerActions } from '../SchedulerActions';
 // Types
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
-import { selectMemoFormItemForSlot } from '../SchedulerSelectors';
+import { selectMemoNewDataItem } from '../SchedulerSelectors';
 
 export const SchedulerSlot: FC<SchedulerSlotProps> = (props) => {
   const { start: Start, end: End, group } = props;
   const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
   const dispatch = useDispatch();
-  if (props.row === 1 && props.col === 0) {
-    console.log(`SchedulerSlotProps`, props);
-  }
 
-  const selectFormItem = useMemo(() => selectMemoFormItemForSlot(Start, resource.ID), [resource.ID, Start]);
-  const formItem = useSelector(selectFormItem);
+  const selectNewDataItem = useMemo(() => selectMemoNewDataItem(Start, resource.ID), [resource.ID, Start]);
+  const newDataItem = useSelector(selectNewDataItem);
 
   const onSlotDoubleClick = useCallback(() => SchedulerActions.addNewItemToEdit(dispatch, { Start, End, TeamID: resource.ID }), [
     End,
@@ -31,7 +28,7 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = (props) => {
   return (
     <>
       <KendoSchedulerSlot {...props} onDoubleClick={onSlotDoubleClick} />
-      {formItem && <SchedulerEditSlot {...props} dataItem={formItem} />}
+      {newDataItem && <SchedulerEditSlot {...props} dataItem={newDataItem} />}
     </>
   );
 };
