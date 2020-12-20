@@ -9,9 +9,8 @@ import {
   SchedulerDateChangeEvent,
   SchedulerViewChangeEvent,
 } from '@progress/kendo-react-scheduler';
-import { formatDate } from '@telerik/kendo-intl';
 //Components
-import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask } from './SchedulerItems';
+import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
 // Types
 import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
 // Selectors
@@ -75,8 +74,8 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         select: false,
       }}>
       <DayView workDayStart={'08:00'} workDayEnd={'20:00'} slotDuration={60} slotDivisions={4} />
-      <WeekView slotDuration={60} slotDivisions={4} selectedShortDateFormat={formatDate(new Date(), 'EEEEE')} />
-      <MonthView />
+      <WeekView slotDuration={60} slotDivisions={4} dateHeaderCell={CustomDateHeaderCell} />
+      <MonthView dateHeaderCell={CustomDateHeaderCell} />
       {/* <AgendaView /> */}
     </KendoScheduler>
   );

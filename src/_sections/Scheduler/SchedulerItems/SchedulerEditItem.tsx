@@ -8,17 +8,11 @@ import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Actions
 import { SchedulerActions } from '../SchedulerActions';
 
-export const SchedulerEditItem: FC<CustomSchedulerItemProps> = ({ dataItem, ...others }): JSX.Element | null => {
+export const SchedulerEditItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
+  const { dataItem } = props;
   const dispatch = useDispatch();
 
   const onFormItemChange = useCallback(({ value }) => SchedulerActions.setFormItemID(dispatch, value), [dispatch]);
 
-  return (
-    <KendoSchedulerEditItem
-      {...{ ...others, dataItem }}
-      formItem={dataItem.isNew ? null : dataItem}
-      onFormItemChange={onFormItemChange}
-      form={SchedulerForm}
-    />
-  );
+  return <KendoSchedulerEditItem {...props} formItem={dataItem.isNew ? null : dataItem} onFormItemChange={onFormItemChange} form={SchedulerForm} />;
 };

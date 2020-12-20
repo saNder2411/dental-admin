@@ -53,7 +53,7 @@
     "@progress/kendo-react-layout": "^3.17.0",
     "@progress/kendo-react-pdf": "^3.17.0",
     "@progress/kendo-react-progressbars": "^3.17.0",
-    "@progress/kendo-react-scheduler": "^3.17.0",
+    "@progress/kendo-react-scheduler": "^4.2.0-dev.202012181528",
     "@progress/kendo-react-upload": "^3.17.0",
     "@progress/kendo-theme-default": "^4.24.0",
     "bootstrap": "^4.5.3",
