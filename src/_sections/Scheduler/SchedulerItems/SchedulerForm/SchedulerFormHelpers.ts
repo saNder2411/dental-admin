@@ -533,13 +533,27 @@ const transformRecurrenceRuleInInitialRepaetPropsForm = (recRule: string | null)
 export const getInitialFormValue = (
   dataItem: SchedulerDataItem,
   { FirstName, Title, Email, Gender, CellPhone }: CustomerFields
-): InitialFormValue => ({
-  ...dataItem,
-  FirstName,
-  LastNameAppt: Title,
-  Email: Email ?? '',
-  Gender,
-  CellPhone: CellPhone ?? '',
-  Notes: dataItem.Notes ?? '',
-  ...transformRecurrenceRuleInInitialRepaetPropsForm(dataItem.MetroRRule),
-});
+): InitialFormValue => {
+  const startHours = dataItem.Start.getHours() === 0 ? 8 : dataItem.Start.getHours();
+  const Start = new Date(dataItem.Start.getFullYear(), dataItem.Start.getMonth(), dataItem.Start.getDate(), startHours, dataItem.Start.getMinutes());
+  const End = new Date(
+    dataItem.Start.getFullYear(),
+    dataItem.Start.getMonth(),
+    dataItem.Start.getDate(),
+    startHours + 1,
+    dataItem.Start.getMinutes()
+  );
+
+  return {
+    ...dataItem,
+    Start,
+    End,
+    FirstName,
+    LastNameAppt: Title,
+    Email: Email ?? '',
+    Gender,
+    CellPhone: CellPhone ?? '',
+    Notes: dataItem.Notes ?? '',
+    ...transformRecurrenceRuleInInitialRepaetPropsForm(dataItem.MetroRRule),
+  };
+};

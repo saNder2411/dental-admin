@@ -24,6 +24,8 @@ import { AgendaActions } from '../../../Agenda/AgendaActions';
 // Selectors
 import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
 import { selectFormItemID } from '../SchedulerSelectors';
+// Helpers
+import { getNewDataItemWithUpdateException } from '../SchedulerHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
@@ -106,12 +108,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const onConfirmDeleteDataItem = () => {
     setIsDataItemLoading(true);
     if (isRemoveOccurrence) {
-      const exception = props.originalStart ? props.originalStart : new Date(dataItem.Start.getTime());
-      const MetroRecException = dataItem.MetroRecException ? [...dataItem.MetroRecException, exception] : [exception];
-      const { occurrenceId, originalStart, ...others } = dataItem as any;
-      const newDataItem = { ...others, MetroRecException };
-      console.log(`exception`, exception);
-      console.log(`newDataItem`, newDataItem);
+      const exception = new Date(dataItem.Start.getTime());
+      const newDataItem = getNewDataItemWithUpdateException(dataItem, exception);
 
       AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
       return;

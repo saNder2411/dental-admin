@@ -2,7 +2,7 @@
 import { SchedulerState, ActionTypes, Actions } from './SchedulerTypes';
 import { ActionTypes as TeamStaffActionsTypes } from '../../TeamStaff/TeamStaffTypes';
 // Helpers
-import { updateStateOnAddNewItemToChange } from './SchedulerHelpers';
+import { updateNewDataItemOnAddNewItemToChange } from './SchedulerHelpers';
 
 const initialState = {
   data: [],
@@ -36,7 +36,7 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
       return { ...state, formItemID: action.payload };
 
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
-      return { ...state, newDataItem: updateStateOnAddNewItemToChange(state.data, action.payload) };
+      return { ...state, newDataItem: updateNewDataItemOnAddNewItemToChange(state.data, action.payload) };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       return { ...state, newDataItem: null };

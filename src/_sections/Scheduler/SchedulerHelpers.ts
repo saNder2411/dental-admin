@@ -3,6 +3,7 @@ import { v4 as uuidV4 } from 'uuid';
 // Types
 import { SchedulerDataItem, ViewType } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
+import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 
 export const ordersModelFields = {
   id: 'ID',
@@ -11,10 +12,6 @@ export const ordersModelFields = {
   start: 'Start',
   end: 'End',
   isAllDay: 'fAllDayEvent',
-  Title: 'Title',
-  CellPhone: 'CellPhone',
-  email: 'Email',
-  notes: 'Description',
   recurrenceRule: 'MetroRRule',
   recurrenceId: 'RecurrenceID',
   recurrenceExceptions: 'MetroRecException',
@@ -30,7 +27,7 @@ export const getFormInputOptionalProps = ({ touched, validationMessage, showVali
 
 export const generateId = (data: SchedulerDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
-export const updateStateOnAddNewItemToChange = (
+export const updateNewDataItemOnAddNewItemToChange = (
   data: SchedulerDataItem[],
   { Start, End, TeamID }: { Start: Date; End: Date; TeamID: number }
 ): SchedulerDataItem => {
@@ -104,19 +101,33 @@ export const extractGuidFromString = (metadataID: string) => {
   return metadataID.slice(startGuid, endGuid);
 };
 
-export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: ViewType, TeamID: number ) => {
+export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: ViewType, TeamID: number) => {
   switch (selectedView) {
     case 'month':
       return {
         Start: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 0),
         End: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate() + 1, 0),
         TeamID,
-      }
+      };
     default:
       return {
         Start: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 10),
         End: new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate(), 11),
         TeamID,
-      }
+      };
   }
+};
+
+export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, exception: Date): SchedulerDataItem => {
+  const MetroRecException = dataItem.MetroRecException ? [...dataItem.MetroRecException, exception] : [exception];
+  const { occurrenceId, originalStart, EventDate, EndDate, ...others } = dataItem;
+  return {
+    ...others,
+    EventDate,
+    EndDate,
+    Start: new Date(EventDate),
+    End: new Date(EndDate),
+    MetroRecException,
+    RecurrenceID: null,
+  };
 };

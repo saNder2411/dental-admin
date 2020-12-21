@@ -4,9 +4,13 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 import { SchedulerDataItem } from '../SchedulerTypes';
 import { CustomersDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-// import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
 
-export interface CustomSchedulerItemProps<T = SchedulerDataItem> extends SchedulerItemProps {
+export interface KendoDataItem extends SchedulerDataItem {
+  occurrenceId?: string;
+  originalStart?: Date;
+}
+
+export interface CustomSchedulerItemProps<T = KendoDataItem> extends SchedulerItemProps {
   dataItem: T;
 }
 
@@ -14,10 +18,10 @@ export interface CustomFieldRenderProps<T = Array<CustomersDataItem | TeamStaffD
   domainData: T;
 }
 
-export interface CustomSchedulerFormProps<T = SchedulerDataItem> extends SchedulerFormProps {
+export interface CustomSchedulerFormProps<T = KendoDataItem> extends SchedulerFormProps {
   dataItem: T;
 }
 
-export interface CustomSchedulerSlotProps<T = SchedulerDataItem> extends SchedulerSlotProps {
+export interface CustomSchedulerSlotProps<T = KendoDataItem> extends SchedulerSlotProps {
   dataItem: T;
 }
