@@ -8,7 +8,7 @@ import { Loader, LoaderDataItem } from '../_components';
 // Styled Components
 import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
-import { selectMemoOriginalData, selectSelectedDate, selectSelectedView } from '../_sections/Scheduler/SchedulerSelectors';
+import { selectMemoData, selectSelectedDate, selectSelectedView } from '../_sections/Scheduler/SchedulerSelectors';
 // Actions
 import { SchedulerActions } from '../_sections/Scheduler/SchedulerActions';
 import { AgendaActions } from '../Agenda/AgendaActions';
@@ -26,12 +26,9 @@ export const Calendar: FC = () => {
   const dispatch = useDispatch();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
-  const selectOriginalData = useMemo(selectMemoOriginalData, []);
-  const originalData = useSelector(selectOriginalData);
-  const calendarData = useMemo(() => originalData.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [
-    mapTeamToFiltered,
-    originalData,
-  ]);
+  const selectData = useMemo(selectMemoData, []);
+  const data = useSelector(selectData);
+  const calendarData = useMemo(() => data.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [data, mapTeamToFiltered]);
   const selectedDate = useSelector(selectSelectedDate);
   const selectedView = useSelector(selectSelectedView);
   const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, calendarData[0]?.LookupHR01team.Id ?? 1);

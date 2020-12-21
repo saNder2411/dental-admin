@@ -44,7 +44,7 @@ export interface APIAgendaDataItem {
   LookupMultiBP01offerings: { results: LookupEntity[] };
   MasterSeriesItemID: null | number;
   MetroRRule: null | string;
-  MetroRecException: null | string;
+  MetroRecException: null | Date[];
   Notes: null | string;
   RecurrenceID: null | number;
   ServiceCharge: number;

@@ -8,6 +8,7 @@ export const transformData = (apiResults: APIAgendaDataItem[]): AgendaDataItem[]
     Start: new Date(item.EventDate),
     End: new Date(item.EndDate),
     LastUpdate: new Date().toISOString(),
+    MetroRecException: item.MetroRecException ? item.MetroRecException.map((exception) => new Date(exception)) : null,
   }));
 
 export const transformDataItem = (apiResult: APIAgendaDataItem): AgendaDataItem => ({
@@ -16,6 +17,7 @@ export const transformDataItem = (apiResult: APIAgendaDataItem): AgendaDataItem 
   Start: new Date(apiResult.EventDate),
   End: new Date(apiResult.EndDate),
   LastUpdate: new Date().toISOString(),
+  MetroRecException: apiResult.MetroRecException ? apiResult.MetroRecException.map((exception) => new Date(exception)) : null,
 });
 
 export const transformDataItemForAPI = ({ LastUpdate, TeamID, Start, End, isNew, inEdit, ...others }: AgendaDataItem): APIAgendaDataItem => ({

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerItem as KendoSchedulerItem } from '@progress/kendo-react-scheduler';
 import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
-import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
@@ -11,8 +10,8 @@ import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
 import * as SC from '../SchedulerItemsStyled/SchedulerItemStyled';
 // Components
-import { Loader } from '../../../_components';
 import { SchedulerEditItem } from './SchedulerEditItem';
+import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirmModal } from './SchedulerConfirmModals';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
@@ -27,16 +26,20 @@ import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
 import { selectFormItemID } from '../SchedulerSelectors';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
+  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
+  console.log('itemProps', props);
+
   const intl = useInternationalization();
-  const [showPopup, setShowPopup] = useState(false);
   const dispatch = useDispatch();
   const agendaIsDataItemLoading = useSelector(selectAgendaIsDataItemLoading);
-  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus } = props;
   const formItemID = useSelector(selectFormItemID);
   const inEdit = formItemID === dataItem.ID;
-  // const [, setShowOccurrenceDialog] = useSchedulerEditItemShowOccurrenceDialogContext();
 
+  const [showPopup, setShowPopup] = useState(false);
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
+  const [showEditOccurrenceDialog, setShowEditOccurrenceDialog] = useState(false);
+  const [showRemoveOccurrenceDialog, setShowRemoveOccurrenceDialog] = useState(false);
+  const [isRemoveOccurrence, setIsRemoveOccurrence] = useState(false);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
   const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
@@ -50,6 +53,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     () => () => {
       setIsDataItemLoading(false);
       setShowRemoveDialog(false);
+      setShowRemoveOccurrenceDialog(false);
+      setIsRemoveOccurrence(false);
     },
     []
   );
@@ -76,24 +81,41 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const onEditBtnClick = useCallback(() => {
     setShowPopup(false);
+
+    if (isRecurring) {
+      setShowEditOccurrenceDialog(true);
+      return;
+    }
+
     SchedulerActions.setFormItemID(dispatch, dataItem.ID);
-    // isRecurring && setShowOccurrenceDialog(true);
-  }, [dispatch, dataItem.ID]);
+  }, [dispatch, dataItem.ID, isRecurring]);
 
   const onDeleteBtnClick = useCallback(() => {
     setShowPopup(false);
 
-    // if (isRecurring) {
-    //   setShowOccurrenceDialog(true);
-    // } else {
+    if (isRecurring) {
+      setShowRemoveOccurrenceDialog(true);
+      return;
+    }
+
     setShowRemoveDialog(true);
-    // }
-  }, [setShowPopup, setShowRemoveDialog]);
+  }, [isRecurring]);
 
   const { onFocus: onFocusAsync, onBlur: onBlurAsync } = useAsyncFocusBlur({ onFocus, onBlur: onSchedulerItemBlur });
 
   const onConfirmDeleteDataItem = () => {
     setIsDataItemLoading(true);
+    if (isRemoveOccurrence) {
+      const exception = props.originalStart ? props.originalStart : new Date(dataItem.Start.getTime());
+      const MetroRecException = dataItem.MetroRecException ? [...dataItem.MetroRecException, exception] : [exception];
+      const { occurrenceId, originalStart, ...others } = dataItem as any;
+      const newDataItem = { ...others, MetroRecException };
+      console.log(`exception`, exception);
+      console.log(`newDataItem`, newDataItem);
+
+      AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
+      return;
+    }
     AgendaActions.deleteDataItem(dispatch, dataItem.ID, () => {});
   };
 
@@ -169,26 +191,38 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         </div>
       </Popup>
       {showRemoveDialog && (
-        <Dialog title={'Delete Event'} onClose={() => !isDataItemLoading && setShowRemoveDialog(false)}>
-          <p style={{ margin: '25px', textAlign: 'center' }}>Are you sure you want to delete this event?</p>
-          <DialogActionsBar>
-            <button className="k-button" onClick={() => setShowRemoveDialog(false)} disabled={isDataItemLoading}>
-              Cancel
-            </button>
-            <button className="k-button" onClick={onConfirmDeleteDataItem} disabled={isDataItemLoading}>
-              {isDataItemLoading ? (
-                <Loader
-                  className="d-flex justify-content-center align-items-center"
-                  type="pulsing"
-                  isLoading={isDataItemLoading}
-                  themeColor="primary"
-                />
-              ) : (
-                `Delete`
-              )}
-            </button>
-          </DialogActionsBar>
-        </Dialog>
+        <RemoveConfirmModal
+          isDataItemLoading={isDataItemLoading}
+          onClose={() => !isDataItemLoading && setShowRemoveDialog(false)}
+          onCancel={() => setShowRemoveDialog(false)}
+          onConfirm={onConfirmDeleteDataItem}
+        />
+      )}
+      {showRemoveOccurrenceDialog && (
+        <RemoveOccurrenceConfirmModal
+          onClose={() => setShowRemoveOccurrenceDialog(false)}
+          onCancel={() => {
+            setIsRemoveOccurrence(true);
+            setShowRemoveOccurrenceDialog(false);
+            setShowRemoveDialog(true);
+          }}
+          onConfirm={() => {
+            setShowRemoveOccurrenceDialog(false);
+            setShowRemoveDialog(true);
+          }}
+        />
+      )}
+      {showEditOccurrenceDialog && (
+        <EditOccurrenceConfirmModal
+          onClose={() => setShowEditOccurrenceDialog(false)}
+          onCancel={() => {
+            setShowEditOccurrenceDialog(false);
+          }}
+          onConfirm={() => {
+            setShowEditOccurrenceDialog(false);
+            SchedulerActions.setFormItemID(dispatch, dataItem.ID);
+          }}
+        />
       )}
       {inEdit && <SchedulerEditItem {...props} />}
     </>

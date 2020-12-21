@@ -2,15 +2,11 @@ import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
 
-const selectEventDrivenData = ({ SchedulerState }: GlobalState) => SchedulerState.eventDrivenData;
-
-const selectOriginalData = ({ SchedulerState }: GlobalState) => SchedulerState.originalData;
+const selectData = ({ SchedulerState }: GlobalState) => SchedulerState.data;
 
 export const selectFormItemID = ({ SchedulerState }: GlobalState) => SchedulerState.formItemID;
 
-export const selectMemoEventDrivenData = () => createSelector(selectEventDrivenData, (eventDrivenData) => eventDrivenData);
-
-export const selectMemoOriginalData = () => createSelector(selectOriginalData, (originalData) => originalData);
+export const selectMemoData = () => createSelector(selectData, (originalData) => originalData);
 
 const selectTeamToFiltered = ({ SchedulerState }: GlobalState) => SchedulerState.mapTeamToFiltered;
 

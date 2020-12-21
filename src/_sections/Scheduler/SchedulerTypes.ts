@@ -44,8 +44,7 @@ export interface SchedulerStateActions {
 }
 
 export interface SchedulerState {
-  eventDrivenData: SchedulerDataItem[];
-  originalData: SchedulerDataItem[];
+  data: SchedulerDataItem[];
   mapTeamToFiltered: { [key: string]: boolean };
   formItemID: number | null;
   newDataItem: null | SchedulerDataItem;

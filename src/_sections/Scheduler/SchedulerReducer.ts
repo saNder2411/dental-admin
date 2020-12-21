@@ -5,8 +5,7 @@ import { ActionTypes as TeamStaffActionsTypes } from '../../TeamStaff/TeamStaffT
 import { updateStateOnAddNewItemToChange } from './SchedulerHelpers';
 
 const initialState = {
-  eventDrivenData: [],
-  originalData: [],
+  data: [],
   mapTeamToFiltered: { '1': false },
   formItemID: null,
   newDataItem: null,
@@ -17,7 +16,7 @@ const initialState = {
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
   switch (action.type) {
     case ActionTypes.SET_DATA:
-      return { ...state, eventDrivenData: action.payload, originalData: [...action.payload] };
+      return { ...state, data: action.payload };
 
     case TeamStaffActionsTypes.FETCH_DATA_SUCCESS:
       return { ...state, mapTeamToFiltered: action.payload.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}) };
@@ -37,7 +36,7 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
       return { ...state, formItemID: action.payload };
 
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
-      return { ...state, newDataItem: updateStateOnAddNewItemToChange(state.eventDrivenData, action.payload) };
+      return { ...state, newDataItem: updateStateOnAddNewItemToChange(state.data, action.payload) };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       return { ...state, newDataItem: null };
