@@ -5,7 +5,7 @@ import { SchedulerDataItem, ViewType } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 
-export const ordersModelFields = {
+export const customModelFields = {
   id: 'ID',
   title: 'Title',
   description: 'Description',

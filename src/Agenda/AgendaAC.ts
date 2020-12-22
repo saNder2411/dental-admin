@@ -67,3 +67,13 @@ export const deleteDataItemInitAsyncAC = (deletedDataItemID: number, onDeleteDat
   payload: deletedDataItemID,
   meta: onDeleteDataItemInGridData,
 });
+
+export const updateRecurringDataItemInitAsyncAC = (
+  updatedDataItem: AgendaDataItem,
+  createDataItem: AgendaDataItem,
+  onUpdateDataItem: () => void
+) => ({
+  type: ActionTypes.UPDATE_RECURRING_DATA_ITEM_ASYNC,
+  payload: { updatedDataItem: transformDataItemForAPI(updatedDataItem), createDataItem: transformDataItemForAPI(createDataItem) },
+  meta: onUpdateDataItem,
+});

@@ -24,4 +24,6 @@ export const transformDataItemForAPI = ({ LastUpdate, TeamID, Start, End, isNew,
   ...others,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),
+  FilterStart: Start.toISOString(),
+  FilterEnd: End.toISOString(),
 });

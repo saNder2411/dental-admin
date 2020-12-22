@@ -27,13 +27,14 @@ import {
 // Selectors
 import { selectTeamStaffMemoData } from '../../../../TeamStaff/TeamStaffSelectors';
 import { selectCustomersMemoData } from '../../../../Customers/CustomersSelectors';
+import { selectMemoUpdatedRecurringDataItem } from '../../SchedulerSelectors';
 // Types
 import { StatusNames } from '../../../../Agenda/AgendaTypes';
 import { CustomersDataItem } from '../../../../Customers';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
-import { AgendaActions } from '../../../../Agenda/AgendaActions';
+import { AgendaActions, AgendaSchedulerActions } from '../../../../Agenda/AgendaActions';
 import { SchedulerActions } from '../../SchedulerActions';
 // Instruments
 import {
@@ -72,6 +73,9 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
 
+  const selectUpdatedRecurringDataItem = useMemo(selectMemoUpdatedRecurringDataItem, []);
+  const updatedRecurringDataItem = useSelector(selectUpdatedRecurringDataItem);
+
   const { FirstName, Title, Email, Gender, CellPhone } = useMemo(
     () => customersData.find(({ Id }) => Id === dataItem.LookupCM102customers.Id) ?? customersData[0],
     [customersData, dataItem.LookupCM102customers.Id]
@@ -93,6 +97,15 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     // console.log(`onSubmitDataItem`, newDataItem);
 
     setIsDataItemLoading(true);
+
+    if (updatedRecurringDataItem && dataItem.isNew) {
+      AgendaSchedulerActions.updateRecurringDataItem(dispatch, updatedRecurringDataItem, newDataItem, () => {
+        SchedulerActions.discardNewItemToData(dispatch);
+        SchedulerActions.changeUpdatedRecurringDataItem(dispatch, null);
+      });
+      return;
+    }
+
     dataItem.isNew
       ? AgendaActions.createDataItem(
           dispatch,
@@ -106,6 +119,10 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
     if (dataItem.isNew) {
       SchedulerActions.discardNewItemToData(dispatch);
+    }
+
+    if (updatedRecurringDataItem) {
+      SchedulerActions.changeUpdatedRecurringDataItem(dispatch, null);
     }
 
     onDiscardAction && onDiscardAction({ value: null });

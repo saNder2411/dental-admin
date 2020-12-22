@@ -10,6 +10,7 @@ import {
   validateStartDateEventAC,
   validateEndDateEventAC,
   validateFullNameValueAC,
+  updateRecurringDataItemInitAsyncAC,
 } from './AgendaAC';
 
 export const AgendaActions = {
@@ -31,4 +32,9 @@ export const AgendaEditCellsActions = {
   validateStartDateEvent: (dispatch: Dispatch, isValid: boolean) => dispatch(validateStartDateEventAC(isValid)),
   validateEndDateEvent: (dispatch: Dispatch, isValid: boolean) => dispatch(validateEndDateEventAC(isValid)),
   validateFullNameValue: (dispatch: Dispatch, isValid: boolean) => dispatch(validateFullNameValueAC(isValid)),
+};
+
+export const AgendaSchedulerActions = {
+  updateRecurringDataItem: (dispatch: Dispatch, updatedDataItem: AgendaDataItem, createDataItem: AgendaDataItem, onUpdateDataItem: () => void) =>
+    dispatch(updateRecurringDataItemInitAsyncAC(updatedDataItem, createDataItem, onUpdateDataItem)),
 };

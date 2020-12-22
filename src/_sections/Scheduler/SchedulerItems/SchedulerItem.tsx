@@ -29,7 +29,7 @@ import { getNewDataItemWithUpdateException } from '../SchedulerHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
-  // console.log('itemProps', props);
+  console.log('itemProps', props);
 
   const intl = useInternationalization();
   const dispatch = useDispatch();
@@ -215,6 +215,11 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           onClose={() => setShowEditOccurrenceDialog(false)}
           onCancel={() => {
             setShowEditOccurrenceDialog(false);
+            SchedulerActions.changeUpdatedRecurringDataItem(
+              dispatch,
+              getNewDataItemWithUpdateException(dataItem, new Date(dataItem.Start.getTime()))
+            );
+            SchedulerActions.addNewItemToEdit(dispatch, { Start: dataItem.Start, End: dataItem.End, TeamID: resource.ID });
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);

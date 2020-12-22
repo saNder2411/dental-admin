@@ -17,7 +17,7 @@ import { useTeamStaffDataForScheduler } from './CalendarHooks';
 import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from '../Agenda/AgendaHooks';
 import { useSetSchedulerDataForDomainWithDataBind } from '../_sections/Scheduler/SchedulerHooks';
 // Helpers
-import { ordersModelFields, getInitDataForNewDataItem } from '../_sections/Scheduler/SchedulerHelpers';
+import { customModelFields, getInitDataForNewDataItem } from '../_sections/Scheduler/SchedulerHelpers';
 
 export const Calendar: FC = () => {
   const localizationService = useLocalization();
@@ -64,7 +64,7 @@ export const Calendar: FC = () => {
       <div className="card-component">
         <Scheduler
           data={calendarData}
-          modelFields={ordersModelFields}
+          modelFields={customModelFields}
           setIsAgendaDataItemLoading={setIsAgendaDataItemLoading}
           group={{
             resources: ['Teams'],

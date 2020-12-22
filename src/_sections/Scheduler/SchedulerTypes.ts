@@ -15,6 +15,8 @@ export const ActionTypes = {
 
   CHANGE_SELECTED_DATE: 'SCHEDULER/CHANGE_SELECTED_DATE' as const,
   CHANGE_SELECTED_VIEW: 'SCHEDULER/CHANGE_SELECTED_VIEW' as const,
+
+  CHANGE_UPDATED_RECURRING_DATA_ITEM: 'SCHEDULER/CHANGE_UPDATED_RECURRING_DATA_ITEM' as const,
 };
 
 type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -41,6 +43,7 @@ export interface SchedulerStateActions {
 
   changeSelectedDate: (dispatch: Dispatch, date: Date) => void;
   changeSelectedView: (dispatch: Dispatch, view: ViewType) => void;
+  changeUpdatedRecurringDataItem: (dispatch: Dispatch, dataItem: null | SchedulerDataItem) => void;
 }
 
 export interface SchedulerState {
@@ -50,6 +53,7 @@ export interface SchedulerState {
   newDataItem: null | SchedulerDataItem;
   selectedDate: Date;
   selectedView: ViewType;
+  updatedRecurringDataItem: null | SchedulerDataItem;
 }
 
 export interface CustomSchedulerProps extends SchedulerProps {

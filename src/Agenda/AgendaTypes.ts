@@ -106,6 +106,7 @@ export const ActionTypes = {
   VALIDATE_START_DATE_EVENT: `AGENDA/VALIDATE_START_DATE_EVENT` as const,
   VALIDATE_END_DATE_EVENT: `AGENDA/VALIDATE_END_DATE_EVENT` as const,
   VALIDATE_FULL_NAME_VALUE: `AGENDA/VALIDATE_FULL_NAME_VALUE` as const,
+  UPDATE_RECURRING_DATA_ITEM_ASYNC: 'AGENDA/UPDATE_RECURRING_DATA_ITEM_ASYNC' as const,
 };
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
@@ -117,3 +118,5 @@ export type CreateDataItemInitAsyncActionType = ReturnType<typeof actions.create
 export type UpdateDataItemInitAsyncActionType = ReturnType<typeof actions.updateDataItemInitAsyncAC>;
 
 export type DeleteDataItemInitAsyncActionType = ReturnType<typeof actions.deleteDataItemInitAsyncAC>;
+
+export type UpdateRecurringDataItemInitAsyncActionType = ReturnType<typeof actions.updateRecurringDataItemInitAsyncAC>;

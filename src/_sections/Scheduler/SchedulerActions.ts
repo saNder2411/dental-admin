@@ -10,6 +10,7 @@ import {
   discardAddNewItemToDataAC,
   changeSelectedDateAC,
   changeSelectedViewAC,
+  changeUpdatedRecurringDataItemAC,
 } from './SchedulerAC';
 
 export const SchedulerActions: SchedulerStateActions = {
@@ -17,10 +18,10 @@ export const SchedulerActions: SchedulerStateActions = {
   onEmployeeChange: (dispatch: Dispatch, employeeID: number) => dispatch(changeMapTeamToFilteredAC(employeeID)),
   setFormItemID: (dispatch: Dispatch, formItemID: number | null) => dispatch(setFormItemIdAC(formItemID)),
 
-  addNewItemToEdit: (dispatch: Dispatch, initDataForNewDataItem: InitDataForNewDataItem) =>
-    dispatch(addNewItemToEditAC(initDataForNewDataItem)),
+  addNewItemToEdit: (dispatch: Dispatch, initDataForNewDataItem: InitDataForNewDataItem) => dispatch(addNewItemToEditAC(initDataForNewDataItem)),
   discardNewItemToData: (dispatch: Dispatch) => dispatch(discardAddNewItemToDataAC()),
 
   changeSelectedDate: (dispatch: Dispatch, date: Date) => dispatch(changeSelectedDateAC(date)),
   changeSelectedView: (dispatch: Dispatch, view: ViewType) => dispatch(changeSelectedViewAC(view)),
+  changeUpdatedRecurringDataItem: (dispatch: Dispatch, dataItem: SchedulerDataItem | null) => dispatch(changeUpdatedRecurringDataItemAC(dataItem)),
 };

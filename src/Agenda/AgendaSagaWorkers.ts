@@ -14,6 +14,7 @@ import {
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
   APIAgendaDataItem,
+  UpdateRecurringDataItemInitAsyncActionType,
 } from './AgendaTypes';
 import { APIServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
@@ -112,5 +113,33 @@ export function* workerDeleteDataItem({
   } finally {
     yield put(actions.deleteDataItemFinallyAC());
     onDeleteDataItemInGridData();
+  }
+}
+
+type UpdateRecurringDataItemResults = [APIAgendaDataItem, APIAgendaDataItem];
+
+export function* workerUpdateRecurringDataItem({
+  payload: { updatedDataItem, createDataItem },
+  meta: onUpdateDataItem,
+}: UpdateRecurringDataItemInitAsyncActionType): SagaIterator {
+  try {
+    yield put(actions.updateDataItemRequestAC());
+
+    const [updateResult, createResult]: UpdateRecurringDataItemResults = yield all([
+      apply(API, API.agenda.updateDataItem, [updatedDataItem]),
+      apply(API, API.agenda.createDataItem, [createDataItem]),
+    ]);
+
+    const updatedDataItemData = transformDataItem(updateResult);
+    yield put(actions.updateDataItemSuccessAC(updatedDataItemData));
+
+    const createDataItemData = transformDataItem(createResult);
+    onUpdateDataItem()
+    yield put(actions.createDataItemSuccessAC(createDataItemData));
+   
+  } catch (error) {
+    yield put(actions.updateDataItemFailureAC(error.message));
+  } finally {
+    yield put(actions.updateDataItemFinallyAC());
   }
 }

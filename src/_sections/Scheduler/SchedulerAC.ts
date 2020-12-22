@@ -22,4 +22,9 @@ export const changeSelectedDateAC = (date: Date) => ({ type: ActionTypes.CHANGE_
 
 export const changeSelectedViewAC = (view: ViewType) => ({ type: ActionTypes.CHANGE_SELECTED_VIEW, payload: view });
 
+export const changeUpdatedRecurringDataItemAC = (dataItem: SchedulerDataItem | null) => ({
+  type: ActionTypes.CHANGE_UPDATED_RECURRING_DATA_ITEM,
+  payload: dataItem,
+});
+
 export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };

@@ -2,7 +2,13 @@ import { takeEvery, all, call } from 'redux-saga/effects';
 // Types
 import { ActionTypes } from './AgendaTypes';
 // Workers
-import { workerFetchData, workerCreateDataItem, workerUpdateDataItem, workerDeleteDataItem } from './AgendaSagaWorkers';
+import {
+  workerFetchData,
+  workerCreateDataItem,
+  workerUpdateDataItem,
+  workerDeleteDataItem,
+  workerUpdateRecurringDataItem,
+} from './AgendaSagaWorkers';
 
 function* watchFetchData() {
   yield takeEvery(ActionTypes.FETCH_DATA_INIT_ASYNC, workerFetchData);
@@ -20,6 +26,16 @@ function* watchDeleteDataItem() {
   yield takeEvery(ActionTypes.DELETE_DATA_ITEM_INIT_ASYNC, workerDeleteDataItem);
 }
 
+function* watchUpdateRecurringDataItem() {
+  yield takeEvery(ActionTypes.UPDATE_RECURRING_DATA_ITEM_ASYNC, workerUpdateRecurringDataItem);
+}
+
 export function* watchAgenda() {
-  yield all([call(watchFetchData), call(watchCreateDataItem), call(watchUpdateDataItem), call(watchDeleteDataItem)]);
+  yield all([
+    call(watchFetchData),
+    call(watchCreateDataItem),
+    call(watchUpdateDataItem),
+    call(watchDeleteDataItem),
+    call(watchUpdateRecurringDataItem),
+  ]);
 }

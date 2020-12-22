@@ -11,6 +11,7 @@ const initialState = {
   newDataItem: null,
   selectedDate: new Date(),
   selectedView: 'day' as const,
+  updatedRecurringDataItem: null,
 };
 
 export const reducer = (state: SchedulerState = initialState, action: Actions): SchedulerState => {
@@ -46,6 +47,9 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
 
     case ActionTypes.CHANGE_SELECTED_VIEW:
       return { ...state, selectedView: action.payload };
+
+    case ActionTypes.CHANGE_UPDATED_RECURRING_DATA_ITEM:
+      return { ...state, updatedRecurringDataItem: action.payload };
     default:
       return state;
   }
