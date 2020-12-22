@@ -22,6 +22,9 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
 
     const selectNewDataItem = useMemo(() => selectMemoNewDataItem(Start, resource.ID), [resource.ID, Start]);
     const newDataItem = useSelector(selectNewDataItem);
+    if (newDataItem) {
+      console.log(`SchedulerSlot`, Start)
+    }
 
     const onSlotDoubleClick = useCallback(() => SchedulerActions.addNewItemToEdit(dispatch, { Start, End, TeamID: resource.ID }), [
       End,

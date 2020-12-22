@@ -33,12 +33,14 @@ export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ..
   const onClick = () => isCalendar && GridActions.setDataNameDefault(dispatch);
 
   return (
-    <NavLink to={route} onClick={onClick}>
-      <DrawerItem {...others}>
-        <span className={`k-icon ${iconSvg}`} />
-        <span className="k-item-text">{text}</span>
-      </DrawerItem>
-    </NavLink>
+    <span>
+      <NavLink to={route} onClick={onClick}>
+        <DrawerItem {...others}>
+          <span className={`k-icon ${iconSvg}`} />
+          <span className="k-item-text">{text}</span>
+        </DrawerItem>
+      </NavLink>
+    </span>
   );
 };
 

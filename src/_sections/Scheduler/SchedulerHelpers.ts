@@ -1,7 +1,7 @@
 import { FieldRenderProps } from '@progress/kendo-react-form';
 import { v4 as uuidV4 } from 'uuid';
 // Types
-import { SchedulerDataItem, ViewType } from './SchedulerTypes';
+import { SchedulerDataItem, ViewType, InitDataForNewDataItem } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 
@@ -29,7 +29,7 @@ export const generateId = (data: SchedulerDataItem[]): number => data.reduce((ac
 
 export const updateNewDataItemOnAddNewItemToChange = (
   data: SchedulerDataItem[],
-  { Start, End, TeamID }: { Start: Date; End: Date; TeamID: number }
+  { Start, End, TeamID }: InitDataForNewDataItem
 ): SchedulerDataItem => {
   const ID = generateId(data);
   const guid = uuidV4();

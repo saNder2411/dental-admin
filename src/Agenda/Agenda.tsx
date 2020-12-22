@@ -128,7 +128,7 @@ export const Agenda: FC = (): JSX.Element => {
   );
 
   return (
-    <div id="Dashboard" className="home-page main-content">
+    <div className="home-page main-content">
       {contentTSX}
       <Loader className="mt-5" isLoading={agendaIsDataLoading} size={'large'} type="infinite-spinner" />
     </div>

@@ -23,9 +23,9 @@ import { SchedulerActions } from '../SchedulerActions';
 import { AgendaActions } from '../../../Agenda/AgendaActions';
 // Selectors
 import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
-import { selectFormItemID } from '../SchedulerSelectors';
+import { selectFormItemID, selectSelectedView } from '../SchedulerSelectors';
 // Helpers
-import { getNewDataItemWithUpdateException } from '../SchedulerHelpers';
+import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
@@ -35,7 +35,9 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const dispatch = useDispatch();
   const agendaIsDataItemLoading = useSelector(selectAgendaIsDataItemLoading);
   const formItemID = useSelector(selectFormItemID);
-  const inEdit = formItemID === dataItem.ID;
+  const isOriginalDataItem = new Date(dataItem.EventDate).getTime() === dataItem.Start.getTime();
+  const inEdit = formItemID === dataItem.ID && isOriginalDataItem;
+  const selectedView = useSelector(selectSelectedView);
 
   const [showPopup, setShowPopup] = useState(false);
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
@@ -219,7 +221,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
               dispatch,
               getNewDataItemWithUpdateException(dataItem, new Date(dataItem.Start.getTime()))
             );
-            SchedulerActions.addNewItemToEdit(dispatch, { Start: dataItem.Start, End: dataItem.End, TeamID: resource.ID });
+            SchedulerActions.addNewItemToEdit(dispatch, getInitDataForNewDataItem(dataItem.Start, selectedView, resource.ID));
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);

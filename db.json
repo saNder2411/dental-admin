@@ -14455,65 +14455,11 @@
       "Description": "",
       "Duration": 60,
       "Email": "test12@gmail.com",
+      "EndDate": "2021-02-08T07:00:00.000Z",
+      "EventDate": "2021-02-08T06:00:00.000Z",
       "EventType": 0,
-      "FilterEnd": "2020-12-23T07:00:00.000Z",
-      "FilterStart": "2020-12-23T06:00:00.000Z",
-      "Gender": "(1) Female",
-      "ID": 1399,
-      "Id": 1399,
-      "LookupCM102customers": {
-        "Id": 1269,
-        "__metadata": {
-          "id": "27f5d039-9c85-4e09-a869-45b65150829f",
-          "type": "SP.Data.MetroBP02ListItem"
-        }
-      },
-      "LookupHR01team": {
-        "Id": 3,
-        "__metadata": {
-          "id": "6b1a08ca-2696-4ae0-b22a-e7f7f1087e98",
-          "type": "SP.Data.MetroHR01ListItem"
-        }
-      },
-      "LookupMultiBP01offerings": {
-        "results": []
-      },
-      "MasterSeriesItemID": null,
-      "MetroRRule": "FREQ=DAILY;INTERVAL=1;COUNT=4",
-      "MetroRecException": [
-        "2020-12-24T06:00:00.000Z"
-      ],
-      "Notes": "",
-      "RecurrenceID": null,
-      "ServiceCharge": 40,
-      "SubmissionIdUIT": null,
-      "TrackingComments": null,
-      "fAllDayEvent": null,
-      "id": 1399,
-      "__metadata": {
-        "id": "Web/Lists(guid'6b1a08ca-2696-4ae0-b22a-e7f7f1087e98')/Items(1399)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'6b1a08ca-2696-4ae0-b22a-e7f7f1087e98')/Items(1399)",
-        "etag": "\"2\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "FirstName": "Consultation",
-      "LastNameAppt": "A.Female",
-      "Title": "C.A.Female-1399",
-      "EventDate": "2020-12-23T06:00:00.000Z",
-      "EndDate": "2020-12-23T07:00:00.000Z"
-    },
-    {
-      "AppointmentSource": null,
-      "AppointmentStatus": "(1) Consultation",
-      "CellPhone": "+(890) 983-04-98",
-      "Description": "",
-      "Duration": 60,
-      "Email": "test12@gmail.com",
-      "EndDate": "2020-12-24T13:00:00.000Z",
-      "EventDate": "2020-12-24T10:00:00.000Z",
-      "EventType": 0,
-      "FilterEnd": "2020-12-24T13:00:00.000Z",
-      "FilterStart": "2020-12-24T10:00:00.000Z",
+      "FilterEnd": "2021-02-08T07:00:00.000Z",
+      "FilterStart": "2021-02-08T06:00:00.000Z",
       "Gender": "(1) Female",
       "ID": 1400,
       "Id": 1400,
@@ -14525,9 +14471,9 @@
         }
       },
       "LookupHR01team": {
-        "Id": 3,
+        "Id": 4,
         "__metadata": {
-          "id": "e23a324b-4d7a-404f-b543-bb66ffe7cc1e",
+          "id": "2e756ed6-292a-4381-98b5-c363d38fe8ba",
           "type": "SP.Data.MetroHR01ListItem"
         }
       },
@@ -14545,8 +14491,8 @@
       "fAllDayEvent": null,
       "id": 1400,
       "__metadata": {
-        "id": "Web/Lists(guid'e23a324b-4d7a-404f-b543-bb66ffe7cc1e')/Items(1400)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'e23a324b-4d7a-404f-b543-bb66ffe7cc1e')/Items(1400)",
+        "id": "Web/Lists(guid'2e756ed6-292a-4381-98b5-c363d38fe8ba')/Items(1400)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'2e756ed6-292a-4381-98b5-c363d38fe8ba')/Items(1400)",
         "etag": "\"2\"",
         "type": "SP.Data.MetroHR03ListItem"
       },

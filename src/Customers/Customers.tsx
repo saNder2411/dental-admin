@@ -133,7 +133,7 @@ export const Customers: FC = (): JSX.Element => {
   );
 
   return (
-    <div id="Grid" className="stylists-page main-content">
+    <div className="stylists-page main-content">
       {contentTSX}
       <Loader className="mt-5" isLoading={customersIsDataLoading} size={'large'} type="infinite-spinner" />
     </div>
