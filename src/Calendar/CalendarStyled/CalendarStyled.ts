@@ -7,6 +7,49 @@ export const Calendar = styled.section`
     grid-template-columns: repeat(5, 1fr);
   }
 
+  & .card-container {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  & .card-title {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  & .k-card-header {
+    border: none;
+  }
+
+  & .k-hbox {
+    padding: 0 20px;
+    background: transparent;
+  }
+
+  & .k-avatar {
+    width: 41px;
+    height: 41px;
+  }
+
+  & .k-card-title {
+    font-size: 15px;
+    margin-bottom: -6px;
+    text-align: left;
+  }
+
+  & .k-card-subtitle {
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 11px;
+  }
+  
+  & .disabled {
+    opacity: 0.5;
+  }
+
+  & .SchedulerItemContent__item {
+    margin-bottom: 0.5rem;
+  }
+
   & .DataItemLoader {
     z-index: 2;
     background-color: rgba(246, 246, 246, 0.4);

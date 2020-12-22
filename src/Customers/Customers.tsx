@@ -133,9 +133,9 @@ export const Customers: FC = (): JSX.Element => {
   );
 
   return (
-    <div className="stylists-page main-content">
+    <>
       {contentTSX}
       <Loader className="mt-5" isLoading={customersIsDataLoading} size={'large'} type="infinite-spinner" />
-    </div>
+    </>
   );
 };

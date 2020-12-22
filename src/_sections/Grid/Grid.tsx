@@ -122,24 +122,26 @@ export const Grid: FC<Props> = ({ children }) => {
       onItemChange={onGridItemChange}
       onDataStateChange={onDataStateChange}>
       <GridToolbar>
-        <span className="Grid__addNewItemWrapper">
-          <Input
-            value={allColumnFilter}
-            onChange={onAllColumnFilterChange}
-            placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
-          />
-          <span className="Grid__addNewItemTitle">{addItemTitle}</span>
-          <button title="Add new" className="k-button" onClick={() => onAddNewItem(dispatch)}>
-            <span className="k-icon k-i-plus-circle" />
-          </button>
-        </span>
+        <div className="text-right">
+          <span className="Grid__addNewItemWrapper">
+            <Input
+              value={allColumnFilter}
+              onChange={onAllColumnFilterChange}
+              placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
+            />
+            <span className="Grid__addNewItemTitle">{addItemTitle}</span>
+            <button title="Add new" className="k-button" onClick={() => onAddNewItem(dispatch)}>
+              <span className="k-icon k-i-plus-circle" />
+            </button>
+          </span>
 
-        <Button icon="excel" onClick={onExcelExport}>
-          {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
-        </Button>
-        <Button icon="pdf" onClick={onPdfExport}>
-          {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
-        </Button>
+          <Button icon="excel" onClick={onExcelExport}>
+            {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}
+          </Button>
+          <Button icon="pdf" onClick={onPdfExport} className="ml-2">
+            {localizationService.toLanguageString('custom.exportPdf', 'Export to PDF')}
+          </Button>
+        </div>
       </GridToolbar>
 
       {children}

@@ -5,6 +5,8 @@ import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/ke
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { AppHeader } from '.';
+// SC
+import * as SC from './AppItemsStyled/CustomDrawerItemStyled'
 // Actions
 import { GridActions } from '../_sections/Grid/GridActions';
 // Images
@@ -33,14 +35,14 @@ export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ..
   const onClick = () => isCalendar && GridActions.setDataNameDefault(dispatch);
 
   return (
-    <span>
+    <SC.CustomDrawerItem>
       <NavLink to={route} onClick={onClick}>
         <DrawerItem {...others}>
           <span className={`k-icon ${iconSvg}`} />
           <span className="k-item-text">{text}</span>
         </DrawerItem>
       </NavLink>
-    </span>
+    </SC.CustomDrawerItem>
   );
 };
 

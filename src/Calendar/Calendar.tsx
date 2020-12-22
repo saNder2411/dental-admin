@@ -98,7 +98,7 @@ export const Calendar: FC = () => {
   );
 
   return (
-    <SC.Calendar id="Planning" className="planning-page main-content">
+    <SC.Calendar>
       {contentTSX}
       <Loader className="mt-5" isLoading={agendaIsDataLoading} size={'large'} type="infinite-spinner" />
     </SC.Calendar>
