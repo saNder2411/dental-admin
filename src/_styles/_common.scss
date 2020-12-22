@@ -13,6 +13,11 @@ a:hover {
   color: inherit;
 }
 
+.App {
+  min-width: 1750px;
+  overflow: hidden;
+}
+
 // App styles
 .k-drawer-container {
   background-color: $background-color;
@@ -23,9 +28,9 @@ a:hover {
     border-right-width: 0 !important;
   }
 
-  .k-drawer-wrapper {
-    position: fixed;
-  }
+  // .k-drawer-wrapper {
+  //   position: fixed;
+  // }
 
   &.k-drawer-expanded .k-drawer-wrapper {
     width: 240px !important;

@@ -29,7 +29,7 @@ import { getNewDataItemWithUpdateException } from '../SchedulerHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
-  console.log('itemProps', props);
+  // console.log('itemProps', props);
 
   const intl = useInternationalization();
   const dispatch = useDispatch();

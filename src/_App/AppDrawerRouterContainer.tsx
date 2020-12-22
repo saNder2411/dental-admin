@@ -59,9 +59,7 @@ export const AppDrawerRouterContainer: FC<Props> = ({ children }): JSX.Element =
 
     window.addEventListener('resize', onResizeWindow);
 
-    return () => {
-      window.removeEventListener('resize', onResizeWindow);
-    };
+    return () => window.removeEventListener('resize', onResizeWindow);
   }, [setIsSmallerScreen]);
 
   return (

@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Calendar = styled.section`
   min-width: 1500px;
-  overflow: auto;
 
   && .grid {
     grid-template-columns: repeat(5, 1fr);
