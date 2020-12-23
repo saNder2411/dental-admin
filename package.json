@@ -60,7 +60,7 @@
     "@progress/kendo-react-progressbars": "^3.17.0",
     "@progress/kendo-react-scheduler": "^4.2.0-dev.202012181528",
     "@progress/kendo-react-upload": "^3.17.0",
-    "@progress/kendo-theme-default": "^4.24.0",
+    "@progress/kendo-theme-default": "^4.23.0",
     "bootstrap": "^4.5.3",
     "cldr-core": "^37.0.0",
     "cldr-dates-full": "^37.0.0",

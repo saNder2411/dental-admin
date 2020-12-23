@@ -1,5 +1,5 @@
-// import { Web } from 'gd-sprest';
-// import { Web } from '@pnp/sp';
+import { Web as gdWeb } from 'gd-sprest';
+import { Web } from '@pnp/sp/presets/core';
 // Config
 import { ROOT_URL } from './config';
 // Types
@@ -149,29 +149,70 @@ export const API: API = {
 
 export const SP_API = {
   agenda: {
-    gdSPrest: () => new Promise((resolve, reject) => {}),
+    gdSPrest: () =>
+      new Promise((resolve, reject) => {
+        gdWeb('https://sa-toniguy01.metroapps.online/_api')
+          .Lists('guid')
+          .getItemById()
+          .execute((res) => {
+            if (res) {
+              resolve(res);
+            } else {
+              reject();
+            }
+          });
+      }),
+    pnpSP: async () => {
+      try {
+        const response = await Web('https://sa-toniguy01.metroapps.online/')
+          .lists.getById('D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')
+          .expand('Views')
+          .get();
 
-    spPlus: () => {},
+        console.log('RES', response);
+
+        return response;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+
+    items: async () => {
+      try {
+        const response = await Web('https://sa-toniguy01.metroapps.online/')
+          .lists.getById('D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')
+          .items.filter(
+            `(FilterStart ge datetime'2020-12-23T14:47:45.143Z') and (FilterEnd le datetime'2021-06-21T13:47:45.143Z')&$skiptoken=Paged=TRUE&p_ID=0&$top=10&$select=Title,ID,EventDate,EndDate,AppointmentStatus,AppointmentSource,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Title,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,TrackingComments,FirstName,LastNameAppt,Gender,CellPhone,Email,SubmissionIdUIT,FilterStart,FilterEnd,Modified&$expand=LookupHR01team,LookupCM102customers,LookupMultiBP01offerings&$orderby=EventDate asc`
+          )
+          .select()
+          .get();
+
+        console.log('RES', response);
+
+        return response;
+      } catch (e) {
+        console.error(e);
+      }
+    },
+
+    originalUrl1: async () =>
+      fetch(`https://sa-toniguy01.metroapps.online/_api/web/Lists(guid'D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')?$expand=Views`).then((res) =>
+        console.log(`Res1`, res)
+      ),
+
+    originalUrl2: async () =>
+      fetch(
+        `https://sa-toniguy01.metroapps.online/_api/web/Lists(guid'D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')/Items?$filter=(FilterStart%20ge%20datetime%272020-12-23T15:44:59.061Z%27)%20and%20(FilterEnd%20le%20datetime%272021-06-21T14:44:59.061Z%27)&$skiptoken=Paged=TRUE%26p_ID=0&$top=10&$select=Title,ID,EventDate,EndDate,AppointmentStatus,AppointmentSource,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Title,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,TrackingComments,FirstName,LastNameAppt,Gender,CellPhone,Email,SubmissionIdUIT,FilterStart,FilterEnd,Modified&$expand=LookupHR01team,LookupCM102customers,LookupMultiBP01offerings&$orderby=EventDate%20asc`
+      ).then((res) => console.log(`Res2`, res)),
   },
 };
 
-// const w = new Web('https://sa-toniguy01.metroapps.online/_api');
+// const w = Web('https://sa-toniguy01.metroapps.online/');
 
-// sp.web.lists
-//   .getById('D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')
-//   .items.expand('Views')
+// w.lists
+//   .getById("guid'D9DCCD8B-9F3D-4330-89E3-BDA20BB04348'")
+//   .expand('Views')
 //   .get()
 //   .then((r: any) => {
-//     // look through the returned items.
-//     for (var i = 0; i < r.length; i++) {
-//       // the title field value
-//       console.log(r[i].Title);
-
-//       // find the value in the MetaInfo string using regex
-//       const matches = /PublishingPageImage:SW\|(.*?)\r\n/gi.exec(r[i].FieldValuesAsText.MetaInfo);
-//       if (matches !== null && matches.length > 1) {
-//         // this wil be the value of the PublishingPageImage field
-//         console.log(matches[1]);
-//       }
-//     }
+//     console.log('RESPONSE', r);
 //   });

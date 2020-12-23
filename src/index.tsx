@@ -8,16 +8,10 @@ import { store } from './_init';
 import * as serviceWorker from './serviceWorker';
 import { SP_API } from './_REST/API';
 
-const fetchSP = async () => {
-  try {
-    const spResult = await SP_API.agenda.gdSPrest();
-    console.log('spResult', spResult);
-  } catch (error) {
-    console.log('error', error);
-  }
-};
-
-fetchSP();
+SP_API.agenda.pnpSP();
+SP_API.agenda.items();
+SP_API.agenda.originalUrl1()
+SP_API.agenda.originalUrl2()
 
 ReactDOM.render(
   <React.StrictMode>
