@@ -1,3 +1,5 @@
+// import { Web } from 'gd-sprest';
+// import { Web } from '@pnp/sp';
 // Config
 import { ROOT_URL } from './config';
 // Types
@@ -144,3 +146,32 @@ export const API: API = {
       }).then((response) => response.json()),
   },
 };
+
+export const SP_API = {
+  agenda: {
+    gdSPrest: () => new Promise((resolve, reject) => {}),
+
+    spPlus: () => {},
+  },
+};
+
+// const w = new Web('https://sa-toniguy01.metroapps.online/_api');
+
+// sp.web.lists
+//   .getById('D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')
+//   .items.expand('Views')
+//   .get()
+//   .then((r: any) => {
+//     // look through the returned items.
+//     for (var i = 0; i < r.length; i++) {
+//       // the title field value
+//       console.log(r[i].Title);
+
+//       // find the value in the MetaInfo string using regex
+//       const matches = /PublishingPageImage:SW\|(.*?)\r\n/gi.exec(r[i].FieldValuesAsText.MetaInfo);
+//       if (matches !== null && matches.length > 1) {
+//         // this wil be the value of the PublishingPageImage field
+//         console.log(matches[1]);
+//       }
+//     }
+//   });
