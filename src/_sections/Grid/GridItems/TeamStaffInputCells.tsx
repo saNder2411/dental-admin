@@ -1,11 +1,10 @@
 import React, { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-inputs';
-import { InputChangeEvent } from '@progress/kendo-react-inputs/dist/npm/input/interfaces/InputChangeEvent';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
-import { EditCellProps } from './GridItemsTypes';
+import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
 import { selectIsValidFullNameField, selectIsValidJobTitleField, selectIsValidMobilePhoneField } from '../../../TeamStaff/TeamStaffSelectors';
