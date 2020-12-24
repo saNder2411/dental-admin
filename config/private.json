@@ -1,5 +1,7 @@
 {
   "siteUrl": "https://sa-toniguy01.metroapps.online",
-  "strategy": "OnDemandCredentials",
-  "ondemand": true
+  "strategy": "UserCredentials",
+  "password": "3922a37b5932c8a1bc97fa1dae259f1685891f505aaed9041f7624b7a2d441b5ef86c758570c64011c935b8b100c525fzt910KQAfXM9b5+P1Lrn+g==",
+  "username": "yegor.gusakov.98@gmail.com",
+  "online": true
 }

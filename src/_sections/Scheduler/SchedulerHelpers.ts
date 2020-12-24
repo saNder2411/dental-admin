@@ -85,6 +85,7 @@ export const updateNewDataItemOnAddNewItemToChange = (
       etag: `"2"`,
       type: `SP.Data.MetroHR03ListItem`,
     },
+    Modified: new Date().toISOString(),
     TeamID,
     Start,
     End,

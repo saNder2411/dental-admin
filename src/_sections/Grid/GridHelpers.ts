@@ -101,6 +101,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
             type: `SP.Data.MetroHR03ListItem`,
           },
           TeamID: 1,
+          Modified: new Date().toISOString(),
           Start: new Date(),
           End: new Date(),
           LastUpdate: ``,
