@@ -19,16 +19,9 @@ export enum StatusNames {
 
 export interface LookupEntity {
   Id: number;
-  // __metadata: { id: string; type: string };
 }
 
-export interface APIAgendaDataItem {
-  // __metadata: {
-  //   etag: string;
-  //   id: string;
-  //   type: string;
-  //   uri: string;
-  // };
+export interface APIReadAgendaDataItem {
   LookupMultiBP01offerings: { results: LookupEntity[] };
   LookupCM102customers: LookupEntity;
   LookupHR01team: LookupEntity;
@@ -59,17 +52,110 @@ export interface APIAgendaDataItem {
   CellPhone: string | null;
   ID: number;
   Modified: string;
-
-  id: number;
 }
 
-export interface AgendaDataItem extends APIAgendaDataItem {
+export interface AgendaDataItem extends APIReadAgendaDataItem {
   TeamID: number;
   Start: Date;
   End: Date;
   LastUpdate: string;
   inEdit?: boolean;
   isNew?: boolean;
+}
+
+export interface APICreateBodyAgendaDataItem {
+  LookupCM102customersId: number;
+  LookupHR01teamId: number;
+  LookupMultiBP01offeringsId: { results: number[] };
+  Id: number;
+  Title: string;
+  EventDate: string;
+  EndDate: string;
+  Duration: number;
+  Description: string;
+  fAllDayEvent: null | boolean;
+  MasterSeriesItemID: null | number;
+  RecurrenceID: null | number;
+  EventType: number;
+  Email: string | null;
+  AppointmentStatus: StatusNames;
+  // AppointmentSource: null | string;
+  // SubmissionIdUIT: null | string;
+  LastNameAppt: string;
+  Gender: null | '(1) Female' | '(2) Male';
+  Notes: null | string;
+  // TrackingComments: null | string;
+  ServiceCharge: number;
+  FilterStart: string;
+  FilterEnd: string;
+  MetroRRule: null | string;
+  MetroRecException: null | Date[];
+  FirstName: string;
+  CellPhone: string | null;
+  ID: number;
+  Modified: string;
+  __metadata: { type: 'SP.Data.MetroHR03ListItem' };
+}
+
+export interface APIResponseAgendaDataItem extends APIReadAgendaDataItem {
+  __metadata: {
+    id: string;
+    uri: string;
+    etag: string;
+    type: string;
+  };
+  FirstUniqueAncestorSecurableObject: { __deferred: { uri: string } };
+  RoleAssignments: { __deferred: { uri: string } };
+  AttachmentFiles: { __deferred: { uri: string } };
+  ContentType: { __deferred: { uri: string } };
+  FieldValuesAsHtml: { __deferred: { uri: string } };
+  FieldValuesAsText: { __deferred: { uri: string } };
+  FieldValuesForEdit: { __deferred: { uri: string } };
+  File: { __deferred: { uri: string } };
+  Folder: { __deferred: { uri: string } };
+  ParentList: { __deferred: { uri: string } };
+  FileSystemObjectType: number;
+  ContentTypeId: string;
+  Location: null | string;
+  fRecurrence: boolean;
+  ParticipantsPickerId: null | string;
+  Category: null | string;
+  FreeBusy: null | string;
+  Overbook: null | string;
+  AppointmentSource: null | string;
+  SubmissionIdUIT: null | string;
+  CalendarColTeam: null | string;
+  CalendarColHex: null | string;
+  TeamProfileEMail: null | string;
+  AssignedToId: null | string;
+  ManagerId: null | number;
+  TrackingComments: null | string;
+  StatusChange: boolean;
+  ServiceChange: boolean;
+  StylistChange: boolean;
+  CustomerChange: boolean;
+  StartTimeChange: boolean;
+  EndTimeChange: boolean;
+  AlertsSMS: number;
+  FirstAppointment: boolean;
+  TimeChanges: number;
+  ExtraFees: number;
+  ServiceDiscount: number;
+  MaxDuration: number;
+  ScheduleGroupID: null | number;
+  ScheduleRefID: null | string;
+  OverlapLvl: string;
+  ComputedDuration: null | number;
+  LookupMultiBP01offeringsId: { __metadata: { type: string }; results: number[] };
+  LookupCM102customersId: number;
+  LookupHR01teamId: number;
+  AlertsCalls: number;
+  Created: string;
+  AuthorId: number;
+  EditorId: number;
+  OData__UIVersionString: string;
+  Attachments: boolean;
+  GUID: number;
 }
 
 export interface AgendaState {

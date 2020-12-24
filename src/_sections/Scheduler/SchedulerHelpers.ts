@@ -86,7 +86,6 @@ export const updateNewDataItemOnAddNewItemToChange = (
     ID,
     Modified: new Date().toISOString(),
 
-    id: ID,
     TeamID,
     Start,
     End,
