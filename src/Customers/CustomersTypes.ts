@@ -1,5 +1,6 @@
 // Types
 import { InferValueTypes } from '../_sections/Grid/GridTypes';
+import { LookupEntity } from '../Agenda/AgendaTypes';
 // Actions
 import * as actions from './CustomersAC';
 
@@ -10,7 +11,7 @@ export interface APICustomersDataItem {
     etag: string;
     type: string;
   };
-  LookupMultiHR01team: { results: Array<{ Id: number; __metadata: { id: string; type: string } }> };
+  LookupMultiHR01team: { results: LookupEntity[] };
   Id: number;
   Title: string;
   FirstName: string;

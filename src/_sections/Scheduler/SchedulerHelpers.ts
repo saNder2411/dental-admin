@@ -1,5 +1,5 @@
 import { FieldRenderProps } from '@progress/kendo-react-form';
-import { v4 as uuidV4 } from 'uuid';
+// import { v4 as uuidV4 } from 'uuid';
 // Types
 import { SchedulerDataItem, ViewType, InitDataForNewDataItem } from './SchedulerTypes';
 import { StatusNames } from '../../Agenda';
@@ -32,30 +32,30 @@ export const updateNewDataItemOnAddNewItemToChange = (
   { Start, End, TeamID }: InitDataForNewDataItem
 ): SchedulerDataItem => {
   const ID = generateId(data);
-  const guid = uuidV4();
-  const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
-  const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
+  // const guid = uuidV4();
+  // const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
+  // const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
 
   return {
-    __metadata: {
-      id: metadataId,
-      uri: metadataUri,
-      etag: `"2"`,
-      type: `SP.Data.MetroHR03ListItem`,
-    },
+    // __metadata: {
+    //   id: metadataId,
+    //   uri: metadataUri,
+    //   etag: `"2"`,
+    //   type: `SP.Data.MetroHR03ListItem`,
+    // },
     LookupCM102customers: {
       Id: 1269,
-      __metadata: {
-        id: '27f5d039-9c85-4e09-a869-45b65150829f',
-        type: 'SP.Data.MetroBP02ListItem',
-      },
+      // __metadata: {
+      //   id: '27f5d039-9c85-4e09-a869-45b65150829f',
+      //   type: 'SP.Data.MetroBP02ListItem',
+      // },
     },
     LookupHR01team: {
       Id: TeamID,
-      __metadata: {
-        id: guid,
-        type: 'SP.Data.MetroHR01ListItem',
-      },
+      // __metadata: {
+      //   id: guid,
+      //   type: 'SP.Data.MetroHR01ListItem',
+      // },
     },
     LookupMultiBP01offerings: { results: [] },
     Id: ID,
@@ -70,12 +70,12 @@ export const updateNewDataItemOnAddNewItemToChange = (
     EventType: 0,
     Email: null,
     AppointmentStatus: StatusNames.Consultation,
-    AppointmentSource: null,
-    SubmissionIdUIT: null,
+    // AppointmentSource: null,
+    // SubmissionIdUIT: null,
     LastNameAppt: ``,
     Gender: '(1) Female',
     Notes: null,
-    TrackingComments: null,
+    // TrackingComments: null,
     ServiceCharge: 40,
     FilterStart: Start.toISOString(),
     FilterEnd: End.toISOString(),

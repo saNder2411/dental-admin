@@ -1,5 +1,5 @@
-import React, { FC, useMemo, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Scheduler as KendoScheduler,
   DayView,
@@ -14,16 +14,16 @@ import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell
 // Types
 import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
 // Selectors
-import { selectTeamStaffMemoData } from '../../TeamStaff/TeamStaffSelectors';
+// import { selectTeamStaffMemoData } from '../../TeamStaff/TeamStaffSelectors';
 // Actions
 import { AgendaActions } from '../../Agenda/AgendaActions';
 import { SchedulerActions } from '../Scheduler/SchedulerActions';
 // Helpers
-import { extractGuidFromString } from './SchedulerHelpers';
+// import { extractGuidFromString } from './SchedulerHelpers';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
-  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
-  const teamStaffData = useSelector(selectTeamStaffData);
+  // const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
+  // const teamStaffData = useSelector(selectTeamStaffData);
   const dispatch = useDispatch();
 
   const onDataChange = useCallback(
@@ -34,15 +34,15 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
       const [updatedDataItem] = updated as SchedulerDataItem[];
 
       if (updatedDataItem.TeamID !== updatedDataItem.LookupHR01team.Id) {
-        const newStaff = teamStaffData.find(({ Id }) => Id === updatedDataItem.TeamID)!;
-        const guidNewStaff = extractGuidFromString(newStaff.__metadata.id);
+        // const newStaff = teamStaffData.find(({ Id }) => Id === updatedDataItem.TeamID)!;
+        // const guidNewStaff = extractGuidFromString(newStaff.__metadata.id);
         updatedDataItem.LookupHR01team.Id = updatedDataItem.TeamID;
-        updatedDataItem.LookupHR01team.__metadata.id = guidNewStaff;
+        // updatedDataItem.LookupHR01team.__metadata.id = guidNewStaff;
       }
 
       AgendaActions.updateDataItem(dispatch, updatedDataItem, () => setIsAgendaDataItemLoading(false));
     },
-    [dispatch, setIsAgendaDataItemLoading, teamStaffData]
+    [dispatch, setIsAgendaDataItemLoading]
   );
 
   const onDateChange = useCallback((evt: SchedulerDateChangeEvent) => SchedulerActions.changeSelectedDate(dispatch, evt.value), [dispatch]);

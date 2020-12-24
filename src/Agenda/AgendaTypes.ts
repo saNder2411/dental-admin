@@ -19,16 +19,16 @@ export enum StatusNames {
 
 export interface LookupEntity {
   Id: number;
-  __metadata: { id: string; type: string };
+  // __metadata: { id: string; type: string };
 }
 
 export interface APIAgendaDataItem {
-  __metadata: {
-    etag: string;
-    id: string;
-    type: string;
-    uri: string;
-  };
+  // __metadata: {
+  //   etag: string;
+  //   id: string;
+  //   type: string;
+  //   uri: string;
+  // };
   LookupMultiBP01offerings: { results: LookupEntity[] };
   LookupCM102customers: LookupEntity;
   LookupHR01team: LookupEntity;
@@ -44,12 +44,12 @@ export interface APIAgendaDataItem {
   EventType: number;
   Email: string | null;
   AppointmentStatus: StatusNames;
-  AppointmentSource: null | string;
-  SubmissionIdUIT: null | string;
+  // AppointmentSource: null | string;
+  // SubmissionIdUIT: null | string;
   LastNameAppt: string;
   Gender: null | '(1) Female' | '(2) Male';
   Notes: null | string;
-  TrackingComments: null | string;
+  // TrackingComments: null | string;
   ServiceCharge: number;
   FilterStart: string;
   FilterEnd: string;

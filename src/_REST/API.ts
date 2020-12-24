@@ -1,4 +1,5 @@
 import { Web } from '@pnp/sp/presets/core';
+import { IItemAddResult } from '@pnp/sp/items';
 // Config
 import { ROOT_URL, headers, SP_ROOT_URL, GUID_APPOINTMENT, GUID_CUSTOMERS, GUID_SERVICES, GUID_STAFF } from './config';
 // Types
@@ -33,7 +34,7 @@ interface API {
   };
   agenda: {
     getData: FetchData<APIAgendaDataItem[]>;
-    createDataItem: CreateDataItem<APIAgendaDataItem>;
+    createDataItem: CreateDataItem<APIAgendaDataItem | IItemAddResult | any>;
     updateDataItem: UpdateDataItem<APIAgendaDataItem>;
     deleteDataItem: DeleteDataItem;
   };
@@ -163,21 +164,19 @@ export const API: API = {
         )
         .top(1000)
         .select(
-          'Title,ID,EventDate,EndDate,AppointmentStatus,AppointmentSource,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Id,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,TrackingComments,FirstName,LastNameAppt,Gender,CellPhone,Email,SubmissionIdUIT,FilterStart,FilterEnd,Modified'
+          'Title,ID,EventDate,EndDate,AppointmentStatus,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Id,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,FirstName,LastNameAppt,Gender,CellPhone,Email,FilterStart,FilterEnd,Modified'
         )
         .expand('LookupHR01team,LookupCM102customers,LookupMultiBP01offerings')
         .orderBy('EventDate')
         .get<APIAgendaDataItem[]>()
         .then((response) => response),
 
-    createDataItem: (createdDataItem: APIAgendaDataItem) =>
-      fetch(`${ROOT_URL}/scheduler-events`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(createdDataItem),
-      }).then((response) => response.json()),
+    createDataItem: async (createdDataItem: APIAgendaDataItem) =>
+      Web(SP_ROOT_URL)
+        .configure({ headers })
+        .lists.getById(GUID_APPOINTMENT)
+        .items.add(createdDataItem)
+        .then((response) => response),
 
     updateDataItem: (updatedDataItem: APIAgendaDataItem) =>
       fetch(`${ROOT_URL}/scheduler-events/${updatedDataItem.id}`, {

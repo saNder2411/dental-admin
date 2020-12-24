@@ -52,25 +52,25 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Agenda:
       return [
         {
-          __metadata: {
-            id: metadataId,
-            uri: metadataUri,
-            etag: `"2"`,
-            type: `SP.Data.MetroHR03ListItem`,
-          },
+          // __metadata: {
+          //   id: metadataId,
+          //   uri: metadataUri,
+          //   etag: `"2"`,
+          //   type: `SP.Data.MetroHR03ListItem`,
+          // },
           LookupCM102customers: {
             Id: -1,
-            __metadata: {
-              id: guid,
-              type: 'SP.Data.MetroBP02ListItem',
-            },
+            // __metadata: {
+            //   id: guid,
+            //   type: 'SP.Data.MetroBP02ListItem',
+            // },
           },
           LookupHR01team: {
             Id: 1,
-            __metadata: {
-              id: '7d03d3f4-87da-4c2c-b288-3177bd0d5f44',
-              type: 'SP.Data.MetroHR01ListItem',
-            },
+            // __metadata: {
+            //   id: '7d03d3f4-87da-4c2c-b288-3177bd0d5f44',
+            //   type: 'SP.Data.MetroHR01ListItem',
+            // },
           },
           LookupMultiBP01offerings: { results: [] },
           Id: ID,
@@ -85,12 +85,12 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           EventType: 0,
           Email: null,
           AppointmentStatus: StatusNames.Consultation,
-          AppointmentSource: null,
-          SubmissionIdUIT: null,
+          // AppointmentSource: null,
+          // SubmissionIdUIT: null,
           LastNameAppt: ``,
           Gender: '(1) Female',
           Notes: null,
-          TrackingComments: null,
+          // TrackingComments: null,
           ServiceCharge: 40,
           FilterStart: new Date().toISOString(),
           FilterEnd: new Date().toISOString(),
