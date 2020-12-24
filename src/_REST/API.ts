@@ -175,7 +175,10 @@ export const API: API = {
       Web(SP_ROOT_URL)
         .configure({ headers })
         .lists.getById(GUID_APPOINTMENT)
-        .items.add(createdDataItem)
+        .items.select(
+          'Title,ID,EventDate,EndDate,AppointmentStatus,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Id,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,FirstName,LastNameAppt,Gender,CellPhone,Email,FilterStart,FilterEnd,Modified'
+        )
+        .add(createdDataItem)
         .then((response) => {
           console.log(`sp res`, response);
           return response.item;
