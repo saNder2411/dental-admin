@@ -8,8 +8,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "mock": "json-server -w db.json -p 4200 -d 300",
-    "server": "concurrently \"npm run start\" \"npm run mock\""
+    "server": "concurrently \"npm run start\" \"npm run mock\"",
+    "proxy": "node ./api-server.ts",
+    "spServer": "concurrently --kill-others \"npm run proxy\" \"npm run start\""
   },
+  "proxy": "http://localhost:8081",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -65,7 +68,6 @@
     "cldr-core": "^37.0.0",
     "cldr-dates-full": "^37.0.0",
     "cldr-numbers-full": "^37.0.0",
-    "gd-sprest": "^6.2.5",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -96,6 +98,7 @@
     "concurrently": "^5.3.0",
     "redux-devtools-extension": "^2.13.8",
     "reselect": "^4.0.0",
+    "sp-rest-proxy": "3.0.2",
     "styled-components": "^5.2.0",
     "typescript": "~3.7.2",
     "uuid": "^8.3.1"
