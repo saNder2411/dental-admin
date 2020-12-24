@@ -79,7 +79,7 @@ export const GenericAvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomersDa
 export const GenericDateCell: FC<GridCellProps<AgendaDataItem | CustomersDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem | CustomersDataItem>(ID, field);
   const intlService = useInternationalization();
-  const value = new Date(cellValue as string);
+  const value = cellValue ? new Date(cellValue as string) : new Date();
 
   return (
     <td>
@@ -143,8 +143,8 @@ export const GenericRoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | Service
   field,
 }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem | TeamStaffDataItem>(ID, field);
-  const currentRoleSkills = cellValue as string[];
-  const value = currentRoleSkills.join(' | ');
+  const currentRoleSkills = cellValue as string[] | null;
+  const value = currentRoleSkills ? currentRoleSkills.join(' | ') : '';
 
   return (
     <td>

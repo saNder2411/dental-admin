@@ -8,28 +8,29 @@ export enum OfferIcons {
 }
 
 export interface APIServicesDataItem {
-  Amount: number;
-  AmountSalesTaxLocal: string;
-  AmountTotal: string;
-  ConsultReq: boolean;
-  ID: number;
-  Id: number;
-  id: number;
-  MinutesDuration: number;
-  OfferingCatType: string;
-  OfferingDiscount: number;
-  OfferingsName_Edit: string;
-  OfferingIconName: OfferIcons;
-  RoleSkills: string[];
-  SalesTaxRate: number;
-  ShowOnline: boolean;
-  Title: string;
   __metadata: {
     etag: string;
     id: string;
     type: string;
     uri: string;
   };
+  Id: number;
+  Title: string;
+  OfferingsName_Edit: string;
+  ShowOnline: boolean;
+  ConsultReq: boolean;
+  MinutesDuration: number;
+  Amount: number;
+  AmountTotal: string;
+  SalesTaxRate: number;
+  AmountSalesTaxLocal: string;
+  OfferingCatType: string;
+  OfferingDiscount: number;
+  ID: number;
+
+  id: number;
+  OfferingIconName: null | OfferIcons;
+  RoleSkills: null | string[];
 }
 
 export interface ServicesDataItem extends APIServicesDataItem {

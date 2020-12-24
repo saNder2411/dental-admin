@@ -4,34 +4,35 @@ import { InferValueTypes } from '../_sections/Grid/GridTypes';
 import * as actions from './CustomersAC';
 
 export interface APICustomersDataItem {
-  AgeGroup: null | string;
-  CellPhone: string | null;
-  ClientPhoto?: {
-    Description: string;
-    Url: string;
-    __metadata: { type: string };
-  };
-  Created: string;
-  Email: string | null;
-  FirstName: string;
-  FullName: string;
-  Gender: '(1) Female' | '(2) Male';
-  HomePhone: null | string;
-  ID: number;
-  Id: number;
-  LookupMultiHR01team: { results: Array<{ Id: number; __metadata: { id: string; type: string } }> };
-  Modified: string;
-  SvcStaff: string;
-  Title: string;
-  TrackingComments: null | string;
-  WorkPhone: null | string;
-  id: number;
   __metadata: {
     id: string;
     uri: string;
     etag: string;
     type: string;
   };
+  LookupMultiHR01team: { results: Array<{ Id: number; __metadata: { id: string; type: string } }> };
+  Id: number;
+  Title: string;
+  FirstName: string;
+  FullName: string;
+  CellPhone: string | null;
+  Email: string | null;
+  Gender: '(1) Female' | '(2) Male';
+  AgeGroup: null | string;
+  TrackingComments: null | string;
+  WorkPhone: null | string;
+  HomePhone: null | string;
+  ClientPhoto: {
+    Description: string;
+    Url: string;
+    __metadata: { type: string };
+  } | null;
+  ID: number;
+  Modified: string;
+  Created: string;
+
+  SvcStaff: null | string;
+  id: number;
   Upcoming: null | string;
 }
 

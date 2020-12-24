@@ -60,7 +60,7 @@ export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<Servic
   );
 };
 
-export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaffDataItem | ServicesDataItem, string[]>> = ({
+export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaffDataItem | ServicesDataItem, string[] | null>> = ({
   dataItemID,
   field,
   onChange,
@@ -71,7 +71,7 @@ export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaf
   const roleSkills = useSelector(selectServicesRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
-  const multiSelectValue = value.map((value) => ({ text: value, value }));
+  const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];
 
   const onValueChange = (evt: MultiSelectChangeEvent) => {
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value) });

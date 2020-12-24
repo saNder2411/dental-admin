@@ -1,7 +1,5 @@
 {
   "siteUrl": "https://sa-toniguy01.metroapps.online",
-  "strategy": "OnpremiseFbaCredentials",
-  "password": "4139a1350e111302a83a35a110766d4731f23638fe32ef522232a5101e3d86cfad523645b721e601082692550e836ac85wr89/asRSCxIpDIGj7wqPzEU5yGyb+pTX0gQtyfo94=",
-  "username": "stevepye70@gmail.com",
-  "fba": true
+  "strategy": "OnDemandCredentials",
+  "ondemand": true
 }

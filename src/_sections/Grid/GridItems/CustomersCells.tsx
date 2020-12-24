@@ -16,7 +16,7 @@ import { isString } from './GridItemsHelpers';
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
-  const value = dataItem[field];
+  const value = dataItem[field] as string | null | undefined;
 
   return <td>{dataItem.inEdit ? <CustomersSvcStaffDropDownList {...props} /> : value}</td>;
 };

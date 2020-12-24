@@ -23,42 +23,44 @@ export interface LookupEntity {
 }
 
 export interface APIAgendaDataItem {
-  AppointmentSource: null | string;
-  AppointmentStatus: StatusNames;
-  CellPhone: string | null;
-  Description: string;
-  Duration: number;
-  Email: string | null;
-  EndDate: string;
-  EventDate: string;
-  EventType: number;
-  FilterEnd: string;
-  FilterStart: string;
-  FirstName: string;
-  Gender: '(1) Female' | '(2) Male';
-  ID: number;
-  Id: number;
-  LastNameAppt: string;
-  LookupCM102customers: LookupEntity;
-  LookupHR01team: LookupEntity;
-  LookupMultiBP01offerings: { results: LookupEntity[] };
-  MasterSeriesItemID: null | number;
-  MetroRRule: null | string;
-  MetroRecException: null | Date[];
-  Notes: null | string;
-  RecurrenceID: null | number;
-  ServiceCharge: number;
-  SubmissionIdUIT: null | string;
-  Title: string;
-  TrackingComments: null | string;
-  fAllDayEvent: null | string;
-  id: number;
   __metadata: {
     etag: string;
     id: string;
     type: string;
     uri: string;
   };
+  LookupMultiBP01offerings: { results: LookupEntity[] };
+  LookupCM102customers: LookupEntity;
+  LookupHR01team: LookupEntity;
+  Id: number;
+  Title: string;
+  EventDate: string;
+  EndDate: string;
+  Duration: number;
+  Description: string;
+  fAllDayEvent: null | boolean;
+  MasterSeriesItemID: null | number;
+  RecurrenceID: null | number;
+  EventType: number;
+  Email: string | null;
+  AppointmentStatus: StatusNames;
+  AppointmentSource: null | string;
+  SubmissionIdUIT: null | string;
+  LastNameAppt: string;
+  Gender: null | '(1) Female' | '(2) Male';
+  Notes: null | string;
+  TrackingComments: null | string;
+  ServiceCharge: number;
+  FilterStart: string;
+  FilterEnd: string;
+  MetroRRule: null | string;
+  MetroRecException: null | Date[];
+  FirstName: string;
+  CellPhone: string | null;
+  ID: number;
+  Modified: string;
+
+  id: number;
 }
 
 export interface AgendaDataItem extends APIAgendaDataItem {

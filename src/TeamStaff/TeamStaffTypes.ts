@@ -4,36 +4,35 @@ import { InferValueTypes } from '../_sections/Grid/GridTypes';
 import * as actions from './TeamStaffAC';
 
 export interface APITeamStaffDataItem {
-  CalendarColHex: string;
-  CalendarColour: string;
-  CellPhone: string;
-  Department: null | string;
-  Email: string;
-  FirstName: string;
-  FullName: string;
-  ID: number;
-  Id: number;
-  JobTitle: string;
-  ProfilesStatus: string;
-  RoleSkills: string[];
-  ShowOnline: boolean;
-  TeamProfilePhoto: {
-    Description: string;
-    Url: string;
-    __metadata: {
-      type: string;
-    };
-  };
-  Title: string;
-  WorkingWeekDays: null | string;
-  id: number;
   __metadata: {
     etag: string;
     id: string;
     type: string;
     uri: string;
   };
-  Gender: '(2) Male' | '(1) Female';
+  Id: number;
+  Title: string;
+  FirstName: string;
+  FullName: string;
+  TeamProfilePhoto: {
+    __metadata: { type: string };
+    Description: string;
+    Url: string;
+  };
+  ShowOnline: boolean;
+  Email: string;
+  CellPhone: string;
+  JobTitle: string;
+  Department: null | string;
+  ProfilesStatus: string;
+  WorkingWeekDays: null | string;
+  CalendarColour: string;
+  CalendarColHex: string;
+  ID: number;
+
+  RoleSkills: null | string[];
+  Gender: null | '(2) Male' | '(1) Female';
+  id: number;
 }
 
 export interface TeamStaffDataItem extends APITeamStaffDataItem {
