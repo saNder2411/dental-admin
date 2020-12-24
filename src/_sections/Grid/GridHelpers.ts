@@ -52,22 +52,12 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Agenda:
       return [
         {
-          AppointmentSource: null,
-          AppointmentStatus: StatusNames.Consultation,
-          CellPhone: ``,
-          Description: ``,
-          Duration: 60,
-          Email: ``,
-          EndDate: new Date().toISOString(),
-          EventDate: new Date().toISOString(),
-          EventType: 0,
-          FilterEnd: new Date().toISOString(),
-          FilterStart: new Date().toISOString(),
-          FirstName: ``,
-          Gender: '(1) Female',
-          ID,
-          Id: ID,
-          LastNameAppt: ``,
+          __metadata: {
+            id: metadataId,
+            uri: metadataUri,
+            etag: `"2"`,
+            type: `SP.Data.MetroHR03ListItem`,
+          },
           LookupCM102customers: {
             Id: -1,
             __metadata: {
@@ -83,28 +73,39 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
             },
           },
           LookupMultiBP01offerings: { results: [] },
+          Id: ID,
+          Title: ``,
+          EventDate: new Date().toISOString(),
+          EndDate: new Date().toISOString(),
+          Duration: 60,
+          Description: ``,
+          fAllDayEvent: null,
           MasterSeriesItemID: null,
+          RecurrenceID: null,
+          EventType: 0,
+          Email: null,
+          AppointmentStatus: StatusNames.Consultation,
+          AppointmentSource: null,
+          SubmissionIdUIT: null,
+          LastNameAppt: ``,
+          Gender: '(1) Female',
+          Notes: null,
+          TrackingComments: null,
+          ServiceCharge: 40,
+          FilterStart: new Date().toISOString(),
+          FilterEnd: new Date().toISOString(),
           MetroRRule: null,
           MetroRecException: null,
-          Notes: null,
-          RecurrenceID: null,
-          ServiceCharge: 40,
-          SubmissionIdUIT: null,
-          Title: ``,
-          TrackingComments: null,
-          fAllDayEvent: null,
-          id: ID,
-          __metadata: {
-            id: metadataId,
-            uri: metadataUri,
-            etag: `"2"`,
-            type: `SP.Data.MetroHR03ListItem`,
-          },
-          TeamID: 1,
+          FirstName: ``,
+          CellPhone: null,
+          ID,
           Modified: new Date().toISOString(),
+
+          id: ID,
+          TeamID: 1,
           Start: new Date(),
-          End: new Date(),
-          LastUpdate: ``,
+          End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
+          LastUpdate: new Date().toISOString(),
           inEdit: true,
           isNew: true,
         },
@@ -113,36 +114,37 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Customers:
       return [
         {
-          AgeGroup: null,
-          CellPhone: '',
-          ClientPhoto: {
-            Description: '',
-            Url: '',
-            __metadata: { type: 'SP.FieldUrlValue' },
-          },
-          ClientPhotoUrl: '',
-          Created: new Date().toISOString(),
-          Email: '',
-          FirstName: ``,
-          FullName: '',
-          Gender: '(1) Female',
-          HomePhone: ``,
-          ID,
-          Id: ID,
-          LookupMultiHR01team: { results: [] },
-          Modified: new Date().toISOString(),
-          SvcStaff: '',
-          Title: '',
-          TrackingComments: null,
-          WorkPhone: null,
-          id: ID,
           __metadata: {
             id: metadataId,
             uri: metadataUri,
             etag: '""',
             type: 'SP.Data.MetroCM102ListItem',
           },
+          LookupMultiHR01team: { results: [] },
+          Id: ID,
+          Title: '',
+          FirstName: ``,
+          FullName: '',
+          CellPhone: '',
+          Email: '',
+          Gender: '(1) Female',
+          AgeGroup: null,
+          TrackingComments: null,
+          WorkPhone: null,
+          HomePhone: ``,
+          ClientPhoto: {
+            Description: '',
+            Url: '',
+            __metadata: { type: 'SP.FieldUrlValue' },
+          },
+          ID,
+          Modified: new Date().toISOString(),
+          Created: new Date().toISOString(),
+
+          SvcStaff: '',
+          id: ID,
           Upcoming: new Date().toISOString(),
+          ClientPhotoUrl: '',
           inEdit: true,
           isNew: true,
         },
@@ -152,28 +154,29 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Services:
       return [
         {
-          Amount: 50,
-          AmountSalesTaxLocal: '',
-          AmountTotal: '',
-          ConsultReq: false,
-          ID,
-          Id: ID,
-          id: ID,
-          MinutesDuration: 60,
-          OfferingCatType: '',
-          OfferingDiscount: 0,
-          OfferingsName_Edit: '',
-          OfferingIconName: OfferIcons.Tooth,
-          RoleSkills: [],
-          SalesTaxRate: 0,
-          ShowOnline: false,
-          Title: '',
           __metadata: {
             id: metadataId,
             uri: metadataUri,
             etag: '""',
             type: 'SP.Data.MetroBP02ListItem',
           },
+          Id: ID,
+          Title: '',
+          OfferingsName_Edit: '',
+          ShowOnline: false,
+          ConsultReq: false,
+          MinutesDuration: 60,
+          Amount: 50,
+          AmountTotal: '',
+          SalesTaxRate: 0,
+          AmountSalesTaxLocal: '',
+          OfferingCatType: '',
+          OfferingDiscount: 0,
+          ID,
+
+          id: ID,
+          OfferingIconName: OfferIcons.Tooth,
+          RoleSkills: [],
           inEdit: true,
           isNew: true,
         },
@@ -183,37 +186,36 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.TeamStaff:
       return [
         {
-          CalendarColHex: color,
-          CalendarColour: color,
-          CellPhone: '',
-          Department: null,
-          Email: '',
-          FirstName: '',
-          FullName: '',
-          ID,
-          Id: ID,
-          JobTitle: '',
-          ProfilesStatus: '',
-          RoleSkills: [],
-          ShowOnline: false,
-          TeamProfilePhoto: {
-            Description: '',
-            Url: '',
-            __metadata: {
-              type: 'SP.FieldUrlValue',
-            },
-          },
-          TeamProfilePhotoUrl: '',
-          Title: '',
-          WorkingWeekDays: null,
-          id: ID,
           __metadata: {
             id: metadataId,
             uri: metadataUri,
             etag: '""',
             type: 'SP.Data.MetroHR01ListItem',
           },
+          Id: ID,
+          Title: '',
+          FirstName: '',
+          FullName: '',
+          TeamProfilePhoto: {
+            __metadata: { type: 'SP.FieldUrlValue' },
+            Description: '',
+            Url: '',
+          },
+          ShowOnline: false,
+          Email: '',
+          CellPhone: '',
+          JobTitle: '',
+          Department: null,
+          ProfilesStatus: '',
+          WorkingWeekDays: null,
+          CalendarColour: color,
+          CalendarColHex: color,
+          ID,
+
+          RoleSkills: [],
           Gender: '(1) Female' as const,
+          id: ID,
+          TeamProfilePhotoUrl: '',
           inEdit: true,
           isNew: true,
         },
@@ -234,16 +236,23 @@ export const updateDataAfterEditNewItem = (data: GridDataItem[], dataItem: GridD
   return [...data.slice(0, index), newItem, ...data.slice(index + 1)];
 };
 
+const UniqueEntityKeys = {
+  Appointments: 'AppointmentStatus',
+  Services: 'OfferingsName_Edit',
+  Customers: 'LookupMultiHR01team',
+  TeamStaff: 'JobTitle',
+};
+
 export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem): { titleForAddNewItemSection: string; dataName: GridDataName } => {
   if (!dataItem) return { titleForAddNewItemSection: '', dataName: GridDataName.Default };
 
-  if ('AppointmentStatus' in dataItem) {
+  if (UniqueEntityKeys.Appointments in dataItem) {
     return { titleForAddNewItemSection: 'New Appointment', dataName: GridDataName.Agenda };
-  } else if ('OfferingCatType' in dataItem) {
+  } else if (UniqueEntityKeys.Services in dataItem) {
     return { titleForAddNewItemSection: 'New Service', dataName: GridDataName.Services };
-  } else if ('Upcoming' in dataItem) {
+  } else if (UniqueEntityKeys.Customers in dataItem) {
     return { titleForAddNewItemSection: 'New Customer', dataName: GridDataName.Customers };
-  } else if ('JobTitle' in dataItem) {
+  } else if (UniqueEntityKeys.TeamStaff in dataItem) {
     return { titleForAddNewItemSection: 'New Staff', dataName: GridDataName.TeamStaff };
   }
   return { titleForAddNewItemSection: '', dataName: GridDataName.Default };
