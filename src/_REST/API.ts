@@ -176,7 +176,10 @@ export const API: API = {
         .configure({ headers })
         .lists.getById(GUID_APPOINTMENT)
         .items.add(createdDataItem)
-        .then((response) => response),
+        .then((response) => {
+          console.log(`sp res`, response);
+          return response.item;
+        }),
 
     updateDataItem: (updatedDataItem: APIAgendaDataItem) =>
       fetch(`${ROOT_URL}/scheduler-events/${updatedDataItem.id}`, {
