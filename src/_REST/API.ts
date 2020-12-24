@@ -1,6 +1,6 @@
 import { Web } from '@pnp/sp/presets/core';
 // Config
-import { ROOT_URL, headers, SP_ROOT_URL, GUID_AGENDA, GUID_CUSTOMERS, GUID_SERVICES, GUID_STAFF } from './config';
+import { ROOT_URL, headers, SP_ROOT_URL, GUID_APPOINTMENT, GUID_CUSTOMERS, GUID_SERVICES, GUID_STAFF } from './config';
 // Types
 import { APIServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
@@ -151,7 +151,7 @@ export const API: API = {
     getData: async () =>
       Web(SP_ROOT_URL)
         .configure({ headers })
-        .lists.getById(GUID_AGENDA)
+        .lists.getById(GUID_APPOINTMENT)
         .items.filter(
           `(FilterStart ge datetime'${new Date().toISOString()}') and (FilterEnd le datetime'${new Date(
             new Date().getFullYear(),
