@@ -5,7 +5,7 @@ import { CustomersSvcStaffDropDownList, CustomersLastAppointmentsMultiSelect } f
 import { CustomersMobilePhoneInput } from './CustomersInputCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { LookupEntity } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
@@ -14,15 +14,15 @@ import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isString } from './GridItemsHelpers';
 
-export const CustomersSvcStaffCell: FC<GridCellProps<CustomersDataItem>> = (props): JSX.Element => {
+export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = (props): JSX.Element => {
   const { dataItem, field } = props;
   const value = dataItem[field] as string | null | undefined;
 
   return <td>{dataItem.inEdit ? <CustomersSvcStaffDropDownList {...props} /> : value}</td>;
 };
 
-export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomersDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<CustomersDataItem>(ID, field);
+export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<CustomerDataItem>(ID, field);
   const LookupMultiHR01team = cellValue as { results: LookupEntity[] };
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
@@ -47,7 +47,7 @@ export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomersDataItem>>
   );
 };
 
-export const CustomersMobilePhoneCell: FC<GridCellProps<CustomersDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+export const CustomersMobilePhoneCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
   const strValue = isString(cellValue) ? cellValue : '';
 

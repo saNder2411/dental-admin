@@ -52,26 +52,8 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Agenda:
       return [
         {
-          // __metadata: {
-          //   id: metadataId,
-          //   uri: metadataUri,
-          //   etag: `"2"`,
-          //   type: `SP.Data.MetroHR03ListItem`,
-          // },
-          LookupCM102customers: {
-            Id: -1,
-            // __metadata: {
-            //   id: guid,
-            //   type: 'SP.Data.MetroBP02ListItem',
-            // },
-          },
-          LookupHR01team: {
-            Id: 1,
-            // __metadata: {
-            //   id: '7d03d3f4-87da-4c2c-b288-3177bd0d5f44',
-            //   type: 'SP.Data.MetroHR01ListItem',
-            // },
-          },
+          LookupCM102customers: { Id: -1 },
+          LookupHR01team: { Id: 1 },
           LookupMultiBP01offerings: { results: [] },
           Id: ID,
           Title: ``,
@@ -101,7 +83,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           ID,
           Modified: new Date().toISOString(),
 
-          id: ID,
           TeamID: 1,
           Start: new Date(),
           End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),

@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 // Types
-import { CustomersDataItem } from './CustomersTypes';
+import { CustomerDataItem } from './CustomersTypes';
 // Actions
 import {
   fetchDataInitAsyncAC,
@@ -13,9 +13,9 @@ import {
 export const CustomersActions = {
   fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) =>
     dispatch(fetchDataInitAsyncAC({ teamStaffDataLength: meta?.teamStaffDataLength ?? 0 })),
-  createDataItem: (dispatch: Dispatch, createdDataItem: CustomersDataItem, onAddDataItemToGridData: () => void) =>
+  createDataItem: (dispatch: Dispatch, createdDataItem: CustomerDataItem, onAddDataItemToGridData: () => void) =>
     dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
-  updateDataItem: (dispatch: Dispatch, updatedDataItem: CustomersDataItem, onUpdateDataItemInGridData: () => void) =>
+  updateDataItem: (dispatch: Dispatch, updatedDataItem: CustomerDataItem, onUpdateDataItemInGridData: () => void) =>
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
     dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),

@@ -4,14 +4,7 @@ import { LookupEntity } from '../Agenda/AgendaTypes';
 // Actions
 import * as actions from './CustomersAC';
 
-export interface APICustomersDataItem {
-  __metadata: {
-    id: string;
-    uri: string;
-    etag: string;
-    type: string;
-  };
-  LookupMultiHR01team: { results: LookupEntity[] };
+interface ImmutableDataItemKey {
   Id: number;
   Title: string;
   FirstName: string;
@@ -19,10 +12,10 @@ export interface APICustomersDataItem {
   CellPhone: string | null;
   Email: string | null;
   Gender: '(1) Female' | '(2) Male';
-  AgeGroup: null | string;
-  TrackingComments: null | string;
-  WorkPhone: null | string;
-  HomePhone: null | string;
+  // AgeGroup: null | string;
+  // TrackingComments: null | string;
+  // WorkPhone: null | string;
+  // HomePhone: null | string;
   ClientPhoto: {
     Description: string;
     Url: string;
@@ -33,19 +26,31 @@ export interface APICustomersDataItem {
   Created: string;
 
   SvcStaff: null | string;
-  id: number;
   Upcoming: null | string;
 }
 
-export interface CustomersDataItem extends APICustomersDataItem {
+export interface APIGetResCustomerDataItem extends ImmutableDataItemKey {
+  LookupMultiHR01team: { results: LookupEntity[] };
+}
+
+export interface CustomerDataItem extends APIGetResCustomerDataItem {
   ClientPhotoUrl: string;
   inEdit?: boolean;
   isNew?: boolean;
 }
 
+export interface CustomerDataItemForCrtUpdActions extends ImmutableDataItemKey {
+  LookupMultiHR01teamId: { results: number[] };
+  __metadata: { type: string };
+}
+
+export interface APIPostPutResCustomerDataItem extends APIGetResCustomerDataItem {
+  [key: string]: any;
+}
+
 export interface CustomersState {
   isDataLoading: boolean;
-  data: CustomersDataItem[];
+  data: CustomerDataItem[];
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;

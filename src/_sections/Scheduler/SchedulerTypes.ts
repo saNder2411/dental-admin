@@ -1,7 +1,7 @@
 import { Dispatch } from 'redux';
 import { SchedulerProps } from '@progress/kendo-react-scheduler';
 // Types
-import { AgendaDataItem } from '../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
 // Actions
 import * as actions from './SchedulerAC';
 
@@ -23,7 +23,7 @@ type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type SchedulerDataItem = InferValueTypes<{ type1: AgendaDataItem }>;
+export type SchedulerDataItem = InferValueTypes<{ type1: AppointmentDataItem }>;
 
 export interface InitDataForNewDataItem {
   Start: Date;

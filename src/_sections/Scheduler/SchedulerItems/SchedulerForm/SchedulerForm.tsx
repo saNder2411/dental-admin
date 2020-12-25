@@ -30,7 +30,7 @@ import { selectCustomersMemoData } from '../../../../Customers/CustomersSelector
 import { selectMemoUpdatedRecurringDataItem } from '../../SchedulerSelectors';
 // Types
 import { StatusNames } from '../../../../Agenda/AgendaTypes';
-import { CustomersDataItem } from '../../../../Customers';
+import { CustomerDataItem } from '../../../../Customers';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
@@ -143,7 +143,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             const secondLabelForRepeatEvery = getSecondLabelForRepeatEvery(repeatValue);
 
-            const setCustomerField = (dataItem: CustomersDataItem | undefined) => {
+            const setCustomerField = (dataItem: CustomerDataItem | undefined) => {
               formRenderProps.onChange(`FirstName`, { value: dataItem?.FirstName });
               formRenderProps.onChange(`LastNameAppt`, { value: dataItem?.Title });
               formRenderProps.onChange(`Email`, { value: dataItem?.Email ?? '' });

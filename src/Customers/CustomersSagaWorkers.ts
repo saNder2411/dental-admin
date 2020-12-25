@@ -11,14 +11,14 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  APICustomersDataItem,
+  APIGetResCustomerDataItem,
 } from './CustomersTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 // Helpers
 import { transformData, transformDataItem } from './CustomersHelpers';
 import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
 
-type Results = [APICustomersDataItem[], APITeamStaffDataItem[] | null];
+type Results = [APIGetResCustomerDataItem[], APITeamStaffDataItem[] | null];
 
 export function* workerFetchData({ meta: { teamStaffDataLength } }: FetchDataInitAsyncActionType): SagaIterator {
   try {
@@ -47,7 +47,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APICustomersDataItem = yield apply(API, API.customers.createDataItem, [createdDataItem]);
+    const result: APIGetResCustomerDataItem = yield apply(API, API.customers.createDataItem, [createdDataItem]);
     const data = transformDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
@@ -65,7 +65,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APICustomersDataItem = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
+    const result: APIGetResCustomerDataItem = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
     const data = transformDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {

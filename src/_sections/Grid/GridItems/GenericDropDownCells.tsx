@@ -3,8 +3,8 @@ import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellDropDownListProps } from './GridItemsTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 // Selectors
@@ -13,7 +13,7 @@ import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelector
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
 
-export const GenericGenderDropDownList: FC<EditCellDropDownListProps<AgendaDataItem | CustomersDataItem, string>> = ({
+export const GenericGenderDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem | CustomerDataItem, string>> = ({
   dataItemID,
   field,
   onChange,
@@ -26,7 +26,7 @@ export const GenericGenderDropDownList: FC<EditCellDropDownListProps<AgendaDataI
   ];
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
-  const onGenderChange = onGridDropDownChange<AgendaDataItem | CustomersDataItem>(dataItemID, field, onChange);
+  const onGenderChange = onGridDropDownChange<AppointmentDataItem | CustomerDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onGenderChange} value={dropDownListValue} data={dataForDropDownList} textField={field} disabled={isDataItemLoading} />

@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, CustomersState, Actions, CustomersDataItem } from './CustomersTypes';
+import { ActionTypes, CustomersState, Actions, CustomerDataItem } from './CustomersTypes';
 // Helpers
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
 
@@ -42,7 +42,7 @@ export const reducer = (state: CustomersState = initialState, action: Actions): 
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
-      const updatedData = updateDataAfterEditItem(state.data, action.payload) as CustomersDataItem[];
+      const updatedData = updateDataAfterEditItem(state.data, action.payload) as CustomerDataItem[];
       return { ...state, data: updatedData, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
@@ -55,7 +55,7 @@ export const reducer = (state: CustomersState = initialState, action: Actions): 
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as CustomersDataItem[];
+      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as CustomerDataItem[];
       return { ...state, data: updatedDataAfterDeleteDataItem, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_FAILURE:

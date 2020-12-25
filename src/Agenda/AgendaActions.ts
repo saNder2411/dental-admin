@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 // Types
-import { AgendaDataItem } from './AgendaTypes';
+import { AppointmentDataItem } from './AgendaTypes';
 // ActionCreators
 import {
   fetchDataInitAsyncAC,
@@ -18,11 +18,11 @@ export const AgendaActions = {
     dispatch(fetchDataInitAsyncAC(meta ?? { servicesDataLength: 0, teamStaffDataLength: 0, customersDataLength: 0 })),
   createDataItem: (
     dispatch: Dispatch,
-    createdDataItem: AgendaDataItem,
+    createdDataItem: AppointmentDataItem,
     onAddDataItemToGridData: () => void,
     onAddDataItemToSchedulerData?: () => void
   ) => dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData, onAddDataItemToSchedulerData)),
-  updateDataItem: (dispatch: Dispatch, updatedDataItem: AgendaDataItem, onUpdateDataItemInGridData: () => void) =>
+  updateDataItem: (dispatch: Dispatch, updatedDataItem: AppointmentDataItem, onUpdateDataItemInGridData: () => void) =>
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
     dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),
@@ -35,6 +35,6 @@ export const AgendaEditCellsActions = {
 };
 
 export const AgendaSchedulerActions = {
-  updateRecurringDataItem: (dispatch: Dispatch, updatedDataItem: AgendaDataItem, createDataItem: AgendaDataItem, onUpdateDataItem: () => void) =>
+  updateRecurringDataItem: (dispatch: Dispatch, updatedDataItem: AppointmentDataItem, createDataItem: AppointmentDataItem, onUpdateDataItem: () => void) =>
     dispatch(updateRecurringDataItemInitAsyncAC(updatedDataItem, createDataItem, onUpdateDataItem)),
 };

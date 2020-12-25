@@ -12,7 +12,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AgendaDataItem, StatusNames, LookupEntity } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem, StatusNames, LookupEntity } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectGridDataItemMemoValueForCell } from '../GridSelectors';
 import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
@@ -23,8 +23,8 @@ import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isString } from './GridItemsHelpers';
 
-export const AgendaReferenceCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const strValue = isString(cellValue) ? cellValue : '';
@@ -44,10 +44,10 @@ export const AgendaReferenceCell: FC<GridCellProps<AgendaDataItem>> = ({ dataIte
   );
 };
 
-export const AgendaStatusIcon: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<AgendaDataItem>(memoID, memoField), [memoField, memoID]);
+  const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<AppointmentDataItem>(memoID, memoField), [memoField, memoID]);
   const cellValue = useSelector(selectDataItemValue);
 
   const iconName = cellValue ? cellValue : StatusNames.Consultation;
@@ -59,8 +59,8 @@ export const AgendaStatusIcon: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: 
   );
 };
 
-export const AgendaStatusCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
 
   return (
     <td>
@@ -73,8 +73,8 @@ export const AgendaStatusCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: 
   );
 };
 
-export const AgendaSvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const LookupHR01team = cellValue as LookupEntity;
 
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
@@ -94,8 +94,8 @@ export const AgendaSvcStaffCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem
   );
 };
 
-export const AgendaServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const LookupMultiBP01offerings = cellValue as { results: LookupEntity[] };
 
   const selectServicesData = useMemo(selectServicesMemoData, []);
@@ -114,8 +114,8 @@ export const AgendaServicesCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem
   );
 };
 
-export const AgendaFullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const LookupCM102customers = cellValue as LookupEntity;
 
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
@@ -134,8 +134,8 @@ export const AgendaFullNameCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem
   );
 };
 
-export const AgendaStartDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const intlService = useInternationalization();
   const value = cellValue as Date;
 
@@ -150,8 +150,8 @@ export const AgendaStartDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataIte
   );
 };
 
-export const AgendaEndDateCell: FC<GridCellProps<AgendaDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AgendaDataItem>(ID, field);
+export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const intlService = useInternationalization();
   const value = cellValue as Date;
 

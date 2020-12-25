@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Types
 import { DomainStateActionsType } from '../../_sections/Grid/GridTypes';
-import { CustomersDataItem } from '../CustomersTypes';
+import { CustomerDataItem } from '../CustomersTypes';
 
 export const useFetchCustomersData = (
   customersDataLength: number,
   teamStaffDataLength: number,
-  CustomerActions: DomainStateActionsType<CustomersDataItem>,
+  CustomerActions: DomainStateActionsType<CustomerDataItem>,
   dispatch: Dispatch
 ) => {
   useEffect(() => {

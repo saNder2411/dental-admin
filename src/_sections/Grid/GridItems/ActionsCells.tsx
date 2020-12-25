@@ -10,8 +10,8 @@ import { GridCellProps } from './GridItemsTypes';
 import { GridDataItem } from '../GridTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
+import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 // Actions
 import { GridActions } from '../GridActions';
 // Helpers
@@ -38,7 +38,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
 
   const onAddItemToData = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem & AgendaDataItem;
+    const newDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomerDataItem & AppointmentDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
@@ -52,7 +52,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
 
   const onItemUpdated = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomersDataItem & AgendaDataItem;
+    const updatedDataItemForApi = others as ServicesDataItem & TeamStaffDataItem & CustomerDataItem & AppointmentDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),

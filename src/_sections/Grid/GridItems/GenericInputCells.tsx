@@ -5,10 +5,10 @@ import { Input } from '@progress/kendo-react-inputs';
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
-import { AgendaDataItem } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { GridDataItem } from '../GridTypes';
 
 export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> = ({ dataItemID, field, onChange, value }) => {
@@ -19,7 +19,7 @@ export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> 
   return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
 };
 
-export const GenericReferenceInput: FC<EditCellProps<AgendaDataItem | ServicesDataItem>> = ({ dataItemID, field, onChange, value }) => {
+export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | ServicesDataItem>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
   const onReferenceChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
@@ -28,7 +28,7 @@ export const GenericReferenceInput: FC<EditCellProps<AgendaDataItem | ServicesDa
   return <Input value={value} placeholder="Ref: TBA-000" onChange={onReferenceChange} disabled={isDataItemLoading} />;
 };
 
-export const GenericAvatarInput: FC<EditCellProps<TeamStaffDataItem | CustomersDataItem>> = ({ dataItemID, field, onChange, value }) => {
+export const GenericAvatarInput: FC<EditCellProps<TeamStaffDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>

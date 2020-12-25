@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, AgendaState, Actions, AgendaDataItem, StatusNames } from './AgendaTypes';
+import { ActionTypes, AgendaState, Actions, AppointmentDataItem, StatusNames } from './AgendaTypes';
 // Helpers
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
 
@@ -45,7 +45,7 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
-      const updatedData = updateDataAfterEditItem(state.data, action.payload) as AgendaDataItem[];
+      const updatedData = updateDataAfterEditItem(state.data, action.payload) as AppointmentDataItem[];
       return { ...state, data: updatedData, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
@@ -58,7 +58,7 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as AgendaDataItem[];
+      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as AppointmentDataItem[];
       return { ...state, data: updatedDataAfterDeleteDataItem, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_FAILURE:

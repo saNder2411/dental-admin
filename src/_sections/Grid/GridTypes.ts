@@ -1,9 +1,9 @@
 import { Dispatch } from 'redux';
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
-import { AgendaDataItem } from '../../Agenda';
+import { AppointmentDataItem } from '../../Agenda';
 import { TeamStaffDataItem } from '../../TeamStaff';
-import { CustomersDataItem } from '../../Customers';
+import { CustomerDataItem } from '../../Customers';
 import { ServicesDataItem } from '../../Services';
 // Actions
 import * as actions from './GridAC';
@@ -26,7 +26,7 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type GridDataItem = InferValueTypes<{ type1: AgendaDataItem; type2: TeamStaffDataItem; type3: CustomersDataItem; type4: ServicesDataItem }>;
+export type GridDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: TeamStaffDataItem; type3: CustomerDataItem; type4: ServicesDataItem }>;
 
 export enum GridDataName {
   Default = 'Empty',
@@ -69,6 +69,6 @@ export interface GridState {
 export type DomainsStateActions = InferValueTypes<{
   type1: DomainStateActionsType<ServicesDataItem>;
   type2: DomainStateActionsType<TeamStaffDataItem>;
-  type3: DomainStateActionsType<CustomersDataItem>;
-  type4: DomainStateActionsType<AgendaDataItem>;
+  type3: DomainStateActionsType<CustomerDataItem>;
+  type4: DomainStateActionsType<AppointmentDataItem>;
 }>;

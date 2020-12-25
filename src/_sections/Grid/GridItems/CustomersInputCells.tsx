@@ -5,7 +5,7 @@ import { MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-i
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 // Selectors
 import { selectCustomersIsValidMobilePhoneField } from '../../../Customers/CustomersSelectors';
 // Actions
@@ -13,7 +13,7 @@ import { CustomersEditCellsActions } from '../../../Customers/CustomersActions';
 // Helpers
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
-export const CustomersMobilePhoneInput: FC<EditCellProps<CustomersDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
+export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidMobilePhone = useSelector(selectCustomersIsValidMobilePhoneField);

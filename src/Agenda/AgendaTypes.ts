@@ -21,10 +21,7 @@ export interface LookupEntity {
   Id: number;
 }
 
-export interface APIReadAgendaDataItem {
-  LookupMultiBP01offerings: { results: LookupEntity[] };
-  LookupCM102customers: LookupEntity;
-  LookupHR01team: LookupEntity;
+interface ImmutableDataItemKey {
   Id: number;
   Title: string;
   EventDate: string;
@@ -54,7 +51,13 @@ export interface APIReadAgendaDataItem {
   Modified: string;
 }
 
-export interface AgendaDataItem extends APIReadAgendaDataItem {
+export interface APIGetResAppointmentDataItem extends ImmutableDataItemKey {
+  LookupMultiBP01offerings: { results: LookupEntity[] };
+  LookupCM102customers: LookupEntity;
+  LookupHR01team: LookupEntity;
+}
+
+export interface AppointmentDataItem extends APIGetResAppointmentDataItem {
   TeamID: number;
   Start: Date;
   End: Date;
@@ -63,41 +66,14 @@ export interface AgendaDataItem extends APIReadAgendaDataItem {
   isNew?: boolean;
 }
 
-export interface APICreateBodyAgendaDataItem {
+export interface AppointmentDataItemForCrtUpdActions extends ImmutableDataItemKey {
   LookupCM102customersId: number;
   LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
-  Id: number;
-  Title: string;
-  EventDate: string;
-  EndDate: string;
-  Duration: number;
-  Description: string;
-  fAllDayEvent: null | boolean;
-  MasterSeriesItemID: null | number;
-  RecurrenceID: null | number;
-  EventType: number;
-  Email: string | null;
-  AppointmentStatus: StatusNames;
-  // AppointmentSource: null | string;
-  // SubmissionIdUIT: null | string;
-  LastNameAppt: string;
-  Gender: null | '(1) Female' | '(2) Male';
-  Notes: null | string;
-  // TrackingComments: null | string;
-  ServiceCharge: number;
-  FilterStart: string;
-  FilterEnd: string;
-  MetroRRule: null | string;
-  MetroRecException: null | Date[];
-  FirstName: string;
-  CellPhone: string | null;
-  ID: number;
-  Modified: string;
-  __metadata: { type: 'SP.Data.MetroHR03ListItem' };
+  __metadata: { type: string };
 }
 
-export interface APIResponseAgendaDataItem extends APIReadAgendaDataItem {
+export interface APIPostPutResAppointmentDataItem extends APIGetResAppointmentDataItem {
   __metadata: {
     id: string;
     uri: string;
@@ -160,7 +136,7 @@ export interface APIResponseAgendaDataItem extends APIReadAgendaDataItem {
 
 export interface AgendaState {
   isDataLoading: boolean;
-  data: AgendaDataItem[];
+  data: AppointmentDataItem[];
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;

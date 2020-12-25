@@ -1,11 +1,11 @@
 // Types
-import { ActionTypes, AgendaDataItem } from './AgendaTypes';
+import { ActionTypes, AppointmentDataItem } from './AgendaTypes';
 // Helpers
 import { transformDataItemForAPI } from './AgendaHelpers';
 // Sync
 export const fetchDataRequestAC = () => ({ type: ActionTypes.FETCH_DATA_REQUEST });
 
-export const fetchDataSuccessAC = (data: AgendaDataItem[]) => ({ type: ActionTypes.FETCH_DATA_SUCCESS, payload: data });
+export const fetchDataSuccessAC = (data: AppointmentDataItem[]) => ({ type: ActionTypes.FETCH_DATA_SUCCESS, payload: data });
 
 export const fetchDataFailureAC = (errorMessage: string) => ({ type: ActionTypes.FETCH_DATA_FAILURE, payload: errorMessage });
 
@@ -13,7 +13,7 @@ export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY 
 
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
 
-export const createDataItemSuccessAC = (data: AgendaDataItem) => ({ type: ActionTypes.CREATE_DATA_ITEM_SUCCESS, payload: data });
+export const createDataItemSuccessAC = (data: AppointmentDataItem) => ({ type: ActionTypes.CREATE_DATA_ITEM_SUCCESS, payload: data });
 
 export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, payload: errorMessage });
 
@@ -21,7 +21,7 @@ export const createDataItemFinallyAC = () => ({ type: ActionTypes.CREATE_DATA_IT
 
 export const updateDataItemRequestAC = () => ({ type: ActionTypes.UPDATE_DATA_ITEM_REQUEST });
 
-export const updateDataItemSuccessAC = (data: AgendaDataItem) => ({ type: ActionTypes.UPDATE_DATA_ITEM_SUCCESS, payload: data });
+export const updateDataItemSuccessAC = (data: AppointmentDataItem) => ({ type: ActionTypes.UPDATE_DATA_ITEM_SUCCESS, payload: data });
 
 export const updateDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.UPDATE_DATA_ITEM_FAILURE, payload: errorMessage });
 
@@ -47,7 +47,7 @@ export const fetchDataInitAsyncAC = (meta: { servicesDataLength: number; teamSta
 });
 
 export const createDataItemInitAsyncAC = (
-  createdDataItem: AgendaDataItem,
+  createdDataItem: AppointmentDataItem,
   onAddDataItemToGridData: () => void,
   onAddDataItemToSchedulerData?: () => void
 ) => ({
@@ -56,7 +56,7 @@ export const createDataItemInitAsyncAC = (
   meta: { onAddDataItemToGridData, onAddDataItemToSchedulerData },
 });
 
-export const updateDataItemInitAsyncAC = (updatedDataItem: AgendaDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateDataItemInitAsyncAC = (updatedDataItem: AppointmentDataItem, onUpdateDataItemInGridData: () => void) => ({
   type: ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC,
   payload: transformDataItemForAPI(updatedDataItem),
   meta: onUpdateDataItemInGridData,
@@ -69,8 +69,8 @@ export const deleteDataItemInitAsyncAC = (deletedDataItemID: number, onDeleteDat
 });
 
 export const updateRecurringDataItemInitAsyncAC = (
-  updatedDataItem: AgendaDataItem,
-  createDataItem: AgendaDataItem,
+  updatedDataItem: AppointmentDataItem,
+  createDataItem: AppointmentDataItem,
   onUpdateDataItem: () => void
 ) => ({
   type: ActionTypes.UPDATE_RECURRING_DATA_ITEM_ASYNC,

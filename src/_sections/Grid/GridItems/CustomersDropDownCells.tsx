@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { GridCellProps, EditCellDropDownListProps } from './GridItemsTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
 import { selectGridDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
@@ -11,12 +11,12 @@ import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Helpers
 import { onGridDropDownChange, transformTeamStaffDataToMultiSelectData } from './GridItemsHelpers';
 
-export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomersDataItem>> = ({ dataItem: { ID }, field, onChange }): JSX.Element => {
+export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<CustomersDataItem>(memoID, memoField), [memoField, memoID]);
+  const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<CustomerDataItem>(memoID, memoField), [memoField, memoID]);
   const cellValue = useSelector(selectDataItemValue) as string;
 
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
@@ -25,14 +25,14 @@ export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomersDataItem>>
   const staffNameList = teamStaffData.map(({ Title }) => Title);
   const dataForDropdownList = staffNameList.map((lastName) => ({ [field]: lastName, value: lastName }));
   const dropDownListValue = dataForDropdownList.find((item) => item.value === cellValue) ?? dataForDropdownList[0];
-  const onSvcStaffChange = onGridDropDownChange<CustomersDataItem>(memoID, field, onChange);
+  const onSvcStaffChange = onGridDropDownChange<CustomerDataItem>(memoID, field, onChange);
 
   return (
     <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField={field} disabled={isDataItemLoading} />
   );
 };
 
-export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<CustomersDataItem, TeamStaffDataItem[], TeamStaffDataItem[]>> = ({
+export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<CustomerDataItem, TeamStaffDataItem[], TeamStaffDataItem[]>> = ({
   dataItemID,
   field,
   onChange,

@@ -3,7 +3,7 @@ import { DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 import { GridOnChange } from './GridItemsTypes';
 import { StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { CustomersDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
 import { GridDataItem } from '../GridTypes';
 
@@ -19,7 +19,7 @@ export const isStatusNames = (arg: any): arg is StatusNames => arg === StatusNam
 
 export const getOnFinallyRequestDataItem = (...handlers: Array<() => void>) => () => handlers.forEach((handler) => handler());
 
-export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaffDataItem | CustomersDataItem>) =>
+export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaffDataItem | CustomerDataItem>) =>
   domainData.map((item) => {
     const isTeamStaffDataItem = 'ShowOnline' in item;
     const value = isTeamStaffDataItem ? item.Title : item.FullName;

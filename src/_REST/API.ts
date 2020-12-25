@@ -1,12 +1,22 @@
 import { Web } from '@pnp/sp/presets/core';
-import { IItemAddResult } from '@pnp/sp/items';
+import { IItemAddResult, IItemUpdateResult } from '@pnp/sp/items';
 // Config
-import { ROOT_URL, headers, SP_ROOT_URL, GUID_APPOINTMENT, GUID_CUSTOMERS, GUID_SERVICES, GUID_STAFF } from './config';
+import {
+  ROOT_URL,
+  headers,
+  SP_ROOT_URL,
+  GUID_APPOINTMENT_LIST,
+  GUID_CUSTOMERS_LIST,
+  GUID_SERVICES_LIST,
+  GUID_STAFF_LIST,
+  APPOINTMENT_SELECT_FIELDS,
+  CUSTOMER_SELECT_FIELDS,
+} from './config';
 // Types
 import { APIServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
-import { APICustomersDataItem } from '../Customers/CustomersTypes';
-import { APIReadAgendaDataItem, APICreateBodyAgendaDataItem } from '../Agenda/AgendaTypes';
+import { APIGetResCustomerDataItem } from '../Customers/CustomersTypes';
+import { APIGetResAppointmentDataItem, AppointmentDataItemForCrtUpdActions, APIPostPutResAppointmentDataItem } from '../Agenda/AgendaTypes';
 
 export type FetchData<T> = () => Promise<T>;
 export type CreateDataItem<T> = (createdDataItem: T) => Promise<T>;
@@ -27,15 +37,15 @@ interface API {
     deleteDataItem: DeleteDataItem;
   };
   customers: {
-    getData: FetchData<APICustomersDataItem[]>;
-    createDataItem: CreateDataItem<APICustomersDataItem>;
-    updateDataItem: UpdateDataItem<APICustomersDataItem>;
+    getData: FetchData<APIGetResCustomerDataItem[]>;
+    createDataItem: CreateDataItem<APIGetResCustomerDataItem>;
+    updateDataItem: UpdateDataItem<APIGetResCustomerDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   agenda: {
-    getData: FetchData<APIReadAgendaDataItem[]>;
-    createDataItem: CreateDataItem<APICreateBodyAgendaDataItem | IItemAddResult | any>;
-    updateDataItem: UpdateDataItem<APICreateBodyAgendaDataItem>;
+    getData: FetchData<APIGetResAppointmentDataItem[]>;
+    createDataItem: CreateDataItem<APIPostPutResAppointmentDataItem | IItemAddResult | any>;
+    updateDataItem: UpdateDataItem<APIPostPutResAppointmentDataItem | IItemUpdateResult | any>;
     deleteDataItem: DeleteDataItem;
   };
 }
@@ -96,7 +106,7 @@ interface API {
 //   customers: {
 //     getData: () => fetch(`${ROOT_URL}/customers`).then((response) => response.json()),
 
-//     createDataItem: (createdDataItem: APICustomersDataItem) =>
+//     createDataItem: (createdDataItem: APIGetResCustomerDataItem) =>
 //       fetch(`${ROOT_URL}/customers`, {
 //         method: 'POST',
 //         headers: {
@@ -105,7 +115,7 @@ interface API {
 //         body: JSON.stringify(createdDataItem),
 //       }).then((response) => response.json()),
 
-//     updateDataItem: (updatedDataItem: APICustomersDataItem) =>
+//     updateDataItem: (updatedDataItem: APIGetResCustomerDataItem) =>
 //       fetch(`${ROOT_URL}/customers/${updatedDataItem.id}`, {
 //         method: 'PUT',
 //         headers: {
@@ -122,7 +132,7 @@ interface API {
 //   agenda: {
 //     getData: () => fetch(`${ROOT_URL}/scheduler-events`).then((response) => response.json()),
 
-//     createDataItem: (createdDataItem: APIReadAgendaDataItem) =>
+//     createDataItem: (createdDataItem: APIGetResAppointmentDataItem) =>
 //       fetch(`${ROOT_URL}/scheduler-events`, {
 //         method: 'POST',
 //         headers: {
@@ -131,7 +141,7 @@ interface API {
 //         body: JSON.stringify(createdDataItem),
 //       }).then((response) => response.json()),
 
-//     updateDataItem: (updatedDataItem: APIReadAgendaDataItem) =>
+//     updateDataItem: (updatedDataItem: APIGetResAppointmentDataItem) =>
 //       fetch(`${ROOT_URL}/scheduler-events/${updatedDataItem.id}`, {
 //         method: 'PUT',
 //         headers: {
@@ -147,12 +157,12 @@ interface API {
 //   },
 // };
 
+const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
+
 export const API: API = {
   agenda: {
     getData: async () =>
-      Web(SP_ROOT_URL)
-        .configure({ headers })
-        .lists.getById(GUID_APPOINTMENT)
+      SPLists.getById(GUID_APPOINTMENT_LIST)
         .items.filter(
           `(FilterStart ge datetime'${new Date().toISOString()}') and (FilterEnd le datetime'${new Date(
             new Date().getFullYear(),
@@ -163,57 +173,52 @@ export const API: API = {
           ).toISOString()}')`
         )
         .top(1000)
-        .select(
-          'Title,ID,EventDate,EndDate,AppointmentStatus,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Id,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,FirstName,LastNameAppt,Gender,CellPhone,Email,FilterStart,FilterEnd,Modified'
-        )
+        .select(APPOINTMENT_SELECT_FIELDS)
         .expand('LookupHR01team,LookupCM102customers,LookupMultiBP01offerings')
         .orderBy('EventDate')
-        .get<APIReadAgendaDataItem[]>()
+        .get<APIGetResAppointmentDataItem[]>()
         .then((response) => response),
 
-    createDataItem: async (createdDataItem: APICreateBodyAgendaDataItem) =>
-      Web(SP_ROOT_URL)
-        .configure({ headers })
-        .lists.getById(GUID_APPOINTMENT)
-        .items.select(
-          'Title,ID,EventDate,EndDate,AppointmentStatus,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Id,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,FirstName,LastNameAppt,Gender,CellPhone,Email,FilterStart,FilterEnd,Modified'
-        )
+    createDataItem: async (createdDataItem: AppointmentDataItemForCrtUpdActions) =>
+      SPLists.getById(GUID_APPOINTMENT_LIST)
+        .items.select(APPOINTMENT_SELECT_FIELDS)
         .add(createdDataItem)
         .then((response) => {
-          console.log(`sp res`, response);
+          console.log(`spCreatRes`, response);
           return response.item;
         }),
 
-    updateDataItem: (updatedDataItem: APICreateBodyAgendaDataItem) =>
-      fetch(`${ROOT_URL}/scheduler-events/${updatedDataItem.Id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedDataItem),
-      }).then((response) => response.json()),
+    updateDataItem: (updatedDataItem: AppointmentDataItemForCrtUpdActions) =>
+      SPLists.getById(GUID_APPOINTMENT_LIST)
+        .items.getById(updatedDataItem.ID)
+        .select(APPOINTMENT_SELECT_FIELDS)
+        .update(updatedDataItem)
+        .then((response) => {
+          console.log(`spUpdateRes`, response);
+          return response.item;
+        }),
 
     deleteDataItem: (deletedDataItemID: number) =>
-      fetch(`${ROOT_URL}/scheduler-events/${deletedDataItemID}`, {
-        method: 'DELETE',
-      }).then((response) => response.json()),
+      SPLists.getById(GUID_APPOINTMENT_LIST)
+        .items.getById(deletedDataItemID)
+        .delete()
+        .then((response) => {
+          console.log(`spDeleteRes`, response);
+          return deletedDataItemID;
+        }),
   },
   customers: {
     getData: async () =>
-      Web(SP_ROOT_URL)
-        .configure({ headers })
-        .lists.getById(GUID_CUSTOMERS)
+      SPLists.getById(GUID_CUSTOMERS_LIST)
         .items.filter(``)
         .top(5000)
-        .select(
-          'ID,Title,FirstName,FullName,ClientPhoto,Email,Gender,WorkPhone,CellPhone,HomePhone,AgeGroup,Created,Modified,LookupMultiHR01team/Id,TrackingComments'
-        )
+        .select(CUSTOMER_SELECT_FIELDS)
         .expand('LookupMultiHR01team')
         .orderBy('Title')
-        .get<APICustomersDataItem[]>()
+        .get<APIGetResCustomerDataItem[]>()
         .then((response) => response),
 
-    createDataItem: (createdDataItem: APICustomersDataItem) =>
+    createDataItem: (createdDataItem: APIGetResCustomerDataItem) =>
       fetch(`${ROOT_URL}/customers`, {
         method: 'POST',
         headers: {
@@ -222,7 +227,7 @@ export const API: API = {
         body: JSON.stringify(createdDataItem),
       }).then((response) => response.json()),
 
-    updateDataItem: (updatedDataItem: APICustomersDataItem) =>
+    updateDataItem: (updatedDataItem: APIGetResCustomerDataItem) =>
       fetch(`${ROOT_URL}/customers/${updatedDataItem.id}`, {
         method: 'PUT',
         headers: {
@@ -239,11 +244,8 @@ export const API: API = {
 
   staff: {
     getData: async () =>
-      Web(SP_ROOT_URL)
-        .configure({ headers })
-        .lists.getById(GUID_STAFF)
-        .items.filter(``)
-        .top(50)
+      SPLists.getById(GUID_STAFF_LIST)
+        .items.top(50)
         .select(
           'ID,Title,FirstName,FullName,TeamProfilePhoto,ShowOnline,Email,CellPhone,JobTitle,Department,ProfilesStatus,WorkingWeekDays,CalendarColour,CalendarColHex'
         )
@@ -276,11 +278,8 @@ export const API: API = {
   },
   services: {
     getData: async () =>
-      Web(SP_ROOT_URL)
-        .configure({ headers })
-        .lists.getById(GUID_SERVICES)
-        .items.filter(``)
-        .top(100)
+      SPLists.getById(GUID_SERVICES_LIST)
+        .items.top(100)
         .select(
           'ID,Title,OfferingsName_Edit,OfferingCatType,ShowOnline,ConsultReq,MinutesDuration,Amount,OfferingDiscount,AmountTotal,SalesTaxRate,AmountSalesTaxLocal'
         )
@@ -310,59 +309,5 @@ export const API: API = {
       fetch(`${ROOT_URL}/services/${deletedDataItemID}`, {
         method: 'DELETE',
       }).then((response) => response.json()),
-  },
-};
-
-export const SP_API_PROTO = {
-  agenda: {
-    pnpSP: async () => {
-      try {
-        const response = await Web('https://sa-toniguy01.metroapps.online/')
-          .configure({ headers })
-          .lists.getById('D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')
-          .expand('Views')
-          .get();
-
-        console.log('RES', response);
-
-        return response;
-      } catch (e) {
-        console.error(e);
-      }
-    },
-
-    items: async () => {
-      try {
-        const response = await Web('https://sa-toniguy01.metroapps.online/')
-          .configure({ headers })
-          .lists.getById('D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')
-          .items.filter(`(FilterStart ge datetime'2020-12-23T14:47:45.143Z') and (FilterEnd le datetime'2021-06-21T13:47:45.143Z')`)
-          .top(10)
-          .select(
-            'Title,ID,EventDate,EndDate,AppointmentStatus,AppointmentSource,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Title,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,TrackingComments,FirstName,LastNameAppt,Gender,CellPhone,Email,SubmissionIdUIT,FilterStart,FilterEnd,Modified'
-          )
-          .expand('LookupHR01team,LookupCM102customers,LookupMultiBP01offerings')
-          .orderBy('EventDate')
-          .get();
-
-        console.log('RES', response);
-
-        return response;
-      } catch (e) {
-        console.error(e);
-      }
-    },
-
-    originalUrl1: async () => {
-      fetch(`https://sa-toniguy01.metroapps.online/_api/web/Lists(guid'D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')?$expand=Views`, {
-        headers,
-      }).then((res) => console.log(`Res1`, res));
-    },
-
-    originalUrl2: async () =>
-      fetch(
-        `https://sa-toniguy01.metroapps.online/_api/web/Lists(guid'D9DCCD8B-9F3D-4330-89E3-BDA20BB04348')/Items?$filter=(FilterStart%20ge%20datetime%272020-12-23T15:44:59.061Z%27)%20and%20(FilterEnd%20le%20datetime%272021-06-21T14:44:59.061Z%27)&$skiptoken=Paged=TRUE%26p_ID=0&$top=10&$select=Title,ID,EventDate,EndDate,AppointmentStatus,AppointmentSource,Description,Notes,MetroRRule,MetroRecException,EventType,MasterSeriesItemID,RecurrenceID,Duration,ServiceCharge,LookupHR01team/Title,LookupCM102customers/Id,LookupMultiBP01offerings/Id,fAllDayEvent,TrackingComments,FirstName,LastNameAppt,Gender,CellPhone,Email,SubmissionIdUIT,FilterStart,FilterEnd,Modified&$expand=LookupHR01team,LookupCM102customers,LookupMultiBP01offerings&$orderby=EventDate%20asc`,
-        { headers }
-      ).then((res) => console.log(`Res2`, res)),
   },
 };

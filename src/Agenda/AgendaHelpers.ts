@@ -1,7 +1,7 @@
 // Types
-import { APIReadAgendaDataItem, AgendaDataItem, APICreateBodyAgendaDataItem, APIResponseAgendaDataItem } from './AgendaTypes';
+import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForCrtUpdActions, APIPostPutResAppointmentDataItem } from './AgendaTypes';
 
-export const transformData = (apiResults: APIReadAgendaDataItem[]): AgendaDataItem[] =>
+export const transformData = (apiResults: APIGetResAppointmentDataItem[]): AppointmentDataItem[] =>
   apiResults.map((item) => ({
     ...item,
     TeamID: item.LookupHR01team.Id,
@@ -11,7 +11,7 @@ export const transformData = (apiResults: APIReadAgendaDataItem[]): AgendaDataIt
     MetroRecException: item.MetroRecException ? item.MetroRecException.map((exception) => new Date(exception)) : null,
   }));
 
-export const transformDataItem = (apiResult: APIResponseAgendaDataItem): AgendaDataItem => {
+export const transformDataItem = (apiResult: APIPostPutResAppointmentDataItem): AppointmentDataItem => {
   const {
     __metadata,
     FirstUniqueAncestorSecurableObject,
@@ -92,7 +92,7 @@ export const transformDataItemForAPI = ({
   LookupHR01team,
   LookupMultiBP01offerings,
   ...others
-}: AgendaDataItem): APICreateBodyAgendaDataItem => ({
+}: AppointmentDataItem): AppointmentDataItemForCrtUpdActions => ({
   ...others,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),

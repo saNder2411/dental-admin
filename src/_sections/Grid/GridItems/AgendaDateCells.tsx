@@ -11,16 +11,16 @@ import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { selectAgendaMemoData, selectIsValidStartDateEvent, selectIsValidEndDateEvent } from '../../../Agenda/AgendaSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AgendaDataItem, LookupEntity } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem, LookupEntity } from '../../../Agenda/AgendaTypes';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 // Actions
 import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 
-export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
+export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(dataItemID, 'LookupHR01team');
+  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01team');
   const LookupHR01team = cellValue as LookupEntity;
 
   const intlService = useInternationalization();
@@ -91,10 +91,10 @@ export const AgendaStartDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ 
   );
 };
 
-export const AgendaEndDateInput: FC<EditCellProps<AgendaDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
+export const AgendaEndDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const { cellValue } = useMemoDataItemValuesForCells<AgendaDataItem>(dataItemID, 'LookupHR01team');
+  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01team');
   const LookupHR01team = cellValue as LookupEntity;
 
   const intlService = useInternationalization();

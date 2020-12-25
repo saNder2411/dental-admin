@@ -13,19 +13,19 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  APIReadAgendaDataItem,
+  APIGetResAppointmentDataItem,
   UpdateRecurringDataItemInitAsyncActionType,
-  APIResponseAgendaDataItem,
+  APIPostPutResAppointmentDataItem,
 } from './AgendaTypes';
 import { APIServicesDataItem } from '../Services/ServicesTypes';
 import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
-import { APICustomersDataItem } from '../Customers/CustomersTypes';
+import { APIGetResCustomerDataItem } from '../Customers/CustomersTypes';
 // Helpers
 import { transformData, transformDataItem } from './AgendaHelpers';
 import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
 import { transformData as transformCustomersData } from '../Customers/CustomersHelpers';
 
-type Results = [APIReadAgendaDataItem[], APIServicesDataItem[] | null, APITeamStaffDataItem[] | null, APICustomersDataItem[] | null];
+type Results = [APIGetResAppointmentDataItem[], APIServicesDataItem[] | null, APITeamStaffDataItem[] | null, APIGetResCustomerDataItem[] | null];
 
 export function* workerFetchData({
   meta: { servicesDataLength, teamStaffDataLength, customersDataLength },
@@ -70,7 +70,7 @@ export function* workerCreateDataItem({
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APIResponseAgendaDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
+    const result: APIPostPutResAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
     const data = transformDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
     yield put(actions.createDataItemSuccessAC(data));
@@ -89,7 +89,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APIResponseAgendaDataItem = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
+    const result: APIPostPutResAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
     const data = transformDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
@@ -117,7 +117,7 @@ export function* workerDeleteDataItem({
   }
 }
 
-type UpdateRecurringDataItemResults = [APIResponseAgendaDataItem, APIResponseAgendaDataItem];
+type UpdateRecurringDataItemResults = [APIPostPutResAppointmentDataItem, APIPostPutResAppointmentDataItem];
 
 export function* workerUpdateRecurringDataItem({
   payload: { updatedDataItem, createDataItem },

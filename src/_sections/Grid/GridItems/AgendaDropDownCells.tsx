@@ -10,10 +10,10 @@ import {
 } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellDropDownListProps } from './GridItemsTypes';
-import { AgendaDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServicesDataItem } from '../../../Services/ServicesTypes';
-import { CustomersDataItem } from '../../../Customers';
+import { CustomerDataItem } from '../../../Customers';
 // Selectors
 import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
@@ -29,21 +29,21 @@ import {
 } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
-export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
+export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const selectStatusNameList = useMemo(selectAgendaMemoStatusNameList, []);
   const statusNameList = useSelector(selectStatusNameList);
   const dataForDropDownList = statusNameList.map((value) => ({ [field]: value, value }));
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
-  const onStatusChange = onGridDropDownChange<AgendaDataItem>(dataItemID, field, onChange);
+  const onStatusChange = onGridDropDownChange<AppointmentDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onStatusChange} value={dropDownListValue} data={dataForDropDownList} textField={field} disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, string, TeamStaffDataItem[]>> = ({
+export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, string, TeamStaffDataItem[]>> = ({
   dataItemID,
   field,
   onChange,
@@ -54,14 +54,14 @@ export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AgendaData
   const dataForDropdownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
   const dropDownListValue = dataForDropdownList.find((item) => item.text === value);
 
-  const onSvcStaffChange = onGridDropDownChange<AgendaDataItem>(dataItemID, field, onChange);
+  const onSvcStaffChange = onGridDropDownChange<AppointmentDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField="text" disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaDataItem, string, CustomersDataItem[]>> = ({
+export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, string, CustomerDataItem[]>> = ({
   dataItemID,
   field,
   onChange,
@@ -117,7 +117,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AgendaData
   );
 };
 
-export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AgendaDataItem, ServicesDataItem[], ServicesDataItem[]>> = ({
+export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AppointmentDataItem, ServicesDataItem[], ServicesDataItem[]>> = ({
   dataItemID,
   field,
   onChange,

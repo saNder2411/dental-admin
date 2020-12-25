@@ -2,14 +2,14 @@ import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Types
 import { DomainStateActionsType } from '../../_sections/Grid/GridTypes';
-import { AgendaDataItem } from '../AgendaTypes';
+import { AppointmentDataItem } from '../AgendaTypes';
 
 export const useFetchAgendaData = (
   agendaDataLength: number,
   servicesDataLength: number,
   teamStaffDataLength: number,
   customersDataLength: number,
-  AgendaActions: DomainStateActionsType<AgendaDataItem>,
+  AgendaActions: DomainStateActionsType<AppointmentDataItem>,
   dispatch: Dispatch
 ) => {
   useEffect(() => {
