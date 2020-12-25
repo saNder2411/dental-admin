@@ -109,10 +109,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           CellPhone: '',
           Email: '',
           Gender: '(1) Female',
-          AgeGroup: null,
-          TrackingComments: null,
-          WorkPhone: null,
-          HomePhone: ``,
           ClientPhoto: {
             Description: '',
             Url: '',
@@ -123,7 +119,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           Created: new Date().toISOString(),
 
           SvcStaff: '',
-          id: ID,
           Upcoming: new Date().toISOString(),
           ClientPhotoUrl: '',
           inEdit: true,

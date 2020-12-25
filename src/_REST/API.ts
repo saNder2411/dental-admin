@@ -228,7 +228,7 @@ export const API: API = {
       }).then((response) => response.json()),
 
     updateDataItem: (updatedDataItem: APIGetResCustomerDataItem) =>
-      fetch(`${ROOT_URL}/customers/${updatedDataItem.id}`, {
+      fetch(`${ROOT_URL}/customers/${updatedDataItem}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

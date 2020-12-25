@@ -32,31 +32,10 @@ export const updateNewDataItemOnAddNewItemToChange = (
   { Start, End, TeamID }: InitDataForNewDataItem
 ): SchedulerDataItem => {
   const ID = generateId(data);
-  // const guid = uuidV4();
-  // const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
-  // const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
 
   return {
-    // __metadata: {
-    //   id: metadataId,
-    //   uri: metadataUri,
-    //   etag: `"2"`,
-    //   type: `SP.Data.MetroHR03ListItem`,
-    // },
-    LookupCM102customers: {
-      Id: 1269,
-      // __metadata: {
-      //   id: '27f5d039-9c85-4e09-a869-45b65150829f',
-      //   type: 'SP.Data.MetroBP02ListItem',
-      // },
-    },
-    LookupHR01team: {
-      Id: TeamID,
-      // __metadata: {
-      //   id: guid,
-      //   type: 'SP.Data.MetroHR01ListItem',
-      // },
-    },
+    LookupCM102customers: { Id: 1269 },
+    LookupHR01team: { Id: TeamID },
     LookupMultiBP01offerings: { results: [] },
     Id: ID,
     Title: ``,
@@ -70,12 +49,9 @@ export const updateNewDataItemOnAddNewItemToChange = (
     EventType: 0,
     Email: null,
     AppointmentStatus: StatusNames.Consultation,
-    // AppointmentSource: null,
-    // SubmissionIdUIT: null,
     LastNameAppt: ``,
     Gender: '(1) Female',
     Notes: null,
-    // TrackingComments: null,
     ServiceCharge: 40,
     FilterStart: Start.toISOString(),
     FilterEnd: End.toISOString(),
