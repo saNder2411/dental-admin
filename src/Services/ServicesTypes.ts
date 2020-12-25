@@ -7,40 +7,37 @@ export enum OfferIcons {
   Tooth = 'Tooth',
 }
 
-export interface APIServicesDataItem {
-  __metadata: {
-    etag: string;
-    id: string;
-    type: string;
-    uri: string;
-  };
+export interface APIGetResServiceDataItem {
   Id: number;
-  Title: string;
   OfferingsName_Edit: string;
   ShowOnline: boolean;
   ConsultReq: boolean;
   MinutesDuration: number;
   Amount: number;
-  AmountTotal: string;
-  SalesTaxRate: number;
-  AmountSalesTaxLocal: string;
   OfferingCatType: string;
   OfferingDiscount: number;
   ID: number;
 
-  id: number;
-  OfferingIconName: null | OfferIcons;
-  RoleSkills: null | string[];
+  OfferingIconName?: null | OfferIcons;
+  RoleSkills?: null | string[];
 }
 
-export interface ServicesDataItem extends APIServicesDataItem {
+export interface ServiceDataItem extends APIGetResServiceDataItem {
   inEdit?: boolean;
   isNew?: boolean;
 }
 
+export interface ServiceDataItemForCrtUpdActions extends APIGetResServiceDataItem {
+  __metadata: { type: string };
+}
+
+export interface APIPostPutResServiceDataItem extends APIGetResServiceDataItem {
+  [key: string]: any;
+}
+
 export interface ServicesState {
   isDataLoading: boolean;
-  data: ServicesDataItem[];
+  data: ServiceDataItem[];
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;

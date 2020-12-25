@@ -6,7 +6,7 @@ import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { GridDataItem } from '../GridTypes';
@@ -19,7 +19,7 @@ export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> 
   return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
 };
 
-export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | ServicesDataItem>> = ({ dataItemID, field, onChange, value }) => {
+export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | ServiceDataItem>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
   const onReferenceChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>

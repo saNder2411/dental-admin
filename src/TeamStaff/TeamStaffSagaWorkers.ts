@@ -9,17 +9,18 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  APITeamStaffDataItem,
+  APIGetResTeamStaffDataItem,
+  APIPostPutResTeamStaffDataItem,
 } from './TeamStaffTypes';
 // Helpers
-import { transformData, transformDataItem } from './TeamStaffHelpers';
+import { transformAPIData, transformAPIDataItem } from './TeamStaffHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APITeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
-    const data = transformData(result);
+    const result: APIGetResTeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
+    const data = transformAPIData(result);
     yield put(actions.fetchDataSuccessAC(data));
   } catch (error) {
     yield put(actions.fetchDataFailureAC(error.message));
@@ -32,8 +33,8 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APITeamStaffDataItem = yield apply(API, API.staff.createDataItem, [createdDataItem]);
-    const data = transformDataItem(result);
+    const result: APIPostPutResTeamStaffDataItem = yield apply(API, API.staff.createDataItem, [createdDataItem]);
+    const data = transformAPIDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(error.message));
@@ -50,8 +51,8 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APITeamStaffDataItem = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
-    const data = transformDataItem(result);
+    const result: APIPostPutResTeamStaffDataItem = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
+    const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));

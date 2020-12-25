@@ -1,5 +1,4 @@
 import { GridItemChangeEvent } from '@progress/kendo-react-grid';
-import { v4 as uuidV4 } from 'uuid';
 // Types
 import { StatusNames } from '../../Agenda';
 import { GridDataItem, GridDataName } from './GridTypes';
@@ -43,9 +42,6 @@ export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, 
 
 export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: GridDataName): GridDataItem[] => {
   const ID = generateId(data);
-  const guid = uuidV4();
-  const metadataId = `Web/Lists(guid'${guid}')/Items(${ID})`;
-  const metadataUri = `https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'${guid}')/Items(${ID})`;
   const color = generateColor();
 
   switch (dataName) {
@@ -67,12 +63,9 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           EventType: 0,
           Email: null,
           AppointmentStatus: StatusNames.Consultation,
-          // AppointmentSource: null,
-          // SubmissionIdUIT: null,
           LastNameAppt: ``,
           Gender: '(1) Female',
           Notes: null,
-          // TrackingComments: null,
           ServiceCharge: 40,
           FilterStart: new Date().toISOString(),
           FilterEnd: new Date().toISOString(),
@@ -95,12 +88,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Customers:
       return [
         {
-          __metadata: {
-            id: metadataId,
-            uri: metadataUri,
-            etag: '""',
-            type: 'SP.Data.MetroCM102ListItem',
-          },
           LookupMultiHR01team: { results: [] },
           Id: ID,
           Title: '',
@@ -130,12 +117,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Services:
       return [
         {
-          __metadata: {
-            id: metadataId,
-            uri: metadataUri,
-            etag: '""',
-            type: 'SP.Data.MetroBP02ListItem',
-          },
           Id: ID,
           Title: '',
           OfferingsName_Edit: '',
@@ -143,14 +124,9 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           ConsultReq: false,
           MinutesDuration: 60,
           Amount: 50,
-          AmountTotal: '',
-          SalesTaxRate: 0,
-          AmountSalesTaxLocal: '',
           OfferingCatType: '',
           OfferingDiscount: 0,
           ID,
-
-          id: ID,
           OfferingIconName: OfferIcons.Tooth,
           RoleSkills: [],
           inEdit: true,
@@ -162,12 +138,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.TeamStaff:
       return [
         {
-          __metadata: {
-            id: metadataId,
-            uri: metadataUri,
-            etag: '""',
-            type: 'SP.Data.MetroHR01ListItem',
-          },
           Id: ID,
           Title: '',
           FirstName: '',
@@ -182,15 +152,11 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           CellPhone: '',
           JobTitle: '',
           Department: null,
-          ProfilesStatus: '',
-          WorkingWeekDays: null,
-          CalendarColour: color,
           CalendarColHex: color,
           ID,
 
           RoleSkills: [],
           Gender: '(1) Female' as const,
-          id: ID,
           TeamProfilePhotoUrl: '',
           inEdit: true,
           isNew: true,

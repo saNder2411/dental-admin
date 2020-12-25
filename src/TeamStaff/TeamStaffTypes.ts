@@ -3,13 +3,7 @@ import { InferValueTypes } from '../_sections/Grid/GridTypes';
 // Actions
 import * as actions from './TeamStaffAC';
 
-export interface APITeamStaffDataItem {
-  __metadata: {
-    etag: string;
-    id: string;
-    type: string;
-    uri: string;
-  };
+export interface APIGetResTeamStaffDataItem {
   Id: number;
   Title: string;
   FirstName: string;
@@ -24,31 +18,25 @@ export interface APITeamStaffDataItem {
   CellPhone: string;
   JobTitle: string;
   Department: null | string;
-  ProfilesStatus: string;
-  WorkingWeekDays: null | string;
-  CalendarColour: string;
   CalendarColHex: string;
   ID: number;
 
-  RoleSkills: null | string[];
-  Gender: null | '(2) Male' | '(1) Female';
-  id: number;
+  RoleSkills?: null | string[];
+  Gender?: null | '(2) Male' | '(1) Female';
 }
 
-export interface TeamStaffDataItem extends APITeamStaffDataItem {
+export interface TeamStaffDataItem extends APIGetResTeamStaffDataItem {
   TeamProfilePhotoUrl: string;
   inEdit?: boolean;
   isNew?: boolean;
 }
 
-export interface TeamStaffTeamData {
-  teamID: number;
-  teamName: string;
-  managerName: string;
-  teamColor: string;
-  photo: string;
-  jobTitle: string;
-  managerID: number;
+export interface TeamStaffDataItemForCrtUpdActions extends APIGetResTeamStaffDataItem {
+  __metadata: { type: string };
+}
+
+export interface APIPostPutResTeamStaffDataItem extends APIGetResTeamStaffDataItem {
+  [key: string]: any;
 }
 
 export interface TeamStaffState {

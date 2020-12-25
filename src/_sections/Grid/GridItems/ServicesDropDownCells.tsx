@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellDropDownListProps } from './GridItemsTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { selectServicesMemoCategories } from '../../../Services/ServicesSelectors';
 
-export const ServicesCategoryMultiSelect: FC<EditCellDropDownListProps<ServicesDataItem, string>> = ({
+export const ServicesCategoryMultiSelect: FC<EditCellDropDownListProps<ServiceDataItem, string>> = ({
   dataItemID,
   field,
   onChange,

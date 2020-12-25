@@ -5,9 +5,9 @@ import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 // Types
 import { EditCellNumericProps } from './GridItemsTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 
-export const ServicesNumeric: FC<EditCellNumericProps<ServicesDataItem, number>> = ({
+export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem, number>> = ({
   dataItemID,
   field,
   onChange,
@@ -23,7 +23,7 @@ export const ServicesNumeric: FC<EditCellNumericProps<ServicesDataItem, number>>
   return <NumericTextBox value={value} step={step} min={min} onChange={onNumericChange} disabled={isDataItemLoading} />;
 };
 
-export const ServicesNumericForDiscount: FC<EditCellNumericProps<ServicesDataItem, number>> = ({
+export const ServicesNumericForDiscount: FC<EditCellNumericProps<ServiceDataItem, number>> = ({
   dataItemID,
   field,
   onChange,

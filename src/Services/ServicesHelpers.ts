@@ -1,17 +1,10 @@
 // Types
-import { APIServicesDataItem, ServicesDataItem } from './ServicesTypes';
+import { ServiceDataItem, ServiceDataItemForCrtUpdActions } from './ServicesTypes';
 
-export const transformDataItemForAPI = ({ ID, __metadata, ...others }: ServicesDataItem): APIServicesDataItem => {
-  const startID = __metadata.id.lastIndexOf(`(`) + 1;
-  const newID = `${__metadata.id.slice(0, startID)}${ID})`;
-  return {
-    ...others,
-    ID,
-    Id: ID,
-    id: ID,
-    __metadata: { ...__metadata, id: newID },
-  };
-};
+export const transformDataItemForAPI = ({ OfferingIconName, RoleSkills, ...others }: ServiceDataItem): ServiceDataItemForCrtUpdActions => ({
+  ...others,
+  __metadata: { type: 'SP.Data.MetroBP02ListItem' },
+});
 
 export const roleSkills = [
   `Active Listening`,

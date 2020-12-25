@@ -12,14 +12,14 @@ import { ServicesCategoryMultiSelect } from './ServicesDropDownCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StatusNames } from '../../../Agenda/AgendaTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Helpers
 import { isNumber } from './GridItemsHelpers';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
-export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
   const value = cellValue as string;
   const isImageUrl = value && (value.includes('png') || value.includes('jpg') || value.includes('jpeg'));
 
@@ -38,8 +38,8 @@ export const ServicesIconCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem
   );
 };
 
-export const ServicesDiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
   const value = cellValue as number;
 
   return (
@@ -53,8 +53,8 @@ export const ServicesDiscountCell: FC<GridCellProps<ServicesDataItem>> = ({ data
   );
 };
 
-export const ServicesDurationCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
   const value = cellValue as number;
 
   return (
@@ -68,9 +68,9 @@ export const ServicesDurationCell: FC<GridCellProps<ServicesDataItem>> = ({ data
   );
 };
 
-export const ServicesTotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
-  const { cellValue: OfferingDiscount } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, 'OfferingDiscount');
+export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { cellValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
+  const { cellValue: OfferingDiscount } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, 'OfferingDiscount');
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 0;
   const numDiscount = isNumber(OfferingDiscount) ? OfferingDiscount : 0;
@@ -83,8 +83,8 @@ export const ServicesTotalPriceCell: FC<GridCellProps<ServicesDataItem>> = ({ da
   );
 };
 
-export const ServicesCategoryCell: FC<GridCellProps<ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem>(ID, field);
+export const ServicesCategoryCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
   const value = cellValue as string;
 
   return (

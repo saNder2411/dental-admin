@@ -12,10 +12,6 @@ interface ImmutableDataItemKey {
   CellPhone: string | null;
   Email: string | null;
   Gender: '(1) Female' | '(2) Male';
-  // AgeGroup: null | string;
-  // TrackingComments: null | string;
-  // WorkPhone: null | string;
-  // HomePhone: null | string;
   ClientPhoto: {
     Description: string;
     Url: string;
@@ -25,8 +21,8 @@ interface ImmutableDataItemKey {
   Modified: string;
   Created: string;
 
-  SvcStaff: null | string;
-  Upcoming: null | string;
+  SvcStaff?: null | string;
+  Upcoming?: null | string;
 }
 
 export interface APIGetResCustomerDataItem extends ImmutableDataItemKey {
@@ -46,6 +42,7 @@ export interface CustomerDataItemForCrtUpdActions extends ImmutableDataItemKey {
 
 export interface APIPostPutResCustomerDataItem extends APIGetResCustomerDataItem {
   [key: string]: any;
+  LookupMultiHR01teamId: { __metadata: { type: string }; results: number[] };
 }
 
 export interface CustomersState {

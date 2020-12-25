@@ -6,7 +6,7 @@ import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Selectors
 import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
@@ -33,7 +33,7 @@ export const GenericGenderDropDownList: FC<EditCellDropDownListProps<Appointment
   );
 };
 
-export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<ServicesDataItem | TeamStaffDataItem, boolean>> = ({
+export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<ServiceDataItem | TeamStaffDataItem, boolean>> = ({
   dataItemID,
   field,
   onChange,
@@ -47,7 +47,7 @@ export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<Servic
   ];
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
-  const onBooleanFlagChange = onGridDropDownChange<ServicesDataItem | TeamStaffDataItem>(dataItemID, field, onChange);
+  const onBooleanFlagChange = onGridDropDownChange<ServiceDataItem | TeamStaffDataItem>(dataItemID, field, onChange);
 
   return (
     <DropDownList
@@ -60,7 +60,7 @@ export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<Servic
   );
 };
 
-export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaffDataItem | ServicesDataItem, string[] | null>> = ({
+export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaffDataItem | ServiceDataItem, string[] | null>> = ({
   dataItemID,
   field,
   onChange,

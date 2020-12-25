@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, ServicesState, Actions, ServicesDataItem } from './ServicesTypes';
+import { ActionTypes, ServicesState, Actions, ServiceDataItem } from './ServicesTypes';
 // Helpers
 import { roleSkills } from './ServicesHelpers';
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
@@ -43,7 +43,7 @@ export const reducer = (state: ServicesState = initialState, action: Actions): S
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
-      const updatedData = updateDataAfterEditItem(state.data, action.payload) as ServicesDataItem[];
+      const updatedData = updateDataAfterEditItem(state.data, action.payload) as ServiceDataItem[];
       return { ...state, data: updatedData, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
@@ -56,7 +56,7 @@ export const reducer = (state: ServicesState = initialState, action: Actions): S
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as ServicesDataItem[];
+      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as ServiceDataItem[];
       return { ...state, data: updatedDataAfterDeleteDataItem, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_FAILURE:

@@ -1,10 +1,10 @@
 // Types
-import { APITeamStaffDataItem, TeamStaffDataItem } from './TeamStaffTypes';
+import { APIGetResTeamStaffDataItem, TeamStaffDataItem, TeamStaffDataItemForCrtUpdActions, APIPostPutResTeamStaffDataItem } from './TeamStaffTypes';
 
-export const transformData = (apiResults: APITeamStaffDataItem[]): TeamStaffDataItem[] =>
+export const transformAPIData = (apiResults: APIGetResTeamStaffDataItem[]): TeamStaffDataItem[] =>
   apiResults.map((item) => ({ ...item, TeamProfilePhotoUrl: item.TeamProfilePhoto.Url }));
 
-export const transformDataItem = (apiResult: APITeamStaffDataItem): TeamStaffDataItem => ({
+export const transformAPIDataItem = (apiResult: APIPostPutResTeamStaffDataItem): TeamStaffDataItem => ({
   ...apiResult,
   TeamProfilePhotoUrl: apiResult.TeamProfilePhoto.Url,
 });
@@ -13,21 +13,16 @@ export const transformDataItemForAPI = ({
   TeamProfilePhotoUrl,
   TeamProfilePhoto,
   FullName,
-  ID,
-  __metadata,
+  RoleSkills,
+  Gender,
   ...others
-}: TeamStaffDataItem): APITeamStaffDataItem => {
-  const startID = __metadata.id.lastIndexOf(`(`) + 1;
-  const newID = `${__metadata.id.slice(0, startID)}${ID})`;
+}: TeamStaffDataItem): TeamStaffDataItemForCrtUpdActions => {
   return {
     ...others,
-    ID,
-    Id: ID,
-    id: ID,
-    __metadata: { ...__metadata, id: newID },
     TeamProfilePhoto: { ...TeamProfilePhoto, Url: TeamProfilePhotoUrl, Description: TeamProfilePhotoUrl },
     FullName,
     FirstName: FullName.split(' ')[0],
     Title: FullName.split(' ').slice(-1)[0],
+    __metadata: { type: 'SP.Data.MetroHR01ListItem' },
   };
 };

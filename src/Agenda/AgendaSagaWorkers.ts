@@ -17,15 +17,15 @@ import {
   UpdateRecurringDataItemInitAsyncActionType,
   APIPostPutResAppointmentDataItem,
 } from './AgendaTypes';
-import { APIServicesDataItem } from '../Services/ServicesTypes';
-import { APITeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { APIGetResServiceDataItem } from '../Services/ServicesTypes';
+import { APIGetResTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 import { APIGetResCustomerDataItem } from '../Customers/CustomersTypes';
 // Helpers
-import { transformData, transformDataItem } from './AgendaHelpers';
-import { transformData as transformTeamStaffData } from '../TeamStaff/TeamStaffHelpers';
-import { transformData as transformCustomersData } from '../Customers/CustomersHelpers';
+import { transformAPIData, transformAPIDataItem } from './AgendaHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../TeamStaff/TeamStaffHelpers';
+import { transformAPIData as transformCustomersAPIData } from '../Customers/CustomersHelpers';
 
-type Results = [APIGetResAppointmentDataItem[], APIServicesDataItem[] | null, APITeamStaffDataItem[] | null, APIGetResCustomerDataItem[] | null];
+type Results = [APIGetResAppointmentDataItem[], APIGetResServiceDataItem[] | null, APIGetResTeamStaffDataItem[] | null, APIGetResCustomerDataItem[] | null];
 
 export function* workerFetchData({
   meta: { servicesDataLength, teamStaffDataLength, customersDataLength },
@@ -40,7 +40,7 @@ export function* workerFetchData({
       customersDataLength === 0 ? apply(API, API.customers.getData, []) : call(() => null),
     ]);
 
-    const data = transformData(agendaResult);
+    const data = transformAPIData(agendaResult);
     yield put(actions.fetchDataSuccessAC(data));
 
     if (servicesResult) {
@@ -48,12 +48,12 @@ export function* workerFetchData({
     }
 
     if (teamStaffResult) {
-      const data = transformTeamStaffData(teamStaffResult);
+      const data = transformTeamStaffAPIData(teamStaffResult);
       yield put(teamStaffActions.fetchDataSuccessAC(data));
     }
 
     if (customersResult) {
-      const data = transformCustomersData(customersResult);
+      const data = transformCustomersAPIData(customersResult);
       yield put(customersActions.fetchDataSuccessAC(data));
     }
   } catch (error) {
@@ -71,7 +71,7 @@ export function* workerCreateDataItem({
     yield put(actions.createDataItemRequestAC());
 
     const result: APIPostPutResAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
-    const data = transformDataItem(result);
+    const data = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
@@ -90,7 +90,7 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemRequestAC());
 
     const result: APIPostPutResAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
-    const data = transformDataItem(result);
+    const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
@@ -131,10 +131,10 @@ export function* workerUpdateRecurringDataItem({
       apply(API, API.agenda.createDataItem, [createDataItem]),
     ]);
 
-    const updatedDataItemData = transformDataItem(updateResult);
+    const updatedDataItemData = transformAPIDataItem(updateResult);
     yield put(actions.updateDataItemSuccessAC(updatedDataItemData));
 
-    const createDataItemData = transformDataItem(createResult);
+    const createDataItemData = transformAPIDataItem(createResult);
     onUpdateDataItem()
     yield put(actions.createDataItemSuccessAC(createDataItemData));
    

@@ -1,7 +1,7 @@
 // Types
 import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForCrtUpdActions, APIPostPutResAppointmentDataItem } from './AgendaTypes';
 
-export const transformData = (apiResults: APIGetResAppointmentDataItem[]): AppointmentDataItem[] =>
+export const transformAPIData = (apiResults: APIGetResAppointmentDataItem[]): AppointmentDataItem[] =>
   apiResults.map((item) => ({
     ...item,
     TeamID: item.LookupHR01team.Id,
@@ -11,7 +11,7 @@ export const transformData = (apiResults: APIGetResAppointmentDataItem[]): Appoi
     MetroRecException: item.MetroRecException ? item.MetroRecException.map((exception) => new Date(exception)) : null,
   }));
 
-export const transformDataItem = (apiResult: APIPostPutResAppointmentDataItem): AppointmentDataItem => {
+export const transformAPIDataItem = (apiResult: APIPostPutResAppointmentDataItem): AppointmentDataItem => {
   const {
     __metadata,
     FirstUniqueAncestorSecurableObject,

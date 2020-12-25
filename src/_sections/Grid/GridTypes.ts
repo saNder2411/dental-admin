@@ -4,7 +4,7 @@ import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 import { AppointmentDataItem } from '../../Agenda';
 import { TeamStaffDataItem } from '../../TeamStaff';
 import { CustomerDataItem } from '../../Customers';
-import { ServicesDataItem } from '../../Services';
+import { ServiceDataItem } from '../../Services';
 // Actions
 import * as actions from './GridAC';
 
@@ -26,7 +26,7 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type GridDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: TeamStaffDataItem; type3: CustomerDataItem; type4: ServicesDataItem }>;
+export type GridDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: TeamStaffDataItem; type3: CustomerDataItem; type4: ServiceDataItem }>;
 
 export enum GridDataName {
   Default = 'Empty',
@@ -67,7 +67,7 @@ export interface GridState {
 }
 
 export type DomainsStateActions = InferValueTypes<{
-  type1: DomainStateActionsType<ServicesDataItem>;
+  type1: DomainStateActionsType<ServiceDataItem>;
   type2: DomainStateActionsType<TeamStaffDataItem>;
   type3: DomainStateActionsType<CustomerDataItem>;
   type4: DomainStateActionsType<AppointmentDataItem>;

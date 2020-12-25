@@ -10,7 +10,7 @@ import { GenericGenderDropDownList, GenericBooleanFlagDropDownList, GenericRoleS
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Helpers
@@ -32,8 +32,8 @@ export const GenericTextCell: FC<GridCellProps> = ({ dataItem: { ID }, onChange,
   );
 };
 
-export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | ServicesDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem | ServicesDataItem>(ID, field);
+export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem | ServiceDataItem>(ID, field);
 
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -100,8 +100,8 @@ export const GenericDateCellNoEditable: FC<GridCellProps<AppointmentDataItem | C
   return <td>{intlService.formatDate(value, 'H:mm | dd.MM')}</td>;
 };
 
-export const GenericCurrencyCell: FC<GridCellProps<AppointmentDataItem | ServicesDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem | ServicesDataItem>(ID, field);
+export const GenericCurrencyCell: FC<GridCellProps<AppointmentDataItem | ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem | ServiceDataItem>(ID, field);
   const intlService = useInternationalization();
 
   const numValue = isNumber(cellValue) ? cellValue : 50;
@@ -118,12 +118,12 @@ export const GenericGenderCell: FC<GridCellProps<AppointmentDataItem | CustomerD
   );
 };
 
-export const GenericBooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamStaffDataItem>> = ({
+export const GenericBooleanFlagCell: FC<GridCellProps<ServiceDataItem | TeamStaffDataItem>> = ({
   dataItem: { ID },
   onChange,
   field,
 }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem | TeamStaffDataItem>(ID, field);
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | TeamStaffDataItem>(ID, field);
   const flag = !!cellValue;
 
   return dataItemInEditValue ? (
@@ -137,12 +137,12 @@ export const GenericBooleanFlagCell: FC<GridCellProps<ServicesDataItem | TeamSta
   );
 };
 
-export const GenericRoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServicesDataItem>> = ({
+export const GenericRoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServiceDataItem>> = ({
   dataItem: { ID },
   onChange,
   field,
 }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServicesDataItem | TeamStaffDataItem>(ID, field);
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | TeamStaffDataItem>(ID, field);
   const currentRoleSkills = cellValue as string[] | null;
   const value = currentRoleSkills ? currentRoleSkills.join(' | ') : '';
 

@@ -6,17 +6,18 @@ import { API } from '../_REST';
 import * as actions from './ServicesAC';
 // Types
 import {
-  APIServicesDataItem,
+  APIGetResServiceDataItem,
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
+  APIPostPutResServiceDataItem,
 } from './ServicesTypes';
 
 export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APIServicesDataItem[] = yield apply(API, API.services.getData, []);
+    const result: APIGetResServiceDataItem[] = yield apply(API, API.services.getData, []);
 
     yield put(actions.fetchDataSuccessAC(result));
   } catch (error) {
@@ -30,7 +31,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APIServicesDataItem = yield apply(API, API.services.createDataItem, [createdDataItem]);
+    const result: APIPostPutResServiceDataItem = yield apply(API, API.services.createDataItem, [createdDataItem]);
 
     yield put(actions.createDataItemSuccessAC(result));
   } catch (error) {
@@ -48,7 +49,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APIServicesDataItem = yield apply(API, API.services.updateDataItem, [updatedDataItem]);
+    const result: APIPostPutResServiceDataItem = yield apply(API, API.services.updateDataItem, [updatedDataItem]);
     yield put(actions.updateDataItemSuccessAC(result));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));

@@ -12,7 +12,7 @@ import {
 import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { ServicesDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { CustomerDataItem } from '../../../Customers';
 // Selectors
 import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
@@ -117,7 +117,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
   );
 };
 
-export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AppointmentDataItem, ServicesDataItem[], ServicesDataItem[]>> = ({
+export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AppointmentDataItem, ServiceDataItem[], ServiceDataItem[]>> = ({
   dataItemID,
   field,
   onChange,

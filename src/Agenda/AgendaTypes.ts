@@ -34,12 +34,9 @@ interface ImmutableDataItemKey {
   EventType: number;
   Email: string | null;
   AppointmentStatus: StatusNames;
-  // AppointmentSource: null | string;
-  // SubmissionIdUIT: null | string;
   LastNameAppt: string;
   Gender: null | '(1) Female' | '(2) Male';
   Notes: null | string;
-  // TrackingComments: null | string;
   ServiceCharge: number;
   FilterStart: string;
   FilterEnd: string;
