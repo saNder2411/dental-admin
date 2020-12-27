@@ -12,7 +12,7 @@ import {
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
   APIGetResCustomerDataItem,
-  APIPostPutResCustomerDataItem,
+  CustomerDataItemForCrtUpdActions,
 } from './CustomersTypes';
 import { APIGetResTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 // Helpers
@@ -48,7 +48,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APIPostPutResCustomerDataItem = yield apply(API, API.customers.createDataItem, [createdDataItem]);
+    const result: CustomerDataItemForCrtUpdActions = yield apply(API, API.customers.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
@@ -66,7 +66,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APIPostPutResCustomerDataItem = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
+    const result: CustomerDataItemForCrtUpdActions = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {

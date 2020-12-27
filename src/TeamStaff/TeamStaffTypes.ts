@@ -35,10 +35,6 @@ export interface TeamStaffDataItemForCrtUpdActions extends APIGetResTeamStaffDat
   __metadata: { type: string };
 }
 
-export interface APIPostPutResTeamStaffDataItem extends APIGetResTeamStaffDataItem {
-  [key: string]: any;
-}
-
 export interface TeamStaffState {
   isDataLoading: boolean;
   data: TeamStaffDataItem[];

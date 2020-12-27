@@ -31,10 +31,6 @@ export interface ServiceDataItemForCrtUpdActions extends APIGetResServiceDataIte
   __metadata: { type: string };
 }
 
-export interface APIPostPutResServiceDataItem extends APIGetResServiceDataItem {
-  [key: string]: any;
-}
-
 export interface ServicesState {
   isDataLoading: boolean;
   data: ServiceDataItem[];

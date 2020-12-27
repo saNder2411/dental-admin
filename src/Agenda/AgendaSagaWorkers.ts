@@ -15,7 +15,7 @@ import {
   DeleteDataItemInitAsyncActionType,
   APIGetResAppointmentDataItem,
   UpdateRecurringDataItemInitAsyncActionType,
-  APIPostPutResAppointmentDataItem,
+  AppointmentDataItemForCrtUpdActions,
 } from './AgendaTypes';
 import { APIGetResServiceDataItem } from '../Services/ServicesTypes';
 import { APIGetResTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
@@ -70,7 +70,7 @@ export function* workerCreateDataItem({
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: APIPostPutResAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
+    const result: AppointmentDataItemForCrtUpdActions = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
     yield put(actions.createDataItemSuccessAC(data));
@@ -89,7 +89,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: APIPostPutResAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
+    const result: AppointmentDataItemForCrtUpdActions = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
@@ -117,7 +117,7 @@ export function* workerDeleteDataItem({
   }
 }
 
-type UpdateRecurringDataItemResults = [APIPostPutResAppointmentDataItem, APIPostPutResAppointmentDataItem];
+type UpdateRecurringDataItemResults = [AppointmentDataItemForCrtUpdActions, AppointmentDataItemForCrtUpdActions];
 
 export function* workerUpdateRecurringDataItem({
   payload: { updatedDataItem, createDataItem },

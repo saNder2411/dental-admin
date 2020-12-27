@@ -29,19 +29,17 @@ interface ImmutableDataItemKey {
   Duration: number;
   Description: string;
   fAllDayEvent: null | boolean;
-  MasterSeriesItemID: null | number;
-  RecurrenceID: null | number;
-  EventType: number;
   Email: string | null;
   AppointmentStatus: StatusNames;
   LastNameAppt: string;
-  Gender: null | '(1) Female' | '(2) Male';
   Notes: null | string;
   ServiceCharge: number;
   FilterStart: string;
   FilterEnd: string;
   MetroRRule: null | string;
   MetroRecException: null | Date[];
+  Gender: null | '(1) Female' | '(2) Male';
+  RecurrenceID: null | number;
   FirstName: string;
   CellPhone: string | null;
   ID: number;
@@ -68,67 +66,6 @@ export interface AppointmentDataItemForCrtUpdActions extends ImmutableDataItemKe
   LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
   __metadata: { type: string };
-}
-
-export interface APIPostPutResAppointmentDataItem extends APIGetResAppointmentDataItem {
-  __metadata: {
-    id: string;
-    uri: string;
-    etag: string;
-    type: string;
-  };
-  FirstUniqueAncestorSecurableObject: { __deferred: { uri: string } };
-  RoleAssignments: { __deferred: { uri: string } };
-  AttachmentFiles: { __deferred: { uri: string } };
-  ContentType: { __deferred: { uri: string } };
-  FieldValuesAsHtml: { __deferred: { uri: string } };
-  FieldValuesAsText: { __deferred: { uri: string } };
-  FieldValuesForEdit: { __deferred: { uri: string } };
-  File: { __deferred: { uri: string } };
-  Folder: { __deferred: { uri: string } };
-  ParentList: { __deferred: { uri: string } };
-  FileSystemObjectType: number;
-  ContentTypeId: string;
-  Location: null | string;
-  fRecurrence: boolean;
-  ParticipantsPickerId: null | string;
-  Category: null | string;
-  FreeBusy: null | string;
-  Overbook: null | string;
-  AppointmentSource: null | string;
-  SubmissionIdUIT: null | string;
-  CalendarColTeam: null | string;
-  CalendarColHex: null | string;
-  TeamProfileEMail: null | string;
-  AssignedToId: null | string;
-  ManagerId: null | number;
-  TrackingComments: null | string;
-  StatusChange: boolean;
-  ServiceChange: boolean;
-  StylistChange: boolean;
-  CustomerChange: boolean;
-  StartTimeChange: boolean;
-  EndTimeChange: boolean;
-  AlertsSMS: number;
-  FirstAppointment: boolean;
-  TimeChanges: number;
-  ExtraFees: number;
-  ServiceDiscount: number;
-  MaxDuration: number;
-  ScheduleGroupID: null | number;
-  ScheduleRefID: null | string;
-  OverlapLvl: string;
-  ComputedDuration: null | number;
-  LookupMultiBP01offeringsId: { __metadata: { type: string }; results: number[] };
-  LookupCM102customersId: number;
-  LookupHR01teamId: number;
-  AlertsCalls: number;
-  Created: string;
-  AuthorId: number;
-  EditorId: number;
-  OData__UIVersionString: string;
-  Attachments: boolean;
-  GUID: number;
 }
 
 export interface AgendaState {

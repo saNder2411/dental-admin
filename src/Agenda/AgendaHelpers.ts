@@ -1,5 +1,5 @@
 // Types
-import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForCrtUpdActions, APIPostPutResAppointmentDataItem } from './AgendaTypes';
+import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForCrtUpdActions } from './AgendaTypes';
 
 export const transformAPIData = (apiResults: APIGetResAppointmentDataItem[]): AppointmentDataItem[] =>
   apiResults.map((item) => ({
@@ -11,63 +11,8 @@ export const transformAPIData = (apiResults: APIGetResAppointmentDataItem[]): Ap
     MetroRecException: item.MetroRecException ? item.MetroRecException.map((exception) => new Date(exception)) : null,
   }));
 
-export const transformAPIDataItem = (apiResult: APIPostPutResAppointmentDataItem): AppointmentDataItem => {
-  const {
-    __metadata,
-    FirstUniqueAncestorSecurableObject,
-    RoleAssignments,
-    AttachmentFiles,
-    ContentType,
-    FieldValuesAsHtml,
-    FieldValuesAsText,
-    FieldValuesForEdit,
-    File,
-    Folder,
-    ParentList,
-    FileSystemObjectType,
-    ContentTypeId,
-    Location,
-    fRecurrence,
-    ParticipantsPickerId,
-    Category,
-    FreeBusy,
-    Overbook,
-    AppointmentSource,
-    SubmissionIdUIT,
-    CalendarColTeam,
-    CalendarColHex,
-    TeamProfileEMail,
-    AssignedToId,
-    ManagerId,
-    TrackingComments,
-    StatusChange,
-    ServiceChange,
-    StylistChange,
-    CustomerChange,
-    StartTimeChange,
-    EndTimeChange,
-    AlertsSMS,
-    FirstAppointment,
-    TimeChanges,
-    ExtraFees,
-    ServiceDiscount,
-    MaxDuration,
-    ScheduleGroupID,
-    ScheduleRefID,
-    OverlapLvl,
-    ComputedDuration,
-    LookupMultiBP01offeringsId,
-    LookupCM102customersId,
-    LookupHR01teamId,
-    AlertsCalls,
-    Created,
-    AuthorId,
-    EditorId,
-    OData__UIVersionString,
-    Attachments,
-    GUID,
-    ...others
-  } = apiResult;
+export const transformAPIDataItem = (apiResult: AppointmentDataItemForCrtUpdActions): AppointmentDataItem => {
+  const { __metadata, LookupMultiBP01offeringsId, LookupCM102customersId, LookupHR01teamId, ...others } = apiResult;
   return {
     ...others,
     LookupMultiBP01offerings: { results: LookupMultiBP01offeringsId.results.map((Id) => ({ Id })) },
@@ -103,27 +48,6 @@ export const transformDataItemForAPI = ({
   LookupMultiBP01offeringsId: { results: LookupMultiBP01offerings.results.map(({ Id }) => Id) },
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });
-
-export const body = {
-  AppointmentSource: '',
-  AppointmentStatus: '(2) Pending',
-  CellPhone: '+234567890',
-  Email: 'test@gmail.com',
-  EndDate: '2020-12-24T09:15:00.000Z',
-  EventDate: '2020-12-24T09:00:00.000Z',
-  FirstName: 'Consultation',
-  LastNameAppt: 'A.Female',
-  LookupCM102customersId: 1269,
-  LookupHR01teamId: 2,
-  LookupMultiBP01offeringsId: { results: [1] },
-  MetroRRule: null,
-  Notes: '',
-  SubmissionIdUIT: '2-Thu Dec 24 2020 11:00:00_1269',
-  Title: '',
-  fAllDayEvent: false,
-  fRecurrence: false,
-  __metadata: { type: 'SP.Data.MetroHR03ListItem' },
-};
 
 export const response = {
   d: {

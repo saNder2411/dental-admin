@@ -40,11 +40,6 @@ export interface CustomerDataItemForCrtUpdActions extends ImmutableDataItemKey {
   __metadata: { type: string };
 }
 
-export interface APIPostPutResCustomerDataItem extends APIGetResCustomerDataItem {
-  [key: string]: any;
-  LookupMultiHR01teamId: { __metadata: { type: string }; results: number[] };
-}
-
 export interface CustomersState {
   isDataLoading: boolean;
   data: CustomerDataItem[];
