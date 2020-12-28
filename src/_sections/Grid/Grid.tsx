@@ -122,7 +122,7 @@ export const Grid: FC<Props> = ({ children }) => {
       onItemChange={onGridItemChange}
       onDataStateChange={onDataStateChange}>
       <GridToolbar>
-        <div className="text-right">
+        <div className="text-right p-2">
           <span className="Grid__addNewItemWrapper">
             <Input
               value={allColumnFilter}

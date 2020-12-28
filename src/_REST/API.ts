@@ -1,6 +1,6 @@
 import { Web } from '@pnp/sp/presets/core';
 // Config
-import { headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
+import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
 import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda/AgendaTypes';
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
@@ -89,7 +89,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem[]>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -127,5 +127,112 @@ export const API: API = {
     updateDataItem: (updatedDataItem: MutationServiceDataItem) => updateSPDataItem(GuidList.Service, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Service, deletedDataItemID),
+  },
+};
+
+export const API: API = {
+  agenda: {
+    getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: MutationAppointmentDataItem) =>
+      fetch(`${ROOT_URL}/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: MutationAppointmentDataItem) =>
+      fetch(`${ROOT_URL}/appointments/${updatedDataItem.ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/appointments/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
+  },
+  customers: {
+    getData: () => fetch(`${ROOT_URL}/customers`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: MutationCustomerDataItem) =>
+      fetch(`${ROOT_URL}/customers`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: MutationCustomerDataItem) =>
+      fetch(`${ROOT_URL}/customers/${updatedDataItem.ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/customers/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
+  },
+  staff: {
+    getData: () => fetch(`${ROOT_URL}/staff`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: MutationTeamStaffDataItem) =>
+      fetch(`${ROOT_URL}/staff`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: MutationTeamStaffDataItem) =>
+      fetch(`${ROOT_URL}/staff/${updatedDataItem.ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/staff/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
+  },
+  services: {
+    getData: () => fetch(`${ROOT_URL}/services`).then((response) => response.json()),
+
+    createDataItem: (createdDataItem: MutationServiceDataItem) =>
+      fetch(`${ROOT_URL}/services`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(createdDataItem),
+      }).then((response) => response.json()),
+
+    updateDataItem: (updatedDataItem: MutationServiceDataItem) =>
+      fetch(`${ROOT_URL}/services/${updatedDataItem.ID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedDataItem),
+      }).then((response) => response.json()),
+
+    deleteDataItem: (deletedDataItemID: number) =>
+      fetch(`${ROOT_URL}/services/${deletedDataItemID}`, {
+        method: 'DELETE',
+      }).then((response) => response.json()),
   },
 };
