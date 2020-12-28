@@ -55,7 +55,10 @@ const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: 
 const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
-    .then(() => ({ ID, Id, ...newDataItem }));
+    .then((res) => {
+      console.log(`ResSpCreateDI`, res);
+      return { ID, Id, ...newDataItem };
+    });
 
 const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, dataItem: T) =>
   SPLists.getById(listGuid)
