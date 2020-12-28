@@ -9,8 +9,8 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  APIGetResTeamStaffDataItem,
-  TeamStaffDataItemForPostPutReq
+  QueryTeamStaffDataItem,
+  MutationTeamStaffDataItem
 ,
 } from './TeamStaffTypes';
 // Helpers
@@ -20,7 +20,7 @@ export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APIGetResTeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
+    const result: QueryTeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
     const data = transformAPIData(result);
     yield put(actions.fetchDataSuccessAC(data));
   } catch (error) {
@@ -34,7 +34,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: TeamStaffDataItemForPostPutReq
+    const result: MutationTeamStaffDataItem
  = yield apply(API, API.staff.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
@@ -53,7 +53,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: TeamStaffDataItemForPostPutReq
+    const result: MutationTeamStaffDataItem
  = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));

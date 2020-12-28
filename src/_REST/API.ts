@@ -1,68 +1,63 @@
 import { Web } from '@pnp/sp/presets/core';
 // Config
-import {
-  headers,
-  SP_ROOT_URL,
-  APPOINTMENT_LIST_GUID,
-  CUSTOMER_LIST_GUID,
-  SERVICE_LIST_GUID,
-  STAFF_LIST_GUID,
-  APPOINTMENT_SELECT_FIELDS,
-  CUSTOMER_SELECT_FIELDS,
-  SERVICE_SELECT_FIELDS,
-  STAFF_SELECT_FIELDS,
-} from './config';
+import { headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
-import { APIGetResAppointmentDataItem, AppointmentDataItemForPostPutReq } from '../Agenda/AgendaTypes';
-import { APIGetResCustomerDataItem, CustomerDataItemForPostPutReq } from '../Customers/CustomersTypes';
-import { APIGetResTeamStaffDataItem, TeamStaffDataItemForPostPutReq } from '../TeamStaff/TeamStaffTypes';
-import { APIGetResServiceDataItem, ServiceDataItemForPostPutReq } from '../Services/ServicesTypes';
+import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda/AgendaTypes';
+import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
+import { QueryTeamStaffDataItem, MutationTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
 
-export type GetData<T> = () => Promise<T>;
-export type PostOrPutReqDataItem<T, U = T> = (dataItem: T) => Promise<U>;
+export type QueryAllData<T> = () => Promise<T>;
+export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
 export type DeleteDataItem = (deletedItemID: number) => Promise<number>;
 
 interface API {
   agenda: {
-    getData: GetData<APIGetResAppointmentDataItem[]>;
-    createDataItem: PostOrPutReqDataItem<AppointmentDataItemForPostPutReq>;
-    updateDataItem: PostOrPutReqDataItem<AppointmentDataItemForPostPutReq>;
+    getData: QueryAllData<QueryAppointmentDataItem[]>;
+    createDataItem: MutationDataItem<MutationAppointmentDataItem>;
+    updateDataItem: MutationDataItem<MutationAppointmentDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   customers: {
-    getData: GetData<APIGetResCustomerDataItem[]>;
-    createDataItem: PostOrPutReqDataItem<CustomerDataItemForPostPutReq>;
-    updateDataItem: PostOrPutReqDataItem<CustomerDataItemForPostPutReq>;
+    getData: QueryAllData<QueryCustomerDataItem[]>;
+    createDataItem: MutationDataItem<MutationCustomerDataItem>;
+    updateDataItem: MutationDataItem<MutationCustomerDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   staff: {
-    getData: GetData<APIGetResTeamStaffDataItem[]>;
-    createDataItem: PostOrPutReqDataItem<TeamStaffDataItemForPostPutReq>;
-    updateDataItem: PostOrPutReqDataItem<TeamStaffDataItemForPostPutReq>;
+    getData: QueryAllData<QueryTeamStaffDataItem[]>;
+    createDataItem: MutationDataItem<MutationTeamStaffDataItem>;
+    updateDataItem: MutationDataItem<MutationTeamStaffDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   services: {
-    getData: GetData<APIGetResServiceDataItem[]>;
-    createDataItem: PostOrPutReqDataItem<ServiceDataItemForPostPutReq>;
-    updateDataItem: PostOrPutReqDataItem<ServiceDataItemForPostPutReq>;
+    getData: QueryAllData<QueryServiceDataItem[]>;
+    createDataItem: MutationDataItem<MutationServiceDataItem>;
+    updateDataItem: MutationDataItem<MutationServiceDataItem>;
     deleteDataItem: DeleteDataItem;
   };
 }
 
-type PostPutDataItem =
-  | AppointmentDataItemForPostPutReq
-  | CustomerDataItemForPostPutReq
-  | ServiceDataItemForPostPutReq
-  | TeamStaffDataItemForPostPutReq;
+type TQueryDataResponse = QueryAppointmentDataItem[] | QueryCustomerDataItem[] | QueryTeamStaffDataItem[] | QueryServiceDataItem[];
+
+type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationTeamStaffDataItem;
 
 const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
 
-const createSPDataItem = <T extends PostPutDataItem = PostPutDataItem>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
+const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: string, select: string, orderBy: string, filter: string = '') =>
+  SPLists.getById(listGuid)
+    .items.filter(filter)
+    .select(select)
+    .orderBy(orderBy)
+    .getAll()
+    .then((response) => response as T);
+
+const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
     .then(() => ({ ID, Id, ...newDataItem }));
 
-const updateSPDataItem = <T extends PostPutDataItem = PostPutDataItem>(listGuid: string, dataItem: T) =>
+const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, dataItem: T) =>
   SPLists.getById(listGuid)
     .items.getById(dataItem.ID)
     .update(dataItem)
@@ -77,67 +72,40 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
 export const API: API = {
   agenda: {
     getData: async () =>
-      SPLists.getById(APPOINTMENT_LIST_GUID)
-        .items.filter(
-          `(FilterStart ge datetime'${new Date().toISOString()}') and (FilterEnd le datetime'${new Date(
-            new Date().getFullYear(),
-            new Date().getMonth() + 6
-          ).toISOString()}')`
-        )
-        .select(APPOINTMENT_SELECT_FIELDS)
-        .expand('LookupHR01team,LookupCM102customers,LookupMultiBP01offerings')
-        .orderBy('EventDate')
-        .get<APIGetResAppointmentDataItem[]>()
-        .then((response) => response),
+      getSPData<QueryAppointmentDataItem[]>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
 
-    createDataItem: async (createdDataItem: AppointmentDataItemForPostPutReq) => createSPDataItem(APPOINTMENT_LIST_GUID, createdDataItem),
+    createDataItem: async (createdDataItem: MutationAppointmentDataItem) => createSPDataItem(GuidList.Appointment, createdDataItem),
 
-    updateDataItem: (updatedDataItem: AppointmentDataItemForPostPutReq) => updateSPDataItem(APPOINTMENT_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationAppointmentDataItem) => updateSPDataItem(GuidList.Appointment, updatedDataItem),
 
-    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(APPOINTMENT_LIST_GUID, deletedDataItemID),
+    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Appointment, deletedDataItemID),
   },
   customers: {
-    getData: async () =>
-      SPLists.getById(CUSTOMER_LIST_GUID)
-        .items.select(CUSTOMER_SELECT_FIELDS)
-        .expand('LookupMultiHR01team')
-        .orderBy('Title')
-        .get<APIGetResCustomerDataItem[]>()
-        .then((response) => response),
+    getData: async () => getSPData<QueryCustomerDataItem[]>(GuidList.Customer, SelectFields.Customer, OrderBy.Customer),
 
-    createDataItem: (createdDataItem: CustomerDataItemForPostPutReq) => createSPDataItem(CUSTOMER_LIST_GUID, createdDataItem),
+    createDataItem: (createdDataItem: MutationCustomerDataItem) => createSPDataItem(GuidList.Customer, createdDataItem),
 
-    updateDataItem: (updatedDataItem: CustomerDataItemForPostPutReq) => updateSPDataItem(CUSTOMER_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationCustomerDataItem) => updateSPDataItem(GuidList.Customer, updatedDataItem),
 
-    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(CUSTOMER_LIST_GUID, deletedDataItemID),
+    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Customer, deletedDataItemID),
   },
 
   staff: {
-    getData: async () =>
-      SPLists.getById(STAFF_LIST_GUID)
-        .items.select(STAFF_SELECT_FIELDS)
-        .orderBy('ID')
-        .get<APIGetResTeamStaffDataItem[]>()
-        .then((response) => response),
+    getData: async () => getSPData<QueryTeamStaffDataItem[]>(GuidList.Staff, SelectFields.Staff, OrderBy.Staff),
 
-    createDataItem: (createdDataItem: TeamStaffDataItemForPostPutReq) => createSPDataItem(STAFF_LIST_GUID, createdDataItem),
+    createDataItem: (createdDataItem: MutationTeamStaffDataItem) => createSPDataItem(GuidList.Staff, createdDataItem),
 
-    updateDataItem: (updatedDataItem: TeamStaffDataItemForPostPutReq) => updateSPDataItem(STAFF_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationTeamStaffDataItem) => updateSPDataItem(GuidList.Staff, updatedDataItem),
 
-    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(STAFF_LIST_GUID, deletedDataItemID),
+    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Staff, deletedDataItemID),
   },
   services: {
-    getData: async () =>
-      SPLists.getById(SERVICE_LIST_GUID)
-        .items.select(SERVICE_SELECT_FIELDS)
-        .orderBy('OfferingCatType')
-        .get<APIGetResServiceDataItem[]>()
-        .then((response) => response),
+    getData: async () => getSPData<QueryServiceDataItem[]>(GuidList.Service, SelectFields.Service, OrderBy.Service),
 
-    createDataItem: (createdDataItem: ServiceDataItemForPostPutReq) => createSPDataItem(SERVICE_LIST_GUID, createdDataItem),
+    createDataItem: (createdDataItem: MutationServiceDataItem) => createSPDataItem(GuidList.Service, createdDataItem),
 
-    updateDataItem: (updatedDataItem: ServiceDataItemForPostPutReq) => updateSPDataItem(SERVICE_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationServiceDataItem) => updateSPDataItem(GuidList.Service, updatedDataItem),
 
-    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(SERVICE_LIST_GUID, deletedDataItemID),
+    deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Service, deletedDataItemID),
   },
 };

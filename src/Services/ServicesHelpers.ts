@@ -1,9 +1,12 @@
 // Types
-import { ServiceDataItem, ServiceDataItemForPostPutReq } from './ServicesTypes';
+import { ServiceDataItem, QueryServiceDataItem, MutationServiceDataItem } from './ServicesTypes';
 
-export const transformAPIDataItem = ({ __metadata, ...others }: ServiceDataItemForPostPutReq): ServiceDataItem => ({ ...others });
+export const transformAPIData = (apiResults: QueryServiceDataItem[]): ServiceDataItem[] =>
+  apiResults.map(({ __metadata, ...others }) => ({ ...others }));
 
-export const transformDataItemForAPI = ({ OfferingIconName, RoleSkills, ...others }: ServiceDataItem): ServiceDataItemForPostPutReq => ({
+export const transformAPIDataItem = ({ __metadata, ...others }: MutationServiceDataItem): ServiceDataItem => ({ ...others });
+
+export const transformDataItemForAPI = ({ OfferingIconName, RoleSkills, ...others }: ServiceDataItem): MutationServiceDataItem => ({
   ...others,
   __metadata: { type: 'SP.Data.MetroBP02ListItem' },
 });

@@ -34,9 +34,6 @@ export const updateNewDataItemOnAddNewItemToChange = (
   const ID = generateId(data);
 
   return {
-    LookupCM102customers: { Id: 1269 },
-    LookupHR01team: { Id: TeamID },
-    LookupMultiBP01offerings: { results: [] },
     Id: ID,
     Title: ``,
     EventDate: Start.toISOString(),
@@ -57,23 +54,18 @@ export const updateNewDataItemOnAddNewItemToChange = (
     MetroRecException: null,
     FirstName: ``,
     CellPhone: null,
+    LookupCM102customersId: 1269,
+    LookupHR01teamId: TeamID,
+    LookupMultiBP01offeringsId: { results: [] },
     ID,
     Modified: new Date().toISOString(),
 
     TeamID,
     Start,
     End,
-    LastUpdate: new Date().toISOString(),
     inEdit: true,
     isNew: true,
   };
-};
-
-export const extractGuidFromString = (metadataID: string) => {
-  const startGuid = metadataID.indexOf(`'`) + 1;
-  const endGuid = metadataID.lastIndexOf(`'`);
-
-  return metadataID.slice(startGuid, endGuid);
 };
 
 export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: ViewType, TeamID: number) => {

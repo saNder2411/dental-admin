@@ -3,7 +3,7 @@ import { InferValueTypes } from '../_sections/Grid/GridTypes';
 // Actions
 import * as actions from './TeamStaffAC';
 
-export interface APIGetResTeamStaffDataItem {
+interface BackendImmutableKey {
   Id: number;
   Title: string;
   FirstName: string;
@@ -25,14 +25,25 @@ export interface APIGetResTeamStaffDataItem {
   Gender?: null | '(2) Male' | '(1) Female';
 }
 
-export interface TeamStaffDataItem extends APIGetResTeamStaffDataItem {
+interface FrontendKey {
   TeamProfilePhotoUrl: string;
   inEdit?: boolean;
   isNew?: boolean;
 }
 
-export interface TeamStaffDataItemForPostPutReq extends APIGetResTeamStaffDataItem {
-  __metadata: { type: string };
+export interface QueryTeamStaffDataItem extends BackendImmutableKey {
+  __metadata: {
+    id: string;
+    uri: string;
+    etag: string;
+    type: 'SP.Data.MetroHR01ListItem';
+  };
+}
+
+export interface TeamStaffDataItem extends BackendImmutableKey, FrontendKey {}
+
+export interface MutationTeamStaffDataItem extends BackendImmutableKey {
+  __metadata: { type: 'SP.Data.MetroHR01ListItem' };
 }
 
 export interface TeamStaffState {

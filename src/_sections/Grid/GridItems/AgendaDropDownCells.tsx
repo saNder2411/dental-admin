@@ -133,7 +133,7 @@ export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<Appointment
       dataItem: dataItemID,
       field,
       syntheticEvent: evt.syntheticEvent,
-      value: { results: evt.target.value.map(({ value }) => value) },
+      value: { results: evt.target.value.map((value) => value) },
     });
   };
 

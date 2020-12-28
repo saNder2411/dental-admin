@@ -28,10 +28,10 @@ export const Calendar: FC = () => {
   const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
   const selectData = useMemo(selectMemoData, []);
   const data = useSelector(selectData);
-  const calendarData = useMemo(() => data.filter(({ LookupHR01team }) => mapTeamToFiltered[LookupHR01team.Id]), [data, mapTeamToFiltered]);
+  const calendarData = useMemo(() => data.filter(({ LookupHR01teamId }) => mapTeamToFiltered[LookupHR01teamId]), [data, mapTeamToFiltered]);
   const selectedDate = useSelector(selectSelectedDate);
   const selectedView = useSelector(selectSelectedView);
-  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, calendarData[0]?.LookupHR01team.Id ?? 1);
+  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, calendarData[0]?.LookupHR01teamId ?? 1);
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
   useSetSchedulerDataForDomainWithDataBind(agendaData, agendaIsDataLoading, SchedulerActions, dispatch);

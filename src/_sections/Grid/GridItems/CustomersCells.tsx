@@ -6,7 +6,6 @@ import { CustomersMobilePhoneInput } from './CustomersInputCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { LookupEntity } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Hooks
@@ -23,11 +22,11 @@ export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = (props
 
 export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<CustomerDataItem>(ID, field);
-  const LookupMultiHR01team = cellValue as { results: LookupEntity[] };
+  const LookupMultiHR01teamId = cellValue as { results: number[] };
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
 
-  const currentAppointment = teamStaffData.filter(({ Id }) => LookupMultiHR01team.results.find((item) => item.Id === Id));
+  const currentAppointment = teamStaffData.filter(({ Id }) => LookupMultiHR01teamId.results.find((item) => item === Id));
   const value = currentAppointment.map(({ Title }) => Title).join(' | ');
 
   return (

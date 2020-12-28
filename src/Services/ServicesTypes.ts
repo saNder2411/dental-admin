@@ -7,7 +7,7 @@ export enum OfferIcons {
   Tooth = 'Tooth',
 }
 
-export interface APIGetResServiceDataItem {
+interface BackendImmutableKey {
   Id: number;
   OfferingsName_Edit: string;
   ShowOnline: boolean;
@@ -22,13 +22,24 @@ export interface APIGetResServiceDataItem {
   RoleSkills?: null | string[];
 }
 
-export interface ServiceDataItem extends APIGetResServiceDataItem {
+interface FrontendKey {
   inEdit?: boolean;
   isNew?: boolean;
 }
 
-export interface ServiceDataItemForPostPutReq extends APIGetResServiceDataItem {
-  __metadata: { type: string };
+export interface QueryServiceDataItem extends BackendImmutableKey {
+  __metadata: {
+    id: string;
+    uri: string;
+    etag: string;
+    type: 'SP.Data.MetroBP02ListItem';
+  };
+}
+
+export interface ServiceDataItem extends BackendImmutableKey, FrontendKey {}
+
+export interface MutationServiceDataItem extends BackendImmutableKey {
+  __metadata: { type: `SP.Data.MetroBP02ListItem` };
 }
 
 export interface ServicesState {

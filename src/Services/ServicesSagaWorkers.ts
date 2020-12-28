@@ -6,11 +6,11 @@ import { API } from '../_REST';
 import * as actions from './ServicesAC';
 // Types
 import {
-  APIGetResServiceDataItem,
+  QueryServiceDataItem,
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  ServiceDataItemForPostPutReq
+  MutationServiceDataItem
 ,
 } from './ServicesTypes';
 // Helpers
@@ -20,7 +20,7 @@ export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: APIGetResServiceDataItem[] = yield apply(API, API.services.getData, []);
+    const result: QueryServiceDataItem[] = yield apply(API, API.services.getData, []);
 
     yield put(actions.fetchDataSuccessAC(result));
   } catch (error) {
@@ -34,7 +34,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: ServiceDataItemForPostPutReq
+    const result: MutationServiceDataItem
  = yield apply(API, API.services.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
 
@@ -54,7 +54,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: ServiceDataItemForPostPutReq
+    const result: MutationServiceDataItem
  = yield apply(API, API.services.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
 

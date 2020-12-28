@@ -12,7 +12,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem, StatusNames, LookupEntity } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 // Selectors
 import { selectGridDataItemMemoValueForCell } from '../GridSelectors';
 import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
@@ -75,13 +75,13 @@ export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
 
 export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const LookupHR01team = cellValue as LookupEntity;
+  const LookupHR01teamId = cellValue as number;
 
   const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
   const teamStaffData = useSelector(selectTeamStaffData);
 
-  const currentEmployee = teamStaffData.find(({ Id }) => Id === LookupHR01team.Id);
-  const value = currentEmployee ? currentEmployee.FullName.split(' ').slice(-1)[0] : '';
+  const currentEmployee = teamStaffData.find(({ Id }) => Id === LookupHR01teamId);
+  const value = currentEmployee ? currentEmployee.Title : '';
 
   return (
     <td>
@@ -96,11 +96,11 @@ export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 
 export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const LookupMultiBP01offerings = cellValue as { results: LookupEntity[] };
+  const LookupMultiBP01offeringsId = cellValue as { results: number[] };
 
   const selectServicesData = useMemo(selectServicesMemoData, []);
   const servicesData = useSelector(selectServicesData);
-  const currentServices = servicesData.filter(({ Id }) => LookupMultiBP01offerings.results.find((item) => item.Id === Id));
+  const currentServices = servicesData.filter(({ Id }) => LookupMultiBP01offeringsId.results.find((item) => item === Id));
   const value = currentServices.map(({ OfferingsName_Edit }) => OfferingsName_Edit).join(' | ');
 
   return (
@@ -116,11 +116,11 @@ export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 
 export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const LookupCM102customers = cellValue as LookupEntity;
+  const LookupCM102customersId = cellValue as number;
 
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
-  const currentCustomer = customersData.find(({ Id }) => Id === LookupCM102customers.Id);
+  const currentCustomer = customersData.find(({ Id }) => Id === LookupCM102customersId);
   const value = currentCustomer ? currentCustomer.FullName : '';
 
   return (

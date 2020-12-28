@@ -17,11 +17,7 @@ export enum StatusNames {
   Tooth = '(11) Tooth',
 }
 
-export interface LookupEntity {
-  Id: number;
-}
-
-interface ImmutableDataItemKey {
+interface BackendImmutableKey {
   Id: number;
   Title: string;
   EventDate: string;
@@ -44,28 +40,35 @@ interface ImmutableDataItemKey {
   CellPhone: string | null;
   ID: number;
   Modified: string;
+  LookupCM102customersId: number;
+  LookupHR01teamId: number;
 }
 
-export interface APIGetResAppointmentDataItem extends ImmutableDataItemKey {
-  LookupMultiBP01offerings: { results: LookupEntity[] };
-  LookupCM102customers: LookupEntity;
-  LookupHR01team: LookupEntity;
-}
-
-export interface AppointmentDataItem extends APIGetResAppointmentDataItem {
+interface FrontendKey {
   TeamID: number;
   Start: Date;
   End: Date;
-  LastUpdate: string;
   inEdit?: boolean;
   isNew?: boolean;
 }
 
-export interface AppointmentDataItemForPostPutReq extends ImmutableDataItemKey {
-  LookupCM102customersId: number;
-  LookupHR01teamId: number;
+export interface QueryAppointmentDataItem extends BackendImmutableKey {
+  __metadata: {
+    id: string;
+    uri: string;
+    etag: string;
+    type: 'SP.Data.MetroHR03ListItem';
+  };
+  LookupMultiBP01offeringsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
+}
+
+export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
   LookupMultiBP01offeringsId: { results: number[] };
-  __metadata: { type: string };
+}
+
+export interface MutationAppointmentDataItem extends BackendImmutableKey {
+  LookupMultiBP01offeringsId: { results: number[] };
+  __metadata: { type: 'SP.Data.MetroHR03ListItem' };
 }
 
 export interface AgendaState {

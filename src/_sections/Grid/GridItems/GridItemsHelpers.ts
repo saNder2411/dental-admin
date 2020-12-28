@@ -7,7 +7,7 @@ import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { GridDataItem } from '../GridTypes';
 
-export const onGridDropDownChange = <T = GridDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (
+export const onGridDropDownChange = <T extends GridDataItem = GridDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (
   evt: DropDownListChangeEvent
 ) => onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
 
@@ -24,13 +24,13 @@ export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaf
     const isTeamStaffDataItem = 'ShowOnline' in item;
     const value = isTeamStaffDataItem ? item.Title : item.FullName;
 
-    return { text: value, value: { Id: item.Id } };
+    return { text: value, value: item.Id };
   });
 
 export const transformDomainDataToMultiSelectData = (domainData: ServiceDataItem[]) =>
-  domainData.map(({ OfferingsName_Edit, Id }) => ({ text: OfferingsName_Edit, value: { Id } }));
+  domainData.map(({ OfferingsName_Edit, Id }) => ({ text: OfferingsName_Edit, value: Id }));
 
 export const transformTeamStaffDataToMultiSelectData = (domainData: TeamStaffDataItem[]) =>
-  domainData.map(({ Title, Id }) => ({ text: Title, value: { Id } }));
+  domainData.map(({ Title, Id }) => ({ text: Title, value: Id }));
 
-export const EmptyDropDownListDataItem = { text: '', value: { Id: -1 } };
+export const EmptyDropDownListDataItem = { text: '', value: -1 };

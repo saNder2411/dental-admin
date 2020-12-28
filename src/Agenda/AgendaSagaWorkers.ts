@@ -13,20 +13,21 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  APIGetResAppointmentDataItem,
+  QueryAppointmentDataItem
+,
   UpdateRecurringDataItemInitAsyncActionType,
-  AppointmentDataItemForPostPutReq
+  MutationAppointmentDataItem
 ,
 } from './AgendaTypes';
-import { APIGetResServiceDataItem } from '../Services/ServicesTypes';
-import { APIGetResTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
-import { APIGetResCustomerDataItem } from '../Customers/CustomersTypes';
+import { QueryServiceDataItem } from '../Services/ServicesTypes';
+import { QueryTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { QueryCustomerDataItem } from '../Customers/CustomersTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem } from './AgendaHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../TeamStaff/TeamStaffHelpers';
 import { transformAPIData as transformCustomersAPIData } from '../Customers/CustomersHelpers';
 
-type Results = [APIGetResAppointmentDataItem[], APIGetResServiceDataItem[] | null, APIGetResTeamStaffDataItem[] | null, APIGetResCustomerDataItem[] | null];
+type Results = [QueryAppointmentDataItem[], QueryServiceDataItem[] | null, QueryTeamStaffDataItem[] | null, QueryCustomerDataItem[] | null];
 
 export function* workerFetchData({
   meta: { servicesDataLength, teamStaffDataLength, customersDataLength },
@@ -71,7 +72,7 @@ export function* workerCreateDataItem({
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: AppointmentDataItemForPostPutReq
+    const result: MutationAppointmentDataItem
  = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
@@ -91,7 +92,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: AppointmentDataItemForPostPutReq
+    const result: MutationAppointmentDataItem
  = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
@@ -120,8 +121,8 @@ export function* workerDeleteDataItem({
   }
 }
 
-type UpdateRecurringDataItemResults = [AppointmentDataItemForPostPutReq
-, AppointmentDataItemForPostPutReq
+type UpdateRecurringDataItemResults = [MutationAppointmentDataItem
+, MutationAppointmentDataItem
 ];
 
 export function* workerUpdateRecurringDataItem({

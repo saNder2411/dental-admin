@@ -1,23 +1,25 @@
 // Types
-import { APIGetResCustomerDataItem, CustomerDataItem, CustomerDataItemForPostPutReq } from './CustomersTypes';
+import { QueryCustomerDataItem, CustomerDataItem, MutationCustomerDataItem } from './CustomersTypes';
 
-export const transformAPIData = (apiResults: APIGetResCustomerDataItem[]): CustomerDataItem[] =>
-  apiResults.map((item) => ({ ...item, ClientPhotoUrl: item.ClientPhoto?.Url ?? '' }));
+export const transformAPIData = (apiResults: QueryCustomerDataItem[]): CustomerDataItem[] =>
+  apiResults.map(({ __metadata, LookupMultiHR01teamId, ...others }) => ({
+    ...others,
+    ClientPhotoUrl: others.ClientPhoto?.Url ?? '',
+    LookupMultiHR01teamId: { results: LookupMultiHR01teamId.results },
+  }));
 
-export const transformAPIDataItem = ({ __metadata, LookupMultiHR01teamId, ...others }: CustomerDataItemForPostPutReq): CustomerDataItem => ({
+export const transformAPIDataItem = ({ __metadata, ...others }: MutationCustomerDataItem): CustomerDataItem => ({
   ...others,
   ClientPhotoUrl: others.ClientPhoto?.Url ?? '',
-  LookupMultiHR01team: { results: LookupMultiHR01teamId.results.map((Id) => ({ Id })) },
 });
 
 export const transformDataItemForAPI = ({
   ClientPhoto,
   ClientPhotoUrl,
-  LookupMultiHR01team,
   SvcStaff,
   Upcoming,
   ...others
-}: CustomerDataItem): CustomerDataItemForPostPutReq => ({
+}: CustomerDataItem): MutationCustomerDataItem => ({
   ...others,
   ClientPhoto: ClientPhoto
     ? { ...ClientPhoto, Url: ClientPhotoUrl }
@@ -27,7 +29,6 @@ export const transformDataItemForAPI = ({
         __metadata: { type: 'SP.FieldUrlValue' },
       },
   FullName: `${others.FirstName} ${others.Title}`,
-  LookupMultiHR01teamId: { results: LookupMultiHR01team.results.map(({ Id }) => Id) },
   __metadata: { type: 'SP.Data.MetroCM102ListItem' },
 });
 

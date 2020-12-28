@@ -11,7 +11,7 @@ import { selectGridDataItemIsLoading } from '../GridSelectors';
 import { selectAgendaMemoData, selectIsValidStartDateEvent, selectIsValidEndDateEvent } from '../../../Agenda/AgendaSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem, LookupEntity } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 // Actions
@@ -20,8 +20,8 @@ import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01team');
-  const LookupHR01team = cellValue as LookupEntity;
+  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01teamId');
+  const LookupHR01teamId = cellValue as number;
 
   const intlService = useInternationalization();
 
@@ -31,7 +31,7 @@ export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem, Date>> 
   const selectAgendaData = useMemo(selectAgendaMemoData, []);
   const agendaData = useSelector(selectAgendaData);
 
-  const employeeEvents = agendaData.filter((event) => event.LookupHR01team.Id === LookupHR01team.Id);
+  const employeeEvents = agendaData.filter((appointment) => appointment.LookupHR01teamId === LookupHR01teamId);
   const scheduledAppointments = employeeEvents.filter(({ Start }) => Date.now() < Start.getTime());
 
   const anchorRef = useRef<HTMLDivElement | null>(null);
@@ -94,8 +94,8 @@ export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem, Date>> 
 export const AgendaEndDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
 
-  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01team');
-  const LookupHR01team = cellValue as LookupEntity;
+  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01teamId');
+  const LookupHR01teamId = cellValue as number;
 
   const intlService = useInternationalization();
 
@@ -105,7 +105,7 @@ export const AgendaEndDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = 
   const selectAgendaData = useMemo(selectAgendaMemoData, []);
   const agendaData = useSelector(selectAgendaData);
 
-  const employeeEvents = agendaData.filter((event) => event.LookupHR01team.Id === LookupHR01team.Id);
+  const employeeEvents = agendaData.filter((appointment) => appointment.LookupHR01teamId === LookupHR01teamId);
   const scheduledAppointments = employeeEvents.filter(({ Start }) => Date.now() < Start.getTime());
 
   const anchorRef = useRef<HTMLDivElement | null>(null);

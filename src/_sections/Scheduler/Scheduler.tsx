@@ -13,17 +13,11 @@ import {
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
 // Types
 import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
-// Selectors
-// import { selectTeamStaffMemoData } from '../../TeamStaff/TeamStaffSelectors';
 // Actions
 import { AgendaActions } from '../../Agenda/AgendaActions';
 import { SchedulerActions } from '../Scheduler/SchedulerActions';
-// Helpers
-// import { extractGuidFromString } from './SchedulerHelpers';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
-  // const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
-  // const teamStaffData = useSelector(selectTeamStaffData);
   const dispatch = useDispatch();
 
   const onDataChange = useCallback(
@@ -33,11 +27,8 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
 
       const [updatedDataItem] = updated as SchedulerDataItem[];
 
-      if (updatedDataItem.TeamID !== updatedDataItem.LookupHR01team.Id) {
-        // const newStaff = teamStaffData.find(({ Id }) => Id === updatedDataItem.TeamID)!;
-        // const guidNewStaff = extractGuidFromString(newStaff.__metadata.id);
-        updatedDataItem.LookupHR01team.Id = updatedDataItem.TeamID;
-        // updatedDataItem.LookupHR01team.__metadata.id = guidNewStaff;
+      if (updatedDataItem.TeamID !== updatedDataItem.LookupHR01teamId) {
+        updatedDataItem.LookupHR01teamId = updatedDataItem.TeamID;
       }
 
       AgendaActions.updateDataItem(dispatch, updatedDataItem, () => setIsAgendaDataItemLoading(false));

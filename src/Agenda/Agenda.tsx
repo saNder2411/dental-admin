@@ -79,7 +79,7 @@ export const Agenda: FC = (): JSX.Element => {
             cell={AgendaEndDateCell as CustomGridCell}
           />
           <GridColumn
-            field={'LookupHR01team'}
+            field={'LookupHR01teamId'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
             width={140}
@@ -87,7 +87,7 @@ export const Agenda: FC = (): JSX.Element => {
             cell={AgendaSvcStaffCell as CustomGridCell}
           />
           <GridColumn
-            field={'LookupMultiBP01offerings'}
+            field={'LookupMultiBP01offeringsId'}
             title={localizationService.toLanguageString('custom.services', 'Services')}
             columnMenu={ColumnMenu}
             cell={AgendaServicesCell as CustomGridCell}
@@ -102,7 +102,7 @@ export const Agenda: FC = (): JSX.Element => {
             filter={'numeric'}
           />
           <GridColumn
-            field={'LookupCM102customers'}
+            field={'LookupCM102customersId'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
             width={140}

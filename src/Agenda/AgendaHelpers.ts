@@ -1,51 +1,30 @@
 // Types
-import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForPostPutReq } from './AgendaTypes';
+import { QueryAppointmentDataItem, AppointmentDataItem, MutationAppointmentDataItem } from './AgendaTypes';
 
-export const transformAPIData = (apiResults: APIGetResAppointmentDataItem[]): AppointmentDataItem[] =>
-  apiResults.map((item) => ({
-    ...item,
-    TeamID: item.LookupHR01team.Id,
-    Start: new Date(item.EventDate),
-    End: new Date(item.EndDate),
-    LastUpdate: new Date().toISOString(),
-    MetroRecException: item.MetroRecException ? item.MetroRecException.map((exception) => new Date(exception)) : null,
+export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): AppointmentDataItem[] =>
+  apiResults.map(({ LookupMultiBP01offeringsId, __metadata, ...others }) => ({
+    ...others,
+    TeamID: others.LookupHR01teamId,
+    Start: new Date(others.EventDate),
+    End: new Date(others.EndDate),
+    MetroRecException: others.MetroRecException ? others.MetroRecException.map((exception) => new Date(exception)) : null,
+    LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
   }));
 
-export const transformAPIDataItem = (apiResult: AppointmentDataItemForPostPutReq): AppointmentDataItem => {
-  const { __metadata, LookupMultiBP01offeringsId, LookupCM102customersId, LookupHR01teamId, ...others } = apiResult;
-  return {
-    ...others,
-    LookupMultiBP01offerings: { results: LookupMultiBP01offeringsId.results.map((Id) => ({ Id })) },
-    LookupCM102customers: { Id: LookupCM102customersId },
-    LookupHR01team: { Id: LookupHR01teamId },
-    TeamID: LookupHR01teamId,
-    Start: new Date(apiResult.EventDate),
-    End: new Date(apiResult.EndDate),
-    LastUpdate: new Date().toISOString(),
-    MetroRecException: apiResult.MetroRecException ? apiResult.MetroRecException.map((exception) => new Date(exception)) : null,
-  };
-};
+export const transformAPIDataItem = ({ __metadata, ...others }: MutationAppointmentDataItem): AppointmentDataItem => ({
+  ...others,
+  TeamID: others.LookupHR01teamId,
+  Start: new Date(others.EventDate),
+  End: new Date(others.EndDate),
+  MetroRecException: others.MetroRecException ? others.MetroRecException.map((exception) => new Date(exception)) : null,
+});
 
-export const transformDataItemForAPI = ({
-  LastUpdate,
-  TeamID,
-  Start,
-  End,
-  isNew,
-  inEdit,
-  LookupCM102customers,
-  LookupHR01team,
-  LookupMultiBP01offerings,
-  ...others
-}: AppointmentDataItem): AppointmentDataItemForPostPutReq => ({
+export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...others }: AppointmentDataItem): MutationAppointmentDataItem => ({
   ...others,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),
   FilterStart: Start.toISOString(),
   FilterEnd: End.toISOString(),
-  LookupCM102customersId: LookupCM102customers.Id,
-  LookupHR01teamId: LookupHR01team.Id,
-  LookupMultiBP01offeringsId: { results: LookupMultiBP01offerings.results.map(({ Id }) => Id) },
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });
 

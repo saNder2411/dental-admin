@@ -86,7 +86,7 @@ export const Customers: FC = (): JSX.Element => {
             filter={'text'}
           />
           <GridColumn
-            field={'LookupMultiHR01team'}
+            field={'LookupMultiHR01teamId'}
             title={localizationService.toLanguageString('custom.lastAppointments', 'Last Appointments')}
             columnMenu={ColumnMenu}
             cell={CustomersLastAppointmentsCell as CustomGridCell}

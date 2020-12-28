@@ -1,10 +1,10 @@
 // Types
-import { APIGetResTeamStaffDataItem, TeamStaffDataItem, TeamStaffDataItemForPostPutReq } from './TeamStaffTypes';
+import { QueryTeamStaffDataItem, TeamStaffDataItem, MutationTeamStaffDataItem } from './TeamStaffTypes';
 
-export const transformAPIData = (apiResults: APIGetResTeamStaffDataItem[]): TeamStaffDataItem[] =>
-  apiResults.map((item) => ({ ...item, TeamProfilePhotoUrl: item.TeamProfilePhoto.Url }));
+export const transformAPIData = (apiResults: QueryTeamStaffDataItem[]): TeamStaffDataItem[] =>
+  apiResults.map(({ __metadata, ...others }) => ({ ...others, TeamProfilePhotoUrl: others.TeamProfilePhoto.Url }));
 
-export const transformAPIDataItem = ({ __metadata, ...others }: TeamStaffDataItemForPostPutReq): TeamStaffDataItem => ({
+export const transformAPIDataItem = ({ __metadata, ...others }: MutationTeamStaffDataItem): TeamStaffDataItem => ({
   ...others,
   TeamProfilePhotoUrl: others.TeamProfilePhoto.Url,
 });
@@ -16,7 +16,7 @@ export const transformDataItemForAPI = ({
   RoleSkills,
   Gender,
   ...others
-}: TeamStaffDataItem): TeamStaffDataItemForPostPutReq => {
+}: TeamStaffDataItem): MutationTeamStaffDataItem => {
   return {
     ...others,
     TeamProfilePhoto: { ...TeamProfilePhoto, Url: TeamProfilePhotoUrl, Description: TeamProfilePhotoUrl },

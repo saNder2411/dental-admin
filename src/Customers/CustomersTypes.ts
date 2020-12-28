@@ -1,10 +1,9 @@
 // Types
 import { InferValueTypes } from '../_sections/Grid/GridTypes';
-import { LookupEntity } from '../Agenda/AgendaTypes';
 // Actions
 import * as actions from './CustomersAC';
 
-interface ImmutableDataItemKey {
+interface BackendImmutableKey {
   Id: number;
   Title: string;
   FirstName: string;
@@ -25,19 +24,29 @@ interface ImmutableDataItemKey {
   Upcoming?: null | string;
 }
 
-export interface APIGetResCustomerDataItem extends ImmutableDataItemKey {
-  LookupMultiHR01team: { results: LookupEntity[] };
-}
-
-export interface CustomerDataItem extends APIGetResCustomerDataItem {
+interface FrontendKey {
   ClientPhotoUrl: string;
   inEdit?: boolean;
   isNew?: boolean;
 }
 
-export interface CustomerDataItemForPostPutReq extends ImmutableDataItemKey {
+export interface QueryCustomerDataItem extends BackendImmutableKey {
+  __metadata: {
+    id: string;
+    uri: string;
+    etag: string;
+    type: 'SP.Data.MetroCM102ListItem';
+  };
+  LookupMultiHR01teamId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
+}
+
+export interface CustomerDataItem extends BackendImmutableKey, FrontendKey {
   LookupMultiHR01teamId: { results: number[] };
-  __metadata: { type: string };
+}
+
+export interface MutationCustomerDataItem extends BackendImmutableKey {
+  LookupMultiHR01teamId: { results: number[] };
+  __metadata: { type: 'SP.Data.MetroCM102ListItem' };
 }
 
 export interface CustomersState {

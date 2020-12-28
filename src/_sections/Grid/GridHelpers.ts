@@ -48,9 +48,6 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Agenda:
       return [
         {
-          LookupCM102customers: { Id: -1 },
-          LookupHR01team: { Id: 1 },
-          LookupMultiBP01offerings: { results: [] },
           Id: ID,
           Title: ``,
           EventDate: new Date().toISOString(),
@@ -71,13 +68,15 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
           MetroRecException: null,
           FirstName: ``,
           CellPhone: null,
+          LookupCM102customersId: -1,
+          LookupHR01teamId: 1,
+          LookupMultiBP01offeringsId: { results: [] },
           ID,
           Modified: new Date().toISOString(),
 
           TeamID: 1,
           Start: new Date(),
           End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
-          LastUpdate: new Date().toISOString(),
           inEdit: true,
           isNew: true,
         },
@@ -86,7 +85,7 @@ export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: G
     case GridDataName.Customers:
       return [
         {
-          LookupMultiHR01team: { results: [] },
+          LookupMultiHR01teamId: { results: [] },
           Id: ID,
           Title: '',
           FirstName: ``,
@@ -179,7 +178,7 @@ export const updateDataAfterEditNewItem = (data: GridDataItem[], dataItem: GridD
 const UniqueEntityKeys = {
   Appointments: 'AppointmentStatus',
   Services: 'OfferingsName_Edit',
-  Customers: 'LookupMultiHR01team',
+  Customers: 'LookupMultiHR01teamId',
   TeamStaff: 'JobTitle',
 };
 
