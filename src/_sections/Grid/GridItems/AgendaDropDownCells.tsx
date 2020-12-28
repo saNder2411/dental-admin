@@ -92,7 +92,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
-    const selectedCustomer = customersData.find(({ Id }) => Id === evtValue.value.Id);
+    const selectedCustomer = customersData.find(({ Id }) => Id === evtValue.value);
     const newTitle = selectedCustomer ? setTitleProp<number>(selectedCustomer.FirstName, selectedCustomer.Title, dataItemID) : '';
 
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evtValue.value });
@@ -133,7 +133,7 @@ export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<Appointment
       dataItem: dataItemID,
       field,
       syntheticEvent: evt.syntheticEvent,
-      value: { results: evt.target.value.map((value) => value) },
+      value: { results: evt.target.value.map(({ value }) => value) },
     });
   };
 

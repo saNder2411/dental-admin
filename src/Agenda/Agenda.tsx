@@ -105,7 +105,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'LookupCM102customersId'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
-            width={140}
+            width={180}
             cell={AgendaFullNameCell as CustomGridCell}
             filter={'text'}
           />

@@ -48,7 +48,7 @@ export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<
       dataItem: dataItemID,
       field,
       syntheticEvent: evt.syntheticEvent,
-      value: { results: evt.target.value.map((Id) => Id) },
+      value: { results: evt.target.value.map(({ value }) => value) },
     });
   };
   return (

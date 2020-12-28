@@ -9,7 +9,7 @@ import { GridDataItem } from '../GridTypes';
 
 export const onGridDropDownChange = <T extends GridDataItem = GridDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (
   evt: DropDownListChangeEvent
-) => onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.value });
+) => onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.value.value });
 
 export const isNumber = (arg: any): arg is number => typeof arg === 'number';
 

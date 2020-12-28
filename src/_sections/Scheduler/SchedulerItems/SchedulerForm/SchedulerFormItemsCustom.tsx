@@ -42,7 +42,7 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   const multiSelectValue = transformDomainDataToMultiSelectData(currentServices);
 
   const onMultiSelectValueChange = useCallback(
-    (evt: MultiSelectChangeEvent) => onChange({ value: { results: evt.target.value.map((value) => value) } }),
+    (evt: MultiSelectChangeEvent) => onChange({ value: { results: evt.target.value.map(({ value }) => value) } }),
     [onChange]
   );
 
