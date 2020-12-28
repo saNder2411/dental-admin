@@ -46,11 +46,12 @@ const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
 
 const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: string, select: string, orderBy: string, filter: string = '') =>
   SPLists.getById(listGuid)
-    .items.filter(filter)
+    .items.top(99999)
+    .filter(filter)
     .select(select)
     .orderBy(orderBy)
-    .getAll()
-    .then((response) => response as T);
+    .get<T>()
+    .then((response) => response);
 
 const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
   SPLists.getById(listGuid)
