@@ -58,6 +58,16 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>
     .items.add(newDataItem)
     .then((res) => {
       console.log(`ResSpCreateDI`, res);
+      console.log(`ResSpCreateDI effectiveBasePermissions`, res.item.effectiveBasePermissions());
+      console.log(`ResSpCreateDI effectiveBasePermissionsForUI`, res.item.effectiveBasePermissionsForUI());
+      console.log(`ResSpCreateDI get`, res.item.get());
+      console.log(`ResSpCreateDI fieldValuesAsText`, res.item.fieldValuesAsText());
+      console.log(`ResSpCreateDI fieldValuesForEdit`, res.item.fieldValuesForEdit());
+      console.log(`ResSpCreateDI versions`, res.item.versions());
+      console.log(`ResSpCreateDI list`, res.item.list());
+      console.log(`ResSpCreateDI getParentInfos`, res.item.getParentInfos());
+      console.log(`ResSpCreateDI get, select`, res.item.select(`ID,Title`).get().then((res) => res));
+
       return { ID, Id, ...newDataItem };
     });
 
