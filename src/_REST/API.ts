@@ -57,16 +57,22 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
     .then((res) => {
-      console.log(`ResSpCreateDI`, res);
-      console.log(`ResSpCreateDI effectiveBasePermissions`, res.item.effectiveBasePermissions());
-      console.log(`ResSpCreateDI effectiveBasePermissionsForUI`, res.item.effectiveBasePermissionsForUI());
-      console.log(`ResSpCreateDI get`, res.item.get());
-      console.log(`ResSpCreateDI fieldValuesAsText`, res.item.fieldValuesAsText());
-      console.log(`ResSpCreateDI fieldValuesForEdit`, res.item.fieldValuesForEdit());
-      console.log(`ResSpCreateDI versions`, res.item.versions());
-      console.log(`ResSpCreateDI list`, res.item.list());
-      console.log(`ResSpCreateDI getParentInfos`, res.item.getParentInfos());
-      console.log(`ResSpCreateDI get, select`, res.item.select(`ID,Title`).get().then((res) => res));
+      console.log(`POST_RES`, res);
+      console.log(`POST_RES effectiveBasePermissions`, res.item.effectiveBasePermissions());
+      console.log(`POST_RES effectiveBasePermissionsForUI`, res.item.effectiveBasePermissionsForUI());
+      console.log(`POST_RES get`, res.item.get());
+      console.log(`POST_RES fieldValuesAsText`, res.item.fieldValuesAsText());
+      console.log(`POST_RES fieldValuesForEdit`, res.item.fieldValuesForEdit());
+      console.log(`POST_RES versions`, res.item.versions());
+      console.log(`POST_RES list`, res.item.list());
+      console.log(`POST_RES getParentInfos`, res.item.getParentInfos());
+      console.log(
+        `POST_RES get, select`,
+        res.item
+          .select(`ID,Title`)
+          .get()
+          .then((res) => res)
+      );
 
       return { ID, Id, ...newDataItem };
     });
