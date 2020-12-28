@@ -35,7 +35,7 @@ export interface CustomerDataItem extends APIGetResCustomerDataItem {
   isNew?: boolean;
 }
 
-export interface CustomerDataItemForCrtUpdActions extends ImmutableDataItemKey {
+export interface CustomerDataItemForPostPutReq extends ImmutableDataItemKey {
   LookupMultiHR01teamId: { results: number[] };
   __metadata: { type: string };
 }

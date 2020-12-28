@@ -1,10 +1,10 @@
 // Types
-import { APIGetResCustomerDataItem, CustomerDataItem, CustomerDataItemForCrtUpdActions } from './CustomersTypes';
+import { APIGetResCustomerDataItem, CustomerDataItem, CustomerDataItemForPostPutReq } from './CustomersTypes';
 
 export const transformAPIData = (apiResults: APIGetResCustomerDataItem[]): CustomerDataItem[] =>
   apiResults.map((item) => ({ ...item, ClientPhotoUrl: item.ClientPhoto?.Url ?? '' }));
 
-export const transformAPIDataItem = ({ __metadata, LookupMultiHR01teamId, ...others }: CustomerDataItemForCrtUpdActions): CustomerDataItem => ({
+export const transformAPIDataItem = ({ __metadata, LookupMultiHR01teamId, ...others }: CustomerDataItemForPostPutReq): CustomerDataItem => ({
   ...others,
   ClientPhotoUrl: others.ClientPhoto?.Url ?? '',
   LookupMultiHR01team: { results: LookupMultiHR01teamId.results.map((Id) => ({ Id })) },
@@ -17,7 +17,7 @@ export const transformDataItemForAPI = ({
   SvcStaff,
   Upcoming,
   ...others
-}: CustomerDataItem): CustomerDataItemForCrtUpdActions => ({
+}: CustomerDataItem): CustomerDataItemForPostPutReq => ({
   ...others,
   ClientPhoto: ClientPhoto
     ? { ...ClientPhoto, Url: ClientPhotoUrl }

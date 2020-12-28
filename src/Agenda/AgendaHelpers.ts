@@ -1,5 +1,5 @@
 // Types
-import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForCrtUpdActions } from './AgendaTypes';
+import { APIGetResAppointmentDataItem, AppointmentDataItem, AppointmentDataItemForPostPutReq } from './AgendaTypes';
 
 export const transformAPIData = (apiResults: APIGetResAppointmentDataItem[]): AppointmentDataItem[] =>
   apiResults.map((item) => ({
@@ -11,7 +11,7 @@ export const transformAPIData = (apiResults: APIGetResAppointmentDataItem[]): Ap
     MetroRecException: item.MetroRecException ? item.MetroRecException.map((exception) => new Date(exception)) : null,
   }));
 
-export const transformAPIDataItem = (apiResult: AppointmentDataItemForCrtUpdActions): AppointmentDataItem => {
+export const transformAPIDataItem = (apiResult: AppointmentDataItemForPostPutReq): AppointmentDataItem => {
   const { __metadata, LookupMultiBP01offeringsId, LookupCM102customersId, LookupHR01teamId, ...others } = apiResult;
   return {
     ...others,
@@ -37,7 +37,7 @@ export const transformDataItemForAPI = ({
   LookupHR01team,
   LookupMultiBP01offerings,
   ...others
-}: AppointmentDataItem): AppointmentDataItemForCrtUpdActions => ({
+}: AppointmentDataItem): AppointmentDataItemForPostPutReq => ({
   ...others,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),

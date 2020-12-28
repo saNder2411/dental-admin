@@ -13,56 +13,56 @@ import {
   STAFF_SELECT_FIELDS,
 } from './config';
 // Types
-import { APIGetResAppointmentDataItem, AppointmentDataItemForCrtUpdActions } from '../Agenda/AgendaTypes';
-import { APIGetResCustomerDataItem, CustomerDataItemForCrtUpdActions } from '../Customers/CustomersTypes';
-import { APIGetResTeamStaffDataItem, TeamStaffDataItemForCrtUpdActions } from '../TeamStaff/TeamStaffTypes';
-import { APIGetResServiceDataItem, ServiceDataItemForCrtUpdActions } from '../Services/ServicesTypes';
+import { APIGetResAppointmentDataItem, AppointmentDataItemForPostPutReq } from '../Agenda/AgendaTypes';
+import { APIGetResCustomerDataItem, CustomerDataItemForPostPutReq } from '../Customers/CustomersTypes';
+import { APIGetResTeamStaffDataItem, TeamStaffDataItemForPostPutReq } from '../TeamStaff/TeamStaffTypes';
+import { APIGetResServiceDataItem, ServiceDataItemForPostPutReq } from '../Services/ServicesTypes';
 
-export type FetchData<T> = () => Promise<T>;
-export type CreateOrUpdateDataItem<T, U = T> = (createdDataItem: T) => Promise<U>;
+export type GetData<T> = () => Promise<T>;
+export type PostOrPutReqDataItem<T, U = T> = (dataItem: T) => Promise<U>;
 export type DeleteDataItem = (deletedItemID: number) => Promise<number>;
 
 interface API {
   agenda: {
-    getData: FetchData<APIGetResAppointmentDataItem[]>;
-    createDataItem: CreateOrUpdateDataItem<AppointmentDataItemForCrtUpdActions>;
-    updateDataItem: CreateOrUpdateDataItem<AppointmentDataItemForCrtUpdActions>;
+    getData: GetData<APIGetResAppointmentDataItem[]>;
+    createDataItem: PostOrPutReqDataItem<AppointmentDataItemForPostPutReq>;
+    updateDataItem: PostOrPutReqDataItem<AppointmentDataItemForPostPutReq>;
     deleteDataItem: DeleteDataItem;
   };
   customers: {
-    getData: FetchData<APIGetResCustomerDataItem[]>;
-    createDataItem: CreateOrUpdateDataItem<CustomerDataItemForCrtUpdActions>;
-    updateDataItem: CreateOrUpdateDataItem<CustomerDataItemForCrtUpdActions>;
+    getData: GetData<APIGetResCustomerDataItem[]>;
+    createDataItem: PostOrPutReqDataItem<CustomerDataItemForPostPutReq>;
+    updateDataItem: PostOrPutReqDataItem<CustomerDataItemForPostPutReq>;
     deleteDataItem: DeleteDataItem;
   };
   staff: {
-    getData: FetchData<APIGetResTeamStaffDataItem[]>;
-    createDataItem: CreateOrUpdateDataItem<TeamStaffDataItemForCrtUpdActions>;
-    updateDataItem: CreateOrUpdateDataItem<TeamStaffDataItemForCrtUpdActions>;
+    getData: GetData<APIGetResTeamStaffDataItem[]>;
+    createDataItem: PostOrPutReqDataItem<TeamStaffDataItemForPostPutReq>;
+    updateDataItem: PostOrPutReqDataItem<TeamStaffDataItemForPostPutReq>;
     deleteDataItem: DeleteDataItem;
   };
   services: {
-    getData: FetchData<APIGetResServiceDataItem[]>;
-    createDataItem: CreateOrUpdateDataItem<ServiceDataItemForCrtUpdActions>;
-    updateDataItem: CreateOrUpdateDataItem<ServiceDataItemForCrtUpdActions>;
+    getData: GetData<APIGetResServiceDataItem[]>;
+    createDataItem: PostOrPutReqDataItem<ServiceDataItemForPostPutReq>;
+    updateDataItem: PostOrPutReqDataItem<ServiceDataItemForPostPutReq>;
     deleteDataItem: DeleteDataItem;
   };
 }
 
-type CreatOrUpdateDataItem =
-  | AppointmentDataItemForCrtUpdActions
-  | CustomerDataItemForCrtUpdActions
-  | ServiceDataItemForCrtUpdActions
-  | TeamStaffDataItemForCrtUpdActions;
+type PostPutDataItem =
+  | AppointmentDataItemForPostPutReq
+  | CustomerDataItemForPostPutReq
+  | ServiceDataItemForPostPutReq
+  | TeamStaffDataItemForPostPutReq;
 
 const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
 
-const createSPDataItem = <T extends CreatOrUpdateDataItem = CreatOrUpdateDataItem>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
+const createSPDataItem = <T extends PostPutDataItem = PostPutDataItem>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
     .then(() => ({ ID, Id, ...newDataItem }));
 
-const updateSPDataItem = <T extends CreatOrUpdateDataItem = CreatOrUpdateDataItem>(listGuid: string, dataItem: T) =>
+const updateSPDataItem = <T extends PostPutDataItem = PostPutDataItem>(listGuid: string, dataItem: T) =>
   SPLists.getById(listGuid)
     .items.getById(dataItem.ID)
     .update(dataItem)
@@ -90,9 +90,9 @@ export const API: API = {
         .get<APIGetResAppointmentDataItem[]>()
         .then((response) => response),
 
-    createDataItem: async (createdDataItem: AppointmentDataItemForCrtUpdActions) => createSPDataItem(APPOINTMENT_LIST_GUID, createdDataItem),
+    createDataItem: async (createdDataItem: AppointmentDataItemForPostPutReq) => createSPDataItem(APPOINTMENT_LIST_GUID, createdDataItem),
 
-    updateDataItem: (updatedDataItem: AppointmentDataItemForCrtUpdActions) => updateSPDataItem(APPOINTMENT_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: AppointmentDataItemForPostPutReq) => updateSPDataItem(APPOINTMENT_LIST_GUID, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(APPOINTMENT_LIST_GUID, deletedDataItemID),
   },
@@ -105,9 +105,9 @@ export const API: API = {
         .get<APIGetResCustomerDataItem[]>()
         .then((response) => response),
 
-    createDataItem: (createdDataItem: CustomerDataItemForCrtUpdActions) => createSPDataItem(CUSTOMER_LIST_GUID, createdDataItem),
+    createDataItem: (createdDataItem: CustomerDataItemForPostPutReq) => createSPDataItem(CUSTOMER_LIST_GUID, createdDataItem),
 
-    updateDataItem: (updatedDataItem: CustomerDataItemForCrtUpdActions) => updateSPDataItem(CUSTOMER_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: CustomerDataItemForPostPutReq) => updateSPDataItem(CUSTOMER_LIST_GUID, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(CUSTOMER_LIST_GUID, deletedDataItemID),
   },
@@ -120,9 +120,9 @@ export const API: API = {
         .get<APIGetResTeamStaffDataItem[]>()
         .then((response) => response),
 
-    createDataItem: (createdDataItem: TeamStaffDataItemForCrtUpdActions) => createSPDataItem(STAFF_LIST_GUID, createdDataItem),
+    createDataItem: (createdDataItem: TeamStaffDataItemForPostPutReq) => createSPDataItem(STAFF_LIST_GUID, createdDataItem),
 
-    updateDataItem: (updatedDataItem: TeamStaffDataItemForCrtUpdActions) => updateSPDataItem(STAFF_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: TeamStaffDataItemForPostPutReq) => updateSPDataItem(STAFF_LIST_GUID, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(STAFF_LIST_GUID, deletedDataItemID),
   },
@@ -134,9 +134,9 @@ export const API: API = {
         .get<APIGetResServiceDataItem[]>()
         .then((response) => response),
 
-    createDataItem: (createdDataItem: ServiceDataItemForCrtUpdActions) => createSPDataItem(SERVICE_LIST_GUID, createdDataItem),
+    createDataItem: (createdDataItem: ServiceDataItemForPostPutReq) => createSPDataItem(SERVICE_LIST_GUID, createdDataItem),
 
-    updateDataItem: (updatedDataItem: ServiceDataItemForCrtUpdActions) => updateSPDataItem(SERVICE_LIST_GUID, updatedDataItem),
+    updateDataItem: (updatedDataItem: ServiceDataItemForPostPutReq) => updateSPDataItem(SERVICE_LIST_GUID, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(SERVICE_LIST_GUID, deletedDataItemID),
   },

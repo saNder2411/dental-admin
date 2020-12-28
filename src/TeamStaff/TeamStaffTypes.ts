@@ -31,7 +31,7 @@ export interface TeamStaffDataItem extends APIGetResTeamStaffDataItem {
   isNew?: boolean;
 }
 
-export interface TeamStaffDataItemForCrtUpdActions extends APIGetResTeamStaffDataItem {
+export interface TeamStaffDataItemForPostPutReq extends APIGetResTeamStaffDataItem {
   __metadata: { type: string };
 }
 

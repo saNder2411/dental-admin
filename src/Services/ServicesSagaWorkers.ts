@@ -10,7 +10,8 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  ServiceDataItemForCrtUpdActions,
+  ServiceDataItemForPostPutReq
+,
 } from './ServicesTypes';
 // Helpers
 import { transformAPIDataItem } from './ServicesHelpers';
@@ -33,7 +34,8 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: ServiceDataItemForCrtUpdActions = yield apply(API, API.services.createDataItem, [createdDataItem]);
+    const result: ServiceDataItemForPostPutReq
+ = yield apply(API, API.services.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
 
     yield put(actions.createDataItemSuccessAC(data));
@@ -52,7 +54,8 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: ServiceDataItemForCrtUpdActions = yield apply(API, API.services.updateDataItem, [updatedDataItem]);
+    const result: ServiceDataItemForPostPutReq
+ = yield apply(API, API.services.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
 
     yield put(actions.updateDataItemSuccessAC(data));

@@ -27,7 +27,7 @@ export interface ServiceDataItem extends APIGetResServiceDataItem {
   isNew?: boolean;
 }
 
-export interface ServiceDataItemForCrtUpdActions extends APIGetResServiceDataItem {
+export interface ServiceDataItemForPostPutReq extends APIGetResServiceDataItem {
   __metadata: { type: string };
 }
 

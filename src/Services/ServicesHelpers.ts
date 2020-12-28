@@ -1,9 +1,9 @@
 // Types
-import { ServiceDataItem, ServiceDataItemForCrtUpdActions } from './ServicesTypes';
+import { ServiceDataItem, ServiceDataItemForPostPutReq } from './ServicesTypes';
 
-export const transformAPIDataItem = ({ __metadata, ...others }: ServiceDataItemForCrtUpdActions): ServiceDataItem => ({ ...others });
+export const transformAPIDataItem = ({ __metadata, ...others }: ServiceDataItemForPostPutReq): ServiceDataItem => ({ ...others });
 
-export const transformDataItemForAPI = ({ OfferingIconName, RoleSkills, ...others }: ServiceDataItem): ServiceDataItemForCrtUpdActions => ({
+export const transformDataItemForAPI = ({ OfferingIconName, RoleSkills, ...others }: ServiceDataItem): ServiceDataItemForPostPutReq => ({
   ...others,
   __metadata: { type: 'SP.Data.MetroBP02ListItem' },
 });

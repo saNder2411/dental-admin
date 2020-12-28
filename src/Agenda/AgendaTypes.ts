@@ -61,7 +61,7 @@ export interface AppointmentDataItem extends APIGetResAppointmentDataItem {
   isNew?: boolean;
 }
 
-export interface AppointmentDataItemForCrtUpdActions extends ImmutableDataItemKey {
+export interface AppointmentDataItemForPostPutReq extends ImmutableDataItemKey {
   LookupCM102customersId: number;
   LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
