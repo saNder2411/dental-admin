@@ -19,16 +19,13 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
 
   const currentLanguage = locales.find((item) => item.localeID === currentLocaleID);
 
-  const onLanguageChange = useCallback(({ value }: DropDownListChangeEvent) => onLocaleChange(dispatch, value.localeID), [
-    onLocaleChange,
-    dispatch,
-  ]);
+  const onLanguageChange = useCallback(({ value }: DropDownListChangeEvent) => onLocaleChange(dispatch, value.localeID), [onLocaleChange, dispatch]);
 
   return (
     <header className="header" style={{ backgroundImage: `url(${headerBg})` }}>
       <div className="nav-container">
         <div className="menu-button">
-          <span className={'k-icon hamburger-icon'} onClick={onBurgerMenuClick} />
+          <span className="k-icon hamburger-icon" onClick={onBurgerMenuClick} />
         </div>
 
         <div className="title">
