@@ -74,6 +74,8 @@ export interface MutationAppointmentDataItem extends BackendImmutableKey {
 export interface AgendaState {
   isDataLoading: boolean;
   data: AppointmentDataItem[];
+  normalizedData: { [key: string]: AppointmentDataItem };
+  allIDs: number[];
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;

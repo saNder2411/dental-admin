@@ -6,6 +6,8 @@ import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections
 export const initialState = {
   isDataLoading: false,
   data: [],
+  normalizedData: {},
+  allIDs: [],
   dataError: ``,
   isDataItemLoading: false,
   dataItemError: ``,
@@ -21,10 +23,11 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataLoading: true, data: [], dataError: `` };
 
     case ActionTypes.FETCH_DATA_SUCCESS:
+      // const [normalizedData, allIDs] = getNormalizedData<AppointmentDataItem>(action.payload);
       return { ...state, data: action.payload, dataError: `` };
 
     case ActionTypes.FETCH_DATA_FAILURE:
-      return { ...state, data: [], dataError: action.payload };
+      return { ...state, data: [], normalizedData: {}, allIDs: [], dataError: action.payload };
 
     case ActionTypes.FETCH_DATA_FINALLY:
       return { ...state, isDataLoading: false };
@@ -33,11 +36,16 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
-      return { ...state, data: [action.payload, ...state.data], dataItemError: `` };
+      return {
+        ...state,
+        data: [action.payload, ...state.data],
+        normalizedData: { ...state.normalizedData, [action.payload.ID]: action.payload },
+        allIDs: [action.payload.ID, ...state.allIDs],
+        dataItemError: ``,
+      };
 
     case ActionTypes.CREATE_DATA_ITEM_FAILURE:
       return { ...state, dataItemError: action.payload };
-
     case ActionTypes.CREATE_DATA_ITEM_FINALLY:
       return { ...state, isDataItemLoading: false };
 
@@ -45,8 +53,8 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
-      const updatedData = updateDataAfterEditItem(state.data, action.payload) as AppointmentDataItem[];
-      return { ...state, data: updatedData, dataItemError: `` };
+      const updatedData = updateDataAfterEditItem<AppointmentDataItem>(state.data, action.payload);
+      return { ...state, data: updatedData, normalizedData: { ...state.normalizedData, [action.payload.ID]: action.payload }, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
       return { ...state, dataItemError: action.payload };
@@ -58,8 +66,16 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as AppointmentDataItem[];
-      return { ...state, data: updatedDataAfterDeleteDataItem, dataItemError: `` };
+      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem<AppointmentDataItem>(state.data, action.payload);
+      const newAllIDs = state.allIDs.filter((ID) => ID !== action.payload);
+      delete state.normalizedData[action.payload];
+      return {
+        ...state,
+        data: updatedDataAfterDeleteDataItem,
+        normalizedData: { ...state.normalizedData },
+        allIDs: [...newAllIDs],
+        dataItemError: ``,
+      };
 
     case ActionTypes.DELETE_DATA_ITEM_FAILURE:
       return { ...state, dataItemError: action.payload };

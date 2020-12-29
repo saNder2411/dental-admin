@@ -2,11 +2,11 @@
 import { QueryTeamStaffDataItem, TeamStaffDataItem, MutationTeamStaffDataItem } from './TeamStaffTypes';
 
 export const transformAPIData = (apiResults: QueryTeamStaffDataItem[]): TeamStaffDataItem[] =>
-  apiResults.map(({ __metadata, ...others }) => ({ ...others, TeamProfilePhotoUrl: others.TeamProfilePhoto.Url ?? '' }));
+  apiResults.map(({ __metadata, ...others }) => ({ ...others, TeamProfilePhotoUrl: others.TeamProfilePhoto?.Url ?? '' }));
 
 export const transformAPIDataItem = ({ __metadata, ...others }: QueryTeamStaffDataItem): TeamStaffDataItem => ({
   ...others,
-  TeamProfilePhotoUrl: others.TeamProfilePhoto.Url ?? '',
+  TeamProfilePhotoUrl: others.TeamProfilePhoto?.Url ?? '',
 });
 
 export const transformDataItemForAPI = ({
@@ -19,7 +19,9 @@ export const transformDataItemForAPI = ({
 }: TeamStaffDataItem): MutationTeamStaffDataItem => {
   return {
     ...others,
-    TeamProfilePhoto: { ...TeamProfilePhoto, Url: TeamProfilePhotoUrl, Description: TeamProfilePhotoUrl },
+    TeamProfilePhoto: TeamProfilePhoto
+      ? { ...TeamProfilePhoto, Url: TeamProfilePhotoUrl, Description: TeamProfilePhotoUrl }
+      : { Url: TeamProfilePhotoUrl, Description: TeamProfilePhotoUrl, __metadata: { type: 'SP.FieldUrlValue' } },
     FullName,
     FirstName: FullName.split(' ')[0],
     Title: FullName.split(' ').slice(-1)[0],

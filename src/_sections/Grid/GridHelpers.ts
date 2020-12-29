@@ -4,6 +4,16 @@ import { StatusNames } from '../../Agenda';
 import { GridDataItem, GridDataName } from './GridTypes';
 import { OfferIcons } from '../../Services';
 
+export const getNormalizedData = <T extends GridDataItem = GridDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
+  const allIDs: number[] = [];
+  const normalizedData = data.reduce((acc: { [key: string]: T }, item) => {
+    acc[item.ID] = item;
+    allIDs.push(item.ID);
+    return acc;
+  }, {});
+  return [normalizedData, allIDs];
+};
+
 export const generateId = (data: GridDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
 export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
@@ -12,7 +22,7 @@ export const updateDataAfterAddItemToEdit = (data: GridDataItem[], editItemID: n
   return data.map((item) => (item.ID === editItemID ? { ...item, inEdit: true } : item));
 };
 
-export const updateDataAfterEditItem = (data: GridDataItem[], dataItem: GridDataItem): GridDataItem[] => {
+export const updateDataAfterEditItem = <T extends GridDataItem = GridDataItem>(data: T[], dataItem: T): T[] => {
   const updatedItem = { ...dataItem, inEdit: false, isNew: false };
   const index = data.findIndex(({ ID }) => ID === dataItem.ID);
 
@@ -21,7 +31,7 @@ export const updateDataAfterEditItem = (data: GridDataItem[], dataItem: GridData
   return [...data.slice(0, index), updatedItem, ...data.slice(index + 1)];
 };
 
-export const updateDataAfterRemoveItem = (data: GridDataItem[], removeItemID: number): GridDataItem[] => {
+export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>(data: T[], removeItemID: number): T[] => {
   const index = data.findIndex(({ ID }) => ID === removeItemID);
 
   if (index < 0) return data;

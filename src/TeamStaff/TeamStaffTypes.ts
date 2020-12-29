@@ -12,7 +12,7 @@ interface BackendImmutableKey {
     __metadata: { type: string };
     Description: string;
     Url: string | null;
-  };
+  } | null;
   ShowOnline: boolean;
   Email: string | null;
   CellPhone: string | null;
