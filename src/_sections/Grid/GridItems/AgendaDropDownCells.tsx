@@ -126,7 +126,7 @@ export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<Appointment
 }) => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const multiSelectData = domainData ? transformDomainDataToMultiSelectData(domainData) : [];
-  const dropDownListValue = transformDomainDataToMultiSelectData(value);
+  const multiSelectValue = transformDomainDataToMultiSelectData(value);
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
     onChange({
@@ -137,5 +137,5 @@ export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<Appointment
     });
   };
 
-  return <MultiSelect onChange={onServicesChange} value={dropDownListValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
+  return <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
 };

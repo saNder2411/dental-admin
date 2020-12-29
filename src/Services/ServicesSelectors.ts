@@ -15,4 +15,5 @@ export const selectServicesMemoReferences = () =>
 
 export const selectServicesMemoRoleSkills = () => createSelector(selectServicesRoleSkills, (roleSkills) => roleSkills);
 
-export const selectServicesMemoCategories = () => createSelector(selectServicesData, (data) => data.map(({ OfferingCatType }) => OfferingCatType));
+export const selectServicesMemoCategories = () =>
+  createSelector(selectServicesData, (data) => data.map(({ OfferingCatType }) => OfferingCatType ?? ''));

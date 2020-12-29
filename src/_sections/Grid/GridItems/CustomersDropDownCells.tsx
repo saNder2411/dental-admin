@@ -41,7 +41,7 @@ export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<
 }): JSX.Element => {
   const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
   const multiSelectData = domainData ? transformTeamStaffDataToMultiSelectData(domainData) : [];
-  const dropDownListValue = transformTeamStaffDataToMultiSelectData(value);
+  const multiSelectValue = transformTeamStaffDataToMultiSelectData(value);
 
   const onAppointmentChange = (evt: MultiSelectChangeEvent) => {
     onChange({
@@ -51,7 +51,5 @@ export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<
       value: { results: evt.target.value.map(({ value }) => value) },
     });
   };
-  return (
-    <MultiSelect onChange={onAppointmentChange} value={dropDownListValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />
-  );
+  return <MultiSelect onChange={onAppointmentChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
 };

@@ -25,7 +25,7 @@ export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | Servi
   const onReferenceChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
-  return <Input value={value} placeholder="Ref: TBA-000" onChange={onReferenceChange} disabled={isDataItemLoading} />;
+  return <Input value={value} onChange={onReferenceChange} disabled={isDataItemLoading} />;
 };
 
 export const GenericAvatarInput: FC<EditCellProps<TeamStaffDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange, value }) => {

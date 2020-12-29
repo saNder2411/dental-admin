@@ -21,9 +21,13 @@ export const ServicesCategoryMultiSelect: FC<EditCellDropDownListProps<ServiceDa
 
   const multiSelectValue = value ? value.split(' | ').map((value) => ({ text: value, value })) : [];
 
-  const onValueChange = (evt: MultiSelectChangeEvent) => {
-    onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value).join(' | ') });
-  };
+  const onValueChange = (evt: MultiSelectChangeEvent) =>
+    onChange({
+      dataItem: dataItemID,
+      field,
+      syntheticEvent: evt.syntheticEvent,
+      value: evt.target.value.map(({ value }) => value ?? '').join(' | '),
+    });
 
   return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
 };

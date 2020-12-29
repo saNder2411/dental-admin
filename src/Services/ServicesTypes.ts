@@ -9,12 +9,12 @@ export enum OfferIcons {
 
 interface BackendImmutableKey {
   Id: number;
-  OfferingsName_Edit: string;
+  OfferingsName_Edit: string | null;
   ShowOnline: boolean;
   ConsultReq: boolean;
   MinutesDuration: number;
   Amount: number;
-  OfferingCatType: string;
+  OfferingCatType: string | null;
   OfferingDiscount: number;
   ID: number;
 

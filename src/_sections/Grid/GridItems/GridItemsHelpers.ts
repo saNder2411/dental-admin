@@ -24,13 +24,13 @@ export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaf
     const isTeamStaffDataItem = 'ShowOnline' in item;
     const value = isTeamStaffDataItem ? item.Title : item.FullName;
 
-    return { text: value, value: item.Id };
+    return { text: value ?? '', value: item.Id };
   });
 
 export const transformDomainDataToMultiSelectData = (domainData: ServiceDataItem[]) =>
-  domainData.map(({ OfferingsName_Edit, Id }) => ({ text: OfferingsName_Edit, value: Id }));
+  domainData.map(({ OfferingsName_Edit, Id }) => ({ text: OfferingsName_Edit ?? '', value: Id }));
 
 export const transformTeamStaffDataToMultiSelectData = (domainData: TeamStaffDataItem[]) =>
-  domainData.map(({ Title, Id }) => ({ text: Title, value: Id }));
+  domainData.map(({ Title, Id }) => ({ text: Title ?? '', value: Id }));
 
 export const EmptyDropDownListDataItem = { text: '', value: -1 };

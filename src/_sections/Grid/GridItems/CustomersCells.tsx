@@ -27,7 +27,7 @@ export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> 
   const teamStaffData = useSelector(selectTeamStaffData);
 
   const currentAppointment = teamStaffData.filter(({ Id }) => LookupMultiHR01teamId.results.find((item) => item === Id));
-  const value = currentAppointment.map(({ Title }) => Title).join(' | ');
+  const value = currentAppointment.map(({ Title }) => Title ?? '').join(' | ');
 
   return (
     <td>

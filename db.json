@@ -377,6 +377,74 @@
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
+    },
+    {
+      "Id": 626,
+      "Title": "I.Acciardi-0626",
+      "EventDate": "2020-12-29T08:11:36.704Z",
+      "EndDate": "2020-12-29T09:00:00.000Z",
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": null,
+      "AppointmentStatus": "(1) Consultation",
+      "LastNameAppt": "",
+      "Gender": "(1) Female",
+      "Notes": null,
+      "ServiceCharge": 40,
+      "FilterStart": "2020-12-29T08:11:36.704Z",
+      "FilterEnd": "2020-12-29T09:00:00.000Z",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstName": "",
+      "CellPhone": null,
+      "LookupCM102customersId": 77,
+      "LookupHR01teamId": 1,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          2
+        ]
+      },
+      "ID": 626,
+      "Modified": "2020-12-29T08:11:36.704Z",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 627,
+      "EventDate": "2020-12-29T07:00:00.000Z",
+      "EndDate": "2020-12-29T08:00:00.000Z",
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": "TJ.Adame@schedulingtoday.local",
+      "AppointmentStatus": "(3) Reserved",
+      "Gender": "(2) Male",
+      "Notes": "",
+      "ServiceCharge": 40,
+      "FilterStart": "2020-12-29T07:00:00.000Z",
+      "FilterEnd": "2020-12-29T08:00:00.000Z",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "CellPhone": "+1891794255069",
+      "LookupCM102customersId": 1142,
+      "LookupHR01teamId": 3,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          16
+        ]
+      },
+      "ID": 627,
+      "Modified": "2020-12-29T08:25:41.551Z",
+      "FirstName": "TJ",
+      "LastNameAppt": "Adame",
+      "Title": "T.Adame-0627",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
     }
   ],
   "services": [
