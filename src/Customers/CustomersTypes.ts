@@ -5,15 +5,15 @@ import * as actions from './CustomersAC';
 
 interface BackendImmutableKey {
   Id: number;
-  Title: string;
-  FirstName: string;
-  FullName: string;
+  Title: string | null;
+  FirstName: string | null;
+  FullName: string | null;
   CellPhone: string | null;
   Email: string | null;
   Gender: '(1) Female' | '(2) Male';
   ClientPhoto: {
     Description: string;
-    Url: string;
+    Url: string | null;
     __metadata: { type: string };
   } | null;
   ID: number;

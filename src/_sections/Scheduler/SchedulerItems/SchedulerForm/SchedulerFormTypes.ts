@@ -47,8 +47,8 @@ export interface RepeatOptions {
 }
 
 export interface CustomerFields {
-  FirstName: string;
-  Title: string;
+  FirstName: string | null;
+  Title: string | null;
   Email: string | null;
   Gender: '(1) Female' | '(2) Male';
   CellPhone: string | null;

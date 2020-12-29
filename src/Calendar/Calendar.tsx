@@ -80,7 +80,7 @@ export const Calendar: FC = () => {
                   text: (
                     <CalendarHeaderCardCell
                       cardColor={item.CalendarColHex}
-                      employeeImage={item.TeamProfilePhoto.Url}
+                      employeeImage={item.TeamProfilePhotoUrl}
                       fullName={item.FullName}
                       jobTitle={item.JobTitle}
                     />

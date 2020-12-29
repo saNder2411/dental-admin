@@ -11,11 +11,11 @@ interface BackendImmutableKey {
   TeamProfilePhoto: {
     __metadata: { type: string };
     Description: string;
-    Url: string;
+    Url: string | null;
   };
   ShowOnline: boolean;
-  Email: string;
-  CellPhone: string;
+  Email: string | null;
+  CellPhone: string | null;
   JobTitle: string;
   Department: null | string;
   CalendarColHex: string;

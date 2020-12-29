@@ -121,7 +121,7 @@ export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
   const currentCustomer = customersData.find(({ Id }) => Id === LookupCM102customersId);
-  const value = currentCustomer ? currentCustomer.FullName : '';
+  const value = currentCustomer ? currentCustomer.FullName ?? '' : '';
 
   return (
     <td>
