@@ -58,22 +58,36 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>
     .items.add(newDataItem)
     .then((res) => {
       console.log(`POST_RES`, res);
-      console.log(`POST_RES effectiveBasePermissions`, res.item.effectiveBasePermissions());
-      console.log(`POST_RES effectiveBasePermissionsForUI`, res.item.effectiveBasePermissionsForUI());
-      console.log(`POST_RES get`, res.item.get());
-      console.log(`POST_RES fieldValuesAsText`, res.item.fieldValuesAsText());
-      console.log(`POST_RES fieldValuesForEdit`, res.item.fieldValuesForEdit());
-      console.log(`POST_RES versions`, res.item.versions());
-      console.log(`POST_RES list`, res.item.list());
-      console.log(`POST_RES getParentInfos`, res.item.getParentInfos());
-      console.log(
-        `POST_RES get, select`,
-        res.item
-          .select(`ID,Title`)
-          .get()
-          .then((res) => res)
-      );
-
+      res.item.effectiveBasePermissions().then((res) => {
+        console.log(`POST_RES effectiveBasePermissions`, res);
+      });
+      res.item.effectiveBasePermissionsForUI().then((res) => {
+        console.log(`POST_RES effectiveBasePermissionsForUI`, res);
+      });
+      res.item.get().then((res) => {
+        console.log(`POST_RES get`, res);
+      });
+      res.item.fieldValuesAsText().then((res) => {
+        console.log(`POST_RES fieldValuesAsText`, res);
+      });
+      res.item.fieldValuesForEdit().then((res) => {
+        console.log(`POST_RES fieldValuesForEdit`, res);
+      });
+      res.item.versions().then((res) => {
+        console.log(`POST_RES versions`, res);
+      });
+      res.item.list().then((res) => {
+        console.log(`POST_RES list`, res);
+      });
+      res.item.getParentInfos().then((res) => {
+        console.log(`POST_RES getParentInfos`, res);
+      });
+      res.item
+        .select(`ID,Title`)
+        .get()
+        .then((res) => {
+          console.log(`POST_RES get, select`, res);
+        });
       return { ID, Id, ...newDataItem };
     });
 
