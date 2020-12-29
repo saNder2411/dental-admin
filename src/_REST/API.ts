@@ -103,7 +103,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem[]>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -144,7 +144,7 @@ export const API_: API = {
   },
 };
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 
