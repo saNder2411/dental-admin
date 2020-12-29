@@ -14,31 +14,31 @@ export type DeleteDataItem = (deletedItemID: number) => Promise<number>;
 interface API {
   agenda: {
     getData: QueryAllData<QueryAppointmentDataItem[]>;
-    createDataItem: MutationDataItem<MutationAppointmentDataItem>;
-    updateDataItem: MutationDataItem<MutationAppointmentDataItem>;
+    createDataItem: MutationDataItem<MutationAppointmentDataItem, QueryAppointmentDataItem>;
+    updateDataItem: MutationDataItem<MutationAppointmentDataItem, QueryAppointmentDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   customers: {
     getData: QueryAllData<QueryCustomerDataItem[]>;
-    createDataItem: MutationDataItem<MutationCustomerDataItem>;
-    updateDataItem: MutationDataItem<MutationCustomerDataItem>;
+    createDataItem: MutationDataItem<MutationCustomerDataItem, QueryCustomerDataItem>;
+    updateDataItem: MutationDataItem<MutationCustomerDataItem, QueryCustomerDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   staff: {
     getData: QueryAllData<QueryTeamStaffDataItem[]>;
-    createDataItem: MutationDataItem<MutationTeamStaffDataItem>;
-    updateDataItem: MutationDataItem<MutationTeamStaffDataItem>;
+    createDataItem: MutationDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>;
+    updateDataItem: MutationDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   services: {
     getData: QueryAllData<QueryServiceDataItem[]>;
-    createDataItem: MutationDataItem<MutationServiceDataItem>;
-    updateDataItem: MutationDataItem<MutationServiceDataItem>;
+    createDataItem: MutationDataItem<MutationServiceDataItem, QueryServiceDataItem>;
+    updateDataItem: MutationDataItem<MutationServiceDataItem, QueryServiceDataItem>;
     deleteDataItem: DeleteDataItem;
   };
 }
 
-type TQueryDataResponse = QueryAppointmentDataItem[] | QueryCustomerDataItem[] | QueryTeamStaffDataItem[] | QueryServiceDataItem[];
+type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryTeamStaffDataItem | QueryServiceDataItem;
 
 type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationTeamStaffDataItem;
 
@@ -50,52 +50,37 @@ const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: 
     .filter(filter)
     .select(select)
     .orderBy(orderBy)
-    .get<T>()
+    .get<T[]>()
     .then((response) => response);
 
-const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, { ID, Id, ...newDataItem }: T) =>
+const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
+  listGuid: string,
+  selectFields: string,
+  { ID, Id, ...newDataItem }: T
+): Promise<U> =>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
-    .then((res) => {
-      console.log(`POST_RES`, res);
-      res.item.effectiveBasePermissions().then((res) => {
-        console.log(`POST_RES effectiveBasePermissions`, res);
-      });
-      res.item.effectiveBasePermissionsForUI().then((res) => {
-        console.log(`POST_RES effectiveBasePermissionsForUI`, res);
-      });
-      res.item.get().then((res) => {
-        console.log(`POST_RES get`, res);
-      });
-      res.item.fieldValuesAsText().then((res) => {
-        console.log(`POST_RES fieldValuesAsText`, res);
-      });
-      res.item.fieldValuesForEdit().then((res) => {
-        console.log(`POST_RES fieldValuesForEdit`, res);
-      });
-      res.item.versions().then((res) => {
-        console.log(`POST_RES versions`, res);
-      });
-      res.item.list().then((res) => {
-        console.log(`POST_RES list`, res);
-      });
-      res.item.getParentInfos().then((res) => {
-        console.log(`POST_RES getParentInfos`, res);
-      });
+    .then((res) =>
       res.item
-        .select(`ID,Title`)
+        .select(selectFields)
         .get()
-        .then((res) => {
-          console.log(`POST_RES get, select`, res);
-        });
-      return { ID, Id, ...newDataItem };
-    });
+        .then<U>((res) => res)
+    );
 
-const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg>(listGuid: string, dataItem: T) =>
+const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
+  listGuid: string,
+  selectFields: string,
+  dataItem: T
+): Promise<U> =>
   SPLists.getById(listGuid)
     .items.getById(dataItem.ID)
     .update(dataItem)
-    .then(() => dataItem);
+    .then((res) =>
+      res.item
+        .select(selectFields)
+        .get()
+        .then<U>((res) => res)
+    );
 
 const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
   SPLists.getById(listGuid)
@@ -106,39 +91,47 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
 export const API: API = {
   agenda: {
     getData: async () =>
-      getSPData<QueryAppointmentDataItem[]>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
+      getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
 
-    createDataItem: async (createdDataItem: MutationAppointmentDataItem) => createSPDataItem(GuidList.Appointment, createdDataItem),
+    createDataItem: async (createdDataItem: MutationAppointmentDataItem) =>
+      createSPDataItem<MutationAppointmentDataItem, QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, createdDataItem),
 
-    updateDataItem: (updatedDataItem: MutationAppointmentDataItem) => updateSPDataItem(GuidList.Appointment, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationAppointmentDataItem) =>
+      updateSPDataItem<MutationAppointmentDataItem, QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Appointment, deletedDataItemID),
   },
   customers: {
-    getData: async () => getSPData<QueryCustomerDataItem[]>(GuidList.Customer, SelectFields.Customer, OrderBy.Customer),
+    getData: async () => getSPData<QueryCustomerDataItem>(GuidList.Customer, SelectFields.Customer, OrderBy.Customer),
 
-    createDataItem: (createdDataItem: MutationCustomerDataItem) => createSPDataItem(GuidList.Customer, createdDataItem),
+    createDataItem: (createdDataItem: MutationCustomerDataItem) =>
+      createSPDataItem<MutationCustomerDataItem, QueryCustomerDataItem>(GuidList.Customer, SelectFields.Customer, createdDataItem),
 
-    updateDataItem: (updatedDataItem: MutationCustomerDataItem) => updateSPDataItem(GuidList.Customer, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationCustomerDataItem) =>
+      updateSPDataItem<MutationCustomerDataItem, QueryCustomerDataItem>(GuidList.Customer, SelectFields.Customer, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Customer, deletedDataItemID),
   },
 
   staff: {
-    getData: async () => getSPData<QueryTeamStaffDataItem[]>(GuidList.Staff, SelectFields.Staff, OrderBy.Staff),
+    getData: async () => getSPData<QueryTeamStaffDataItem>(GuidList.Staff, SelectFields.Staff, OrderBy.Staff),
 
-    createDataItem: (createdDataItem: MutationTeamStaffDataItem) => createSPDataItem(GuidList.Staff, createdDataItem),
+    createDataItem: (createdDataItem: MutationTeamStaffDataItem) =>
+      createSPDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>(GuidList.Staff, SelectFields.Staff, createdDataItem),
 
-    updateDataItem: (updatedDataItem: MutationTeamStaffDataItem) => updateSPDataItem(GuidList.Staff, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationTeamStaffDataItem) =>
+      updateSPDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>(GuidList.Staff, SelectFields.Staff, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Staff, deletedDataItemID),
   },
   services: {
-    getData: async () => getSPData<QueryServiceDataItem[]>(GuidList.Service, SelectFields.Service, OrderBy.Service),
+    getData: async () => getSPData<QueryServiceDataItem>(GuidList.Service, SelectFields.Service, OrderBy.Service),
 
-    createDataItem: (createdDataItem: MutationServiceDataItem) => createSPDataItem(GuidList.Service, createdDataItem),
+    createDataItem: (createdDataItem: MutationServiceDataItem) =>
+      createSPDataItem<MutationServiceDataItem, QueryServiceDataItem>(GuidList.Service, SelectFields.Service, createdDataItem),
 
-    updateDataItem: (updatedDataItem: MutationServiceDataItem) => updateSPDataItem(GuidList.Service, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationServiceDataItem) =>
+      updateSPDataItem<MutationServiceDataItem, QueryServiceDataItem>(GuidList.Service, SelectFields.Service, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Service, deletedDataItemID),
   },

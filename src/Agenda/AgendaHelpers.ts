@@ -11,12 +11,13 @@ export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): Appoin
     LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
   }));
 
-export const transformAPIDataItem = ({ __metadata, ...others }: MutationAppointmentDataItem): AppointmentDataItem => ({
+export const transformAPIDataItem = ({ __metadata, LookupMultiBP01offeringsId, ...others }: QueryAppointmentDataItem): AppointmentDataItem => ({
   ...others,
   TeamID: others.LookupHR01teamId,
   Start: new Date(others.EventDate),
   End: new Date(others.EndDate),
   MetroRecException: others.MetroRecException ? others.MetroRecException.map((exception) => new Date(exception)) : null,
+  LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
 });
 
 export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...others }: AppointmentDataItem): MutationAppointmentDataItem => ({

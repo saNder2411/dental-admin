@@ -4,7 +4,7 @@ import { QueryTeamStaffDataItem, TeamStaffDataItem, MutationTeamStaffDataItem } 
 export const transformAPIData = (apiResults: QueryTeamStaffDataItem[]): TeamStaffDataItem[] =>
   apiResults.map(({ __metadata, ...others }) => ({ ...others, TeamProfilePhotoUrl: others.TeamProfilePhoto.Url }));
 
-export const transformAPIDataItem = ({ __metadata, ...others }: MutationTeamStaffDataItem): TeamStaffDataItem => ({
+export const transformAPIDataItem = ({ __metadata, ...others }: QueryTeamStaffDataItem): TeamStaffDataItem => ({
   ...others,
   TeamProfilePhotoUrl: others.TeamProfilePhoto.Url,
 });

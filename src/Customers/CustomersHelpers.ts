@@ -8,9 +8,10 @@ export const transformAPIData = (apiResults: QueryCustomerDataItem[]): CustomerD
     LookupMultiHR01teamId: { results: LookupMultiHR01teamId.results },
   }));
 
-export const transformAPIDataItem = ({ __metadata, ...others }: MutationCustomerDataItem): CustomerDataItem => ({
+export const transformAPIDataItem = ({ __metadata, LookupMultiHR01teamId, ...others }: QueryCustomerDataItem): CustomerDataItem => ({
   ...others,
   ClientPhotoUrl: others.ClientPhoto?.Url ?? '',
+  LookupMultiHR01teamId: { results: LookupMultiHR01teamId.results },
 });
 
 export const transformDataItemForAPI = ({

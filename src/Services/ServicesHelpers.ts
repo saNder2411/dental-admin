@@ -4,7 +4,7 @@ import { ServiceDataItem, QueryServiceDataItem, MutationServiceDataItem } from '
 export const transformAPIData = (apiResults: QueryServiceDataItem[]): ServiceDataItem[] =>
   apiResults.map(({ __metadata, ...others }) => ({ ...others }));
 
-export const transformAPIDataItem = ({ __metadata, ...others }: MutationServiceDataItem): ServiceDataItem => ({ ...others });
+export const transformAPIDataItem = ({ __metadata, ...others }: QueryServiceDataItem): ServiceDataItem => ({ ...others });
 
 export const transformDataItemForAPI = ({ OfferingIconName, RoleSkills, ...others }: ServiceDataItem): MutationServiceDataItem => ({
   ...others,

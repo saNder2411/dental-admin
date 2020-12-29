@@ -10,8 +10,6 @@ import {
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
   QueryTeamStaffDataItem,
-  MutationTeamStaffDataItem
-,
 } from './TeamStaffTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem } from './TeamStaffHelpers';
@@ -34,8 +32,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: MutationTeamStaffDataItem
- = yield apply(API, API.staff.createDataItem, [createdDataItem]);
+    const result: QueryTeamStaffDataItem = yield apply(API, API.staff.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
@@ -53,8 +50,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: MutationTeamStaffDataItem
- = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
+    const result: QueryTeamStaffDataItem = yield apply(API, API.staff.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {

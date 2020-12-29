@@ -13,11 +13,8 @@ import {
   CreateDataItemInitAsyncActionType,
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
-  QueryAppointmentDataItem
-,
+  QueryAppointmentDataItem,
   UpdateRecurringDataItemInitAsyncActionType,
-  MutationAppointmentDataItem
-,
 } from './AgendaTypes';
 import { QueryServiceDataItem } from '../Services/ServicesTypes';
 import { QueryTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
@@ -72,8 +69,7 @@ export function* workerCreateDataItem({
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: MutationAppointmentDataItem
- = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
+    const result: QueryAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
     yield put(actions.createDataItemSuccessAC(data));
@@ -92,8 +88,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: MutationAppointmentDataItem
- = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
+    const result: QueryAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {
@@ -121,9 +116,7 @@ export function* workerDeleteDataItem({
   }
 }
 
-type UpdateRecurringDataItemResults = [MutationAppointmentDataItem
-, MutationAppointmentDataItem
-];
+type UpdateRecurringDataItemResults = [QueryAppointmentDataItem, QueryAppointmentDataItem];
 
 export function* workerUpdateRecurringDataItem({
   payload: { updatedDataItem, createDataItem },
@@ -141,9 +134,8 @@ export function* workerUpdateRecurringDataItem({
     yield put(actions.updateDataItemSuccessAC(updatedDataItemData));
 
     const createDataItemData = transformAPIDataItem(createResult);
-    onUpdateDataItem()
+    onUpdateDataItem();
     yield put(actions.createDataItemSuccessAC(createDataItemData));
-   
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
   } finally {

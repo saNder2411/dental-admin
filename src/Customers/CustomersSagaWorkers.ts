@@ -12,8 +12,6 @@ import {
   UpdateDataItemInitAsyncActionType,
   DeleteDataItemInitAsyncActionType,
   QueryCustomerDataItem,
-  MutationCustomerDataItem
-,
 } from './CustomersTypes';
 import { QueryTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 // Helpers
@@ -49,8 +47,7 @@ export function* workerCreateDataItem({ payload: createdDataItem, meta: onAddDat
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: MutationCustomerDataItem
- = yield apply(API, API.customers.createDataItem, [createdDataItem]);
+    const result: QueryCustomerDataItem = yield apply(API, API.customers.createDataItem, [createdDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.createDataItemSuccessAC(data));
   } catch (error) {
@@ -68,8 +65,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: MutationCustomerDataItem
- = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
+    const result: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [updatedDataItem]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(data));
   } catch (error) {

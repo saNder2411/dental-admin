@@ -101,7 +101,6 @@ export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
   const selectServicesData = useMemo(selectServicesMemoData, []);
   const servicesData = useSelector(selectServicesData);
   const currentServices = servicesData.filter(({ Id }) => LookupMultiBP01offeringsId.results.find((serviceID) => serviceID === Id));
-  console.log(`currentServices`, currentServices);
   const value = currentServices.map(({ OfferingsName_Edit }) => OfferingsName_Edit ?? '').join(' | ');
 
   return (
