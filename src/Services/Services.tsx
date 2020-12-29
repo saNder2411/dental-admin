@@ -22,7 +22,6 @@ import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
-import { GridActions } from '../_sections/Grid/GridActions';
 import { ServicesActions } from './ServicesActions';
 // Hooks
 import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
@@ -35,7 +34,7 @@ export const Services: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   useFetchDataForDomain(servicesData.length, ServicesActions, dispatch);
-  useSetGridData(dataName, GridDataName.Services, servicesData, GridActions, dispatch);
+  useSetGridData(dataName, GridDataName.Services, servicesData, dispatch);
 
   const hasServicesData = dataName === GridDataName.Services;
   const contentTSX = hasServicesData && !servicesIsDataLoading && (

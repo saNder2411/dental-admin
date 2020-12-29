@@ -23,10 +23,10 @@ export const SelectFields = {
 };
 
 export const FilterItems = {
-  Appointments: `(FilterStart ge datetime'${new Date().toISOString()}') and (FilterEnd le datetime'${new Date(
+  Appointments: `(FilterStart ge datetime'${new Date(
     new Date().getFullYear(),
-    new Date().getMonth() + 6
-  ).toISOString()}')`,
+    new Date().getMonth()
+  ).toISOString()}') and (FilterEnd le datetime'${new Date(new Date().getFullYear(), new Date().getMonth() + 6).toISOString()}')`,
 };
 
 export const OrderBy = {

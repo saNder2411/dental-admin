@@ -1,19 +1,20 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Types
-import { GridDataName, GridStateActions, GridDataItem } from '../GridTypes';
+import { GridDataName, GridDataItem } from '../GridTypes';
+// Actions
+import { GridActions } from '../GridActions';
 
 export const useSetGridDataForDomainWithDataBind = (
   dataName: GridDataName,
   domainDataName: GridDataName,
   domainData: GridDataItem[],
   domainIsDataLoading: boolean,
-  gridActions: GridStateActions,
   dispatch: Dispatch
 ) => {
   useEffect(() => {
     if (dataName !== domainDataName && domainData.length > 0 && !domainIsDataLoading) {
-      gridActions.setData(dispatch, domainData);
+      GridActions.setData(dispatch, domainData);
     }
-  }, [dataName, gridActions, dispatch, domainData, domainDataName, domainIsDataLoading]);
+  }, [dataName, dispatch, domainData, domainDataName, domainIsDataLoading]);
 };

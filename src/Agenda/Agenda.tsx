@@ -25,7 +25,6 @@ import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
-import { GridActions } from '../_sections/Grid/GridActions';
 import { AgendaActions } from './AgendaActions';
 // Hooks
 import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
@@ -39,7 +38,7 @@ export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
-  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, GridActions, dispatch);
+  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, dispatch);
 
   const hasAgendaData = dataName === GridDataName.Agenda;
   const contentTSX = hasAgendaData && !agendaIsDataLoading && (
@@ -67,7 +66,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.start', 'Start')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            // width={120}
+            width={180}
             cell={AgendaStartDateCell as CustomGridCell}
           />
           <GridColumn
@@ -75,7 +74,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.end', 'End')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            // width={120}
+            width={180}
             cell={AgendaEndDateCell as CustomGridCell}
           />
           <GridColumn

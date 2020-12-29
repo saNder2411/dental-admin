@@ -20,7 +20,6 @@ import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectGridDataName } from '../_sections/Grid/GridSelectors';
 // Actions
-import { GridActions } from '../_sections/Grid/GridActions';
 import { TeamStaffActions } from './TeamStaffActions';
 // Hooks
 import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
@@ -33,7 +32,7 @@ export const TeamStaff: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   useFetchDataForDomain(teamStaffData.length, TeamStaffActions, dispatch);
-  useSetGridData(dataName, GridDataName.TeamStaff, teamStaffData, GridActions, dispatch);
+  useSetGridData(dataName, GridDataName.TeamStaff, teamStaffData, dispatch);
 
   const hasTeamStaffData = dataName === GridDataName.TeamStaff;
   const contentTSX = hasTeamStaffData && !teamStaffIsDataLoading && (
