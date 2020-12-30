@@ -42,7 +42,7 @@ export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>
 export const updateDataAfterCancelEdit = (data: GridDataItem[], originalData: GridDataItem[], editItemID: number): GridDataItem[] => {
   const originalItem = originalData.find(({ ID }) => ID === editItemID);
 
-  return originalItem ? data.map((item) => (item.ID === originalItem.ID ? originalItem : item)) : data;
+  return originalItem ? data.map((item) => (item.ID === originalItem.ID ? { ...originalItem, inEdit: false } : item)) : data;
 };
 
 export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, value, syntheticEvent }: GridItemChangeEvent): GridDataItem[] => {

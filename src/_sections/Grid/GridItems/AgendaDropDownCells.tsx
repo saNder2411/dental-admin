@@ -72,7 +72,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
   const dispatch = useDispatch();
   const isValidFullName = useSelector(selectIsValidFullNameValue);
   const [filter, setFilter] = useState('');
-  const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
+  const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData.slice(0, 20)) : [];
   const filteredDataForDropDownList = !filter
     ? dataForDropDownList
     : dataForDropDownList.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
@@ -92,7 +92,6 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
-    console.log(`onFullNameChange evtValue`, evtValue)
     const selectedCustomer = customersData.find(({ Id }) => Id === evtValue.value);
     const newTitle = selectedCustomer ? setTitleProp<number>(selectedCustomer.FirstName ?? '', selectedCustomer.Title ?? '', dataItemID) : '';
 

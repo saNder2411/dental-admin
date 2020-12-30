@@ -307,16 +307,10 @@
       "Modified": "2020-02-12T14:52:44Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(624)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(624)",
-        "etag": "\"2\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
       "Id": 624,
-      "Title": "C.Lustenberger-0624",
-      "EventDate": "2020-12-30T10:00:00Z",
-      "EndDate": "2020-12-30T11:00:00Z",
+      "Title": "I.Acciardi-0624",
+      "EventDate": "2020-12-30T10:00:00.000Z",
+      "EndDate": "2020-12-30T11:00:00.000Z",
       "Duration": 3600,
       "Description": " | Stylist-Any Stylist | Customer-Catarina Lustenberger_+189795108847-Catarina.Lustenberger@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
@@ -327,24 +321,24 @@
       "Gender": "(1) Female",
       "Notes": null,
       "ServiceCharge": 56.25,
-      "FilterStart": "2020-12-30T09:00:00Z",
-      "FilterEnd": "2020-12-30T10:00:00Z",
+      "FilterStart": "2020-12-30T10:00:00.000Z",
+      "FilterEnd": "2020-12-30T11:00:00.000Z",
       "MetroRRule": null,
       "MetroRecException": null,
       "FirstName": "Catarina",
       "CellPhone": "+189795108847",
+      "LookupCM102customersId": 77,
+      "LookupHR01teamId": 1,
+      "ID": 624,
+      "Modified": "2020-02-12T14:52:44Z",
       "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": [
           14
         ]
       },
-      "LookupCM102customersId": 976,
-      "LookupHR01teamId": 1,
-      "ID": 624,
-      "Modified": "2020-02-12T14:52:44Z"
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
     },
     {
       "Id": 627,
@@ -382,9 +376,73 @@
     },
     {
       "Id": 628,
-      "Title": "",
-      "EventDate": "2020-12-30T09:57:39.820Z",
-      "EndDate": "2020-12-30T10:00:00.000Z",
+      "Title": "T.Acciardi-0628",
+      "EventDate": "2020-12-30T11:59:06.828Z",
+      "EndDate": "2020-12-30T12:00:00.000Z",
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": null,
+      "AppointmentStatus": "(1) Consultation",
+      "LastNameAppt": "",
+      "Gender": "(2) Male",
+      "Notes": null,
+      "ServiceCharge": 40,
+      "FilterStart": "2020-12-30T11:59:06.828Z",
+      "FilterEnd": "2020-12-30T12:00:00.000Z",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstName": "",
+      "CellPhone": null,
+      "LookupCM102customersId": 200,
+      "LookupHR01teamId": 1,
+      "ID": 628,
+      "Modified": "2020-12-30T11:59:06.828Z",
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 629,
+      "Title": "O.Abraham-0629",
+      "EventDate": "2020-12-30T13:05:57.779Z",
+      "EndDate": "2020-12-30T14:00:00.000Z",
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": null,
+      "AppointmentStatus": "(1) Consultation",
+      "LastNameAppt": "",
+      "Gender": "(2) Male",
+      "Notes": null,
+      "ServiceCharge": 40,
+      "FilterStart": "2020-12-30T13:05:57.779Z",
+      "FilterEnd": "2020-12-30T14:00:00.000Z",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstName": "",
+      "CellPhone": null,
+      "LookupCM102customersId": 290,
+      "LookupHR01teamId": 1,
+      "ID": 629,
+      "Modified": "2020-12-30T13:05:57.779Z",
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 630,
+      "Title": "C.Abraham-0630",
+      "EventDate": "2020-12-30T13:51:45.493Z",
+      "EndDate": "2020-12-30T14:00:00.000Z",
       "Duration": 60,
       "Description": "",
       "fAllDayEvent": null,
@@ -395,21 +453,51 @@
       "Gender": "(1) Female",
       "Notes": null,
       "ServiceCharge": 40,
-      "FilterStart": "2020-12-30T09:57:39.820Z",
-      "FilterEnd": "2020-12-30T10:00:00.000Z",
+      "FilterStart": "2020-12-30T13:51:45.493Z",
+      "FilterEnd": "2020-12-30T14:00:00.000Z",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstName": "",
+      "CellPhone": null,
+      "LookupCM102customersId": 54,
+      "LookupHR01teamId": 3,
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "ID": 630,
+      "Modified": "2020-12-30T13:51:45.493Z",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 631,
+      "Title": "C.A.Male-0631",
+      "EventDate": "2020-12-30T13:55:40.642Z",
+      "EndDate": "2020-12-30T14:00:00.000Z",
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": null,
+      "AppointmentStatus": "(1) Consultation",
+      "LastNameAppt": "",
+      "Gender": "(2) Male",
+      "Notes": null,
+      "ServiceCharge": 40,
+      "FilterStart": "2020-12-30T13:55:40.642Z",
+      "FilterEnd": "2020-12-30T14:00:00.000Z",
       "MetroRRule": null,
       "MetroRecException": null,
       "FirstName": "",
       "CellPhone": null,
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 1,
+      "ID": 631,
+      "Modified": "2020-12-30T13:55:40.642Z",
       "LookupMultiBP01offeringsId": {
-        "results": [
-          3
-        ]
+        "results": []
       },
-      "ID": 628,
-      "Modified": "2020-12-30T09:57:39.820Z",
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }

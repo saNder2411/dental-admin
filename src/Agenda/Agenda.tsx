@@ -51,7 +51,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.status', 'Status')}
             columnMenu={ColumnMenu}
             cell={AgendaStatusCell as CustomGridCell}
-            width={130}
+            width={140}
             filter={'text'}
           />
           <GridColumn
@@ -59,6 +59,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
             cell={AgendaReferenceCell as CustomGridCell}
+            width={140}
             filter={'text'}
           />
           <GridColumn
@@ -66,7 +67,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.start', 'Start')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            width={180}
+            width={190}
             cell={AgendaStartDateCell as CustomGridCell}
           />
           <GridColumn
@@ -74,14 +75,14 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.end', 'End')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            width={180}
+            width={190}
             cell={AgendaEndDateCell as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01teamId'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
-            width={140}
+            width={160}
             filter={'text'}
             cell={AgendaSvcStaffCell as CustomGridCell}
           />
@@ -90,6 +91,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.services', 'Services')}
             columnMenu={ColumnMenu}
             cell={AgendaServicesCell as CustomGridCell}
+            width={160}
             filter={'text'}
           />
           <GridColumn
@@ -104,7 +106,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'LookupCM102customersId'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
-            width={180}
+            width={190}
             cell={AgendaFullNameCell as CustomGridCell}
             filter={'text'}
           />
@@ -114,7 +116,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             cell={GenericGenderCell as CustomGridCell}
             filter={'text'}
-            width={120}
+            width={160}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}

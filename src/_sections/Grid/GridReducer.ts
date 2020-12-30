@@ -17,8 +17,8 @@ import {
 const initialState = {
   originalData: [],
   eventDrivenData: [],
-  originalNormalizeData: {},
-  normalizedData: {},
+  originalObjectData: {},
+  processData: {},
   allIDs: [],
   dataName: GridDataName.Default,
   isDataItemLoading: false,
@@ -29,13 +29,13 @@ const initialState = {
 export const reducer = (state: GridState = initialState, action: Actions): GridState => {
   switch (action.type) {
     case ActionTypes.SET_DATA:
-      const [normalizedData, allIDs] = getNormalizedData(action.payload);
+      const [processData, allIDs] = getNormalizedData(action.payload);
       return {
         ...state,
         eventDrivenData: action.payload,
         originalData: [...action.payload],
-        normalizedData,
-        originalNormalizeData: { ...normalizedData },
+        processData,
+        originalObjectData: { ...processData },
         allIDs,
         ...setTitleForAddNewItemSectionAndDataName(action.payload[0]),
       };
@@ -44,11 +44,12 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       return { ...state, dataName: GridDataName.Default };
 
     case ActionTypes.ADD_ITEM_TO_EDIT:
-      const inEditNormalizeItem = { ...state.normalizedData[action.payload], inEdit: true };
+      const inEditDataItem = { ...state.processData[action.payload], inEdit: true };
       return {
         ...state,
         eventDrivenData: updateDataAfterAddItemToEdit(state.eventDrivenData, action.payload),
-        normalizedData: { ...state.normalizedData, [action.payload]: inEditNormalizeItem },
+        processData: { ...state.processData, [action.payload]: inEditDataItem },
+        // originalObjectData: { ...state.originalObjectData, [action.payload]: { ...inEditDataItem } },
       };
 
     case ActionTypes.UPDATE_ITEM_AFTER_EDIT:
@@ -58,40 +59,42 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         ...state,
         eventDrivenData: newDataAfterEditItem,
         originalData: [...newDataAfterEditItem],
-        normalizedData: { ...state.normalizedData, [action.payload.ID]: updatedNormalizeItem },
-        originalNormalizeData: { ...state.originalNormalizeData, [action.payload.ID]: { ...action.payload, inEdit: false, isNew: false } },
+        processData: { ...state.processData, [action.payload.ID]: updatedNormalizeItem },
+        originalObjectData: { ...state.originalObjectData, [action.payload.ID]: { ...updatedNormalizeItem } },
         isDataItemLoading: false,
       };
 
     case ActionTypes.REMOVE_ITEM_FROM_DATA:
       const newDataAfterRemoveItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
       const newAllIDs = state.allIDs.filter((ID) => ID !== action.payload);
-      delete state.normalizedData[action.payload];
-      delete state.originalNormalizeData[action.payload];
+      delete state.processData[action.payload];
+      delete state.originalObjectData[action.payload];
       return {
         ...state,
         eventDrivenData: newDataAfterRemoveItem,
         originalData: [...newDataAfterRemoveItem],
-        normalizedData: { ...state.normalizedData },
-        originalNormalizeData: { ...state.originalNormalizeData },
+        processData: { ...state.processData },
+        originalObjectData: { ...state.originalObjectData },
         allIDs: [...newAllIDs],
         isDataItemLoading: false,
       };
 
     case ActionTypes.CANCEL_EDIT:
+      const originalDataItem = state.originalObjectData[action.payload];
       return {
         ...state,
         eventDrivenData: updateDataAfterCancelEdit(state.eventDrivenData, state.originalData, action.payload),
-        normalizedData: { ...state.originalNormalizeData },
+        processData: { ...state.processData, [action.payload]: { ...originalDataItem, inEdit: false } },
+        // originalObjectData: { ...state.originalObjectData, [action.payload]: { ...originalDataItem } },
       };
 
     case ActionTypes.CHANGE_ITEM:
-      const changeNormalizeItem = state.normalizedData[action.payload.dataItem];
+      const changeNormalizeItem = state.processData[action.payload.dataItem];
       return {
         ...state,
         eventDrivenData: updateDataOnChangeItem(state.eventDrivenData, action.payload),
-        normalizedData: {
-          ...state.normalizedData,
+        processData: {
+          ...state.processData,
           [action.payload.dataItem]: { ...changeNormalizeItem, [action.payload.field as string]: action.payload.value },
         },
       };
@@ -102,8 +105,8 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         ...state,
         eventDrivenData: [newDataItem, ...state.eventDrivenData],
         originalData: [newDataItem, ...state.originalData],
-        normalizedData: { ...state.normalizedData, [newDataItem.ID]: newDataItem },
-        originalNormalizeData: { ...state.originalNormalizeData, [newDataItem.ID]: newDataItem },
+        processData: { ...state.processData, [newDataItem.ID]: newDataItem },
+        originalObjectData: { ...state.originalObjectData, [newDataItem.ID]: { ...newDataItem } },
         allIDs: [newDataItem.ID, ...state.allIDs],
       };
 
@@ -113,22 +116,22 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         ...state,
         eventDrivenData: newDataAfterEditNewItem,
         originalData: [...newDataAfterEditNewItem],
-        normalizedData: { ...state.normalizedData, [action.payload.ID]: action.payload },
-        originalNormalizeData: { ...state.originalNormalizeData, [action.payload.ID]: { ...action.payload } },
+        processData: { ...state.processData, [action.payload.ID]: action.payload },
+        originalObjectData: { ...state.originalObjectData, [action.payload.ID]: { ...action.payload } },
         isDataItemLoading: false,
       };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
       const updatedAllIDs = state.allIDs.filter((ID) => ID !== action.payload);
-      delete state.normalizedData[action.payload];
-      delete state.originalNormalizeData[action.payload];
+      delete state.processData[action.payload];
+      delete state.originalObjectData[action.payload];
       return {
         ...state,
         eventDrivenData: newDataAfterDiscardAddNewItem,
         originalData: [...newDataAfterDiscardAddNewItem],
-        normalizedData: { ...state.normalizedData },
-        originalNormalizeData: { ...state.originalNormalizeData },
+        processData: { ...state.processData },
+        originalObjectData: { ...state.originalObjectData },
         allIDs: [...updatedAllIDs],
       };
 
@@ -139,5 +142,3 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       return state;
   }
 };
-
-

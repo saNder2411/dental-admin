@@ -14,17 +14,19 @@ import { IconMap } from '../../../_instruments';
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 // Selectors
-import { selectGridDataItemMemoValueForCell } from '../GridSelectors';
+import { selectGridDataItemMemoValueForCell, selectProcessDataItemFieldValue } from '../GridSelectors';
 import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridItemsHooks';
+import { useMemoDataItemValuesForCells, useOriginalDataItemValuesForCells, useProcessDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isString } from './GridItemsHelpers';
 
 export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
+  // const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
+  // const { cellValue } = useProcessDataItemValuesForCells<AppointmentDataItem>(ID, field);
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem>(ID, field));
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const strValue = isString(cellValue) ? cellValue : '';
@@ -120,7 +122,7 @@ export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 
   const selectCustomersData = useMemo(selectCustomersMemoData, []);
   const customersData = useSelector(selectCustomersData);
-  const currentCustomer = customersData.find(({ Id }) => Id === LookupCM102customersId);
+  const currentCustomer = customersData.slice(0, 20).find(({ Id }) => Id === LookupCM102customersId);
   const value = currentCustomer ? currentCustomer.FullName ?? '' : '';
 
   return (
