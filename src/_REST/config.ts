@@ -25,7 +25,8 @@ export const SelectFields = {
 export const FilterItems = {
   Appointments: `(FilterStart ge datetime'${new Date(
     new Date().getFullYear(),
-    new Date().getMonth()
+    new Date().getMonth(),
+    new Date().getDate()
   ).toISOString()}') and (FilterEnd le datetime'${new Date(new Date().getFullYear(), new Date().getMonth() + 6).toISOString()}')`,
 };
 

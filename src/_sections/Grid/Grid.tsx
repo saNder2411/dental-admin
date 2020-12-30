@@ -118,6 +118,7 @@ export const Grid: FC<Props> = ({ children }) => {
       pageable
       sortable
       data={processedData}
+      
       editField={editField}
       onItemChange={onGridItemChange}
       onDataStateChange={onDataStateChange}>

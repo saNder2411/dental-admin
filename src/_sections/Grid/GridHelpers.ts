@@ -50,129 +50,115 @@ export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, 
   return data.map((item) => (item.ID === dataItem ? { ...item, [field as string]: value } : item));
 };
 
-export const updateDataOnAddNewItemToChange = (data: GridDataItem[], dataName: GridDataName): GridDataItem[] => {
+export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): GridDataItem => {
   const ID = generateId(data);
   const color = generateColor();
 
   switch (dataName) {
     case GridDataName.Agenda:
-      return [
-        {
-          Id: ID,
-          Title: ``,
-          EventDate: new Date().toISOString(),
-          EndDate: new Date().toISOString(),
-          Duration: 60,
-          Description: ``,
-          fAllDayEvent: null,
-          RecurrenceID: null,
-          Email: null,
-          AppointmentStatus: StatusNames.Consultation,
-          LastNameAppt: ``,
-          Gender: '(1) Female',
-          Notes: null,
-          ServiceCharge: 40,
-          FilterStart: new Date().toISOString(),
-          FilterEnd: new Date().toISOString(),
-          MetroRRule: null,
-          MetroRecException: null,
-          FirstName: ``,
-          CellPhone: null,
-          LookupCM102customersId: -1,
-          LookupHR01teamId: 1,
-          LookupMultiBP01offeringsId: { results: [] },
-          ID,
-          Modified: new Date().toISOString(),
+      return {
+        Id: ID,
+        Title: ``,
+        EventDate: new Date().toISOString(),
+        EndDate: new Date().toISOString(),
+        Duration: 60,
+        Description: ``,
+        fAllDayEvent: null,
+        RecurrenceID: null,
+        Email: null,
+        AppointmentStatus: StatusNames.Consultation,
+        LastNameAppt: ``,
+        Gender: '(1) Female',
+        Notes: null,
+        ServiceCharge: 40,
+        FilterStart: new Date().toISOString(),
+        FilterEnd: new Date().toISOString(),
+        MetroRRule: null,
+        MetroRecException: null,
+        FirstName: ``,
+        CellPhone: null,
+        LookupCM102customersId: -1,
+        LookupHR01teamId: 1,
+        LookupMultiBP01offeringsId: { results: [] },
+        ID,
+        Modified: new Date().toISOString(),
 
-          TeamID: 1,
-          Start: new Date(),
-          End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
-          inEdit: true,
-          isNew: true,
-        },
-        ...data,
-      ];
+        TeamID: 1,
+        Start: new Date(),
+        End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
+        inEdit: true,
+        isNew: true,
+      };
     case GridDataName.Customers:
-      return [
-        {
-          LookupMultiHR01teamId: { results: [] },
-          Id: ID,
-          Title: '',
-          FirstName: ``,
-          FullName: '',
-          CellPhone: '',
-          Email: '',
-          Gender: '(1) Female',
-          ClientPhoto: {
-            Description: '',
-            Url: '',
-            __metadata: { type: 'SP.FieldUrlValue' },
-          },
-          ID,
-          Modified: new Date().toISOString(),
-          Created: new Date().toISOString(),
-
-          SvcStaff: '',
-          Upcoming: new Date().toISOString(),
-          ClientPhotoUrl: '',
-          inEdit: true,
-          isNew: true,
+      return {
+        LookupMultiHR01teamId: { results: [] },
+        Id: ID,
+        Title: '',
+        FirstName: ``,
+        FullName: '',
+        CellPhone: '',
+        Email: '',
+        Gender: '(1) Female',
+        ClientPhoto: {
+          Description: '',
+          Url: '',
+          __metadata: { type: 'SP.FieldUrlValue' },
         },
-        ...data,
-      ];
+        ID,
+        Modified: new Date().toISOString(),
+        Created: new Date().toISOString(),
+
+        SvcStaff: '',
+        Upcoming: new Date().toISOString(),
+        ClientPhotoUrl: '',
+        inEdit: true,
+        isNew: true,
+      };
 
     case GridDataName.Services:
-      return [
-        {
-          Id: ID,
-          Title: '',
-          OfferingsName_Edit: '',
-          ShowOnline: false,
-          ConsultReq: false,
-          MinutesDuration: 60,
-          Amount: 50,
-          OfferingCatType: '',
-          OfferingDiscount: 0,
-          ID,
-          OfferingIconName: OfferIcons.Tooth,
-          RoleSkills: [],
-          inEdit: true,
-          isNew: true,
-        },
-        ...data,
-      ];
-
+      return {
+        Id: ID,
+        Title: '',
+        OfferingsName_Edit: '',
+        ShowOnline: false,
+        ConsultReq: false,
+        MinutesDuration: 60,
+        Amount: 50,
+        OfferingCatType: '',
+        OfferingDiscount: 0,
+        ID,
+        OfferingIconName: OfferIcons.Tooth,
+        RoleSkills: [],
+        inEdit: true,
+        isNew: true,
+      };
     case GridDataName.TeamStaff:
-      return [
-        {
-          Id: ID,
-          Title: '',
-          FirstName: '',
-          FullName: '',
-          TeamProfilePhoto: {
-            __metadata: { type: 'SP.FieldUrlValue' },
-            Description: '',
-            Url: '',
-          },
-          ShowOnline: false,
-          Email: '',
-          CellPhone: '',
-          JobTitle: '',
-          Department: null,
-          CalendarColHex: color,
-          ID,
-
-          RoleSkills: [],
-          Gender: '(1) Female' as const,
-          TeamProfilePhotoUrl: '',
-          inEdit: true,
-          isNew: true,
+      return {
+        Id: ID,
+        Title: '',
+        FirstName: '',
+        FullName: '',
+        TeamProfilePhoto: {
+          __metadata: { type: 'SP.FieldUrlValue' },
+          Description: '',
+          Url: '',
         },
-        ...data,
-      ];
+        ShowOnline: false,
+        Email: '',
+        CellPhone: '',
+        JobTitle: '',
+        Department: null,
+        CalendarColHex: color,
+        ID,
 
+        RoleSkills: [],
+        Gender: '(1) Female' as const,
+        TeamProfilePhotoUrl: '',
+        inEdit: true,
+        isNew: true,
+      };
     default:
-      return data;
+      throw new Error(`Grid Data Name not correct`);
   }
 };
 

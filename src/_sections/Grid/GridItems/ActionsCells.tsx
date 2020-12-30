@@ -42,7 +42,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
-      () => GridActions.onAddNewItemToData(dispatch, dataItem)
+      () => GridActions.onAddNewItemToData(dispatch, newDataItemForApi)
     );
 
     setIsDataItemLoading(true);
@@ -56,7 +56,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
-      () => GridActions.onItemUpdatedAfterEdit(dispatch, dataItem)
+      () => GridActions.onItemUpdatedAfterEdit(dispatch, updatedDataItemForApi)
     );
 
     setIsDataItemLoading(true);

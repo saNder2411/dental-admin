@@ -92,6 +92,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
+    console.log(`onFullNameChange evtValue`, evtValue)
     const selectedCustomer = customersData.find(({ Id }) => Id === evtValue.value);
     const newTitle = selectedCustomer ? setTitleProp<number>(selectedCustomer.FirstName ?? '', selectedCustomer.Title ?? '', dataItemID) : '';
 

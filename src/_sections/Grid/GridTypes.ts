@@ -58,8 +58,11 @@ export interface GridStateActions {
 }
 
 export interface GridState {
-  eventDrivenData: GridDataItem[];
   originalData: GridDataItem[];
+  eventDrivenData: GridDataItem[];
+  originalNormalizeData: { [key: string]: GridDataItem };
+  normalizedData: { [key: string]: GridDataItem };
+  allIDs: number[];
   dataName: GridDataName;
   isDataItemLoading: boolean;
   editField: 'inEdit';

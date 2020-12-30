@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 // Instruments
 import { rootReducer } from './rootReducer';
 import { rootSaga } from './rootSaga';
@@ -22,6 +22,6 @@ export interface GlobalState {
   TeamStaffState: TeamStaffState;
 }
 
-export const store = createStore(rootReducer, composeEnhancers(compose(applyMiddleware(...middleware))));
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));
 
 sagaMiddleware.run(rootSaga);
