@@ -18,7 +18,7 @@ import { Loader } from '../_components';
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
-import { selectGridDataName } from '../_sections/Grid/GridSelectors';
+import { selectDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { TeamStaffActions } from './TeamStaffActions';
 // Hooks
@@ -26,7 +26,7 @@ import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHoo
 import { useTeamStaffStateForDomain } from './TeamStaffHooks';
 
 export const TeamStaff: FC = (): JSX.Element => {
-  const dataName = useSelector(selectGridDataName);
+  const dataName = useSelector(selectDataName);
   const { teamStaffData, teamStaffIsDataLoading } = useTeamStaffStateForDomain();
   const dispatch = useDispatch();
   const localizationService = useLocalization();

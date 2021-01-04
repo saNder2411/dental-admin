@@ -8,7 +8,7 @@ import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 import { selectServicesMemoRoleSkills } from '../../../Services/ServicesSelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
@@ -19,7 +19,7 @@ export const GenericGenderDropDownList: FC<EditCellDropDownListProps<Appointment
   onChange,
   value,
 }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dataForDropDownList = [
     { [field]: '(1) Female', value: '(1) Female' },
     { [field]: '(2) Male', value: '(2) Male' },
@@ -39,7 +39,7 @@ export const GenericBooleanFlagDropDownList: FC<EditCellDropDownListProps<Servic
   onChange,
   value,
 }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const dataForDropDownList = [
     { [field]: 'yes', value: true },
@@ -66,7 +66,7 @@ export const GenericRoleSkillsMultiSelect: FC<EditCellDropDownListProps<TeamStaf
   onChange,
   value,
 }): JSX.Element => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesRoleSkills = useMemo(selectServicesMemoRoleSkills, []);
   const roleSkills = useSelector(selectServicesRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));

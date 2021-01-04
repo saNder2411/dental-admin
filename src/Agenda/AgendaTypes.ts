@@ -79,6 +79,7 @@ export interface AgendaState {
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;
+  
   statusNameList: StatusNames[];
   isValidStartDateEvent: boolean;
   isValidEndDateEvent: boolean;

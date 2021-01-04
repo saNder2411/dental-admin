@@ -20,7 +20,7 @@ import { Loader } from '../_components';
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
-import { selectGridDataName } from '../_sections/Grid/GridSelectors';
+import { selectDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { ServicesActions } from './ServicesActions';
 // Hooks
@@ -28,7 +28,7 @@ import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHoo
 import { useServicesStateForDomain } from './ServicesHooks';
 
 export const Services: FC = (): JSX.Element => {
-  const dataName = useSelector(selectGridDataName);
+  const dataName = useSelector(selectDataName);
   const { servicesData, servicesIsDataLoading } = useServicesStateForDomain();
   const dispatch = useDispatch();
   const localizationService = useLocalization();

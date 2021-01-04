@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectGridDataItemMemoValueForCell, selectOriginalDataItemFieldValue, selectProcessDataItemFieldValue } from '../../GridSelectors';
+import { selectGridDataItemMemoValueForCell, selectByIdDataItemFieldValue, selectProcessDataItemFieldValue } from '../../GridSelectors';
 // Types
 import { GridDataItem } from '../../GridTypes';
 
@@ -18,11 +18,11 @@ export const useMemoDataItemValuesForCells = <T = GridDataItem>(ID: number, fiel
   return { memoID, memoField, cellValue, dataItemInEditValue };
 };
 
-export const useOriginalDataItemValuesForCells = (ID: number, field: keyof GridDataItem) => {
-  const selectCellValue = useMemo(() => selectOriginalDataItemFieldValue(ID, field), [ID, field]);
-  const selectDataItemInEditValue = useMemo(() => selectOriginalDataItemFieldValue(ID, `inEdit`), [ID]);
+export const useOriginalDataItemValuesForCells = <T extends GridDataItem = GridDataItem, U = any>(ID: number, field: keyof T) => {
+  const selectCellValue = useMemo(() => selectByIdDataItemFieldValue(ID, field), [ID, field]);
+  const selectDataItemInEditValue = useMemo(() => selectByIdDataItemFieldValue(ID, `inEdit`), [ID]);
 
-  const cellValue = useSelector(selectCellValue);
+  const cellValue: U = useSelector(selectCellValue);
   const dataItemInEditValue = (useSelector(selectDataItemInEditValue) as unknown) as boolean;
   return { cellValue, dataItemInEditValue };
 };

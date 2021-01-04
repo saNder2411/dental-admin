@@ -1,7 +1,7 @@
 // Types
 import { ActionTypes, AgendaState, Actions, AppointmentDataItem, StatusNames } from './AgendaTypes';
 // Helpers
-import { updateDataAfterEditItem, updateDataAfterRemoveItem, getNormalizedData } from '../_sections/Grid/GridHelpers';
+import { updateDataAfterEditItem, updateDataAfterRemoveItem, transformArrayDataToByIdData } from '../_sections/Grid/GridHelpers';
 
 export const initialState = {
   isDataLoading: false,
@@ -26,7 +26,7 @@ export const reducer = (state: AgendaState = initialState, action: Actions): Age
       return { ...state, isDataLoading: true, data: [], dataError: `` };
 
     case ActionTypes.FETCH_DATA_SUCCESS:
-      const [normalizedData, allIDs] = getNormalizedData<AppointmentDataItem>(action.payload);
+      const [normalizedData, allIDs] = transformArrayDataToByIdData<AppointmentDataItem>(action.payload);
       return { ...state, data: action.payload, normalizedData, allIDs, dataError: `` };
 
     case ActionTypes.FETCH_DATA_FAILURE:

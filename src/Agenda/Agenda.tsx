@@ -23,7 +23,7 @@ import { Loader } from '../_components';
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
-import { selectGridDataName } from '../_sections/Grid/GridSelectors';
+import { selectDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { AgendaActions } from './AgendaActions';
 // Hooks
@@ -31,7 +31,7 @@ import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks
 import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
-  const dataName = useSelector(selectGridDataName);
+  const dataName = useSelector(selectDataName);
   const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
   const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.status', 'Status')}
             columnMenu={ColumnMenu}
             cell={AgendaStatusCell as CustomGridCell}
-            width={140}
+            minResizableWidth={140}
             filter={'text'}
           />
           <GridColumn
@@ -59,7 +59,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
             cell={AgendaReferenceCell as CustomGridCell}
-            width={140}
+            minResizableWidth={140}
             filter={'text'}
           />
           <GridColumn
@@ -67,7 +67,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.start', 'Start')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            width={190}
+            minResizableWidth={190}
             cell={AgendaStartDateCell as CustomGridCell}
           />
           <GridColumn
@@ -75,14 +75,14 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.end', 'End')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            width={190}
+            minResizableWidth={190}
             cell={AgendaEndDateCell as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01teamId'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
-            width={160}
+            minResizableWidth={160}
             filter={'text'}
             cell={AgendaSvcStaffCell as CustomGridCell}
           />
@@ -91,14 +91,14 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.services', 'Services')}
             columnMenu={ColumnMenu}
             cell={AgendaServicesCell as CustomGridCell}
-            width={160}
+            minResizableWidth={190}
             filter={'text'}
           />
           <GridColumn
             field={'ServiceCharge'}
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
-            width={90}
+            minResizableWidth={90}
             cell={GenericCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
@@ -106,7 +106,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'LookupCM102customersId'}
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
-            width={190}
+            minResizableWidth={190}
             cell={AgendaFullNameCell as CustomGridCell}
             filter={'text'}
           />
@@ -116,11 +116,11 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             cell={GenericGenderCell as CustomGridCell}
             filter={'text'}
-            width={160}
+            minResizableWidth={160}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
-            width={140}
+            minResizableWidth={140}
             cell={ActionsControlCell as CustomGridCell}
           />
         </Grid>

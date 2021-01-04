@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Input } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
@@ -12,7 +12,7 @@ import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { GridDataItem } from '../GridTypes';
 
 export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
@@ -20,7 +20,7 @@ export const GenericTextInput: FC<EditCellProps<GridDataItem, string | number>> 
 };
 
 export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | ServiceDataItem>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const onReferenceChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
@@ -29,7 +29,7 @@ export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | Servi
 };
 
 export const GenericAvatarInput: FC<EditCellProps<TeamStaffDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });

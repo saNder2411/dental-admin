@@ -17,7 +17,7 @@ import { CustomerDataItem } from '../../../Customers';
 // Selectors
 import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
 import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Actions
 import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 // Helpers
@@ -29,8 +29,9 @@ import {
 } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
-export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, StatusNames>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, StatusNames>> = ({ dataItemID, field, onChange }) => {
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, field));
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectStatusNameList = useMemo(selectAgendaMemoStatusNameList, []);
   const statusNameList = useSelector(selectStatusNameList);
   const dataForDropDownList = statusNameList.map((value) => ({ [field]: value, value }));
@@ -50,7 +51,7 @@ export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<Appointmen
   domainData,
   value,
 }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dataForDropdownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
   const dropDownListValue = dataForDropdownList.find((item) => item.text === value);
 
@@ -68,7 +69,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
   domainData,
   value,
 }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidFullName = useSelector(selectIsValidFullNameValue);
   const [filter, setFilter] = useState('');
@@ -124,7 +125,7 @@ export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<Appointment
   value,
   domainData,
 }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const multiSelectData = domainData ? transformDomainDataToMultiSelectData(domainData) : [];
   const multiSelectValue = transformDomainDataToMultiSelectData(value);
 

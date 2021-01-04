@@ -6,13 +6,13 @@ import { GridCellProps, EditCellDropDownListProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
-import { selectGridDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
+import { selectDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
 // Helpers
 import { onGridDropDownChange, transformTeamStaffDataToMultiSelectData } from './GridItemsHelpers';
 
 export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, field, onChange }): JSX.Element => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
@@ -39,7 +39,7 @@ export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<
   value,
   domainData,
 }): JSX.Element => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const multiSelectData = domainData ? transformTeamStaffDataToMultiSelectData(domainData) : [];
   const multiSelectValue = transformTeamStaffDataToMultiSelectData(value);
 

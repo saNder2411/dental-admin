@@ -3,24 +3,22 @@ import { createSelector } from 'reselect';
 import { GlobalState } from '../../_init';
 import { GridDataItem } from '../Grid/GridTypes';
 
-const selectGridOriginalData = ({ GridState }: GlobalState) => GridState.originalData;
+const selectViewOriginalData = ({ GridState }: GlobalState) => GridState.viewOriginalData;
 
-const selectGridOriginalObjectData = ({ GridState }: GlobalState) => GridState.originalObjectData;
+const selectByIdData = ({ GridState }: GlobalState) => GridState.byId;
 
-const selectGridProcessData = ({ GridState }: GlobalState) => GridState.processData;
+const selectProcessByIdData = ({ GridState }: GlobalState) => GridState.processById;
 
-export const selectGridDataName = ({ GridState }: GlobalState) => GridState.dataName;
+export const selectDataName = ({ GridState }: GlobalState) => GridState.dataName;
 
-export const selectGridEditField = ({ GridState }: GlobalState) => GridState.editField;
+export const selectLabelForAddNewItemBtn = ({ GridState }: GlobalState) => GridState.labelForAddNewItemBtn;
 
-export const selectGridTitleForAddNewItemSection = ({ GridState }: GlobalState) => GridState.titleForAddNewItemSection;
+export const selectDataItemIsLoading = ({ GridState }: GlobalState) => GridState.isDataItemLoading;
 
-export const selectGridDataItemIsLoading = ({ GridState }: GlobalState) => GridState.isDataItemLoading;
+export const selectMemoViewOriginalData = () => createSelector(selectViewOriginalData, (viewOriginalData) => viewOriginalData);
 
-export const selectGridMemoOriginalData = () => createSelector(selectGridOriginalData, (originalData) => originalData);
-
-export const selectGridMemoDataItem = <T extends GridDataItem = GridDataItem>(ID: number) =>
-  createSelector(selectGridProcessData, (processData): T => processData[ID] as T);
+export const selectMemoProcessDataItem = <T extends GridDataItem = GridDataItem>(ID: number) =>
+  createSelector(selectProcessByIdData, (processById): T => processById[ID] as T);
 
 export const selectGridDataItemMemoValueForCell = <T>(ID: number, field: keyof T) =>
   createSelector(
@@ -28,8 +26,8 @@ export const selectGridDataItemMemoValueForCell = <T>(ID: number, field: keyof T
     (value) => value
   );
 
-export const selectOriginalDataItemFieldValue = <T extends GridDataItem = GridDataItem>(ID: number, field: keyof T) =>
-  createSelector(selectGridOriginalObjectData, (originalObjectData) => originalObjectData[ID][field as keyof GridDataItem]);
+export const selectByIdDataItemFieldValue = <T extends GridDataItem = GridDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
+  createSelector(selectByIdData, (byId): U => byId[ID][field as keyof GridDataItem] as U);
 
-export const selectProcessDataItemFieldValue = <T extends GridDataItem = GridDataItem>(ID: number, field: keyof T) =>
-  createSelector(selectGridProcessData, (processData) => processData[ID][field as keyof GridDataItem]);
+export const selectProcessDataItemFieldValue = <T extends GridDataItem = GridDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
+  createSelector(selectProcessByIdData, (processById): U => processById[ID][field as keyof GridDataItem] as U);

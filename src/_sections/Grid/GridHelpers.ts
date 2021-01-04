@@ -4,14 +4,14 @@ import { StatusNames } from '../../Agenda';
 import { GridDataItem, GridDataName } from './GridTypes';
 import { OfferIcons } from '../../Services';
 
-export const getNormalizedData = <T extends GridDataItem = GridDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
+export const transformArrayDataToByIdData = <T extends GridDataItem = GridDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
   const allIDs: number[] = [];
-  const normalizedData = data.reduce((acc: { [key: string]: T }, item) => {
+  const byIdData = data.reduce((acc: { [key: string]: T }, item) => {
     acc[item.ID] = item;
     allIDs.push(item.ID);
     return acc;
   }, {});
-  return [normalizedData, allIDs];
+  return [byIdData, allIDs];
 };
 
 export const generateId = (data: GridDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
@@ -55,7 +55,7 @@ export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): Gr
   const color = generateColor();
 
   switch (dataName) {
-    case GridDataName.Agenda:
+    case GridDataName.Appointments:
       return {
         Id: ID,
         Title: ``,
@@ -132,7 +132,7 @@ export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): Gr
         inEdit: true,
         isNew: true,
       };
-    case GridDataName.TeamStaff:
+    case GridDataName.Staff:
       return {
         Id: ID,
         Title: '',
@@ -178,17 +178,17 @@ const UniqueEntityKeys = {
   TeamStaff: 'JobTitle',
 };
 
-export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem): { titleForAddNewItemSection: string; dataName: GridDataName } => {
-  if (!dataItem) return { titleForAddNewItemSection: '', dataName: GridDataName.Default };
+export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem): { labelForAddNewItemBtn: string; dataName: GridDataName } => {
+  if (!dataItem) return { labelForAddNewItemBtn: '', dataName: GridDataName.Default };
 
   if (UniqueEntityKeys.Appointments in dataItem) {
-    return { titleForAddNewItemSection: 'New Appointment', dataName: GridDataName.Agenda };
+    return { labelForAddNewItemBtn: 'New Appointment', dataName: GridDataName.Appointments };
   } else if (UniqueEntityKeys.Services in dataItem) {
-    return { titleForAddNewItemSection: 'New Service', dataName: GridDataName.Services };
+    return { labelForAddNewItemBtn: 'New Service', dataName: GridDataName.Services };
   } else if (UniqueEntityKeys.Customers in dataItem) {
-    return { titleForAddNewItemSection: 'New Customer', dataName: GridDataName.Customers };
+    return { labelForAddNewItemBtn: 'New Customer', dataName: GridDataName.Customers };
   } else if (UniqueEntityKeys.TeamStaff in dataItem) {
-    return { titleForAddNewItemSection: 'New Staff', dataName: GridDataName.TeamStaff };
+    return { labelForAddNewItemBtn: 'New Staff', dataName: GridDataName.Staff };
   }
-  return { titleForAddNewItemSection: '', dataName: GridDataName.Default };
+  return { labelForAddNewItemBtn: '', dataName: GridDataName.Default };
 };

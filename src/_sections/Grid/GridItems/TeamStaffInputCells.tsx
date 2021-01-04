@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Input, MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
@@ -14,7 +14,7 @@ import { TeamStaffEditCellsActions } from '../../../TeamStaff/TeamStaffActions';
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const TeamStaffFullNameInput: FC<EditCellProps<TeamStaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidFullName = useSelector(selectIsValidFullNameField);
 
@@ -33,7 +33,7 @@ export const TeamStaffFullNameInput: FC<EditCellProps<TeamStaffDataItem, string>
 };
 
 export const TeamStaffJobTitleInput: FC<EditCellProps<TeamStaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidJobTitle = useSelector(selectIsValidJobTitleField);
 
@@ -52,7 +52,7 @@ export const TeamStaffJobTitleInput: FC<EditCellProps<TeamStaffDataItem, string>
 };
 
 export const TeamStaffMobilePhoneInput: FC<EditCellProps<TeamStaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidMobilePhone = useSelector(selectIsValidMobilePhoneField);
   const errorMessage = phoneValidator(value);

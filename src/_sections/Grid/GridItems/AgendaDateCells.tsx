@@ -7,7 +7,7 @@ import { Error } from '@progress/kendo-react-labels';
 // Styled Components
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 import { selectAgendaMemoData, selectIsValidStartDateEvent, selectIsValidEndDateEvent } from '../../../Agenda/AgendaSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
@@ -18,7 +18,7 @@ import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 
 export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01teamId');
   const LookupHR01teamId = cellValue as number;
@@ -92,7 +92,7 @@ export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem, Date>> 
 };
 
 export const AgendaEndDateInput: FC<EditCellProps<AppointmentDataItem, Date>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(dataItemID, 'LookupHR01teamId');
   const LookupHR01teamId = cellValue as number;

@@ -2,7 +2,7 @@ import React, { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
@@ -14,7 +14,7 @@ import { CustomersEditCellsActions } from '../../../Customers/CustomersActions';
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidMobilePhone = useSelector(selectCustomersIsValidMobilePhoneField);
   const errorMessage = phoneValidator(value);

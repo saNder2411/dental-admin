@@ -19,7 +19,7 @@ import { Loader } from '../_components';
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
-import { selectGridDataName } from '../_sections/Grid/GridSelectors';
+import { selectDataName } from '../_sections/Grid/GridSelectors';
 // Actions
 import { CustomersActions } from './CustomersActions';
 // Hooks
@@ -27,7 +27,7 @@ import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks
 import { useCustomersStateForDomain, useActionMetaForCustomersFetchData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
-  const dataName = useSelector(selectGridDataName);
+  const dataName = useSelector(selectDataName);
   const { customersData, customersIsDataLoading } = useCustomersStateForDomain();
   const teamStaffDataLength = useActionMetaForCustomersFetchData();
   const dispatch = useDispatch();

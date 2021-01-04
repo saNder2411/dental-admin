@@ -3,140 +3,137 @@
 import { ActionTypes, GridState, Actions, GridDataName } from './GridTypes';
 // Helpers
 import {
-  getNormalizedData,
-  updateDataAfterAddItemToEdit,
+  transformArrayDataToByIdData,
+  // updateDataAfterAddItemToEdit,
   updateDataAfterEditItem,
   updateDataAfterRemoveItem,
-  updateDataOnChangeItem,
+  // updateDataOnChangeItem,
   getNewDataItem,
   updateDataAfterEditNewItem,
   setTitleForAddNewItemSectionAndDataName,
-  updateDataAfterCancelEdit,
+  // updateDataAfterCancelEdit,
 } from './GridHelpers';
 
 const initialState = {
-  originalData: [],
-  eventDrivenData: [],
-  originalObjectData: {},
-  processData: {},
+  viewOriginalData: [],
+  byId: {},
+  processById: {},
   allIDs: [],
   dataName: GridDataName.Default,
+  isDataLoading: false,
   isDataItemLoading: false,
-  editField: 'inEdit' as const,
-  titleForAddNewItemSection: '',
+  dataError: ``,
+  dataItemError: ``,
+  labelForAddNewItemBtn: '',
+  entities: {
+    appointments: { originalData: [], byId: {}, allIDs: [] },
+    customers: { originalData: [], byId: {}, allIDs: [] },
+    staff: { originalData: [], byId: {}, allIDs: [] },
+    services: { originalData: [], byId: {}, allIDs: [] },
+  },
 };
 
 export const reducer = (state: GridState = initialState, action: Actions): GridState => {
   switch (action.type) {
-    case ActionTypes.SET_DATA:
-      const [processData, allIDs] = getNormalizedData(action.payload);
+    // View
+    case ActionTypes.CHANGE_VIEW_ORIGINAL_DATA:
+      const [byId, allIDs] = transformArrayDataToByIdData(action.payload);
       return {
         ...state,
-        eventDrivenData: action.payload,
-        originalData: [...action.payload],
-        processData,
-        originalObjectData: { ...processData },
+        viewOriginalData: action.payload,
+        byId,
+        processById: { ...byId },
         allIDs,
         ...setTitleForAddNewItemSectionAndDataName(action.payload[0]),
       };
 
-    case ActionTypes.SET_DATA_NAME_DEFAULT:
-      return { ...state, dataName: GridDataName.Default };
+    case ActionTypes.CHANGE_DATA_NAME:
+      return { ...state, dataName: action.payload };
 
+    // Edit
     case ActionTypes.ADD_ITEM_TO_EDIT:
-      const inEditDataItem = { ...state.processData[action.payload], inEdit: true };
+      const inEditDataItem = { ...state.processById[action.payload], inEdit: true };
       return {
         ...state,
-        eventDrivenData: updateDataAfterAddItemToEdit(state.eventDrivenData, action.payload),
-        processData: { ...state.processData, [action.payload]: inEditDataItem },
-        // originalObjectData: { ...state.originalObjectData, [action.payload]: { ...inEditDataItem } },
+        processById: { ...state.processById, [action.payload]: inEditDataItem },
+        byId: { ...state.byId, [action.payload]: { ...inEditDataItem } },
       };
 
     case ActionTypes.UPDATE_ITEM_AFTER_EDIT:
-      const newDataAfterEditItem = updateDataAfterEditItem(state.eventDrivenData, action.payload);
-      const updatedNormalizeItem = { ...action.payload, inEdit: false, isNew: false };
+      const newDataAfterEditItem = updateDataAfterEditItem(state.viewOriginalData, action.payload);
+      const updatedByIdItem = { ...action.payload, inEdit: false, isNew: false };
       return {
         ...state,
-        eventDrivenData: newDataAfterEditItem,
-        originalData: [...newDataAfterEditItem],
-        processData: { ...state.processData, [action.payload.ID]: updatedNormalizeItem },
-        originalObjectData: { ...state.originalObjectData, [action.payload.ID]: { ...updatedNormalizeItem } },
+        viewOriginalData: newDataAfterEditItem,
+        processById: { ...state.processById, [action.payload.ID]: updatedByIdItem },
+        byId: { ...state.byId, [action.payload.ID]: { ...updatedByIdItem } },
         isDataItemLoading: false,
       };
 
     case ActionTypes.REMOVE_ITEM_FROM_DATA:
-      const newDataAfterRemoveItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
-      const newAllIDs = state.allIDs.filter((ID) => ID !== action.payload);
-      delete state.processData[action.payload];
-      delete state.originalObjectData[action.payload];
+      const newDataAfterRemoveItem = updateDataAfterRemoveItem(state.viewOriginalData, action.payload);
+      const newAllIDsAfterRemoveItem = state.allIDs.filter((ID) => ID !== action.payload);
+      delete state.processById[action.payload];
+      delete state.byId[action.payload];
       return {
         ...state,
-        eventDrivenData: newDataAfterRemoveItem,
-        originalData: [...newDataAfterRemoveItem],
-        processData: { ...state.processData },
-        originalObjectData: { ...state.originalObjectData },
-        allIDs: [...newAllIDs],
+        viewOriginalData: newDataAfterRemoveItem,
+        processById: { ...state.processById },
+        byId: { ...state.byId },
+        allIDs: [...newAllIDsAfterRemoveItem],
         isDataItemLoading: false,
       };
 
     case ActionTypes.CANCEL_EDIT:
-      const originalDataItem = state.originalObjectData[action.payload];
+      const originalDataItem = state.byId[action.payload];
       return {
         ...state,
-        eventDrivenData: updateDataAfterCancelEdit(state.eventDrivenData, state.originalData, action.payload),
-        processData: { ...state.processData, [action.payload]: { ...originalDataItem, inEdit: false } },
-        // originalObjectData: { ...state.originalObjectData, [action.payload]: { ...originalDataItem } },
+        processById: { ...state.processById, [action.payload]: { ...originalDataItem, inEdit: false } },
+        byId: { ...state.byId, [action.payload]: { ...originalDataItem, inEdit: false } },
       };
 
     case ActionTypes.CHANGE_ITEM:
-      const changeNormalizeItem = state.processData[action.payload.dataItem];
+      const changeProcessItem = state.processById[action.payload.dataItem];
       return {
         ...state,
-        eventDrivenData: updateDataOnChangeItem(state.eventDrivenData, action.payload),
-        processData: {
-          ...state.processData,
-          [action.payload.dataItem]: { ...changeNormalizeItem, [action.payload.field as string]: action.payload.value },
+        processById: {
+          ...state.processById,
+          [action.payload.dataItem]: { ...changeProcessItem, [action.payload.field as string]: action.payload.value },
         },
       };
 
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
-      const newDataItem = getNewDataItem(state.eventDrivenData, state.dataName);
+      const newDataItem = getNewDataItem(state.viewOriginalData, state.dataName);
       return {
         ...state,
-        eventDrivenData: [newDataItem, ...state.eventDrivenData],
-        originalData: [newDataItem, ...state.originalData],
-        processData: { ...state.processData, [newDataItem.ID]: newDataItem },
-        originalObjectData: { ...state.originalObjectData, [newDataItem.ID]: { ...newDataItem } },
+        viewOriginalData: [newDataItem, ...state.viewOriginalData],
+        processById: { ...state.processById, [newDataItem.ID]: newDataItem },
+        byId: { ...state.byId, [newDataItem.ID]: { ...newDataItem } },
         allIDs: [newDataItem.ID, ...state.allIDs],
       };
 
     case ActionTypes.ADD_NEW_ITEM_TO_DATA:
-      const newDataAfterEditNewItem = updateDataAfterEditNewItem(state.eventDrivenData, action.payload);
+      const newDataAfterEditNewItem = updateDataAfterEditNewItem(state.viewOriginalData, action.payload);
       return {
         ...state,
-        eventDrivenData: newDataAfterEditNewItem,
-        originalData: [...newDataAfterEditNewItem],
-        processData: { ...state.processData, [action.payload.ID]: action.payload },
-        originalObjectData: { ...state.originalObjectData, [action.payload.ID]: { ...action.payload } },
+        viewOriginalData: newDataAfterEditNewItem,
+        processById: { ...state.processById, [action.payload.ID]: action.payload },
+        byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
         isDataItemLoading: false,
       };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
-      const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.eventDrivenData, action.payload);
+      const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.viewOriginalData, action.payload);
       const updatedAllIDs = state.allIDs.filter((ID) => ID !== action.payload);
-      delete state.processData[action.payload];
-      delete state.originalObjectData[action.payload];
+      delete state.processById[action.payload];
+      delete state.byId[action.payload];
       return {
         ...state,
-        eventDrivenData: newDataAfterDiscardAddNewItem,
-        originalData: [...newDataAfterDiscardAddNewItem],
-        processData: { ...state.processData },
-        originalObjectData: { ...state.originalObjectData },
+        viewOriginalData: newDataAfterDiscardAddNewItem,
+        processById: { ...state.processById },
+        byId: { ...state.byId },
         allIDs: [...updatedAllIDs],
       };
-
-    case ActionTypes.DATA_ITEM_FETCHING:
-      return { ...state, isDataItemLoading: action.payload };
 
     default:
       return state;

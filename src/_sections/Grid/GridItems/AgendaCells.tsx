@@ -47,10 +47,11 @@ export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ da
 };
 
 export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
-  const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<AppointmentDataItem>(memoID, memoField), [memoField, memoID]);
-  const cellValue = useSelector(selectDataItemValue);
+  // const memoID = useMemo(() => ID, [ID]);
+  // const memoField = useMemo(() => field, [field]);
+  // const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<AppointmentDataItem>(memoID, memoField), [memoField, memoID]);
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem>(ID, field));
+  // const cellValue = useSelector(selectDataItemValue);
 
   const iconName = cellValue ? cellValue : StatusNames.Consultation;
 
@@ -62,15 +63,13 @@ export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
 };
 
 export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-
+  // const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(ID, field);
   return (
     <td>
-      {dataItemInEditValue ? (
-        <AgendaStatusDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue as StatusNames} />
-      ) : (
-        cellValue
-      )}
+      {dataItemInEditValue ? <AgendaStatusDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} /> : cellValue}
     </td>
   );
 };

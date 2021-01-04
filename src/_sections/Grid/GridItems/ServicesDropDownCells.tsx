@@ -5,7 +5,7 @@ import { MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropd
 import { EditCellDropDownListProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 import { selectServicesMemoCategories } from '../../../Services/ServicesSelectors';
 
 export const ServicesCategoryMultiSelect: FC<EditCellDropDownListProps<ServiceDataItem, string>> = ({
@@ -14,7 +14,7 @@ export const ServicesCategoryMultiSelect: FC<EditCellDropDownListProps<ServiceDa
   onChange,
   value,
 }): JSX.Element => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesCategories = useMemo(selectServicesMemoCategories, []);
   const categories = useSelector(selectServicesCategories);
   const multiSelectData = Array.from(new Set(categories)).map((value) => ({ text: value, value }));

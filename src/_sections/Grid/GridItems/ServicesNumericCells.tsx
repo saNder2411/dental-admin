@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectGridDataItemIsLoading } from '../GridSelectors';
+import { selectDataItemIsLoading } from '../GridSelectors';
 // Types
 import { EditCellNumericProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
@@ -15,7 +15,7 @@ export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem, number>> 
   step,
   min,
 }): JSX.Element => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
@@ -31,7 +31,7 @@ export const ServicesNumericForDiscount: FC<EditCellNumericProps<ServiceDataItem
   step,
   min,
 }): JSX.Element => {
-  const isDataItemLoading = useSelector(selectGridDataItemIsLoading);
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value: value ? value / 100 : value });

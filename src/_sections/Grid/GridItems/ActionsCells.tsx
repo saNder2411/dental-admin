@@ -17,23 +17,23 @@ import { GridActions } from '../GridActions';
 // Helpers
 import { getOnFinallyRequestDataItem } from './GridItemsHelpers';
 // Hooks
-import { useGridStateForActionsCell, useDomainActions } from '../GridHooks';
+import { useDomainActions } from '../GridHooks';
 import { useSelectValidateField } from './GridItemsHooks';
 // Selectors
-import { selectGridMemoDataItem } from '../GridSelectors';
+import { selectMemoProcessDataItem, selectDataName } from '../GridSelectors';
 
 export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const selectDataItem = useMemo(() => selectGridMemoDataItem<GridDataItem>(ID), [ID]);
+  const selectDataItem = useMemo(() => selectMemoProcessDataItem<GridDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
   const isValidFields = useSelectValidateField();
 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const [showRemoveDialog, setShowRemoveDialog] = useState(false);
-  const { editField, gridDataName } = useGridStateForActionsCell();
+  const gridDataName = useSelector(selectDataName);
   const DomainActions = useDomainActions(gridDataName);
   const dispatch = useDispatch();
 
-  const inEdit = dataItem[editField];
+  const inEdit = dataItem.inEdit;
   const isNewItem = dataItem.isNew;
 
   const onAddItemToData = () => {

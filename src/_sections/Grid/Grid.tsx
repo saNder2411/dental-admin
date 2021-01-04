@@ -8,7 +8,7 @@ import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
-import { selectGridEditField, selectGridTitleForAddNewItemSection, selectGridMemoOriginalData } from './GridSelectors';
+import { selectLabelForAddNewItemBtn, selectMemoViewOriginalData } from './GridSelectors';
 import { GridActions } from './GridActions';
 
 export const ColumnMenu: FC<any> = (props) => {
@@ -27,11 +27,10 @@ interface Props {
 export const Grid: FC<Props> = ({ children }) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
-  const selectOriginalData = useMemo(selectGridMemoOriginalData, []);
+  const selectOriginalData = useMemo(selectMemoViewOriginalData, []);
 
   const originalData = useSelector(selectOriginalData);
-  const editField = useSelector(selectGridEditField);
-  const addItemTitle = useSelector(selectGridTitleForAddNewItemSection);
+  const addItemTitle = useSelector(selectLabelForAddNewItemBtn);
   const dispatch = useDispatch();
   const { onItemChange, onAddNewItem } = GridActions;
 
@@ -118,8 +117,6 @@ export const Grid: FC<Props> = ({ children }) => {
       pageable
       sortable
       data={processedData}
-      
-      editField={editField}
       onItemChange={onGridItemChange}
       onDataStateChange={onDataStateChange}>
       <GridToolbar>
