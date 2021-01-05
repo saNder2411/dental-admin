@@ -23,12 +23,23 @@ export const updateDataAfterAddItemToEdit = (data: GridDataItem[], editItemID: n
 };
 
 export const updateDataAfterEditItem = <T extends GridDataItem = GridDataItem>(data: T[], dataItem: T): T[] => {
+  // Delete isNew and inEdit field after change reducer
   const updatedItem = { ...dataItem, inEdit: false, isNew: false };
   const index = data.findIndex(({ ID }) => ID === dataItem.ID);
 
   if (index < 0) return data;
 
   return [...data.slice(0, index), updatedItem, ...data.slice(index + 1)];
+};
+
+export const updateDataAfterEditNewItem = <T extends GridDataItem = GridDataItem>(data: T[], dataItem: T): T[] => {
+  // Delete isNew and inEdit field after change reducer
+  const newItem = { ...dataItem, inEdit: false, isNew: false };
+  const index = data.findIndex(({ ID }) => ID === dataItem.ID);
+
+  if (index < 0) return data;
+
+  return [...data.slice(0, index), newItem, ...data.slice(index + 1)];
 };
 
 export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>(data: T[], removeItemID: number): T[] => {
@@ -160,15 +171,6 @@ export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): Gr
     default:
       throw new Error(`Grid Data Name not correct`);
   }
-};
-
-export const updateDataAfterEditNewItem = (data: GridDataItem[], dataItem: GridDataItem): GridDataItem[] => {
-  const newItem = { ...dataItem, inEdit: false, isNew: false };
-  const index = data.findIndex(({ ID }) => ID === dataItem.ID);
-
-  if (index < 0) return data;
-
-  return [...data.slice(0, index), newItem, ...data.slice(index + 1)];
 };
 
 const UniqueEntityKeys = {

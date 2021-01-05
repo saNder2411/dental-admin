@@ -17,7 +17,7 @@ import { IconMap } from '../../../_instruments';
 // Types
 import { StatusNames } from '../../../Agenda/AgendaTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 //Actions
 import { SchedulerActions } from '../SchedulerActions';
 import { AgendaActions } from '../../../Agenda/AgendaActions';
@@ -46,7 +46,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const [isRemoveOccurrence, setIsRemoveOccurrence] = useState(false);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
-  const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
+  const resource = (group.resources[0] as unknown) as StaffDataItem;
   const color = resource.CalendarColHex;
   const iconName = dataItem.AppointmentStatus;
   const iconDentalName = StatusNames.Tooth;

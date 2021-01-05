@@ -11,13 +11,13 @@ export const useDomainActions = (gridDataName: GridDataName) => {
     case GridDataName.Services:
       return ServicesActions;
 
-    case GridDataName.TeamStaff:
+    case GridDataName.Staff:
       return TeamStaffActions;
 
     case GridDataName.Customers:
       return CustomersActions;
 
-    case GridDataName.Agenda:
+    case GridDataName.Appointments:
       return AgendaActions;
 
     default:

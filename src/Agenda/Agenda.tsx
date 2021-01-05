@@ -15,8 +15,8 @@ import {
   AgendaServicesCell,
   GenericCurrencyCell,
   AgendaFullNameCell,
-  GenericGenderCell,
-  ActionsControlCell,
+  AgendaGenderCell,
+  AgendaActionsControlCell,
 } from '../_sections/Grid';
 import { Loader } from '../_components';
 // Types
@@ -24,24 +24,22 @@ import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectDataName } from '../_sections/Grid/GridSelectors';
-// Actions
-import { AgendaActions } from './AgendaActions';
 // Hooks
 import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
-import { useAgendaStateForDomain, useActionMetaForAgendaFetchData, useFetchAgendaData } from './AgendaHooks';
+import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
   const dataName = useSelector(selectDataName);
-  const { agendaData, agendaIsDataLoading } = useAgendaStateForDomain();
-  const { servicesDataLength, teamStaffDataLength, customersDataLength } = useActionMetaForAgendaFetchData();
+  const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
+  const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchAgendaData(agendaData.length, servicesDataLength, teamStaffDataLength, customersDataLength, AgendaActions, dispatch);
-  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Agenda, agendaData, agendaIsDataLoading, dispatch);
+  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
+  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Appointments, appointmentsData, isDataLoading, dispatch);
 
-  const hasAgendaData = dataName === GridDataName.Agenda;
-  const contentTSX = hasAgendaData && !agendaIsDataLoading && (
+  const hasAgendaData = dataName === GridDataName.Appointments;
+  const contentTSX = hasAgendaData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid>
@@ -51,7 +49,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.status', 'Status')}
             columnMenu={ColumnMenu}
             cell={AgendaStatusCell as CustomGridCell}
-            minResizableWidth={140}
+            minResizableWidth={160}
             filter={'text'}
           />
           <GridColumn
@@ -59,7 +57,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
             cell={AgendaReferenceCell as CustomGridCell}
-            minResizableWidth={140}
+            minResizableWidth={130}
             filter={'text'}
           />
           <GridColumn
@@ -98,7 +96,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'ServiceCharge'}
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
-            minResizableWidth={90}
+            width={90}
             cell={GenericCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
@@ -114,14 +112,14 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={GenericGenderCell as CustomGridCell}
+            cell={AgendaGenderCell as CustomGridCell}
             filter={'text'}
             minResizableWidth={160}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
             minResizableWidth={140}
-            cell={ActionsControlCell as CustomGridCell}
+            cell={AgendaActionsControlCell as CustomGridCell}
           />
         </Grid>
       </div>
@@ -131,7 +129,7 @@ export const Agenda: FC = (): JSX.Element => {
   return (
     <>
       {contentTSX}
-      <Loader className="mt-5" isLoading={agendaIsDataLoading} size={'large'} type="infinite-spinner" />
+      <Loader className="mt-5" isLoading={isDataLoading} size={'large'} type="infinite-spinner" />
     </>
   );
 };

@@ -1,8 +1,8 @@
-// import { Dispatch } from 'redux';
-// import { GridItemChangeEvent } from '@progress/kendo-react-grid';
+import { Dispatch } from 'redux';
+import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
 import { AppointmentDataItem } from '../../Agenda';
-import { TeamStaffDataItem } from '../../TeamStaff';
+import { StaffDataItem } from '../../TeamStaff';
 import { CustomerDataItem } from '../../Customers';
 import { ServiceDataItem } from '../../Services';
 // Actions
@@ -80,7 +80,7 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type GridDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: TeamStaffDataItem; type3: CustomerDataItem; type4: ServiceDataItem }>;
+export type GridDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: StaffDataItem; type3: CustomerDataItem; type4: ServiceDataItem }>;
 
 export enum GridDataName {
   Default = 'Empty',
@@ -90,26 +90,39 @@ export enum GridDataName {
   Services = 'Services',
 }
 
-// export interface DomainStateActionsType<T> {
-//   fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) => void;
-//   createDataItem: (dispatch: Dispatch, createdDataItem: T, onAddDataItemToGridData: () => void) => void;
-//   updateDataItem: (dispatch: Dispatch, updatedDataItem: T, onUpdateDataItemInGridData: () => void) => void;
-//   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => void;
-// }
+export enum StatusNames {
+  Consultation = '(1) Consultation',
+  Pending = '(2) Pending',
+  Reserved = '(3) Reserved',
+  Booked = '(4) Booked',
+  Paid = '(5) Paid',
+  Checking = '(6) Checking',
+  Cancelled = '(7) Cancelled',
+  Closed = '(8) Closed',
+  Unavailable = '(9) Unavailable',
+  Other = '(10) Other',
+  Tooth = '(11) Tooth',
+}
 
-// export interface GridStateActions {
-//   setData: (dispatch: Dispatch, data: GridDataItem[]) => void;
-//   setDataNameDefault: (dispatch: Dispatch) => void;
-//   setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => void;
-//   onItemEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-//   onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-//   onItemRemove: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-//   onCancelEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-//   onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
-//   onAddNewItem: (dispatch: Dispatch) => void;
-//   onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-//   onDiscardNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-// }
+export interface DomainStateActionsType<T> {
+  fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) => void;
+  createDataItem: (dispatch: Dispatch, createdDataItem: T, onAddDataItemToGridData: () => void) => void;
+  updateDataItem: (dispatch: Dispatch, updatedDataItem: T, onUpdateDataItemInGridData: () => void) => void;
+  deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => void;
+}
+
+export interface GridStateActions {
+  changeViewOriginalData: (dispatch: Dispatch, data: GridDataItem[]) => void;
+  changeDataName: (dispatch: Dispatch, dataName: GridDataName) => void;
+  onItemEdit: (dispatch: Dispatch, dataItemID: number) => void;
+  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onItemRemove: (dispatch: Dispatch, dataItemID: number) => void;
+  onCancelEdit: (dispatch: Dispatch, dataItemID: number) => void;
+  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
+  onAddNewItem: (dispatch: Dispatch) => void;
+  onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
+  onDiscardNewItemToData: (dispatch: Dispatch, dataItemID: number) => void;
+}
 
 export interface GridState {
   viewOriginalData: GridDataItem[];
@@ -122,20 +135,21 @@ export interface GridState {
   dataError: string;
   dataItemError: string;
   labelForAddNewItemBtn: string;
+  statusNameList: StatusNames[];
   entities: {
     appointments: { originalData: AppointmentDataItem[]; byId: { [key: string]: AppointmentDataItem }; allIDs: number[] };
     customers: { originalData: CustomerDataItem[]; byId: { [key: string]: CustomerDataItem }; allIDs: number[] };
-    staff: { originalData: TeamStaffDataItem[]; byId: { [key: string]: ServiceDataItem }; allIDs: number[] };
+    staff: { originalData: StaffDataItem[]; byId: { [key: string]: StaffDataItem }; allIDs: number[] };
     services: { originalData: ServiceDataItem[]; byId: { [key: string]: ServiceDataItem }; allIDs: number[] };
   };
 }
 
-// export type DomainsStateActions = InferValueTypes<{
-//   type1: DomainStateActionsType<ServiceDataItem>;
-//   type2: DomainStateActionsType<TeamStaffDataItem>;
-//   type3: DomainStateActionsType<CustomerDataItem>;
-//   type4: DomainStateActionsType<AppointmentDataItem>;
-// }>;
+export type DomainsStateActions = InferValueTypes<{
+  type1: DomainStateActionsType<ServiceDataItem>;
+  type2: DomainStateActionsType<StaffDataItem>;
+  type3: DomainStateActionsType<CustomerDataItem>;
+  type4: DomainStateActionsType<AppointmentDataItem>;
+}>;
 
 export type FetchAppointmentsDataInitAsyncActionType = ReturnType<typeof actions.fetchAppointmentsDataInitAsyncAC>;
 
@@ -166,4 +180,3 @@ export type DeleteCustomerDataItemInitAsyncActionType = ReturnType<typeof action
 export type DeleteStaffDataItemInitAsyncActionType = ReturnType<typeof actions.deleteStaffDataItemInitAsyncAC>;
 
 export type DeleteServiceDataItemInitAsyncActionType = ReturnType<typeof actions.deleteServiceDataItemInitAsyncAC>;
-

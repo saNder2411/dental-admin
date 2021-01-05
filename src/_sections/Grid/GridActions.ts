@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
 // Types
-import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 import { GridDataItem } from './GridTypes';
-import { GridStateActions } from './GridTypes';
+import { GridStateActions, GridDataName } from './GridTypes';
 // ActionCreators
 import {
-  setDataAC,
-  setDataNameDefaultAC,
+  changeViewOriginalDataAC,
+  changeDataNameAC,
   addItemToEditAC,
   updateItemAfterEditAC,
   removeItemFromDataAC,
@@ -15,19 +14,17 @@ import {
   addNewItemToEditAC,
   addNewItemToDataAC,
   discardAddNewItemToDataAC,
-  dataItemFetchingAC,
 } from './GridAC';
 
 export const GridActions: GridStateActions = {
-  setData: (dispatch: Dispatch, data: GridDataItem[]) => dispatch(setDataAC(data)),
-  setDataNameDefault: (dispatch: Dispatch) => dispatch(setDataNameDefaultAC()),
-  setIsGridDataItemLoading: (dispatch: Dispatch, isLoading: boolean) => dispatch(dataItemFetchingAC(isLoading)),
-  onItemEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(addItemToEditAC(ID)),
+  changeViewOriginalData: (dispatch: Dispatch, data: GridDataItem[]) => dispatch(changeViewOriginalDataAC(data)),
+  changeDataName: (dispatch: Dispatch, dataName: GridDataName) => dispatch(changeDataNameAC(dataName)),
+  onItemEdit: (dispatch: Dispatch, dataItemID: number) => dispatch(addItemToEditAC(dataItemID)),
   onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(updateItemAfterEditAC(dataItem)),
-  onItemRemove: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(removeItemFromDataAC(ID)),
-  onCancelEdit: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(cancelEditAC(ID)),
-  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => dispatch(changeItemAC(evt)),
+  onItemRemove: (dispatch: Dispatch, dataItemID: number) => dispatch(removeItemFromDataAC(dataItemID)),
+  onCancelEdit: (dispatch: Dispatch, dataItemID: number) => dispatch(cancelEditAC(dataItemID)),
+  onItemChange: (dispatch: Dispatch) => (evt: any) => dispatch(changeItemAC(evt)),
   onAddNewItem: (dispatch: Dispatch) => dispatch(addNewItemToEditAC()),
   onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => dispatch(addNewItemToDataAC(dataItem)),
-  onDiscardNewItemToData: (dispatch: Dispatch, { ID }: GridDataItem) => dispatch(discardAddNewItemToDataAC(ID)),
+  onDiscardNewItemToData: (dispatch: Dispatch, dataItemID: number) => dispatch(discardAddNewItemToDataAC(dataItemID)),
 };

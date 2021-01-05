@@ -14,19 +14,20 @@ import { IconMap } from '../../../_instruments';
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
 // Selectors
-import { selectGridDataItemMemoValueForCell, selectProcessDataItemFieldValue } from '../GridSelectors';
-import { selectServicesMemoData } from '../../../Services/ServicesSelectors';
-import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
-import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
+import {
+  selectProcessDataItemFieldValue,
+  selectStaffLastNameByID,
+  selectCustomerFullNameByID,
+  selectServicesNameByID,
+  selectCustomerGenderByID,
+} from '../GridSelectors';
 // Hooks
-import { useMemoDataItemValuesForCells, useOriginalDataItemValuesForCells, useProcessDataItemValuesForCells } from './GridItemsHooks';
+import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isString } from './GridItemsHelpers';
 
 export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  // const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  // const { cellValue } = useProcessDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem>(ID, field));
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, string | null>(ID, field));
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const strValue = isString(cellValue) ? cellValue : '';
@@ -47,11 +48,7 @@ export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ da
 };
 
 export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  // const memoID = useMemo(() => ID, [ID]);
-  // const memoField = useMemo(() => field, [field]);
-  // const selectDataItemValue = useMemo(() => selectGridDataItemMemoValueForCell<AppointmentDataItem>(memoID, memoField), [memoField, memoID]);
-  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem>(ID, field));
-  // const cellValue = useSelector(selectDataItemValue);
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames | null>(ID, field));
 
   const iconName = cellValue ? cellValue : StatusNames.Consultation;
 
@@ -63,10 +60,10 @@ export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
 };
 
 export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  // const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(ID, field);
+
   return (
     <td>
       {dataItemInEditValue ? <AgendaStatusDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} /> : cellValue}
@@ -75,94 +72,91 @@ export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
 };
 
 export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const LookupHR01teamId = cellValue as number;
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, field);
 
-  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
-  const teamStaffData = useSelector(selectTeamStaffData);
+  const selectStaffLastName = useMemo(() => selectStaffLastNameByID(cellValue), [cellValue]);
+  const staffLastName = useSelector(selectStaffLastName);
 
-  const currentEmployee = teamStaffData.find(({ Id }) => Id === LookupHR01teamId);
-  const value = currentEmployee ? currentEmployee.Title : '';
+  const value = staffLastName ? staffLastName : '';
 
   return (
-    <td>
-      {dataItemInEditValue ? (
-        <AgendaSvcStaffDropDownList dataItemID={memoID} field={memoField} onChange={onChange} domainData={teamStaffData} value={value} />
-      ) : (
-        value
-      )}
-    </td>
+    <td>{dataItemInEditValue ? <AgendaSvcStaffDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={value} /> : value}</td>
   );
 };
 
 export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const LookupMultiBP01offeringsId = cellValue as { results: number[] };
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, { results: number[] }>(ID, field);
 
-  const selectServicesData = useMemo(selectServicesMemoData, []);
-  const servicesData = useSelector(selectServicesData);
-  const currentServices = servicesData.filter(({ Id }) => LookupMultiBP01offeringsId.results.find((serviceID) => serviceID === Id));
-  const value = currentServices.map(({ OfferingsName_Edit }) => OfferingsName_Edit ?? '').join(' | ');
+  const selectServicesName = useMemo(() => selectServicesNameByID(cellValue.results), [cellValue.results]);
+  const servicesName = useSelector(selectServicesName);
 
   return (
     <td>
       {dataItemInEditValue ? (
-        <AgendaServicesMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} value={currentServices} domainData={servicesData} />
+        <AgendaServicesMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} value={servicesName} />
       ) : (
-        value
+        servicesName
       )}
     </td>
   );
 };
 
 export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
-  const LookupCM102customersId = cellValue as number;
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, field);
 
-  const selectCustomersData = useMemo(selectCustomersMemoData, []);
-  const customersData = useSelector(selectCustomersData);
-  const currentCustomer = customersData.slice(0, 20).find(({ Id }) => Id === LookupCM102customersId);
-  const value = currentCustomer ? currentCustomer.FullName ?? '' : '';
+  const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(cellValue), [cellValue]);
+  const customerFullName = useSelector(selectCustomerFullName);
+
+  const value = customerFullName ? customerFullName : '';
 
   return (
-    <td>
-      {dataItemInEditValue ? (
-        <AgendaFullNameDropDownList dataItemID={memoID} field={memoField} onChange={onChange} domainData={customersData} value={value} />
-      ) : (
-        value
-      )}
-    </td>
+    <td>{dataItemInEditValue ? <AgendaFullNameDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={value} /> : value}</td>
   );
 };
 
 export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, Date>(ID, field);
   const intlService = useInternationalization();
-  const value = cellValue as Date;
 
   return (
     <td style={{ padding: '18px 12px' }}>
       {dataItemInEditValue ? (
-        <AgendaStartDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+        <AgendaStartDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} />
       ) : (
-        intlService.formatDate(value, 'H:mm | dd.MM')
+        intlService.formatDate(cellValue, 'H:mm | dd.MM')
       )}
     </td>
   );
 };
 
 export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem>(ID, field);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, Date>(ID, field);
   const intlService = useInternationalization();
-  const value = cellValue as Date;
 
   return (
-    <td>
+    <td style={{ padding: '18px 12px' }}>
       {dataItemInEditValue ? (
-        <AgendaEndDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+        <AgendaEndDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} />
       ) : (
-        intlService.formatDate(value, 'H:mm | dd.MM')
+        intlService.formatDate(cellValue, 'H:mm | dd.MM')
       )}
     </td>
   );
+};
+
+export const AgendaGenderCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(ID, 'LookupCM102customersId'));
+  const gender = useSelector(selectCustomerGenderByID(cellValue));
+
+  return <td>{gender}</td>;
 };

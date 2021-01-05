@@ -4,7 +4,7 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 // Types
 import { GridCellProps, EditCellDropDownListProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
 import { selectDataItemIsLoading, selectGridDataItemMemoValueForCell } from '../GridSelectors';
 import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
@@ -32,7 +32,7 @@ export const CustomersSvcStaffDropDownList: FC<GridCellProps<CustomerDataItem>> 
   );
 };
 
-export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<CustomerDataItem, TeamStaffDataItem[], TeamStaffDataItem[]>> = ({
+export const CustomersLastAppointmentsMultiSelect: FC<EditCellDropDownListProps<CustomerDataItem, StaffDataItem[], StaffDataItem[]>> = ({
   dataItemID,
   field,
   onChange,

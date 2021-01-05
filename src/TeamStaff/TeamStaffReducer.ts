@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, TeamStaffState, Actions, TeamStaffDataItem } from './TeamStaffTypes';
+import { ActionTypes, TeamStaffState, Actions, StaffDataItem } from './TeamStaffTypes';
 // Helpers
 import { updateDataAfterEditItem, updateDataAfterRemoveItem } from '../_sections/Grid/GridHelpers';
 
@@ -44,7 +44,7 @@ export const reducer = (state: TeamStaffState = initialState, action: Actions): 
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
-      const updatedData = updateDataAfterEditItem(state.data, action.payload) as TeamStaffDataItem[];
+      const updatedData = updateDataAfterEditItem(state.data, action.payload) as StaffDataItem[];
       return { ...state, data: updatedData, dataItemError: `` };
 
     case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
@@ -57,7 +57,7 @@ export const reducer = (state: TeamStaffState = initialState, action: Actions): 
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as TeamStaffDataItem[];
+      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem(state.data, action.payload) as StaffDataItem[];
       return { ...state, data: updatedDataAfterDeleteDataItem, dataItemError: `` };
 
     case ActionTypes.DELETE_DATA_ITEM_FAILURE:

@@ -12,7 +12,7 @@ import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Helpers
 import { isString, isNumber } from './GridItemsHelpers';
 // Images
@@ -58,9 +58,9 @@ export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | Servic
   );
 };
 
-export const GenericAvatarCell: FC<GridCellProps<TeamStaffDataItem | CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<TeamStaffDataItem | CustomerDataItem>(ID, field);
-  const { cellValue: Gender } = useMemoDataItemValuesForCells<TeamStaffDataItem | CustomerDataItem>(ID, 'Gender');
+export const GenericAvatarCell: FC<GridCellProps<StaffDataItem | CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<StaffDataItem | CustomerDataItem>(ID, field);
+  const { cellValue: Gender } = useMemoDataItemValuesForCells<StaffDataItem | CustomerDataItem>(ID, 'Gender');
   const strValue = isString(cellValue) ? cellValue : '';
   const placeholderImageUrl = Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
@@ -118,12 +118,12 @@ export const GenericGenderCell: FC<GridCellProps<AppointmentDataItem | CustomerD
   );
 };
 
-export const GenericBooleanFlagCell: FC<GridCellProps<ServiceDataItem | TeamStaffDataItem>> = ({
+export const GenericBooleanFlagCell: FC<GridCellProps<ServiceDataItem | StaffDataItem>> = ({
   dataItem: { ID },
   onChange,
   field,
 }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | TeamStaffDataItem>(ID, field);
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | StaffDataItem>(ID, field);
   const flag = !!cellValue;
 
   return dataItemInEditValue ? (
@@ -137,12 +137,12 @@ export const GenericBooleanFlagCell: FC<GridCellProps<ServiceDataItem | TeamStaf
   );
 };
 
-export const GenericRoleSkillsCell: FC<GridCellProps<TeamStaffDataItem | ServiceDataItem>> = ({
+export const GenericRoleSkillsCell: FC<GridCellProps<StaffDataItem | ServiceDataItem>> = ({
   dataItem: { ID },
   onChange,
   field,
 }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | TeamStaffDataItem>(ID, field);
+  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | StaffDataItem>(ID, field);
   const currentRoleSkills = cellValue as string[] | null;
   const value = currentRoleSkills ? currentRoleSkills.join(' | ') : '';
 

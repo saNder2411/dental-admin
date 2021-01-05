@@ -6,14 +6,14 @@ import { SchedulerEditSlot } from './SchedulerEditSlot';
 // Actions
 import { SchedulerActions } from '../SchedulerActions';
 // Types
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
 import { selectMemoNewDataItem } from '../SchedulerSelectors';
 
 export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
   (props) => {
     const { start: Start, end: End, group } = props;
-    const resource = (group.resources[0] as unknown) as TeamStaffDataItem;
+    const resource = (group.resources[0] as unknown) as StaffDataItem;
     const dispatch = useDispatch();
     const renders = useRef(0);
     if (Start === End) {

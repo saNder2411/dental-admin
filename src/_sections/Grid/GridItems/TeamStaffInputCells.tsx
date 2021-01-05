@@ -5,7 +5,7 @@ import { Input, MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-
 import { selectDataItemIsLoading } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Selectors
 import { selectIsValidFullNameField, selectIsValidJobTitleField, selectIsValidMobilePhoneField } from '../../../TeamStaff/TeamStaffSelectors';
 // Actions
@@ -13,7 +13,7 @@ import { TeamStaffEditCellsActions } from '../../../TeamStaff/TeamStaffActions';
 // Helpers
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
-export const TeamStaffFullNameInput: FC<EditCellProps<TeamStaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
+export const TeamStaffFullNameInput: FC<EditCellProps<StaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidFullName = useSelector(selectIsValidFullNameField);
@@ -32,7 +32,7 @@ export const TeamStaffFullNameInput: FC<EditCellProps<TeamStaffDataItem, string>
   return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} valid={isValidFullName} placeholder="This field is required." />;
 };
 
-export const TeamStaffJobTitleInput: FC<EditCellProps<TeamStaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
+export const TeamStaffJobTitleInput: FC<EditCellProps<StaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidJobTitle = useSelector(selectIsValidJobTitleField);
@@ -51,7 +51,7 @@ export const TeamStaffJobTitleInput: FC<EditCellProps<TeamStaffDataItem, string>
   return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} valid={isValidJobTitle} placeholder="This field is required." />;
 };
 
-export const TeamStaffMobilePhoneInput: FC<EditCellProps<TeamStaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
+export const TeamStaffMobilePhoneInput: FC<EditCellProps<StaffDataItem, string>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidMobilePhone = useSelector(selectIsValidMobilePhoneField);

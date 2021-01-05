@@ -11,76 +11,77 @@ import {
 // Types
 import { EditCellDropDownListProps } from './GridItemsTypes';
 import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
-import { CustomerDataItem } from '../../../Customers';
 // Selectors
-import { selectAgendaMemoStatusNameList, selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
-import { selectCustomersMemoData } from '../../../Customers/CustomersSelectors';
-import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
+import { selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
+import {
+  selectDataItemIsLoading,
+  selectProcessDataItemFieldValue,
+  selectMemoStatusNameList,
+  selectStaffDataForDropDownListData,
+  selectStaffLastNameByID,
+  selectCustomersDataForDropDownListData,
+  selectCustomersByIdData,
+  selectCustomerFullNameByID,
+  selectServicesDataForDropDownListData,
+} from '../GridSelectors';
 // Actions
 import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 // Helpers
-import {
-  onGridDropDownChange,
-  transformDomainDataToDropDownListData,
-  transformDomainDataToMultiSelectData,
-  EmptyDropDownListDataItem,
-} from './GridItemsHelpers';
+import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, StatusNames>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectStatusNameList = useMemo(selectAgendaMemoStatusNameList, []);
+  const selectStatusNameList = useMemo(selectMemoStatusNameList, []);
   const statusNameList = useSelector(selectStatusNameList);
-  const dataForDropDownList = statusNameList.map((value) => ({ [field]: value, value }));
+  const dataForDropDownList = statusNameList.map((value) => ({ text: value, value }));
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 
   const onStatusChange = onGridDropDownChange<AppointmentDataItem>(dataItemID, field, onChange);
 
   return (
-    <DropDownList onChange={onStatusChange} value={dropDownListValue} data={dataForDropDownList} textField={field} disabled={isDataItemLoading} />
+    <DropDownList onChange={onStatusChange} value={dropDownListValue} data={dataForDropDownList} textField="text" disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, string, TeamStaffDataItem[]>> = ({
-  dataItemID,
-  field,
-  onChange,
-  domainData,
-  value,
-}) => {
+export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const dataForDropdownList = domainData ? transformDomainDataToDropDownListData(domainData) : [];
-  const dropDownListValue = dataForDropdownList.find((item) => item.text === value);
+  const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
+  const dataForDropdownList = useSelector(selectStaffDropDownListData);
+  const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
+  const selectStaffLastName = useMemo(() => selectStaffLastNameByID(value), [value]);
+  const staffLastName = useSelector(selectStaffLastName);
+  const dropDownListValue = { text: staffLastName, value };
 
   const onSvcStaffChange = onGridDropDownChange<AppointmentDataItem>(dataItemID, field, onChange);
 
   return (
-    <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={dataForDropdownList} textField="text" disabled={isDataItemLoading} />
+    <DropDownList onChange={onSvcStaffChange} value={dropDownListValue} data={memoDropDownListData} textField="text" disabled={isDataItemLoading} />
   );
 };
 
-export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, string, CustomerDataItem[]>> = ({
-  dataItemID,
-  field,
-  onChange,
-  domainData,
-  value,
-}) => {
+export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
   const isValidFullName = useSelector(selectIsValidFullNameValue);
   const [filter, setFilter] = useState('');
-  const dataForDropDownList = domainData ? transformDomainDataToDropDownListData(domainData.slice(0, 20)) : [];
-  const filteredDataForDropDownList = !filter
-    ? dataForDropDownList
-    : dataForDropDownList.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
-  const dropDownListValue = filteredDataForDropDownList.find((item) => item.text === value) ?? EmptyDropDownListDataItem;
+  const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
+  const dataForDropdownList = useSelector(selectCustomerDropDownListData);
+  const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
 
-  const selectCustomersData = useMemo(selectCustomersMemoData, []);
-  const customersData = useSelector(selectCustomersData);
+  const filteredDataForDropDownList = !filter
+    ? memoDropDownListData
+    : memoDropDownListData.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
+
+  const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(value), [value]);
+  const customerFullName = useSelector(selectCustomerFullName);
+  const dropDownListValue = { text: customerFullName, value };
+
+  const selectCustomersById = useMemo(() => selectCustomersByIdData, []);
+  const customersById = useSelector(selectCustomersById);
 
   useEffect(() => {
     if (value) return;
@@ -93,7 +94,7 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
-    const selectedCustomer = customersData.find(({ Id }) => Id === evtValue.value);
+    const selectedCustomer = customersById[evtValue.value];
     const newTitle = selectedCustomer ? setTitleProp<number>(selectedCustomer.FirstName ?? '', selectedCustomer.Title ?? '', dataItemID) : '';
 
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evtValue.value });
@@ -118,16 +119,13 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
   );
 };
 
-export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AppointmentDataItem, ServiceDataItem[], ServiceDataItem[]>> = ({
-  dataItemID,
-  field,
-  onChange,
-  value,
-  domainData,
-}) => {
+export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, { results: number[] }>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const multiSelectData = domainData ? transformDomainDataToMultiSelectData(domainData) : [];
-  const multiSelectValue = transformDomainDataToMultiSelectData(value);
+  const selectServicesDropDownListData = useMemo(selectServicesDataForDropDownListData, []);
+  const dataForDropdownList = useSelector(selectServicesDropDownListData);
+  const memoMultiSelectData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
+  const multiSelectValue = memoMultiSelectData.filter((item) => value.results.find((ID) => ID === item.value));
 
   const onServicesChange = (evt: MultiSelectChangeEvent) => {
     onChange({
@@ -138,5 +136,7 @@ export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<Appointment
     });
   };
 
-  return <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
+  return (
+    <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={memoMultiSelectData} textField="text" disabled={isDataItemLoading} />
+  );
 };

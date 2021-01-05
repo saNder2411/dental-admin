@@ -22,7 +22,7 @@ export interface CustomGridCell extends FC<KendoGridCellProps> {
   (props: GridCellProps): JSX.Element;
 }
 
-export interface InputChangeEvent  {
+export interface InputChangeEvent {
   nativeEvent: Event;
   syntheticEvent: SyntheticEvent<HTMLInputElement>;
   target: Input;

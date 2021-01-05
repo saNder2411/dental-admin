@@ -3,13 +3,13 @@ import React, { FC } from 'react';
 import { TeamStaffFullNameInput, TeamStaffJobTitleInput, TeamStaffMobilePhoneInput } from './TeamStaffInputCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 // Helpers
 import { isString } from './GridItemsHelpers';
 // Hooks
 import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
-export const TeamStaffFullNameCell: FC<GridCellProps<TeamStaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+export const TeamStaffFullNameCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
@@ -18,7 +18,7 @@ export const TeamStaffFullNameCell: FC<GridCellProps<TeamStaffDataItem>> = ({ da
   );
 };
 
-export const TeamStaffJobTitleCell: FC<GridCellProps<TeamStaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+export const TeamStaffJobTitleCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
@@ -27,7 +27,7 @@ export const TeamStaffJobTitleCell: FC<GridCellProps<TeamStaffDataItem>> = ({ da
   );
 };
 
-export const TeamStaffMobilePhoneCell: FC<GridCellProps<TeamStaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+export const TeamStaffMobilePhoneCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
   const strValue = isString(cellValue) ? cellValue : '';
 

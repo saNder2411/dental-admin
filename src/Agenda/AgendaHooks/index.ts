@@ -1,3 +1,3 @@
-export * from './useAgendaStateForDomain';
-export * from './useActionMetaForAgendaFetchData';
+export * from './useSelectAppointmentsData';
+export * from './useSelectBindDataLengthForAgenda';
 export * from './useFetchAgendaData';

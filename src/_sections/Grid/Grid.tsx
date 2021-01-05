@@ -1,6 +1,13 @@
 import React, { FC, useRef, useState, useCallback, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Grid as KendoGrid, GridColumn, GridColumnMenuSort, GridColumnMenuFilter, GridToolbar } from '@progress/kendo-react-grid';
+import {
+  Grid as KendoGrid,
+  GridColumn,
+  GridColumnMenuSort,
+  GridColumnMenuFilter,
+  GridToolbar,
+  GridItemChangeEvent,
+} from '@progress/kendo-react-grid';
 import { Button } from '@progress/kendo-react-buttons';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import { ExcelExport } from '@progress/kendo-react-excel-export';
@@ -9,7 +16,8 @@ import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
 import { selectLabelForAddNewItemBtn, selectMemoViewOriginalData } from './GridSelectors';
-import { GridActions } from './GridActions';
+// Action Creators
+import { changeItemAC, addNewItemToEditAC } from '../Grid/GridAC';
 
 export const ColumnMenu: FC<any> = (props) => {
   return (
@@ -32,9 +40,14 @@ export const Grid: FC<Props> = ({ children }) => {
   const originalData = useSelector(selectOriginalData);
   const addItemTitle = useSelector(selectLabelForAddNewItemBtn);
   const dispatch = useDispatch();
-  const { onItemChange, onAddNewItem } = GridActions;
 
-  const onGridItemChange = useCallback(onItemChange(dispatch), [dispatch, onItemChange]);
+  const onGridItemChange = useCallback(
+    (evt: GridItemChangeEvent) => {
+      evt.syntheticEvent.persist();
+      dispatch(changeItemAC({ dataItemID: evt.dataItem, field: evt?.field ?? '', value: evt.value }));
+    },
+    [dispatch]
+  );
 
   const [take, setTake] = useState(10);
   const [skip, setSkip] = useState(0);
@@ -128,7 +141,7 @@ export const Grid: FC<Props> = ({ children }) => {
               placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
             />
             <span className="Grid__addNewItemTitle">{addItemTitle}</span>
-            <button title="Add new" className="k-button" onClick={() => onAddNewItem(dispatch)}>
+            <button title="Add new" className="k-button" onClick={() => dispatch(addNewItemToEditAC())}>
               <span className="k-icon k-i-plus-circle" />
             </button>
           </span>

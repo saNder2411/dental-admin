@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
@@ -6,9 +6,11 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { AppHeader } from '.';
 // SC
-import * as SC from './AppItemsStyled/CustomDrawerItemStyled'
-// Actions
-import { GridActions } from '../_sections/Grid/GridActions';
+import * as SC from './AppItemsStyled/CustomDrawerItemStyled';
+// Action Creators
+import { changeDataNameAC } from '../_sections/Grid/GridAC';
+// Types
+import { GridDataName } from '../_sections/Grid/GridTypes';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
 
@@ -32,7 +34,7 @@ const getSelectedItemName = (pathname: string): string => {
 export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ...others }): JSX.Element => {
   const isCalendar = route === '/calendar';
   const dispatch = useDispatch();
-  const onClick = () => isCalendar && GridActions.setDataNameDefault(dispatch);
+  const onClick = useCallback(() => isCalendar && dispatch(changeDataNameAC(GridDataName.Default)), [dispatch, isCalendar]);
 
   return (
     <SC.CustomDrawerItem>

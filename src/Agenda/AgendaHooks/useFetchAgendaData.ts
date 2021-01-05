@@ -1,20 +1,16 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
-// Types
-import { DomainStateActionsType } from '../../_sections/Grid/GridTypes';
-import { AppointmentDataItem } from '../AgendaTypes';
+// ActionCreators
+import { fetchAppointmentsDataInitAsyncAC } from '../../_sections/Grid/GridAC';
 
 export const useFetchAgendaData = (
-  agendaDataLength: number,
+  appointmentsDataLength: number,
   servicesDataLength: number,
-  teamStaffDataLength: number,
+  staffDataLength: number,
   customersDataLength: number,
-  AgendaActions: DomainStateActionsType<AppointmentDataItem>,
   dispatch: Dispatch
-) => {
+) =>
   useEffect(() => {
-    if (agendaDataLength > 0) return;
-
-    AgendaActions.fetchData(dispatch, { servicesDataLength, teamStaffDataLength, customersDataLength });
-  }, [dispatch, AgendaActions, agendaDataLength, servicesDataLength, teamStaffDataLength, customersDataLength]);
-};
+    if (appointmentsDataLength > 0) return;
+    dispatch(fetchAppointmentsDataInitAsyncAC({ servicesDataLength, staffDataLength, customersDataLength }));
+  }, [dispatch, appointmentsDataLength, servicesDataLength, customersDataLength, staffDataLength]);

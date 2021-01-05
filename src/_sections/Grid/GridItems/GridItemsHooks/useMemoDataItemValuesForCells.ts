@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectGridDataItemMemoValueForCell, selectByIdDataItemFieldValue, selectProcessDataItemFieldValue } from '../../GridSelectors';
+import { selectGridDataItemMemoValueForCell, selectByIdDataItemFieldValue } from '../../GridSelectors';
 // Types
 import { GridDataItem } from '../../GridTypes';
 
@@ -19,19 +19,19 @@ export const useMemoDataItemValuesForCells = <T = GridDataItem>(ID: number, fiel
 };
 
 export const useOriginalDataItemValuesForCells = <T extends GridDataItem = GridDataItem, U = any>(ID: number, field: keyof T) => {
-  const selectCellValue = useMemo(() => selectByIdDataItemFieldValue(ID, field), [ID, field]);
-  const selectDataItemInEditValue = useMemo(() => selectByIdDataItemFieldValue(ID, `inEdit`), [ID]);
-
-  const cellValue: U = useSelector(selectCellValue);
-  const dataItemInEditValue = (useSelector(selectDataItemInEditValue) as unknown) as boolean;
-  return { cellValue, dataItemInEditValue };
-};
-
-export const useProcessDataItemValuesForCells = <T extends GridDataItem = GridDataItem>(ID: number, field: keyof T) => {
-  const selectCellValue = useMemo(() => selectProcessDataItemFieldValue<T>(ID, field), [ID, field]);
-  const selectDataItemInEditValue = useMemo(() => selectProcessDataItemFieldValue(ID, `inEdit`), [ID]);
+  const selectCellValue = useMemo(() => selectByIdDataItemFieldValue<T, U>(ID, field), [ID, field]);
+  const selectDataItemInEditValue = useMemo(() => selectByIdDataItemFieldValue<T, boolean | undefined>(ID, `inEdit`), [ID]);
 
   const cellValue = useSelector(selectCellValue);
   const dataItemInEditValue = (useSelector(selectDataItemInEditValue) as unknown) as boolean;
   return { cellValue, dataItemInEditValue };
 };
+
+// export const useProcessDataItemValuesForCells = <T extends GridDataItem = GridDataItem, U = any>(ID: number, field: keyof T) => {
+//   const selectCellValue = useMemo(() => selectProcessDataItemFieldValue<T, U>(ID, field), [ID, field]);
+//   const selectDataItemInEditValue = useMemo(() => selectProcessDataItemFieldValue(ID, `inEdit`), [ID]);
+
+//   const cellValue = useSelector(selectCellValue);
+//   const dataItemInEditValue = (useSelector(selectDataItemInEditValue) as unknown) as boolean;
+//   return { cellValue, dataItemInEditValue };
+// };

@@ -7,7 +7,7 @@ import { selectDataItemIsLoading } from '../GridSelectors';
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { GridDataItem } from '../GridTypes';
 
@@ -28,7 +28,7 @@ export const GenericReferenceInput: FC<EditCellProps<AppointmentDataItem | Servi
   return <Input value={value} onChange={onReferenceChange} disabled={isDataItemLoading} />;
 };
 
-export const GenericAvatarInput: FC<EditCellProps<TeamStaffDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange, value }) => {
+export const GenericAvatarInput: FC<EditCellProps<StaffDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange, value }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>

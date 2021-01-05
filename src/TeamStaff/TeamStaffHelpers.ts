@@ -1,10 +1,10 @@
 // Types
-import { QueryTeamStaffDataItem, TeamStaffDataItem, MutationTeamStaffDataItem } from './TeamStaffTypes';
+import { QueryTeamStaffDataItem, StaffDataItem, MutationTeamStaffDataItem } from './TeamStaffTypes';
 
-export const transformAPIData = (apiResults: QueryTeamStaffDataItem[]): TeamStaffDataItem[] =>
+export const transformAPIData = (apiResults: QueryTeamStaffDataItem[]): StaffDataItem[] =>
   apiResults.map(({ __metadata, ...others }) => ({ ...others, TeamProfilePhotoUrl: others.TeamProfilePhoto?.Url ?? '' }));
 
-export const transformAPIDataItem = ({ __metadata, ...others }: QueryTeamStaffDataItem): TeamStaffDataItem => ({
+export const transformAPIDataItem = ({ __metadata, ...others }: QueryTeamStaffDataItem): StaffDataItem => ({
   ...others,
   TeamProfilePhotoUrl: others.TeamProfilePhoto?.Url ?? '',
 });
@@ -16,7 +16,7 @@ export const transformDataItemForAPI = ({
   RoleSkills,
   Gender,
   ...others
-}: TeamStaffDataItem): MutationTeamStaffDataItem => {
+}: StaffDataItem): MutationTeamStaffDataItem => {
   return {
     ...others,
     TeamProfilePhoto: TeamProfilePhoto

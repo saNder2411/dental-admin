@@ -32,9 +32,9 @@ export const TeamStaff: FC = (): JSX.Element => {
   const localizationService = useLocalization();
 
   useFetchDataForDomain(teamStaffData.length, TeamStaffActions, dispatch);
-  useSetGridData(dataName, GridDataName.TeamStaff, teamStaffData, dispatch);
+  useSetGridData(dataName, GridDataName.Staff, teamStaffData, dispatch);
 
-  const hasTeamStaffData = dataName === GridDataName.TeamStaff;
+  const hasTeamStaffData = dataName === GridDataName.Staff;
   const contentTSX = hasTeamStaffData && !teamStaffIsDataLoading && (
     <div className="card-container grid">
       <div className="card-component">

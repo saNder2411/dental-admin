@@ -9,7 +9,7 @@ import { Loader } from '../../../_components';
 import { GridCellProps } from './GridItemsTypes';
 import { GridDataItem } from '../GridTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 // Actions
@@ -38,7 +38,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
 
   const onAddItemToData = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const newDataItemForApi = others as ServiceDataItem & TeamStaffDataItem & CustomerDataItem & AppointmentDataItem;
+    const newDataItemForApi = others as ServiceDataItem & StaffDataItem & CustomerDataItem & AppointmentDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
@@ -46,13 +46,12 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
     );
 
     setIsDataItemLoading(true);
-    GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.createDataItem(dispatch, newDataItemForApi, onFinallyRequestDataItem);
   };
 
   const onItemUpdated = () => {
     const { inEdit, isNew, ...others } = dataItem;
-    const updatedDataItemForApi = others as ServiceDataItem & TeamStaffDataItem & CustomerDataItem & AppointmentDataItem;
+    const updatedDataItemForApi = others as ServiceDataItem & StaffDataItem & CustomerDataItem & AppointmentDataItem;
 
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
@@ -60,19 +59,17 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
     );
 
     setIsDataItemLoading(true);
-    GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.updateDataItem(dispatch, updatedDataItemForApi, onFinallyRequestDataItem);
   };
 
   const onDeleteItem = () => {
     const onFinallyRequestDataItem = getOnFinallyRequestDataItem(
       () => setIsDataItemLoading(false),
-      () => GridActions.onItemRemove(dispatch, dataItem)
+      () => GridActions.onItemRemove(dispatch, dataItem.ID)
     );
 
     setShowRemoveDialog(false);
     setIsDataItemLoading(true);
-    GridActions.setIsGridDataItemLoading(dispatch, true);
     DomainActions.deleteDataItem(dispatch, dataItem.ID, onFinallyRequestDataItem);
   };
 
@@ -90,7 +87,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
           </button>
           <button
             className="k-button btn-custom"
-            onClick={() => (isNewItem ? GridActions.onDiscardNewItemToData(dispatch, dataItem) : GridActions.onCancelEdit(dispatch, dataItem))}
+            onClick={() => (isNewItem ? GridActions.onDiscardNewItemToData(dispatch, dataItem.ID) : GridActions.onCancelEdit(dispatch, dataItem.ID))}
             disabled={isDataItemLoading}>
             <span className="k-icon k-i-x custom-icon" />
           </button>
@@ -103,7 +100,7 @@ export const ActionsControlCell: FC<GridCellProps<GridDataItem>> = ({ dataItem: 
         <Loader className="d-flex justify-content-center align-items-center" isLoading={isDataItemLoading} themeColor="tertiary" />
       ) : (
         <>
-          <button className="k-button btn-custom" onClick={() => GridActions.onItemEdit(dispatch, dataItem)}>
+          <button className="k-button btn-custom" onClick={() => GridActions.onItemEdit(dispatch, dataItem.ID)}>
             <span className="k-icon k-i-edit custom-icon" />
           </button>
           <button className="k-button btn-custom" onClick={() => setShowRemoveDialog(true)}>

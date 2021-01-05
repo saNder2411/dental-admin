@@ -40,7 +40,7 @@ export interface QueryTeamStaffDataItem extends BackendImmutableKey {
   };
 }
 
-export interface TeamStaffDataItem extends BackendImmutableKey, FrontendKey {}
+export interface StaffDataItem extends BackendImmutableKey, FrontendKey {}
 
 export interface MutationTeamStaffDataItem extends BackendImmutableKey {
   __metadata: { type: 'SP.Data.MetroHR01ListItem' };
@@ -48,7 +48,7 @@ export interface MutationTeamStaffDataItem extends BackendImmutableKey {
 
 export interface TeamStaffState {
   isDataLoading: boolean;
-  data: TeamStaffDataItem[];
+  data: StaffDataItem[];
   dataError: string;
   isDataItemLoading: boolean;
   dataItemError: string;

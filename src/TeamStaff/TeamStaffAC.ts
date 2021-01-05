@@ -1,11 +1,11 @@
 // Types
-import { ActionTypes, TeamStaffDataItem } from './TeamStaffTypes';
+import { ActionTypes, StaffDataItem } from './TeamStaffTypes';
 // Helpers
 import { transformDataItemForAPI } from './TeamStaffHelpers';
 // Sync
 export const fetchDataRequestAC = () => ({ type: ActionTypes.FETCH_DATA_REQUEST });
 
-export const fetchDataSuccessAC = (data: TeamStaffDataItem[]) => ({ type: ActionTypes.FETCH_DATA_SUCCESS, payload: data });
+export const fetchDataSuccessAC = (data: StaffDataItem[]) => ({ type: ActionTypes.FETCH_DATA_SUCCESS, payload: data });
 
 export const fetchDataFailureAC = (errorMessage: string) => ({ type: ActionTypes.FETCH_DATA_FAILURE, payload: errorMessage });
 
@@ -13,7 +13,7 @@ export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY 
 
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
 
-export const createDataItemSuccessAC = (data: TeamStaffDataItem) => ({ type: ActionTypes.CREATE_DATA_ITEM_SUCCESS, payload: data });
+export const createDataItemSuccessAC = (data: StaffDataItem) => ({ type: ActionTypes.CREATE_DATA_ITEM_SUCCESS, payload: data });
 
 export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, payload: errorMessage });
 
@@ -21,7 +21,7 @@ export const createDataItemFinallyAC = () => ({ type: ActionTypes.CREATE_DATA_IT
 
 export const updateDataItemRequestAC = () => ({ type: ActionTypes.UPDATE_DATA_ITEM_REQUEST });
 
-export const updateDataItemSuccessAC = (data: TeamStaffDataItem) => ({ type: ActionTypes.UPDATE_DATA_ITEM_SUCCESS, payload: data });
+export const updateDataItemSuccessAC = (data: StaffDataItem) => ({ type: ActionTypes.UPDATE_DATA_ITEM_SUCCESS, payload: data });
 
 export const updateDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.UPDATE_DATA_ITEM_FAILURE, payload: errorMessage });
 
@@ -43,13 +43,13 @@ export const validateMobilePhoneFieldAC = (isValid: boolean) => ({ type: ActionT
 // Async
 export const fetchDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_DATA_INIT_ASYNC });
 
-export const createDataItemInitAsyncAC = (createdDataItem: TeamStaffDataItem, onAddDataItemToGridData: () => void) => ({
+export const createDataItemInitAsyncAC = (createdDataItem: StaffDataItem, onAddDataItemToGridData: () => void) => ({
   type: ActionTypes.CREATE_DATA_ITEM_INIT_ASYNC,
   payload: transformDataItemForAPI(createdDataItem),
   meta: onAddDataItemToGridData,
 });
 
-export const updateDataItemInitAsyncAC = (updatedDataItem: TeamStaffDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateDataItemInitAsyncAC = (updatedDataItem: StaffDataItem, onUpdateDataItemInGridData: () => void) => ({
   type: ActionTypes.UPDATE_DATA_ITEM_INIT_ASYNC,
   payload: transformDataItemForAPI(updatedDataItem),
   meta: onUpdateDataItemInGridData,

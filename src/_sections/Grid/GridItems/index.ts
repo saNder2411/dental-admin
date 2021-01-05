@@ -4,3 +4,4 @@ export * from './GenericCells';
 export * from './CustomersCells';
 export * from './ServicesCell';
 export * from './TeamStaffCells';
+export * from './AgendaActionsCells';

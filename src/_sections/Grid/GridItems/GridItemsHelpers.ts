@@ -2,7 +2,7 @@ import { DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 //Types
 import { GridOnChange } from './GridItemsTypes';
 import { StatusNames } from '../../../Agenda/AgendaTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { GridDataItem } from '../GridTypes';
@@ -19,7 +19,7 @@ export const isStatusNames = (arg: any): arg is StatusNames => arg === StatusNam
 
 export const getOnFinallyRequestDataItem = (...handlers: Array<() => void>) => () => handlers.forEach((handler) => handler());
 
-export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaffDataItem | CustomerDataItem>) =>
+export const transformDomainDataToDropDownListData = (domainData: Array<StaffDataItem | CustomerDataItem>) =>
   domainData.map((item) => {
     const isTeamStaffDataItem = 'ShowOnline' in item;
     const value = isTeamStaffDataItem ? item.Title : item.FullName;
@@ -30,7 +30,7 @@ export const transformDomainDataToDropDownListData = (domainData: Array<TeamStaf
 export const transformDomainDataToMultiSelectData = (domainData: ServiceDataItem[]) =>
   domainData.map(({ OfferingsName_Edit, Id }) => ({ text: OfferingsName_Edit ?? '', value: Id }));
 
-export const transformTeamStaffDataToMultiSelectData = (domainData: TeamStaffDataItem[]) =>
+export const transformTeamStaffDataToMultiSelectData = (domainData: StaffDataItem[]) =>
   domainData.map(({ Title, Id }) => ({ text: Title ?? '', value: Id }));
 
 export const EmptyDropDownListDataItem = { text: '', value: -1 };

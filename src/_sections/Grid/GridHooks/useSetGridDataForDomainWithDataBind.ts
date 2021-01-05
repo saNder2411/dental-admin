@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Types
 import { GridDataName, GridDataItem } from '../GridTypes';
-// Actions
-import { GridActions } from '../GridActions';
+// Action Creators
+import { changeViewOriginalDataAC } from '../GridAC';
 
 export const useSetGridDataForDomainWithDataBind = (
   dataName: GridDataName,
@@ -14,7 +14,7 @@ export const useSetGridDataForDomainWithDataBind = (
 ) => {
   useEffect(() => {
     if (dataName !== domainDataName && domainData.length > 0 && !domainIsDataLoading) {
-      GridActions.setData(dispatch, domainData);
+      dispatch(changeViewOriginalDataAC(domainData));
     }
   }, [dataName, dispatch, domainData, domainDataName, domainIsDataLoading]);
 };

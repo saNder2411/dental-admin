@@ -104,12 +104,13 @@ export function* workerDeleteDataItem({
     yield put(actions.deleteDataItemRequestAC());
 
     yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
+
+    onDeleteDataItemInGridData();
     yield put(actions.deleteAppointmentDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Appointments delete data item Error: ${error.message}`));
   } finally {
     yield put(actions.deleteDataItemFinallyAC());
-    onDeleteDataItemInGridData();
   }
 }
 

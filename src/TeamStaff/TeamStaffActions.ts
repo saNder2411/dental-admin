@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
 // Types
-import { TeamStaffDataItem } from './TeamStaffTypes';
+import { StaffDataItem } from './TeamStaffTypes';
 // ActionCreators
 import {
   fetchDataInitAsyncAC,
@@ -14,9 +14,9 @@ import {
 
 export const TeamStaffActions = {
   fetchData: (dispatch: Dispatch) => dispatch(fetchDataInitAsyncAC()),
-  createDataItem: (dispatch: Dispatch, createdDataItem: TeamStaffDataItem, onAddDataItemToGridData: () => void) =>
+  createDataItem: (dispatch: Dispatch, createdDataItem: StaffDataItem, onAddDataItemToGridData: () => void) =>
     dispatch(createDataItemInitAsyncAC(createdDataItem, onAddDataItemToGridData)),
-  updateDataItem: (dispatch: Dispatch, updatedDataItem: TeamStaffDataItem, onUpdateDataItemInGridData: () => void) =>
+  updateDataItem: (dispatch: Dispatch, updatedDataItem: StaffDataItem, onUpdateDataItemInGridData: () => void) =>
     dispatch(updateDataItemInitAsyncAC(updatedDataItem, onUpdateDataItemInGridData)),
   deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) =>
     dispatch(deleteDataItemInitAsyncAC(deletedDataItemID, onDeleteDataItemInGridData)),

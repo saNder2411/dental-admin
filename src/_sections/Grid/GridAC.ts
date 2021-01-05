@@ -1,9 +1,8 @@
-import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
 import { ActionTypes, GridDataItem, GridDataName } from './GridTypes';
 import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../Customers/CustomersTypes';
-import { TeamStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../TeamStaff/TeamStaffTypes';
 import { ServiceDataItem } from '../../Services/ServicesTypes';
 
 // Async Fetch Data
@@ -38,7 +37,7 @@ export const createCustomerDataItemInitAsyncAC = (createdDataItem: CustomerDataI
   meta: onAddDataItemToGridData,
 });
 
-export const createStaffDataItemInitAsyncAC = (createdDataItem: TeamStaffDataItem, onAddDataItemToGridData: () => void) => ({
+export const createStaffDataItemInitAsyncAC = (createdDataItem: StaffDataItem, onAddDataItemToGridData: () => void) => ({
   type: ActionTypes.CREATE_STAFF_DATA_ITEM_INIT_ASYNC,
   payload: createdDataItem,
   meta: onAddDataItemToGridData,
@@ -73,7 +72,7 @@ export const updateCustomerDataItemInitAsyncAC = (updatedDataItem: CustomerDataI
   meta: onUpdateDataItemInGridData,
 });
 
-export const updateStaffDataItemInitAsyncAC = (updatedDataItem: TeamStaffDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateStaffDataItemInitAsyncAC = (updatedDataItem: StaffDataItem, onUpdateDataItemInGridData: () => void) => ({
   type: ActionTypes.UPDATE_STAFF_DATA_ITEM_INIT_ASYNC,
   payload: updatedDataItem,
   meta: onUpdateDataItemInGridData,
@@ -117,7 +116,7 @@ export const fetchAppointmentsDataSuccessAC = (data: AppointmentDataItem[]) => (
 
 export const fetchCustomersDataSuccessAC = (data: CustomerDataItem[]) => ({ type: ActionTypes.FETCH_CUSTOMERS_DATA_SUCCESS, payload: data });
 
-export const fetchStaffDataSuccessAC = (data: TeamStaffDataItem[]) => ({ type: ActionTypes.FETCH_STAFF_DATA_SUCCESS, payload: data });
+export const fetchStaffDataSuccessAC = (data: StaffDataItem[]) => ({ type: ActionTypes.FETCH_STAFF_DATA_SUCCESS, payload: data });
 
 export const fetchServicesDataSuccessAC = (data: ServiceDataItem[]) => ({ type: ActionTypes.FETCH_SERVICES_DATA_SUCCESS, payload: data });
 
@@ -125,7 +124,7 @@ export const fetchDataFailureAC = (errorMessage: string) => ({ type: ActionTypes
 
 export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY });
 
-// Sync Create DataItem
+// Sync Create Data Item
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
 
 export const createAppointmentDataItemSuccessAC = (data: AppointmentDataItem) => ({
@@ -138,7 +137,7 @@ export const createCustomerDataItemSuccessAC = (data: CustomerDataItem) => ({
   payload: data,
 });
 
-export const createStaffDataItemSuccessAC = (data: TeamStaffDataItem) => ({
+export const createStaffDataItemSuccessAC = (data: StaffDataItem) => ({
   type: ActionTypes.CREATE_STAFF_DATA_ITEM_SUCCESS,
   payload: data,
 });
@@ -152,7 +151,7 @@ export const createDataItemFailureAC = (errorMessage: string) => ({ type: Action
 
 export const createDataItemFinallyAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_FINALLY });
 
-// Sync Update DataItem
+// Sync Update Data Item
 export const updateDataItemRequestAC = () => ({ type: ActionTypes.UPDATE_DATA_ITEM_REQUEST });
 
 export const updateAppointmentDataItemSuccessAC = (data: AppointmentDataItem) => ({
@@ -162,7 +161,7 @@ export const updateAppointmentDataItemSuccessAC = (data: AppointmentDataItem) =>
 
 export const updateCustomerDataItemSuccessAC = (data: CustomerDataItem) => ({ type: ActionTypes.UPDATE_CUSTOMER_DATA_ITEM_SUCCESS, payload: data });
 
-export const updateStaffDataItemSuccessAC = (data: TeamStaffDataItem) => ({ type: ActionTypes.UPDATE_STAFF_DATA_ITEM_SUCCESS, payload: data });
+export const updateStaffDataItemSuccessAC = (data: StaffDataItem) => ({ type: ActionTypes.UPDATE_STAFF_DATA_ITEM_SUCCESS, payload: data });
 
 export const updateServiceDataItemSuccessAC = (data: ServiceDataItem) => ({ type: ActionTypes.UPDATE_SERVICE_DATA_ITEM_SUCCESS, payload: data });
 
@@ -170,7 +169,7 @@ export const updateDataItemFailureAC = (errorMessage: string) => ({ type: Action
 
 export const updateDataItemFinallyAC = () => ({ type: ActionTypes.UPDATE_DATA_ITEM_FINALLY });
 
-// Sync Delete DataItem
+// Sync Delete Data Item
 export const deleteDataItemRequestAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_REQUEST });
 
 export const deleteAppointmentDataItemSuccessAC = (deletedDataItemID: number) => ({
@@ -211,7 +210,10 @@ export const removeItemFromDataAC = (removeItemID: number) => ({ type: ActionTyp
 
 export const cancelEditAC = (editItemID: number) => ({ type: ActionTypes.CANCEL_EDIT, payload: editItemID });
 
-export const changeItemAC = (gridEvent: GridItemChangeEvent) => ({ type: ActionTypes.CHANGE_ITEM, payload: gridEvent });
+export const changeItemAC = (changeData: { dataItemID: number; field: string; value: any }) => ({
+  type: ActionTypes.CHANGE_ITEM,
+  payload: changeData,
+});
 
 export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT });
 

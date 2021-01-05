@@ -3,7 +3,7 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
 import { SchedulerDataItem } from '../SchedulerTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { TeamStaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 
 export interface KendoDataItem extends SchedulerDataItem {
   occurrenceId?: string;
@@ -14,7 +14,7 @@ export interface CustomSchedulerItemProps<T = KendoDataItem> extends SchedulerIt
   dataItem: T;
 }
 
-export interface CustomFieldRenderProps<T = Array<CustomerDataItem | TeamStaffDataItem>> extends FieldRenderProps {
+export interface CustomFieldRenderProps<T = Array<CustomerDataItem | StaffDataItem>> extends FieldRenderProps {
   domainData: T;
 }
 
