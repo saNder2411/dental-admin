@@ -26,7 +26,7 @@ export function* workerFetchData(): SagaIterator {
 
 export function* workerCreateDataItem({
   payload: createdDataItem,
-  meta: onAddDataItemToGridData,
+  meta: sideEffectAfterCreatedDataItem,
 }: CreateStaffDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.createDataItemRequestAC());
@@ -38,13 +38,13 @@ export function* workerCreateDataItem({
     yield put(actions.createDataItemFailureAC(`Staff create data item Error: ${error.message}`));
   } finally {
     yield put(actions.createDataItemFinallyAC());
-    onAddDataItemToGridData();
+    sideEffectAfterCreatedDataItem();
   }
 }
 
 export function* workerUpdateDataItem({
   payload: updatedDataItem,
-  meta: onUpdateDataItemInGridData,
+  meta: sideEffectAfterUpdatedDataItem,
 }: UpdateStaffDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.updateDataItemRequestAC());
@@ -56,13 +56,13 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemFailureAC(`Staff update data item Error: ${error.message}`));
   } finally {
     yield put(actions.updateDataItemFinallyAC());
-    onUpdateDataItemInGridData();
+    sideEffectAfterUpdatedDataItem();
   }
 }
 
 export function* workerDeleteDataItem({
   payload: deletedDataItemID,
-  meta: onDeleteDataItemInGridData,
+  meta: sideEffectAfterDeletedDataItem,
 }: DeleteStaffDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.deleteDataItemRequestAC());
@@ -73,6 +73,6 @@ export function* workerDeleteDataItem({
     yield put(actions.deleteDataItemFailureAC(`Staff update data item Error: ${error.message}`));
   } finally {
     yield put(actions.deleteDataItemFinallyAC());
-    onDeleteDataItemInGridData();
+    sideEffectAfterDeletedDataItem();
   }
 }

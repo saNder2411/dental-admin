@@ -17,14 +17,17 @@ import { FieldRenderProps, Field, FieldProps } from '@progress/kendo-react-form'
 import { CustomFieldRenderProps } from '../SchedulerItemTypes';
 import { WeekdayTypesType } from './SchedulerFormTypes';
 // Selectors
-import { selectServicesMemoData } from '../../../../Services/ServicesSelectors';
+import {
+  selectStaffDataForDropDownListData,
+  selectStaffLastNameByID,
+  selectCustomersDataForDropDownListData,
+  selectCustomersByIdData,
+  selectCustomerFullNameByID,
+  selectServicesDataForDropDownListData,
+} from '../../../Grid/GridSelectors';
 // Helpers
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
-import {
-  transformDomainDataToDropDownListData,
-  transformDomainDataToMultiSelectData,
-  EmptyDropDownListDataItem,
-} from '../../../Grid/GridItems/GridItemsHelpers';
+import { EmptyDropDownListDataItem } from '../../../Grid/GridItems/GridItemsHelpers';
 // Instruments
 import { WeekdayButtonGroupData } from './SchedulerFormInstruments';
 
@@ -35,11 +38,10 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const LookupMultiBP01offeringsId = value as { results: number[] };
 
-  const selectServicesData = useMemo(selectServicesMemoData, []);
-  const servicesData = useSelector(selectServicesData);
-  const currentServices = servicesData.filter(({ Id }) => LookupMultiBP01offeringsId.results.find((offerId) => offerId === Id));
-  const dataForMultiSelect = transformDomainDataToMultiSelectData(servicesData);
-  const multiSelectValue = transformDomainDataToMultiSelectData(currentServices);
+  const selectServicesDropDownListData = useMemo(selectServicesDataForDropDownListData, []);
+  const dataForDropdownList = useSelector(selectServicesDropDownListData);
+  const memoMultiSelectData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
+  const multiSelectValue = memoMultiSelectData.filter((item) => LookupMultiBP01offeringsId.results.find((ID) => ID === item.value));
 
   const onMultiSelectValueChange = useCallback(
     (evt: MultiSelectChangeEvent) => onChange({ value: { results: evt.target.value.map(({ value }) => value) } }),
@@ -57,7 +59,7 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
         valid={valid}
         id={id}
         value={multiSelectValue}
-        data={dataForMultiSelect}
+        data={memoMultiSelectData}
         disabled={disabled}
         textField="text"
         onChange={onMultiSelectValueChange}
@@ -69,14 +71,17 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   );
 });
 
-export const TeamStaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props) => {
+export const StaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props) => {
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, ...others } = props;
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = props;
   const LookupEntityId = value as number;
 
-  const currentEmployee = domainData.find(({ Id }) => Id === LookupEntityId);
-  const dataForDropDownList = transformDomainDataToDropDownListData(domainData);
-  const dropDownListValue = dataForDropDownList.find((item) => item.text === currentEmployee?.Title) ?? dataForDropDownList[0];
+  const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
+  const dataForDropdownList = useSelector(selectStaffDropDownListData);
+  const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
+  const selectStaffLastName = useMemo(() => selectStaffLastNameByID(LookupEntityId), [LookupEntityId]);
+  const staffLastName = useSelector(selectStaffLastName);
+  const dropDownListValue = { text: staffLastName, value };
 
   const onDropDownListValueChange = useCallback((evt: DropDownListChangeEvent) => onChange({ value: evt.value.value }), [onChange]);
 
@@ -92,7 +97,7 @@ export const TeamStaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props
           valid={valid}
           id={id}
           value={dropDownListValue}
-          data={dataForDropDownList}
+          data={memoDropDownListData}
           onChange={onDropDownListValueChange}
           disabled={disabled}
           textField="text"
@@ -106,25 +111,30 @@ export const TeamStaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props
 
 export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) => {
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, domainData, onChange, setCustomerField, ...others } = props;
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, setCustomerField, ...others } = props;
   const LookupEntityId = value as number;
 
   const [filter, setFilter] = useState('');
-  const currentCustomer = domainData.find(({ Id }) => Id === LookupEntityId);
-  const dataForComboBox = transformDomainDataToDropDownListData(domainData);
+  const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
+  const dataForComboBox = useSelector(selectCustomerDropDownListData);
+  const memoComboBoxData = useMemo(() => dataForComboBox, [dataForComboBox]);
   const filteredDataForComboBox = !filter
-    ? dataForComboBox
-    : dataForComboBox.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
-  const comboBoxValue = filteredDataForComboBox.find((item) => item.text === currentCustomer?.FullName) ?? EmptyDropDownListDataItem;
+    ? memoComboBoxData
+    : memoComboBoxData.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
+
+  const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(LookupEntityId), [LookupEntityId]);
+  const customerFullName = useSelector(selectCustomerFullName);
+  const comboBoxValue = { text: customerFullName, value };
+  const customerById = useSelector(selectCustomersByIdData);
 
   const onComboBoxValueChange = useCallback(
     (evt: ComboBoxChangeEvent) => {
       const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
-      setCustomerField(domainData.find(({ Id }) => Id === evtValue.value));
+      setCustomerField(customerById[evtValue.value]);
 
       onChange({ value: evtValue.value });
     },
-    [domainData, onChange, setCustomerField]
+    [customerById, onChange, setCustomerField]
   );
 
   const onFilterChange = (evt: ComboBoxFilterChangeEvent) => setFilter(evt.filter.value);

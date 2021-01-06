@@ -15,14 +15,14 @@ import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirm
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
-import { StatusNames } from '../../../Agenda/AgendaTypes';
+import { StatusNames } from '../../Grid/GridTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
 //Actions
 import { SchedulerActions } from '../SchedulerActions';
-import { AgendaActions } from '../../../Agenda/AgendaActions';
+import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../Grid/GridAC';
 // Selectors
-import { selectAgendaIsDataItemLoading } from '../../../Agenda/AgendaSelectors';
+import { selectDataItemIsLoading } from '../../Grid/GridSelectors';
 import { selectFormItemID, selectSelectedView } from '../SchedulerSelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
@@ -33,7 +33,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const intl = useInternationalization();
   const dispatch = useDispatch();
-  const agendaIsDataItemLoading = useSelector(selectAgendaIsDataItemLoading);
+  const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
   const formItemID = useSelector(selectFormItemID);
   const isOriginalDataItem = new Date(dataItem.EventDate).getTime() === dataItem.Start.getTime();
   const inEdit = formItemID === dataItem.ID && isOriginalDataItem;
@@ -65,12 +65,12 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const onSchedulerItemClick = useCallback(
     (evt) => {
-      if (agendaIsDataItemLoading) return;
+      if (appointmentIsDataItemLoading) return;
 
       setShowPopup((prevState) => !prevState);
       onClick && onClick(evt);
     },
-    [agendaIsDataItemLoading, onClick]
+    [appointmentIsDataItemLoading, onClick]
   );
 
   const onSchedulerItemBlur = useCallback(
@@ -113,10 +113,10 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       const exception = new Date(dataItem.Start.getTime());
       const newDataItem = getNewDataItemWithUpdateException(dataItem, exception);
 
-      AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
+      dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => {}));
       return;
     }
-    AgendaActions.deleteDataItem(dispatch, dataItem.ID, () => {});
+    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem.ID, () => {}));
   };
 
   return (

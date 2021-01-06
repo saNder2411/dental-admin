@@ -2,7 +2,7 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 // import { v4 as uuidV4 } from 'uuid';
 // Types
 import { SchedulerDataItem, ViewType, InitDataForNewDataItem } from './SchedulerTypes';
-import { StatusNames } from '../../Agenda';
+import { StatusNames } from '../Grid/GridTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 
 export const customModelFields = {

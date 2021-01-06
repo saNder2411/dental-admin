@@ -10,7 +10,7 @@ import { Loader } from '../../../../_components';
 import {
   CustomMemoField,
   ServicesFormMultiSelect,
-  TeamStaffFormDropDownList,
+  StaffFormDropDownList,
   CustomersFormComboBox,
   FormDropDownListWithCustomData,
   WeekdayFormButtonGroup,
@@ -25,16 +25,19 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectTeamStaffMemoData } from '../../../../TeamStaff/TeamStaffSelectors';
-import { selectCustomersMemoData } from '../../../../Customers/CustomersSelectors';
+import { selectCustomerById } from '../../../Grid/GridSelectors';
 import { selectMemoUpdatedRecurringDataItem } from '../../SchedulerSelectors';
 // Types
-import { StatusNames } from '../../../../Agenda/AgendaTypes';
+import { StatusNames } from '../../../Grid/GridTypes';
 import { CustomerDataItem } from '../../../../Customers';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
-import { AgendaActions, AgendaSchedulerActions } from '../../../../Agenda/AgendaActions';
+import {
+  updateAppointmentRecurringDataItemInitAsyncAC,
+  updateAppointmentDataItemInitAsyncAC,
+  createAppointmentDataItemInitAsyncAC,
+} from '../../../Grid/GridAC';
 import { SchedulerActions } from '../../SchedulerActions';
 // Instruments
 import {
@@ -67,19 +70,11 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
-  const teamStaffData = useSelector(selectTeamStaffData);
-
-  const selectCustomersData = useMemo(selectCustomersMemoData, []);
-  const customersData = useSelector(selectCustomersData);
-
   const selectUpdatedRecurringDataItem = useMemo(selectMemoUpdatedRecurringDataItem, []);
   const updatedRecurringDataItem = useSelector(selectUpdatedRecurringDataItem);
 
-  const { FirstName, Title, Email, Gender, CellPhone } = useMemo(
-    () => customersData.find(({ Id }) => Id === dataItem.LookupCM102customersId) ?? customersData[0],
-    [customersData, dataItem.LookupCM102customersId]
-  );
+  const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);
+  const { FirstName, Title, Email, Gender, CellPhone } = useSelector(selectCustomer);
 
   const initialValue = getInitialFormValue(dataItem, { FirstName, Title, Email, Gender, CellPhone });
 
@@ -99,21 +94,24 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     setIsDataItemLoading(true);
 
     if (updatedRecurringDataItem && dataItem.isNew) {
-      AgendaSchedulerActions.updateRecurringDataItem(dispatch, updatedRecurringDataItem, newDataItem, () => {
-        SchedulerActions.discardNewItemToData(dispatch);
-        SchedulerActions.changeUpdatedRecurringDataItem(dispatch, null);
-      });
+      dispatch(
+        updateAppointmentRecurringDataItemInitAsyncAC(updatedRecurringDataItem, newDataItem, () => {
+          SchedulerActions.discardNewItemToData(dispatch);
+          SchedulerActions.changeUpdatedRecurringDataItem(dispatch, null);
+        })
+      );
       return;
     }
 
     dataItem.isNew
-      ? AgendaActions.createDataItem(
-          dispatch,
-          newDataItem,
-          () => {},
-          () => SchedulerActions.discardNewItemToData(dispatch)
+      ? dispatch(
+          createAppointmentDataItemInitAsyncAC(
+            newDataItem,
+            () => {},
+            () => SchedulerActions.discardNewItemToData(dispatch)
+          )
         )
-      : AgendaActions.updateDataItem(dispatch, newDataItem, () => {});
+      : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => {}));
   };
 
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
@@ -375,8 +373,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                     id="staff"
                     name="LookupHR01teamId"
                     label="Support Stuff"
-                    domainData={teamStaffData}
-                    component={TeamStaffFormDropDownList}
+                    component={StaffFormDropDownList}
                     disabled={isDataItemLoading}
                   />
 
@@ -387,7 +384,6 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                         name="LookupCM102customersId"
                         label="Customer"
                         setCustomerField={setCustomerField}
-                        domainData={customersData}
                         component={CustomersFormComboBox}
                         disabled={isDataItemLoading}
                         validator={requiredDropDownListValidator}

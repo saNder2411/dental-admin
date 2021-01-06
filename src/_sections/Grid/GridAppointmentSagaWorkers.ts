@@ -61,7 +61,7 @@ export function* workerFetchData({
 
 export function* workerCreateDataItem({
   payload: createdDataItem,
-  meta: { onAddDataItemToGridData, onAddDataItemToSchedulerData },
+  meta: { sideEffectAfterCreatedDataItem, onAddDataItemToSchedulerData },
 }: CreateAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.createDataItemRequestAC());
@@ -74,13 +74,13 @@ export function* workerCreateDataItem({
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {
     yield put(actions.createDataItemFinallyAC());
-    onAddDataItemToGridData();
+    sideEffectAfterCreatedDataItem();
   }
 }
 
 export function* workerUpdateDataItem({
   payload: updatedDataItem,
-  meta: onUpdateDataItemInGridData,
+  meta: sideEffectAfterUpdatedDataItem,
 }: UpdateAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.updateDataItemRequestAC());
@@ -92,20 +92,20 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemFailureAC(`Appointments update data item Error: ${error.message}`));
   } finally {
     yield put(actions.updateDataItemFinallyAC());
-    onUpdateDataItemInGridData();
+    sideEffectAfterUpdatedDataItem();
   }
 }
 
 export function* workerDeleteDataItem({
   payload: deletedDataItemID,
-  meta: onDeleteDataItemInGridData,
+  meta: sideEffectAfterDeletedDataItem,
 }: DeleteAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.deleteDataItemRequestAC());
 
     yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
 
-    onDeleteDataItemInGridData();
+    sideEffectAfterDeletedDataItem();
     yield put(actions.deleteAppointmentDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Appointments delete data item Error: ${error.message}`));
@@ -118,7 +118,7 @@ type UpdateAppointmentRecurringDataItemResults = [QueryAppointmentDataItem, Quer
 
 export function* workerUpdateRecurringDataItem({
   payload: { updatedDataItem, createDataItem },
-  meta: onUpdateDataItem,
+  meta: sideEffectAfterUpdatedDataItem,
 }: UpdateAppointmentRecurringDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.updateDataItemRequestAC());
@@ -132,7 +132,7 @@ export function* workerUpdateRecurringDataItem({
     yield put(actions.updateAppointmentDataItemSuccessAC(updatedDataItemData));
 
     const createDataItemData = transformAPIDataItem(createResult);
-    onUpdateDataItem();
+    sideEffectAfterUpdatedDataItem();
     yield put(actions.createAppointmentDataItemSuccessAC(createDataItemData));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));

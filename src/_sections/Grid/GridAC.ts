@@ -23,90 +23,90 @@ export const fetchServicesDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SER
 // Async Create Data Item
 export const createAppointmentDataItemInitAsyncAC = (
   createdDataItem: AppointmentDataItem,
-  onAddDataItemToGridData: () => void,
+  sideEffectAfterCreatedDataItem: () => void,
   onAddDataItemToSchedulerData?: () => void
 ) => ({
   type: ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
   payload: createdDataItem,
-  meta: { onAddDataItemToGridData, onAddDataItemToSchedulerData },
+  meta: { sideEffectAfterCreatedDataItem, onAddDataItemToSchedulerData },
 });
 
-export const createCustomerDataItemInitAsyncAC = (createdDataItem: CustomerDataItem, onAddDataItemToGridData: () => void) => ({
+export const createCustomerDataItemInitAsyncAC = (createdDataItem: CustomerDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_CUSTOMER_DATA_ITEM_INIT_ASYNC,
   payload: createdDataItem,
-  meta: onAddDataItemToGridData,
+  meta: sideEffectAfterCreatedDataItem,
 });
 
-export const createStaffDataItemInitAsyncAC = (createdDataItem: StaffDataItem, onAddDataItemToGridData: () => void) => ({
+export const createStaffDataItemInitAsyncAC = (createdDataItem: StaffDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_STAFF_DATA_ITEM_INIT_ASYNC,
   payload: createdDataItem,
-  meta: onAddDataItemToGridData,
+  meta: sideEffectAfterCreatedDataItem,
 });
 
-export const createServiceDataItemInitAsyncAC = (createdDataItem: ServiceDataItem, onAddDataItemToGridData: () => void) => ({
+export const createServiceDataItemInitAsyncAC = (createdDataItem: ServiceDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_SERVICE_DATA_ITEM_INIT_ASYNC,
   payload: createdDataItem,
-  meta: onAddDataItemToGridData,
+  meta: sideEffectAfterCreatedDataItem,
 });
 
 // Async Update Data Item
-export const updateAppointmentDataItemInitAsyncAC = (updatedDataItem: AppointmentDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateAppointmentDataItemInitAsyncAC = (updatedDataItem: AppointmentDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
   payload: updatedDataItem,
-  meta: onUpdateDataItemInGridData,
+  meta: sideEffectAfterUpdatedDataItem,
 });
 
 export const updateAppointmentRecurringDataItemInitAsyncAC = (
   updatedDataItem: AppointmentDataItem,
   createDataItem: AppointmentDataItem,
-  onUpdateDataItem: () => void
+  sideEffectAfterUpdatedDataItem: () => void
 ) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_RECURRING_DATA_ITEM_ASYNC,
   payload: { updatedDataItem, createDataItem },
-  meta: onUpdateDataItem,
+  meta: sideEffectAfterUpdatedDataItem,
 });
 
-export const updateCustomerDataItemInitAsyncAC = (updatedDataItem: CustomerDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateCustomerDataItemInitAsyncAC = (updatedDataItem: CustomerDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_CUSTOMER_DATA_ITEM_INIT_ASYNC,
   payload: updatedDataItem,
-  meta: onUpdateDataItemInGridData,
+  meta: sideEffectAfterUpdatedDataItem,
 });
 
-export const updateStaffDataItemInitAsyncAC = (updatedDataItem: StaffDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateStaffDataItemInitAsyncAC = (updatedDataItem: StaffDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_STAFF_DATA_ITEM_INIT_ASYNC,
   payload: updatedDataItem,
-  meta: onUpdateDataItemInGridData,
+  meta: sideEffectAfterUpdatedDataItem,
 });
 
-export const updateServiceDataItemInitAsyncAC = (updatedDataItem: ServiceDataItem, onUpdateDataItemInGridData: () => void) => ({
+export const updateServiceDataItemInitAsyncAC = (updatedDataItem: ServiceDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_SERVICE_DATA_ITEM_INIT_ASYNC,
   payload: updatedDataItem,
-  meta: onUpdateDataItemInGridData,
+  meta: sideEffectAfterUpdatedDataItem,
 });
 
 // Async Delete Data Item
-export const deleteAppointmentDataItemInitAsyncAC = (deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => ({
+export const deleteAppointmentDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
   payload: deletedDataItemID,
-  meta: onDeleteDataItemInGridData,
+  meta: sideEffectAfterDeletedDataItem,
 });
 
-export const deleteCustomerDataItemInitAsyncAC = (deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => ({
+export const deleteCustomerDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_CUSTOMER_DATA_ITEM_INIT_ASYNC,
   payload: deletedDataItemID,
-  meta: onDeleteDataItemInGridData,
+  meta: sideEffectAfterDeletedDataItem,
 });
 
-export const deleteStaffDataItemInitAsyncAC = (deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => ({
+export const deleteStaffDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_STAFF_DATA_ITEM_INIT_ASYNC,
   payload: deletedDataItemID,
-  meta: onDeleteDataItemInGridData,
+  meta: sideEffectAfterDeletedDataItem,
 });
 
-export const deleteServiceDataItemInitAsyncAC = (deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => ({
+export const deleteServiceDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_SERVICE_DATA_ITEM_INIT_ASYNC,
   payload: deletedDataItemID,
-  meta: onDeleteDataItemInGridData,
+  meta: sideEffectAfterDeletedDataItem,
 });
 
 // Sync Data

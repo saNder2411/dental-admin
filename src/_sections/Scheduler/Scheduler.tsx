@@ -13,9 +13,9 @@ import {
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
 // Types
 import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
-// Actions
-import { AgendaActions } from '../../Agenda/AgendaActions';
 import { SchedulerActions } from '../Scheduler/SchedulerActions';
+// Action Creators
+import { updateAppointmentDataItemInitAsyncAC } from '../Grid/GridAC';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
   const dispatch = useDispatch();
@@ -31,7 +31,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         updatedDataItem.LookupHR01teamId = updatedDataItem.TeamID;
       }
 
-      AgendaActions.updateDataItem(dispatch, updatedDataItem, () => setIsAgendaDataItemLoading(false));
+      dispatch(updateAppointmentDataItemInitAsyncAC(updatedDataItem, () => setIsAgendaDataItemLoading(false)));
     },
     [dispatch, setIsAgendaDataItemLoading]
   );

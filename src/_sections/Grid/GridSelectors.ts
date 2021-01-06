@@ -90,6 +90,7 @@ export const selectCustomerGenderByID = (ID: number) => createSelector(selectCus
 export const selectCustomersDataForDropDownListData = () =>
   createSelector(selectCustomers, ({ byId, allIDs }) => allIDs.map((ID) => ({ text: byId[ID].FullName ?? '', value: ID })));
 
+export const selectCustomerById = (ID: number) => createSelector(selectCustomersByIdData, (byId) => byId[ID]);
 // Services
 
 export const selectOriginalServicesData = ({ GridState }: GlobalState) => GridState.entities.services.originalData;
