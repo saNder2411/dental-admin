@@ -6,12 +6,12 @@ import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
   GenericTextCell,
   GenericAvatarCell,
-  TeamStaffFullNameCell,
-  TeamStaffJobTitleCell,
+  StaffFullNameCell,
+  StaffJobTitleCell,
   GenericRoleSkillsCell,
   GenericBooleanFlagCell,
-  TeamStaffMobilePhoneCell,
-  ActionsControlCell,
+  StaffMobilePhoneCell,
+  StaffActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
@@ -19,23 +19,21 @@ import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectDataName } from '../_sections/Grid/GridSelectors';
-// Actions
-import { TeamStaffActions } from './TeamStaffActions';
 // Hooks
-import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
-import { useTeamStaffStateForDomain } from './TeamStaffHooks';
+import { useSetGridData } from '../_sections/Grid/GridHooks';
+import { useSelectStaffData, useFetchStaffData } from './TeamStaffHooks';
 
 export const TeamStaff: FC = (): JSX.Element => {
   const dataName = useSelector(selectDataName);
-  const { teamStaffData, teamStaffIsDataLoading } = useTeamStaffStateForDomain();
+  const { staffData, isDataLoading } = useSelectStaffData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchDataForDomain(teamStaffData.length, TeamStaffActions, dispatch);
-  useSetGridData(dataName, GridDataName.Staff, teamStaffData, dispatch);
+  useFetchStaffData(staffData.length, dispatch);
+  useSetGridData(dataName, GridDataName.Staff, staffData, dispatch);
 
   const hasTeamStaffData = dataName === GridDataName.Staff;
-  const contentTSX = hasTeamStaffData && !teamStaffIsDataLoading && (
+  const contentTSX = hasTeamStaffData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid>
@@ -56,7 +54,7 @@ export const TeamStaff: FC = (): JSX.Element => {
           <GridColumn
             field={'FullName'}
             title={localizationService.toLanguageString('custom.fullName', 'Name')}
-            cell={TeamStaffFullNameCell as CustomGridCell}
+            cell={StaffFullNameCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
@@ -64,7 +62,7 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'JobTitle'}
             title={localizationService.toLanguageString('custom.jobTitle', 'Job Title')}
             columnMenu={ColumnMenu}
-            cell={TeamStaffJobTitleCell as CustomGridCell}
+            cell={StaffJobTitleCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -86,7 +84,7 @@ export const TeamStaff: FC = (): JSX.Element => {
             field={'CellPhone'}
             title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
             columnMenu={ColumnMenu}
-            cell={TeamStaffMobilePhoneCell as CustomGridCell}
+            cell={StaffMobilePhoneCell as CustomGridCell}
             filter={'text'}
             width={140}
           />
@@ -99,7 +97,7 @@ export const TeamStaff: FC = (): JSX.Element => {
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
-            cell={ActionsControlCell as CustomGridCell}
+            cell={StaffActionsControlCell as CustomGridCell}
             width={140}
           />
         </Grid>
@@ -110,7 +108,7 @@ export const TeamStaff: FC = (): JSX.Element => {
   return (
     <>
       {contentTSX}
-      <Loader className="mt-5" isLoading={teamStaffIsDataLoading} size={'large'} type="infinite-spinner" />
+      <Loader className="mt-5" isLoading={isDataLoading} size={'large'} type="infinite-spinner" />
     </>
   );
 };

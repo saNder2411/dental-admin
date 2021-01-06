@@ -2,31 +2,26 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
-import { EditCellDropDownListProps } from './GridItemsTypes';
+import { EditCellProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Selectors
-import { selectDataItemIsLoading } from '../GridSelectors';
-import { selectServicesMemoCategories } from '../../../Services/ServicesSelectors';
+import { selectProcessDataItemFieldValue, selectDataItemIsLoading, selectServicesCategory } from '../GridSelectors';
 
-export const ServicesCategoryMultiSelect: FC<EditCellDropDownListProps<ServiceDataItem, string>> = ({
-  dataItemID,
-  field,
-  onChange,
-  value,
-}): JSX.Element => {
+export const ServicesCategoryMultiSelect: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectServicesCategories = useMemo(selectServicesMemoCategories, []);
+  const selectServicesCategories = useMemo(selectServicesCategory, []);
   const categories = useSelector(selectServicesCategories);
-  const multiSelectData = Array.from(new Set(categories)).map((value) => ({ text: value, value }));
+  const multiSelectData = Array.from(new Set(categories));
 
-  const multiSelectValue = value ? value.split(' | ').map((value) => ({ text: value, value })) : [];
+  const multiSelectValue = value ? value.split(' | ') : [];
 
   const onValueChange = (evt: MultiSelectChangeEvent) =>
     onChange({
       dataItem: dataItemID,
       field,
       syntheticEvent: evt.syntheticEvent,
-      value: evt.target.value.map(({ value }) => value ?? '').join(' | '),
+      value: evt.target.value.join(' | '),
     });
 
   return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;

@@ -12,7 +12,8 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { StatusNames } from '../GridTypes';
 // Selectors
 import {
   selectProcessDataItemFieldValue,
@@ -64,11 +65,7 @@ export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
   const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(ID, field);
 
-  return (
-    <td>
-      {dataItemInEditValue ? <AgendaStatusDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} /> : cellValue}
-    </td>
-  );
+  return <td>{dataItemInEditValue ? <AgendaStatusDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : cellValue}</td>;
 };
 
 export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
@@ -81,9 +78,7 @@ export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 
   const value = staffLastName ? staffLastName : '';
 
-  return (
-    <td>{dataItemInEditValue ? <AgendaSvcStaffDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={value} /> : value}</td>
-  );
+  return <td>{dataItemInEditValue ? <AgendaSvcStaffDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
 };
 
 export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
@@ -94,15 +89,7 @@ export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
   const selectServicesName = useMemo(() => selectServicesNameByID(cellValue.results), [cellValue.results]);
   const servicesName = useSelector(selectServicesName);
 
-  return (
-    <td>
-      {dataItemInEditValue ? (
-        <AgendaServicesMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} value={servicesName} />
-      ) : (
-        servicesName
-      )}
-    </td>
-  );
+  return <td>{dataItemInEditValue ? <AgendaServicesMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : servicesName}</td>;
 };
 
 export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
@@ -115,9 +102,7 @@ export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 
   const value = customerFullName ? customerFullName : '';
 
-  return (
-    <td>{dataItemInEditValue ? <AgendaFullNameDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={value} /> : value}</td>
-  );
+  return <td>{dataItemInEditValue ? <AgendaFullNameDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
 };
 
 export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
@@ -129,7 +114,7 @@ export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ da
   return (
     <td style={{ padding: '18px 12px' }}>
       {dataItemInEditValue ? (
-        <AgendaStartDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} />
+        <AgendaStartDateInput dataItemID={memoID} field={memoField} onChange={onChange} />
       ) : (
         intlService.formatDate(cellValue, 'H:mm | dd.MM')
       )}
@@ -146,7 +131,7 @@ export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ data
   return (
     <td style={{ padding: '18px 12px' }}>
       {dataItemInEditValue ? (
-        <AgendaEndDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={cellValue} />
+        <AgendaEndDateInput dataItemID={memoID} field={memoField} onChange={onChange} />
       ) : (
         intlService.formatDate(cellValue, 'H:mm | dd.MM')
       )}

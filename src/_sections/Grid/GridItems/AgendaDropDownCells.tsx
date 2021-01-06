@@ -9,10 +9,10 @@ import {
   ComboBoxFilterChangeEvent,
 } from '@progress/kendo-react-dropdowns';
 // Types
-import { EditCellDropDownListProps } from './GridItemsTypes';
-import { AppointmentDataItem, StatusNames } from '../../../Agenda/AgendaTypes';
+import { EditCellProps } from './GridItemsTypes';
+import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { StatusNames } from '../GridTypes';
 // Selectors
-import { selectIsValidFullNameValue } from '../../../Agenda/AgendaSelectors';
 import {
   selectDataItemIsLoading,
   selectProcessDataItemFieldValue,
@@ -24,13 +24,11 @@ import {
   selectCustomerFullNameByID,
   selectServicesDataForDropDownListData,
 } from '../GridSelectors';
-// Actions
-import { AgendaEditCellsActions } from '../../../Agenda/AgendaActions';
 // Helpers
 import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
-export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem, StatusNames>> = ({ dataItemID, field, onChange }) => {
+export const AgendaStatusDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectStatusNameList = useMemo(selectMemoStatusNameList, []);
@@ -45,7 +43,7 @@ export const AgendaStatusDropDownList: FC<EditCellDropDownListProps<AppointmentD
   );
 };
 
-export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
+export const AgendaSvcStaffDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
@@ -62,11 +60,11 @@ export const AgendaSvcStaffDropDownList: FC<EditCellDropDownListProps<Appointmen
   );
 };
 
-export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
+export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const dispatch = useDispatch();
-  const isValidFullName = useSelector(selectIsValidFullNameValue);
+  // const isValidFullName = useSelector(selectIsValidFullNameValue);
   const [filter, setFilter] = useState('');
   const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
   const dataForDropdownList = useSelector(selectCustomerDropDownListData);
@@ -85,10 +83,10 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
 
   useEffect(() => {
     if (value) return;
-    AgendaEditCellsActions.validateFullNameValue(dispatch, false);
+    // AgendaEditCellsActions.validateFullNameValue(dispatch, false);
 
     return () => {
-      AgendaEditCellsActions.validateFullNameValue(dispatch, true);
+      // AgendaEditCellsActions.validateFullNameValue(dispatch, true);
     };
   }, [dispatch, value]);
 
@@ -113,13 +111,13 @@ export const AgendaFullNameDropDownList: FC<EditCellDropDownListProps<Appointmen
       dataItemKey="value"
       filterable
       disabled={isDataItemLoading}
-      valid={isValidFullName}
+      valid={true}
       placeholder="This field is required."
     />
   );
 };
 
-export const AgendaServicesMultiSelect: FC<EditCellDropDownListProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
+export const AgendaServicesMultiSelect: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, { results: number[] }>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesDropDownListData = useMemo(selectServicesDataForDropDownListData, []);

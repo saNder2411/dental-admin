@@ -1,4 +1,5 @@
-import React, { FC, useState, useRef } from 'react';
+import React, { FC, useState, useRef, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 // Styled Components
@@ -8,32 +9,42 @@ import { GenericReferenceInput, GenericTextInput, GenericAvatarInput } from './G
 import { GenericDateInput } from './GenericDateCells';
 import { GenericGenderDropDownList, GenericBooleanFlagDropDownList, GenericRoleSkillsMultiSelect } from './GenericDropDownCells';
 // Types
+import { GridDataItem } from '../GridTypes';
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+// Selectors
+import { selectProcessDataItemFieldValue } from '../GridSelectors';
 // Helpers
 import { isString, isNumber } from './GridItemsHelpers';
 // Images
 import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridItemsHooks';
+import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 
 export const GenericTextCell: FC<GridCellProps> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<GridDataItem, string | number>(ID, field);
+
   const strValue = isString(cellValue) ? cellValue : '';
   const numValue = isNumber(cellValue) ? cellValue : '';
   const resultValue = strValue ? strValue : numValue;
 
-  return (
-    <td>{dataItemInEditValue ? <GenericTextInput dataItemID={memoID} field={memoField} onChange={onChange} value={resultValue} /> : resultValue}</td>
-  );
+  return <td>{dataItemInEditValue ? <GenericTextInput dataItemID={memoID} field={memoField} onChange={onChange} /> : resultValue}</td>;
 };
 
-export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem | ServiceDataItem>(ID, field);
+export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | ServiceDataItem>> = ({
+  dataItem: { ID },
+  onChange,
+  field,
+}): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem | ServiceDataItem, string>(ID, field);
 
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -41,7 +52,7 @@ export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | Servic
 
   return dataItemInEditValue ? (
     <td>
-      <GenericReferenceInput dataItemID={memoID} field={memoField} onChange={onChange} value={strValue} />
+      <GenericReferenceInput dataItemID={memoID} field={memoField} onChange={onChange} />
     </td>
   ) : (
     <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
@@ -59,15 +70,17 @@ export const GenericReferenceCell: FC<GridCellProps<AppointmentDataItem | Servic
 };
 
 export const GenericAvatarCell: FC<GridCellProps<StaffDataItem | CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<StaffDataItem | CustomerDataItem>(ID, field);
-  const { cellValue: Gender } = useMemoDataItemValuesForCells<StaffDataItem | CustomerDataItem>(ID, 'Gender');
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem | CustomerDataItem, string>(ID, field);
+  const Gender = useSelector(selectProcessDataItemFieldValue<StaffDataItem | CustomerDataItem, string>(ID, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
   const placeholderImageUrl = Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
 
   return dataItemInEditValue ? (
     <td>
-      <GenericAvatarInput dataItemID={memoID} field={memoField} onChange={onChange} value={strValue} />
+      <GenericAvatarInput dataItemID={memoID} field={memoField} onChange={onChange} />
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
@@ -77,14 +90,16 @@ export const GenericAvatarCell: FC<GridCellProps<StaffDataItem | CustomerDataIte
 };
 
 export const GenericDateCell: FC<GridCellProps<AppointmentDataItem | CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem | CustomerDataItem>(ID, field);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem | CustomerDataItem, string>(ID, field);
   const intlService = useInternationalization();
-  const value = cellValue ? new Date(cellValue as string) : new Date();
+  const value = cellValue ? new Date(cellValue) : new Date();
 
   return (
     <td>
       {dataItemInEditValue ? (
-        <GenericDateInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+        <GenericDateInput dataItemID={memoID} field={memoField} onChange={onChange} />
       ) : (
         intlService.formatDate(value, 'H:mm | dd.MM')
       )}
@@ -93,7 +108,7 @@ export const GenericDateCell: FC<GridCellProps<AppointmentDataItem | CustomerDat
 };
 
 export const GenericDateCellNoEditable: FC<GridCellProps<AppointmentDataItem | CustomerDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem | CustomerDataItem>(ID, field);
+  const { cellValue } = useOriginalDataItemValuesForCells<AppointmentDataItem | CustomerDataItem, string>(ID, field);
   const intlService = useInternationalization();
   const value = new Date(cellValue as string);
 
@@ -101,58 +116,43 @@ export const GenericDateCellNoEditable: FC<GridCellProps<AppointmentDataItem | C
 };
 
 export const GenericCurrencyCell: FC<GridCellProps<AppointmentDataItem | ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<AppointmentDataItem | ServiceDataItem>(ID, field);
+  const { cellValue } = useOriginalDataItemValuesForCells<AppointmentDataItem | ServiceDataItem, number>(ID, field);
   const intlService = useInternationalization();
-
   const numValue = isNumber(cellValue) ? cellValue : 50;
 
   return <SC.GenericCurrencyCell isNegativeAmount={numValue < 0}>{intlService.formatNumber(numValue, 'c')}</SC.GenericCurrencyCell>;
 };
 
 export const GenericGenderCell: FC<GridCellProps<AppointmentDataItem | CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<AppointmentDataItem | CustomerDataItem>(ID, field);
-  const value = cellValue ? (cellValue as string) : '(1) Female';
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem | CustomerDataItem, string>(ID, field);
+  const value = cellValue ? cellValue : '(1) Female';
 
-  return (
-    <td>{dataItemInEditValue ? <GenericGenderDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={value} /> : value}</td>
-  );
+  return <td>{dataItemInEditValue ? <GenericGenderDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
 };
 
-export const GenericBooleanFlagCell: FC<GridCellProps<ServiceDataItem | StaffDataItem>> = ({
-  dataItem: { ID },
-  onChange,
-  field,
-}): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | StaffDataItem>(ID, field);
-  const flag = !!cellValue;
+export const GenericBooleanFlagCell: FC<GridCellProps<ServiceDataItem | StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem | StaffDataItem, boolean>(ID, field);
 
   return dataItemInEditValue ? (
     <td>
-      <GenericBooleanFlagDropDownList dataItemID={memoID} field={memoField} onChange={onChange} value={flag} />
+      <GenericBooleanFlagDropDownList dataItemID={memoID} field={memoField} onChange={onChange} />
     </td>
   ) : (
-    <SC.BooleanFlagCell isOnline={flag}>
-      <span className={flag ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
+    <SC.BooleanFlagCell isOnline={cellValue}>
+      <span className={cellValue ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
     </SC.BooleanFlagCell>
   );
 };
 
-export const GenericRoleSkillsCell: FC<GridCellProps<StaffDataItem | ServiceDataItem>> = ({
-  dataItem: { ID },
-  onChange,
-  field,
-}): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem | StaffDataItem>(ID, field);
-  const currentRoleSkills = cellValue as string[] | null;
-  const value = currentRoleSkills ? currentRoleSkills.join(' | ') : '';
+export const GenericRoleSkillsCell: FC<GridCellProps<StaffDataItem | ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem | StaffDataItem, string[] | null>(ID, field);
+  const value = cellValue ? cellValue.join(' | ') : '';
 
-  return (
-    <td>
-      {dataItemInEditValue ? (
-        <GenericRoleSkillsMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} value={currentRoleSkills} />
-      ) : (
-        value
-      )}
-    </td>
-  );
+  return <td>{dataItemInEditValue ? <GenericRoleSkillsMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
 };

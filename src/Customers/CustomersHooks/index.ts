@@ -1,3 +1,2 @@
-export * from './useCustomersStateForDomain';
-export * from './useActionMetaForCustomersFetchData';
-export * from './usrFetchCustomersData';
+export * from './useSelectCustomersData';
+export * from './useFetchCustomersData';

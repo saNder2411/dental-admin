@@ -15,7 +15,7 @@ interface BackendImmutableKey {
   Modified: string;
   Created: string;
 
-  SvcStaff?: null | string;
+  SvcStaff?: number;
   Upcoming?: null | string;
 }
 

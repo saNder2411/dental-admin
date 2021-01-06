@@ -13,7 +13,7 @@ import {
   GenericCurrencyCell,
   ServicesDiscountCell,
   ServicesTotalPriceCell,
-  ActionsControlCell,
+  ServicesActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
@@ -21,23 +21,21 @@ import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
 import { selectDataName } from '../_sections/Grid/GridSelectors';
-// Actions
-import { ServicesActions } from './ServicesActions';
 // Hooks
-import { useFetchDataForDomain, useSetGridData } from '../_sections/Grid/GridHooks';
-import { useServicesStateForDomain } from './ServicesHooks';
+import { useSetGridData } from '../_sections/Grid/GridHooks';
+import { useSelectServicesData, useFetchServicesData } from './ServicesHooks';
 
 export const Services: FC = (): JSX.Element => {
   const dataName = useSelector(selectDataName);
-  const { servicesData, servicesIsDataLoading } = useServicesStateForDomain();
+  const { servicesData, isDataLoading } = useSelectServicesData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchDataForDomain(servicesData.length, ServicesActions, dispatch);
+  useFetchServicesData(servicesData.length, dispatch);
   useSetGridData(dataName, GridDataName.Services, servicesData, dispatch);
 
   const hasServicesData = dataName === GridDataName.Services;
-  const contentTSX = hasServicesData && !servicesIsDataLoading && (
+  const contentTSX = hasServicesData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid>
@@ -115,7 +113,7 @@ export const Services: FC = (): JSX.Element => {
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
-            cell={ActionsControlCell as CustomGridCell}
+            cell={ServicesActionsControlCell as CustomGridCell}
             width={140}
           />
         </Grid>
@@ -126,7 +124,7 @@ export const Services: FC = (): JSX.Element => {
   return (
     <>
       {contentTSX}
-      <Loader className="mt-5" isLoading={servicesIsDataLoading} size={'large'} type="infinite-spinner" />
+      <Loader className="mt-5" isLoading={isDataLoading} size={'large'} type="infinite-spinner" />
     </>
   );
 };

@@ -12,7 +12,6 @@ export type GridOnChange<T> = (evt: {
 }) => void;
 
 export interface GridCellProps<T = GridDataItem> {
-  rowType: string;
   dataItem: T;
   field: keyof T;
   onChange: GridOnChange<T>;
@@ -29,18 +28,14 @@ export interface InputChangeEvent {
   value: string;
 }
 
-export interface EditCellProps<T = GridDataItem, V = string> {
+export interface EditCellProps<T extends GridDataItem = GridDataItem> {
   dataItemID: number;
   field: keyof T;
   onChange: GridOnChange<T>;
-  value: V;
 }
 
-export interface EditCellDropDownListProps<T = GridDataItem, V = string, D = GridDataItem> extends EditCellProps<T, V> {
-  domainData?: D;
-}
 
-export interface EditCellNumericProps<T = GridDataItem, V = number> extends EditCellProps<T, V> {
+export interface EditCellNumericProps<T extends GridDataItem = GridDataItem> extends EditCellProps<T> {
   step: number;
   min: number;
 }

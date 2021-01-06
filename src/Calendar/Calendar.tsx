@@ -25,7 +25,7 @@ export const Calendar: FC = () => {
 
   const [isAgendaDataItemLoading, setIsAgendaDataItemLoading] = useState(false);
   const dispatch = useDispatch();
-  const { teamData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
+  const { staffData, mapTeamToFiltered } = useTeamStaffDataForScheduler();
   const selectData = useMemo(selectMemoData, []);
   const data = useSelector(selectData);
   const calendarData = useMemo(() => data.filter(({ LookupHR01teamId }) => mapTeamToFiltered[LookupHR01teamId]), [data, mapTeamToFiltered]);
@@ -45,7 +45,7 @@ export const Calendar: FC = () => {
       <LoaderDataItem isLoading={isAgendaDataItemLoading} />
       <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>
       <div className="card-control-wrapper">
-        {teamData.map((employee) => (
+        {staffData.map((employee) => (
           <CalendarTopControlItem
             key={employee.ID}
             isFiltered={!mapTeamToFiltered[employee.ID]}
@@ -73,7 +73,7 @@ export const Calendar: FC = () => {
           resources={[
             {
               name: 'Teams',
-              data: teamData
+              data: staffData
                 .filter(({ ID }) => mapTeamToFiltered[ID])
                 .map((item) => ({
                   ...item,

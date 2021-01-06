@@ -7,52 +7,45 @@ import { CustomersMobilePhoneInput } from './CustomersInputCells';
 import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 // Selectors
-import { selectTeamStaffMemoData } from '../../../TeamStaff/TeamStaffSelectors';
+import { selectStaffLastNameByID, selectStaffLastNamesByID } from '../GridSelectors';
 // Hooks
-import { useMemoDataItemValuesForCells } from './GridItemsHooks';
+import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isString } from './GridItemsHelpers';
 
-export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = (props): JSX.Element => {
-  const { dataItem, field } = props;
-  const value = dataItem[field] as string | null | undefined;
+export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, number>(ID, field);
 
-  return <td>{dataItem.inEdit ? <CustomersSvcStaffDropDownList {...props} /> : value}</td>;
+  const selectStaffLastName = useMemo(() => selectStaffLastNameByID(cellValue), [cellValue]);
+  const staffLastName = useSelector(selectStaffLastName);
+
+  const value = staffLastName ? staffLastName : '';
+
+  return <td>{dataItemInEditValue ? <CustomersSvcStaffDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
 };
 
 export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<CustomerDataItem>(ID, field);
-  const LookupMultiHR01teamId = cellValue as { results: number[] };
-  const selectTeamStaffData = useMemo(selectTeamStaffMemoData, []);
-  const teamStaffData = useSelector(selectTeamStaffData);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, { results: number[] }>(ID, field);
 
-  const currentAppointment = teamStaffData.filter(({ Id }) => LookupMultiHR01teamId.results.find((item) => item === Id));
-  const value = currentAppointment.map(({ Title }) => Title ?? '').join(' | ');
+  const selectStaffLastNames = useMemo(() => selectStaffLastNamesByID(cellValue.results), [cellValue.results]);
+  const staffLastNames = useSelector(selectStaffLastNames);
 
   return (
     <td>
-      {dataItemInEditValue ? (
-        <CustomersLastAppointmentsMultiSelect
-          dataItemID={memoID}
-          field={memoField}
-          onChange={onChange}
-          value={currentAppointment}
-          domainData={teamStaffData}
-        />
-      ) : (
-        value
-      )}
+      {dataItemInEditValue ? <CustomersLastAppointmentsMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : staffLastNames}
     </td>
   );
 };
 
 export const CustomersMobilePhoneCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells(ID, field);
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
-  return (
-    <td>
-      {dataItemInEditValue ? <CustomersMobilePhoneInput dataItemID={memoID} field={memoField} onChange={onChange} value={strValue} /> : strValue}
-    </td>
-  );
+  return <td>{dataItemInEditValue ? <CustomersMobilePhoneInput dataItemID={memoID} field={memoField} onChange={onChange} /> : strValue}</td>;
 };

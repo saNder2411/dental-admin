@@ -91,7 +91,7 @@ export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): Gr
         Modified: new Date().toISOString(),
         Created: new Date().toISOString(),
 
-        SvcStaff: '',
+        SvcStaff: 1,
         Upcoming: new Date().toISOString(),
         ClientPhotoUrl: '',
         inEdit: true,

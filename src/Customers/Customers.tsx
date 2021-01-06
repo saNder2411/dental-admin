@@ -12,32 +12,30 @@ import {
   CustomersLastAppointmentsCell,
   CustomersMobilePhoneCell,
   GenericAvatarCell,
-  ActionsControlCell,
+  CustomersActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
 import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 // Selectors
-import { selectDataName } from '../_sections/Grid/GridSelectors';
-// Actions
-import { CustomersActions } from './CustomersActions';
+import { selectDataName, selectOriginalStaffDataLength } from '../_sections/Grid/GridSelectors';
 // Hooks
 import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
-import { useCustomersStateForDomain, useActionMetaForCustomersFetchData, useFetchCustomersData } from './CustomersHooks';
+import { useSelectCustomersData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
   const dataName = useSelector(selectDataName);
-  const { customersData, customersIsDataLoading } = useCustomersStateForDomain();
-  const teamStaffDataLength = useActionMetaForCustomersFetchData();
+  const { customersData, isDataLoading } = useSelectCustomersData();
+  const staffDataLength = useSelector(selectOriginalStaffDataLength);
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchCustomersData(customersData.length, teamStaffDataLength, CustomersActions, dispatch);
-  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Customers, customersData, customersIsDataLoading, dispatch);
+  useFetchCustomersData(customersData.length, staffDataLength, dispatch);
+  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Customers, customersData, isDataLoading, dispatch);
 
   const hasCustomersData = dataName === GridDataName.Customers;
-  const contentTSX = hasCustomersData && !customersIsDataLoading && (
+  const contentTSX = hasCustomersData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid>
@@ -123,7 +121,7 @@ export const Customers: FC = (): JSX.Element => {
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
-            cell={ActionsControlCell as CustomGridCell}
+            cell={CustomersActionsControlCell as CustomGridCell}
             width={140}
           />
         </Grid>
@@ -134,7 +132,7 @@ export const Customers: FC = (): JSX.Element => {
   return (
     <>
       {contentTSX}
-      <Loader className="mt-5" isLoading={customersIsDataLoading} size={'large'} type="infinite-spinner" />
+      <Loader className="mt-5" isLoading={isDataLoading} size={'large'} type="infinite-spinner" />
     </>
   );
 };

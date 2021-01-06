@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
-// ActionCreators
+// Action Creators
 import { fetchAppointmentsDataInitAsyncAC } from '../../_sections/Grid/GridAC';
 
 export const useFetchAgendaData = (

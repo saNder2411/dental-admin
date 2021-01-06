@@ -1,4 +1,5 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useInternationalization } from '@progress/kendo-react-intl';
 // Instruments
@@ -11,24 +12,28 @@ import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCe
 import { ServicesCategoryMultiSelect } from './ServicesDropDownCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StatusNames } from '../../../Agenda/AgendaTypes';
+import { StatusNames } from '../GridTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
+// Selectors
+import { selectProcessDataItemFieldValue } from '../GridSelectors';
+// Hooks
+import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
 import { isNumber } from './GridItemsHelpers';
-// Hooks
-import { useMemoDataItemValuesForCells } from './GridItemsHooks';
 
 export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
-  const value = cellValue as string;
-  const isImageUrl = value && (value.includes('png') || value.includes('jpg') || value.includes('jpeg'));
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, field);
+
+  const isImageUrl = cellValue && (cellValue.includes('png') || cellValue.includes('jpg') || cellValue.includes('jpeg'));
 
   return dataItemInEditValue ? (
     <td>
-      <ServicesIconInput dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
+      <ServicesIconInput dataItemID={memoID} field={memoField} onChange={onChange} />
     </td>
   ) : isImageUrl ? (
-    <SC.ServicesImageCell imageUrl={value}>
+    <SC.ServicesImageCell imageUrl={cellValue}>
       <div className="Grid__serviceImage" />
     </SC.ServicesImageCell>
   ) : (
@@ -39,38 +44,40 @@ export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem:
 };
 
 export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
-  const value = cellValue as number;
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, field);
 
   return (
     <td>
       {dataItemInEditValue ? (
-        <ServicesNumericForDiscount dataItemID={memoID} field={memoField} onChange={onChange} value={value} step={1} min={0} />
+        <ServicesNumericForDiscount dataItemID={memoID} field={memoField} onChange={onChange} step={1} min={0} />
       ) : (
-        <span>{`${value ? value * 100 : `0`}%`}</span>
+        <span>{`${cellValue ? cellValue * 100 : `0`}%`}</span>
       )}
     </td>
   );
 };
 
 export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
-  const value = cellValue as number;
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, field);
 
   return (
     <td>
       {dataItemInEditValue ? (
-        <ServicesNumeric dataItemID={memoID} field={memoField} onChange={onChange} value={value} step={5} min={5} />
+        <ServicesNumeric dataItemID={memoID} field={memoField} onChange={onChange} step={5} min={5} />
       ) : (
-        <span>{value}</span>
+        <span>{cellValue}</span>
       )}
     </td>
   );
 };
 
-export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
-  const { cellValue: OfferingDiscount } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, 'OfferingDiscount');
+export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, field);
+  const OfferingDiscount = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(ID, 'OfferingDiscount'));
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 0;
   const numDiscount = isNumber(OfferingDiscount) ? OfferingDiscount : 0;
@@ -84,16 +91,9 @@ export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dat
 };
 
 export const ServicesCategoryCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { memoID, memoField, cellValue, dataItemInEditValue } = useMemoDataItemValuesForCells<ServiceDataItem>(ID, field);
-  const value = cellValue as string;
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, field);
 
-  return (
-    <td>
-      {dataItemInEditValue ? (
-        <ServicesCategoryMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} value={value} />
-      ) : (
-        value
-      )}
-    </td>
-  );
+  return <td>{dataItemInEditValue ? <ServicesCategoryMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : cellValue}</td>;
 };
