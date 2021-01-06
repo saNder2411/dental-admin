@@ -1,6 +1,6 @@
 // Types
 import { SchedulerState, ActionTypes, Actions } from './SchedulerTypes';
-import { ActionTypes as TeamStaffActionsTypes } from '../../TeamStaff/TeamStaffTypes';
+import { ActionTypes as StaffActionsTypes } from '../Grid/GridTypes';
 // Helpers
 import { updateNewDataItemOnAddNewItemToChange } from './SchedulerHelpers';
 
@@ -19,13 +19,13 @@ export const reducer = (state: SchedulerState = initialState, action: Actions): 
     case ActionTypes.SET_DATA:
       return { ...state, data: action.payload };
 
-    case TeamStaffActionsTypes.FETCH_DATA_SUCCESS:
+    case StaffActionsTypes.FETCH_STAFF_DATA_SUCCESS:
       return { ...state, mapTeamToFiltered: action.payload.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}) };
 
-    case TeamStaffActionsTypes.CREATE_DATA_ITEM_SUCCESS:
+    case StaffActionsTypes.CREATE_STAFF_DATA_ITEM_SUCCESS:
       return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.payload.ID]: true } };
 
-    case TeamStaffActionsTypes.DELETE_DATA_ITEM_SUCCESS:
+    case StaffActionsTypes.DELETE_STAFF_DATA_ITEM_SUCCESS:
       const swapMapTeamToFiltered = { ...state.mapTeamToFiltered };
       delete swapMapTeamToFiltered[action.payload];
       return { ...state, mapTeamToFiltered: swapMapTeamToFiltered };

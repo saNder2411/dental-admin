@@ -1,7 +1,5 @@
-import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
-import { StatusNames } from '../../Agenda';
-import { GridDataItem, GridDataName } from './GridTypes';
+import { GridDataItem, GridDataName, StatusNames } from './GridTypes';
 import { OfferIcons } from '../../Services';
 
 export const transformArrayDataToByIdData = <T extends GridDataItem = GridDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
@@ -18,29 +16,14 @@ export const generateId = (data: GridDataItem[]): number => data.reduce((acc, cu
 
 export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
-export const updateDataAfterAddItemToEdit = (data: GridDataItem[], editItemID: number): GridDataItem[] => {
-  return data.map((item) => (item.ID === editItemID ? { ...item, inEdit: true } : item));
-};
-
 export const updateDataAfterEditItem = <T extends GridDataItem = GridDataItem>(data: T[], dataItem: T): T[] => {
-  // Delete isNew and inEdit field after change reducer
-  const updatedItem = { ...dataItem, inEdit: false, isNew: false };
   const index = data.findIndex(({ ID }) => ID === dataItem.ID);
 
   if (index < 0) return data;
 
-  return [...data.slice(0, index), updatedItem, ...data.slice(index + 1)];
+  return [...data.slice(0, index), dataItem, ...data.slice(index + 1)];
 };
 
-export const updateDataAfterEditNewItem = <T extends GridDataItem = GridDataItem>(data: T[], dataItem: T): T[] => {
-  // Delete isNew and inEdit field after change reducer
-  const newItem = { ...dataItem, inEdit: false, isNew: false };
-  const index = data.findIndex(({ ID }) => ID === dataItem.ID);
-
-  if (index < 0) return data;
-
-  return [...data.slice(0, index), newItem, ...data.slice(index + 1)];
-};
 
 export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>(data: T[], removeItemID: number): T[] => {
   const index = data.findIndex(({ ID }) => ID === removeItemID);
@@ -48,17 +31,6 @@ export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>
   if (index < 0) return data;
 
   return [...data.slice(0, index), ...data.slice(index + 1)];
-};
-
-export const updateDataAfterCancelEdit = (data: GridDataItem[], originalData: GridDataItem[], editItemID: number): GridDataItem[] => {
-  const originalItem = originalData.find(({ ID }) => ID === editItemID);
-
-  return originalItem ? data.map((item) => (item.ID === originalItem.ID ? { ...originalItem, inEdit: false } : item)) : data;
-};
-
-export const updateDataOnChangeItem = (data: GridDataItem[], { dataItem, field, value, syntheticEvent }: GridItemChangeEvent): GridDataItem[] => {
-  syntheticEvent.persist();
-  return data.map((item) => (item.ID === dataItem ? { ...item, [field as string]: value } : item));
 };
 
 export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): GridDataItem => {
@@ -194,3 +166,28 @@ export const setTitleForAddNewItemSectionAndDataName = (dataItem: GridDataItem):
   }
   return { labelForAddNewItemBtn: '', dataName: GridDataName.Default };
 };
+
+export const roleSkills = [
+  `Active Listening`,
+  `Artistic & Creative`,
+  `Colouring-Balayage`,
+  `Colouring-Base`,
+  `Colouring-Ombré`,
+  `Consultative`,
+  `Decisive & Confident`,
+  `First Aid`,
+  `Marketing & Promoting`,
+  `Patience & Tolerance`,
+  `Personal Dexterity`,
+  `Physical Stamina`,
+  `Problem Solving`,
+  `Rapport Building`,
+  `Styling-Blunt Cut`,
+  `Styling-Chunky`,
+  `Styling-Dusting`,
+  `Styling-Layering`,
+  `Styling-Undercut`,
+  `Styling-Wispy`,
+  `Time Management`,
+];
+

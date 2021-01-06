@@ -1,9 +1,5 @@
 import { ActionTypes, SchedulerDataItem, InitDataForNewDataItem, ViewType } from './SchedulerTypes';
-import {
-  fetchDataSuccessAC as fetchTeamStaffDataTSuccessAC,
-  createDataItemSuccessAC as createTeamStaffDataDataItemSuccessAC,
-  deleteDataItemSuccessAC as deleteTeamStaffDataDataItemSuccessAC,
-} from '../../TeamStaff/TeamStaffAC';
+import { fetchStaffDataSuccessAC, createStaffDataItemSuccessAC, deleteStaffDataItemSuccessAC } from '../Grid/GridAC';
 
 export const setDataAC = (data: SchedulerDataItem[]) => ({ type: ActionTypes.SET_DATA, payload: data });
 
@@ -27,4 +23,4 @@ export const changeUpdatedRecurringDataItemAC = (dataItem: SchedulerDataItem | n
   payload: dataItem,
 });
 
-export { fetchTeamStaffDataTSuccessAC, createTeamStaffDataDataItemSuccessAC, deleteTeamStaffDataDataItemSuccessAC };
+export { fetchStaffDataSuccessAC, createStaffDataItemSuccessAC, deleteStaffDataItemSuccessAC };

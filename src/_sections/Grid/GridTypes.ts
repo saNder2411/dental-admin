@@ -1,5 +1,3 @@
-import { Dispatch } from 'redux';
-import { GridItemChangeEvent } from '@progress/kendo-react-grid';
 // Types
 import { AppointmentDataItem } from '../../Agenda';
 import { StaffDataItem } from '../../TeamStaff';
@@ -67,13 +65,20 @@ export const ActionTypes = {
   CHANGE_DATA_NAME: 'GRID/CHANGE_DATA_NAME' as const,
   // Edit
   ADD_ITEM_TO_EDIT: 'GRID/ADD_ITEM_TO_EDIT' as const,
-  UPDATE_ITEM_AFTER_EDIT: 'GRID/UPDATE_ITEM_AFTER_EDIT' as const,
-  REMOVE_ITEM_FROM_DATA: 'GRID/REMOVE_ITEM_FROM_DATA' as const,
   CANCEL_EDIT: 'GRID/CANCEL_EDIT' as const,
   CHANGE_ITEM: 'GRID/CHANGE_ITEM' as const,
   ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
-  ADD_NEW_ITEM_TO_DATA: 'GRID/ADD_NEW_ITEM_TO_DATA' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
+  // Validation Staff
+  VALIDATE_FULL_NAME_FIELD: 'STAFF/VALIDATE_FULL_NAME_FIELD' as const,
+  VALIDATE_JOB_TITLE_FIELD: 'STAFF/VALIDATE_JOB_TITLE_FIELD' as const,
+  VALIDATE_MOBILE_PHONE_FIELD: 'STAFF/VALIDATE_MOBILE_PHONE_FIELD' as const,
+  // Validation Customers
+  VALIDATE_CUSTOMER_MOBILE_PHONE_FIELD: 'CUSTOMERS/VALIDATE_MOBILE_PHONE_FIELD' as const,
+  // Validation Appointments
+  VALIDATE_START_DATE_EVENT: 'APPOINTMENTS/VALIDATE_START_DATE_EVENT' as const,
+  VALIDATE_END_DATE_EVENT: 'APPOINTMENTS/VALIDATE_END_DATE_EVENT' as const,
+  VALIDATE_FULL_NAME_VALUE: 'APPOINTMENTS/VALIDATE_FULL_NAME_VALUE' as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -104,26 +109,6 @@ export enum StatusNames {
   Tooth = '(11) Tooth',
 }
 
-export interface DomainStateActionsType<T> {
-  fetchData: (dispatch: Dispatch, meta?: { servicesDataLength: number; teamStaffDataLength: number; customersDataLength: number }) => void;
-  createDataItem: (dispatch: Dispatch, createdDataItem: T, onAddDataItemToGridData: () => void) => void;
-  updateDataItem: (dispatch: Dispatch, updatedDataItem: T, onUpdateDataItemInGridData: () => void) => void;
-  deleteDataItem: (dispatch: Dispatch, deletedDataItemID: number, onDeleteDataItemInGridData: () => void) => void;
-}
-
-export interface GridStateActions {
-  changeViewOriginalData: (dispatch: Dispatch, data: GridDataItem[]) => void;
-  changeDataName: (dispatch: Dispatch, dataName: GridDataName) => void;
-  onItemEdit: (dispatch: Dispatch, dataItemID: number) => void;
-  onItemUpdatedAfterEdit: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onItemRemove: (dispatch: Dispatch, dataItemID: number) => void;
-  onCancelEdit: (dispatch: Dispatch, dataItemID: number) => void;
-  onItemChange: (dispatch: Dispatch) => (evt: GridItemChangeEvent) => void;
-  onAddNewItem: (dispatch: Dispatch) => void;
-  onAddNewItemToData: (dispatch: Dispatch, dataItem: GridDataItem) => void;
-  onDiscardNewItemToData: (dispatch: Dispatch, dataItemID: number) => void;
-}
-
 export interface GridState {
   viewOriginalData: GridDataItem[];
   byId: { [key: string]: GridDataItem };
@@ -136,6 +121,7 @@ export interface GridState {
   dataItemError: string;
   labelForAddNewItemBtn: string;
   statusNameList: StatusNames[];
+  roleSkills: string[];
   entities: {
     appointments: { originalData: AppointmentDataItem[]; byId: { [key: string]: AppointmentDataItem }; allIDs: number[] };
     customers: { originalData: CustomerDataItem[]; byId: { [key: string]: CustomerDataItem }; allIDs: number[] };
@@ -143,13 +129,6 @@ export interface GridState {
     services: { originalData: ServiceDataItem[]; byId: { [key: string]: ServiceDataItem }; allIDs: number[] };
   };
 }
-
-export type DomainsStateActions = InferValueTypes<{
-  type1: DomainStateActionsType<ServiceDataItem>;
-  type2: DomainStateActionsType<StaffDataItem>;
-  type3: DomainStateActionsType<CustomerDataItem>;
-  type4: DomainStateActionsType<AppointmentDataItem>;
-}>;
 
 export type FetchAppointmentsDataInitAsyncActionType = ReturnType<typeof actions.fetchAppointmentsDataInitAsyncAC>;
 

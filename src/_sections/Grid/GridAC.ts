@@ -204,10 +204,6 @@ export const changeDataNameAC = (dataName: GridDataName) => ({ type: ActionTypes
 // Edit
 export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
 
-export const updateItemAfterEditAC = (dataItem: GridDataItem) => ({ type: ActionTypes.UPDATE_ITEM_AFTER_EDIT, payload: dataItem });
-
-export const removeItemFromDataAC = (removeItemID: number) => ({ type: ActionTypes.REMOVE_ITEM_FROM_DATA, payload: removeItemID });
-
 export const cancelEditAC = (editItemID: number) => ({ type: ActionTypes.CANCEL_EDIT, payload: editItemID });
 
 export const changeItemAC = (changeData: { dataItemID: number; field: string; value: any }) => ({
@@ -216,7 +212,5 @@ export const changeItemAC = (changeData: { dataItemID: number; field: string; va
 });
 
 export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT });
-
-export const addNewItemToDataAC = (dataItem: GridDataItem) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_DATA, payload: dataItem });
 
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });

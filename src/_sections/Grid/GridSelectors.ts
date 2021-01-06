@@ -3,12 +3,6 @@ import { createSelector } from 'reselect';
 import { GlobalState } from '../../_init';
 import { GridDataItem } from '../Grid/GridTypes';
 
-export const selectGridDataItemMemoValueForCell = <T>(ID: number, field: keyof T) =>
-  createSelector(
-    ({ GridState }: GlobalState) => ((GridState.viewOriginalData.find((dataItem) => dataItem.ID === ID) as unknown) as T)[field],
-    (value) => value
-  );
-
 const selectViewOriginalData = ({ GridState }: GlobalState) => GridState.viewOriginalData;
 
 const selectByIdData = ({ GridState }: GlobalState) => GridState.byId;

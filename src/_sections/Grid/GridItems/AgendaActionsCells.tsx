@@ -8,14 +8,13 @@ import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 // Actions
 import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../GridAC';
 // Hooks
-import { useSelectValidateField } from './GridItemsHooks';
+// import { useSelectValidateField } from './GridItemsHooks';
 // Selectors
 import { selectMemoProcessDataItem } from '../GridSelectors';
 
 export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<AppointmentDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
-  const isValidFields = useSelectValidateField();
 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
@@ -44,7 +43,7 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
       isNewItem={dataItem.isNew}
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
-      isValidFields={isValidFields}
+      isValidFields
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}
