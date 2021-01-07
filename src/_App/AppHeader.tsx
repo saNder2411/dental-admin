@@ -40,7 +40,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
               target="_blank"
               rel="noopener noreferrer">
               <span className={`k-icon k-i-gear`} />
-              &nbsp;<span className="k-item-text">StylCall-Support</span>
+              &nbsp;<span className="k-item-text">StyCal-Admin</span>
             </a>
           )}
         </li>
