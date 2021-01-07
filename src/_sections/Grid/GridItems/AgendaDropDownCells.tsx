@@ -1,5 +1,5 @@
-import React, { FC, useMemo, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useMemo, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   DropDownList,
   MultiSelect,
@@ -24,6 +24,8 @@ import {
   selectCustomerFullNameByID,
   selectServicesDataForDropDownListData,
 } from '../GridSelectors';
+// Hooks
+import { useTextFieldsValidation } from '../GridHooks';
 // Helpers
 import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
@@ -63,8 +65,6 @@ export const AgendaSvcStaffDropDownList: FC<EditCellProps<AppointmentDataItem>> 
 export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const dispatch = useDispatch();
-  // const isValidFullName = useSelector(selectIsValidFullNameValue);
   const [filter, setFilter] = useState('');
   const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
   const dataForDropdownList = useSelector(selectCustomerDropDownListData);
@@ -81,14 +81,7 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
   const selectCustomersById = useMemo(() => selectCustomersByIdData, []);
   const customersById = useSelector(selectCustomersById);
 
-  useEffect(() => {
-    if (value) return;
-    // AgendaEditCellsActions.validateFullNameValue(dispatch, false);
-
-    return () => {
-      // AgendaEditCellsActions.validateFullNameValue(dispatch, true);
-    };
-  }, [dispatch, value]);
+  const isValid = useTextFieldsValidation(dropDownListValue.text);
 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
@@ -111,7 +104,7 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
       dataItemKey="value"
       filterable
       disabled={isDataItemLoading}
-      valid={true}
+      valid={isValid}
       placeholder="This field is required."
     />
   );

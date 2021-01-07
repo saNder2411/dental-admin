@@ -17,7 +17,7 @@ import { IconMap } from '../../../_instruments';
 // Types
 import { StatusNames } from '../../Grid/GridTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 //Actions
 import { SchedulerActions } from '../SchedulerActions';
 import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../Grid/GridAC';

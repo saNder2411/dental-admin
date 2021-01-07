@@ -23,7 +23,7 @@ import { selectDataName } from '../_sections/Grid/GridSelectors';
 import { useSetGridData } from '../_sections/Grid/GridHooks';
 import { useSelectStaffData, useFetchStaffData } from './TeamStaffHooks';
 
-export const TeamStaff: FC = (): JSX.Element => {
+export const Staff: FC = (): JSX.Element => {
   const dataName = useSelector(selectDataName);
   const { staffData, isDataLoading } = useSelectStaffData();
   const dispatch = useDispatch();

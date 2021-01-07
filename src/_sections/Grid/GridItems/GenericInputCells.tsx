@@ -7,7 +7,7 @@ import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../Gri
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { GridDataItem } from '../GridTypes';
 

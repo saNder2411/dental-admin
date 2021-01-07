@@ -4,18 +4,24 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 // Actions
 import { createStaffDataItemInitAsyncAC, updateStaffDataItemInitAsyncAC, deleteStaffDataItemInitAsyncAC } from '../GridAC';
 // Selectors
 import { selectMemoProcessDataItem } from '../GridSelectors';
+// Hooks
+import { useTextFieldsValidation, usePhoneFieldsValidation } from '../GridHooks';
+// Helpers
+import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const StaffActionsControlCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<StaffDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
-
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
+  const isValidFullName = useTextFieldsValidation(dataItem.FullName);
+  const isValidJobTitle = useTextFieldsValidation(dataItem.JobTitle);
+  const isValidMobilePhone = usePhoneFieldsValidation(phoneValidator(dataItem.CellPhone));
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
@@ -38,7 +44,7 @@ export const StaffActionsControlCell: FC<GridCellProps<StaffDataItem>> = ({ data
       isNewItem={dataItem.isNew}
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
-      isValidFields
+      isValidFields={isValidFullName && isValidJobTitle && isValidMobilePhone}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

@@ -6,7 +6,7 @@ import { SchedulerEditSlot } from './SchedulerEditSlot';
 // Actions
 import { SchedulerActions } from '../SchedulerActions';
 // Types
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 // Selectors
 import { selectMemoNewDataItem } from '../SchedulerSelectors';
 

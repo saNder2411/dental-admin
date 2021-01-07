@@ -14,11 +14,11 @@ import {
 } from './GridTypes';
 import { QueryAppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { QueryServiceDataItem } from '../../Services/ServicesTypes';
-import { QueryStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem } from '../../Staff/StaffTypes';
 import { QueryCustomerDataItem } from '../../Customers/CustomersTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Agenda/AgendaHelpers';
-import { transformAPIData as transformTeamStaffAPIData } from '../../TeamStaff/TeamStaffHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../../Staff/StaffHelpers';
 import { transformAPIData as transformCustomersAPIData } from '../../Customers/CustomersHelpers';
 
 type Results = [QueryAppointmentDataItem[], QueryServiceDataItem[] | null, QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null];

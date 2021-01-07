@@ -4,7 +4,7 @@ import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, Or
 // Types
 import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda/AgendaTypes';
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
-import { QueryStaffDataItem, MutationStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem, MutationStaffDataItem } from '../Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
 
 export type QueryAllData<T> = () => Promise<T>;

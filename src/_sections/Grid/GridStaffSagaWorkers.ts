@@ -6,9 +6,9 @@ import { API } from '../../_REST';
 import * as actions from './GridAC';
 // Types
 import { CreateStaffDataItemInitAsyncActionType, UpdateStaffDataItemInitAsyncActionType, DeleteStaffDataItemInitAsyncActionType } from './GridTypes';
-import { QueryStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem } from '../../Staff/StaffTypes';
 // Helpers
-import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../TeamStaff/TeamStaffHelpers';
+import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Staff/StaffHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {

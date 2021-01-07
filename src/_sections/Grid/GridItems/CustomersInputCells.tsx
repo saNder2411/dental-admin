@@ -6,24 +6,16 @@ import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../Gri
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
+// Hooks
+import { usePhoneFieldsValidation } from '../GridHooks';
 // Helpers
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, field));
-  // const dispatch = useDispatch();
-  // const isValidMobilePhone = useSelector(selectCustomersIsValidMobilePhoneField);
   const errorMessage = phoneValidator(value);
-
-  // useEffect(() => {
-  //   if (!errorMessage) return;
-  //   CustomersEditCellsActions.validateMobilePhoneField(dispatch, false);
-
-  //   return () => {
-  //     CustomersEditCellsActions.validateMobilePhoneField(dispatch, true);
-  //   };
-  // }, [dispatch, errorMessage]);
+  const isValid = usePhoneFieldsValidation(errorMessage);
 
   const onPhoneChange = ({ syntheticEvent, target: { value } }: MaskedTextBoxChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
@@ -31,10 +23,10 @@ export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem>> = ({
   return (
     <MaskedTextBox
       value={value}
-      mask="+(000) 000-00-00"
+      mask="+(000) 000-000-00-00"
       onChange={onPhoneChange}
       disabled={isDataItemLoading}
-      valid={true}
+      valid={isValid}
       placeholder={errorMessage}
     />
   );

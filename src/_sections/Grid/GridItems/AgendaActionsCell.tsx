@@ -9,13 +9,15 @@ import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../GridAC';
 // Selectors
 import { selectMemoProcessDataItem } from '../GridSelectors';
+// Hooks
+import { useByIdValidation } from '../GridHooks';
 
 export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<AppointmentDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
-
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
+  const isCustomerIDValid = useByIdValidation(dataItem.LookupCM102customersId);
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
@@ -38,7 +40,7 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
       isNewItem={dataItem.isNew}
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
-      isValidFields
+      isValidFields={isCustomerIDValid}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

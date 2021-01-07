@@ -1,7 +1,7 @@
 import { DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 //Types
 import { GridOnChange } from './GridItemsTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { GridDataItem, StatusNames } from '../GridTypes';

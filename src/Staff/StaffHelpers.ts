@@ -1,5 +1,5 @@
 // Types
-import { QueryStaffDataItem, StaffDataItem, MutationStaffDataItem } from './TeamStaffTypes';
+import { QueryStaffDataItem, StaffDataItem, MutationStaffDataItem } from './StaffTypes';
 
 export const transformAPIData = (apiResults: QueryStaffDataItem[]): StaffDataItem[] =>
   apiResults.map(({ __metadata, ...dataItem }) => ({ ...dataItem, TeamProfilePhotoUrl: dataItem.TeamProfilePhoto?.Url ?? '' }));

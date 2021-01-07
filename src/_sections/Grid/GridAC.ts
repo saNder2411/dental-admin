@@ -2,7 +2,7 @@
 import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType } from './GridTypes';
 import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../Staff/StaffTypes';
 import { ServiceDataItem } from '../../Services/ServicesTypes';
 
 // Async Fetch Data

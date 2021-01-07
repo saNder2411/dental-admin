@@ -5,7 +5,7 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 import { EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 // Selectors
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue, selectMemoRoleSkills } from '../GridSelectors';

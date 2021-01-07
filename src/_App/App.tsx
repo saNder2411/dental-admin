@@ -39,11 +39,11 @@ import { AppDrawerRouterContainer } from '.';
 // Pages
 import { Agenda } from '../Agenda';
 import { Calendar } from '../Calendar';
-import { TeamStaff } from '../TeamStaff';
+import { Staff } from '../Staff';
 import { Customers } from '../Customers';
 import { Services } from '../Services';
 // Styles
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppStyles.scss';
 // Selectors
 import { selectLocaleId } from './AppSelectors';
@@ -97,7 +97,7 @@ export const App: FC = (): JSX.Element => {
                   <Calendar />
                 </Route>
                 <Route exact path="/team-staff">
-                  <TeamStaff />
+                  <Staff />
                 </Route>
                 <Route exact path="/customers">
                   <Customers />

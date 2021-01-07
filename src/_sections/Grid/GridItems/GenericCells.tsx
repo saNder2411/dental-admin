@@ -14,7 +14,7 @@ import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
 import { ServiceDataItem } from '../../../Services/ServicesTypes';
 import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../GridSelectors';
 // Helpers

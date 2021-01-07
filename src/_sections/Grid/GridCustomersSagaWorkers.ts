@@ -12,10 +12,10 @@ import {
   DeleteCustomerDataItemInitAsyncActionType,
 } from './GridTypes';
 import { QueryCustomerDataItem } from '../../Customers/CustomersTypes';
-import { QueryStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem } from '../../Staff/StaffTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Customers/CustomersHelpers';
-import { transformAPIData as transformTeamStaffAPIData } from '../../TeamStaff/TeamStaffHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../../Staff/StaffHelpers';
 
 type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null];
 

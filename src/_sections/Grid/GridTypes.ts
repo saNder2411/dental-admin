@@ -1,6 +1,6 @@
 // Types
 import { AppointmentDataItem } from '../../Agenda';
-import { StaffDataItem } from '../../TeamStaff';
+import { StaffDataItem } from '../../Staff';
 import { CustomerDataItem } from '../../Customers';
 import { ServiceDataItem } from '../../Services';
 // Actions
@@ -69,12 +69,6 @@ export const ActionTypes = {
   CHANGE_ITEM: 'GRID/CHANGE_ITEM' as const,
   ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
-  // Validation Staff
-  VALIDATE_FULL_NAME_FIELD: 'STAFF/VALIDATE_FULL_NAME_FIELD' as const,
-  VALIDATE_JOB_TITLE_FIELD: 'STAFF/VALIDATE_JOB_TITLE_FIELD' as const,
-  VALIDATE_MOBILE_PHONE_FIELD: 'STAFF/VALIDATE_MOBILE_PHONE_FIELD' as const,
-  // Validation Customers
-  VALIDATE_CUSTOMER_MOBILE_PHONE_FIELD: 'CUSTOMERS/VALIDATE_MOBILE_PHONE_FIELD' as const,
   // Validation Appointments
   VALIDATE_START_DATE_EVENT: 'APPOINTMENTS/VALIDATE_START_DATE_EVENT' as const,
   VALIDATE_END_DATE_EVENT: 'APPOINTMENTS/VALIDATE_END_DATE_EVENT' as const,

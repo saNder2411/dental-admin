@@ -9,13 +9,17 @@ import { CustomerDataItem } from '../../../Customers/CustomersTypes';
 import { createCustomerDataItemInitAsyncAC, updateCustomerDataItemInitAsyncAC, deleteCustomerDataItemInitAsyncAC } from '../GridAC';
 // Selectors
 import { selectMemoProcessDataItem } from '../GridSelectors';
+// Hooks
+import { usePhoneFieldsValidation } from '../GridHooks';
+// Helpers
+import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<CustomerDataItem>(ID), [ID]);
   const dataItem = useSelector(selectDataItem);
-
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
+  const isValidMobilePhone = usePhoneFieldsValidation(phoneValidator(dataItem.CellPhone));
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
@@ -38,7 +42,7 @@ export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = 
       isNewItem={dataItem.isNew}
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
-      isValidFields
+      isValidFields={isValidMobilePhone}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

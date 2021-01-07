@@ -3,7 +3,7 @@ import React, { FC, useMemo } from 'react';
 import { StaffFullNameInput, StaffJobTitleInput, StaffMobilePhoneInput } from './StaffInputCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StaffDataItem } from '../../../TeamStaff/TeamStaffTypes';
+import { StaffDataItem } from '../../../Staff/StaffTypes';
 // Helpers
 import { isString } from './GridItemsHelpers';
 // Hooks
