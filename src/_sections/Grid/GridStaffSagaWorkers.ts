@@ -6,7 +6,7 @@ import { API } from '../../_REST';
 import * as actions from './GridAC';
 // Types
 import { CreateStaffDataItemInitAsyncActionType, UpdateStaffDataItemInitAsyncActionType, DeleteStaffDataItemInitAsyncActionType } from './GridTypes';
-import { QueryTeamStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../TeamStaff/TeamStaffHelpers';
 
@@ -14,7 +14,7 @@ export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const result: QueryTeamStaffDataItem[] = yield apply(API, API.staff.getData, []);
+    const result: QueryStaffDataItem[] = yield apply(API, API.staff.getData, []);
     const data = transformAPIData(result);
     yield put(actions.fetchStaffDataSuccessAC(data));
   } catch (error) {
@@ -31,14 +31,14 @@ export function* workerCreateDataItem({
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: QueryTeamStaffDataItem = yield apply(API, API.staff.createDataItem, [transformDataItemForAPI(createdDataItem)]);
+    const result: QueryStaffDataItem = yield apply(API, API.staff.createDataItem, [transformDataItemForAPI(createdDataItem)]);
     const data = transformAPIDataItem(result);
     yield put(actions.createStaffDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Staff create data item Error: ${error.message}`));
   } finally {
-    yield put(actions.createDataItemFinallyAC());
     sideEffectAfterCreatedDataItem();
+    yield put(actions.createDataItemFinallyAC());
   }
 }
 
@@ -49,14 +49,14 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: QueryTeamStaffDataItem = yield apply(API, API.staff.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
+    const result: QueryStaffDataItem = yield apply(API, API.staff.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
     const data = transformAPIDataItem(result);
     yield put(actions.updateStaffDataItemSuccessAC(data));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Staff update data item Error: ${error.message}`));
   } finally {
-    yield put(actions.updateDataItemFinallyAC());
     sideEffectAfterUpdatedDataItem();
+    yield put(actions.updateDataItemFinallyAC());
   }
 }
 
@@ -68,11 +68,11 @@ export function* workerDeleteDataItem({
     yield put(actions.deleteDataItemRequestAC());
 
     yield apply(API, API.staff.deleteDataItem, [deletedDataItemID]);
+    sideEffectAfterDeletedDataItem();
     yield put(actions.deleteStaffDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Staff update data item Error: ${error.message}`));
   } finally {
     yield put(actions.deleteDataItemFinallyAC());
-    sideEffectAfterDeletedDataItem();
   }
 }

@@ -79,6 +79,17 @@ export const ActionTypes = {
   VALIDATE_START_DATE_EVENT: 'APPOINTMENTS/VALIDATE_START_DATE_EVENT' as const,
   VALIDATE_END_DATE_EVENT: 'APPOINTMENTS/VALIDATE_END_DATE_EVENT' as const,
   VALIDATE_FULL_NAME_VALUE: 'APPOINTMENTS/VALIDATE_FULL_NAME_VALUE' as const,
+  // Scheduler
+  CHANGE_MAP_TEAM_TO_FILTERED: 'SCHEDULER/CHANGE_MAP_TEAM_TO_FILTERED' as const,
+  SET_FORM_ITEM_ID: 'SCHEDULER/SET_FORM_ITEM_ID' as const,
+
+  ADD_NEW_ITEM_TO_EDIT_Sh: 'SCHEDULER/ADD_NEW_ITEM_TO_EDIT' as const,
+  DISCARD_ADD_NEW_ITEM_TO_DATA_Sh: 'SCHEDULER/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
+
+  CHANGE_SELECTED_DATE: 'SCHEDULER/CHANGE_SELECTED_DATE' as const,
+  CHANGE_SELECTED_VIEW: 'SCHEDULER/CHANGE_SELECTED_VIEW' as const,
+
+  CHANGE_UPDATED_RECURRING_DATA_ITEM: 'SCHEDULER/CHANGE_UPDATED_RECURRING_DATA_ITEM' as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -109,6 +120,14 @@ export enum StatusNames {
   Tooth = '(11) Tooth',
 }
 
+export type ViewType = 'day' | 'week' | 'month';
+
+export interface InitDataForNewDataItem {
+  Start: Date;
+  End: Date;
+  TeamID: number;
+}
+
 export interface GridState {
   viewOriginalData: GridDataItem[];
   byId: { [key: string]: GridDataItem };
@@ -122,6 +141,12 @@ export interface GridState {
   labelForAddNewItemBtn: string;
   statusNameList: StatusNames[];
   roleSkills: string[];
+  mapTeamToFiltered: { [key: string]: boolean };
+  formItemID: number | null;
+  newAppointmentDataItem: null | AppointmentDataItem;
+  selectedDate: Date;
+  selectedView: ViewType;
+  updatableRecurringDataItem: null | AppointmentDataItem;
   entities: {
     appointments: { originalData: AppointmentDataItem[]; byId: { [key: string]: AppointmentDataItem }; allIDs: number[] };
     customers: { originalData: CustomerDataItem[]; byId: { [key: string]: CustomerDataItem }; allIDs: number[] };

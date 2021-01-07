@@ -64,7 +64,7 @@ const selectStaff = ({ GridState }: GlobalState) => GridState.entities.staff;
 
 export const selectStaffByIdData = ({ GridState }: GlobalState) => GridState.entities.staff.byId;
 
-export const selectStaffLastNameByID = (ID: number) => createSelector(selectStaffByIdData, (staffById) => staffById[ID].Title);
+export const selectStaffLastNameByID = (ID: number) => createSelector(selectStaffByIdData, (staffById) => staffById[ID]?.Title ?? '');
 
 export const selectStaffLastNamesByID = (IDs: number[]) =>
   createSelector(selectStaffByIdData, (staffById) => IDs.map((ID) => staffById[ID]?.Title ?? '').join(' | '));
@@ -108,3 +108,30 @@ export const selectServicesDataForDropDownListData = () =>
   createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => ({ text: byId[ID].OfferingsName_Edit ?? '', value: ID })));
 
 export const selectServicesCategory = () => createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => byId[ID]?.OfferingCatType ?? ''));
+
+// Scheduler
+
+const selectTeamToFiltered = ({ GridState }: GlobalState) => GridState.mapTeamToFiltered;
+
+export const selectMemoMapTeamToFiltered = () => createSelector(selectTeamToFiltered, (mapTeamToFiltered) => mapTeamToFiltered);
+
+export const selectFormItemID = ({ GridState }: GlobalState) => GridState.formItemID;
+
+const selectNewAppointmentDataItem = ({ GridState }: GlobalState) => GridState.newAppointmentDataItem;
+
+export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
+  return createSelector(selectNewAppointmentDataItem, (newAppointmentDataItem) => {
+    if (!newAppointmentDataItem) return null;
+
+    return newAppointmentDataItem?.Start.getTime() === start.getTime() && newAppointmentDataItem.TeamID === TeamID ? newAppointmentDataItem : null;
+  });
+};
+
+export const selectSelectedDate = ({ GridState }: GlobalState) => GridState.selectedDate;
+
+export const selectSelectedView = ({ GridState }: GlobalState) => GridState.selectedView;
+
+export const selectUpdatableRecurringDataItem = ({ GridState }: GlobalState) => GridState.updatableRecurringDataItem;
+
+export const selectMemoUpdatedRecurringDataItem = () =>
+  createSelector(selectUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);

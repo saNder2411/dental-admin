@@ -2,26 +2,26 @@
 import { QueryAppointmentDataItem, AppointmentDataItem, MutationAppointmentDataItem } from './AgendaTypes';
 
 export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): AppointmentDataItem[] =>
-  apiResults.map(({ LookupMultiBP01offeringsId, __metadata, ...others }) => ({
-    ...others,
-    TeamID: others.LookupHR01teamId,
-    Start: new Date(others.EventDate),
-    End: new Date(others.EndDate),
-    MetroRecException: others.MetroRecException ? others.MetroRecException.map((exception) => new Date(exception)) : null,
+  apiResults.map(({ LookupMultiBP01offeringsId, __metadata, ...dataItem }) => ({
+    ...dataItem,
+    TeamID: dataItem.LookupHR01teamId,
+    Start: new Date(dataItem.EventDate),
+    End: new Date(dataItem.EndDate),
+    MetroRecException: dataItem.MetroRecException ? dataItem.MetroRecException.map((exception) => new Date(exception)) : null,
     LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
   }));
 
-export const transformAPIDataItem = ({ __metadata, LookupMultiBP01offeringsId, ...others }: QueryAppointmentDataItem): AppointmentDataItem => ({
-  ...others,
-  TeamID: others.LookupHR01teamId,
-  Start: new Date(others.EventDate),
-  End: new Date(others.EndDate),
-  MetroRecException: others.MetroRecException ? others.MetroRecException.map((exception) => new Date(exception)) : null,
+export const transformAPIDataItem = ({ __metadata, LookupMultiBP01offeringsId, ...dataItem }: QueryAppointmentDataItem): AppointmentDataItem => ({
+  ...dataItem,
+  TeamID: dataItem.LookupHR01teamId,
+  Start: new Date(dataItem.EventDate),
+  End: new Date(dataItem.EndDate),
+  MetroRecException: dataItem.MetroRecException ? dataItem.MetroRecException.map((exception) => new Date(exception)) : null,
   LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
 });
 
-export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...others }: AppointmentDataItem): MutationAppointmentDataItem => ({
-  ...others,
+export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...dataItem }: AppointmentDataItem): MutationAppointmentDataItem => ({
+  ...dataItem,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),
   FilterStart: Start.toISOString(),

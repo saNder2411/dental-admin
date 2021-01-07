@@ -7,19 +7,11 @@ import { composeEnhancers, middleware, sagaMiddleware } from './middleware';
 import { AppState } from '../_App';
 import { GridState } from '../_sections/Grid';
 import { SchedulerState } from '../_sections/Scheduler/SchedulerTypes';
-import { AgendaState } from '../Agenda';
-import { CustomersState } from '../Customers';
-import { ServicesState } from '../Services';
-import { TeamStaffState } from '../TeamStaff';
 
 export interface GlobalState {
   AppState: AppState;
   GridState: GridState;
   SchedulerState: SchedulerState;
-  AgendaState: AgendaState;
-  CustomersState: CustomersState;
-  ServicesState: ServicesState;
-  TeamStaffState: TeamStaffState;
 }
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));

@@ -12,16 +12,16 @@ export const ServicesCategoryMultiSelect: FC<EditCellProps<ServiceDataItem>> = (
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesCategories = useMemo(selectServicesCategory, []);
   const categories = useSelector(selectServicesCategories);
-  const multiSelectData = Array.from(new Set(categories));
+  const multiSelectData = Array.from(new Set(categories)).map((value) => ({ text: value, value }));
 
-  const multiSelectValue = value ? value.split(' | ') : [];
+  const multiSelectValue = value ? value.split(' | ').map((value) => ({ text: value, value })) : [];
 
   const onValueChange = (evt: MultiSelectChangeEvent) =>
     onChange({
       dataItem: dataItemID,
       field,
       syntheticEvent: evt.syntheticEvent,
-      value: evt.target.value.join(' | '),
+      value: evt.target.value.map(({ value }) => value ?? '').join(' | '),
     });
 
   return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;

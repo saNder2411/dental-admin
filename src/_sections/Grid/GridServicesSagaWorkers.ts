@@ -12,15 +12,16 @@ import {
 } from './GridTypes';
 import { QueryServiceDataItem } from '../../Services/ServicesTypes';
 // Helpers
-import { transformAPIDataItem, transformDataItemForAPI } from '../../Services/ServicesHelpers';
+import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from '../../Services/ServicesHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC());
 
     const result: QueryServiceDataItem[] = yield apply(API, API.services.getData, []);
+    const data = transformAPIData(result)
 
-    yield put(actions.fetchServicesDataSuccessAC(result));
+    yield put(actions.fetchServicesDataSuccessAC(data));
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Services fetch data Error: ${error.message}`));
   } finally {
@@ -42,8 +43,8 @@ export function* workerCreateDataItem({
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Services create data item Error: ${error.message}`));
   } finally {
-    yield put(actions.createDataItemFinallyAC());
     sideEffectAfterCreatedDataItem();
+    yield put(actions.createDataItemFinallyAC());
   }
 }
 
@@ -61,8 +62,8 @@ export function* workerUpdateDataItem({
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Services update data item Error: ${error.message}`));
   } finally {
-    yield put(actions.updateDataItemFinallyAC());
     sideEffectAfterUpdatedDataItem();
+    yield put(actions.updateDataItemFinallyAC());
   }
 }
 
@@ -74,11 +75,11 @@ export function* workerDeleteDataItem({
     yield put(actions.deleteDataItemRequestAC());
 
     yield apply(API, API.services.deleteDataItem, [deletedDataItemID]);
+    sideEffectAfterDeletedDataItem();
     yield put(actions.deleteServiceDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Services delete data item Error: ${error.message}`));
   } finally {
     yield put(actions.deleteDataItemFinallyAC());
-    sideEffectAfterDeletedDataItem();
   }
 }

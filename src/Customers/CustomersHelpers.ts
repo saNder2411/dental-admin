@@ -2,26 +2,28 @@
 import { QueryCustomerDataItem, CustomerDataItem, MutationCustomerDataItem } from './CustomersTypes';
 
 export const transformAPIData = (apiResults: QueryCustomerDataItem[]): CustomerDataItem[] =>
-  apiResults.map(({ __metadata, LookupMultiHR01teamId, ...others }) => ({
-    ...others,
-    ClientPhotoUrl: others.ClientPhoto?.Url ?? '',
+  apiResults.map(({ __metadata, LookupMultiHR01teamId, ...dataItem }) => ({
+    ...dataItem,
+    ClientPhotoUrl: dataItem.ClientPhoto?.Url ?? '',
     LookupMultiHR01teamId: { results: LookupMultiHR01teamId.results },
   }));
 
-export const transformAPIDataItem = ({ __metadata, LookupMultiHR01teamId, ...others }: QueryCustomerDataItem): CustomerDataItem => ({
-  ...others,
-  ClientPhotoUrl: others.ClientPhoto?.Url ?? '',
+export const transformAPIDataItem = ({ __metadata, LookupMultiHR01teamId, ...dataItem }: QueryCustomerDataItem): CustomerDataItem => ({
+  ...dataItem,
+  ClientPhotoUrl: dataItem.ClientPhoto?.Url ?? '',
   LookupMultiHR01teamId: { results: LookupMultiHR01teamId.results },
 });
 
 export const transformDataItemForAPI = ({
   ClientPhoto,
   ClientPhotoUrl,
-  SvcStaff,
-  Upcoming,
-  ...others
+  // SvcStaff,
+  // Upcoming,
+  inEdit,
+  isNew,
+  ...dataItem
 }: CustomerDataItem): MutationCustomerDataItem => ({
-  ...others,
+  ...dataItem,
   ClientPhoto: ClientPhoto
     ? { ...ClientPhoto, Url: ClientPhotoUrl }
     : {
@@ -29,7 +31,7 @@ export const transformDataItemForAPI = ({
         Url: ClientPhotoUrl,
         __metadata: { type: 'SP.FieldUrlValue' },
       },
-  FullName: `${others.FirstName} ${others.Title}`,
+  FullName: `${dataItem.FirstName} ${dataItem.Title}`,
   __metadata: { type: 'SP.Data.MetroCM102ListItem' },
 });
 

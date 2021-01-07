@@ -1,5 +1,5 @@
 // Types
-import { StatusNames } from '../../../../Agenda/AgendaTypes';
+import { StatusNames } from '../../../Grid/GridTypes';
 
 export const StatusDropDownListData = Object.values(StatusNames);
 

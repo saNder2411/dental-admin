@@ -12,12 +12,12 @@ import {
   DeleteCustomerDataItemInitAsyncActionType,
 } from './GridTypes';
 import { QueryCustomerDataItem } from '../../Customers/CustomersTypes';
-import { QueryTeamStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Customers/CustomersHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../../TeamStaff/TeamStaffHelpers';
 
-type Results = [QueryCustomerDataItem[], QueryTeamStaffDataItem[] | null];
+type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null];
 
 export function* workerFetchData({ meta: { staffDataLength } }: FetchCustomersDataInitAsyncActionType): SagaIterator {
   try {
@@ -55,8 +55,8 @@ export function* workerCreateDataItem({
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Customers create data item Error: ${error.message}`));
   } finally {
-    yield put(actions.createDataItemFinallyAC());
     sideEffectAfterCreatedDataItem();
+    yield put(actions.createDataItemFinallyAC());
   }
 }
 
@@ -73,8 +73,8 @@ export function* workerUpdateDataItem({
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Customers update data item Error: ${error.message}`));
   } finally {
-    yield put(actions.updateDataItemFinallyAC());
     sideEffectAfterUpdatedDataItem();
+    yield put(actions.updateDataItemFinallyAC());
   }
 }
 
@@ -86,11 +86,11 @@ export function* workerDeleteDataItem({
     yield put(actions.deleteDataItemRequestAC());
 
     yield apply(API, API.customers.deleteDataItem, [deletedDataItemID]);
+    sideEffectAfterDeletedDataItem();
     yield put(actions.deleteCustomerDataItemSuccessAC(deletedDataItemID));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Customers update data item Error: ${error.message}`));
   } finally {
     yield put(actions.deleteDataItemFinallyAC());
-    sideEffectAfterDeletedDataItem();
   }
 }

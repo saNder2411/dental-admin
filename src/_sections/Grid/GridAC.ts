@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, GridDataItem, GridDataName } from './GridTypes';
+import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType } from './GridTypes';
 import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../Customers/CustomersTypes';
 import { StaffDataItem } from '../../TeamStaff/TeamStaffTypes';
@@ -214,3 +214,26 @@ export const changeItemAC = (changeData: { dataItemID: number; field: string; va
 export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT });
 
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
+
+
+// Scheduler
+
+export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, payload: employeeID });
+
+export const setFormItemIdAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM_ID, payload: formItemID });
+
+export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewDataItem) => ({
+  type: ActionTypes.ADD_NEW_ITEM_TO_EDIT_Sh,
+  payload: initDataForNewDataItem,
+});
+
+export const schDiscardAddNewItemToDataAC = () => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA_Sh });
+
+export const changeSelectedDateAC = (date: Date) => ({ type: ActionTypes.CHANGE_SELECTED_DATE, payload: date });
+
+export const changeSelectedViewAC = (view: ViewType) => ({ type: ActionTypes.CHANGE_SELECTED_VIEW, payload: view });
+
+export const changeUpdatedRecurringDataItemAC = (dataItem: AppointmentDataItem | null) => ({
+  type: ActionTypes.CHANGE_UPDATED_RECURRING_DATA_ITEM,
+  payload: dataItem,
+});

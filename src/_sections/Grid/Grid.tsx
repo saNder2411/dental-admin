@@ -134,7 +134,7 @@ export const Grid: FC<Props> = ({ children }) => {
       onDataStateChange={onDataStateChange}>
       <GridToolbar>
         <div className="text-right p-2">
-          <span className="Grid__addNewItemWrapper">
+          <div className="Grid__addNewItemWrapper">
             <Input
               value={allColumnFilter}
               onChange={onAllColumnFilterChange}
@@ -144,7 +144,7 @@ export const Grid: FC<Props> = ({ children }) => {
             <button title="Add new" className="k-button" onClick={() => dispatch(addNewItemToEditAC())}>
               <span className="k-icon k-i-plus-circle" />
             </button>
-          </span>
+          </div>
 
           <Button icon="excel" onClick={onExcelExport}>
             {localizationService.toLanguageString('custom.exportExcel', 'Export to Excel')}

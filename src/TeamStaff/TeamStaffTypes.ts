@@ -26,7 +26,7 @@ interface FrontendKey {
   isNew?: boolean;
 }
 
-export interface QueryTeamStaffDataItem extends BackendImmutableKey {
+export interface QueryStaffDataItem extends BackendImmutableKey {
   __metadata: {
     id: string;
     uri: string;
@@ -37,6 +37,6 @@ export interface QueryTeamStaffDataItem extends BackendImmutableKey {
 
 export interface StaffDataItem extends BackendImmutableKey, FrontendKey {}
 
-export interface MutationTeamStaffDataItem extends BackendImmutableKey {
+export interface MutationStaffDataItem extends BackendImmutableKey {
   __metadata: { type: 'SP.Data.MetroHR01ListItem' };
 }

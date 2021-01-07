@@ -10,6 +10,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { ServicesIconInput } from './ServicesInputCells';
 import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCells';
 import { ServicesCategoryMultiSelect } from './ServicesDropDownCells';
+import { OfferIcons } from '../../../Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StatusNames } from '../GridTypes';
@@ -24,7 +25,7 @@ import { isNumber } from './GridItemsHelpers';
 export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null | undefined>(ID, field);
 
   const isImageUrl = cellValue && (cellValue.includes('png') || cellValue.includes('jpg') || cellValue.includes('jpeg'));
 
@@ -33,7 +34,7 @@ export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem:
       <ServicesIconInput dataItemID={memoID} field={memoField} onChange={onChange} />
     </td>
   ) : isImageUrl ? (
-    <SC.ServicesImageCell imageUrl={cellValue}>
+    <SC.ServicesImageCell imageUrl={cellValue ?? (OfferIcons.Tooth as string)}>
       <div className="Grid__serviceImage" />
     </SC.ServicesImageCell>
   ) : (
@@ -93,7 +94,7 @@ export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dat
 export const ServicesCategoryCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null>(ID, field);
 
   return <td>{dataItemInEditValue ? <ServicesCategoryMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : cellValue}</td>;
 };

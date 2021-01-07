@@ -53,8 +53,15 @@ a:hover {
 
     .k-dropdown,
     .k-datetimepicker,
-    .k-combobox {
+    .k-combobox,
+    .k-textbox,
+    .k-numerictextbox,
+    .k-maskedtextbox {
       width: 100%;
+    }
+
+    .Grid__addNewItemWrapper .k-textbox {
+      width: 50%;
     }
   }
 

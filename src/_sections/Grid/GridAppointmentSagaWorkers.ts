@@ -14,14 +14,14 @@ import {
 } from './GridTypes';
 import { QueryAppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { QueryServiceDataItem } from '../../Services/ServicesTypes';
-import { QueryTeamStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem } from '../../TeamStaff/TeamStaffTypes';
 import { QueryCustomerDataItem } from '../../Customers/CustomersTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Agenda/AgendaHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../../TeamStaff/TeamStaffHelpers';
 import { transformAPIData as transformCustomersAPIData } from '../../Customers/CustomersHelpers';
 
-type Results = [QueryAppointmentDataItem[], QueryServiceDataItem[] | null, QueryTeamStaffDataItem[] | null, QueryCustomerDataItem[] | null];
+type Results = [QueryAppointmentDataItem[], QueryServiceDataItem[] | null, QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null];
 
 export function* workerFetchData({
   meta: { servicesDataLength, staffDataLength, customersDataLength },
@@ -73,8 +73,8 @@ export function* workerCreateDataItem({
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {
-    yield put(actions.createDataItemFinallyAC());
     sideEffectAfterCreatedDataItem();
+    yield put(actions.createDataItemFinallyAC());
   }
 }
 
@@ -91,8 +91,8 @@ export function* workerUpdateDataItem({
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Appointments update data item Error: ${error.message}`));
   } finally {
-    yield put(actions.updateDataItemFinallyAC());
     sideEffectAfterUpdatedDataItem();
+    yield put(actions.updateDataItemFinallyAC());
   }
 }
 
@@ -104,7 +104,6 @@ export function* workerDeleteDataItem({
     yield put(actions.deleteDataItemRequestAC());
 
     yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
-
     sideEffectAfterDeletedDataItem();
     yield put(actions.deleteAppointmentDataItemSuccessAC(deletedDataItemID));
   } catch (error) {

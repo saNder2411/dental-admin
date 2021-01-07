@@ -86,7 +86,6 @@ export const TeamStaff: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             cell={StaffMobilePhoneCell as CustomGridCell}
             filter={'text'}
-            width={140}
           />
           <GridColumn
             field={'Email'}

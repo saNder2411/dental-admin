@@ -76,7 +76,8 @@ export const GenericAvatarCell: FC<GridCellProps<StaffDataItem | CustomerDataIte
   const Gender = useSelector(selectProcessDataItemFieldValue<StaffDataItem | CustomerDataItem, string>(ID, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
   const placeholderImageUrl = Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
-  const imageUrl = strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') ? strValue : placeholderImageUrl;
+  const imageUrl =
+    strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') || strValue.includes('images') ? strValue : placeholderImageUrl;
 
   return dataItemInEditValue ? (
     <td>

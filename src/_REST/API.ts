@@ -4,7 +4,7 @@ import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, Or
 // Types
 import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda/AgendaTypes';
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
-import { QueryTeamStaffDataItem, MutationTeamStaffDataItem } from '../TeamStaff/TeamStaffTypes';
+import { QueryStaffDataItem, MutationStaffDataItem } from '../TeamStaff/TeamStaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
 
 export type QueryAllData<T> = () => Promise<T>;
@@ -25,9 +25,9 @@ interface API {
     deleteDataItem: DeleteDataItem;
   };
   staff: {
-    getData: QueryAllData<QueryTeamStaffDataItem[]>;
-    createDataItem: MutationDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>;
-    updateDataItem: MutationDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>;
+    getData: QueryAllData<QueryStaffDataItem[]>;
+    createDataItem: MutationDataItem<MutationStaffDataItem, QueryStaffDataItem>;
+    updateDataItem: MutationDataItem<MutationStaffDataItem, QueryStaffDataItem>;
     deleteDataItem: DeleteDataItem;
   };
   services: {
@@ -38,9 +38,9 @@ interface API {
   };
 }
 
-type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryTeamStaffDataItem | QueryServiceDataItem;
+type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryStaffDataItem | QueryServiceDataItem;
 
-type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationTeamStaffDataItem;
+type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationStaffDataItem;
 
 const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
 
@@ -114,13 +114,13 @@ export const API_: API = {
   },
 
   staff: {
-    getData: async () => getSPData<QueryTeamStaffDataItem>(GuidList.Staff, SelectFields.Staff, OrderBy.Staff),
+    getData: async () => getSPData<QueryStaffDataItem>(GuidList.Staff, SelectFields.Staff, OrderBy.Staff),
 
-    createDataItem: (createdDataItem: MutationTeamStaffDataItem) =>
-      createSPDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>(GuidList.Staff, SelectFields.Staff, createdDataItem),
+    createDataItem: (createdDataItem: MutationStaffDataItem) =>
+      createSPDataItem<MutationStaffDataItem, QueryStaffDataItem>(GuidList.Staff, SelectFields.Staff, createdDataItem),
 
-    updateDataItem: (updatedDataItem: MutationTeamStaffDataItem) =>
-      updateSPDataItem<MutationTeamStaffDataItem, QueryTeamStaffDataItem>(GuidList.Staff, SelectFields.Staff, updatedDataItem),
+    updateDataItem: (updatedDataItem: MutationStaffDataItem) =>
+      updateSPDataItem<MutationStaffDataItem, QueryStaffDataItem>(GuidList.Staff, SelectFields.Staff, updatedDataItem),
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Staff, deletedDataItemID),
   },
@@ -193,7 +193,7 @@ export const API: API = {
   staff: {
     getData: () => fetch(`${ROOT_URL}/staff`).then((response) => response.json()),
 
-    createDataItem: (createdDataItem: MutationTeamStaffDataItem) =>
+    createDataItem: (createdDataItem: MutationStaffDataItem) =>
       fetch(`${ROOT_URL}/staff`, {
         method: 'POST',
         headers: {
@@ -202,7 +202,7 @@ export const API: API = {
         body: JSON.stringify(createdDataItem),
       }).then((response) => response.json()),
 
-    updateDataItem: (updatedDataItem: MutationTeamStaffDataItem) =>
+    updateDataItem: (updatedDataItem: MutationStaffDataItem) =>
       fetch(`${ROOT_URL}/staff/${updatedDataItem.ID}`, {
         method: 'PUT',
         headers: {
