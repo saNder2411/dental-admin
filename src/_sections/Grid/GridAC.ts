@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType } from './GridTypes';
+import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType, Auth } from './GridTypes';
 import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../Customers/CustomersTypes';
 import { StaffDataItem } from '../../Staff/StaffTypes';
@@ -215,7 +215,6 @@ export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDI
 
 export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
 
-
 // Scheduler
 
 export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, payload: employeeID });
@@ -237,3 +236,16 @@ export const changeUpdatedRecurringDataItemAC = (dataItem: AppointmentDataItem |
   type: ActionTypes.CHANGE_UPDATED_RECURRING_DATA_ITEM,
   payload: dataItem,
 });
+
+// Auth Async
+
+export const fetchAuthDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_INIT_ASYNC });
+
+// // Auth Sync
+export const fetchAuthDataRequestAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_REQUEST });
+
+export const fetchAuthDataSuccessAC = (data: Auth) => ({ type: ActionTypes.FETCH_AUTH_DATA_SUCCESS, payload: data });
+
+export const fetchAuthDataFailureAC = (errorMessage: string) => ({ type: ActionTypes.FETCH_AUTH_DATA_FAILURE, payload: errorMessage });
+
+export const fetchAuthDataFinallyAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_FINALLY });

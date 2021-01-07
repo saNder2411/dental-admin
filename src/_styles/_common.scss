@@ -149,17 +149,20 @@ a:hover {
 
 // Header
 .header {
-  height: 80px;
+  // height: 100px;
   position: sticky;
+  padding-bottom: 24px;
   top: 0;
   z-index: 3;
+  color: $white;
 
   .nav-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 100%;
+    // height: 100%;
+    padding-top: 10px;
     color: $white;
   }
 
@@ -181,19 +184,6 @@ a:hover {
     flex-direction: column;
     align-items: flex-start;
     margin-left: 25px;
-  }
-
-  .k-avatar {
-    display: block;
-    width: 40px;
-    height: 40px;
-    margin: 0 25px;
-    box-shadow: 0 0 0px 1px $white;
-
-    img {
-      width: 40px;
-      height: 40px;
-    }
   }
 
   .settings {

@@ -69,10 +69,6 @@ export const ActionTypes = {
   CHANGE_ITEM: 'GRID/CHANGE_ITEM' as const,
   ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
-  // Validation Appointments
-  VALIDATE_START_DATE_EVENT: 'APPOINTMENTS/VALIDATE_START_DATE_EVENT' as const,
-  VALIDATE_END_DATE_EVENT: 'APPOINTMENTS/VALIDATE_END_DATE_EVENT' as const,
-  VALIDATE_FULL_NAME_VALUE: 'APPOINTMENTS/VALIDATE_FULL_NAME_VALUE' as const,
   // Scheduler
   CHANGE_MAP_TEAM_TO_FILTERED: 'SCHEDULER/CHANGE_MAP_TEAM_TO_FILTERED' as const,
   SET_FORM_ITEM_ID: 'SCHEDULER/SET_FORM_ITEM_ID' as const,
@@ -84,6 +80,13 @@ export const ActionTypes = {
   CHANGE_SELECTED_VIEW: 'SCHEDULER/CHANGE_SELECTED_VIEW' as const,
 
   CHANGE_UPDATED_RECURRING_DATA_ITEM: 'SCHEDULER/CHANGE_UPDATED_RECURRING_DATA_ITEM' as const,
+  //Async Fetch Auth
+  FETCH_AUTH_DATA_INIT_ASYNC: 'AUTH/FETCH_AUTH_DATA_INIT_ASYNC' as const,
+  // Sync  Auth
+  FETCH_AUTH_DATA_REQUEST: `AUTH/FETCH_AUTH_DATA_REQUEST` as const,
+  FETCH_AUTH_DATA_SUCCESS: `AUTH/FETCH_AUTH_DATA_SUCCESS` as const,
+  FETCH_AUTH_DATA_FAILURE: `AUTH/FETCH_AUTH_DATA_FAILURE` as const,
+  FETCH_AUTH_DATA_FINALLY: `AUTH/FETCH_AUTH_DATA_FINALLY` as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -122,25 +125,41 @@ export interface InitDataForNewDataItem {
   TeamID: number;
 }
 
+export enum IndividualRights {
+  FullControl = 'Full Control',
+  Designer = 'Designer',
+}
+
+export interface Auth {
+  MembershipGroupId: number;
+  IndividualRights: IndividualRights;
+}
+
 export interface GridState {
+  authData: Auth | null;
+
   viewOriginalData: GridDataItem[];
   byId: { [key: string]: GridDataItem };
   processById: { [key: string]: GridDataItem };
   allIDs: number[];
+
   dataName: GridDataName;
   isDataLoading: boolean;
   isDataItemLoading: boolean;
   dataError: string;
   dataItemError: string;
+  authError: string;
   labelForAddNewItemBtn: string;
   statusNameList: StatusNames[];
   roleSkills: string[];
+
   mapTeamToFiltered: { [key: string]: boolean };
   formItemID: number | null;
   newAppointmentDataItem: null | AppointmentDataItem;
   selectedDate: Date;
   selectedView: ViewType;
   updatableRecurringDataItem: null | AppointmentDataItem;
+
   entities: {
     appointments: { originalData: AppointmentDataItem[]; byId: { [key: string]: AppointmentDataItem }; allIDs: number[] };
     customers: { originalData: CustomerDataItem[]; byId: { [key: string]: CustomerDataItem }; allIDs: number[] };

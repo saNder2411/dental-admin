@@ -1,4 +1,8 @@
 {
+  "authorization": {
+    "MembershipGroupId": 10,
+    "IndividualRights": "Full Cont"
+  },
   "staff": [
     {
       "__metadata": {
@@ -193,9 +197,7 @@
       "Department": null,
       "CalendarColHex": "#4833b8",
       "ID": 10,
-      "RoleSkills": [
-        "Colouring-Balayage"
-      ],
+      "RoleSkills": ["Colouring-Balayage"],
       "TeamProfilePhoto": {
         "__metadata": {
           "type": "SP.FieldUrlValue"
@@ -241,9 +243,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 981,
       "LookupHR01teamId": 3,
@@ -281,11 +281,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2,
-          27,
-          28
-        ]
+        "results": [2, 27, 28]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 6,
@@ -323,9 +319,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 6,
@@ -358,9 +352,7 @@
       "ID": 624,
       "Modified": "2020-02-12T14:52:44Z",
       "LookupMultiBP01offeringsId": {
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
@@ -387,9 +379,7 @@
       "LookupCM102customersId": 1142,
       "LookupHR01teamId": 3,
       "LookupMultiBP01offeringsId": {
-        "results": [
-          16
-        ]
+        "results": [16]
       },
       "ID": 627,
       "Modified": "2020-12-29T08:25:41.551Z",
@@ -426,9 +416,7 @@
       "ID": 629,
       "Modified": "2020-12-30T13:05:57.779Z",
       "LookupMultiBP01offeringsId": {
-        "results": [
-          15
-        ]
+        "results": [15]
       },
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
@@ -460,9 +448,7 @@
       "LastNameAppt": "A.Male",
       "Title": "C.A.Male-0634",
       "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
@@ -489,9 +475,7 @@
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 2,
       "LookupMultiBP01offeringsId": {
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "ID": 635,
       "Modified": "2021-01-06T22:37:22.362Z",
@@ -523,9 +507,7 @@
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 3,
       "LookupMultiBP01offeringsId": {
-        "results": [
-          3
-        ]
+        "results": [3]
       },
       "ID": 636,
       "Modified": "2021-01-06T23:01:59.533Z",
@@ -560,9 +542,7 @@
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 2,
       "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "ID": 639,
       "Modified": "2021-01-07T09:50:58.541Z",
@@ -1548,9 +1528,7 @@
       "OfferingDiscount": 0.03,
       "ID": 58,
       "OfferingIconName": "https://previews.123rf.com/images/jpgon/jpgon1410/jpgon141000033/32142221-illustration-of-an-isolated-tooht-with-a-chemical-test-tube.jpg",
-      "RoleSkills": [
-        "Colouring-Balayage"
-      ],
+      "RoleSkills": ["Colouring-Balayage"],
       "__metadata": {
         "type": "SP.Data.MetroBP02ListItem"
       }

@@ -1,6 +1,6 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { IntlProvider, load, LocalizationProvider, loadMessages } from '@progress/kendo-react-intl';
 // Locale
 import likelySubtags from 'cldr-core/supplemental/likelySubtags.json';
@@ -33,7 +33,6 @@ import itCaGregorian from 'cldr-dates-full/main/it/ca-gregorian.json';
 import itDateFields from 'cldr-dates-full/main/it/dateFields.json';
 // Messages
 import { enMessages, deMessages, frMessages, esMessages, itMessages } from '../_messages';
-
 // Components
 import { AppDrawerRouterContainer } from '.';
 // Pages
@@ -47,7 +46,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppStyles.scss';
 // Selectors
 import { selectLocaleId } from './AppSelectors';
-
+// Action Creators
+import { fetchAuthDataInitAsyncAC } from '../_sections/Grid/GridAC';
 load(
   likelySubtags,
   currencyData,
@@ -82,6 +82,10 @@ loadMessages(itMessages, 'it');
 
 export const App: FC = (): JSX.Element => {
   const currentLocaleID = useSelector(selectLocaleId);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchAuthDataInitAsyncAC());
+  });
 
   return (
     <div className="App">

@@ -6,6 +6,7 @@ import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
 import { QueryStaffDataItem, MutationStaffDataItem } from '../Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
+import { Auth, IndividualRights } from '../_sections/Grid/GridTypes';
 
 export type QueryAllData<T> = () => Promise<T>;
 export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
@@ -35,6 +36,9 @@ interface API {
     createDataItem: MutationDataItem<MutationServiceDataItem, QueryServiceDataItem>;
     updateDataItem: MutationDataItem<MutationServiceDataItem, QueryServiceDataItem>;
     deleteDataItem: DeleteDataItem;
+  };
+  auth: {
+    getAuth: QueryAllData<Auth>;
   };
 }
 
@@ -88,7 +92,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -135,9 +139,12 @@ export const API_: API = {
 
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Service, deletedDataItemID),
   },
+  auth: {
+    getAuth: async () => new Promise((resolve) => resolve({ MembershipGroupId: 10, IndividualRights: IndividualRights.FullControl })),
+  },
 };
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 
@@ -241,5 +248,8 @@ export const API: API = {
       fetch(`${ROOT_URL}/services/${deletedDataItemID}`, {
         method: 'DELETE',
       }).then((response) => response.json()),
+  },
+  auth: {
+    getAuth: async () => fetch(`${ROOT_URL}/authorization`).then((response) => response.json()),
   },
 };

@@ -16,6 +16,8 @@ import {
 } from './GridHelpers';
 
 const initialState = {
+  authData: null,
+
   viewOriginalData: [],
   byId: {},
   processById: {},
@@ -26,6 +28,7 @@ const initialState = {
   isDataItemLoading: false,
   dataError: ``,
   dataItemError: ``,
+  authError: '',
   labelForAddNewItemBtn: '',
   statusNameList: Object.values(StatusNames),
   roleSkills,
@@ -437,6 +440,13 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
 
     case ActionTypes.CHANGE_DATA_NAME:
       return { ...state, dataName: action.payload };
+
+    // Auth
+    case ActionTypes.FETCH_AUTH_DATA_SUCCESS:
+      return { ...state, authData: action.payload };
+
+    case ActionTypes.FETCH_AUTH_DATA_FAILURE:
+      return { ...state, authError: action.payload };
 
     default:
       return state;

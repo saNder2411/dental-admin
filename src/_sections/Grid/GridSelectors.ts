@@ -138,3 +138,9 @@ export const selectUpdatableRecurringDataItem = ({ GridState }: GlobalState) => 
 
 export const selectMemoUpdatedRecurringDataItem = () =>
   createSelector(selectUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);
+
+// Auth
+
+export const selectAuthData = ({ GridState }: GlobalState) => GridState.authData;
+
+export const selectMemoAuthData = () => createSelector(selectAuthData, (authData) => authData);
