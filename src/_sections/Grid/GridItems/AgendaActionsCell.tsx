@@ -10,7 +10,7 @@ import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyn
 // Selectors
 import { selectMemoProcessDataItem } from '../GridSelectors';
 // Hooks
-import { useByIdValidation } from '../GridHooks';
+import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 
 export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<AppointmentDataItem>(ID), [ID]);
@@ -18,6 +18,8 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
   const isCustomerIDValid = useByIdValidation(dataItem.LookupCM102customersId);
+  const { isValid: isValidStartEvent } = useStartDateEventValidation(dataItem.Start, dataItem.LookupHR01teamId);
+  const { isValid: isValidEndEvent } = useEndDateEventValidation(dataItem.End, dataItem.LookupHR01teamId);
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
@@ -40,7 +42,7 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
       isNewItem={dataItem.isNew}
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
-      isValidFields={isCustomerIDValid}
+      isValidFields={isCustomerIDValid && isValidStartEvent && isValidEndEvent}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

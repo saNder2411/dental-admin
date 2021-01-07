@@ -54,6 +54,9 @@ export const selectOriginalStaffDataLength = ({ GridState }: GlobalState) => Gri
 
 export const selectOriginalServicesDataLength = ({ GridState }: GlobalState) => GridState.entities.services.originalData.length;
 
+export const selectAppointmentByEmployeeID = (ID: number) =>
+  createSelector(selectOriginalAppointmentsData, (appointmentData) => appointmentData.filter(({ LookupHR01teamId }) => LookupHR01teamId === ID));
+
 // Staff
 
 export const selectOriginalStaffData = ({ GridState }: GlobalState) => GridState.entities.staff.originalData;

@@ -1,4 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+// Selectors
+import { selectAppointmentByEmployeeID } from '../GridSelectors';
 
 export const useTextFieldsValidation = (value: string | null) => {
   const [isValid, setIsValid] = useState(true);
@@ -37,4 +40,71 @@ export const useByIdValidation = (ID: number) => {
   }, [ID]);
 
   return isValid;
+};
+
+export const useStartDateEventValidation = (value: Date, LookupHR01teamId: number) => {
+  const [isValid, setIsValid] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const selectEmployeeAppointments = useMemo(() => selectAppointmentByEmployeeID(LookupHR01teamId), [LookupHR01teamId]);
+  const employeeAppointments = useSelector(selectEmployeeAppointments);
+  const actualAppointments = employeeAppointments.filter(({ Start }) => Date.now() < Start.getTime());
+
+  useEffect(() => {
+    if (actualAppointments.length === 0) return;
+
+    for (const { Start, End } of actualAppointments) {
+      const inputStartDateInTimestamp = value.getTime();
+
+      if (inputStartDateInTimestamp > Start.getTime() && inputStartDateInTimestamp < End.getTime()) {
+        setIsValid(false);
+        break;
+      } else if (!isValid) {
+        setShowPopup(false);
+        setIsValid(true);
+      }
+    }
+  }, [actualAppointments, actualAppointments.length, isValid, value]);
+
+  useEffect(() => {
+    if (!isValid) {
+      setShowPopup(true);
+    }
+    return () => setIsValid(true);
+  }, [isValid]);
+
+  return { isValid, showPopup, setShowPopup, actualAppointments };
+};
+
+
+export const useEndDateEventValidation = (value: Date, LookupHR01teamId: number) => {
+  const [isValid, setIsValid] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
+  const selectEmployeeAppointments = useMemo(() => selectAppointmentByEmployeeID(LookupHR01teamId), [LookupHR01teamId]);
+  const employeeAppointments = useSelector(selectEmployeeAppointments);
+  const actualAppointments = employeeAppointments.filter(({ Start }) => Date.now() < Start.getTime());
+
+  useEffect(() => {
+    if (actualAppointments.length === 0) return;
+
+    for (const { Start, End } of actualAppointments) {
+      const inputEndDateInTimestamp = value.getTime();
+
+      if (inputEndDateInTimestamp > Start.getTime() && inputEndDateInTimestamp < End.getTime()) {
+        setIsValid(false);
+        break;
+      } else if (!isValid) {
+        setShowPopup(false);
+        setIsValid(true);
+      }
+    }
+  }, [actualAppointments, actualAppointments.length, isValid, value]);
+
+  useEffect(() => {
+    if (!isValid) {
+      setShowPopup(true);
+    }
+    return () => setIsValid(true);
+  }, [isValid]);
+
+  return { isValid, showPopup, setShowPopup, actualAppointments };
 };
