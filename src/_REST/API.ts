@@ -9,7 +9,19 @@ import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/Servi
 import { Auth, IndividualRights } from '../_sections/Grid/GridTypes';
 
 // sp.web.getUserEffectivePermissions("i:0#.f|membership|user@site.com")
-Web(SP_ROOT_URL).configure({ headers }).getUserEffectivePermissions("i:0#.f|membership|user@site.com")
+
+
+
+const spPer = async () => {
+
+const perms2 = await (await Web(SP_ROOT_URL).configure({ headers }).getParentWeb()).web.roleAssignments()
+
+
+
+console.log(perms2)
+}
+
+spPer();
 
 
 export type QueryAllData<T> = () => Promise<T>;
