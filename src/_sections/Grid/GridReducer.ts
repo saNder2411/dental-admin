@@ -13,6 +13,7 @@ import {
   getNewDataItem,
   setTitleForAddNewItemSectionAndDataName,
   roleSkills,
+  getNewAppointmentDataItemForScheduler,
 } from './GridHelpers';
 
 const initialState = {
@@ -58,7 +59,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const [appointmentsById, appointmentsAllIDs] = transformArrayDataToByIdData<AppointmentDataItem>(action.payload);
       return {
         ...state,
-        dataError: ``,
         entities: { ...state.entities, appointments: { originalData: action.payload, byId: appointmentsById, allIDs: appointmentsAllIDs } },
       };
 
@@ -66,7 +66,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const [customersById, customersAllIDs] = transformArrayDataToByIdData<CustomerDataItem>(action.payload);
       return {
         ...state,
-        dataError: ``,
         entities: { ...state.entities, customers: { originalData: action.payload, byId: customersById, allIDs: customersAllIDs } },
       };
 
@@ -74,7 +73,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const [staffById, staffAllIDs] = transformArrayDataToByIdData<StaffDataItem>(action.payload);
       return {
         ...state,
-        dataError: ``,
+        mapTeamToFiltered: action.payload.reduce((prevVal, employee) => ({ ...prevVal, [employee.ID]: true }), {}),
         entities: { ...state.entities, staff: { originalData: action.payload, byId: staffById, allIDs: staffAllIDs } },
       };
 
@@ -82,7 +81,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const [servicesById, servicesAllIDs] = transformArrayDataToByIdData<ServiceDataItem>(action.payload);
       return {
         ...state,
-        dataError: ``,
         entities: { ...state.entities, services: { originalData: action.payload, byId: servicesById, allIDs: servicesAllIDs } },
       };
 
@@ -106,7 +104,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterEditAppointmentNewItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
+        newAppointmentDataItem: null,
         entities: {
           ...state.entities,
           appointments: {
@@ -124,7 +122,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterEditCustomerNewItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
         entities: {
           ...state.entities,
           customers: {
@@ -142,7 +139,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterEditStaffNewItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
+        mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.payload.ID]: true },
         entities: {
           ...state.entities,
           staff: {
@@ -160,7 +157,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterEditServiceNewItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
         entities: {
           ...state.entities,
           services: {
@@ -191,7 +187,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterUpdateAppointmentDataItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
+        updatableRecurringDataItem: null,
         entities: {
           ...state.entities,
           appointments: {
@@ -212,7 +208,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterUpdateCustomerDataItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
         entities: {
           ...state.entities,
           customers: {
@@ -230,7 +225,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterUpdateStaffDataItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
         entities: {
           ...state.entities,
           staff: {
@@ -248,7 +242,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         viewOriginalData: newDataAfterUpdateServiceDataItem,
         processById: { ...state.processById, [action.payload.ID]: action.payload },
         byId: { ...state.byId, [action.payload.ID]: { ...action.payload } },
-        dataItemError: ``,
         entities: {
           ...state.entities,
           services: {
@@ -284,7 +277,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         processById: newApptProcessById,
         byId: newApptById,
         allIDs: [...newAllIDsAfterRemoveAppointmentDataItem],
-        dataItemError: ``,
         entities: {
           ...state.entities,
           appointments: {
@@ -310,7 +302,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         processById: newCustomerProcessById,
         byId: newCustomerById,
         allIDs: [...newAllIDsAfterRemoveCustomerDataItem],
-        dataItemError: ``,
         entities: {
           ...state.entities,
           customers: {
@@ -327,13 +318,14 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const { [action.payload]: deletedStaffItem, ...newStaffProcessById } = state.processById;
       const { [action.payload]: deletedStaffByIdItem, ...newStaffById } = state.byId;
       const { [action.payload]: deletedStaffEntItem, ...newStaffEntById } = state.entities.staff.byId;
+      const { [action.payload]: deletedStaffFromMapTeam, ...newMapTeam } = state.mapTeamToFiltered;
       return {
         ...state,
         viewOriginalData: updatedDataAfterDeleteStaffDataItem,
         processById: newStaffProcessById,
         byId: newStaffById,
         allIDs: [...newAllIDsAfterRemoveStaffDataItem],
-        dataItemError: ``,
+        mapTeamToFiltered: newMapTeam,
         entities: {
           ...state.entities,
           staff: {
@@ -359,7 +351,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         processById: newSerProcessById,
         byId: newSerById,
         allIDs: [...newAllIDsAfterRemoveServiceDataItem],
-        dataItemError: ``,
         entities: {
           ...state.entities,
           services: {
@@ -404,7 +395,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       };
 
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
-      const newDataItem = getNewDataItem(state.viewOriginalData, state.dataName);
+      const newDataItem = getNewDataItem(state.allIDs, state.dataName);
       return {
         ...state,
         viewOriginalData: [newDataItem, ...state.viewOriginalData],
@@ -416,13 +407,14 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       const newDataAfterDiscardAddNewItem = updateDataAfterRemoveItem(state.viewOriginalData, action.payload);
       const updatedAllIDs = state.allIDs.filter((ID) => ID !== action.payload);
-      delete state.processById[action.payload];
-      delete state.byId[action.payload];
+      const { [action.payload]: discIte, ...newProcById } = state.processById;
+      const { [action.payload]: disc, ...newById } = state.byId;
+
       return {
         ...state,
         viewOriginalData: newDataAfterDiscardAddNewItem,
-        processById: { ...state.processById },
-        byId: { ...state.byId },
+        processById: newProcById,
+        byId: newById,
         allIDs: [...updatedAllIDs],
       };
 
@@ -440,6 +432,64 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
 
     case ActionTypes.CHANGE_DATA_NAME:
       return { ...state, dataName: action.payload };
+
+    // Scheduler
+    case ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED:
+      return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.payload]: !state.mapTeamToFiltered[action.payload] } };
+
+    case ActionTypes.SET_FORM_ITEM_ID:
+      return { ...state, formItemID: action.payload };
+
+    case ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM:
+      const newAppointmentDataItemForScheduler = getNewAppointmentDataItemForScheduler(state.entities.appointments.allIDs, action.payload);
+      return {
+        ...state,
+        viewOriginalData: [newAppointmentDataItemForScheduler, ...state.viewOriginalData],
+        processById: { ...state.processById, [newAppointmentDataItemForScheduler.ID]: { ...newAppointmentDataItemForScheduler } },
+        byId: { ...state.byId, [newAppointmentDataItemForScheduler.ID]: { ...newAppointmentDataItemForScheduler } },
+        allIDs: [newAppointmentDataItemForScheduler.ID, ...state.allIDs],
+        newAppointmentDataItem: newAppointmentDataItemForScheduler,
+        entities: {
+          ...state.entities,
+          appointments: {
+            originalData: [newAppointmentDataItemForScheduler, ...state.entities.appointments.originalData],
+            byId: { ...state.entities.appointments.byId, [newAppointmentDataItemForScheduler.ID]: { ...newAppointmentDataItemForScheduler } },
+            allIDs: [newAppointmentDataItemForScheduler.ID, ...state.entities.appointments.allIDs],
+          },
+        },
+      };
+
+    case ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA:
+      const newDataAfterDiscardAddNewItemSch = updateDataAfterRemoveItem(state.entities.appointments.originalData, action.payload);
+      const updatedAllIDsSch = state.allIDs.filter((ID) => ID !== action.payload);
+      const { [action.payload]: discIteSch, ...newProcByIdSch } = state.processById;
+      const { [action.payload]: discSch, ...newByIdCsh } = state.byId;
+      const { [action.payload]: deletedApptEntItemSch, ...newApptEntByIdSch } = state.entities.appointments.byId;
+      return {
+        ...state,
+        viewOriginalData: newDataAfterDiscardAddNewItemSch,
+        processById: newProcByIdSch,
+        byId: newByIdCsh,
+        allIDs: [...updatedAllIDsSch],
+        newAppointmentDataItem: null,
+        entities: {
+          ...state.entities,
+          appointments: {
+            originalData: [...newDataAfterDiscardAddNewItemSch],
+            byId: newApptEntByIdSch,
+            allIDs: [...state.entities.appointments.allIDs.filter((ID) => ID !== action.payload)],
+          },
+        },
+      };
+
+    case ActionTypes.SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM:
+      return { ...state, updatableRecurringDataItem: action.payload };
+
+    case ActionTypes.CHANGE_SELECTED_DATE:
+      return { ...state, selectedDate: action.payload };
+
+    case ActionTypes.CHANGE_SELECTED_VIEW:
+      return { ...state, selectedView: action.payload };
 
     // Auth
     case ActionTypes.FETCH_AUTH_DATA_SUCCESS:

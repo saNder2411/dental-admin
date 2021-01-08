@@ -13,9 +13,8 @@ import {
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
 // Types
 import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
-import { SchedulerActions } from '../Scheduler/SchedulerActions';
 // Action Creators
-import { updateAppointmentDataItemInitAsyncAC } from '../Grid/GridAC';
+import { updateAppointmentDataItemInitAsyncAC, changeSelectedDateAC, changeSelectedViewAC } from '../Grid/GridAC';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
   const dispatch = useDispatch();
@@ -36,11 +35,9 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
     [dispatch, setIsAgendaDataItemLoading]
   );
 
-  const onDateChange = useCallback((evt: SchedulerDateChangeEvent) => SchedulerActions.changeSelectedDate(dispatch, evt.value), [dispatch]);
+  const onDateChange = useCallback((evt: SchedulerDateChangeEvent) => dispatch(changeSelectedDateAC(evt.value)), [dispatch]);
 
-  const onViewChange = useCallback((evt: SchedulerViewChangeEvent) => SchedulerActions.changeSelectedView(dispatch, evt.value as ViewType), [
-    dispatch,
-  ]);
+  const onViewChange = useCallback((evt: SchedulerViewChangeEvent) => dispatch(changeSelectedViewAC(evt.value as ViewType)), [dispatch]);
 
   return (
     <KendoScheduler

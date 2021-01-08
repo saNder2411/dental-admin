@@ -5,10 +5,6 @@ import { GridDataItem } from '../Grid/GridTypes';
 
 const selectViewOriginalData = ({ GridState }: GlobalState) => GridState.viewOriginalData;
 
-const selectByIdData = ({ GridState }: GlobalState) => GridState.byId;
-
-const selectProcessByIdData = ({ GridState }: GlobalState) => GridState.processById;
-
 export const selectDataName = ({ GridState }: GlobalState) => GridState.dataName;
 
 export const selectLabelForAddNewItemBtn = ({ GridState }: GlobalState) => GridState.labelForAddNewItemBtn;
@@ -27,14 +23,24 @@ export const selectMemoRoleSkills = () => createSelector(selectRoleSkills, (role
 
 export const selectMemoViewOriginalData = () => createSelector(selectViewOriginalData, (viewOriginalData) => viewOriginalData);
 
+const selectProcessByIdData = ({ GridState }: GlobalState) => GridState.processById;
+
 export const selectMemoProcessDataItem = <T extends GridDataItem = GridDataItem>(ID: number) =>
   createSelector(selectProcessByIdData, (processById): T => processById[ID] as T);
+
+const selectByIdData = ({ GridState }: GlobalState) => GridState.byId;
 
 export const selectByIdDataItemFieldValue = <T extends GridDataItem = GridDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
   createSelector(selectByIdData, (byId): U => byId[ID][field as keyof GridDataItem] as U);
 
 export const selectProcessDataItemFieldValue = <T extends GridDataItem = GridDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
   createSelector(selectProcessByIdData, (processById): U => processById[ID][field as keyof GridDataItem] as U);
+
+// Feature
+
+type KeyEntity = 'appointments' | 'staff' | 'customers' | 'services';
+
+export const selectEntityByIdData = (entity: KeyEntity) => ({ GridState }: GlobalState) => GridState.entities[entity].byId;
 
 // For Domain
 // Appointment
@@ -133,6 +139,8 @@ export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) =>
 export const selectSelectedDate = ({ GridState }: GlobalState) => GridState.selectedDate;
 
 export const selectSelectedView = ({ GridState }: GlobalState) => GridState.selectedView;
+
+export const selectMemoOriginalDataItem = (dataItemID: number) => createSelector(selectByIdAppointmentsData, (byID) => byID[dataItemID]);
 
 export const selectUpdatableRecurringDataItem = ({ GridState }: GlobalState) => GridState.updatableRecurringDataItem;
 

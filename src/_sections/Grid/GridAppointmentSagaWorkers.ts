@@ -21,7 +21,7 @@ import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from 
 import { transformAPIData as transformTeamStaffAPIData } from '../../Staff/StaffHelpers';
 import { transformAPIData as transformCustomersAPIData } from '../../Customers/CustomersHelpers';
 
-type Results = [QueryAppointmentDataItem[], QueryServiceDataItem[] | null, QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null];
+type Results = [QueryAppointmentDataItem[], QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
 
 export function* workerFetchData({
   meta: { servicesDataLength, staffDataLength, customersDataLength },
@@ -29,19 +29,15 @@ export function* workerFetchData({
   try {
     yield put(actions.fetchDataRequestAC());
 
-    const [agendaResult, servicesResult, staffResult, customersResult]: Results = yield all([
+    const [agendaResult, staffResult, customersResult, servicesResult]: Results = yield all([
       apply(API, API.agenda.getData, []),
-      servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
       staffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
       customersDataLength === 0 ? apply(API, API.customers.getData, []) : call(() => null),
+      servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
     ]);
 
     const data = transformAPIData(agendaResult);
     yield put(actions.fetchAppointmentsDataSuccessAC(data));
-
-    if (servicesResult) {
-      yield put(actions.fetchServicesDataSuccessAC(servicesResult));
-    }
 
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);
@@ -51,6 +47,10 @@ export function* workerFetchData({
     if (customersResult) {
       const data = transformCustomersAPIData(customersResult);
       yield put(actions.fetchCustomersDataSuccessAC(data));
+    }
+
+    if (servicesResult) {
+      yield put(actions.fetchServicesDataSuccessAC(servicesResult));
     }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`));

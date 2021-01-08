@@ -29,17 +29,17 @@ import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
+  const localizationService = useLocalization();
+
   const dataName = useSelector(selectDataName);
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
-  const localizationService = useLocalization();
-
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
   useSetGridDataForDomainWithDataBind(dataName, GridDataName.Appointments, appointmentsData, isDataLoading, dispatch);
 
-  const hasAgendaData = dataName === GridDataName.Appointments;
-  const contentTSX = hasAgendaData && !isDataLoading && (
+  const hasAppointmentsData = dataName === GridDataName.Appointments;
+  const contentTSX = hasAppointmentsData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid>

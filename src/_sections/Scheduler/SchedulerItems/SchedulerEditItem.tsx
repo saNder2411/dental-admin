@@ -5,10 +5,10 @@ import { SchedulerEditItem as KendoSchedulerEditItem } from '@progress/kendo-rea
 import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
-// Actions
-import { SchedulerActions } from '../SchedulerActions';
 // Selectors
-import { selectMemoOriginalDataItem } from '../SchedulerSelectors';
+import { selectMemoOriginalDataItem } from '../../Grid/GridSelectors';
+// Action Creators
+import { setFormItemIdAC } from '../../Grid/GridAC';
 
 export const SchedulerEditItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem } = props;
@@ -16,7 +16,7 @@ export const SchedulerEditItem: FC<CustomSchedulerItemProps> = (props): JSX.Elem
   const selectOriginalDataItem = useMemo(() => selectMemoOriginalDataItem(dataItem.ID), [dataItem.ID]);
   const originalDataItem = useSelector(selectOriginalDataItem) ?? null;
 
-  const onFormItemChange = useCallback(({ value }) => SchedulerActions.setFormItemID(dispatch, value), [dispatch]);
+  const onFormItemChange = useCallback(({ value }) => dispatch(setFormItemIdAC(value)), [dispatch]);
 
   return (
     <KendoSchedulerEditItem

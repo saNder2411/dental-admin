@@ -1,14 +1,14 @@
-import React, { FC, useCallback, useMemo, memo, useRef } from 'react';
+import React, { FC, useCallback, memo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerSlot as KendoSchedulerSlot, SchedulerSlotProps } from '@progress/kendo-react-scheduler';
 // Components
 import { SchedulerEditSlot } from './SchedulerEditSlot';
-// Actions
-import { SchedulerActions } from '../SchedulerActions';
+// Action Creators
+import { schAddNewItemToEditAC } from '../../Grid/GridAC';
 // Types
 import { StaffDataItem } from '../../../Staff/StaffTypes';
 // Selectors
-import { selectMemoNewDataItem } from '../SchedulerSelectors';
+import { selectMemoNewAppointmentDataItem } from '../../Grid/GridSelectors';
 
 export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
   (props) => {
@@ -20,13 +20,9 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
       console.log(renders);
     }
 
-    const selectNewDataItem = useMemo(() => selectMemoNewDataItem(Start, resource.ID), [resource.ID, Start]);
-    const newDataItem = useSelector(selectNewDataItem);
-    if (newDataItem) {
-      console.log(`SchedulerSlot`, Start)
-    }
+    const newDataItem = useSelector(selectMemoNewAppointmentDataItem(Start, resource.ID));
 
-    const onSlotDoubleClick = useCallback(() => SchedulerActions.addNewItemToEdit(dispatch, { Start, End, TeamID: resource.ID }), [
+    const onSlotDoubleClick = useCallback(() => dispatch(schAddNewItemToEditAC({ Start, End, TeamID: resource.ID })), [
       End,
       Start,
       dispatch,

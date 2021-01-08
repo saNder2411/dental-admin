@@ -39,7 +39,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
               href="https://sa-toniguy01.metroapps.online/_layouts/15/viewlsts.aspx"
               target="_blank"
               rel="noopener noreferrer">
-              <span className={`k-icon k-i-gear`} />
+              <span className="k-icon k-i-gear" />
               &nbsp;<span className="k-item-text">StyCal-Admin</span>
             </a>
           )}

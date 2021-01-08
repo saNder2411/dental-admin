@@ -1,1 +1,1 @@
-export * from './useTeamStaffDataForCalendar';
+export * from './useStaffDataForCalendar';

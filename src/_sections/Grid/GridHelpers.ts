@@ -1,5 +1,6 @@
 // Types
-import { GridDataItem, GridDataName, StatusNames } from './GridTypes';
+import { GridDataItem, GridDataName, StatusNames, InitDataForNewDataItem } from './GridTypes';
+import { AppointmentDataItem } from './../../Agenda/AgendaTypes';
 import { OfferIcons } from '../../Services';
 
 export const transformArrayDataToByIdData = <T extends GridDataItem = GridDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
@@ -12,7 +13,7 @@ export const transformArrayDataToByIdData = <T extends GridDataItem = GridDataIt
   return [byIdData, allIDs];
 };
 
-export const generateId = (data: GridDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
+export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
 
 export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
@@ -24,7 +25,6 @@ export const updateDataAfterEditItem = <T extends GridDataItem = GridDataItem>(d
   return [...data.slice(0, index), dataItem, ...data.slice(index + 1)];
 };
 
-
 export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>(data: T[], removeItemID: number): T[] => {
   const index = data.findIndex(({ ID }) => ID === removeItemID);
 
@@ -33,8 +33,8 @@ export const updateDataAfterRemoveItem = <T extends GridDataItem = GridDataItem>
   return [...data.slice(0, index), ...data.slice(index + 1)];
 };
 
-export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): GridDataItem => {
-  const ID = generateId(data);
+export const getNewDataItem = (allIDs: number[], dataName: GridDataName): GridDataItem => {
+  const ID = generateId(allIDs);
   const color = generateColor();
 
   switch (dataName) {
@@ -145,6 +145,44 @@ export const getNewDataItem = (data: GridDataItem[], dataName: GridDataName): Gr
   }
 };
 
+export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start, End, TeamID }: InitDataForNewDataItem): AppointmentDataItem => {
+  const ID = generateId(allIDs);
+
+  return {
+    Id: ID,
+    Title: ``,
+    EventDate: Start.toISOString(),
+    EndDate: End.toISOString(),
+    Duration: 60,
+    Description: ``,
+    fAllDayEvent: null,
+    RecurrenceID: null,
+    Email: null,
+    AppointmentStatus: StatusNames.Consultation,
+    LastNameAppt: ``,
+    Gender: '(1) Female',
+    Notes: null,
+    ServiceCharge: 40,
+    FilterStart: Start.toISOString(),
+    FilterEnd: End.toISOString(),
+    MetroRRule: null,
+    MetroRecException: null,
+    FirstName: ``,
+    CellPhone: null,
+    LookupCM102customersId: 1270,
+    LookupHR01teamId: TeamID,
+    LookupMultiBP01offeringsId: { results: [] },
+    ID,
+    Modified: new Date().toISOString(),
+
+    TeamID,
+    Start,
+    End,
+    inEdit: true,
+    isNew: true,
+  };
+};
+
 const UniqueEntityKeys = {
   Appointments: 'AppointmentStatus',
   Services: 'OfferingsName_Edit',
@@ -190,4 +228,3 @@ export const roleSkills = [
   `Styling-Wispy`,
   `Time Management`,
 ];
-

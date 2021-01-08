@@ -18,12 +18,11 @@ import { IconMap } from '../../../_instruments';
 import { StatusNames } from '../../Grid/GridTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../Staff/StaffTypes';
-//Actions
-import { SchedulerActions } from '../SchedulerActions';
+//Action Creators
+import { setFormItemIdAC, schAddNewItemToEditAC, changeUpdatedRecurringDataItemAC } from '../../Grid/GridAC';
 import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../Grid/GridAC';
 // Selectors
-import { selectDataItemIsLoading } from '../../Grid/GridSelectors';
-import { selectFormItemID, selectSelectedView } from '../SchedulerSelectors';
+import { selectDataItemIsLoading, selectFormItemID, selectSelectedView } from '../../Grid/GridSelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
 
@@ -90,8 +89,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       setShowEditOccurrenceDialog(true);
       return;
     }
-
-    SchedulerActions.setFormItemID(dispatch, dataItem.ID);
+    dispatch(setFormItemIdAC(dataItem.ID));
   }, [dispatch, dataItem.ID, isRecurring]);
 
   const onDeleteBtnClick = useCallback(() => {
@@ -150,7 +148,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         anchor={_ref.current?.element as any}
         style={{ width: 300 }}>
         <div className="rounded" tabIndex={-1} onFocus={onFocusAsync as any} onBlur={onBlurAsync as any}>
-          <Card>
+          <CardHeader>
             <CardHeader>
               <div className="d-flex align-items-center">
                 <div className="team-marker" style={{ backgroundColor: color }} />
@@ -187,7 +185,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
               <CardHeader>Email: {dataItem.Email}</CardHeader>
               <CardHeader>Notes: {dataItem.Description}</CardHeader>
             </CardBody>
-          </Card>
+          </CardHeader>
         </div>
       </Popup>
       {showRemoveDialog && (
@@ -217,15 +215,12 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           onClose={() => setShowEditOccurrenceDialog(false)}
           onCancel={() => {
             setShowEditOccurrenceDialog(false);
-            SchedulerActions.changeUpdatedRecurringDataItem(
-              dispatch,
-              getNewDataItemWithUpdateException(dataItem, new Date(dataItem.Start.getTime()))
-            );
-            SchedulerActions.addNewItemToEdit(dispatch, getInitDataForNewDataItem(dataItem.Start, selectedView, resource.ID));
+            dispatch(changeUpdatedRecurringDataItemAC(getNewDataItemWithUpdateException(dataItem, new Date(dataItem.Start.getTime()))));
+            dispatch(schAddNewItemToEditAC(getInitDataForNewDataItem(dataItem.Start, selectedView, resource.ID)));
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);
-            SchedulerActions.setFormItemID(dispatch, dataItem.ID);
+            dispatch(setFormItemIdAC(dataItem.ID));
           }}
         />
       )}

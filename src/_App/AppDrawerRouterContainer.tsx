@@ -1,5 +1,4 @@
-import React, { FC, useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { FC, useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
@@ -7,10 +6,6 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { AppHeader } from '.';
 // SC
 import * as SC from './AppItemsStyled/CustomDrawerItemStyled';
-// Action Creators
-import { changeDataNameAC } from '../_sections/Grid/GridAC';
-// Types
-import { GridDataName } from '../_sections/Grid/GridTypes';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
 
@@ -31,22 +26,16 @@ const getSelectedItemName = (pathname: string): string => {
   return ``;
 };
 
-export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ...others }): JSX.Element => {
-  const isCalendar = route === '/calendar';
-  const dispatch = useDispatch();
-  const onClick = useCallback(() => isCalendar && dispatch(changeDataNameAC(GridDataName.Default)), [dispatch, isCalendar]);
-
-  return (
-    <SC.CustomDrawerItem>
-      <NavLink to={route} onClick={onClick}>
-        <DrawerItem {...others}>
-          <span className={`k-icon ${iconSvg}`} />
-          <span className="k-item-text">{text}</span>
-        </DrawerItem>
-      </NavLink>
-    </SC.CustomDrawerItem>
-  );
-};
+export const CustomDrawerItem: FC<DrawerItemProps> = ({ iconSvg, text, route, ...others }): JSX.Element => (
+  <SC.CustomDrawerItem>
+    <NavLink to={route}>
+      <DrawerItem {...others}>
+        <span className={`k-icon ${iconSvg}`} />
+        <span className="k-item-text">{text}</span>
+      </DrawerItem>
+    </NavLink>
+  </SC.CustomDrawerItem>
+);
 
 interface Props {
   children: JSX.Element | JSX.Element[] | [];

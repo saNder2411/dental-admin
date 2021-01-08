@@ -25,8 +25,7 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectCustomerById } from '../../../Grid/GridSelectors';
-import { selectMemoUpdatedRecurringDataItem } from '../../SchedulerSelectors';
+import { selectCustomerById, selectMemoUpdatedRecurringDataItem } from '../../../Grid/GridSelectors';
 // Types
 import { StatusNames } from '../../../Grid/GridTypes';
 import { CustomerDataItem } from '../../../../Customers';
@@ -37,8 +36,9 @@ import {
   updateAppointmentRecurringDataItemInitAsyncAC,
   updateAppointmentDataItemInitAsyncAC,
   createAppointmentDataItemInitAsyncAC,
+  schDiscardAddNewItemToDataAC,
+  changeUpdatedRecurringDataItemAC,
 } from '../../../Grid/GridAC';
-import { SchedulerActions } from '../../SchedulerActions';
 // Instruments
 import {
   StatusDropDownListData,
@@ -96,31 +96,25 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
     if (updatedRecurringDataItem && dataItem.isNew) {
       dispatch(
         updateAppointmentRecurringDataItemInitAsyncAC(updatedRecurringDataItem, newDataItem, () => {
-          SchedulerActions.discardNewItemToData(dispatch);
-          SchedulerActions.changeUpdatedRecurringDataItem(dispatch, null);
+          // dispatch(schDiscardAddNewItemToDataAC(dataItem.ID));
+          // dispatch(changeUpdatedRecurringDataItemAC(null));
         })
       );
       return;
     }
 
     dataItem.isNew
-      ? dispatch(
-          createAppointmentDataItemInitAsyncAC(
-            newDataItem,
-            () => {},
-            () => SchedulerActions.discardNewItemToData(dispatch)
-          )
-        )
+      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, () => {}))
       : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => {}));
   };
 
   const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
     if (dataItem.isNew) {
-      SchedulerActions.discardNewItemToData(dispatch);
+      dispatch(schDiscardAddNewItemToDataAC(dataItem.ID));
     }
 
     if (updatedRecurringDataItem) {
-      SchedulerActions.changeUpdatedRecurringDataItem(dispatch, null);
+      dispatch(changeUpdatedRecurringDataItemAC(null));
     }
 
     onDiscardAction && onDiscardAction({ value: null });

@@ -1,4 +1,4 @@
-import { Web } from '@pnp/sp/presets/core';
+import { Web, sp } from '@pnp/sp/presets/core';
 // Config
 import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
@@ -7,6 +7,10 @@ import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/Cu
 import { QueryStaffDataItem, MutationStaffDataItem } from '../Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
 import { Auth, IndividualRights } from '../_sections/Grid/GridTypes';
+
+// sp.web.getUserEffectivePermissions("i:0#.f|membership|user@site.com")
+Web(SP_ROOT_URL).configure({ headers }).getUserEffectivePermissions("i:0#.f|membership|user@site.com")
+
 
 export type QueryAllData<T> = () => Promise<T>;
 export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
@@ -92,7 +96,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -144,7 +148,7 @@ export const API: API = {
   },
 };
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 
