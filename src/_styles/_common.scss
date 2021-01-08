@@ -149,9 +149,9 @@ a:hover {
 
 // Header
 .header {
-  // height: 100px;
+  height: 80px;
   position: sticky;
-  padding-bottom: 24px;
+  // padding-bottom: 24px;
   top: 0;
   z-index: 3;
   color: $white;
@@ -161,8 +161,8 @@ a:hover {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    // height: 100%;
-    padding-top: 10px;
+    height: 100%;
+    // padding-top: 10px;
     color: $white;
   }
 

@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType, Auth } from './GridTypes';
+import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType, UserInfo } from './GridTypes';
 import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
 import { CustomerDataItem } from '../../Customers/CustomersTypes';
 import { StaffDataItem } from '../../Staff/StaffTypes';
@@ -240,13 +240,13 @@ export const changeUpdatedRecurringDataItemAC = (dataItem: AppointmentDataItem |
   payload: dataItem,
 });
 
-// Auth Async
+// UserInfo Async
 export const fetchAuthDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_INIT_ASYNC });
 
-// // Auth Sync
+// // UserInfo Sync
 export const fetchAuthDataRequestAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_REQUEST });
 
-export const fetchAuthDataSuccessAC = (data: Auth) => ({ type: ActionTypes.FETCH_AUTH_DATA_SUCCESS, payload: data });
+export const fetchAuthDataSuccessAC = (data: UserInfo) => ({ type: ActionTypes.FETCH_AUTH_DATA_SUCCESS, payload: data });
 
 export const fetchAuthDataFailureAC = (errorMessage: string) => ({ type: ActionTypes.FETCH_AUTH_DATA_FAILURE, payload: errorMessage });
 

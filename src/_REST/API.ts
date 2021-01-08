@@ -1,4 +1,5 @@
-import { Web, sp } from '@pnp/sp/presets/core';
+import { Web } from '@pnp/sp/presets/all';
+import { sp } from '@pnp/sp';
 // Config
 import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
@@ -6,23 +7,15 @@ import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
 import { QueryStaffDataItem, MutationStaffDataItem } from '../Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
-import { Auth, IndividualRights } from '../_sections/Grid/GridTypes';
+import { UserInfo } from '../_sections/Grid/GridTypes';
 
-// sp.web.getUserEffectivePermissions("i:0#.f|membership|user@site.com")
+// const spPer = async () => {
+//   // const perms2 = await Web(SP_ROOT_URL).configure({ headers }).getCurrentUserEffectivePermissions
+//   const perms = await sp.configure({ headers }, SP_ROOT_URL).web.configure({ headers }).currentUser.select('IsSiteAdmin').get();
+//   console.log(perms);
+// };
 
-
-
-const spPer = async () => {
-
-const perms2 = await (await Web(SP_ROOT_URL).configure({ headers }).getParentWeb()).web.roleAssignments()
-
-
-
-console.log(perms2)
-}
-
-spPer();
-
+// spPer();
 
 export type QueryAllData<T> = () => Promise<T>;
 export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
@@ -54,7 +47,7 @@ interface API {
     deleteDataItem: DeleteDataItem;
   };
   auth: {
-    getAuth: QueryAllData<Auth>;
+    getAuth: QueryAllData<UserInfo>;
   };
 }
 
@@ -108,7 +101,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -156,11 +149,17 @@ export const API_: API = {
     deleteDataItem: (deletedDataItemID: number) => deleteSPDataItem(GuidList.Service, deletedDataItemID),
   },
   auth: {
-    getAuth: async () => new Promise((resolve) => resolve({ MembershipGroupId: 10, IndividualRights: IndividualRights.FullControl })),
+    getAuth: async () =>
+      sp
+        .configure({ headers }, SP_ROOT_URL)
+        .web.configure({ headers })
+        .currentUser.select('IsSiteAdmin')
+        .get()
+        .then((response) => (response as unknown) as UserInfo),
   },
 };
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 

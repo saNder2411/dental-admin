@@ -1,7 +1,6 @@
 {
   "authorization": {
-    "MembershipGroupId": 10,
-    "IndividualRights": "Full Cont"
+    "IsSiteAdmin": true
   },
   "staff": [
     {

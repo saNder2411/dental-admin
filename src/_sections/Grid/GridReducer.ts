@@ -491,7 +491,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.CHANGE_SELECTED_VIEW:
       return { ...state, selectedView: action.payload };
 
-    // Auth
+    // UserInfo
     case ActionTypes.FETCH_AUTH_DATA_SUCCESS:
       return { ...state, authData: action.payload };
 

@@ -80,9 +80,9 @@ export const ActionTypes = {
   CHANGE_SELECTED_VIEW: 'SCHEDULER/CHANGE_SELECTED_VIEW' as const,
 
   SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM: 'SCHEDULER/SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM' as const,
-  //Async Fetch Auth
+  //Async Fetch UserInfo
   FETCH_AUTH_DATA_INIT_ASYNC: 'AUTH/FETCH_AUTH_DATA_INIT_ASYNC' as const,
-  // Sync  Auth
+  // Sync  UserInfo
   FETCH_AUTH_DATA_REQUEST: `AUTH/FETCH_AUTH_DATA_REQUEST` as const,
   FETCH_AUTH_DATA_SUCCESS: `AUTH/FETCH_AUTH_DATA_SUCCESS` as const,
   FETCH_AUTH_DATA_FAILURE: `AUTH/FETCH_AUTH_DATA_FAILURE` as const,
@@ -130,13 +130,12 @@ export enum IndividualRights {
   Designer = 'Designer',
 }
 
-export interface Auth {
-  MembershipGroupId: number;
-  IndividualRights: IndividualRights;
+export interface UserInfo {
+  IsSiteAdmin: boolean;
 }
 
 export interface GridState {
-  authData: Auth | null;
+  authData: UserInfo | null;
 
   viewOriginalData: GridDataItem[];
   byId: { [key: string]: GridDataItem };
