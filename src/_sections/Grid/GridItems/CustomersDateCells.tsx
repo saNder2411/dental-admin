@@ -5,12 +5,12 @@ import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
 import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { EntitiesMap } from '../GridTypes';
 
-export const GenericDateInput: FC<EditCellProps<AppointmentDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
+export const CustomersDateInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem | CustomerDataItem, string>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesMap.Customers, field));
 
   const onDateChange = ({ syntheticEvent, target: { value } }: DateTimePickerChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value: value?.toISOString() });

@@ -1,13 +1,7 @@
 import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
-import { GenericDataItem } from '../Grid/GridTypes';
-
-const selectViewOriginalData = ({ GridState }: GlobalState) => GridState.viewOriginalData;
-
-export const selectDataName = ({ GridState }: GlobalState) => GridState.dataName;
-
-export const selectLabelForAddNewItemBtn = ({ GridState }: GlobalState) => GridState.labelForAddNewItemBtn;
+import { GenericDataItem, EntitiesKeys } from '../Grid/GridTypes';
 
 export const selectDataIsLoading = ({ GridState }: GlobalState) => GridState.isDataLoading;
 
@@ -21,26 +15,24 @@ const selectRoleSkills = ({ GridState }: GlobalState) => GridState.roleSkills;
 
 export const selectMemoRoleSkills = () => createSelector(selectRoleSkills, (roleSkills) => roleSkills);
 
-export const selectMemoViewOriginalData = () => createSelector(selectViewOriginalData, (viewOriginalData) => viewOriginalData);
+const selectProcessByIdData = (entityName: EntitiesKeys) => ({ GridState }: GlobalState) => GridState.entities[entityName].processById;
 
-const selectProcessByIdData = ({ GridState }: GlobalState) => GridState.processById;
+export const selectMemoProcessDataItem = <T extends GenericDataItem = GenericDataItem>(ID: number, entityName: EntitiesKeys) =>
+  createSelector(selectProcessByIdData(entityName), (processById): T => processById[ID] as T);
 
-export const selectMemoProcessDataItem = <T extends GenericDataItem = GenericDataItem>(ID: number) =>
-  createSelector(selectProcessByIdData, (processById): T => processById[ID] as T);
+const selectByIdData = (entityName: EntitiesKeys) => ({ GridState }: GlobalState) => GridState.entities[entityName].byId;
 
-const selectByIdData = ({ GridState }: GlobalState) => GridState.byId;
+export const selectByIdDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(
+  ID: number,
+  entityName: EntitiesKeys,
+  field: keyof T
+) => createSelector(selectByIdData(entityName), (byId): U => byId[ID][field as keyof GenericDataItem] as U);
 
-export const selectByIdDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
-  createSelector(selectByIdData, (byId): U => byId[ID][field as keyof GenericDataItem] as U);
-
-export const selectProcessDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
-  createSelector(selectProcessByIdData, (processById): U => processById[ID][field as keyof GenericDataItem] as U);
-
-// Feature
-
-type KeyEntity = 'appointments' | 'staff' | 'customers' | 'services';
-
-export const selectEntityByIdData = (entity: KeyEntity) => ({ GridState }: GlobalState) => GridState.entities[entity].byId;
+export const selectProcessDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(
+  ID: number,
+  entityName: EntitiesKeys,
+  field: keyof T
+) => createSelector(selectProcessByIdData(entityName), (processById): U => processById[ID][field as keyof GenericDataItem] as U);
 
 // For Domain
 // Appointment

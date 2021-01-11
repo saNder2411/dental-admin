@@ -1,42 +1,36 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
-  GenericTextCell,
-  GenericAvatarCell,
+  StaffTextCell,
+  StaffAvatarCell,
   StaffFullNameCell,
   StaffJobTitleCell,
-  GenericRoleSkillsCell,
-  GenericBooleanFlagCell,
+  StaffRoleSkillsCell,
+  StaffBooleanFlagCell,
   StaffMobilePhoneCell,
   StaffActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
-import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-// Selectors
-import { selectDataName } from '../_sections/Grid/GridSelectors';
+import { EntitiesMap } from '../_sections/Grid/GridTypes';
 // Hooks
-import { useSetGridData } from '../_sections/Grid/GridHooks';
 import { useSelectStaffData, useFetchStaffData } from './StaffHooks';
 
 export const Staff: FC = (): JSX.Element => {
-  const dataName = useSelector(selectDataName);
   const { staffData, isDataLoading } = useSelectStaffData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
   useFetchStaffData(staffData.length, dispatch);
-  useSetGridData(dataName, GridDataName.Staff, staffData, dispatch);
 
-  const hasTeamStaffData = dataName === GridDataName.Staff;
-  const contentTSX = hasTeamStaffData && !isDataLoading && (
+  const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid>
+        <Grid data={staffData} entityName={EntitiesMap.Staff} labelNewItemBtn="New Staff">
           <GridColumn
             field={'Id'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}
@@ -48,7 +42,7 @@ export const Staff: FC = (): JSX.Element => {
           <GridColumn
             field={'TeamProfilePhotoUrl'}
             title={localizationService.toLanguageString('custom.photo', 'Photo')}
-            cell={GenericAvatarCell as CustomGridCell}
+            cell={StaffAvatarCell as CustomGridCell}
             width={120}
           />
           <GridColumn
@@ -69,14 +63,14 @@ export const Staff: FC = (): JSX.Element => {
             field={'RoleSkills'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
             columnMenu={ColumnMenu}
-            cell={GenericRoleSkillsCell as CustomGridCell}
+            cell={StaffRoleSkillsCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'ShowOnline'}
             title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
             columnMenu={ColumnMenu}
-            cell={GenericBooleanFlagCell as CustomGridCell}
+            cell={StaffBooleanFlagCell as CustomGridCell}
             width={160}
             filter={'boolean'}
           />
@@ -92,7 +86,7 @@ export const Staff: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.email', 'Email')}
             columnMenu={ColumnMenu}
             filter={'text'}
-            cell={GenericTextCell as CustomGridCell}
+            cell={StaffTextCell as CustomGridCell}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}

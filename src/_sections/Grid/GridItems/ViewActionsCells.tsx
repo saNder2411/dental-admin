@@ -5,6 +5,8 @@ import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { Loader } from '../../../_components';
+// Types
+import {EntitiesKeys} from '../GridTypes'
 // Action Creators
 import { discardAddNewItemToDataAC, cancelEditAC, addItemToEditAC } from '../GridAC';
 
@@ -14,6 +16,7 @@ interface Props {
   dataItemID: number;
   isDataItemLoading: boolean;
   isValidFields: boolean;
+  entityName: EntitiesKeys;
   onCreateDataItem: () => void;
   onUpdatedDataItem: () => void;
   onDeleteDataItem: () => void;
@@ -25,6 +28,7 @@ export const ViewActionsControlCell: FC<Props> = ({
   isDataItemLoading,
   isValidFields,
   dataItemID,
+  entityName,
   onCreateDataItem,
   onUpdatedDataItem,
   onDeleteDataItem,
@@ -51,7 +55,7 @@ export const ViewActionsControlCell: FC<Props> = ({
           </button>
           <button
             className="k-button btn-custom"
-            onClick={() => (isNewItem ? dispatch(discardAddNewItemToDataAC(dataItemID)) : dispatch(cancelEditAC(dataItemID)))}
+            onClick={() => (isNewItem ? dispatch(discardAddNewItemToDataAC(dataItemID, entityName)) : dispatch(cancelEditAC(dataItemID, entityName)))}
             disabled={isDataItemLoading}>
             <span className="k-icon k-i-x custom-icon" />
           </button>
@@ -64,7 +68,7 @@ export const ViewActionsControlCell: FC<Props> = ({
         <Loader className="d-flex justify-content-center align-items-center" isLoading={isDataItemLoading} themeColor="tertiary" />
       ) : (
         <>
-          <button className="k-button btn-custom" onClick={() => dispatch(addItemToEditAC(dataItemID))}>
+          <button className="k-button btn-custom" onClick={() => dispatch(addItemToEditAC(dataItemID, entityName))}>
             <span className="k-icon k-i-edit custom-icon" />
           </button>
           <button className="k-button btn-custom" onClick={() => setShowRemoveDialog(true)}>

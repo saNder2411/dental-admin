@@ -1,44 +1,38 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
   ServicesIconCell,
-  GenericReferenceCell,
+  ServicesReferenceCell,
   ServicesCategoryCell,
-  GenericRoleSkillsCell,
+  ServicesRoleSkillsCell,
   ServicesDurationCell,
-  GenericBooleanFlagCell,
-  GenericCurrencyCell,
+  ServicesBooleanFlagCell,
+  ServicesCurrencyCell,
   ServicesDiscountCell,
   ServicesTotalPriceCell,
   ServicesActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
-import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-// Selectors
-import { selectDataName } from '../_sections/Grid/GridSelectors';
+import { EntitiesMap } from '../_sections/Grid/GridTypes';
 // Hooks
-import { useSetGridData } from '../_sections/Grid/GridHooks';
 import { useSelectServicesData, useFetchServicesData } from './ServicesHooks';
 
 export const Services: FC = (): JSX.Element => {
-  const dataName = useSelector(selectDataName);
   const { servicesData, isDataLoading } = useSelectServicesData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
   useFetchServicesData(servicesData.length, dispatch);
-  useSetGridData(dataName, GridDataName.Services, servicesData, dispatch);
 
-  const hasServicesData = dataName === GridDataName.Services;
-  const contentTSX = hasServicesData && !isDataLoading && (
+  const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid>
+        <Grid data={servicesData} entityName={EntitiesMap.Services} labelNewItemBtn="New Service">
           <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`OfferingIconName`} title={` `} />
           <GridColumn
             field={'Id'}
@@ -52,7 +46,7 @@ export const Services: FC = (): JSX.Element => {
             field={'OfferingsName_Edit'}
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
-            cell={GenericReferenceCell as CustomGridCell}
+            cell={ServicesReferenceCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -66,7 +60,7 @@ export const Services: FC = (): JSX.Element => {
             field={'RoleSkills'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
             columnMenu={ColumnMenu}
-            cell={GenericRoleSkillsCell as CustomGridCell}
+            cell={ServicesRoleSkillsCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -80,21 +74,21 @@ export const Services: FC = (): JSX.Element => {
             field={'ShowOnline'}
             title={localizationService.toLanguageString('custom.showOnline', 'Show Online')}
             columnMenu={ColumnMenu}
-            cell={GenericBooleanFlagCell as CustomGridCell}
+            cell={ServicesBooleanFlagCell as CustomGridCell}
             filter={'boolean'}
           />
           <GridColumn
             field={'ConsultReq'}
             title={localizationService.toLanguageString('custom.consultation', 'Consultation')}
             columnMenu={ColumnMenu}
-            cell={GenericBooleanFlagCell as CustomGridCell}
+            cell={ServicesBooleanFlagCell as CustomGridCell}
             filter={'boolean'}
           />
           <GridColumn
             field={'Amount'}
             title={localizationService.toLanguageString('custom.price', 'Price')}
             columnMenu={ColumnMenu}
-            cell={GenericCurrencyCell as CustomGridCell}
+            cell={ServicesCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn

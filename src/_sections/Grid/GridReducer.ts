@@ -1,10 +1,6 @@
 // import { combineReducers } from 'redux';
 // Types
 import { ActionTypes, GridState, Actions, StatusNames, GenericDataItem, EntitiesMap } from './GridTypes';
-import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
-import { CustomerDataItem } from '../../_bus/Customers/CustomersTypes';
-import { StaffDataItem } from '../../_bus/Staff/StaffTypes';
-import { ServiceDataItem } from '../../_bus/Services/ServicesTypes';
 // Helpers
 import {
   transformArrayDataToByIdData,

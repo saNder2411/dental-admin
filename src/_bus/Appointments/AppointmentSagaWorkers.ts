@@ -11,6 +11,7 @@ import {
   UpdateAppointmentDataItemInitAsyncActionType,
   UpdateAppointmentRecurringDataItemInitAsyncActionType,
   DeleteAppointmentDataItemInitAsyncActionType,
+  EntitiesMap,
 } from '../../_sections/Grid/GridTypes';
 import { QueryAppointmentDataItem } from './AppointmentsTypes';
 import { QueryServiceDataItem } from '../Services/ServicesTypes';
@@ -20,6 +21,7 @@ import { QueryCustomerDataItem } from '../Customers/CustomersTypes';
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './AppointmentsHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../Staff/StaffHelpers';
 import { transformAPIData as transformCustomersAPIData } from '../Customers/CustomersHelpers';
+import { transformAPIData as transformServicesAPIData } from '../Services/ServicesHelpers';
 
 type Results = [QueryAppointmentDataItem[], QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
 
@@ -27,7 +29,7 @@ export function* workerFetchData({
   meta: { servicesDataLength, staffDataLength, customersDataLength },
 }: FetchAppointmentsDataInitAsyncActionType): SagaIterator {
   try {
-    yield put(actions.fetchDataRequestAC());
+    yield put(actions.fetchDataRequestAC(EntitiesMap.Appointments));
 
     const [agendaResult, staffResult, customersResult, servicesResult]: Results = yield all([
       apply(API, API.agenda.getData, []),
@@ -37,23 +39,24 @@ export function* workerFetchData({
     ]);
 
     const data = transformAPIData(agendaResult);
-    yield put(actions.fetchAppointmentsDataSuccessAC(data));
+    yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Appointments));
 
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);
-      yield put(actions.fetchStaffDataSuccessAC(data));
+      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Staff));
     }
 
     if (customersResult) {
       const data = transformCustomersAPIData(customersResult);
-      yield put(actions.fetchCustomersDataSuccessAC(data));
+      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Customers));
     }
 
     if (servicesResult) {
-      yield put(actions.fetchServicesDataSuccessAC(servicesResult));
+      const data = transformServicesAPIData(servicesResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Services));
     }
   } catch (error) {
-    yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`));
+    yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`, EntitiesMap.Appointments));
   } finally {
     yield put(actions.fetchDataFinallyAC());
   }
@@ -67,9 +70,9 @@ export function* workerCreateDataItem({
     yield put(actions.createDataItemRequestAC());
 
     const result: QueryAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [transformDataItemForAPI(createdDataItem)]);
-    const data = transformAPIDataItem(result);
+    const dataItem = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
-    yield put(actions.createAppointmentDataItemSuccessAC(data));
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Appointments));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {
@@ -86,8 +89,8 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemRequestAC());
 
     const result: QueryAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
-    const data = transformAPIDataItem(result);
-    yield put(actions.updateAppointmentDataItemSuccessAC(data));
+    const dataItem = transformAPIDataItem(result);
+    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesMap.Appointments));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Appointments update data item Error: ${error.message}`));
   } finally {
@@ -105,7 +108,7 @@ export function* workerDeleteDataItem({
 
     yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
     sideEffectAfterDeletedDataItem();
-    yield put(actions.deleteAppointmentDataItemSuccessAC(deletedDataItemID));
+    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesMap.Appointments));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Appointments delete data item Error: ${error.message}`));
   } finally {
@@ -128,11 +131,11 @@ export function* workerUpdateRecurringDataItem({
     ]);
 
     const updatedDataItemData = transformAPIDataItem(updateResult);
-    yield put(actions.updateAppointmentDataItemSuccessAC(updatedDataItemData));
+    yield put(actions.updateDataItemSuccessAC(updatedDataItemData, EntitiesMap.Appointments));
 
     const createDataItemData = transformAPIDataItem(createResult);
     sideEffectAfterUpdatedDataItem();
-    yield put(actions.createAppointmentDataItemSuccessAC(createDataItemData));
+    yield put(actions.createDataItemSuccessAC(createDataItemData, EntitiesMap.Appointments));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
   } finally {

@@ -11,7 +11,7 @@ import {
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
-import { StatusNames } from '../GridTypes';
+import { StatusNames, EntitiesMap } from '../GridTypes';
 // Selectors
 import {
   selectDataItemIsLoading,
@@ -31,7 +31,7 @@ import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelp
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const AgendaStatusDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, EntitiesMap.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectStatusNameList = useMemo(selectMemoStatusNameList, []);
   const statusNameList = useSelector(selectStatusNameList);
@@ -46,7 +46,7 @@ export const AgendaStatusDropDownList: FC<EditCellProps<AppointmentDataItem>> = 
 };
 
 export const AgendaSvcStaffDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, EntitiesMap.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
   const dataForDropdownList = useSelector(selectStaffDropDownListData);
@@ -63,7 +63,7 @@ export const AgendaSvcStaffDropDownList: FC<EditCellProps<AppointmentDataItem>> 
 };
 
 export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, EntitiesMap.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const [filter, setFilter] = useState('');
   const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
@@ -111,7 +111,7 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
 };
 
 export const AgendaServicesMultiSelect: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, { results: number[] }>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, { results: number[] }>(dataItemID, EntitiesMap.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesDropDownListData = useMemo(selectServicesDataForDropDownListData, []);
   const dataForDropdownList = useSelector(selectServicesDropDownListData);

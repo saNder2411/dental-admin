@@ -1,19 +1,29 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-inputs';
+import { Input, MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Selectors
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
-import { EditCellProps } from './GridItemsTypes';
+import { EditCellProps, InputChangeEvent } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { EntitiesMap } from '../GridTypes';
 // Hooks
 import { usePhoneFieldsValidation } from '../GridHooks';
 // Helpers
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
+export const CustomersTextInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string | number>(dataItemID, EntitiesMap.Customers, field));
+
+  const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
+
+  return <Input value={value} onChange={onTextChange} disabled={isDataItemLoading} />;
+};
+
 export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesMap.Customers, field));
   const errorMessage = phoneValidator(value);
   const isValid = usePhoneFieldsValidation(errorMessage);
 
@@ -30,4 +40,14 @@ export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem>> = ({
       placeholder={errorMessage}
     />
   );
+};
+
+export const CustomersAvatarInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
+  const isDataItemLoading = useSelector(selectDataItemIsLoading);
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesMap.Customers, field));
+
+  const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
+    onChange({ dataItem: dataItemID, field, syntheticEvent, value });
+
+  return <Input value={value} onChange={onAvatarChange} disabled={isDataItemLoading} />;
 };

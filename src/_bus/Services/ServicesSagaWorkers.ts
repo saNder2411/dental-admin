@@ -9,6 +9,7 @@ import {
   CreateServiceDataItemInitAsyncActionType,
   UpdateServiceDataItemInitAsyncActionType,
   DeleteServiceDataItemInitAsyncActionType,
+  EntitiesMap,
 } from '../../_sections/Grid/GridTypes';
 import { QueryServiceDataItem } from './ServicesTypes';
 // Helpers
@@ -16,14 +17,14 @@ import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from 
 
 export function* workerFetchData(): SagaIterator {
   try {
-    yield put(actions.fetchDataRequestAC());
+    yield put(actions.fetchDataRequestAC(EntitiesMap.Services));
 
     const result: QueryServiceDataItem[] = yield apply(API, API.services.getData, []);
-    const data = transformAPIData(result)
+    const data = transformAPIData(result);
 
-    yield put(actions.fetchServicesDataSuccessAC(data));
+    yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Services));
   } catch (error) {
-    yield put(actions.fetchDataFailureAC(`Services fetch data Error: ${error.message}`));
+    yield put(actions.fetchDataFailureAC(`Services fetch data Error: ${error.message}`, EntitiesMap.Services));
   } finally {
     yield put(actions.fetchDataFinallyAC());
   }
@@ -37,9 +38,9 @@ export function* workerCreateDataItem({
     yield put(actions.createDataItemRequestAC());
 
     const result: QueryServiceDataItem = yield apply(API, API.services.createDataItem, [transformDataItemForAPI(createdDataItem)]);
-    const data = transformAPIDataItem(result);
+    const dataItem = transformAPIDataItem(result);
 
-    yield put(actions.createServiceDataItemSuccessAC(data));
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Services));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Services create data item Error: ${error.message}`));
   } finally {
@@ -56,9 +57,9 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemRequestAC());
 
     const result: QueryServiceDataItem = yield apply(API, API.services.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
-    const data = transformAPIDataItem(result);
+    const dataItem = transformAPIDataItem(result);
 
-    yield put(actions.updateServiceDataItemSuccessAC(data));
+    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesMap.Services));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Services update data item Error: ${error.message}`));
   } finally {
@@ -76,7 +77,7 @@ export function* workerDeleteDataItem({
 
     yield apply(API, API.services.deleteDataItem, [deletedDataItemID]);
     sideEffectAfterDeletedDataItem();
-    yield put(actions.deleteServiceDataItemSuccessAC(deletedDataItemID));
+    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesMap.Services));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Services delete data item Error: ${error.message}`));
   } finally {

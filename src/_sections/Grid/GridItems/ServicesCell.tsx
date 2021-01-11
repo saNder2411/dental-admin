@@ -1,31 +1,36 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useMemo, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useInternationalization } from '@progress/kendo-react-intl';
+import { Popup } from '@progress/kendo-react-popup';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Styled Components
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
-import { ServicesIconInput } from './ServicesInputCells';
+import { ServicesIconInput, ServicesReferenceInput } from './ServicesInputCells';
 import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCells';
-import { ServicesCategoryMultiSelect } from './ServicesDropDownCells';
+import { ServicesCategoryMultiSelect, ServicesBooleanFlagDropDownList, ServicesRoleSkillsMultiSelect } from './ServicesDropDownCells';
 import { OfferIcons } from '../../../_bus/Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StatusNames } from '../GridTypes';
+import { StatusNames, EntitiesMap } from '../GridTypes';
 import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../GridSelectors';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
-import { isNumber } from './GridItemsHelpers';
+import { isNumber, isString } from './GridItemsHelpers';
 
 export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null | undefined>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null | undefined>(
+    ID,
+    EntitiesMap.Services,
+    field
+  );
 
   const isImageUrl = cellValue && (cellValue.includes('png') || cellValue.includes('jpg') || cellValue.includes('jpeg'));
 
@@ -47,7 +52,7 @@ export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem:
 export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
 
   return (
     <td>
@@ -63,7 +68,7 @@ export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataI
 export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
 
   return (
     <td>
@@ -77,8 +82,8 @@ export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataI
 };
 
 export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, field);
-  const OfferingDiscount = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(ID, 'OfferingDiscount'));
+  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
+  const OfferingDiscount = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(ID, EntitiesMap.Services, 'OfferingDiscount'));
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 0;
   const numDiscount = isNumber(OfferingDiscount) ? OfferingDiscount : 0;
@@ -94,7 +99,68 @@ export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dat
 export const ServicesCategoryCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null>(ID, EntitiesMap.Services, field);
 
   return <td>{dataItemInEditValue ? <ServicesCategoryMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : cellValue}</td>;
+};
+
+export const ServicesReferenceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, EntitiesMap.Services, field);
+
+  const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const strValue = isString(cellValue) ? cellValue : '';
+
+  return dataItemInEditValue ? (
+    <td>
+      <ServicesReferenceInput dataItemID={memoID} field={memoField} onChange={onChange} />
+    </td>
+  ) : (
+    <SC.ReferenceCell ref={anchorRef} id="td-p" onClick={() => setShowPopup((prevState) => !prevState)}>
+      {cellValue}
+      <Popup
+        show={showPopup}
+        anchor={anchorRef.current as HTMLTableDataCellElement}
+        style={{ width: anchorRef.current?.offsetWidth }}
+        popupClass="popup-content">
+        <p>Details reference</p>
+        {strValue}
+      </Popup>
+    </SC.ReferenceCell>
+  );
+};
+
+export const ServicesCurrencyCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
+  const intlService = useInternationalization();
+  const numValue = isNumber(cellValue) ? cellValue : 50;
+
+  return <SC.GenericCurrencyCell isNegativeAmount={numValue < 0}>{intlService.formatNumber(numValue, 'c')}</SC.GenericCurrencyCell>;
+};
+
+export const ServicesBooleanFlagCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, boolean>(ID, EntitiesMap.Services, field);
+
+  return dataItemInEditValue ? (
+    <td>
+      <ServicesBooleanFlagDropDownList dataItemID={memoID} field={memoField} onChange={onChange} />
+    </td>
+  ) : (
+    <SC.BooleanFlagCell isOnline={cellValue}>
+      <span className={cellValue ? 'k-icon k-i-checkmark-outline' : 'k-icon k-i-close-outline'} />
+    </SC.BooleanFlagCell>
+  );
+};
+
+export const ServicesRoleSkillsCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const memoID = useMemo(() => ID, [ID]);
+  const memoField = useMemo(() => field, [field]);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string[] | null>(ID, EntitiesMap.Services, field);
+  const value = cellValue ? cellValue.join(' | ') : '';
+
+  return <td>{dataItemInEditValue ? <ServicesRoleSkillsMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
 };

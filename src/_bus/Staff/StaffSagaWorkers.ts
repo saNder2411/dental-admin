@@ -5,20 +5,25 @@ import { API } from '../../_REST';
 // Actions
 import * as actions from '../../_sections/Grid/GridAC';
 // Types
-import { CreateStaffDataItemInitAsyncActionType, UpdateStaffDataItemInitAsyncActionType, DeleteStaffDataItemInitAsyncActionType } from '../../_sections/Grid/GridTypes';
+import {
+  CreateStaffDataItemInitAsyncActionType,
+  UpdateStaffDataItemInitAsyncActionType,
+  DeleteStaffDataItemInitAsyncActionType,
+  EntitiesMap,
+} from '../../_sections/Grid/GridTypes';
 import { QueryStaffDataItem } from './StaffTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './StaffHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {
-    yield put(actions.fetchDataRequestAC());
+    yield put(actions.fetchDataRequestAC(EntitiesMap.Staff));
 
     const result: QueryStaffDataItem[] = yield apply(API, API.staff.getData, []);
     const data = transformAPIData(result);
-    yield put(actions.fetchStaffDataSuccessAC(data));
+    yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Staff));
   } catch (error) {
-    yield put(actions.fetchDataFailureAC(`Staff fetch data Error: ${error.message}`));
+    yield put(actions.fetchDataFailureAC(`Staff fetch data Error: ${error.message}`, EntitiesMap.Staff));
   } finally {
     yield put(actions.fetchDataFinallyAC());
   }
@@ -32,8 +37,8 @@ export function* workerCreateDataItem({
     yield put(actions.createDataItemRequestAC());
 
     const result: QueryStaffDataItem = yield apply(API, API.staff.createDataItem, [transformDataItemForAPI(createdDataItem)]);
-    const data = transformAPIDataItem(result);
-    yield put(actions.createStaffDataItemSuccessAC(data));
+    const dataItem = transformAPIDataItem(result);
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Staff));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Staff create data item Error: ${error.message}`));
   } finally {
@@ -50,8 +55,8 @@ export function* workerUpdateDataItem({
     yield put(actions.updateDataItemRequestAC());
 
     const result: QueryStaffDataItem = yield apply(API, API.staff.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
-    const data = transformAPIDataItem(result);
-    yield put(actions.updateStaffDataItemSuccessAC(data));
+    const dataItem = transformAPIDataItem(result);
+    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesMap.Staff));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Staff update data item Error: ${error.message}`));
   } finally {
@@ -69,7 +74,7 @@ export function* workerDeleteDataItem({
 
     yield apply(API, API.staff.deleteDataItem, [deletedDataItemID]);
     sideEffectAfterDeletedDataItem();
-    yield put(actions.deleteStaffDataItemSuccessAC(deletedDataItemID));
+    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesMap.Staff));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Staff update data item Error: ${error.message}`));
   } finally {

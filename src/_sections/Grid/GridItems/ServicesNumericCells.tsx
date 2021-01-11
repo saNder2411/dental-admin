@@ -6,10 +6,11 @@ import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../Gri
 // Types
 import { EditCellNumericProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
+import { EntitiesMap } from '../GridTypes';
 
 export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem>> = ({ dataItemID, field, onChange, step, min }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(dataItemID, EntitiesMap.Services, field));
 
   const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
@@ -19,7 +20,7 @@ export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem>> = ({ dat
 
 export const ServicesNumericForDiscount: FC<EditCellNumericProps<ServiceDataItem>> = ({ dataItemID, field, onChange, step, min }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(dataItemID, EntitiesMap.Services, field));
 
   const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value: value ? value / 100 : value });

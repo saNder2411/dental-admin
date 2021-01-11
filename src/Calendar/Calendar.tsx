@@ -7,14 +7,11 @@ import { CalendarTopControlItem, CalendarHeaderCardCell } from './CalendarItems'
 import { Loader, LoaderDataItem } from '../_components';
 // Styled Components
 import * as SC from './CalendarStyled/CalendarStyled';
-// Types
-import { GridDataName } from '../_sections/Grid';
 // Selectors
-import { selectDataName, selectSelectedDate, selectSelectedView } from '../_sections/Grid/GridSelectors';
+import {  selectSelectedDate, selectSelectedView } from '../_sections/Grid/GridSelectors';
 // Action Creators
 import { changeMapTeamToFilteredAC, schAddNewItemToEditAC } from '../_sections/Grid/GridAC';
 // Hooks
-import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from '../Agenda/AgendaHooks';
 import { useStaffDataForScheduler } from './CalendarHooks';
 // Helpers
@@ -23,12 +20,10 @@ import { customModelFields, getInitDataForNewDataItem } from '../_sections/Sched
 export const Calendar: FC = () => {
   const localizationService = useLocalization();
 
-  const dataName = useSelector(selectDataName);
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
-  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Appointments, appointmentsData, isDataLoading, dispatch);
 
   const { staffData, mapTeamToFiltered } = useStaffDataForScheduler();
   const calendarData = useMemo(() => appointmentsData.filter(({ LookupHR01teamId }) => mapTeamToFiltered[LookupHR01teamId]), [

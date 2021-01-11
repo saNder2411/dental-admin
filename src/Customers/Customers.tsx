@@ -4,41 +4,37 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
 import {
-  GenericTextCell,
-  GenericGenderCell,
+  CustomersTextCell,
+  CustomersGenderCell,
   CustomersSvcStaffCell,
-  GenericDateCell,
-  GenericDateCellNoEditable,
+  CustomersDateCell,
+  CustomersDateCellNoEditable,
   CustomersLastAppointmentsCell,
   CustomersMobilePhoneCell,
-  GenericAvatarCell,
+  CustomersAvatarCell,
   CustomersActionsControlCell,
 } from '../_sections';
 import { Loader } from '../_components';
 // Types
-import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
+import { EntitiesMap } from '../_sections/Grid/GridTypes';
 // Selectors
-import { selectDataName, selectOriginalStaffDataLength } from '../_sections/Grid/GridSelectors';
+import { selectOriginalStaffDataLength } from '../_sections/Grid/GridSelectors';
 // Hooks
-import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useSelectCustomersData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
-  const dataName = useSelector(selectDataName);
   const { customersData, isDataLoading } = useSelectCustomersData();
   const staffDataLength = useSelector(selectOriginalStaffDataLength);
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
   useFetchCustomersData(customersData.length, staffDataLength, dispatch);
-  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Customers, customersData, isDataLoading, dispatch);
 
-  const hasCustomersData = dataName === GridDataName.Customers;
-  const contentTSX = hasCustomersData && !isDataLoading && (
+  const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid>
+        <Grid data={customersData} entityName={EntitiesMap.Customers} labelNewItemBtn="New Customer">
           <GridColumn
             field={'Id'}
             title={localizationService.toLanguageString('custom.ID', 'ID')}
@@ -50,14 +46,14 @@ export const Customers: FC = (): JSX.Element => {
           <GridColumn
             field={'Title'}
             title={localizationService.toLanguageString('custom.lastName', 'Last Name')}
-            cell={GenericTextCell as CustomGridCell}
+            cell={CustomersTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
           <GridColumn
             field={'FirstName'}
             title={localizationService.toLanguageString('custom.firstName', 'First Name')}
-            cell={GenericTextCell as CustomGridCell}
+            cell={CustomersTextCell as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
@@ -65,7 +61,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={GenericGenderCell as CustomGridCell}
+            cell={CustomersGenderCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -79,7 +75,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Upcoming'}
             title={localizationService.toLanguageString('custom.upcoming', 'Upcoming')}
             columnMenu={ColumnMenu}
-            cell={GenericDateCell as CustomGridCell}
+            cell={CustomersDateCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -93,7 +89,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Email'}
             title={localizationService.toLanguageString('custom.email', 'Email')}
             columnMenu={ColumnMenu}
-            cell={GenericTextCell as CustomGridCell}
+            cell={CustomersTextCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
@@ -108,7 +104,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Modified'}
             title={localizationService.toLanguageString('custom.lastUpdate', 'Last Update')}
             columnMenu={ColumnMenu}
-            cell={GenericDateCellNoEditable as CustomGridCell}
+            cell={CustomersDateCellNoEditable as CustomGridCell}
             editable={false}
             filter={'date'}
             width={140}
@@ -116,7 +112,7 @@ export const Customers: FC = (): JSX.Element => {
           <GridColumn
             field={'ClientPhotoUrl'}
             title={localizationService.toLanguageString('custom.photo', 'Photo')}
-            cell={GenericAvatarCell as CustomGridCell}
+            cell={CustomersAvatarCell as CustomGridCell}
             width={120}
           />
           <GridColumn

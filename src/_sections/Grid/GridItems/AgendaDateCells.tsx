@@ -11,14 +11,17 @@ import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../Gri
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { EntitiesMap } from '../GridTypes';
 // Hooks
 import { useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 
 export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, Date>(dataItemID, field));
-  const LookupHR01teamId = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, 'LookupHR01teamId'));
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, Date>(dataItemID, EntitiesMap.Appointments, field));
+  const LookupHR01teamId = useSelector(
+    selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, EntitiesMap.Appointments, 'LookupHR01teamId')
+  );
   const intlService = useInternationalization();
   const { isValid, showPopup, setShowPopup, actualAppointments } = useStartDateEventValidation(value, LookupHR01teamId);
 
@@ -53,8 +56,10 @@ export const AgendaStartDateInput: FC<EditCellProps<AppointmentDataItem>> = ({ d
 export const AgendaEndDateInput: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const anchorRef = useRef<HTMLDivElement | null>(null);
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, Date>(dataItemID, field));
-  const LookupHR01teamId = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, 'LookupHR01teamId'));
+  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, Date>(dataItemID, EntitiesMap.Appointments, field));
+  const LookupHR01teamId = useSelector(
+    selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, EntitiesMap.Appointments, 'LookupHR01teamId')
+  );
   const intlService = useInternationalization();
   const { isValid, showPopup, setShowPopup, actualAppointments } = useEndDateEventValidation(value, LookupHR01teamId);
 

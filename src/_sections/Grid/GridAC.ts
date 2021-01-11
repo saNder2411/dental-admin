@@ -155,7 +155,7 @@ export const updateDataItemFinallyAC = () => ({ type: ActionTypes.UPDATE_DATA_IT
 // Sync Delete Data Item
 export const deleteDataItemRequestAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_REQUEST });
 
-export const deleteAppointmentDataItemSuccessAC = (deletedDataItemID: number, entityName: EntitiesKeys) => ({
+export const deleteDataItemSuccessAC = (deletedDataItemID: number, entityName: EntitiesKeys) => ({
   type: ActionTypes.DELETE_DATA_ITEM_SUCCESS,
   deletedDataItemID,
   entityName,

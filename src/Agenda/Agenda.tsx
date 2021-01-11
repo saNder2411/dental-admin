@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import {
@@ -13,36 +13,29 @@ import {
   AgendaEndDateCell,
   AgendaSvcStaffCell,
   AgendaServicesCell,
-  GenericCurrencyCell,
+  AgendaCurrencyCell,
   AgendaFullNameCell,
   AgendaGenderCell,
   AgendaActionsControlCell,
 } from '../_sections/Grid';
 import { Loader } from '../_components';
 // Types
-import { GridDataName } from '../_sections/Grid';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-// Selectors
-import { selectDataName } from '../_sections/Grid/GridSelectors';
+import { EntitiesMap } from '../_sections/Grid/GridTypes';
 // Hooks
-import { useSetGridDataForDomainWithDataBind } from '../_sections/Grid/GridHooks';
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from './AgendaHooks';
 
 export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
-
-  const dataName = useSelector(selectDataName);
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
-  useSetGridDataForDomainWithDataBind(dataName, GridDataName.Appointments, appointmentsData, isDataLoading, dispatch);
 
-  const hasAppointmentsData = dataName === GridDataName.Appointments;
-  const contentTSX = hasAppointmentsData && !isDataLoading && (
+  const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid>
+        <Grid data={appointmentsData} entityName={EntitiesMap.Appointments} labelNewItemBtn="New Appointment">
           <GridColumn field={'AppointmentStatus'} title={` `} width={100} editable={false} cell={AgendaStatusIcon as CustomGridCell} />
           <GridColumn
             field={'AppointmentStatus'}
@@ -97,7 +90,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
             width={90}
-            cell={GenericCurrencyCell as CustomGridCell}
+            cell={AgendaCurrencyCell as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn

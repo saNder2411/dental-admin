@@ -1,5 +1,5 @@
-import React, { FC, useRef, useState, useCallback, useEffect, useMemo } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { FC, useRef, useState, useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   Grid as KendoGrid,
   GridColumn,
@@ -14,8 +14,8 @@ import { ExcelExport } from '@progress/kendo-react-excel-export';
 import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
-// Selectors
-import { selectLabelForAddNewItemBtn, selectMemoViewOriginalData } from './GridSelectors';
+// Types
+import { GenericDataItem, EntitiesKeys } from '../Grid/GridTypes';
 // Action Creators
 import { changeItemAC, addNewItemToEditAC } from '../Grid/GridAC';
 
@@ -29,24 +29,23 @@ export const ColumnMenu: FC<any> = (props) => {
 };
 
 interface Props {
+  data: GenericDataItem[];
+  entityName: EntitiesKeys;
+  labelNewItemBtn: string;
   children: JSX.Element[];
 }
 
-export const Grid: FC<Props> = ({ children }) => {
+export const Grid: FC<Props> = ({ data, entityName, labelNewItemBtn, children }) => {
   const excelExportRef = useRef<any>(null);
   const pdfExportRef = useRef<any>(null);
-  const selectOriginalData = useMemo(selectMemoViewOriginalData, []);
-
-  const originalData = useSelector(selectOriginalData);
-  const addItemTitle = useSelector(selectLabelForAddNewItemBtn);
   const dispatch = useDispatch();
 
   const onGridItemChange = useCallback(
     (evt: GridItemChangeEvent) => {
       evt.syntheticEvent.persist();
-      dispatch(changeItemAC({ dataItemID: evt.dataItem, field: evt?.field ?? '', value: evt.value }));
+      dispatch(changeItemAC({ dataItemID: evt.dataItem, field: evt?.field ?? '', value: evt.value, entityName }));
     },
-    [dispatch]
+    [dispatch, entityName]
   );
 
   const [take, setTake] = useState(10);
@@ -107,7 +106,7 @@ export const Grid: FC<Props> = ({ children }) => {
     value: allColumnFilter,
   }));
 
-  const allColumnFilteredData = allColumnFilter ? process(originalData, { filter: { logic: 'or', filters: allColumnsFilters } }).data : originalData;
+  const allColumnFilteredData = allColumnFilter ? process(data, { filter: { logic: 'or', filters: allColumnsFilters } }).data : data;
 
   const processedData = process(allColumnFilteredData, dataState as any);
 
@@ -140,8 +139,8 @@ export const Grid: FC<Props> = ({ children }) => {
               onChange={onAllColumnFilterChange}
               placeholder={localizationService.toLanguageString('custom.gridSearch', `Search in all columns...`)}
             />
-            <span className="Grid__addNewItemTitle">{addItemTitle}</span>
-            <button title="Add new" className="k-button" onClick={() => dispatch(addNewItemToEditAC())}>
+            <span className="Grid__addNewItemTitle">{labelNewItemBtn}</span>
+            <button title="Add new" className="k-button" onClick={() => dispatch(addNewItemToEditAC(entityName))}>
               <span className="k-icon k-i-plus-circle" />
             </button>
           </div>
@@ -162,7 +161,7 @@ export const Grid: FC<Props> = ({ children }) => {
   return (
     <>
       <div style={{ display: 'none' }}>
-        <ExcelExport data={originalData} ref={excelExportRef}>
+        <ExcelExport data={data} ref={excelExportRef}>
           {GridElement}
         </ExcelExport>
       </div>
