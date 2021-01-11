@@ -3,16 +3,16 @@ import { put, apply } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from './GridAC';
+import * as actions from '../../_sections/Grid/GridAC';
 // Types
 import {
   CreateServiceDataItemInitAsyncActionType,
   UpdateServiceDataItemInitAsyncActionType,
   DeleteServiceDataItemInitAsyncActionType,
-} from './GridTypes';
-import { QueryServiceDataItem } from '../../Services/ServicesTypes';
+} from '../../_sections/Grid/GridTypes';
+import { QueryServiceDataItem } from './ServicesTypes';
 // Helpers
-import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from '../../Services/ServicesHelpers';
+import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from './ServicesHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {

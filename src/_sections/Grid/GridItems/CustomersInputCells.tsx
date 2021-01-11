@@ -5,7 +5,7 @@ import { MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-i
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
 // Hooks
 import { usePhoneFieldsValidation } from '../GridHooks';
 // Helpers

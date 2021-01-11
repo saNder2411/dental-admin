@@ -3,12 +3,12 @@ import { put, apply } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from './GridAC';
+import * as actions from '../../_sections/Grid/GridAC';
 // Types
-import { CreateStaffDataItemInitAsyncActionType, UpdateStaffDataItemInitAsyncActionType, DeleteStaffDataItemInitAsyncActionType } from './GridTypes';
-import { QueryStaffDataItem } from '../../Staff/StaffTypes';
+import { CreateStaffDataItemInitAsyncActionType, UpdateStaffDataItemInitAsyncActionType, DeleteStaffDataItemInitAsyncActionType } from '../../_sections/Grid/GridTypes';
+import { QueryStaffDataItem } from './StaffTypes';
 // Helpers
-import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Staff/StaffHelpers';
+import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './StaffHelpers';
 
 export function* workerFetchData(): SagaIterator {
   try {

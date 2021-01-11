@@ -2,8 +2,8 @@ import { SchedulerItemProps, SchedulerFormProps, SchedulerSlotProps } from '@pro
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
 import { SchedulerDataItem } from '../SchedulerTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../../Staff/StaffTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 
 export interface KendoDataItem extends SchedulerDataItem {
   occurrenceId?: string;

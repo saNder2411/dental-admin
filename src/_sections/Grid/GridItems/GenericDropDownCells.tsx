@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../../Staff/StaffTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
+import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
 // Selectors
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue, selectMemoRoleSkills } from '../GridSelectors';
 // Helpers
@@ -49,7 +49,7 @@ export const GenericRoleSkillsMultiSelect: FC<EditCellProps<StaffDataItem | Serv
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem | ServiceDataItem, string[] | null>(dataItemID, field));
   const selectRoleSkills = useMemo(selectMemoRoleSkills, []);
-  const roleSkills = useSelector(selectRoleSkills);
+  const roleSkills = useSelector(selectRoleSkillsws);
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
   const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];

@@ -2,7 +2,7 @@ import { SyntheticEvent, FC } from 'react';
 import { GridCellProps as KendoGridCellProps } from '@progress/kendo-react-grid';
 import { Input } from '@progress/kendo-react-inputs';
 // Types
-import { GridDataItem } from '../GridTypes';
+import { GenericDataItem } from '../GridTypes';
 
 export type GridOnChange<T> = (evt: {
   dataItem: number;
@@ -11,7 +11,7 @@ export type GridOnChange<T> = (evt: {
   value: T[keyof T] | null | string | undefined | string[] | boolean;
 }) => void;
 
-export interface GridCellProps<T = GridDataItem> {
+export interface GridCellProps<T = GenericDataItem> {
   dataItem: T;
   field: keyof T;
   onChange: GridOnChange<T>;
@@ -28,14 +28,14 @@ export interface InputChangeEvent {
   value: string;
 }
 
-export interface EditCellProps<T extends GridDataItem = GridDataItem> {
+export interface EditCellProps<T extends GenericDataItem = GenericDataItem> {
   dataItemID: number;
   field: keyof T;
   onChange: GridOnChange<T>;
 }
 
 
-export interface EditCellNumericProps<T extends GridDataItem = GridDataItem> extends EditCellProps<T> {
+export interface EditCellNumericProps<T extends GenericDataItem = GenericDataItem> extends EditCellProps<T> {
   step: number;
   min: number;
 }

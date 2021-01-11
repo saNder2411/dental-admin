@@ -12,7 +12,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
 import { StatusNames } from '../GridTypes';
 // Selectors
 import {

@@ -1,6 +1,6 @@
 import { takeEvery, all, call } from 'redux-saga/effects';
 // Types
-import { ActionTypes } from './GridTypes';
+import { ActionTypes } from '../../_sections/Grid/GridTypes';
 // Workers
 import {
   workerFetchData,
@@ -8,7 +8,7 @@ import {
   workerUpdateDataItem,
   workerDeleteDataItem,
   workerUpdateRecurringDataItem,
-} from './GridAppointmentSagaWorkers';
+} from './AppointmentSagaWorkers';
 
 function* watchFetchData() {
   yield takeEvery(ActionTypes.FETCH_APPOINTMENTS_DATA_INIT_ASYNC, workerFetchData);

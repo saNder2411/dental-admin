@@ -3,10 +3,10 @@ import { sp } from '@pnp/sp';
 // Config
 import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
-import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../Agenda/AgendaTypes';
-import { QueryCustomerDataItem, MutationCustomerDataItem } from '../Customers/CustomersTypes';
-import { QueryStaffDataItem, MutationStaffDataItem } from '../Staff/StaffTypes';
-import { QueryServiceDataItem, MutationServiceDataItem } from '../Services/ServicesTypes';
+import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/Appointments/AppointmentsTypes';
+import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/Customers/CustomersTypes';
+import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/Staff/StaffTypes';
+import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/Services/ServicesTypes';
 import { UserInfo } from '../_sections/Grid/GridTypes';
 
 // const spPer = async () => {

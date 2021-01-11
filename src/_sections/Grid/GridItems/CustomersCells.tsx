@@ -5,7 +5,7 @@ import { CustomersSvcStaffDropDownList, CustomersLastAppointmentsMultiSelect } f
 import { CustomersMobilePhoneInput } from './CustomersInputCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
 // Selectors
 import { selectStaffLastNameByID, selectStaffLastNamesByID } from '../GridSelectors';
 // Hooks

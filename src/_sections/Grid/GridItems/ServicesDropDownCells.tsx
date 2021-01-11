@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue, selectDataItemIsLoading, selectServicesCategory } from '../GridSelectors';
 

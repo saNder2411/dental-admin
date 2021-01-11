@@ -9,12 +9,12 @@ import { GenericReferenceInput, GenericTextInput, GenericAvatarInput } from './G
 import { GenericDateInput } from './GenericDateCells';
 import { GenericGenderDropDownList, GenericBooleanFlagDropDownList, GenericRoleSkillsMultiSelect } from './GenericDropDownCells';
 // Types
-import { GridDataItem } from '../GridTypes';
+import { GenericDataItem } from '../GridTypes';
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../../Staff/StaffTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../GridSelectors';
 // Helpers
@@ -28,7 +28,7 @@ import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 export const GenericTextCell: FC<GridCellProps> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const memoID = useMemo(() => ID, [ID]);
   const memoField = useMemo(() => field, [field]);
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<GridDataItem, string | number>(ID, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<GenericDataItem, string | number>(ID, field);
 
   const strValue = isString(cellValue) ? cellValue : '';
   const numValue = isNumber(cellValue) ? cellValue : '';

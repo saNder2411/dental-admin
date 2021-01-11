@@ -1,9 +1,9 @@
 // Types
-import { ActionTypes, GridDataItem, GridDataName, InitDataForNewDataItem, ViewType, UserInfo } from './GridTypes';
-import { AppointmentDataItem } from '../../Agenda/AgendaTypes';
-import { CustomerDataItem } from '../../Customers/CustomersTypes';
-import { StaffDataItem } from '../../Staff/StaffTypes';
-import { ServiceDataItem } from '../../Services/ServicesTypes';
+import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem, ViewType, UserInfo } from './GridTypes';
+import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
+import { CustomerDataItem } from '../../_bus/Customers/CustomersTypes';
+import { StaffDataItem } from '../../_bus/Staff/StaffTypes';
+import { ServiceDataItem } from '../../_bus/Services/ServicesTypes';
 
 // Async Fetch Data
 export const fetchAppointmentsDataInitAsyncAC = (meta: { servicesDataLength: number; staffDataLength: number; customersDataLength: number }) => ({
@@ -110,17 +110,26 @@ export const deleteServiceDataItemInitAsyncAC = (deletedDataItemID: number, side
 });
 
 // Sync Data
-export const fetchDataRequestAC = () => ({ type: ActionTypes.FETCH_DATA_REQUEST });
+export const fetchDataRequestAC = (entityName: EntitiesKeys) => ({ type: ActionTypes.FETCH_DATA_REQUEST, entityName });
 
-export const fetchAppointmentsDataSuccessAC = (data: AppointmentDataItem[]) => ({ type: ActionTypes.FETCH_APPOINTMENTS_DATA_SUCCESS, payload: data });
+export const fetchDataSuccessAC = (data: GenericDataItem[], entityName: EntitiesKeys) => ({
+  type: ActionTypes.FETCH_DATA_SUCCESS,
+  data,
+  entityName,
+});
+// export const fetchAppointmentsDataSuccessAC = (data: AppointmentDataItem[]) => ({ type: ActionTypes.FETCH_APPOINTMENTS_DATA_SUCCESS, payload: data });
 
-export const fetchCustomersDataSuccessAC = (data: CustomerDataItem[]) => ({ type: ActionTypes.FETCH_CUSTOMERS_DATA_SUCCESS, payload: data });
+// export const fetchCustomersDataSuccessAC = (data: CustomerDataItem[]) => ({ type: ActionTypes.FETCH_CUSTOMERS_DATA_SUCCESS, payload: data });
 
-export const fetchStaffDataSuccessAC = (data: StaffDataItem[]) => ({ type: ActionTypes.FETCH_STAFF_DATA_SUCCESS, payload: data });
+// export const fetchStaffDataSuccessAC = (data: StaffDataItem[]) => ({ type: ActionTypes.FETCH_STAFF_DATA_SUCCESS, payload: data });
 
-export const fetchServicesDataSuccessAC = (data: ServiceDataItem[]) => ({ type: ActionTypes.FETCH_SERVICES_DATA_SUCCESS, payload: data });
+// export const fetchServicesDataSuccessAC = (data: ServiceDataItem[]) => ({ type: ActionTypes.FETCH_SERVICES_DATA_SUCCESS, payload: data });
 
-export const fetchDataFailureAC = (errorMessage: string) => ({ type: ActionTypes.FETCH_DATA_FAILURE, payload: errorMessage });
+export const fetchDataFailureAC = (errorMessage: string, entityName: EntitiesKeys) => ({
+  type: ActionTypes.FETCH_DATA_FAILURE,
+  payload: errorMessage,
+  entityName,
+});
 
 export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY });
 
@@ -197,23 +206,31 @@ export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: Action
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
 
 // View
-export const changeViewOriginalDataAC = (data: GridDataItem[]) => ({ type: ActionTypes.CHANGE_VIEW_ORIGINAL_DATA, payload: data });
+// export const changeViewOriginalDataAC = (data: GenericDataItem[]) => ({ type: ActionTypes.CHANGE_VIEW_ORIGINAL_DATA, payload: data });
 
-export const changeDataNameAC = (dataName: GridDataName) => ({ type: ActionTypes.CHANGE_DATA_NAME, payload: dataName });
+// export const changeDataNameAC = (dataName: GridDataName) => ({ type: ActionTypes.CHANGE_DATA_NAME, payload: dataName });
 
 // Edit
-export const addItemToEditAC = (dataItemID: number) => ({ type: ActionTypes.ADD_ITEM_TO_EDIT, payload: dataItemID });
-
-export const cancelEditAC = (editItemID: number) => ({ type: ActionTypes.CANCEL_EDIT, payload: editItemID });
-
-export const changeItemAC = (changeData: { dataItemID: number; field: string; value: any }) => ({
-  type: ActionTypes.CHANGE_ITEM,
-  payload: changeData,
+export const addItemToEditAC = (dataItemID: number, entityName: EntitiesKeys) => ({
+  type: ActionTypes.ADD_ITEM_TO_EDIT,
+  dataItemID,
+  entityName,
 });
 
-export const addNewItemToEditAC = () => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT });
+export const cancelEditAC = (dataItemID: number, entityName: EntitiesKeys) => ({ type: ActionTypes.CANCEL_EDIT, dataItemID, entityName });
 
-export const discardAddNewItemToDataAC = (dataItemID: number) => ({ type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA, payload: dataItemID });
+export const changeItemAC = (changeData: { dataItemID: number; field: string; value: any; entityName: EntitiesKeys }) => ({
+  type: ActionTypes.CHANGE_ITEM,
+  ...changeData,
+});
+
+export const addNewItemToEditAC = (entityName: EntitiesKeys) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT, entityName });
+
+export const discardAddNewItemToDataAC = (dataItemID: number, entityName: EntitiesKeys) => ({
+  type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA,
+  dataItemID,
+  entityName,
+});
 
 // Scheduler
 

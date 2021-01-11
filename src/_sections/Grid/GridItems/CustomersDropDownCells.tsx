@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
 // Selectors
 import {
   selectDataItemIsLoading,

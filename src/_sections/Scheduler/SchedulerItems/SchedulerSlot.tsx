@@ -6,7 +6,7 @@ import { SchedulerEditSlot } from './SchedulerEditSlot';
 // Action Creators
 import { schAddNewItemToEditAC } from '../../Grid/GridAC';
 // Types
-import { StaffDataItem } from '../../../Staff/StaffTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 // Selectors
 import { selectMemoNewAppointmentDataItem } from '../../Grid/GridSelectors';
 

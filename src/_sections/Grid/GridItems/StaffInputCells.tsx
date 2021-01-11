@@ -5,7 +5,7 @@ import { Input, MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
-import { StaffDataItem } from '../../../Staff/StaffTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 // Hooks
 import { useTextFieldsValidation, usePhoneFieldsValidation } from '../GridHooks';
 // Helpers

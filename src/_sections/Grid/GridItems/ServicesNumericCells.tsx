@@ -5,7 +5,7 @@ import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { EditCellNumericProps } from './GridItemsTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
 
 export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem>> = ({ dataItemID, field, onChange, step, min }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);

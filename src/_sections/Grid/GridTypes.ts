@@ -1,8 +1,8 @@
 // Types
-import { AppointmentDataItem } from '../../Agenda';
-import { StaffDataItem } from '../../Staff';
-import { CustomerDataItem } from '../../Customers';
-import { ServiceDataItem } from '../../Services';
+import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
+import { StaffDataItem } from '../../_bus/Staff/StaffTypes';
+import { CustomerDataItem } from '../../_bus/Customers/CustomersTypes';
+import { ServiceDataItem } from '../../_bus/Services/ServicesTypes';
 // Actions
 import * as actions from './GridAC';
 
@@ -30,10 +30,11 @@ export const ActionTypes = {
   DELETE_SERVICE_DATA_ITEM_INIT_ASYNC: 'GRID/DELETE_SERVICE_DATA_ITEM_INIT_ASYNC' as const,
   // Sync Data
   FETCH_DATA_REQUEST: `GRID/FETCH_DATA_REQUEST` as const,
-  FETCH_APPOINTMENTS_DATA_SUCCESS: `GRID/FETCH_APPOINTMENTS_DATA_SUCCESS` as const,
-  FETCH_CUSTOMERS_DATA_SUCCESS: `GRID/FETCH_CUSTOMERS_DATA_SUCCESS` as const,
-  FETCH_STAFF_DATA_SUCCESS: `GRID/FETCH_STAFF_DATA_SUCCESS` as const,
-  FETCH_SERVICES_DATA_SUCCESS: `GRID/FETCH_SERVICES_DATA_SUCCESS` as const,
+  FETCH_DATA_SUCCESS: `GRID/FETCH_DATA_SUCCESS` as const,
+  // FETCH_APPOINTMENTS_DATA_SUCCESS: `GRID/FETCH_APPOINTMENTS_DATA_SUCCESS` as const,
+  // FETCH_CUSTOMERS_DATA_SUCCESS: `GRID/FETCH_CUSTOMERS_DATA_SUCCESS` as const,
+  // FETCH_STAFF_DATA_SUCCESS: `GRID/FETCH_STAFF_DATA_SUCCESS` as const,
+  // FETCH_SERVICES_DATA_SUCCESS: `GRID/FETCH_SERVICES_DATA_SUCCESS` as const,
   FETCH_DATA_FAILURE: `GRID/FETCH_DATA_FAILURE` as const,
   FETCH_DATA_FINALLY: `GRID/FETCH_DATA_FINALLY` as const,
   // Sync Create DataItem
@@ -61,8 +62,8 @@ export const ActionTypes = {
   DELETE_DATA_ITEM_FAILURE: `GRID/DELETE_DATA_ITEM_FAILURE` as const,
   DELETE_DATA_ITEM_FINALLY: `GRID/DELETE_DATA_ITEM_FINALLY` as const,
   // View
-  CHANGE_VIEW_ORIGINAL_DATA: 'GRID/CHANGE_VIEW_ORIGINAL_DATA' as const,
-  CHANGE_DATA_NAME: 'GRID/CHANGE_DATA_NAME' as const,
+  // CHANGE_VIEW_ORIGINAL_DATA: 'GRID/CHANGE_VIEW_ORIGINAL_DATA' as const,
+  // CHANGE_DATA_NAME: 'GRID/CHANGE_DATA_NAME' as const,
   // Edit
   ADD_ITEM_TO_EDIT: 'GRID/ADD_ITEM_TO_EDIT' as const,
   CANCEL_EDIT: 'GRID/CANCEL_EDIT' as const,
@@ -93,15 +94,7 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type GridDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: StaffDataItem; type3: CustomerDataItem; type4: ServiceDataItem }>;
-
-export enum GridDataName {
-  Default = 'Empty',
-  Appointments = 'Appointments',
-  Staff = 'Staff',
-  Customers = 'Customers',
-  Services = 'Services',
-}
+export type GenericDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: StaffDataItem; type3: CustomerDataItem; type4: ServiceDataItem }>;
 
 export enum StatusNames {
   Consultation = '(1) Consultation',
@@ -134,21 +127,50 @@ export interface UserInfo {
   IsSiteAdmin: boolean;
 }
 
+export const EntitiesMap = {
+  Appointments: 'appointments' as const,
+  Staff: 'staff' as const,
+  Customers: 'customers' as const,
+  Services: 'services' as const,
+};
+
+export interface Entities {
+  [EntitiesMap.Appointments]: {
+    originalData: AppointmentDataItem[];
+    processById: { [key: string]: AppointmentDataItem };
+    byId: { [key: string]: AppointmentDataItem };
+    allIDs: number[];
+  };
+  [EntitiesMap.Customers]: {
+    originalData: CustomerDataItem[];
+    processById: { [key: string]: CustomerDataItem };
+    byId: { [key: string]: CustomerDataItem };
+    allIDs: number[];
+  };
+  [EntitiesMap.Staff]: {
+    originalData: StaffDataItem[];
+    processById: { [key: string]: StaffDataItem };
+    byId: { [key: string]: StaffDataItem };
+    allIDs: number[];
+  };
+  [EntitiesMap.Services]: {
+    originalData: ServiceDataItem[];
+    processById: { [key: string]: ServiceDataItem };
+    byId: { [key: string]: ServiceDataItem };
+    allIDs: number[];
+  };
+}
+
+export type EntitiesKeys = keyof Entities;
+
 export interface GridState {
   authData: UserInfo | null;
 
-  viewOriginalData: GridDataItem[];
-  byId: { [key: string]: GridDataItem };
-  processById: { [key: string]: GridDataItem };
-  allIDs: number[];
-
-  dataName: GridDataName;
   isDataLoading: boolean;
   isDataItemLoading: boolean;
   dataError: string;
   dataItemError: string;
   authError: string;
-  labelForAddNewItemBtn: string;
   statusNameList: StatusNames[];
   roleSkills: string[];
 
@@ -159,12 +181,7 @@ export interface GridState {
   selectedView: ViewType;
   updatableRecurringDataItem: null | AppointmentDataItem;
 
-  entities: {
-    appointments: { originalData: AppointmentDataItem[]; byId: { [key: string]: AppointmentDataItem }; allIDs: number[] };
-    customers: { originalData: CustomerDataItem[]; byId: { [key: string]: CustomerDataItem }; allIDs: number[] };
-    staff: { originalData: StaffDataItem[]; byId: { [key: string]: StaffDataItem }; allIDs: number[] };
-    services: { originalData: ServiceDataItem[]; byId: { [key: string]: ServiceDataItem }; allIDs: number[] };
-  };
+  entities: Entities;
 }
 
 export type FetchAppointmentsDataInitAsyncActionType = ReturnType<typeof actions.fetchAppointmentsDataInitAsyncAC>;

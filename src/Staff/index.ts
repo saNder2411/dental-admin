@@ -1,3 +1,3 @@
 export * from './Staff';
-export * from './StaffTypes';
-export * from './StaffTypes';
+export * from '../_bus/Staff/StaffTypes';
+export * from '../_bus/Staff/StaffTypes';

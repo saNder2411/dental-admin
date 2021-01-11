@@ -10,11 +10,11 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { ServicesIconInput } from './ServicesInputCells';
 import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCells';
 import { ServicesCategoryMultiSelect } from './ServicesDropDownCells';
-import { OfferIcons } from '../../../Services/ServicesTypes';
+import { OfferIcons } from '../../../_bus/Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StatusNames } from '../GridTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
+import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../GridSelectors';
 // Hooks

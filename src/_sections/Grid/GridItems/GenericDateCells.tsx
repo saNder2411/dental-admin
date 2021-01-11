@@ -5,8 +5,8 @@ import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
 
 export const GenericDateInput: FC<EditCellProps<AppointmentDataItem | CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);

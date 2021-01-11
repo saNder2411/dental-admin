@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
 // Actions
 import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../GridAC';
 // Selectors

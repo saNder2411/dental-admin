@@ -5,7 +5,7 @@ import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Card, CardHeader, CardBody } from '@progress/kendo-react-layout';
+import { CardHeader, CardBody } from '@progress/kendo-react-layout';
 import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
 import * as SC from '../SchedulerItemsStyled/SchedulerItemStyled';
@@ -17,7 +17,7 @@ import { IconMap } from '../../../_instruments';
 // Types
 import { StatusNames } from '../../Grid/GridTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
-import { StaffDataItem } from '../../../Staff/StaffTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 //Action Creators
 import { setFormItemIdAC, schAddNewItemToEditAC, changeUpdatedRecurringDataItemAC } from '../../Grid/GridAC';
 import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../Grid/GridAC';

@@ -3,19 +3,19 @@ import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from './GridAC';
+import * as actions from '../../_sections/Grid/GridAC';
 // Types
 import {
   FetchCustomersDataInitAsyncActionType,
   CreateCustomerDataItemInitAsyncActionType,
   UpdatCustomerDataItemInitAsyncActionType,
   DeleteCustomerDataItemInitAsyncActionType,
-} from './GridTypes';
-import { QueryCustomerDataItem } from '../../Customers/CustomersTypes';
-import { QueryStaffDataItem } from '../../Staff/StaffTypes';
+} from '../../_sections/Grid/GridTypes';
+import { QueryCustomerDataItem } from './CustomersTypes';
+import { QueryStaffDataItem } from '../Staff/StaffTypes';
 // Helpers
-import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Customers/CustomersHelpers';
-import { transformAPIData as transformTeamStaffAPIData } from '../../Staff/StaffHelpers';
+import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './CustomersHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../Staff/StaffHelpers';
 
 type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null];
 

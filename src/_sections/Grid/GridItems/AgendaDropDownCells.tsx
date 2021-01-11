@@ -10,7 +10,7 @@ import {
 } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
 import { StatusNames } from '../GridTypes';
 // Selectors
 import {

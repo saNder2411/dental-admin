@@ -3,7 +3,7 @@ import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from './GridAC';
+import * as actions from '../../_sections/Grid/GridAC';
 // Types
 import {
   FetchAppointmentsDataInitAsyncActionType,
@@ -11,15 +11,15 @@ import {
   UpdateAppointmentDataItemInitAsyncActionType,
   UpdateAppointmentRecurringDataItemInitAsyncActionType,
   DeleteAppointmentDataItemInitAsyncActionType,
-} from './GridTypes';
-import { QueryAppointmentDataItem } from '../../Agenda/AgendaTypes';
-import { QueryServiceDataItem } from '../../Services/ServicesTypes';
-import { QueryStaffDataItem } from '../../Staff/StaffTypes';
-import { QueryCustomerDataItem } from '../../Customers/CustomersTypes';
+} from '../../_sections/Grid/GridTypes';
+import { QueryAppointmentDataItem } from './AppointmentsTypes';
+import { QueryServiceDataItem } from '../Services/ServicesTypes';
+import { QueryStaffDataItem } from '../Staff/StaffTypes';
+import { QueryCustomerDataItem } from '../Customers/CustomersTypes';
 // Helpers
-import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from '../../Agenda/AgendaHelpers';
-import { transformAPIData as transformTeamStaffAPIData } from '../../Staff/StaffHelpers';
-import { transformAPIData as transformCustomersAPIData } from '../../Customers/CustomersHelpers';
+import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './AppointmentsHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../Staff/StaffHelpers';
+import { transformAPIData as transformCustomersAPIData } from '../Customers/CustomersHelpers';
 
 type Results = [QueryAppointmentDataItem[], QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
 

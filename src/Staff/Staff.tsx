@@ -21,7 +21,7 @@ import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { selectDataName } from '../_sections/Grid/GridSelectors';
 // Hooks
 import { useSetGridData } from '../_sections/Grid/GridHooks';
-import { useSelectStaffData, useFetchStaffData } from './TeamStaffHooks';
+import { useSelectStaffData, useFetchStaffData } from './StaffHooks';
 
 export const Staff: FC = (): JSX.Element => {
   const dataName = useSelector(selectDataName);

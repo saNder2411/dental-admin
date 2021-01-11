@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Types
-import { GridDataName, GridDataItem } from '../GridTypes';
+import { GridDataName, GenericDataItem } from '../GridTypes';
 // Action Creators
 import { changeViewOriginalDataAC } from '../GridAC';
 
 export const useSetGridDataForDomainWithDataBind = (
   dataName: GridDataName,
   domainDataName: GridDataName,
-  domainData: GridDataItem[],
+  domainData: GenericDataItem[],
   domainIsDataLoading: boolean,
   dispatch: Dispatch
 ) => {

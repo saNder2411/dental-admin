@@ -5,15 +5,15 @@ import { Input } from '@progress/kendo-react-inputs';
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
-import { ServiceDataItem } from '../../../Services/ServicesTypes';
-import { StaffDataItem } from '../../../Staff/StaffTypes';
-import { CustomerDataItem } from '../../../Customers/CustomersTypes';
-import { GridDataItem } from '../GridTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
+import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
+import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { GenericDataItem } from '../GridTypes';
 
-export const GenericTextInput: FC<EditCellProps<GridDataItem>> = ({ dataItemID, field, onChange }) => {
+export const GenericTextInput: FC<EditCellProps<GenericDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<GridDataItem, string | number>(dataItemID, field));
+  const value = useSelector(selectProcessDataItemFieldValue<GenericDataItem, string | number>(dataItemID, field));
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 

@@ -10,7 +10,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../Agenda/AgendaTypes';
+import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
 // Hooks
 import { useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 

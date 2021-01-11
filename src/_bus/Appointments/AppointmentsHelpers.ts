@@ -1,5 +1,5 @@
 // Types
-import { QueryAppointmentDataItem, AppointmentDataItem, MutationAppointmentDataItem } from './AgendaTypes';
+import { QueryAppointmentDataItem, AppointmentDataItem, MutationAppointmentDataItem } from './AppointmentsTypes';
 
 export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): AppointmentDataItem[] =>
   apiResults.map(({ LookupMultiBP01offeringsId, __metadata, ...dataItem }) => ({

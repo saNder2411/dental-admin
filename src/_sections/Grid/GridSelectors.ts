@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
-import { GridDataItem } from '../Grid/GridTypes';
+import { GenericDataItem } from '../Grid/GridTypes';
 
 const selectViewOriginalData = ({ GridState }: GlobalState) => GridState.viewOriginalData;
 
@@ -25,16 +25,16 @@ export const selectMemoViewOriginalData = () => createSelector(selectViewOrigina
 
 const selectProcessByIdData = ({ GridState }: GlobalState) => GridState.processById;
 
-export const selectMemoProcessDataItem = <T extends GridDataItem = GridDataItem>(ID: number) =>
+export const selectMemoProcessDataItem = <T extends GenericDataItem = GenericDataItem>(ID: number) =>
   createSelector(selectProcessByIdData, (processById): T => processById[ID] as T);
 
 const selectByIdData = ({ GridState }: GlobalState) => GridState.byId;
 
-export const selectByIdDataItemFieldValue = <T extends GridDataItem = GridDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
-  createSelector(selectByIdData, (byId): U => byId[ID][field as keyof GridDataItem] as U);
+export const selectByIdDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
+  createSelector(selectByIdData, (byId): U => byId[ID][field as keyof GenericDataItem] as U);
 
-export const selectProcessDataItemFieldValue = <T extends GridDataItem = GridDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
-  createSelector(selectProcessByIdData, (processById): U => processById[ID][field as keyof GridDataItem] as U);
+export const selectProcessDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(ID: number, field: keyof T) =>
+  createSelector(selectProcessByIdData, (processById): U => processById[ID][field as keyof GenericDataItem] as U);
 
 // Feature
 
