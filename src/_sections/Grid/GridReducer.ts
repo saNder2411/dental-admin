@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 // Types
-import { ActionTypes, GridState, Actions, StatusNames, GenericDataItem } from './GridTypes';
+import { ActionTypes, GridState, Actions, StatusNames, GenericDataItem, EntitiesMap } from './GridTypes';
 import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
 import { CustomerDataItem } from '../../_bus/Customers/CustomersTypes';
 import { StaffDataItem } from '../../_bus/Staff/StaffTypes';
@@ -82,67 +82,20 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.CREATE_DATA_ITEM_REQUEST:
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
-    case ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_SUCCESS:
-      const newDataAfterEditAppointmentNewItem = updateDataAfterEditItem<AppointmentDataItem>(
-        state.entities.appointments.originalData,
-        action.payload
-      );
+    case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
+      const newDataAfterEditNewItem = updateDataAfterEditItem(state.entities[action.entityName].originalData, action.dataItem);
       return {
         ...state,
-        newAppointmentDataItem: null,
+        newAppointmentDataItem: action.entityName === EntitiesMap.Appointments ? null : state.newAppointmentDataItem,
+        mapTeamToFiltered:
+          action.entityName === EntitiesMap.Staff ? { ...state.mapTeamToFiltered, [action.dataItem.ID]: true } : state.mapTeamToFiltered,
         entities: {
           ...state.entities,
-          appointments: {
-            ...state.entities.appointments,
-            originalData: newDataAfterEditAppointmentNewItem,
-            processById: { ...state.entities.appointments.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.appointments.byId, [action.payload.ID]: { ...action.payload } },
-          },
-        },
-      };
-
-    case ActionTypes.CREATE_CUSTOMER_DATA_ITEM_SUCCESS:
-      const newDataAfterEditCustomerNewItem = updateDataAfterEditItem<CustomerDataItem>(state.entities.customers.originalData, action.payload);
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          customers: {
-            ...state.entities.customers,
-            originalData: newDataAfterEditCustomerNewItem,
-            processById: { ...state.entities.customers.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.customers.byId, [action.payload.ID]: { ...action.payload } },
-          },
-        },
-      };
-
-    case ActionTypes.CREATE_STAFF_DATA_ITEM_SUCCESS:
-      const newDataAfterEditStaffNewItem = updateDataAfterEditItem<StaffDataItem>(state.entities.staff.originalData, action.payload);
-      return {
-        ...state,
-        mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.payload.ID]: true },
-        entities: {
-          ...state.entities,
-          staff: {
-            ...state.entities.staff,
-            originalData: newDataAfterEditStaffNewItem,
-            processById: { ...state.entities.staff.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.staff.byId, [action.payload.ID]: { ...action.payload } },
-          },
-        },
-      };
-
-    case ActionTypes.CREATE_SERVICE_DATA_ITEM_SUCCESS:
-      const newDataAfterEditServiceNewItem = updateDataAfterEditItem<ServiceDataItem>(state.entities.services.originalData, action.payload);
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          services: {
-            ...state.entities.services,
-            originalData: newDataAfterEditServiceNewItem,
-            processById: { ...state.entities.services.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.services.byId, [action.payload.ID]: { ...action.payload } },
+          [action.entityName]: {
+            ...state.entities[action.entityName],
+            originalData: newDataAfterEditNewItem,
+            processById: { ...state.entities[action.entityName].processById, [action.dataItem.ID]: { ...action.dataItem } },
+            byId: { ...state.entities[action.entityName].byId, [action.dataItem.ID]: { ...action.dataItem } },
           },
         },
       };
@@ -157,66 +110,18 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.UPDATE_DATA_ITEM_REQUEST:
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
-    case ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_SUCCESS:
-      const newDataAfterUpdateAppointmentDataItem = updateDataAfterEditItem<AppointmentDataItem>(
-        state.entities.appointments.originalData,
-        action.payload
-      );
+    case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
+      const newDataAfterUpdateDataItem = updateDataAfterEditItem(state.entities[action.entityName].originalData, action.dataItem);
       return {
         ...state,
-        updatableRecurringDataItem: null,
+        updatableRecurringDataItem: action.entityName === EntitiesMap.Appointments ? null : state.updatableRecurringDataItem,
         entities: {
           ...state.entities,
-          appointments: {
-            ...state.entities.appointments,
-            originalData: newDataAfterUpdateAppointmentDataItem,
-            processById: { ...state.entities.appointments.processById, [action.payload.ID]: action.payload },
-            byId: { ...state.entities.appointments.byId, [action.payload.ID]: { ...action.payload } },
-          },
-        },
-      };
-
-    case ActionTypes.UPDATE_CUSTOMER_DATA_ITEM_SUCCESS:
-      const newDataAfterUpdateCustomerDataItem = updateDataAfterEditItem<CustomerDataItem>(state.entities.customers.originalData, action.payload);
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          customers: {
-            ...state.entities.customers,
-            originalData: newDataAfterUpdateCustomerDataItem,
-            processById: { ...state.entities.customers.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.customers.byId, [action.payload.ID]: { ...action.payload } },
-          },
-        },
-      };
-
-    case ActionTypes.UPDATE_STAFF_DATA_ITEM_SUCCESS:
-      const newDataAfterUpdateStaffDataItem = updateDataAfterEditItem<StaffDataItem>(state.entities.staff.originalData, action.payload);
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          staff: {
-            ...state.entities.staff,
-            originalData: newDataAfterUpdateStaffDataItem,
-            processById: { ...state.entities.staff.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.staff.byId, [action.payload.ID]: { ...action.payload } },
-          },
-        },
-      };
-
-    case ActionTypes.UPDATE_SERVICE_DATA_ITEM_SUCCESS:
-      const newDataAfterUpdateServiceDataItem = updateDataAfterEditItem<ServiceDataItem>(state.entities.services.originalData, action.payload);
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          services: {
-            ...state.entities.services,
-            originalData: newDataAfterUpdateServiceDataItem,
-            processById: { ...state.entities.services.processById, [action.payload.ID]: { ...action.payload } },
-            byId: { ...state.entities.services.byId, [action.payload.ID]: { ...action.payload } },
+          [action.entityName]: {
+            ...state.entities[action.entityName],
+            originalData: newDataAfterUpdateDataItem,
+            processById: { ...state.entities[action.entityName].processById, [action.dataItem.ID]: action.dataItem },
+            byId: { ...state.entities[action.entityName].byId, [action.dataItem.ID]: { ...action.dataItem } },
           },
         },
       };
@@ -231,74 +136,23 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.DELETE_DATA_ITEM_REQUEST:
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
-    case ActionTypes.DELETE_APPOINTMENT_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteAppointmentDataItem = updateDataAfterRemoveItem<AppointmentDataItem>(
-        state.entities.appointments.originalData,
-        action.payload
+    case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
+      const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem<GenericDataItem>(
+        state.entities[action.entityName].originalData,
+        action.deletedDataItemID
       );
-      const { [action.payload]: deletedApptEntItem, ...newApptEntById } = state.entities.appointments.byId;
+      const { [action.deletedDataItemID]: deletedItem, ...newEnById } = state.entities[action.entityName].byId;
+      const { [action.deletedDataItemID]: deletedStaffFromMapTeam, ...newMapTeam } = state.mapTeamToFiltered;
       return {
         ...state,
+        mapTeamToFiltered: action.entityName === EntitiesMap.Staff ? newMapTeam : state.mapTeamToFiltered,
         entities: {
           ...state.entities,
-          appointments: {
-            originalData: updatedDataAfterDeleteAppointmentDataItem,
-            processById: { ...newApptEntById },
-            byId: newApptEntById,
-            allIDs: state.entities.appointments.allIDs.filter((ID) => ID !== action.payload),
-          },
-        },
-      };
-
-    case ActionTypes.DELETE_CUSTOMER_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteCustomerDataItem = updateDataAfterRemoveItem<CustomerDataItem>(
-        state.entities.customers.originalData,
-        action.payload
-      );
-      const { [action.payload]: deletedCustomerEntItem, ...newCustomerEntById } = state.entities.customers.byId;
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          customers: {
-            originalData: updatedDataAfterDeleteCustomerDataItem,
-            processById: { ...newCustomerEntById },
-            byId: newCustomerEntById,
-            allIDs: state.entities.customers.allIDs.filter((ID) => ID !== action.payload),
-          },
-        },
-      };
-
-    case ActionTypes.DELETE_STAFF_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteStaffDataItem = updateDataAfterRemoveItem<StaffDataItem>(state.entities.staff.originalData, action.payload);
-      const { [action.payload]: deletedStaffEntItem, ...newStaffEntById } = state.entities.staff.byId;
-      const { [action.payload]: deletedStaffFromMapTeam, ...newMapTeam } = state.mapTeamToFiltered;
-      return {
-        ...state,
-        mapTeamToFiltered: newMapTeam,
-        entities: {
-          ...state.entities,
-          staff: {
-            originalData: updatedDataAfterDeleteStaffDataItem,
-            processById: { ...newStaffEntById },
-            byId: newStaffEntById,
-            allIDs: state.entities.staff.allIDs.filter((ID) => ID !== action.payload),
-          },
-        },
-      };
-
-    case ActionTypes.DELETE_SERVICE_DATA_ITEM_SUCCESS:
-      const updatedDataAfterDeleteServiceDataItem = updateDataAfterRemoveItem<ServiceDataItem>(state.entities.services.originalData, action.payload);
-      const { [action.payload]: deletedSerEntItem, ...newSerEntById } = state.entities.services.byId;
-      return {
-        ...state,
-        entities: {
-          ...state.entities,
-          services: {
-            originalData: updatedDataAfterDeleteServiceDataItem,
-            processById: { ...newSerEntById },
-            byId: newSerEntById,
-            allIDs: state.entities.services.allIDs.filter((ID) => ID !== action.payload),
+          [action.entityName]: {
+            originalData: updatedDataAfterDeleteDataItem,
+            processById: { ...newEnById },
+            byId: newEnById,
+            allIDs: state.entities[action.entityName].allIDs.filter((ID) => ID !== action.deletedDataItemID),
           },
         },
       };

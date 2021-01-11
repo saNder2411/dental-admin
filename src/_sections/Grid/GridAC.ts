@@ -117,13 +117,6 @@ export const fetchDataSuccessAC = (data: GenericDataItem[], entityName: Entities
   data,
   entityName,
 });
-// export const fetchAppointmentsDataSuccessAC = (data: AppointmentDataItem[]) => ({ type: ActionTypes.FETCH_APPOINTMENTS_DATA_SUCCESS, payload: data });
-
-// export const fetchCustomersDataSuccessAC = (data: CustomerDataItem[]) => ({ type: ActionTypes.FETCH_CUSTOMERS_DATA_SUCCESS, payload: data });
-
-// export const fetchStaffDataSuccessAC = (data: StaffDataItem[]) => ({ type: ActionTypes.FETCH_STAFF_DATA_SUCCESS, payload: data });
-
-// export const fetchServicesDataSuccessAC = (data: ServiceDataItem[]) => ({ type: ActionTypes.FETCH_SERVICES_DATA_SUCCESS, payload: data });
 
 export const fetchDataFailureAC = (errorMessage: string, entityName: EntitiesKeys) => ({
   type: ActionTypes.FETCH_DATA_FAILURE,
@@ -136,24 +129,10 @@ export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY 
 // Sync Create Data Item
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
 
-export const createAppointmentDataItemSuccessAC = (data: AppointmentDataItem) => ({
-  type: ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_SUCCESS,
-  payload: data,
-});
-
-export const createCustomerDataItemSuccessAC = (data: CustomerDataItem) => ({
-  type: ActionTypes.CREATE_CUSTOMER_DATA_ITEM_SUCCESS,
-  payload: data,
-});
-
-export const createStaffDataItemSuccessAC = (data: StaffDataItem) => ({
-  type: ActionTypes.CREATE_STAFF_DATA_ITEM_SUCCESS,
-  payload: data,
-});
-
-export const createServiceDataItemSuccessAC = (data: ServiceDataItem) => ({
-  type: ActionTypes.CREATE_SERVICE_DATA_ITEM_SUCCESS,
-  payload: data,
+export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: EntitiesKeys) => ({
+  type: ActionTypes.CREATE_DATA_ITEM_SUCCESS,
+  dataItem,
+  entityName,
 });
 
 export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, payload: errorMessage });
@@ -163,16 +142,11 @@ export const createDataItemFinallyAC = () => ({ type: ActionTypes.CREATE_DATA_IT
 // Sync Update Data Item
 export const updateDataItemRequestAC = () => ({ type: ActionTypes.UPDATE_DATA_ITEM_REQUEST });
 
-export const updateAppointmentDataItemSuccessAC = (data: AppointmentDataItem) => ({
-  type: ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_SUCCESS,
-  payload: data,
+export const updateDataItemSuccessAC = (dataItem: GenericDataItem, entityName: EntitiesKeys) => ({
+  type: ActionTypes.UPDATE_DATA_ITEM_SUCCESS,
+  dataItem,
+  entityName,
 });
-
-export const updateCustomerDataItemSuccessAC = (data: CustomerDataItem) => ({ type: ActionTypes.UPDATE_CUSTOMER_DATA_ITEM_SUCCESS, payload: data });
-
-export const updateStaffDataItemSuccessAC = (data: StaffDataItem) => ({ type: ActionTypes.UPDATE_STAFF_DATA_ITEM_SUCCESS, payload: data });
-
-export const updateServiceDataItemSuccessAC = (data: ServiceDataItem) => ({ type: ActionTypes.UPDATE_SERVICE_DATA_ITEM_SUCCESS, payload: data });
 
 export const updateDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.UPDATE_DATA_ITEM_FAILURE, payload: errorMessage });
 
@@ -181,24 +155,10 @@ export const updateDataItemFinallyAC = () => ({ type: ActionTypes.UPDATE_DATA_IT
 // Sync Delete Data Item
 export const deleteDataItemRequestAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_REQUEST });
 
-export const deleteAppointmentDataItemSuccessAC = (deletedDataItemID: number) => ({
-  type: ActionTypes.DELETE_APPOINTMENT_DATA_ITEM_SUCCESS,
-  payload: deletedDataItemID,
-});
-
-export const deleteCustomerDataItemSuccessAC = (deletedDataItemID: number) => ({
-  type: ActionTypes.DELETE_CUSTOMER_DATA_ITEM_SUCCESS,
-  payload: deletedDataItemID,
-});
-
-export const deleteStaffDataItemSuccessAC = (deletedDataItemID: number) => ({
-  type: ActionTypes.DELETE_STAFF_DATA_ITEM_SUCCESS,
-  payload: deletedDataItemID,
-});
-
-export const deleteServiceDataItemSuccessAC = (deletedDataItemID: number) => ({
-  type: ActionTypes.DELETE_SERVICE_DATA_ITEM_SUCCESS,
-  payload: deletedDataItemID,
+export const deleteAppointmentDataItemSuccessAC = (deletedDataItemID: number, entityName: EntitiesKeys) => ({
+  type: ActionTypes.DELETE_DATA_ITEM_SUCCESS,
+  deletedDataItemID,
+  entityName,
 });
 
 export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.DELETE_DATA_ITEM_FAILURE, payload: errorMessage });
