@@ -11,7 +11,7 @@ import {
   MonthlyWeekNumberType,
   CustomerFields,
 } from './SchedulerFormTypes';
-import { SchedulerDataItem } from '../../SchedulerTypes';
+import { AppointmentDataItem } from '../../../../_bus/Appointments/AppointmentsTypes';
 // Instruments
 import {
   EndRepeatTypes,
@@ -142,7 +142,7 @@ const setRecurrenceRule = ({
   }
 };
 
-export const getDataItemForApi = (formDataItem: InitialFormValue): SchedulerDataItem => {
+export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDataItem => {
   const {
     FirstName,
     LastNameAppt,
@@ -532,7 +532,7 @@ const transformRecurrenceRuleInInitialRepaetPropsForm = (recRule: string | null)
 };
 
 export const getInitialFormValue = (
-  dataItem: SchedulerDataItem,
+  dataItem: AppointmentDataItem,
   { FirstName, Title, Email, Gender, CellPhone }: CustomerFields
 ): InitialFormValue => {
   const startHours = dataItem.Start.getHours() === 0 ? 8 : dataItem.Start.getHours();

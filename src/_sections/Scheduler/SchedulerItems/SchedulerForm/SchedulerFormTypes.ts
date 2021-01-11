@@ -10,7 +10,7 @@ import {
   MonthNameTypes,
 } from './SchedulerFormInstruments';
 import { InferValueTypes } from '../../../Grid/GridTypes';
-import { SchedulerDataItem } from '../../SchedulerTypes';
+import { AppointmentDataItem } from '../../../../_bus/Appointments/AppointmentsTypes';
 
 export type EndRepeatTypesType = InferValueTypes<typeof EndRepeatTypes>;
 
@@ -54,4 +54,4 @@ export interface CustomerFields {
   CellPhone: string | null;
 }
 
-export interface InitialFormValue extends SchedulerDataItem, RepeatOptions {}
+export interface InitialFormValue extends AppointmentDataItem, RepeatOptions {}

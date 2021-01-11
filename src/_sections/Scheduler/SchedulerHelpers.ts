@@ -1,6 +1,7 @@
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
-import { SchedulerDataItem, ViewType, InitDataForNewDataItem } from './SchedulerTypes';
+import { ViewType, InitDataForNewDataItem } from '../Grid/GridTypes';
+import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
 import { StatusNames } from '../Grid/GridTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 
@@ -24,12 +25,12 @@ export const getFormInputOptionalProps = ({ touched, validationMessage, showVali
   labelId: label ? `${id}_label` : '',
 });
 
-export const generateId = (data: SchedulerDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
+export const generateId = (data: AppointmentDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
 
 export const updateNewDataItemOnAddNewItemToChange = (
-  data: SchedulerDataItem[],
+  data: AppointmentDataItem[],
   { Start, End, TeamID }: InitDataForNewDataItem
-): SchedulerDataItem => {
+): AppointmentDataItem => {
   const ID = generateId(data);
 
   return {
@@ -84,7 +85,7 @@ export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: View
   }
 };
 
-export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, exception: Date): SchedulerDataItem => {
+export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, exception: Date): AppointmentDataItem => {
   const MetroRecException = dataItem.MetroRecException ? [...dataItem.MetroRecException, exception] : [exception];
   const { occurrenceId, originalStart, EventDate, EndDate, ...others } = dataItem;
   return {

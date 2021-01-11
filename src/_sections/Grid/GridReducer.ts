@@ -7,7 +7,6 @@ import {
   updateDataAfterEditItem,
   updateDataAfterRemoveItem,
   getNewDataItem,
-  // setTitleForAddNewItemSectionAndDataName,
   roleSkills,
   getNewAppointmentDataItemForScheduler,
 } from './GridHelpers';
@@ -53,6 +52,8 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const [byId, allIDs] = transformArrayDataToByIdData(action.data);
       return {
         ...state,
+        mapTeamToFiltered:
+          action.entityName === EntitiesMap.Staff ? { ...allIDs.reduce((acc, id) => ({ ...acc, [id]: true }), {}) } : state.mapTeamToFiltered,
         entities: {
           ...state.entities,
           [action.entityName]: {

@@ -12,7 +12,9 @@ import {
 //Components
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
 // Types
-import { SchedulerDataItem, CustomSchedulerProps, ViewType } from './SchedulerTypes';
+import { CustomSchedulerProps } from './SchedulerTypes';
+import { ViewType } from '../Grid/GridTypes';
+import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
 // Action Creators
 import { updateAppointmentDataItemInitAsyncAC, changeSelectedDateAC, changeSelectedViewAC } from '../Grid/GridAC';
 
@@ -24,7 +26,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
       if (typeof updated[0] === 'number' || !updated[0]) return;
       setIsAgendaDataItemLoading(true);
 
-      const [updatedDataItem] = updated as SchedulerDataItem[];
+      const [updatedDataItem] = updated as AppointmentDataItem[];
 
       if (updatedDataItem.TeamID !== updatedDataItem.LookupHR01teamId) {
         updatedDataItem.LookupHR01teamId = updatedDataItem.TeamID;
