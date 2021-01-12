@@ -4,14 +4,14 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
 import {
   selectDataItemIsLoading,
   selectProcessDataItemFieldValue,
   selectStaffDataForDropDownListData,
   selectStaffLastNameByID,
-} from '../GridSelectors';
+} from '../../../_bus/Selectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
 

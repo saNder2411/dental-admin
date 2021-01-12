@@ -13,10 +13,10 @@ import {
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
 // Types
 import { CustomSchedulerProps } from './SchedulerTypes';
-import { ViewType } from '../Grid/GridTypes';
+import { ViewType } from '../../_bus/Types';
 import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
 // Action Creators
-import { updateAppointmentDataItemInitAsyncAC, changeSelectedDateAC, changeSelectedViewAC } from '../Grid/GridAC';
+import { updateAppointmentDataItemInitAsyncAC, changeSelectedDateAC, changeSelectedViewAC } from '../../_bus/AC';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
   const dispatch = useDispatch();

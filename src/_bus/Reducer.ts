@@ -1,6 +1,6 @@
 // import { combineReducers } from 'redux';
 // Types
-import { ActionTypes, GridState, Actions, StatusNames, GenericDataItem, EntitiesMap } from './GridTypes';
+import { ActionTypes, GridState, Actions, StatusNames, GenericDataItem, EntitiesMap } from './Types';
 // Helpers
 import {
   transformArrayDataToByIdData,
@@ -9,7 +9,8 @@ import {
   getNewDataItem,
   roleSkills,
   getNewAppointmentDataItemForScheduler,
-} from './GridHelpers';
+  updateDataAfterEditProcessItem,
+} from './Helpers';
 
 const initialState = {
   authData: null,
@@ -19,6 +20,7 @@ const initialState = {
   dataError: ``,
   dataItemError: ``,
   authError: '',
+  
   statusNameList: Object.values(StatusNames),
   roleSkills,
 
@@ -80,7 +82,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       return { ...state, isDataItemLoading: true, dataItemError: `` };
 
     case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
-      const newDataAfterEditNewItem = updateDataAfterEditItem(state.entities[action.entityName].originalData, action.dataItem);
+      const newDataAfterEditNewItem = updateDataAfterEditProcessItem(state.entities[action.entityName].processById, action.dataItem);
       return {
         ...state,
         newAppointmentDataItem: action.entityName === EntitiesMap.Appointments ? null : state.newAppointmentDataItem,
@@ -255,7 +257,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         entities: {
           ...state.entities,
           appointments: {
-            originalData: [newAppointmentForScheduler, ...state.entities.appointments.originalData], // Need optimization
+            ...state.entities.appointments,
             processById: { ...state.entities.appointments.processById, [newAppointmentForScheduler.ID]: { ...newAppointmentForScheduler } },
             byId: { ...state.entities.appointments.byId, [newAppointmentForScheduler.ID]: { ...newAppointmentForScheduler } },
             allIDs: [newAppointmentForScheduler.ID, ...state.entities.appointments.allIDs],
@@ -264,7 +266,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       };
 
     case ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA:
-      const newDataAfterDiscardAddNewItemSch = updateDataAfterRemoveItem(state.entities.appointments.originalData, action.payload);
       const { [action.payload]: discIteSch, ...newProcByIdSch } = state.entities.appointments.processById;
       const { [action.payload]: deletedApptEntItemSch, ...newApptEntByIdSch } = state.entities.appointments.byId;
       return {
@@ -273,7 +274,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         entities: {
           ...state.entities,
           appointments: {
-            originalData: [...newDataAfterDiscardAddNewItemSch],
+            ...state.entities.appointments,
             processById: newProcByIdSch,
             byId: newApptEntByIdSch,
             allIDs: [...state.entities.appointments.allIDs.filter((ID) => ID !== action.payload)],

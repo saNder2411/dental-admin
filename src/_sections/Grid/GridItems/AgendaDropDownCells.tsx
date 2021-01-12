@@ -11,7 +11,7 @@ import {
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
-import { StatusNames, EntitiesMap } from '../GridTypes';
+import { StatusNames, EntitiesMap } from '../../../_bus/Types';
 // Selectors
 import {
   selectDataItemIsLoading,
@@ -23,7 +23,7 @@ import {
   selectCustomersByIdData,
   selectCustomerFullNameByID,
   selectServicesDataForDropDownListData,
-} from '../GridSelectors';
+} from '../../../_bus/Selectors';
 // Hooks
 import { useTextFieldsValidation } from '../GridHooks';
 // Helpers

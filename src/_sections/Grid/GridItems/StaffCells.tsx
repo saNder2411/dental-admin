@@ -8,9 +8,9 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../GridSelectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
 // Helpers
 import { isString, isNumber } from './GridItemsHelpers';
 // Hooks

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 // Types
-import { GlobalState } from '../../_init';
-import { GenericDataItem, EntitiesKeys } from '../Grid/GridTypes';
+import { GlobalState } from '../_init';
+import { GenericDataItem, EntitiesKeys } from './Types';
 
 export const selectDataIsLoading = ({ GridState }: GlobalState) => GridState.isDataLoading;
 

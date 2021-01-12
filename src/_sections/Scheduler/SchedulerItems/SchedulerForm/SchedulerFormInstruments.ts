@@ -1,5 +1,5 @@
 // Types
-import { StatusNames } from '../../../Grid/GridTypes';
+import { StatusNames } from '../../../../_bus/Types';
 
 export const StatusDropDownListData = Object.values(StatusNames);
 

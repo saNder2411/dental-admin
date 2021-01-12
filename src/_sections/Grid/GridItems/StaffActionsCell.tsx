@@ -5,11 +5,11 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Actions
-import { createStaffDataItemInitAsyncAC, updateStaffDataItemInitAsyncAC, deleteStaffDataItemInitAsyncAC } from '../GridAC';
+import { createStaffDataItemInitAsyncAC, updateStaffDataItemInitAsyncAC, deleteStaffDataItemInitAsyncAC } from '../../../_bus/AC';
 // Selectors
-import { selectMemoProcessDataItem } from '../GridSelectors';
+import { selectMemoProcessDataItem } from '../../../_bus/Selectors';
 // Hooks
 import { useTextFieldsValidation, usePhoneFieldsValidation } from '../GridHooks';
 // Helpers

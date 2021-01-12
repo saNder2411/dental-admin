@@ -1,9 +1,9 @@
 // Types
-import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem, ViewType, UserInfo } from './GridTypes';
-import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
-import { CustomerDataItem } from '../../_bus/Customers/CustomersTypes';
-import { StaffDataItem } from '../../_bus/Staff/StaffTypes';
-import { ServiceDataItem } from '../../_bus/Services/ServicesTypes';
+import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem, ViewType, UserInfo } from './Types';
+import { AppointmentDataItem } from './Appointments/AppointmentsTypes';
+import { CustomerDataItem } from './Customers/CustomersTypes';
+import { StaffDataItem } from './Staff/StaffTypes';
+import { ServiceDataItem } from './Services/ServicesTypes';
 
 // Async Fetch Data
 export const fetchAppointmentsDataInitAsyncAC = (meta: { servicesDataLength: number; staffDataLength: number; customersDataLength: number }) => ({
@@ -164,11 +164,6 @@ export const deleteDataItemSuccessAC = (deletedDataItemID: number, entityName: E
 export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.DELETE_DATA_ITEM_FAILURE, payload: errorMessage });
 
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
-
-// View
-// export const changeViewOriginalDataAC = (data: GenericDataItem[]) => ({ type: ActionTypes.CHANGE_VIEW_ORIGINAL_DATA, payload: data });
-
-// export const changeDataNameAC = (dataName: GridDataName) => ({ type: ActionTypes.CHANGE_DATA_NAME, payload: dataName });
 
 // Edit
 export const addItemToEditAC = (dataItemID: number, entityName: EntitiesKeys) => ({

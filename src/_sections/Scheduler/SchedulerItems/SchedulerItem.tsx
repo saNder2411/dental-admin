@@ -15,14 +15,14 @@ import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirm
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
-import { StatusNames } from '../../Grid/GridTypes';
+import { StatusNames } from '../../../_bus/Types';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 //Action Creators
-import { setFormItemIdAC, schAddNewItemToEditAC, changeUpdatedRecurringDataItemAC } from '../../Grid/GridAC';
-import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../Grid/GridAC';
+import { setFormItemIdAC, schAddNewItemToEditAC, changeUpdatedRecurringDataItemAC } from '../../../_bus/AC';
+import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/AC';
 // Selectors
-import { selectDataItemIsLoading, selectFormItemID, selectSelectedView } from '../../Grid/GridSelectors';
+import { selectDataItemIsLoading, selectFormItemID, selectSelectedView } from '../../../_bus/Selectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
 

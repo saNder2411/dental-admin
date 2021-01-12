@@ -4,9 +4,9 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
-import { selectDataItemIsLoading, selectProcessDataItemFieldValue, selectMemoRoleSkills } from '../GridSelectors';
+import { selectDataItemIsLoading, selectProcessDataItemFieldValue, selectMemoRoleSkills } from '../../../_bus/Selectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
 

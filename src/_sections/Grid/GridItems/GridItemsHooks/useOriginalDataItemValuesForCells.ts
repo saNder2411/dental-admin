@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectByIdDataItemFieldValue } from '../../GridSelectors';
+import { selectByIdDataItemFieldValue } from '../../../../_bus/Selectors';
 // Types
-import { GenericDataItem, EntitiesKeys } from '../../GridTypes';
+import { GenericDataItem, EntitiesKeys } from '../../../../_bus/Types';
 
 export const useOriginalDataItemValuesForCells = <T extends GenericDataItem = GenericDataItem, U = any>(
   ID: number,

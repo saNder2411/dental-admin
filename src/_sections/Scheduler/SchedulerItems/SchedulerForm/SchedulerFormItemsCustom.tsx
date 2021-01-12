@@ -24,7 +24,7 @@ import {
   selectCustomersByIdData,
   selectCustomerFullNameByID,
   selectServicesDataForDropDownListData,
-} from '../../../Grid/GridSelectors';
+} from '../../../../_bus/Selectors';
 // Helpers
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
 import { EmptyDropDownListDataItem } from '../../../Grid/GridItems/GridItemsHelpers';

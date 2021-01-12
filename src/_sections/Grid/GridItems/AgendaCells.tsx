@@ -13,7 +13,7 @@ import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
-import { StatusNames, EntitiesMap } from '../GridTypes';
+import { StatusNames, EntitiesMap } from '../../../_bus/Types';
 // Selectors
 import {
   selectProcessDataItemFieldValue,
@@ -21,7 +21,7 @@ import {
   selectCustomerFullNameByID,
   selectServicesNameByID,
   selectCustomerGenderByID,
-} from '../GridSelectors';
+} from '../../../_bus/Selectors';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers

@@ -1,8 +1,7 @@
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
-import { ViewType, InitDataForNewDataItem } from '../Grid/GridTypes';
+import { ViewType } from '../../_bus/Types';
 import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
-import { StatusNames } from '../Grid/GridTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 
 export const customModelFields = {
@@ -24,49 +23,6 @@ export const getFormInputOptionalProps = ({ touched, validationMessage, showVali
   errorId: showValidationMessage ? `${id}_error` : '',
   labelId: label ? `${id}_label` : '',
 });
-
-export const generateId = (data: AppointmentDataItem[]): number => data.reduce((acc, current) => Math.max(acc, current.ID), 0) + 1;
-
-export const updateNewDataItemOnAddNewItemToChange = (
-  data: AppointmentDataItem[],
-  { Start, End, TeamID }: InitDataForNewDataItem
-): AppointmentDataItem => {
-  const ID = generateId(data);
-
-  return {
-    Id: ID,
-    Title: ``,
-    EventDate: Start.toISOString(),
-    EndDate: End.toISOString(),
-    Duration: 60,
-    Description: ``,
-    fAllDayEvent: null,
-    RecurrenceID: null,
-    Email: null,
-    AppointmentStatus: StatusNames.Consultation,
-    LastNameAppt: ``,
-    Gender: '(1) Female',
-    Notes: null,
-    ServiceCharge: 40,
-    FilterStart: Start.toISOString(),
-    FilterEnd: End.toISOString(),
-    MetroRRule: null,
-    MetroRecException: null,
-    FirstName: ``,
-    CellPhone: null,
-    LookupCM102customersId: 1270,
-    LookupHR01teamId: TeamID,
-    LookupMultiBP01offeringsId: { results: [] },
-    ID,
-    Modified: new Date().toISOString(),
-
-    TeamID,
-    Start,
-    End,
-    inEdit: true,
-    isNew: true,
-  };
-};
 
 export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: ViewType, TeamID: number) => {
   switch (selectedView) {

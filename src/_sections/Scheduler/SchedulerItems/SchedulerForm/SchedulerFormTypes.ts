@@ -9,7 +9,7 @@ import {
   YearlyTypes,
   MonthNameTypes,
 } from './SchedulerFormInstruments';
-import { InferValueTypes } from '../../../Grid/GridTypes';
+import { InferValueTypes } from '../../../../_bus/Types';
 import { AppointmentDataItem } from '../../../../_bus/Appointments/AppointmentsTypes';
 
 export type EndRepeatTypesType = InferValueTypes<typeof EndRepeatTypes>;

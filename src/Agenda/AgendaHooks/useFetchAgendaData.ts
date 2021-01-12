@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Action Creators
-import { fetchAppointmentsDataInitAsyncAC } from '../../_sections/Grid/GridAC';
+import { fetchAppointmentsDataInitAsyncAC } from '../../_bus/AC';
 
 export const useFetchAgendaData = (
   appointmentsDataLength: number,

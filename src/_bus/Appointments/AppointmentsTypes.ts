@@ -1,5 +1,5 @@
 // Types
-import { StatusNames } from '../../_sections/Grid/GridTypes';
+import { StatusNames } from '../Types';
 
 interface BackendImmutableKey {
   Id: number;

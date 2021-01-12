@@ -1,6 +1,6 @@
 import { takeEvery, all, call } from 'redux-saga/effects';
 // Types
-import { ActionTypes } from '../../_sections/Grid/GridTypes';
+import { ActionTypes } from '../Types';
 // Workers
 import {
   workerFetchData,

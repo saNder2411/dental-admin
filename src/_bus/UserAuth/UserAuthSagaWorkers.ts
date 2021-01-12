@@ -3,9 +3,9 @@ import { put, apply } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from './GridAC';
+import * as actions from '../AC';
 // Types
-import { UserInfo } from '../Grid/GridTypes';
+import { UserInfo } from '../Types';
 
 export function* workerFetchAuth(): SagaIterator {
   try {

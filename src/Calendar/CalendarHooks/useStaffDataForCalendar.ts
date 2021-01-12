@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectMemoOriginalStaffData, selectMemoMapTeamToFiltered } from '../../_sections/Grid/GridSelectors';
+import { selectMemoOriginalStaffData, selectMemoMapTeamToFiltered } from '../../_bus/Selectors';
 
 export const useStaffDataForScheduler = () => {
   const selectStaffData = useMemo(selectMemoOriginalStaffData, []);

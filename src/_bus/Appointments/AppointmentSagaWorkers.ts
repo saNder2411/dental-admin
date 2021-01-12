@@ -3,7 +3,7 @@ import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from '../../_sections/Grid/GridAC';
+import * as actions from '../AC';
 // Types
 import {
   FetchAppointmentsDataInitAsyncActionType,
@@ -12,7 +12,7 @@ import {
   UpdateAppointmentRecurringDataItemInitAsyncActionType,
   DeleteAppointmentDataItemInitAsyncActionType,
   EntitiesMap,
-} from '../../_sections/Grid/GridTypes';
+} from '../Types';
 import { QueryAppointmentDataItem } from './AppointmentsTypes';
 import { QueryServiceDataItem } from '../Services/ServicesTypes';
 import { QueryStaffDataItem } from '../Staff/StaffTypes';

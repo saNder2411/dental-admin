@@ -2,7 +2,7 @@ import { SyntheticEvent, FC } from 'react';
 import { GridCellProps as KendoGridCellProps } from '@progress/kendo-react-grid';
 import { Input } from '@progress/kendo-react-inputs';
 // Types
-import { GenericDataItem } from '../GridTypes';
+import { GenericDataItem } from '../../../_bus/Types';
 
 export type GridOnChange<T> = (evt: {
   dataItem: number;

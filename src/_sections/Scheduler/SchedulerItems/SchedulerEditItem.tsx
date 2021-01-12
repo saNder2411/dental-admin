@@ -6,9 +6,9 @@ import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Selectors
-import { selectMemoOriginalDataItem } from '../../Grid/GridSelectors';
+import { selectMemoOriginalDataItem } from '../../../_bus/Selectors';
 // Action Creators
-import { setFormItemIdAC } from '../../Grid/GridAC';
+import { setFormItemIdAC } from '../../../_bus/AC';
 
 export const SchedulerEditItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem } = props;

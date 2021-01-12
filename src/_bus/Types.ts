@@ -1,10 +1,10 @@
 // Types
-import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
-import { StaffDataItem } from '../../_bus/Staff/StaffTypes';
-import { CustomerDataItem } from '../../_bus/Customers/CustomersTypes';
-import { ServiceDataItem } from '../../_bus/Services/ServicesTypes';
+import { AppointmentDataItem } from './Appointments/AppointmentsTypes';
+import { StaffDataItem } from './Staff/StaffTypes';
+import { CustomerDataItem } from './Customers/CustomersTypes';
+import { ServiceDataItem } from './Services/ServicesTypes';
 // Actions
-import * as actions from './GridAC';
+import * as actions from './AC';
 
 export const ActionTypes = {
   // Async Fetch Data
@@ -48,9 +48,6 @@ export const ActionTypes = {
   DELETE_DATA_ITEM_SUCCESS: `GRID/DELETE_DATA_ITEM_SUCCESS` as const,
   DELETE_DATA_ITEM_FAILURE: `GRID/DELETE_DATA_ITEM_FAILURE` as const,
   DELETE_DATA_ITEM_FINALLY: `GRID/DELETE_DATA_ITEM_FINALLY` as const,
-  // View
-  // CHANGE_VIEW_ORIGINAL_DATA: 'GRID/CHANGE_VIEW_ORIGINAL_DATA' as const,
-  // CHANGE_DATA_NAME: 'GRID/CHANGE_DATA_NAME' as const,
   // Edit
   ADD_ITEM_TO_EDIT: 'GRID/ADD_ITEM_TO_EDIT' as const,
   CANCEL_EDIT: 'GRID/CANCEL_EDIT' as const,

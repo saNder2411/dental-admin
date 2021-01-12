@@ -2,11 +2,11 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Input, MaskedTextBox, MaskedTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../GridSelectors';
+import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Hooks
 import { useTextFieldsValidation, usePhoneFieldsValidation } from '../GridHooks';
 // Helpers

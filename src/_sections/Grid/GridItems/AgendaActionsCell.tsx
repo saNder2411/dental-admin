@@ -5,11 +5,11 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Actions
-import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../GridAC';
+import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/AC';
 // Selectors
-import { selectMemoProcessDataItem } from '../GridSelectors';
+import { selectMemoProcessDataItem } from '../../../_bus/Selectors';
 // Hooks
 import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 

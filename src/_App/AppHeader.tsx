@@ -4,7 +4,7 @@ import { DropDownList, DropDownListChangeEvent } from '@progress/kendo-react-dro
 import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
 import { selectLocaleState } from './AppSelectors';
-import { selectMemoAuthData } from '../_sections/Grid/GridSelectors';
+import { selectMemoAuthData } from '../_bus/Selectors';
 // Images
 import headerBg from '../_assets/header-bg.png';
 

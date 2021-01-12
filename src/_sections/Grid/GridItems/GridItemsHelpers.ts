@@ -4,7 +4,7 @@ import { GridOnChange } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
 import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
 import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
-import { GenericDataItem, StatusNames } from '../GridTypes';
+import { GenericDataItem, StatusNames } from '../../../_bus/Types';
 
 export const onGridDropDownChange = <T extends GenericDataItem = GenericDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (
   evt: DropDownListChangeEvent

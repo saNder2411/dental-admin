@@ -47,7 +47,7 @@ import './AppStyles.scss';
 // Selectors
 import { selectLocaleId } from './AppSelectors';
 // Action Creators
-import { fetchAuthDataInitAsyncAC } from '../_sections/Grid/GridAC';
+import { fetchAuthDataInitAsyncAC } from '../_bus/AC';
 load(
   likelySubtags,
   currencyData,

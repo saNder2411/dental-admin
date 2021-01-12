@@ -25,9 +25,9 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectCustomerById, selectMemoUpdatedRecurringDataItem } from '../../../Grid/GridSelectors';
+import { selectCustomerById, selectMemoUpdatedRecurringDataItem } from '../../../../_bus/Selectors';
 // Types
-import { StatusNames } from '../../../Grid/GridTypes';
+import { StatusNames } from '../../../../_bus/Types';
 import { CustomerDataItem } from '../../../../_bus/Customers/CustomersTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
@@ -38,7 +38,7 @@ import {
   createAppointmentDataItemInitAsyncAC,
   schDiscardAddNewItemToDataAC,
   changeUpdatedRecurringDataItemAC,
-} from '../../../Grid/GridAC';
+} from '../../../../_bus/AC';
 // Instruments
 import {
   StatusDropDownListData,

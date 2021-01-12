@@ -4,7 +4,7 @@ import { watchAppointments } from '../_bus/Appointments/AppointmentSagaWatchers'
 import { watchCustomers } from '../_bus/Customers/CustomersSagaWatchers';
 import { watchStaff } from '../_bus/Staff/StaffSagaWatchers';
 import { watchServices } from '../_bus/Services/ServicesSagaWatchers';
-import { watchAuth } from '../_sections/Grid/AuthSagaWatchers';
+import { watchAuth } from '../_bus/UserAuth/UserAuthSagaWatchers';
 
 export function* rootSaga() {
   try {

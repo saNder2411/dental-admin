@@ -4,7 +4,7 @@ import {
   selectOriginalCustomersDataLength,
   selectOriginalStaffDataLength,
   selectOriginalServicesDataLength,
-} from '../../_sections/Grid/GridSelectors';
+} from '../../_bus/Selectors';
 
 export const useSelectBindDataLengthForAgenda = () => {
   const customersDataLength = useSelector(selectOriginalCustomersDataLength);

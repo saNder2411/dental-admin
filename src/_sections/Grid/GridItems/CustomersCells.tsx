@@ -10,9 +10,9 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
-import { EntitiesMap } from '../GridTypes';
+import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
-import { selectStaffLastNameByID, selectStaffLastNamesByID, selectProcessDataItemFieldValue } from '../GridSelectors';
+import { selectStaffLastNameByID, selectStaffLastNamesByID, selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers

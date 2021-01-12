@@ -7,7 +7,7 @@ import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/A
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/Customers/CustomersTypes';
 import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/Services/ServicesTypes';
-import { UserInfo } from '../_sections/Grid/GridTypes';
+import { UserInfo } from '../_bus/Types';
 
 // const spPer = async () => {
 //   // const perms2 = await Web(SP_ROOT_URL).configure({ headers }).getCurrentUserEffectivePermissions
