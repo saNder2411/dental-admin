@@ -3,17 +3,6 @@ import { createSelector } from 'reselect';
 import { GlobalState } from '../_init';
 import { GenericDataItem, EntitiesKeys } from './Types';
 
-export const selectDataIsLoading = ({ GridState }: GlobalState) => GridState.isDataLoading;
-
-export const selectDataItemIsLoading = ({ GridState }: GlobalState) => GridState.isDataItemLoading;
-
-const selectStatusNameList = ({ GridState }: GlobalState) => GridState.statusNameList;
-
-export const selectMemoStatusNameList = () => createSelector(selectStatusNameList, (statusNameList) => statusNameList);
-
-const selectRoleSkills = ({ GridState }: GlobalState) => GridState.roleSkills;
-
-export const selectMemoRoleSkills = () => createSelector(selectRoleSkills, (roleSkills) => roleSkills);
 
 const selectProcessByIdData = (entityName: EntitiesKeys) => ({ GridState }: GlobalState) => GridState.entities[entityName].processById;
 
@@ -138,9 +127,3 @@ export const selectUpdatableRecurringDataItem = ({ GridState }: GlobalState) => 
 
 export const selectMemoUpdatedRecurringDataItem = () =>
   createSelector(selectUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);
-
-// UserInfo
-
-export const selectAuthData = ({ GridState }: GlobalState) => GridState.authData;
-
-export const selectMemoAuthData = () => createSelector(selectAuthData, (authData) => authData);

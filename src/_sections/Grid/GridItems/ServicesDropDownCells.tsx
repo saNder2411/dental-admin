@@ -3,12 +3,15 @@ import { useSelector } from 'react-redux';
 import { MultiSelect, MultiSelectChangeEvent, DropDownList } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
+import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
-import { selectProcessDataItemFieldValue, selectDataItemIsLoading, selectServicesCategory, selectMemoRoleSkills } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue, selectServicesCategory } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
+// Const
+import { roleSkills } from '../../../_bus/Const';
 
 export const ServicesCategoryMultiSelect: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string>(dataItemID, EntitiesMap.Services, field));
@@ -50,8 +53,6 @@ export const ServicesBooleanFlagDropDownList: FC<EditCellProps<ServiceDataItem>>
 export const ServicesRoleSkillsMultiSelect: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string[] | null>(dataItemID, EntitiesMap.Services, field));
-  const selectRoleSkills = useMemo(selectMemoRoleSkills, []);
-  const roleSkills = useSelector(selectRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
   const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];

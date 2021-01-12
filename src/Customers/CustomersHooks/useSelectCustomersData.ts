@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectMemoOriginalCustomersData, selectDataIsLoading } from '../../_bus/Selectors';
+import { selectMemoOriginalCustomersData } from '../../_bus/Selectors';
+import { selectDataIsLoading } from '../../_bus/UI/UISelectors';
 
 export const useSelectCustomersData = () => {
   const selectCustomersData = useMemo(selectMemoOriginalCustomersData, []);

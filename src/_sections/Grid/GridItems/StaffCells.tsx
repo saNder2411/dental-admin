@@ -7,7 +7,7 @@ import { StaffBooleanFlagDropDownList, StaffRoleSkillsMultiSelect } from './Staf
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
+import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';

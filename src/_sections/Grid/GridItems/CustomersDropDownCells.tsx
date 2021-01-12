@@ -3,15 +3,11 @@ import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
-import {
-  selectDataItemIsLoading,
-  selectProcessDataItemFieldValue,
-  selectStaffDataForDropDownListData,
-  selectStaffLastNameByID,
-} from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue, selectStaffDataForDropDownListData, selectStaffLastNameByID } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
 

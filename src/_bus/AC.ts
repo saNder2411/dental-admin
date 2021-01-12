@@ -1,9 +1,9 @@
 // Types
-import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem, ViewType, UserInfo } from './Types';
-import { AppointmentDataItem } from './Appointments/AppointmentsTypes';
-import { CustomerDataItem } from './Customers/CustomersTypes';
-import { StaffDataItem } from './Staff/StaffTypes';
-import { ServiceDataItem } from './Services/ServicesTypes';
+import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem, ViewType } from './Types';
+import { AppointmentDataItem } from './_Appointments/AppointmentsTypes';
+import { CustomerDataItem } from './_Customers/CustomersTypes';
+import { StaffDataItem } from './_Staff/StaffTypes';
+import { ServiceDataItem } from './_Services/ServicesTypes';
 
 // Async Fetch Data
 export const fetchAppointmentsDataInitAsyncAC = (meta: { servicesDataLength: number; staffDataLength: number; customersDataLength: number }) => ({
@@ -27,32 +27,32 @@ export const createAppointmentDataItemInitAsyncAC = (
   onAddDataItemToSchedulerData?: () => void
 ) => ({
   type: ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: createdDataItem,
+  createdDataItem,
   meta: { sideEffectAfterCreatedDataItem, onAddDataItemToSchedulerData },
 });
 
 export const createCustomerDataItemInitAsyncAC = (createdDataItem: CustomerDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_CUSTOMER_DATA_ITEM_INIT_ASYNC,
-  payload: createdDataItem,
+  createdDataItem,
   meta: sideEffectAfterCreatedDataItem,
 });
 
 export const createStaffDataItemInitAsyncAC = (createdDataItem: StaffDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_STAFF_DATA_ITEM_INIT_ASYNC,
-  payload: createdDataItem,
+  createdDataItem,
   meta: sideEffectAfterCreatedDataItem,
 });
 
 export const createServiceDataItemInitAsyncAC = (createdDataItem: ServiceDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_SERVICE_DATA_ITEM_INIT_ASYNC,
-  payload: createdDataItem,
+  createdDataItem,
   meta: sideEffectAfterCreatedDataItem,
 });
 
 // Async Update Data Item
 export const updateAppointmentDataItemInitAsyncAC = (updatedDataItem: AppointmentDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 });
 
@@ -62,50 +62,51 @@ export const updateAppointmentRecurringDataItemInitAsyncAC = (
   sideEffectAfterUpdatedDataItem: () => void
 ) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_RECURRING_DATA_ITEM_ASYNC,
-  payload: { updatedDataItem, createDataItem },
+  updatedDataItem,
+  createDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 });
 
 export const updateCustomerDataItemInitAsyncAC = (updatedDataItem: CustomerDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_CUSTOMER_DATA_ITEM_INIT_ASYNC,
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 });
 
 export const updateStaffDataItemInitAsyncAC = (updatedDataItem: StaffDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_STAFF_DATA_ITEM_INIT_ASYNC,
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 });
 
 export const updateServiceDataItemInitAsyncAC = (updatedDataItem: ServiceDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_SERVICE_DATA_ITEM_INIT_ASYNC,
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 });
 
 // Async Delete Data Item
 export const deleteAppointmentDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 });
 
 export const deleteCustomerDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_CUSTOMER_DATA_ITEM_INIT_ASYNC,
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 });
 
 export const deleteStaffDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_STAFF_DATA_ITEM_INIT_ASYNC,
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 });
 
 export const deleteServiceDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_SERVICE_DATA_ITEM_INIT_ASYNC,
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 });
 
@@ -120,7 +121,7 @@ export const fetchDataSuccessAC = (data: GenericDataItem[], entityName: Entities
 
 export const fetchDataFailureAC = (errorMessage: string, entityName: EntitiesKeys) => ({
   type: ActionTypes.FETCH_DATA_FAILURE,
-  payload: errorMessage,
+  errorMessage,
   entityName,
 });
 
@@ -135,7 +136,7 @@ export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: E
   entityName,
 });
 
-export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, payload: errorMessage });
+export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, errorMessage });
 
 export const createDataItemFinallyAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_FINALLY });
 
@@ -148,7 +149,7 @@ export const updateDataItemSuccessAC = (dataItem: GenericDataItem, entityName: E
   entityName,
 });
 
-export const updateDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.UPDATE_DATA_ITEM_FAILURE, payload: errorMessage });
+export const updateDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.UPDATE_DATA_ITEM_FAILURE, errorMessage });
 
 export const updateDataItemFinallyAC = () => ({ type: ActionTypes.UPDATE_DATA_ITEM_FINALLY });
 
@@ -161,7 +162,7 @@ export const deleteDataItemSuccessAC = (deletedDataItemID: number, entityName: E
   entityName,
 });
 
-export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.DELETE_DATA_ITEM_FAILURE, payload: errorMessage });
+export const deleteDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.DELETE_DATA_ITEM_FAILURE, errorMessage });
 
 export const deleteDataItemFinallyAC = () => ({ type: ActionTypes.DELETE_DATA_ITEM_FINALLY });
 
@@ -189,37 +190,25 @@ export const discardAddNewItemToDataAC = (dataItemID: number, entityName: Entiti
 
 // Scheduler
 
-export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, payload: employeeID });
+export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, employeeID });
 
 export const setFormItemIdAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM_ID, payload: formItemID });
 
 export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewDataItem) => ({
   type: ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM,
-  payload: initDataForNewDataItem,
+  initDataForNewDataItem,
 });
 
 export const schDiscardAddNewItemToDataAC = (dataItemID: number) => ({
   type: ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA,
-  payload: dataItemID,
+  dataItemID,
 });
 
-export const changeSelectedDateAC = (date: Date) => ({ type: ActionTypes.CHANGE_SELECTED_DATE, payload: date });
+export const changeSelectedDateAC = (date: Date) => ({ type: ActionTypes.CHANGE_SELECTED_DATE, date });
 
-export const changeSelectedViewAC = (view: ViewType) => ({ type: ActionTypes.CHANGE_SELECTED_VIEW, payload: view });
+export const changeSelectedViewAC = (view: ViewType) => ({ type: ActionTypes.CHANGE_SELECTED_VIEW, view });
 
 export const changeUpdatedRecurringDataItemAC = (dataItem: AppointmentDataItem | null) => ({
   type: ActionTypes.SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM,
-  payload: dataItem,
+  dataItem,
 });
-
-// UserInfo Async
-export const fetchAuthDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_INIT_ASYNC });
-
-// // UserInfo Sync
-export const fetchAuthDataRequestAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_REQUEST });
-
-export const fetchAuthDataSuccessAC = (data: UserInfo) => ({ type: ActionTypes.FETCH_AUTH_DATA_SUCCESS, payload: data });
-
-export const fetchAuthDataFailureAC = (errorMessage: string) => ({ type: ActionTypes.FETCH_AUTH_DATA_FAILURE, payload: errorMessage });
-
-export const fetchAuthDataFinallyAC = () => ({ type: ActionTypes.FETCH_AUTH_DATA_FINALLY });

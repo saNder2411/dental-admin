@@ -1,8 +1,8 @@
 // Types
-import { AppointmentDataItem } from './Appointments/AppointmentsTypes';
-import { StaffDataItem } from './Staff/StaffTypes';
-import { CustomerDataItem } from './Customers/CustomersTypes';
-import { ServiceDataItem } from './Services/ServicesTypes';
+import { AppointmentDataItem } from './_Appointments/AppointmentsTypes';
+import { StaffDataItem } from './_Staff/StaffTypes';
+import { CustomerDataItem } from './_Customers/CustomersTypes';
+import { ServiceDataItem } from './_Services/ServicesTypes';
 // Actions
 import * as actions from './AC';
 
@@ -65,13 +65,6 @@ export const ActionTypes = {
   CHANGE_SELECTED_VIEW: 'SCHEDULER/CHANGE_SELECTED_VIEW' as const,
 
   SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM: 'SCHEDULER/SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM' as const,
-  //Async Fetch UserInfo
-  FETCH_AUTH_DATA_INIT_ASYNC: 'AUTH/FETCH_AUTH_DATA_INIT_ASYNC' as const,
-  // Sync  UserInfo
-  FETCH_AUTH_DATA_REQUEST: `AUTH/FETCH_AUTH_DATA_REQUEST` as const,
-  FETCH_AUTH_DATA_SUCCESS: `AUTH/FETCH_AUTH_DATA_SUCCESS` as const,
-  FETCH_AUTH_DATA_FAILURE: `AUTH/FETCH_AUTH_DATA_FAILURE` as const,
-  FETCH_AUTH_DATA_FINALLY: `AUTH/FETCH_AUTH_DATA_FINALLY` as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -100,15 +93,6 @@ export interface InitDataForNewDataItem {
   Start: Date;
   End: Date;
   TeamID: number;
-}
-
-export enum IndividualRights {
-  FullControl = 'Full Control',
-  Designer = 'Designer',
-}
-
-export interface UserInfo {
-  IsSiteAdmin: boolean;
 }
 
 export const EntitiesMap = {
@@ -148,16 +132,6 @@ export interface Entities {
 export type EntitiesKeys = keyof Entities;
 
 export interface GridState {
-  authData: UserInfo | null;
-
-  isDataLoading: boolean;
-  isDataItemLoading: boolean;
-  dataError: string;
-  dataItemError: string;
-  authError: string;
-  statusNameList: StatusNames[];
-  roleSkills: string[];
-
   mapTeamToFiltered: { [key: string]: boolean };
   formItemID: number | null;
   newAppointmentDataItem: null | AppointmentDataItem;

@@ -1,9 +1,9 @@
 import { DropDownListChangeEvent } from '@progress/kendo-react-dropdowns';
 //Types
 import { GridOnChange } from './GridItemsTypes';
-import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
-import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
-import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
+import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
+import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
+import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 import { GenericDataItem, StatusNames } from '../../../_bus/Types';
 
 export const onGridDropDownChange = <T extends GenericDataItem = GenericDataItem>(dataItemID: number, field: keyof T, onChange: GridOnChange<T>) => (

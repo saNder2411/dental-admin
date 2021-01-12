@@ -1,29 +1,17 @@
 // import { combineReducers } from 'redux';
 // Types
-import { ActionTypes, GridState, Actions, StatusNames, GenericDataItem, EntitiesMap } from './Types';
+import { ActionTypes, GridState, Actions, GenericDataItem, EntitiesMap } from './Types';
 // Helpers
 import {
   transformArrayDataToByIdData,
   updateDataAfterEditItem,
   updateDataAfterRemoveItem,
   getNewDataItem,
-  roleSkills,
   getNewAppointmentDataItemForScheduler,
   updateDataAfterEditProcessItem,
 } from './Helpers';
 
 const initialState = {
-  authData: null,
-
-  isDataLoading: false,
-  isDataItemLoading: false,
-  dataError: ``,
-  dataItemError: ``,
-  authError: '',
-  
-  statusNameList: Object.values(StatusNames),
-  roleSkills,
-
   mapTeamToFiltered: { '1': false },
   formItemID: null,
   newAppointmentDataItem: null,
@@ -45,8 +33,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.FETCH_DATA_REQUEST:
       return {
         ...state,
-        isDataLoading: true,
-        dataError: ``,
         entities: { ...state.entities, [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [] } },
       };
 
@@ -70,17 +56,10 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
     case ActionTypes.FETCH_DATA_FAILURE:
       return {
         ...state,
-        dataError: action.payload,
         entities: { ...state.entities, [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [] } },
       };
 
-    case ActionTypes.FETCH_DATA_FINALLY:
-      return { ...state, isDataLoading: false };
-
     // Sync Create Data Item
-    case ActionTypes.CREATE_DATA_ITEM_REQUEST:
-      return { ...state, isDataItemLoading: true, dataItemError: `` };
-
     case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
       const newDataAfterEditNewItem = updateDataAfterEditProcessItem(state.entities[action.entityName].processById, action.dataItem);
       return {
@@ -99,16 +78,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         },
       };
 
-    case ActionTypes.CREATE_DATA_ITEM_FAILURE:
-      return { ...state, dataItemError: action.payload };
-
-    case ActionTypes.CREATE_DATA_ITEM_FINALLY:
-      return { ...state, isDataItemLoading: false };
-
     // Sync Update DataItem
-    case ActionTypes.UPDATE_DATA_ITEM_REQUEST:
-      return { ...state, isDataItemLoading: true, dataItemError: `` };
-
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
       const newDataAfterUpdateDataItem = updateDataAfterEditItem(state.entities[action.entityName].originalData, action.dataItem);
       return {
@@ -125,16 +95,7 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         },
       };
 
-    case ActionTypes.UPDATE_DATA_ITEM_FAILURE:
-      return { ...state, dataItemError: action.payload };
-
-    case ActionTypes.UPDATE_DATA_ITEM_FINALLY:
-      return { ...state, isDataItemLoading: false };
-
     // Sync Delete DataItem
-    case ActionTypes.DELETE_DATA_ITEM_REQUEST:
-      return { ...state, isDataItemLoading: true, dataItemError: `` };
-
     case ActionTypes.DELETE_DATA_ITEM_SUCCESS:
       const updatedDataAfterDeleteDataItem = updateDataAfterRemoveItem<GenericDataItem>(
         state.entities[action.entityName].originalData,
@@ -155,13 +116,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
           },
         },
       };
-
-    case ActionTypes.DELETE_DATA_ITEM_FAILURE:
-      return { ...state, dataItemError: action.payload };
-
-    case ActionTypes.DELETE_DATA_ITEM_FINALLY:
-      return { ...state, isDataItemLoading: false };
-
     // Edit
     case ActionTypes.ADD_ITEM_TO_EDIT:
       const inEditDataItem = { ...state.entities[action.entityName].processById[action.dataItemID], inEdit: true };
@@ -244,13 +198,13 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
 
     // Scheduler
     case ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED:
-      return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.payload]: !state.mapTeamToFiltered[action.payload] } };
+      return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.employeeID]: !state.mapTeamToFiltered[action.employeeID] } };
 
     case ActionTypes.SET_FORM_ITEM_ID:
       return { ...state, formItemID: action.payload };
 
     case ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM:
-      const newAppointmentForScheduler = getNewAppointmentDataItemForScheduler(state.entities.appointments.allIDs, action.payload);
+      const newAppointmentForScheduler = getNewAppointmentDataItemForScheduler(state.entities.appointments.allIDs, action.initDataForNewDataItem);
       return {
         ...state,
         newAppointmentDataItem: newAppointmentForScheduler,
@@ -266,8 +220,8 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       };
 
     case ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA:
-      const { [action.payload]: discIteSch, ...newProcByIdSch } = state.entities.appointments.processById;
-      const { [action.payload]: deletedApptEntItemSch, ...newApptEntByIdSch } = state.entities.appointments.byId;
+      const { [action.dataItemID]: discIteSch, ...newProcByIdSch } = state.entities.appointments.processById;
+      const { [action.dataItemID]: deletedApptEntItemSch, ...newApptEntByIdSch } = state.entities.appointments.byId;
       return {
         ...state,
         newAppointmentDataItem: null,
@@ -277,26 +231,19 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
             ...state.entities.appointments,
             processById: newProcByIdSch,
             byId: newApptEntByIdSch,
-            allIDs: [...state.entities.appointments.allIDs.filter((ID) => ID !== action.payload)],
+            allIDs: [...state.entities.appointments.allIDs.filter((ID) => ID !== action.dataItemID)],
           },
         },
       };
 
     case ActionTypes.SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM:
-      return { ...state, updatableRecurringDataItem: action.payload };
+      return { ...state, updatableRecurringDataItem: action.dataItem };
 
     case ActionTypes.CHANGE_SELECTED_DATE:
-      return { ...state, selectedDate: action.payload };
+      return { ...state, selectedDate: action.date };
 
     case ActionTypes.CHANGE_SELECTED_VIEW:
-      return { ...state, selectedView: action.payload };
-
-    // UserInfo
-    case ActionTypes.FETCH_AUTH_DATA_SUCCESS:
-      return { ...state, authData: action.payload };
-
-    case ActionTypes.FETCH_AUTH_DATA_FAILURE:
-      return { ...state, authError: action.payload };
+      return { ...state, selectedView: action.view };
 
     default:
       return state;

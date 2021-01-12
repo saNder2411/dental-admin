@@ -10,13 +10,11 @@ import {
 } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 import { StatusNames, EntitiesMap } from '../../../_bus/Types';
 // Selectors
 import {
-  selectDataItemIsLoading,
   selectProcessDataItemFieldValue,
-  selectMemoStatusNameList,
   selectStaffDataForDropDownListData,
   selectStaffLastNameByID,
   selectCustomersDataForDropDownListData,
@@ -24,17 +22,18 @@ import {
   selectCustomerFullNameByID,
   selectServicesDataForDropDownListData,
 } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Hooks
 import { useTextFieldsValidation } from '../GridHooks';
 // Helpers
 import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
+// Const
+import { statusNameList } from '../../../_bus/Const';
 
 export const AgendaStatusDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, EntitiesMap.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectStatusNameList = useMemo(selectMemoStatusNameList, []);
-  const statusNameList = useSelector(selectStatusNameList);
   const dataForDropDownList = statusNameList.map((value) => ({ text: value, value }));
   const dropDownListValue = dataForDropDownList.find((item) => item.value === value);
 

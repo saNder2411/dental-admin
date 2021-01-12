@@ -14,7 +14,7 @@ import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell
 // Types
 import { CustomSchedulerProps } from './SchedulerTypes';
 import { ViewType } from '../../_bus/Types';
-import { AppointmentDataItem } from '../../_bus/Appointments/AppointmentsTypes';
+import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
 // Action Creators
 import { updateAppointmentDataItemInitAsyncAC, changeSelectedDateAC, changeSelectedViewAC } from '../../_bus/AC';
 

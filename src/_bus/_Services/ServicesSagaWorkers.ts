@@ -31,7 +31,7 @@ export function* workerFetchData(): SagaIterator {
 }
 
 export function* workerCreateDataItem({
-  payload: createdDataItem,
+  createdDataItem,
   meta: sideEffectAfterCreatedDataItem,
 }: CreateServiceDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -50,7 +50,7 @@ export function* workerCreateDataItem({
 }
 
 export function* workerUpdateDataItem({
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 }: UpdateServiceDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -69,7 +69,7 @@ export function* workerUpdateDataItem({
 }
 
 export function* workerDeleteDataItem({
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 }: DeleteServiceDataItemInitAsyncActionType): SagaIterator {
   try {

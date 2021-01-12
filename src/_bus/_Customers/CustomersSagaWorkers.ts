@@ -13,10 +13,10 @@ import {
   EntitiesMap,
 } from '../Types';
 import { QueryCustomerDataItem } from './CustomersTypes';
-import { QueryStaffDataItem } from '../Staff/StaffTypes';
+import { QueryStaffDataItem } from '../_Staff/StaffTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './CustomersHelpers';
-import { transformAPIData as transformTeamStaffAPIData } from '../Staff/StaffHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
 
 type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null];
 
@@ -44,7 +44,7 @@ export function* workerFetchData({ meta: { staffDataLength } }: FetchCustomersDa
 }
 
 export function* workerCreateDataItem({
-  payload: createdDataItem,
+  createdDataItem,
   meta: sideEffectAfterCreatedDataItem,
 }: CreateCustomerDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -62,7 +62,7 @@ export function* workerCreateDataItem({
 }
 
 export function* workerUpdateDataItem({
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 }: UpdatCustomerDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -80,7 +80,7 @@ export function* workerUpdateDataItem({
 }
 
 export function* workerDeleteDataItem({
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 }: DeleteCustomerDataItemInitAsyncActionType): SagaIterator {
   try {

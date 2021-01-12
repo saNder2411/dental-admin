@@ -3,11 +3,11 @@ import { sp } from '@pnp/sp';
 // Config
 import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
-import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/Appointments/AppointmentsTypes';
-import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/Customers/CustomersTypes';
-import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/Staff/StaffTypes';
-import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/Services/ServicesTypes';
-import { UserInfo } from '../_bus/Types';
+import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/_Appointments/AppointmentsTypes';
+import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/_Customers/CustomersTypes';
+import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/_Staff/StaffTypes';
+import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/_Services/ServicesTypes';
+import { UserInfo } from '../_bus/User/UserTypes';
 
 // const spPer = async () => {
 //   // const perms2 = await Web(SP_ROOT_URL).configure({ headers }).getCurrentUserEffectivePermissions

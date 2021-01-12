@@ -1,10 +1,10 @@
 import { all, call } from 'redux-saga/effects';
 // Watchers
-import { watchAppointments } from '../_bus/Appointments/AppointmentSagaWatchers';
-import { watchCustomers } from '../_bus/Customers/CustomersSagaWatchers';
-import { watchStaff } from '../_bus/Staff/StaffSagaWatchers';
-import { watchServices } from '../_bus/Services/ServicesSagaWatchers';
-import { watchAuth } from '../_bus/UserAuth/UserAuthSagaWatchers';
+import { watchAppointments } from '../_bus/_Appointments/AppointmentSagaWatchers';
+import { watchCustomers } from '../_bus/_Customers/CustomersSagaWatchers';
+import { watchStaff } from '../_bus/_Staff/StaffSagaWatchers';
+import { watchServices } from '../_bus/_Services/ServicesSagaWatchers';
+import { watchAuth } from '../_bus/User/UserSagaWatchers';
 
 export function* rootSaga() {
   try {

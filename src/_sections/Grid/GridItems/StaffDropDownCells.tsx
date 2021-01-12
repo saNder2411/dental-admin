@@ -1,14 +1,17 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
+import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 // Selectors
-import { selectDataItemIsLoading, selectProcessDataItemFieldValue, selectMemoRoleSkills } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
+// Const
+import { roleSkills } from '../../../_bus/Const';
 
 export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
@@ -30,8 +33,6 @@ export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({
 export const StaffRoleSkillsMultiSelect: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string[] | null>(dataItemID, EntitiesMap.Staff, field));
-  const selectRoleSkills = useMemo(selectMemoRoleSkills, []);
-  const roleSkills = useSelector(selectRoleSkills);
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
   const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];

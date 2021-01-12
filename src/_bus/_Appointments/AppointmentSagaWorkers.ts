@@ -14,14 +14,14 @@ import {
   EntitiesMap,
 } from '../Types';
 import { QueryAppointmentDataItem } from './AppointmentsTypes';
-import { QueryServiceDataItem } from '../Services/ServicesTypes';
-import { QueryStaffDataItem } from '../Staff/StaffTypes';
-import { QueryCustomerDataItem } from '../Customers/CustomersTypes';
+import { QueryServiceDataItem } from '../_Services/ServicesTypes';
+import { QueryStaffDataItem } from '../_Staff/StaffTypes';
+import { QueryCustomerDataItem } from '../_Customers/CustomersTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './AppointmentsHelpers';
-import { transformAPIData as transformTeamStaffAPIData } from '../Staff/StaffHelpers';
-import { transformAPIData as transformCustomersAPIData } from '../Customers/CustomersHelpers';
-import { transformAPIData as transformServicesAPIData } from '../Services/ServicesHelpers';
+import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
+import { transformAPIData as transformCustomersAPIData } from '../_Customers/CustomersHelpers';
+import { transformAPIData as transformServicesAPIData } from '../_Services/ServicesHelpers';
 
 type Results = [QueryAppointmentDataItem[], QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
 
@@ -63,7 +63,7 @@ export function* workerFetchData({
 }
 
 export function* workerCreateDataItem({
-  payload: createdDataItem,
+  createdDataItem,
   meta: { sideEffectAfterCreatedDataItem, onAddDataItemToSchedulerData },
 }: CreateAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -82,7 +82,7 @@ export function* workerCreateDataItem({
 }
 
 export function* workerUpdateDataItem({
-  payload: updatedDataItem,
+  updatedDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 }: UpdateAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -100,7 +100,7 @@ export function* workerUpdateDataItem({
 }
 
 export function* workerDeleteDataItem({
-  payload: deletedDataItemID,
+  deletedDataItemID,
   meta: sideEffectAfterDeletedDataItem,
 }: DeleteAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
@@ -119,7 +119,8 @@ export function* workerDeleteDataItem({
 type UpdateAppointmentRecurringDataItemResults = [QueryAppointmentDataItem, QueryAppointmentDataItem];
 
 export function* workerUpdateRecurringDataItem({
-  payload: { updatedDataItem, createDataItem },
+  updatedDataItem,
+  createDataItem,
   meta: sideEffectAfterUpdatedDataItem,
 }: UpdateAppointmentRecurringDataItemInitAsyncActionType): SagaIterator {
   try {

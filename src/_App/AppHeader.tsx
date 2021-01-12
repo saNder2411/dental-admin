@@ -4,7 +4,7 @@ import { DropDownList, DropDownListChangeEvent } from '@progress/kendo-react-dro
 import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
 import { selectLocaleState } from './AppSelectors';
-import { selectMemoAuthData } from '../_bus/Selectors';
+import { selectMemoUser } from '../_bus/User/UserSelectors';
 // Images
 import headerBg from '../_assets/header-bg.png';
 
@@ -17,9 +17,9 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
   const localizationService = useLocalization();
   const { currentLocaleID, locales, onLocaleChange } = useSelector(selectLocaleState);
   const dispatch = useDispatch();
-  const selectAuth = useMemo(() => selectMemoAuthData(), []);
-  const auth = useSelector(selectAuth);
-  const showSupportStylist = auth && auth.IsSiteAdmin;
+  const selectUser = useMemo(() => selectMemoUser(), []);
+  const user = useSelector(selectUser);
+  const showSupportStylist = user && user.IsSiteAdmin;
 
   const currentLanguage = locales.find((item) => item.localeID === currentLocaleID);
 

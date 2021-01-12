@@ -1,7 +1,7 @@
 // Types
 import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, InitDataForNewDataItem } from './Types';
-import { AppointmentDataItem } from './Appointments/AppointmentsTypes';
-import { OfferIcons } from './Services/ServicesTypes';
+import { AppointmentDataItem } from './_Appointments/AppointmentsTypes';
+import { OfferIcons } from './_Services/ServicesTypes';
 
 export const transformArrayDataToByIdData = <T extends GenericDataItem = GenericDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
   const allIDs: number[] = [];
@@ -190,49 +190,3 @@ export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start,
     isNew: true,
   };
 };
-
-// const UniqueEntityKeys = {
-//   Appointments: 'AppointmentStatus',
-//   Services: 'OfferingsName_Edit',
-//   Customers: 'LookupMultiHR01teamId',
-//   TeamStaff: 'JobTitle',
-// };
-
-// export const setTitleForAddNewItemSectionAndDataName = (dataItem: GenericDataItem): { labelForAddNewItemBtn: string; dataName: GridDataName } => {
-//   if (!dataItem) return { labelForAddNewItemBtn: '', dataName: GridDataName.Default };
-
-//   if (UniqueEntityKeys.Appointments in dataItem) {
-//     return { labelForAddNewItemBtn: 'New Appointment', dataName: GridDataName.Appointments };
-//   } else if (UniqueEntityKeys.Services in dataItem) {
-//     return { labelForAddNewItemBtn: 'New Service', dataName: GridDataName.Services };
-//   } else if (UniqueEntityKeys.Customers in dataItem) {
-//     return { labelForAddNewItemBtn: 'New Customer', dataName: GridDataName.Customers };
-//   } else if (UniqueEntityKeys.TeamStaff in dataItem) {
-//     return { labelForAddNewItemBtn: 'New Staff', dataName: GridDataName.Staff };
-//   }
-//   return { labelForAddNewItemBtn: '', dataName: GridDataName.Default };
-// };
-
-export const roleSkills = [
-  `Active Listening`,
-  `Artistic & Creative`,
-  `Colouring-Balayage`,
-  `Colouring-Base`,
-  `Colouring-Ombré`,
-  `Consultative`,
-  `Decisive & Confident`,
-  `First Aid`,
-  `Marketing & Promoting`,
-  `Patience & Tolerance`,
-  `Personal Dexterity`,
-  `Physical Stamina`,
-  `Problem Solving`,
-  `Rapport Building`,
-  `Styling-Blunt Cut`,
-  `Styling-Chunky`,
-  `Styling-Dusting`,
-  `Styling-Layering`,
-  `Styling-Undercut`,
-  `Styling-Wispy`,
-  `Time Management`,
-];

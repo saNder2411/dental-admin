@@ -47,7 +47,7 @@ import './AppStyles.scss';
 // Selectors
 import { selectLocaleId } from './AppSelectors';
 // Action Creators
-import { fetchAuthDataInitAsyncAC } from '../_bus/AC';
+import { fetchUserDataInitAsyncAC } from '../_bus/User/UserAC';
 load(
   likelySubtags,
   currencyData,
@@ -84,7 +84,7 @@ export const App: FC = (): JSX.Element => {
   const currentLocaleID = useSelector(selectLocaleId);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAuthDataInitAsyncAC());
+    dispatch(fetchUserDataInitAsyncAC());
   });
 
   return (

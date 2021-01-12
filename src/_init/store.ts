@@ -6,10 +6,14 @@ import { composeEnhancers, middleware, sagaMiddleware } from './middleware';
 // Types
 import { AppState } from '../_App';
 import { GridState } from '../_bus/Types';
+import { UIState } from '../_bus/UI/UITypes';
+import { UserState } from '../_bus/User/UserTypes';
 
 export interface GlobalState {
   AppState: AppState;
   GridState: GridState;
+  UI: UIState;
+  User: UserState;
 }
 
 export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(...middleware)));

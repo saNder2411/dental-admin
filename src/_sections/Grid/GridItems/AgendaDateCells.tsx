@@ -7,10 +7,11 @@ import { Error } from '@progress/kendo-react-labels';
 // Styled Components
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Selectors
-import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../_bus/Appointments/AppointmentsTypes';
+import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 // Hooks
 import { useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';

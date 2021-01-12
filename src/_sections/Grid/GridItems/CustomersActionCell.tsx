@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { CustomerDataItem } from '../../../_bus/Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 // Actions
 import { createCustomerDataItemInitAsyncAC, updateCustomerDataItemInitAsyncAC, deleteCustomerDataItemInitAsyncAC } from '../../../_bus/AC';

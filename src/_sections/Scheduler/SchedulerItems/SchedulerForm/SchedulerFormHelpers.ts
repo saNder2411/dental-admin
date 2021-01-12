@@ -11,7 +11,7 @@ import {
   MonthlyWeekNumberType,
   CustomerFields,
 } from './SchedulerFormTypes';
-import { AppointmentDataItem } from '../../../../_bus/Appointments/AppointmentsTypes';
+import { AppointmentDataItem } from '../../../../_bus/_Appointments/AppointmentsTypes';
 // Instruments
 import {
   EndRepeatTypes,

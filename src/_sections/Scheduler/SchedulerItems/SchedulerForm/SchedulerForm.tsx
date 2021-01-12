@@ -28,7 +28,7 @@ import {
 import { selectCustomerById, selectMemoUpdatedRecurringDataItem } from '../../../../_bus/Selectors';
 // Types
 import { StatusNames } from '../../../../_bus/Types';
-import { CustomerDataItem } from '../../../../_bus/Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions

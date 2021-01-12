@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { NumericTextBox, NumericTextBoxChangeEvent } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectDataItemIsLoading, selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Types
 import { EditCellNumericProps } from './GridItemsTypes';
-import { ServiceDataItem } from '../../../_bus/Services/ServicesTypes';
+import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 import { EntitiesMap } from '../../../_bus/Types';
 
 export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem>> = ({ dataItemID, field, onChange, step, min }): JSX.Element => {

@@ -17,12 +17,13 @@ import { IconMap } from '../../../_instruments';
 // Types
 import { StatusNames } from '../../../_bus/Types';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
-import { StaffDataItem } from '../../../_bus/Staff/StaffTypes';
+import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 //Action Creators
 import { setFormItemIdAC, schAddNewItemToEditAC, changeUpdatedRecurringDataItemAC } from '../../../_bus/AC';
 import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/AC';
 // Selectors
-import { selectDataItemIsLoading, selectFormItemID, selectSelectedView } from '../../../_bus/Selectors';
+import { selectFormItemID, selectSelectedView } from '../../../_bus/Selectors';
+import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
 
