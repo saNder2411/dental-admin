@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem, ViewType } from './Types';
+import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem } from './Types';
 import { AppointmentDataItem } from './_Appointments/AppointmentsTypes';
 import { CustomerDataItem } from './_Customers/CustomersTypes';
 import { StaffDataItem } from './_Staff/StaffTypes';
@@ -189,11 +189,6 @@ export const discardAddNewItemToDataAC = (dataItemID: number, entityName: Entiti
 });
 
 // Scheduler
-
-export const changeMapTeamToFilteredAC = (employeeID: number) => ({ type: ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED, employeeID });
-
-export const setFormItemIdAC = (formItemID: number | null) => ({ type: ActionTypes.SET_FORM_ITEM_ID, payload: formItemID });
-
 export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewDataItem) => ({
   type: ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM,
   initDataForNewDataItem,
@@ -202,13 +197,4 @@ export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewData
 export const schDiscardAddNewItemToDataAC = (dataItemID: number) => ({
   type: ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA,
   dataItemID,
-});
-
-export const changeSelectedDateAC = (date: Date) => ({ type: ActionTypes.CHANGE_SELECTED_DATE, date });
-
-export const changeSelectedViewAC = (view: ViewType) => ({ type: ActionTypes.CHANGE_SELECTED_VIEW, view });
-
-export const changeUpdatedRecurringDataItemAC = (dataItem: AppointmentDataItem | null) => ({
-  type: ActionTypes.SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM,
-  dataItem,
 });

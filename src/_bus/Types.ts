@@ -55,16 +55,8 @@ export const ActionTypes = {
   ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
   // Scheduler
-  CHANGE_MAP_TEAM_TO_FILTERED: 'SCHEDULER/CHANGE_MAP_TEAM_TO_FILTERED' as const,
-  SET_FORM_ITEM_ID: 'SCHEDULER/SET_FORM_ITEM_ID' as const,
-
   SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM: 'SCHEDULER/SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM' as const,
   SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA: 'SCHEDULER/SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
-
-  CHANGE_SELECTED_DATE: 'SCHEDULER/CHANGE_SELECTED_DATE' as const,
-  CHANGE_SELECTED_VIEW: 'SCHEDULER/CHANGE_SELECTED_VIEW' as const,
-
-  SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM: 'SCHEDULER/SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM' as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -87,20 +79,18 @@ export enum StatusNames {
   Tooth = '(11) Tooth',
 }
 
-export type ViewType = 'day' | 'week' | 'month';
-
-export interface InitDataForNewDataItem {
-  Start: Date;
-  End: Date;
-  TeamID: number;
-}
-
 export const EntitiesMap = {
   Appointments: 'appointments' as const,
   Staff: 'staff' as const,
   Customers: 'customers' as const,
   Services: 'services' as const,
 };
+
+export interface InitDataForNewDataItem {
+  Start: Date;
+  End: Date;
+  TeamID: number;
+}
 
 export interface Entities {
   [EntitiesMap.Appointments]: {
@@ -132,13 +122,7 @@ export interface Entities {
 export type EntitiesKeys = keyof Entities;
 
 export interface GridState {
-  mapTeamToFiltered: { [key: string]: boolean };
-  formItemID: number | null;
   newAppointmentDataItem: null | AppointmentDataItem;
-  selectedDate: Date;
-  selectedView: ViewType;
-  updatableRecurringDataItem: null | AppointmentDataItem;
-
   entities: Entities;
 }
 

@@ -6,7 +6,7 @@ import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerSlotProps } from './SchedulerItemTypes';
 // Action Creators
-import { setFormItemIdAC } from '../../../_bus/AC';
+import { setFormItemIdAC } from '../../../_bus/Scheduler/SchedulerAC';
 
 export const SchedulerEditSlot: FC<CustomSchedulerSlotProps> = (props): JSX.Element => {
   const { dataItem } = props;

@@ -3,7 +3,6 @@ import { createSelector } from 'reselect';
 import { GlobalState } from '../_init';
 import { GenericDataItem, EntitiesKeys } from './Types';
 
-
 const selectProcessByIdData = (entityName: EntitiesKeys) => ({ GridState }: GlobalState) => GridState.entities[entityName].processById;
 
 export const selectMemoProcessDataItem = <T extends GenericDataItem = GenericDataItem>(ID: number, entityName: EntitiesKeys) =>
@@ -100,13 +99,6 @@ export const selectServicesDataForDropDownListData = () =>
 export const selectServicesCategory = () => createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => byId[ID]?.OfferingCatType ?? ''));
 
 // Scheduler
-
-const selectTeamToFiltered = ({ GridState }: GlobalState) => GridState.mapTeamToFiltered;
-
-export const selectMemoMapTeamToFiltered = () => createSelector(selectTeamToFiltered, (mapTeamToFiltered) => mapTeamToFiltered);
-
-export const selectFormItemID = ({ GridState }: GlobalState) => GridState.formItemID;
-
 const selectNewAppointmentDataItem = ({ GridState }: GlobalState) => GridState.newAppointmentDataItem;
 
 export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
@@ -117,13 +109,4 @@ export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) =>
   });
 };
 
-export const selectSelectedDate = ({ GridState }: GlobalState) => GridState.selectedDate;
-
-export const selectSelectedView = ({ GridState }: GlobalState) => GridState.selectedView;
-
 export const selectMemoOriginalDataItem = (dataItemID: number) => createSelector(selectByIdAppointmentsData, (byID) => byID[dataItemID]);
-
-export const selectUpdatableRecurringDataItem = ({ GridState }: GlobalState) => GridState.updatableRecurringDataItem;
-
-export const selectMemoUpdatedRecurringDataItem = () =>
-  createSelector(selectUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);

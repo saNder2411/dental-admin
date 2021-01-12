@@ -25,7 +25,8 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectCustomerById, selectMemoUpdatedRecurringDataItem } from '../../../../_bus/Selectors';
+import { selectCustomerById } from '../../../../_bus/Selectors';
+import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 // Types
 import { StatusNames } from '../../../../_bus/Types';
 import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
@@ -37,8 +38,8 @@ import {
   updateAppointmentDataItemInitAsyncAC,
   createAppointmentDataItemInitAsyncAC,
   schDiscardAddNewItemToDataAC,
-  changeUpdatedRecurringDataItemAC,
 } from '../../../../_bus/AC';
+import { changeUpdatedRecurringDataItemAC } from '../../../../_bus/Scheduler/SchedulerAC';
 // Instruments
 import {
   StatusDropDownListData,
@@ -70,7 +71,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const selectUpdatedRecurringDataItem = useMemo(selectMemoUpdatedRecurringDataItem, []);
+  const selectUpdatedRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
   const updatedRecurringDataItem = useSelector(selectUpdatedRecurringDataItem);
 
   const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);

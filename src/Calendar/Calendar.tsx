@@ -8,9 +8,10 @@ import { Loader, LoaderDataItem } from '../_components';
 // Styled Components
 import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
-import {  selectSelectedDate, selectSelectedView } from '../_bus/Selectors';
+import { selectSelectedDate, selectSelectedView } from '../_bus/Scheduler/SchedulerSelectors';
 // Action Creators
-import { changeMapTeamToFilteredAC, schAddNewItemToEditAC } from '../_bus/AC';
+import { schAddNewItemToEditAC } from '../_bus/AC';
+import { changeMapTeamToFilteredAC } from '../_bus/Scheduler/SchedulerAC';
 // Hooks
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from '../Agenda/AgendaHooks';
 import { useStaffDataForScheduler } from './CalendarHooks';

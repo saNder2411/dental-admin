@@ -12,13 +12,7 @@ import {
 } from './Helpers';
 
 const initialState = {
-  mapTeamToFiltered: { '1': false },
-  formItemID: null,
   newAppointmentDataItem: null,
-  selectedDate: new Date(),
-  selectedView: 'day' as const,
-  updatableRecurringDataItem: null,
-
   entities: {
     appointments: { originalData: [], processById: {}, byId: {}, allIDs: [] },
     customers: { originalData: [], processById: {}, byId: {}, allIDs: [] },
@@ -40,8 +34,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const [byId, allIDs] = transformArrayDataToByIdData(action.data);
       return {
         ...state,
-        mapTeamToFiltered:
-          action.entityName === EntitiesMap.Staff ? { ...allIDs.reduce((acc, id) => ({ ...acc, [id]: true }), {}) } : state.mapTeamToFiltered,
         entities: {
           ...state.entities,
           [action.entityName]: {
@@ -65,8 +57,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       return {
         ...state,
         newAppointmentDataItem: action.entityName === EntitiesMap.Appointments ? null : state.newAppointmentDataItem,
-        mapTeamToFiltered:
-          action.entityName === EntitiesMap.Staff ? { ...state.mapTeamToFiltered, [action.dataItem.ID]: true } : state.mapTeamToFiltered,
         entities: {
           ...state.entities,
           [action.entityName]: {
@@ -83,7 +73,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       const newDataAfterUpdateDataItem = updateDataAfterEditItem(state.entities[action.entityName].originalData, action.dataItem);
       return {
         ...state,
-        updatableRecurringDataItem: action.entityName === EntitiesMap.Appointments ? null : state.updatableRecurringDataItem,
         entities: {
           ...state.entities,
           [action.entityName]: {
@@ -102,10 +91,8 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
         action.deletedDataItemID
       );
       const { [action.deletedDataItemID]: deletedItem, ...newEnById } = state.entities[action.entityName].byId;
-      const { [action.deletedDataItemID]: deletedStaffFromMapTeam, ...newMapTeam } = state.mapTeamToFiltered;
       return {
         ...state,
-        mapTeamToFiltered: action.entityName === EntitiesMap.Staff ? newMapTeam : state.mapTeamToFiltered,
         entities: {
           ...state.entities,
           [action.entityName]: {
@@ -197,12 +184,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
       };
 
     // Scheduler
-    case ActionTypes.CHANGE_MAP_TEAM_TO_FILTERED:
-      return { ...state, mapTeamToFiltered: { ...state.mapTeamToFiltered, [action.employeeID]: !state.mapTeamToFiltered[action.employeeID] } };
-
-    case ActionTypes.SET_FORM_ITEM_ID:
-      return { ...state, formItemID: action.payload };
-
     case ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM:
       const newAppointmentForScheduler = getNewAppointmentDataItemForScheduler(state.entities.appointments.allIDs, action.initDataForNewDataItem);
       return {
@@ -235,15 +216,6 @@ export const reducer = (state: GridState = initialState, action: Actions): GridS
           },
         },
       };
-
-    case ActionTypes.SCHEDULER_CHANGE_UPDATED_RECURRING_DATA_ITEM:
-      return { ...state, updatableRecurringDataItem: action.dataItem };
-
-    case ActionTypes.CHANGE_SELECTED_DATE:
-      return { ...state, selectedDate: action.date };
-
-    case ActionTypes.CHANGE_SELECTED_VIEW:
-      return { ...state, selectedView: action.view };
 
     default:
       return state;

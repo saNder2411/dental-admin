@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 // Types
 import { ActionTypes, Actions } from '../Types';
+import { ActionTypes as UserActionTypes, UserActions } from '../User/UserTypes';
 
 const dataLoadingReducer = (state: boolean = false, action: Actions) => {
   switch (action.type) {
@@ -76,9 +77,9 @@ const dataItemErrorReducer = (state: string = ``, action: Actions) => {
   }
 };
 
-const userAuthErrorReducer = (state: string = ``, action: Actions) => {
+const userAuthErrorReducer = (state: string = ``, action: UserActions) => {
   switch (action.type) {
-    case ActionTypes.FETCH_AUTH_DATA_FAILURE:
+    case UserActionTypes.FETCH_USER_DATA_FAILURE:
       return action.errorMessage;
     default:
       return state;

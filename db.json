@@ -379,8 +379,8 @@
     },
     {
       "Id": 628,
-      "EventDate": "2021-01-12T07:00:00.000Z",
-      "EndDate": "2021-01-12T08:00:00.000Z",
+      "EventDate": "2021-01-12T06:45:00.000Z",
+      "EndDate": "2021-01-12T07:45:00.000Z",
       "Duration": 60,
       "Description": "",
       "fAllDayEvent": null,
@@ -390,23 +390,23 @@
       "Gender": "(2) Male",
       "Notes": "",
       "ServiceCharge": 40,
-      "FilterStart": "2021-01-12T07:00:00.000Z",
-      "FilterEnd": "2021-01-12T08:00:00.000Z",
+      "FilterStart": "2021-01-12T06:45:00.000Z",
+      "FilterEnd": "2021-01-12T07:45:00.000Z",
       "MetroRRule": null,
       "MetroRecException": null,
       "CellPhone": "+411234567890",
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 4,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
-      },
       "ID": 628,
       "Modified": "2021-01-11T17:17:01.679Z",
       "FirstName": "Consultation",
       "LastNameAppt": "A.Male",
       "Title": "C.A.Male-0628",
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
