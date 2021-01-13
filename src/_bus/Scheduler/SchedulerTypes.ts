@@ -1,6 +1,6 @@
 // Types
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
-import { InferValueTypes } from '../Types';
+import { InferValueTypes } from '../Entities/EntitiesTypes';
 // Actions
 import * as actions from './SchedulerAC';
 

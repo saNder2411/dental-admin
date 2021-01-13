@@ -1,4 +1,4 @@
-import { StatusNames } from './Types';
+import { StatusNames } from './Entities/EntitiesTypes';
 
 export const statusNameList = Object.values(StatusNames);
 

@@ -15,9 +15,9 @@ import { process } from '@progress/kendo-data-query';
 import { Input } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Types
-import { GenericDataItem, EntitiesKeys } from '../../_bus/Types';
+import { GenericDataItem, EntitiesKeys } from '../../_bus/Entities/EntitiesTypes';
 // Action Creators
-import { changeItemAC, addNewItemToEditAC } from '../../_bus/AC';
+import { changeItemAC, addNewItemToEditAC } from '../../_bus/Entities/EntitiesAC';
 
 export const ColumnMenu: FC<any> = (props) => {
   return (

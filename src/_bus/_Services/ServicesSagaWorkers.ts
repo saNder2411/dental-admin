@@ -3,14 +3,14 @@ import { put, apply } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
-import * as actions from '../AC';
+import * as actions from '../Entities/EntitiesAC';
 // Types
 import {
   CreateServiceDataItemInitAsyncActionType,
   UpdateServiceDataItemInitAsyncActionType,
   DeleteServiceDataItemInitAsyncActionType,
   EntitiesMap,
-} from '../Types';
+} from '../Entities/EntitiesTypes';
 import { QueryServiceDataItem } from './ServicesTypes';
 // Helpers
 import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from './ServicesHelpers';

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Action Creators
-import { fetchStaffDataInitAsyncAC } from '../../_bus/AC';
+import { fetchStaffDataInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 
 export const useFetchStaffData = (staffDataLength: number, dispatch: Dispatch) =>
   useEffect(() => {

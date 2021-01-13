@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectAppointmentByEmployeeID } from '../../../_bus/Selectors';
+import { selectAppointmentByEmployeeID } from '../../../_bus/Entities/EntitiesSelectors';
 
 export const useTextFieldsValidation = (value: string | null) => {
   const [isValid, setIsValid] = useState(true);

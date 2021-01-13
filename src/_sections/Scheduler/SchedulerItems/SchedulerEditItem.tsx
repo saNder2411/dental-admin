@@ -6,7 +6,7 @@ import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Selectors
-import { selectMemoOriginalDataItem } from '../../../_bus/Selectors';
+import { selectMemoOriginalDataItem } from '../../../_bus/Entities/EntitiesSelectors';
 // Action Creators
 import { setFormItemIdAC } from '../../../_bus/Scheduler/SchedulerAC';
 

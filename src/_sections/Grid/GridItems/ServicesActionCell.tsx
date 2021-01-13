@@ -5,11 +5,11 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
-import { EntitiesMap } from '../../../_bus/Types';
+import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
-import { createServiceDataItemInitAsyncAC, updateServiceDataItemInitAsyncAC, deleteServiceDataItemInitAsyncAC } from '../../../_bus/AC';
+import { createServiceDataItemInitAsyncAC, updateServiceDataItemInitAsyncAC, deleteServiceDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectMemoProcessDataItem } from '../../../_bus/Selectors';
+import { selectMemoProcessDataItem } from '../../../_bus/Entities/EntitiesSelectors';
 
 export const ServicesActionsControlCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<ServiceDataItem>(ID, EntitiesMap.Services), [ID]);

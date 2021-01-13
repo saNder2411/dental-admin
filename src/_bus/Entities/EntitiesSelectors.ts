@@ -1,14 +1,14 @@
 import { createSelector } from 'reselect';
 // Types
-import { GlobalState } from '../_init';
-import { GenericDataItem, EntitiesKeys } from './Types';
+import { GlobalState } from '../../_init';
+import { GenericDataItem, EntitiesKeys } from './EntitiesTypes';
 
-const selectProcessByIdData = (entityName: EntitiesKeys) => ({ GridState }: GlobalState) => GridState.entities[entityName].processById;
+const selectProcessByIdData = (entityName: EntitiesKeys) => ({ Entities }: GlobalState) => Entities[entityName].processById;
 
 export const selectMemoProcessDataItem = <T extends GenericDataItem = GenericDataItem>(ID: number, entityName: EntitiesKeys) =>
   createSelector(selectProcessByIdData(entityName), (processById): T => processById[ID] as T);
 
-const selectByIdData = (entityName: EntitiesKeys) => ({ GridState }: GlobalState) => GridState.entities[entityName].byId;
+const selectByIdData = (entityName: EntitiesKeys) => ({ Entities }: GlobalState) => Entities[entityName].byId;
 
 export const selectByIdDataItemFieldValue = <T extends GenericDataItem = GenericDataItem, U extends unknown = any>(
   ID: number,
@@ -24,34 +24,34 @@ export const selectProcessDataItemFieldValue = <T extends GenericDataItem = Gene
 
 // For Domain
 // Appointment
-export const selectOriginalAppointmentsData = ({ GridState }: GlobalState) => GridState.entities.appointments.originalData;
+export const selectOriginalAppointmentsData = ({ Entities }: GlobalState) => Entities.appointments.originalData;
 
 export const selectMemoOriginalAppointmentsData = () => createSelector(selectOriginalAppointmentsData, (data) => data);
 
-export const selectByIdAppointmentsData = ({ GridState }: GlobalState) => GridState.entities.appointments.byId;
+export const selectByIdAppointmentsData = ({ Entities }: GlobalState) => Entities.appointments.byId;
 
-export const selectAllIdsAppointments = ({ GridState }: GlobalState) => GridState.entities.appointments.allIDs;
+export const selectAllIdsAppointments = ({ Entities }: GlobalState) => Entities.appointments.allIDs;
 
-export const selectOriginalAppointmentsDataLength = ({ GridState }: GlobalState) => GridState.entities.appointments.originalData.length;
+export const selectOriginalAppointmentsDataLength = ({ Entities }: GlobalState) => Entities.appointments.originalData.length;
 
-export const selectOriginalCustomersDataLength = ({ GridState }: GlobalState) => GridState.entities.customers.originalData.length;
+export const selectOriginalCustomersDataLength = ({ Entities }: GlobalState) => Entities.customers.originalData.length;
 
-export const selectOriginalStaffDataLength = ({ GridState }: GlobalState) => GridState.entities.staff.originalData.length;
+export const selectOriginalStaffDataLength = ({ Entities }: GlobalState) => Entities.staff.originalData.length;
 
-export const selectOriginalServicesDataLength = ({ GridState }: GlobalState) => GridState.entities.services.originalData.length;
+export const selectOriginalServicesDataLength = ({ Entities }: GlobalState) => Entities.services.originalData.length;
 
 export const selectAppointmentByEmployeeID = (ID: number) =>
   createSelector(selectOriginalAppointmentsData, (appointmentData) => appointmentData.filter(({ LookupHR01teamId }) => LookupHR01teamId === ID));
 
 // Staff
 
-export const selectOriginalStaffData = ({ GridState }: GlobalState) => GridState.entities.staff.originalData;
+export const selectOriginalStaffData = ({ Entities }: GlobalState) => Entities.staff.originalData;
 
 export const selectMemoOriginalStaffData = () => createSelector(selectOriginalStaffData, (data) => data);
 
-const selectStaff = ({ GridState }: GlobalState) => GridState.entities.staff;
+const selectStaff = ({ Entities }: GlobalState) => Entities.staff;
 
-export const selectStaffByIdData = ({ GridState }: GlobalState) => GridState.entities.staff.byId;
+export const selectStaffByIdData = ({ Entities }: GlobalState) => Entities.staff.byId;
 
 export const selectStaffLastNameByID = (ID: number) => createSelector(selectStaffByIdData, (staffById) => staffById[ID]?.Title ?? '');
 
@@ -63,13 +63,13 @@ export const selectStaffDataForDropDownListData = () =>
 
 // Customers
 
-export const selectOriginalCustomersData = ({ GridState }: GlobalState) => GridState.entities.customers.originalData;
+export const selectOriginalCustomersData = ({ Entities }: GlobalState) => Entities.customers.originalData;
 
 export const selectMemoOriginalCustomersData = () => createSelector(selectOriginalCustomersData, (data) => data);
 
-const selectCustomers = ({ GridState }: GlobalState) => GridState.entities.customers;
+const selectCustomers = ({ Entities }: GlobalState) => Entities.customers;
 
-export const selectCustomersByIdData = ({ GridState }: GlobalState) => GridState.entities.customers.byId;
+export const selectCustomersByIdData = ({ Entities }: GlobalState) => Entities.customers.byId;
 
 export const selectCustomerFullNameByID = (ID: number) =>
   createSelector(selectCustomersByIdData, (customersById) => customersById[ID]?.FullName ?? '');
@@ -82,13 +82,13 @@ export const selectCustomersDataForDropDownListData = () =>
 export const selectCustomerById = (ID: number) => createSelector(selectCustomersByIdData, (byId) => byId[ID]);
 // Services
 
-export const selectOriginalServicesData = ({ GridState }: GlobalState) => GridState.entities.services.originalData;
+export const selectOriginalServicesData = ({ Entities }: GlobalState) => Entities.services.originalData;
 
 export const selectMemoOriginalServicesData = () => createSelector(selectOriginalServicesData, (data) => data);
 
-const selectServices = ({ GridState }: GlobalState) => GridState.entities.services;
+const selectServices = ({ Entities }: GlobalState) => Entities.services;
 
-export const selectServicesByIdData = ({ GridState }: GlobalState) => GridState.entities.services.byId;
+export const selectServicesByIdData = ({ Entities }: GlobalState) => Entities.services.byId;
 
 export const selectServicesNameByID = (IDs: number[]) =>
   createSelector(selectServicesByIdData, (servicesById) => IDs.map((ID) => servicesById[ID]?.OfferingsName_Edit ?? '').join(' | '));
@@ -99,7 +99,7 @@ export const selectServicesDataForDropDownListData = () =>
 export const selectServicesCategory = () => createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => byId[ID]?.OfferingCatType ?? ''));
 
 // Scheduler
-const selectNewAppointmentDataItem = ({ GridState }: GlobalState) => GridState.newAppointmentDataItem;
+const selectNewAppointmentDataItem = ({ Entities }: GlobalState) => Entities.appointments.newDataItem;
 
 export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
   return createSelector(selectNewAppointmentDataItem, (newAppointmentDataItem) => {

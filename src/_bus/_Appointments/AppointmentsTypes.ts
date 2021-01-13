@@ -1,5 +1,5 @@
 // Types
-import { StatusNames } from '../Types';
+import { StatusNames } from '../Entities/EntitiesTypes';
 
 interface BackendImmutableKey {
   Id: number;

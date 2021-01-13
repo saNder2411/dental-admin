@@ -10,7 +10,7 @@ import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
 import { selectSelectedDate, selectSelectedView } from '../_bus/Scheduler/SchedulerSelectors';
 // Action Creators
-import { schAddNewItemToEditAC } from '../_bus/AC';
+import { schAddNewItemToEditAC } from '../_bus/Entities/EntitiesAC';
 import { changeMapTeamToFilteredAC } from '../_bus/Scheduler/SchedulerAC';
 // Hooks
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from '../Agenda/AgendaHooks';

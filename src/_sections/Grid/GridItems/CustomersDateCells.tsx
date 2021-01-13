@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react-dateinputs';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
-import { EntitiesMap } from '../../../_bus/Types';
+import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
 
 export const CustomersDateInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);

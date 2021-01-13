@@ -4,7 +4,7 @@ import {
   selectOriginalCustomersDataLength,
   selectOriginalStaffDataLength,
   selectOriginalServicesDataLength,
-} from '../../_bus/Selectors';
+} from '../../_bus/Entities/EntitiesSelectors';
 
 export const useSelectBindDataLengthForAgenda = () => {
   const customersDataLength = useSelector(selectOriginalCustomersDataLength);

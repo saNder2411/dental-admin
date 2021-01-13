@@ -1,5 +1,5 @@
 // Types
-import { InferValueTypes } from '../Types';
+import { InferValueTypes } from '../Entities/EntitiesTypes';
 // Actions
 import * as actions from './UserAC';
 

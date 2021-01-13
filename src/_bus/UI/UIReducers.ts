@@ -1,9 +1,9 @@
 import { combineReducers } from 'redux';
 // Types
-import { ActionTypes, Actions } from '../Types';
+import { ActionTypes, Actions } from '../Entities/EntitiesTypes';
 import { ActionTypes as UserActionTypes, UserActions } from '../User/UserTypes';
 
-const dataLoadingReducer = (state: boolean = false, action: Actions) => {
+const dataLoadingReducer = (state: boolean = false, action: Actions): boolean => {
   switch (action.type) {
     case ActionTypes.FETCH_DATA_REQUEST:
       return true;
@@ -14,7 +14,7 @@ const dataLoadingReducer = (state: boolean = false, action: Actions) => {
   }
 };
 
-const dataItemLoadingReducer = (state: boolean = false, action: Actions) => {
+const dataItemLoadingReducer = (state: boolean = false, action: Actions): boolean => {
   switch (action.type) {
     case ActionTypes.CREATE_DATA_ITEM_REQUEST:
       return true;
@@ -39,7 +39,7 @@ const dataItemLoadingReducer = (state: boolean = false, action: Actions) => {
   }
 };
 
-const dataErrorReducer = (state: string = ``, action: Actions) => {
+const dataErrorReducer = (state: string = ``, action: Actions): string => {
   switch (action.type) {
     case ActionTypes.FETCH_DATA_REQUEST:
       return ``;
@@ -52,7 +52,7 @@ const dataErrorReducer = (state: string = ``, action: Actions) => {
   }
 };
 
-const dataItemErrorReducer = (state: string = ``, action: Actions) => {
+const dataItemErrorReducer = (state: string = ``, action: Actions): string => {
   switch (action.type) {
     case ActionTypes.CREATE_DATA_ITEM_REQUEST:
       return ``;
@@ -77,7 +77,7 @@ const dataItemErrorReducer = (state: string = ``, action: Actions) => {
   }
 };
 
-const userAuthErrorReducer = (state: string = ``, action: UserActions) => {
+const userAuthErrorReducer = (state: string = ``, action: UserActions): string => {
   switch (action.type) {
     case UserActionTypes.FETCH_USER_DATA_FAILURE:
       return action.errorMessage;

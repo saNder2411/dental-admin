@@ -4,11 +4,11 @@ import { SchedulerSlot as KendoSchedulerSlot, SchedulerSlotProps } from '@progre
 // Components
 import { SchedulerEditSlot } from './SchedulerEditSlot';
 // Action Creators
-import { schAddNewItemToEditAC } from '../../../_bus/AC';
+import { schAddNewItemToEditAC } from '../../../_bus/Entities/EntitiesAC';
 // Types
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 // Selectors
-import { selectMemoNewAppointmentDataItem } from '../../../_bus/Selectors';
+import { selectMemoNewAppointmentDataItem } from '../../../_bus/Entities/EntitiesSelectors';
 
 export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
   (props) => {

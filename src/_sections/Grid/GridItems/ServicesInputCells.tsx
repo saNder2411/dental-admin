@@ -2,12 +2,12 @@ import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Input } from '@progress/kendo-react-inputs';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
-import { EntitiesMap } from '../../../_bus/Types';
+import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
 
 export const ServicesIconInput: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);

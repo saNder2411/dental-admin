@@ -1,6 +1,6 @@
 import { takeEvery, all, call } from 'redux-saga/effects';
 // Types
-import { ActionTypes } from '../Types';
+import { ActionTypes } from '../Entities/EntitiesTypes';
 // Workers
 import { workerFetchData, workerCreateDataItem, workerUpdateDataItem, workerDeleteDataItem } from './CustomersSagaWorkers';
 

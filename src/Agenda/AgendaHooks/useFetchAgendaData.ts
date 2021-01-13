@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { Dispatch } from 'redux';
 // Action Creators
-import { fetchAppointmentsDataInitAsyncAC } from '../../_bus/AC';
+import { fetchAppointmentsDataInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 
 export const useFetchAgendaData = (
   appointmentsDataLength: number,

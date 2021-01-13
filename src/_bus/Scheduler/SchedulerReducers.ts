@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 // Types
-import { ActionTypes, Actions, EntitiesMap } from '../Types';
+import { ActionTypes, Actions, EntitiesMap } from '../Entities/EntitiesTypes';
 import { ActionTypes as SchedulerActionTypes, Actions as SchedulerActions, ViewType } from './SchedulerTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 

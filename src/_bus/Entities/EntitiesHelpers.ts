@@ -1,7 +1,7 @@
 // Types
-import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, InitDataForNewDataItem } from './Types';
-import { AppointmentDataItem } from './_Appointments/AppointmentsTypes';
-import { OfferIcons } from './_Services/ServicesTypes';
+import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, InitDataForNewAppointmentDataItem } from './EntitiesTypes';
+import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { OfferIcons } from '../_Services/ServicesTypes';
 
 export const transformArrayDataToByIdData = <T extends GenericDataItem = GenericDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
   const allIDs: number[] = [];
@@ -25,7 +25,7 @@ export const updateDataAfterEditItem = <T extends GenericDataItem = GenericDataI
   return [...data.slice(0, index), dataItem, ...data.slice(index + 1)];
 };
 
-export const updateDataAfterEditProcessItem = <T extends GenericDataItem = GenericDataItem>(processData: { [key: string]: T }, dataItem: T): T[] => {
+export const updateStateOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(processData: { [key: string]: T }, dataItem: T): T[] => {
   const newProcessData = { ...processData, [dataItem.ID]: dataItem };
   const newOriginalData = Object.values(newProcessData);
   newOriginalData.sort((a: any, b: any) => b.ID - a.ID);
@@ -153,7 +153,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
   }
 };
 
-export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start, End, TeamID }: InitDataForNewDataItem): AppointmentDataItem => {
+export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start, End, TeamID }: InitDataForNewAppointmentDataItem): AppointmentDataItem => {
   const ID = generateId(allIDs);
 
   return {

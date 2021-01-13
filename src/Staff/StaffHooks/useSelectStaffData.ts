@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectMemoOriginalStaffData } from '../../_bus/Selectors';
+import { selectMemoOriginalStaffData } from '../../_bus/Entities/EntitiesSelectors';
 import { selectDataIsLoading } from '../../_bus/UI/UISelectors';
 
 export const useSelectStaffData = () => {

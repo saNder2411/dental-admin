@@ -16,7 +16,7 @@ import { CustomSchedulerProps } from './SchedulerTypes';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
 import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
 // Action Creators
-import { updateAppointmentDataItemInitAsyncAC } from '../../_bus/AC';
+import { updateAppointmentDataItemInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 import { changeSelectedDateAC, changeSelectedViewAC } from '../../_bus/Scheduler/SchedulerAC';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {

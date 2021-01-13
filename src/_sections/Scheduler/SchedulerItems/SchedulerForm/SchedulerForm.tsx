@@ -25,10 +25,10 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectCustomerById } from '../../../../_bus/Selectors';
+import { selectCustomerById } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 // Types
-import { StatusNames } from '../../../../_bus/Types';
+import { StatusNames } from '../../../../_bus/Entities/EntitiesTypes';
 import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
@@ -38,7 +38,7 @@ import {
   updateAppointmentDataItemInitAsyncAC,
   createAppointmentDataItemInitAsyncAC,
   schDiscardAddNewItemToDataAC,
-} from '../../../../_bus/AC';
+} from '../../../../_bus/Entities/EntitiesAC';
 import { changeUpdatedRecurringDataItemAC } from '../../../../_bus/Scheduler/SchedulerAC';
 // Instruments
 import {

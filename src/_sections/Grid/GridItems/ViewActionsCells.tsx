@@ -6,9 +6,9 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { Loader } from '../../../_components';
 // Types
-import { EntitiesKeys } from '../../../_bus/Types';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Action Creators
-import { discardAddNewItemToDataAC, cancelEditAC, addItemToEditAC } from '../../../_bus/AC';
+import { discardAddNewItemToDataAC, cancelEditAC, addItemToEditAC } from '../../../_bus/Entities/EntitiesAC';
 
 interface Props {
   inEdit: boolean | undefined;

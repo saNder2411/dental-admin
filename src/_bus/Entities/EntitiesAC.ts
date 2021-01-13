@@ -1,9 +1,9 @@
 // Types
-import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewDataItem } from './Types';
-import { AppointmentDataItem } from './_Appointments/AppointmentsTypes';
-import { CustomerDataItem } from './_Customers/CustomersTypes';
-import { StaffDataItem } from './_Staff/StaffTypes';
-import { ServiceDataItem } from './_Services/ServicesTypes';
+import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewAppointmentDataItem } from './EntitiesTypes';
+import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { CustomerDataItem } from '../_Customers/CustomersTypes';
+import { StaffDataItem } from '../_Staff/StaffTypes';
+import { ServiceDataItem } from '../_Services/ServicesTypes';
 
 // Async Fetch Data
 export const fetchAppointmentsDataInitAsyncAC = (meta: { servicesDataLength: number; staffDataLength: number; customersDataLength: number }) => ({
@@ -189,7 +189,7 @@ export const discardAddNewItemToDataAC = (dataItemID: number, entityName: Entiti
 });
 
 // Scheduler
-export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewDataItem) => ({
+export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewAppointmentDataItem) => ({
   type: ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM,
   initDataForNewDataItem,
 });

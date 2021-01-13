@@ -18,7 +18,7 @@ import {
 import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-import { EntitiesMap } from '../_bus/Types';
+import { EntitiesMap } from '../_bus/Entities/EntitiesTypes';
 // Hooks
 import { useSelectServicesData, useFetchServicesData } from './ServicesHooks';
 

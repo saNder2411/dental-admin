@@ -15,11 +15,11 @@ import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirm
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
-import { StatusNames } from '../../../_bus/Types';
+import { StatusNames } from '../../../_bus/Entities/EntitiesTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 //Action Creators
-import { schAddNewItemToEditAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/AC';
+import { schAddNewItemToEditAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 import { setFormItemIdAC, changeUpdatedRecurringDataItemAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectFormItemID, selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';

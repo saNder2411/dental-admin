@@ -14,10 +14,10 @@ import { ServicesCategoryMultiSelect, ServicesBooleanFlagDropDownList, ServicesR
 import { OfferIcons } from '../../../_bus/_Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StatusNames, EntitiesMap } from '../../../_bus/Types';
+import { StatusNames, EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../../../_bus/Selectors';
+import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
