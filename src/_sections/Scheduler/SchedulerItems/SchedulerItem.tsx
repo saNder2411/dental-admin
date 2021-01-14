@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect,  useRef } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerItem as KendoSchedulerItem } from '@progress/kendo-react-scheduler';
 import { useAsyncFocusBlur } from '@progress/kendo-react-common';
@@ -30,7 +30,6 @@ import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '..
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
-  const renders = useRef(0);
 
   const intl = useInternationalization();
   const dispatch = useDispatch();
@@ -130,7 +129,6 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         onRemoveClick={onDeleteBtnClick}>
         {height && height > 25 && (
           <SC.SchedulerItemTopWrapper isSmallDisplay={!!(width && width < 120)}>
-            <span>{renders.current++}</span>
             {width && width > 120 && children}
             <div className="SchedulerItem__icons">
               <div className="SchedulerItem__icon">

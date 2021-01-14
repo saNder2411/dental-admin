@@ -2,9 +2,7 @@ import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
 
-const selectTeamToFiltered = ({ Scheduler }: GlobalState) => Scheduler.mapTeamToFiltered;
-
-export const selectMemoMapTeamToFiltered = () => createSelector(selectTeamToFiltered, (mapTeamToFiltered) => mapTeamToFiltered);
+export const selectMapTeamToFiltered = ({ Scheduler }: GlobalState) => Scheduler.mapTeamToFiltered;
 
 export const selectFormItemID = ({ Scheduler }: GlobalState) => Scheduler.formItemID;
 
