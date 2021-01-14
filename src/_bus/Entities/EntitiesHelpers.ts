@@ -278,7 +278,7 @@ export const getNewAppointmentDataItemForScheduler = (
     MetroRecException: null,
     FirstName: ``,
     CellPhone: null,
-    LookupCM102customersId: 1270,
+    LookupCM102customersId: 1,
     LookupHR01teamId: TeamID,
     LookupMultiBP01offeringsId: { results: [] },
     ID,

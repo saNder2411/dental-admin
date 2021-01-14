@@ -85,7 +85,7 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
   const onFullNameChange = (evt: ComboBoxChangeEvent) => {
     const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
     const selectedCustomer = customersById[evtValue.value];
-    const newTitle = selectedCustomer ? setTitleProp<number>(selectedCustomer.FirstName ?? '', selectedCustomer.Title ?? '', dataItemID) : '';
+    const newTitle = selectedCustomer ? setTitleProp(selectedCustomer.FirstName ?? '', selectedCustomer.Title ?? '', dataItemID) : '';
 
     onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evtValue.value });
     onChange({ dataItem: dataItemID, field: 'Title', syntheticEvent: evt.syntheticEvent, value: newTitle });

@@ -27,10 +27,13 @@ const mapTeamToFilteredReducer = (
   }
 };
 
-const formItemIDReducer = (state: number | null = null, action: SchedulerActions): number | null => {
+const formItemIDReducer = (state: number | null = null, action: SchedulerActions | Actions): number | null => {
   switch (action.type) {
     case SchedulerActionTypes.SET_FORM_ITEM_ID:
       return action.formItemID;
+
+    case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
+      return action.entityName === EntitiesMap.Appointments ? null : state;
 
     default:
       return state;

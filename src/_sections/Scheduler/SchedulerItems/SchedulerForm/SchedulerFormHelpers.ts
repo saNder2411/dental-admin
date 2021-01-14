@@ -53,8 +53,8 @@ export const getSecondLabelForRepeatEvery = (Repeat: RepeatTypesType) => {
   }
 };
 
-export const setTitleProp = <T = string>(firstName: string | null, lastName: string | null, ID: T) =>
-  `${firstName ? firstName[0] : ''}.${lastName}-0${ID}`;
+export const setTitleProp = (firstName: string | null, lastName: string | null, ID: number) =>
+  `${firstName ? firstName[0] : ''}.${lastName}-${ID < 1000 ? `0${ID}` : ID}`;
 
 const getEndRepeatRule = (endRepeatType: EndRepeatTypesType, repeatInterval: number, endCount: number, endUntil: Date) => {
   switch (endRepeatType) {
@@ -169,7 +169,7 @@ export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDa
     ...others,
     FirstName,
     LastNameAppt,
-    Title: setTitleProp<number>(FirstName, LastNameAppt, formDataItem.ID),
+    Title: setTitleProp(FirstName, LastNameAppt, formDataItem.ID),
     MetroRRule: setRecurrenceRule({
       Repeat,
       EndRepeat,
