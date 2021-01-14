@@ -92,35 +92,19 @@ export interface InitDataForNewAppointmentDataItem {
   TeamID: number;
 }
 
+export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
+  originalData: T[];
+  processById: { [key: string]: T };
+  byId: { [key: string]: T };
+  allIDs: number[];
+  newDataItem: null | T;
+}
+
 export interface EntitiesState {
-  [EntitiesMap.Appointments]: {
-    originalData: AppointmentDataItem[];
-    processById: { [key: string]: AppointmentDataItem };
-    byId: { [key: string]: AppointmentDataItem };
-    allIDs: number[];
-    newDataItem: null | AppointmentDataItem;
-  };
-  [EntitiesMap.Customers]: {
-    originalData: CustomerDataItem[];
-    processById: { [key: string]: CustomerDataItem };
-    byId: { [key: string]: CustomerDataItem };
-    allIDs: number[];
-    newDataItem: null | CustomerDataItem;
-  };
-  [EntitiesMap.Staff]: {
-    originalData: StaffDataItem[];
-    processById: { [key: string]: StaffDataItem };
-    byId: { [key: string]: StaffDataItem };
-    allIDs: number[];
-    newDataItem: null | StaffDataItem;
-  };
-  [EntitiesMap.Services]: {
-    originalData: ServiceDataItem[];
-    processById: { [key: string]: ServiceDataItem };
-    byId: { [key: string]: ServiceDataItem };
-    allIDs: number[];
-    newDataItem: null | ServiceDataItem;
-  };
+  [EntitiesMap.Appointments]: EntitiesStateSlice<AppointmentDataItem>;
+  [EntitiesMap.Customers]: EntitiesStateSlice<CustomerDataItem>;
+  [EntitiesMap.Staff]: EntitiesStateSlice<StaffDataItem>;
+  [EntitiesMap.Services]: EntitiesStateSlice<ServiceDataItem>;
 }
 
 export type EntitiesKeys = keyof EntitiesState;

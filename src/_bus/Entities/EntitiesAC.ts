@@ -175,9 +175,10 @@ export const addItemToEditAC = (dataItemID: number, entityName: EntitiesKeys) =>
 
 export const cancelEditAC = (dataItemID: number, entityName: EntitiesKeys) => ({ type: ActionTypes.CANCEL_EDIT, dataItemID, entityName });
 
-export const changeItemAC = (changeData: { dataItemID: number; field: string; value: any; entityName: EntitiesKeys }) => ({
+export const changeItemAC = (changeData: { dataItemID: number; field: string; value: any }, entityName: EntitiesKeys) => ({
   type: ActionTypes.CHANGE_ITEM,
-  ...changeData,
+  entityName,
+  changeData,
 });
 
 export const addNewItemToEditAC = (entityName: EntitiesKeys) => ({ type: ActionTypes.ADD_NEW_ITEM_TO_EDIT, entityName });

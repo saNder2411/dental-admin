@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useMemo, useState } from 'react';
+import React, { FC, useCallback, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -20,26 +20,23 @@ import { customModelFields, getInitDataForNewDataItem } from '../_sections/Sched
 
 export const Calendar: FC = () => {
   const localizationService = useLocalization();
-
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
 
   const { staffData, mapTeamToFiltered } = useStaffDataForScheduler();
-  const calendarData = useMemo(() => appointmentsData.filter(({ LookupHR01teamId }) => mapTeamToFiltered[LookupHR01teamId]), [
-    appointmentsData,
-    mapTeamToFiltered,
-  ]);
 
   const selectedDate = useSelector(selectSelectedDate);
   const selectedView = useSelector(selectSelectedView);
-  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, calendarData[0]?.LookupHR01teamId ?? 1);
+  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, 1);
   const [isAgendaDataItemLoading, setIsAgendaDataItemLoading] = useState(false);
 
-  const onEmployeeClick = useCallback((employeeID: number) => dispatch(changeMapTeamToFilteredAC(employeeID)), [dispatch]);
+  const onEmployeeClick = useCallback((employeeID: number) => () => dispatch(changeMapTeamToFilteredAC(employeeID)), [dispatch]);
 
   const onAddNewItemClick = () => dispatch(schAddNewItemToEditAC(initDataForNewDataItem));
+  const renders = useRef(0);
+  console.log(renders.current++);
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid position-relative">
@@ -51,7 +48,7 @@ export const Calendar: FC = () => {
             key={employee.ID}
             isFiltered={!mapTeamToFiltered[employee.ID]}
             cardColor={employee.CalendarColHex}
-            onEmployeeClick={() => onEmployeeClick(employee.ID)}
+            onEmployeeClick={onEmployeeClick(employee.ID)}
             fullName={employee.FullName}
           />
         ))}
@@ -64,7 +61,7 @@ export const Calendar: FC = () => {
       </div>
       <div className="card-component">
         <Scheduler
-          data={calendarData}
+          data={appointmentsData}
           modelFields={customModelFields}
           setIsAgendaDataItemLoading={setIsAgendaDataItemLoading}
           group={{

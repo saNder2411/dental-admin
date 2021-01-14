@@ -1,7 +1,11 @@
 // Types
-import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, InitDataForNewAppointmentDataItem } from './EntitiesTypes';
+import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, InitDataForNewAppointmentDataItem, EntitiesStateSlice } from './EntitiesTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { OfferIcons } from '../_Services/ServicesTypes';
+
+export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
+
+export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 
 export const transformArrayDataToByIdData = <T extends GenericDataItem = GenericDataItem>(data: T[]): [{ [key: string]: T }, number[]] => {
   const allIDs: number[] = [];
@@ -13,11 +17,7 @@ export const transformArrayDataToByIdData = <T extends GenericDataItem = Generic
   return [byIdData, allIDs];
 };
 
-export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
-
-export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-
-export const updateDataAfterEditItem = <T extends GenericDataItem = GenericDataItem>(data: T[], dataItem: T): T[] => {
+export const updateDataItemInArray = <T extends GenericDataItem = GenericDataItem>(data: T[], dataItem: T): T[] => {
   const index = data.findIndex(({ ID }) => ID === dataItem.ID);
 
   if (index < 0) return data;
@@ -25,25 +25,123 @@ export const updateDataAfterEditItem = <T extends GenericDataItem = GenericDataI
   return [...data.slice(0, index), dataItem, ...data.slice(index + 1)];
 };
 
-export const updateStateOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(processData: { [key: string]: T }, dataItem: T): T[] => {
-  const newProcessData = { ...processData, [dataItem.ID]: dataItem };
-  const newOriginalData = Object.values(newProcessData);
-  newOriginalData.sort((a: any, b: any) => b.ID - a.ID);
-
-  return newOriginalData as T[];
-};
-
-export const updateDataAfterRemoveItem = <T extends GenericDataItem = GenericDataItem>(data: T[], removeItemID: number): T[] => {
-  const index = data.findIndex(({ ID }) => ID === removeItemID);
+export const deleteDataItemFromArray = <T extends GenericDataItem = GenericDataItem>(data: T[], deleteItemID: number): T[] => {
+  const index = data.findIndex(({ ID }) => ID === deleteItemID);
 
   if (index < 0) return data;
 
   return [...data.slice(0, index), ...data.slice(index + 1)];
 };
 
+export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  data: T[]
+): EntitiesStateSlice<T> => {
+  const [byId, allIDs] = transformArrayDataToByIdData(data);
+
+  return { ...stateSlice, originalData: data, processById: { ...byId }, byId, allIDs };
+};
+
+export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  dataItem: T
+): EntitiesStateSlice<T> => {
+  const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
+  const originalData = stateSlice.originalData.find(({ ID }) => ID === dataItem.ID)
+    ? updateDataItemInArray(stateSlice.originalData, dataItem)
+    : [dataItem, ...stateSlice.originalData];
+
+  return { ...stateSlice, originalData, processById, byId: { ...processById }, newDataItem: null };
+};
+
+export const updateStateSliceOnUpdateDataItem = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  dataItem: T
+): EntitiesStateSlice<T> => {
+  const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
+  const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
+
+  return { ...stateSlice, originalData, processById, byId: { ...processById } };
+};
+
+export const updateStateSliceOnDeleteDataItem = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  deleteDataItemID: number
+): EntitiesStateSlice<T> => {
+  const originalData = deleteDataItemFromArray(stateSlice.originalData, deleteDataItemID);
+  const { [deleteDataItemID]: deletedItem, ...processById } = stateSlice.processById;
+  const allIDs = stateSlice.allIDs.filter((ID) => ID !== deleteDataItemID);
+
+  return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+};
+
+// Edit in Grid
+export const updateStateSliceOnAddDataItemToEditInGrid = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  dataItemID: number
+): EntitiesStateSlice<T> => {
+  const inEditDataItem = { ...stateSlice.processById[dataItemID], inEdit: true };
+  const processById = { ...stateSlice.processById, [dataItemID]: inEditDataItem };
+
+  return { ...stateSlice, processById, byId: { ...processById } };
+};
+
+export const updateStateSliceOnCancelEditInGrid = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  dataItemID: number
+): EntitiesStateSlice<T> => {
+  const { inEdit, ...originalDataItem } = stateSlice.byId[dataItemID];
+  const processById = { ...stateSlice.processById, [dataItemID]: originalDataItem };
+
+  return { ...stateSlice, processById, byId: { ...processById } };
+};
+
+export const updateStateSliceOnChangeDataItemInGrid = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  changeData: { dataItemID: number; field: string; value: any }
+): EntitiesStateSlice<T> => {
+  const processItem = stateSlice.processById[changeData.dataItemID];
+  const processById = { ...stateSlice.processById, [changeData.dataItemID]: { ...processItem, [changeData.field]: changeData.value } };
+
+  return { ...stateSlice, processById };
+};
+
+export const updateStateSliceOnAddNewItemToEditInGrid = <T extends GenericDataItem = GenericDataItem>(
+  stateSlice: EntitiesStateSlice<T>,
+  entityName: EntitiesKeys
+): EntitiesStateSlice<T> => {
+  const newDataItem = getNewDataItem(stateSlice.allIDs, entityName) as T;
+  const originalData = [newDataItem, ...stateSlice.originalData];
+  const processById = { ...stateSlice.processById, [newDataItem.ID]: newDataItem };
+  const allIDs = [newDataItem.ID, ...stateSlice.allIDs];
+
+  return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+};
+
+// Scheduler Edit
+export const updateStateSliceOnAddNewItemToEditInScheduler = (
+  stateSlice: EntitiesStateSlice<AppointmentDataItem>,
+  initDataForNewDataItem: InitDataForNewAppointmentDataItem
+): EntitiesStateSlice<AppointmentDataItem> => {
+  const newDataItem = getNewAppointmentDataItemForScheduler(stateSlice.allIDs, initDataForNewDataItem);
+  const processById = { ...stateSlice.processById, [newDataItem.ID]: newDataItem };
+  const allIDs = [newDataItem.ID, ...stateSlice.allIDs];
+
+  return { ...stateSlice, processById, byId: { ...processById }, allIDs, newDataItem };
+};
+
+export const updateStateSliceOnDiscardAddNewItemInScheduler = (
+  stateSlice: EntitiesStateSlice<AppointmentDataItem>,
+  deleteDataItemID: number
+): EntitiesStateSlice<AppointmentDataItem> => {
+  const { [deleteDataItemID]: deletedItem, ...processById } = stateSlice.processById;
+  const allIDs = stateSlice.allIDs.filter((ID) => ID !== deleteDataItemID);
+
+  return { ...stateSlice, processById, byId: { ...processById }, allIDs, newDataItem: null };
+};
+
 export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): GenericDataItem => {
   const ID = generateId(allIDs);
-  const color = generateColor();
 
   switch (entityName) {
     case EntitiesMap.Appointments:
@@ -139,7 +237,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         CellPhone: '',
         JobTitle: '',
         Department: null,
-        CalendarColHex: color,
+        CalendarColHex: generateColor(),
         ID,
 
         RoleSkills: [],
@@ -153,7 +251,10 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
   }
 };
 
-export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start, End, TeamID }: InitDataForNewAppointmentDataItem): AppointmentDataItem => {
+export const getNewAppointmentDataItemForScheduler = (
+  allIDs: number[],
+  { Start, End, TeamID }: InitDataForNewAppointmentDataItem
+): AppointmentDataItem => {
   const ID = generateId(allIDs);
 
   return {

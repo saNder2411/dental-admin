@@ -43,7 +43,7 @@ export const Grid: FC<Props> = ({ data, entityName, labelNewItemBtn, children })
   const onGridItemChange = useCallback(
     (evt: GridItemChangeEvent) => {
       evt.syntheticEvent.persist();
-      dispatch(changeItemAC({ dataItemID: evt.dataItem, field: evt?.field ?? '', value: evt.value, entityName }));
+      dispatch(changeItemAC({ dataItemID: evt.dataItem, field: evt?.field ?? '', value: evt.value }, entityName));
     },
     [dispatch, entityName]
   );

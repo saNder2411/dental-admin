@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -26,8 +26,9 @@ export const Services: FC = (): JSX.Element => {
   const { servicesData, isDataLoading } = useSelectServicesData();
   const dispatch = useDispatch();
   const localizationService = useLocalization();
-
   useFetchServicesData(servicesData.length, dispatch);
+  const renders = useRef(0);
+  console.log(renders.current++);
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">

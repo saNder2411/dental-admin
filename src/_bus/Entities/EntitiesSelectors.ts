@@ -26,8 +26,6 @@ export const selectProcessDataItemFieldValue = <T extends GenericDataItem = Gene
 // Appointment
 export const selectOriginalAppointmentsData = ({ Entities }: GlobalState) => Entities.appointments.originalData;
 
-export const selectMemoOriginalAppointmentsData = () => createSelector(selectOriginalAppointmentsData, (data) => data);
-
 export const selectByIdAppointmentsData = ({ Entities }: GlobalState) => Entities.appointments.byId;
 
 export const selectAllIdsAppointments = ({ Entities }: GlobalState) => Entities.appointments.allIDs;
@@ -47,8 +45,6 @@ export const selectAppointmentByEmployeeID = (ID: number) =>
 
 export const selectOriginalStaffData = ({ Entities }: GlobalState) => Entities.staff.originalData;
 
-export const selectMemoOriginalStaffData = () => createSelector(selectOriginalStaffData, (data) => data);
-
 const selectStaff = ({ Entities }: GlobalState) => Entities.staff;
 
 export const selectStaffByIdData = ({ Entities }: GlobalState) => Entities.staff.byId;
@@ -64,8 +60,6 @@ export const selectStaffDataForDropDownListData = () =>
 // Customers
 
 export const selectOriginalCustomersData = ({ Entities }: GlobalState) => Entities.customers.originalData;
-
-export const selectMemoOriginalCustomersData = () => createSelector(selectOriginalCustomersData, (data) => data);
 
 const selectCustomers = ({ Entities }: GlobalState) => Entities.customers;
 
@@ -83,8 +77,6 @@ export const selectCustomerById = (ID: number) => createSelector(selectCustomers
 // Services
 
 export const selectOriginalServicesData = ({ Entities }: GlobalState) => Entities.services.originalData;
-
-export const selectMemoOriginalServicesData = () => createSelector(selectOriginalServicesData, (data) => data);
 
 const selectServices = ({ Entities }: GlobalState) => Entities.services;
 
