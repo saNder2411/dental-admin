@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState, useEffect, SyntheticEvent } from 'react';
+import React, { FC, useMemo, useState, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, FormElement } from '@progress/kendo-react-form';
@@ -39,7 +39,7 @@ import {
   createAppointmentDataItemInitAsyncAC,
   schDiscardAddNewItemToDataAC,
 } from '../../../../_bus/Entities/EntitiesAC';
-import { changeUpdatedRecurringDataItemAC } from '../../../../_bus/Scheduler/SchedulerAC';
+import { changeUpdatedRecurringDataItemAC, setFormItemIdAC } from '../../../../_bus/Scheduler/SchedulerAC';
 // Instruments
 import {
   StatusDropDownListData,
@@ -67,7 +67,7 @@ import {
   getSecondLabelForRepeatEvery,
 } from './SchedulerFormHelpers';
 
-export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit, onCancel, onClose }): JSX.Element => {
+export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -75,32 +75,19 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
   const updatedRecurringDataItem = useSelector(selectUpdatedRecurringDataItem);
 
   const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);
-  const { FirstName, Title, Email, Gender, CellPhone } = useSelector(selectCustomer);
+  const customer = useSelector(selectCustomer);
+  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customer ? customer : {};
 
   const initialValue = getInitialFormValue(dataItem, { FirstName, Title, Email, Gender, CellPhone });
-
-  useEffect(
-    () => () => {
-      setIsDataItemLoading(false);
-      onSubmit({ value: -1 });
-    },
-    [onSubmit]
-  );
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const newDataItem = getDataItemForApi(formDataItem);
-    // console.log(`onSubmitDataItem`, newDataItem);
 
     setIsDataItemLoading(true);
 
     if (updatedRecurringDataItem && dataItem.isNew) {
-      dispatch(
-        updateAppointmentRecurringDataItemInitAsyncAC(updatedRecurringDataItem, newDataItem, () => {
-          // dispatch(schDiscardAddNewItemToDataAC(dataItem.ID));
-          // dispatch(changeUpdatedRecurringDataItemAC(null));
-        })
-      );
+      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatedRecurringDataItem, newDataItem, () => {}));
       return;
     }
 
@@ -109,20 +96,22 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
       : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => {}));
   };
 
-  const onDialogClose = (onDiscardAction: undefined | ((arg: { value: null }) => void)) => {
+  const onDialogClose = () => {
     if (dataItem.isNew) {
       dispatch(schDiscardAddNewItemToDataAC(dataItem.ID));
+      return;
     }
 
     if (updatedRecurringDataItem) {
       dispatch(changeUpdatedRecurringDataItemAC(null));
+      return;
     }
 
-    onDiscardAction && onDiscardAction({ value: null });
+    dispatch(setFormItemIdAC(null));
   };
 
   return (
-    <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose(onClose)} minWidth={700} height="73%">
+    <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose()} minWidth={700} height="73%">
       <SC.SchedulerForm>
         <Form
           initialValues={initialValue}
@@ -450,7 +439,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onSubmit
                           `Save`
                         )}
                       </button>
-                      <button className="k-button" onClick={() => onDialogClose(onCancel)} disabled={isDataItemLoading}>
+                      <button className="k-button" onClick={() => onDialogClose()} disabled={isDataItemLoading}>
                         Cancel
                       </button>
                     </DialogActionsBar>

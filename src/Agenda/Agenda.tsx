@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -31,8 +31,6 @@ export const Agenda: FC = (): JSX.Element => {
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
-  const renders = useRef(0);
-  console.log(renders.current++)
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">
@@ -104,7 +102,6 @@ export const Agenda: FC = (): JSX.Element => {
             filter={'text'}
           />
           <GridColumn
-            field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
             cell={AgendaGenderCell as CustomGridCell}

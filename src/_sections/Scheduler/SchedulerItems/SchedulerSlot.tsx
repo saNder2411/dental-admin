@@ -15,7 +15,6 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
     const { start: Start, end: End, group } = props;
     const resource = (group.resources[0] as unknown) as StaffDataItem;
     const dispatch = useDispatch();
-
     const newDataItem = useSelector(selectMemoNewAppointmentDataItem(Start, resource.ID));
 
     const onSlotDoubleClick = useCallback(() => dispatch(schAddNewItemToEditAC({ Start, End, TeamID: resource.ID })), [
@@ -32,5 +31,10 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
       </>
     );
   },
-  (prevProps: SchedulerSlotProps, nextProps: SchedulerSlotProps) => prevProps.start.getTime() === nextProps.start.getTime()
+  (prevProps: SchedulerSlotProps, nextProps: SchedulerSlotProps) => {
+    const prevStaff = (prevProps.group.resources[0] as unknown) as StaffDataItem;
+    const nextStaff = (nextProps.group.resources[0] as unknown) as StaffDataItem;
+
+    return prevProps.start.getTime() !== nextProps.start.getTime() || prevStaff.ID === nextStaff.ID;
+  }
 );

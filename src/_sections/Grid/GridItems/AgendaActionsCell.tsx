@@ -7,9 +7,13 @@ import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
-import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
+import {
+  createAppointmentDataItemInitAsyncAC,
+  updateAppointmentDataItemInitAsyncAC,
+  deleteAppointmentDataItemInitAsyncAC,
+} from '../../../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectMemoProcessDataItem } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoProcessDataItem, selectCustomerById } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 
@@ -21,11 +25,15 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
   const isCustomerIDValid = useByIdValidation(dataItem.LookupCM102customersId);
   const { isValid: isValidStartEvent } = useStartDateEventValidation(dataItem.Start, dataItem.LookupHR01teamId);
   const { isValid: isValidEndEvent } = useEndDateEventValidation(dataItem.End, dataItem.LookupHR01teamId);
+  const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);
+  const customer = useSelector(selectCustomer);
+  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customer ? customer : {};
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(createAppointmentDataItemInitAsyncAC(dataItem, () => setIsDataItemLoading(false)));
-  }, [dataItem, dispatch]);
+    const newDataItem = { ...dataItem, Email, CellPhone, FirstName, LastNameAppt: Title, Gender };
+    dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, () => setIsDataItemLoading(false)));
+  }, [CellPhone, Email, FirstName, Gender, Title, dataItem, dispatch]);
 
   const onUpdatedDataItem = useCallback(() => {
     setIsDataItemLoading(true);

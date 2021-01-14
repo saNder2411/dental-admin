@@ -53,7 +53,8 @@ export const getSecondLabelForRepeatEvery = (Repeat: RepeatTypesType) => {
   }
 };
 
-export const setTitleProp = <T = string>(firstName: string, lastName: string, ID: T) => `${firstName[0]}.${lastName}-0${ID}`;
+export const setTitleProp = <T = string>(firstName: string | null, lastName: string | null, ID: T) =>
+  `${firstName ? firstName[0] : ''}.${lastName}-0${ID}`;
 
 const getEndRepeatRule = (endRepeatType: EndRepeatTypesType, repeatInterval: number, endCount: number, endUntil: Date) => {
   switch (endRepeatType) {

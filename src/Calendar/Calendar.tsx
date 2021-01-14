@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState, useRef } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -35,8 +35,6 @@ export const Calendar: FC = () => {
   const onEmployeeClick = useCallback((employeeID: number) => () => dispatch(changeMapTeamToFilteredAC(employeeID)), [dispatch]);
 
   const onAddNewItemClick = () => dispatch(schAddNewItemToEditAC(initDataForNewDataItem));
-  const renders = useRef(0);
-  console.log(renders.current++);
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid position-relative">

@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 // Components
 import { StaffTextInput, StaffFullNameInput, StaffJobTitleInput, StaffMobilePhoneInput, StaffAvatarInput } from './StaffInputCells';
@@ -20,47 +20,37 @@ import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jp
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 
 export const StaffTextCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string | number>(ID, EntitiesMap.Staff, field);
 
   const strValue = isString(cellValue) ? cellValue : '';
   const numValue = isNumber(cellValue) ? cellValue : '';
   const resultValue = strValue ? strValue : numValue;
 
-  return <td>{dataItemInEditValue ? <StaffTextInput dataItemID={memoID} field={memoField} onChange={onChange} /> : resultValue}</td>;
+  return <td>{dataItemInEditValue ? <StaffTextInput dataItemID={ID} field={field} onChange={onChange} /> : resultValue}</td>;
 };
 
 export const StaffFullNameCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
-  return <td>{dataItemInEditValue ? <StaffFullNameInput dataItemID={memoID} field={memoField} onChange={onChange} /> : strValue}</td>;
+  return <td>{dataItemInEditValue ? <StaffFullNameInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const StaffJobTitleCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
-  return <td>{dataItemInEditValue ? <StaffJobTitleInput dataItemID={memoID} field={memoField} onChange={onChange} /> : strValue}</td>;
+  return <td>{dataItemInEditValue ? <StaffJobTitleInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const StaffMobilePhoneCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
-  return <td>{dataItemInEditValue ? <StaffMobilePhoneInput dataItemID={memoID} field={memoField} onChange={onChange} /> : strValue}</td>;
+  return <td>{dataItemInEditValue ? <StaffMobilePhoneInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const StaffAvatarCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
   const Gender = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(ID, EntitiesMap.Staff, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
@@ -70,7 +60,7 @@ export const StaffAvatarCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { 
 
   return dataItemInEditValue ? (
     <td>
-      <StaffAvatarInput dataItemID={memoID} field={memoField} onChange={onChange} />
+      <StaffAvatarInput dataItemID={ID} field={field} onChange={onChange} />
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
@@ -80,13 +70,11 @@ export const StaffAvatarCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { 
 };
 
 export const StaffBooleanFlagCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, boolean>(ID, EntitiesMap.Staff, field);
 
   return dataItemInEditValue ? (
     <td>
-      <StaffBooleanFlagDropDownList dataItemID={memoID} field={memoField} onChange={onChange} />
+      <StaffBooleanFlagDropDownList dataItemID={ID} field={field} onChange={onChange} />
     </td>
   ) : (
     <SC.BooleanFlagCell isOnline={cellValue}>
@@ -96,10 +84,8 @@ export const StaffBooleanFlagCell: FC<GridCellProps<StaffDataItem>> = ({ dataIte
 };
 
 export const StaffRoleSkillsCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string[] | null>(ID, EntitiesMap.Staff, field);
   const value = cellValue ? cellValue.join(' | ') : '';
 
-  return <td>{dataItemInEditValue ? <StaffRoleSkillsMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
+  return <td>{dataItemInEditValue ? <StaffRoleSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;
 };

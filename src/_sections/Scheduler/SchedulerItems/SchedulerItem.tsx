@@ -1,4 +1,4 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerItem as KendoSchedulerItem } from '@progress/kendo-react-scheduler';
 import { useAsyncFocusBlur } from '@progress/kendo-react-common';
@@ -23,7 +23,7 @@ import { schAddNewItemToEditAC, updateAppointmentDataItemInitAsyncAC, deleteAppo
 import { setFormItemIdAC, changeUpdatedRecurringDataItemAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectFormItemID, selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
-
+import { selectCustomerById } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
@@ -53,15 +53,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const width = _ref.current?.element?.offsetWidth;
   const height = _ref.current?.element?.offsetHeight;
 
-  useEffect(
-    () => () => {
-      setIsDataItemLoading(false);
-      setShowRemoveDialog(false);
-      setShowRemoveOccurrenceDialog(false);
-      setIsRemoveOccurrence(false);
-    },
-    []
-  );
+  const customer = useSelector(selectCustomerById(dataItem.LookupCM102customersId));
+  const { Email = '', CellPhone = '' } = customer ? customer : {};
 
   const onSchedulerItemClick = useCallback(
     (evt) => {
@@ -147,7 +140,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         popupAlign={{ horizontal: 'left', vertical: 'center' }}
         popupClass="SchedulerItemContent-popup-content"
         anchor={_ref.current?.element as any}
-        style={{ width: 300 }}>
+        style={{ width: 330 }}>
         <div className="rounded" tabIndex={-1} onFocus={onFocusAsync as any} onBlur={onBlurAsync as any}>
           <CardHeader>
             <CardHeader>
@@ -182,8 +175,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
               <CardHeader>
                 <span className="k-icon k-i-clock" /> End: {intl.formatDate(zonedEnd, 't')}
               </CardHeader>
-              <CardHeader>Mobile Phone: {dataItem.CellPhone}</CardHeader>
-              <CardHeader>Email: {dataItem.Email}</CardHeader>
+              <CardHeader>Mobile Phone: {CellPhone}</CardHeader>
+              <CardHeader>Email: {Email}</CardHeader>
               <CardHeader>Notes: {dataItem.Description}</CardHeader>
             </CardBody>
           </CardHeader>

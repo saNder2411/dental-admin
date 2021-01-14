@@ -17,10 +17,10 @@ interface BackendImmutableKey {
   MetroRRule: null | string;
   MetroRecException: null | Date[];
   RecurrenceID: null | number;
-  LastNameAppt: string;
+  LastNameAppt: string | null;
   Email: string | null;
   Gender: null | '(1) Female' | '(2) Male';
-  FirstName: string;
+  FirstName: string | null;
   CellPhone: string | null;
   ID: number;
   Modified: string;

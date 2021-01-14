@@ -22,20 +22,16 @@ import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jp
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 
 export const CustomersTextCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string | number>(ID, EntitiesMap.Customers, field);
 
   const strValue = isString(cellValue) ? cellValue : '';
   const numValue = isNumber(cellValue) ? cellValue : '';
   const resultValue = strValue ? strValue : numValue;
 
-  return <td>{dataItemInEditValue ? <CustomersTextInput dataItemID={memoID} field={memoField} onChange={onChange} /> : resultValue}</td>;
+  return <td>{dataItemInEditValue ? <CustomersTextInput dataItemID={ID} field={field} onChange={onChange} /> : resultValue}</td>;
 };
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, number>(ID, EntitiesMap.Customers, field);
 
   const selectStaffLastName = useMemo(() => selectStaffLastNameByID(cellValue), [cellValue]);
@@ -43,12 +39,10 @@ export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = ({ dat
 
   const value = staffLastName ? staffLastName : '';
 
-  return <td>{dataItemInEditValue ? <CustomersSvcStaffDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
+  return <td>{dataItemInEditValue ? <CustomersSvcStaffDropDownList dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;
 };
 
 export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, { results: number[] }>(
     ID,
     EntitiesMap.Customers,
@@ -58,25 +52,17 @@ export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> 
   const selectStaffLastNames = useMemo(() => selectStaffLastNamesByID(cellValue.results), [cellValue.results]);
   const staffLastNames = useSelector(selectStaffLastNames);
 
-  return (
-    <td>
-      {dataItemInEditValue ? <CustomersLastAppointmentsMultiSelect dataItemID={memoID} field={memoField} onChange={onChange} /> : staffLastNames}
-    </td>
-  );
+  return <td>{dataItemInEditValue ? <CustomersLastAppointmentsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : staffLastNames}</td>;
 };
 
 export const CustomersMobilePhoneCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
-  return <td>{dataItemInEditValue ? <CustomersMobilePhoneInput dataItemID={memoID} field={memoField} onChange={onChange} /> : strValue}</td>;
+  return <td>{dataItemInEditValue ? <CustomersMobilePhoneInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const CustomersAvatarCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
   const Gender = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(ID, EntitiesMap.Customers, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
@@ -86,7 +72,7 @@ export const CustomersAvatarCell: FC<GridCellProps<CustomerDataItem>> = ({ dataI
 
   return dataItemInEditValue ? (
     <td>
-      <CustomersAvatarInput dataItemID={memoID} field={memoField} onChange={onChange} />
+      <CustomersAvatarInput dataItemID={ID} field={field} onChange={onChange} />
     </td>
   ) : (
     <SC.PhotoCell imageUrl={imageUrl}>
@@ -96,19 +82,13 @@ export const CustomersAvatarCell: FC<GridCellProps<CustomerDataItem>> = ({ dataI
 };
 
 export const CustomersDateCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
   const intlService = useInternationalization();
   const value = cellValue ? new Date(cellValue) : new Date();
 
   return (
     <td>
-      {dataItemInEditValue ? (
-        <CustomersDateInput dataItemID={memoID} field={memoField} onChange={onChange} />
-      ) : (
-        intlService.formatDate(value, 'H:mm | dd.MM')
-      )}
+      {dataItemInEditValue ? <CustomersDateInput dataItemID={ID} field={field} onChange={onChange} /> : intlService.formatDate(value, 'H:mm | dd.MM')}
     </td>
   );
 };
@@ -122,10 +102,8 @@ export const CustomersDateCellNoEditable: FC<GridCellProps<CustomerDataItem>> = 
 };
 
 export const CustomersGenderCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const memoID = useMemo(() => ID, [ID]);
-  const memoField = useMemo(() => field, [field]);
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
   const value = cellValue ? cellValue : '(1) Female';
 
-  return <td>{dataItemInEditValue ? <CustomersGenderDropDownList dataItemID={memoID} field={memoField} onChange={onChange} /> : value}</td>;
+  return <td>{dataItemInEditValue ? <CustomersGenderDropDownList dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;
 };
