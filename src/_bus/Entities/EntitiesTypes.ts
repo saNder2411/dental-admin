@@ -54,9 +54,6 @@ export const ActionTypes = {
   CHANGE_ITEM: 'GRID/CHANGE_ITEM' as const,
   ADD_NEW_ITEM_TO_EDIT: 'GRID/ADD_NEW_ITEM_TO_EDIT' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'GRID/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
-  // Scheduler
-  SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM: 'SCHEDULER/SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM' as const,
-  SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA: 'SCHEDULER/SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
@@ -86,18 +83,11 @@ export const EntitiesMap = {
   Services: 'services' as const,
 };
 
-export interface InitDataForNewAppointmentDataItem {
-  Start: Date;
-  End: Date;
-  TeamID: number;
-}
-
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
   originalData: T[];
   processById: { [key: string]: T };
   byId: { [key: string]: T };
   allIDs: number[];
-  newDataItem: null | T;
 }
 
 export interface EntitiesState {

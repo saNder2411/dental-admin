@@ -1,6 +1,5 @@
 // Types
-import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, InitDataForNewAppointmentDataItem, EntitiesStateSlice } from './EntitiesTypes';
-import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, EntitiesStateSlice } from './EntitiesTypes';
 import { OfferIcons } from '../_Services/ServicesTypes';
 
 export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
@@ -50,8 +49,9 @@ export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = Gen
   const originalData = stateSlice.originalData.find(({ ID }) => ID === dataItem.ID)
     ? updateDataItemInArray(stateSlice.originalData, dataItem)
     : [dataItem, ...stateSlice.originalData];
+  const allIDs = stateSlice.allIDs.includes(dataItem.ID) ? stateSlice.allIDs : [dataItem.ID, ...stateSlice.allIDs];
 
-  return { ...stateSlice, originalData, processById, byId: { ...processById }, newDataItem: null };
+  return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
 };
 
 export const updateStateSliceOnUpdateDataItem = <T extends GenericDataItem = GenericDataItem>(
@@ -116,28 +116,6 @@ export const updateStateSliceOnAddNewItemToEditInGrid = <T extends GenericDataIt
   const allIDs = [newDataItem.ID, ...stateSlice.allIDs];
 
   return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
-};
-
-// Scheduler Edit
-export const updateStateSliceOnAddNewItemToEditInScheduler = (
-  stateSlice: EntitiesStateSlice<AppointmentDataItem>,
-  initDataForNewDataItem: InitDataForNewAppointmentDataItem
-): EntitiesStateSlice<AppointmentDataItem> => {
-  const newDataItem = getNewAppointmentDataItemForScheduler(stateSlice.allIDs, initDataForNewDataItem);
-  const processById = { ...stateSlice.processById, [newDataItem.ID]: newDataItem };
-  const allIDs = [newDataItem.ID, ...stateSlice.allIDs];
-
-  return { ...stateSlice, processById, byId: { ...processById }, allIDs, newDataItem };
-};
-
-export const updateStateSliceOnDiscardAddNewItemInScheduler = (
-  stateSlice: EntitiesStateSlice<AppointmentDataItem>,
-  deleteDataItemID: number
-): EntitiesStateSlice<AppointmentDataItem> => {
-  const { [deleteDataItemID]: deletedItem, ...processById } = stateSlice.processById;
-  const allIDs = stateSlice.allIDs.filter((ID) => ID !== deleteDataItemID);
-
-  return { ...stateSlice, processById, byId: { ...processById }, allIDs, newDataItem: null };
 };
 
 export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): GenericDataItem => {
@@ -249,45 +227,4 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
     default:
       throw new Error(`Grid Data Name not correct`);
   }
-};
-
-export const getNewAppointmentDataItemForScheduler = (
-  allIDs: number[],
-  { Start, End, TeamID }: InitDataForNewAppointmentDataItem
-): AppointmentDataItem => {
-  const ID = generateId(allIDs);
-
-  return {
-    Id: ID,
-    Title: ``,
-    EventDate: Start.toISOString(),
-    EndDate: End.toISOString(),
-    Duration: 60,
-    Description: ``,
-    fAllDayEvent: null,
-    RecurrenceID: null,
-    Email: null,
-    AppointmentStatus: StatusNames.Consultation,
-    LastNameAppt: ``,
-    Gender: '(1) Female',
-    Notes: '',
-    ServiceCharge: 40,
-    FilterStart: Start.toISOString(),
-    FilterEnd: End.toISOString(),
-    MetroRRule: null,
-    MetroRecException: null,
-    FirstName: ``,
-    CellPhone: null,
-    LookupCM102customersId: 1,
-    LookupHR01teamId: TeamID,
-    LookupMultiBP01offeringsId: { results: [] },
-    ID,
-    Modified: new Date().toISOString(),
-
-    TeamID,
-    Start,
-    End,
-    inEdit: true,
-    isNew: true,
-  };
 };

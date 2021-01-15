@@ -10,15 +10,13 @@ import {
   updateStateSliceOnCancelEditInGrid,
   updateStateSliceOnChangeDataItemInGrid,
   updateStateSliceOnAddNewItemToEditInGrid,
-  updateStateSliceOnAddNewItemToEditInScheduler,
-  updateStateSliceOnDiscardAddNewItemInScheduler,
 } from './EntitiesHelpers';
 
 const initialState = {
-  appointments: { originalData: [], processById: {}, byId: {}, allIDs: [], newDataItem: null },
-  customers: { originalData: [], processById: {}, byId: {}, allIDs: [], newDataItem: null },
-  staff: { originalData: [], processById: {}, byId: {}, allIDs: [], newDataItem: null },
-  services: { originalData: [], processById: {}, byId: {}, allIDs: [], newDataItem: null },
+  appointments: { originalData: [], processById: {}, byId: {}, allIDs: [] },
+  customers: { originalData: [], processById: {}, byId: {}, allIDs: [] },
+  staff: { originalData: [], processById: {}, byId: {}, allIDs: [] },
+  services: { originalData: [], processById: {}, byId: {}, allIDs: [] },
 };
 
 export const reducer = (state: EntitiesState = initialState, action: Actions): EntitiesState => {
@@ -27,7 +25,7 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
     case ActionTypes.FETCH_DATA_REQUEST:
       return {
         ...state,
-        [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [], newDataItem: null },
+        [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [] },
       };
 
     case ActionTypes.FETCH_DATA_SUCCESS:
@@ -39,7 +37,7 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
     case ActionTypes.FETCH_DATA_FAILURE:
       return {
         ...state,
-        [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [], newDataItem: null },
+        [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [] },
       };
     // Sync Data Item
     case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
@@ -88,18 +86,6 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
       return {
         ...state,
         [action.entityName]: updateStateSliceOnDeleteDataItem<GenericDataItem>(state[action.entityName], action.dataItemID),
-      };
-    // Scheduler
-    case ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM:
-      return {
-        ...state,
-        appointments: updateStateSliceOnAddNewItemToEditInScheduler(state.appointments, action.initDataForNewDataItem),
-      };
-
-    case ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA:
-      return {
-        ...state,
-        appointments: updateStateSliceOnDiscardAddNewItemInScheduler(state.appointments, action.dataItemID),
       };
 
     default:

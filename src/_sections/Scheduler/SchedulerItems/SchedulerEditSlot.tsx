@@ -1,18 +1,12 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC } from 'react';
 import { SchedulerEditSlot as KendoSchedulerEditSlot } from '@progress/kendo-react-scheduler';
-import { useDispatch } from 'react-redux';
 // Components
 import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerSlotProps } from './SchedulerItemTypes';
-// Action Creators
-import { setFormItemIdAC } from '../../../_bus/Scheduler/SchedulerAC';
 
 export const SchedulerEditSlot: FC<CustomSchedulerSlotProps> = (props): JSX.Element => {
   const { dataItem } = props;
-  const dispatch = useDispatch();
 
-  const onFormItemChange = useCallback(({ value }) => dispatch(setFormItemIdAC(value)), [dispatch]);
-
-  return <KendoSchedulerEditSlot {...props} formItem={dataItem} onFormItemChange={onFormItemChange} form={SchedulerForm} />;
+  return <KendoSchedulerEditSlot {...props} formItem={dataItem} form={SchedulerForm} />;
 };

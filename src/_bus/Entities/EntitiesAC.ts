@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, GenericDataItem, EntitiesKeys, InitDataForNewAppointmentDataItem } from './EntitiesTypes';
+import { ActionTypes, GenericDataItem, EntitiesKeys } from './EntitiesTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
@@ -187,15 +187,4 @@ export const discardAddNewItemToDataAC = (dataItemID: number, entityName: Entiti
   type: ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA,
   dataItemID,
   entityName,
-});
-
-// Scheduler
-export const schAddNewItemToEditAC = (initDataForNewDataItem: InitDataForNewAppointmentDataItem) => ({
-  type: ActionTypes.SCHEDULER_ADD_NEW_ITEM_TO_EDIT_FORM,
-  initDataForNewDataItem,
-});
-
-export const schDiscardAddNewItemToDataAC = (dataItemID: number) => ({
-  type: ActionTypes.SCHEDULER_DISCARD_ADD_NEW_ITEM_TO_DATA,
-  dataItemID,
 });

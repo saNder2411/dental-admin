@@ -37,9 +37,8 @@ import {
   updateAppointmentRecurringDataItemInitAsyncAC,
   updateAppointmentDataItemInitAsyncAC,
   createAppointmentDataItemInitAsyncAC,
-  schDiscardAddNewItemToDataAC,
 } from '../../../../_bus/Entities/EntitiesAC';
-import { changeUpdatedRecurringDataItemAC, setFormItemIdAC } from '../../../../_bus/Scheduler/SchedulerAC';
+import { changeUpdatedRecurringDataItemAC, setFormItemIdAC, discardAddNewItemToDataInSchedulerAC } from '../../../../_bus/Scheduler/SchedulerAC';
 // Instruments
 import {
   StatusDropDownListData,
@@ -98,7 +97,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
 
   const onDialogClose = () => {
     if (dataItem.isNew) {
-      dispatch(schDiscardAddNewItemToDataAC(dataItem.ID));
+      dispatch(discardAddNewItemToDataInSchedulerAC());
       return;
     }
 

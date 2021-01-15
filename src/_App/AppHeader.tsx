@@ -7,6 +7,8 @@ import { selectLocaleState } from './AppSelectors';
 import { selectMemoUser } from '../_bus/User/UserSelectors';
 // Images
 import headerBg from '../_assets/header-bg.png';
+// Other
+import { SP_ROOT_URL } from '../_REST/config';
 
 interface Props {
   page: string;
@@ -44,7 +46,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
               {showSupportStylist && (
                 <a
                   className="nav-link d-flex d-flex justify-content-between align-items-center"
-                  href="https://sa-toniguy01.metroapps.online/_layouts/15/viewlsts.aspx"
+                  href={`${SP_ROOT_URL}_layouts/15/viewlsts.aspx`}
                   target="_blank"
                   rel="noopener noreferrer">
                   <span className="k-icon k-i-gear" />

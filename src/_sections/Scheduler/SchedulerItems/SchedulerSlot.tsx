@@ -4,11 +4,12 @@ import { SchedulerSlot as KendoSchedulerSlot, SchedulerSlotProps } from '@progre
 // Components
 import { SchedulerEditSlot } from './SchedulerEditSlot';
 // Action Creators
-import { schAddNewItemToEditAC } from '../../../_bus/Entities/EntitiesAC';
+import { addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Types
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 // Selectors
-import { selectMemoNewAppointmentDataItem } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoNewAppointmentDataItem } from '../../../_bus/Scheduler/SchedulerSelectors';
 
 export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
   (props) => {
@@ -16,17 +17,19 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
     const resource = (group.resources[0] as unknown) as StaffDataItem;
     const dispatch = useDispatch();
     const newDataItem = useSelector(selectMemoNewAppointmentDataItem(Start, resource.ID));
+    const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
 
-    const onSlotDoubleClick = useCallback(() => dispatch(schAddNewItemToEditAC({ Start, End, TeamID: resource.ID })), [
+    const onSlotDoubleClick = useCallback(() => dispatch(addNewItemToEditFormAC({ Start, End, TeamID: resource.ID }, appointmentsAllIDs)), [
       End,
       Start,
       dispatch,
       resource.ID,
+      appointmentsAllIDs,
     ]);
 
     return (
       <>
-        <KendoSchedulerSlot {...props} onDoubleClick={onSlotDoubleClick}></KendoSchedulerSlot>
+        <KendoSchedulerSlot {...props} onDoubleClick={onSlotDoubleClick} />
         {newDataItem && <SchedulerEditSlot {...props} dataItem={newDataItem} />}
       </>
     );

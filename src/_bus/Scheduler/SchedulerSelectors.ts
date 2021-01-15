@@ -14,3 +14,13 @@ export const selectUpdatableRecurringDataItem = ({ Scheduler }: GlobalState) => 
 
 export const selectMemoUpdatableRecurringDataItem = () =>
   createSelector(selectUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);
+
+const selectNewAppointmentDataItem = ({ Scheduler }: GlobalState) => Scheduler.newAppointmentDataItem;
+
+export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
+  return createSelector(selectNewAppointmentDataItem, (newAppointmentDataItem) => {
+    if (!newAppointmentDataItem) return null;
+
+    return newAppointmentDataItem?.Start.getTime() === start.getTime() && newAppointmentDataItem.TeamID === TeamID ? newAppointmentDataItem : null;
+  });
+};

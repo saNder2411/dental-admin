@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 import { ActionTypes, Actions, EntitiesMap } from '../Entities/EntitiesTypes';
 import { ActionTypes as SchedulerActionTypes, Actions as SchedulerActions, ViewType } from './SchedulerTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+// Helpers
+import { getNewAppointmentDataItemForScheduler } from './SchedulerHelpers';
 
 const mapTeamToFilteredReducer = (
   state: { [key: string]: boolean } = { '1': false },
@@ -59,6 +61,22 @@ const selectedViewReducer = (state: ViewType = 'day', action: SchedulerActions):
   }
 };
 
+const newAppointmentDataItemReducer = (state: null | AppointmentDataItem = null, action: SchedulerActions | Actions): null | AppointmentDataItem => {
+  switch (action.type) {
+    case SchedulerActionTypes.ADD_NEW_ITEM_TO_EDIT_FORM:
+      return getNewAppointmentDataItemForScheduler(action.appointmentsAllIDs, action.initDataForNewDataItem);
+
+    case SchedulerActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
+      return null;
+
+      case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
+        return action.entityName === EntitiesMap.Appointments ? null : state;
+
+    default:
+      return state;
+  }
+};
+
 const updatableRecurringDataItemViewReducer = (
   state: null | AppointmentDataItem = null,
   action: Actions | SchedulerActions
@@ -80,5 +98,6 @@ export const SchedulerReducer = combineReducers({
   formItemID: formItemIDReducer,
   selectedDate: selectedDateReducer,
   selectedView: selectedViewReducer,
+  newAppointmentDataItem: newAppointmentDataItemReducer,
   updatableRecurringDataItem: updatableRecurringDataItemViewReducer,
 });

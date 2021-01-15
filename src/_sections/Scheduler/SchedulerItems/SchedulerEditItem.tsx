@@ -1,29 +1,17 @@
-import React, { FC, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { SchedulerEditItem as KendoSchedulerEditItem } from '@progress/kendo-react-scheduler';
 // Components
 import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Selectors
-import { selectMemoOriginalDataItem } from '../../../_bus/Entities/EntitiesSelectors';
-// Action Creators
-import { setFormItemIdAC } from '../../../_bus/Scheduler/SchedulerAC';
+import { selectMemoAppointmentByID } from '../../../_bus/Entities/EntitiesSelectors';
 
 export const SchedulerEditItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
   const { dataItem } = props;
-  const dispatch = useDispatch();
-  const selectOriginalDataItem = useMemo(() => selectMemoOriginalDataItem(dataItem.ID), [dataItem.ID]);
+  const selectOriginalDataItem = useMemo(() => selectMemoAppointmentByID(dataItem.ID), [dataItem.ID]);
   const originalDataItem = useSelector(selectOriginalDataItem) ?? null;
 
-  const onFormItemChange = useCallback(({ value }) => dispatch(setFormItemIdAC(value)), [dispatch]);
-
-  return (
-    <KendoSchedulerEditItem
-      {...props}
-      formItem={originalDataItem?.isNew ? null : originalDataItem}
-      onFormItemChange={onFormItemChange}
-      form={SchedulerForm}
-    />
-  );
+  return <KendoSchedulerEditItem {...props} formItem={originalDataItem?.isNew ? null : originalDataItem} form={SchedulerForm} />;
 };

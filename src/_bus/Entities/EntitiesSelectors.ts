@@ -26,9 +26,11 @@ export const selectProcessDataItemFieldValue = <T extends GenericDataItem = Gene
 // Appointment
 export const selectOriginalAppointmentsData = ({ Entities }: GlobalState) => Entities.appointments.originalData;
 
-export const selectByIdAppointmentsData = ({ Entities }: GlobalState) => Entities.appointments.byId;
+export const selectAppointmentsByIdData = ({ Entities }: GlobalState) => Entities.appointments.byId;
 
-export const selectAllIdsAppointments = ({ Entities }: GlobalState) => Entities.appointments.allIDs;
+export const selectMemoAppointmentByID = (dataItemID: number) => createSelector(selectAppointmentsByIdData, (byID) => byID[dataItemID]);
+
+export const selectAppointmentsAllIds = ({ Entities }: GlobalState) => Entities.appointments.allIDs;
 
 export const selectOriginalAppointmentsDataLength = ({ Entities }: GlobalState) => Entities.appointments.originalData.length;
 
@@ -37,6 +39,8 @@ export const selectOriginalCustomersDataLength = ({ Entities }: GlobalState) => 
 export const selectOriginalStaffDataLength = ({ Entities }: GlobalState) => Entities.staff.originalData.length;
 
 export const selectOriginalServicesDataLength = ({ Entities }: GlobalState) => Entities.services.originalData.length;
+
+export const selectAppointmentDataItemByID = (ID: number) => ({ Entities }: GlobalState) => Entities.appointments.byId[ID];
 
 export const selectAppointmentByEmployeeID = (ID: number) =>
   createSelector(selectOriginalAppointmentsData, (appointmentData) => appointmentData.filter(({ LookupHR01teamId }) => LookupHR01teamId === ID));
@@ -89,16 +93,3 @@ export const selectServicesDataForDropDownListData = () =>
   createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => ({ text: byId[ID].OfferingsName_Edit ?? '', value: ID })));
 
 export const selectServicesCategory = () => createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => byId[ID]?.OfferingCatType ?? ''));
-
-// Scheduler
-const selectNewAppointmentDataItem = ({ Entities }: GlobalState) => Entities.appointments.newDataItem;
-
-export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
-  return createSelector(selectNewAppointmentDataItem, (newAppointmentDataItem) => {
-    if (!newAppointmentDataItem) return null;
-
-    return newAppointmentDataItem?.Start.getTime() === start.getTime() && newAppointmentDataItem.TeamID === TeamID ? newAppointmentDataItem : null;
-  });
-};
-
-export const selectMemoOriginalDataItem = (dataItemID: number) => createSelector(selectByIdAppointmentsData, (byID) => byID[dataItemID]);

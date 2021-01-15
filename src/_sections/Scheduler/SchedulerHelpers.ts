@@ -3,6 +3,8 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
 import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
+// Helpers
+import {} from '../';
 
 export const customModelFields = {
   id: 'ID',

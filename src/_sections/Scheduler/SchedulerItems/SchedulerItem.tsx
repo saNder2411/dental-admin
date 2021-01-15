@@ -19,11 +19,11 @@ import { StatusNames } from '../../../_bus/Entities/EntitiesTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 //Action Creators
-import { schAddNewItemToEditAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
-import { setFormItemIdAC, changeUpdatedRecurringDataItemAC } from '../../../_bus/Scheduler/SchedulerAC';
+import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
+import { setFormItemIdAC, changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectFormItemID, selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
-import { selectCustomerById } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectCustomerById, selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
@@ -55,6 +55,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const customer = useSelector(selectCustomerById(dataItem.LookupCM102customersId));
   const { Email = '', CellPhone = '' } = customer ? customer : {};
+
+  const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
 
   const onSchedulerItemClick = useCallback(
     (evt) => {
@@ -210,7 +212,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           onCancel={() => {
             setShowEditOccurrenceDialog(false);
             dispatch(changeUpdatedRecurringDataItemAC(getNewDataItemWithUpdateException(dataItem, new Date(dataItem.Start.getTime()))));
-            dispatch(schAddNewItemToEditAC(getInitDataForNewDataItem(dataItem.Start, selectedView, resource.ID)));
+            dispatch(addNewItemToEditFormAC(getInitDataForNewDataItem(dataItem.Start, selectedView, resource.ID), appointmentsAllIDs));
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);

@@ -9,9 +9,9 @@ import { Loader, LoaderDataItem } from '../_components';
 import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
 import { selectSelectedDate, selectSelectedView } from '../_bus/Scheduler/SchedulerSelectors';
+import { selectAppointmentsAllIds } from '../_bus/Entities/EntitiesSelectors';
 // Action Creators
-import { schAddNewItemToEditAC } from '../_bus/Entities/EntitiesAC';
-import { changeMapTeamToFilteredAC } from '../_bus/Scheduler/SchedulerAC';
+import { changeMapTeamToFilteredAC, addNewItemToEditFormAC } from '../_bus/Scheduler/SchedulerAC';
 // Hooks
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from '../Agenda/AgendaHooks';
 import { useStaffDataForScheduler } from './CalendarHooks';
@@ -31,10 +31,11 @@ export const Calendar: FC = () => {
   const selectedView = useSelector(selectSelectedView);
   const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, 1);
   const [isAgendaDataItemLoading, setIsAgendaDataItemLoading] = useState(false);
+  const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
 
   const onEmployeeClick = useCallback((employeeID: number) => () => dispatch(changeMapTeamToFilteredAC(employeeID)), [dispatch]);
 
-  const onAddNewItemClick = () => dispatch(schAddNewItemToEditAC(initDataForNewDataItem));
+  const onAddNewItemClick = () => dispatch(addNewItemToEditFormAC(initDataForNewDataItem, appointmentsAllIDs));
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid position-relative">

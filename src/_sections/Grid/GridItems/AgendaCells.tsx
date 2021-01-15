@@ -107,7 +107,7 @@ export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ da
       {dataItemInEditValue ? (
         <AgendaStartDateInput dataItemID={ID} field={field} onChange={onChange} />
       ) : (
-        intlService.formatDate(cellValue, 'H:mm | dd.MM')
+        intlService.formatDate(cellValue, 'H:mm | dd/MM')
       )}
     </td>
   );
@@ -122,7 +122,7 @@ export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ data
       {dataItemInEditValue ? (
         <AgendaEndDateInput dataItemID={ID} field={field} onChange={onChange} />
       ) : (
-        intlService.formatDate(cellValue, 'H:mm | dd.MM')
+        intlService.formatDate(cellValue, 'H:mm | dd/MM')
       )}
     </td>
   );
@@ -140,5 +140,7 @@ export const AgendaCurrencyCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 50;
 
-  return <SC.GenericCurrencyCell isNegativeAmount={numValue < 0}>{intlService.formatNumber(numValue, 'c')}</SC.GenericCurrencyCell>;
+  return (
+    <SC.GenericCurrencyCell isNegativeAmount={numValue < 0}>{intlService.formatNumber(numValue, { currencyDisplay: 'code' })}</SC.GenericCurrencyCell>
+  );
 };
