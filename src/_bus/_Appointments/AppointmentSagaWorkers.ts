@@ -72,7 +72,7 @@ export function* workerCreateDataItem({
     const result: QueryAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [transformDataItemForAPI(createdDataItem)]);
     const dataItem = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
-    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Appointments));
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Appointments, createdDataItem.ID));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {

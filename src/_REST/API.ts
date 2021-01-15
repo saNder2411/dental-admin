@@ -69,7 +69,7 @@ const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: 
 const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
   listGuid: string,
   selectFields: string,
-  { ID, Id, ...newDataItem }: T
+  newDataItem: T
 ): Promise<U> =>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
@@ -77,7 +77,7 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
       res.item
         .select(selectFields)
         .get()
-        .then<U>((newServerDataItem: U) => ({ ...newServerDataItem, ID, Id }))
+        .then<U>((newServerDataItem: U) => newServerDataItem)
     );
 
 const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
@@ -101,7 +101,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -159,7 +159,7 @@ export const API: API = {
   },
 };
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 

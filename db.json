@@ -339,110 +339,9 @@
       }
     },
     {
-      "Id": 625,
-      "EventDate": "2021-01-15T06:30:00.000Z",
-      "EndDate": "2021-01-15T07:30:00.000Z",
-      "Duration": 60,
-      "Description": "",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "stevepye70@gmail.com",
-      "AppointmentStatus": "(1) Consultation",
-      "Gender": "(2) Male",
-      "Notes": "",
-      "ServiceCharge": 40,
-      "FilterStart": "2021-01-15T06:30:00.000Z",
-      "FilterEnd": "2021-01-15T07:30:00.000Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "CellPhone": "0798302214",
-      "LookupCM102customersId": 1,
-      "LookupHR01teamId": 5,
-      "ID": 625,
-      "Modified": "2021-01-15T11:36:14.247Z",
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          2,
-          4
-        ]
-      },
-      "FirstName": "Stephen",
-      "LastNameAppt": "Pye",
-      "Title": "S.Pye-0625",
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
       "Id": 626,
-      "Title": "O.Abraham-0626",
-      "EventDate": "2021-01-15T11:45:44.010Z",
-      "EndDate": "2021-01-15T14:00:00.000Z",
-      "Duration": 60,
-      "Description": "",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Oliver.Abraham@schedulingtoday.local",
-      "AppointmentStatus": "(1) Consultation",
-      "LastNameAppt": "Abraham",
-      "Gender": "(2) Male",
-      "Notes": "",
-      "ServiceCharge": 40,
-      "FilterStart": "2021-01-15T11:45:44.010Z",
-      "FilterEnd": "2021-01-15T14:00:00.000Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Oliver",
-      "CellPhone": "+1189764251327",
-      "LookupCM102customersId": 290,
-      "LookupHR01teamId": 3,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
-      },
-      "ID": 626,
-      "Modified": "2021-01-15T11:45:44.010Z",
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 627,
-      "EventDate": "2021-01-16T07:30:00.000Z",
-      "EndDate": "2021-01-16T09:15:00.000Z",
-      "Duration": 60,
-      "Description": "",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "ANNA.Aj@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "Gender": "(1) Female",
-      "Notes": "",
-      "ServiceCharge": 40,
-      "FilterStart": "2021-01-16T07:30:00.000Z",
-      "FilterEnd": "2021-01-16T09:15:00.000Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "CellPhone": "+189797530278",
-      "LookupCM102customersId": 267,
-      "LookupHR01teamId": 5,
-      "ID": 627,
-      "Modified": "2021-01-15T13:10:22.187Z",
-      "FirstName": "Anna",
-      "LastNameAppt": "Aj",
-      "Title": "A.Aj-0627",
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          4
-        ]
-      },
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 628,
+      "EventDate": "2021-01-16T07:00:00.000Z",
+      "EndDate": "2021-01-16T08:00:00.000Z",
       "Duration": 60,
       "Description": "",
       "fAllDayEvent": null,
@@ -452,61 +351,23 @@
       "Gender": "(2) Male",
       "Notes": "",
       "ServiceCharge": 40,
-      "FilterStart": "2021-02-01T07:00:00.000Z",
-      "FilterEnd": "2021-02-01T08:00:00.000Z",
-      "MetroRRule": "FREQ=DAILY;INTERVAL=1;COUNT=5",
-      "MetroRecException": [
-        "2021-02-04T07:00:00.000Z",
-        "2021-02-02T07:00:00.000Z",
-        "2021-02-05T07:00:00.000Z"
-      ],
-      "CellPhone": "0798302214",
-      "LookupCM102customersId": 1,
-      "LookupHR01teamId": 4,
-      "ID": 628,
-      "Modified": "2021-01-15T13:12:33.799Z",
-      "FirstName": "Stephen",
-      "LastNameAppt": "Pye",
-      "Title": "S.Pye-0628",
-      "EventDate": "2021-02-01T07:00:00.000Z",
-      "EndDate": "2021-02-01T08:00:00.000Z",
-      "LookupMultiBP01offeringsId": {
-        "results": []
-      },
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 629,
-      "EventDate": "2021-02-06T08:00:00.000Z",
-      "EndDate": "2021-02-06T09:00:00.000Z",
-      "Duration": 60,
-      "Description": "",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "stevepye70@gmail.com",
-      "AppointmentStatus": "(1) Consultation",
-      "Gender": "(2) Male",
-      "Notes": "",
-      "ServiceCharge": 40,
-      "FilterStart": "2021-02-06T08:00:00.000Z",
-      "FilterEnd": "2021-02-06T09:00:00.000Z",
+      "FilterStart": "2021-01-16T07:00:00.000Z",
+      "FilterEnd": "2021-01-16T08:00:00.000Z",
       "MetroRRule": null,
       "MetroRecException": null,
       "CellPhone": "0798302214",
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
-      "ID": 629,
-      "Modified": "2021-01-15T13:12:54.863Z",
-      "FirstName": "Stephen",
-      "LastNameAppt": "Pye",
-      "Title": "S.Pye-0629",
       "LookupMultiBP01offeringsId": {
         "results": [
           3
         ]
       },
+      "ID": 626,
+      "Modified": "2021-01-15T15:44:45.401Z",
+      "FirstName": "Stephen",
+      "LastNameAppt": "Pye",
+      "Title": "S.Pye-0626",
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }

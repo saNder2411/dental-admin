@@ -1,9 +1,11 @@
 // Types
-import { ActionTypes, EntitiesState, Actions, GenericDataItem } from './EntitiesTypes';
+import { ActionTypes, EntitiesState, Actions, GenericDataItem, EntitiesMap } from './EntitiesTypes';
+import { AppointmentDataItem } from './../_Appointments/AppointmentsTypes';
 // Helpers
 import {
   updateStateSliceOnFetchDataSuccess,
   updateStateSliceOnCreateDataItem,
+  updateStateSliceOnCreateAppointmentDataItem,
   updateStateSliceOnUpdateDataItem,
   updateStateSliceOnDeleteDataItem,
   updateStateSliceOnAddDataItemToEditInGrid,
@@ -43,7 +45,10 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
     case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
       return {
         ...state,
-        [action.entityName]: updateStateSliceOnCreateDataItem(state[action.entityName], action.dataItem),
+        [action.entityName]:
+          action.entityName === EntitiesMap.Appointments
+            ? updateStateSliceOnCreateAppointmentDataItem(state.appointments, action.dataItem as AppointmentDataItem, action.clientID)
+            : updateStateSliceOnCreateDataItem(state[action.entityName], action.dataItem),
       };
 
     case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:

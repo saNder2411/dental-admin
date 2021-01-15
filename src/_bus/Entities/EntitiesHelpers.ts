@@ -1,4 +1,5 @@
 // Types
+import { AppointmentDataItem } from './../_Appointments/AppointmentsTypes';
 import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, EntitiesStateSlice } from './EntitiesTypes';
 import { OfferIcons } from '../_Services/ServicesTypes';
 
@@ -46,10 +47,32 @@ export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = Gen
   dataItem: T
 ): EntitiesStateSlice<T> => {
   const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
-  const originalData = stateSlice.originalData.find(({ ID }) => ID === dataItem.ID)
-    ? updateDataItemInArray(stateSlice.originalData, dataItem)
-    : [dataItem, ...stateSlice.originalData];
-  const allIDs = stateSlice.allIDs.includes(dataItem.ID) ? stateSlice.allIDs : [dataItem.ID, ...stateSlice.allIDs];
+  const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
+
+  return { ...stateSlice, originalData, processById, byId: { ...processById } };
+};
+
+export const updateStateSliceOnCreateAppointmentDataItem = (
+  stateSlice: EntitiesStateSlice<AppointmentDataItem>,
+  dataItem: AppointmentDataItem,
+  clientID: number | undefined
+): EntitiesStateSlice<AppointmentDataItem> => {
+  const oldID = clientID ? clientID : -1;
+  const newID = dataItem.ID;
+
+  if (oldID === newID) {
+    const hasID = stateSlice.allIDs.includes(newID);
+    const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
+    const originalData = hasID ? updateDataItemInArray(stateSlice.originalData, dataItem) : [dataItem, ...stateSlice.originalData];
+    const allIDs = hasID ? stateSlice.allIDs : [dataItem.ID, ...stateSlice.allIDs];
+
+    return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+  }
+
+  const { [oldID]: oldItem, ...oldProcessById } = stateSlice.processById;
+  const processById = { ...oldProcessById, [dataItem.ID]: dataItem };
+  const originalData = [dataItem, ...deleteDataItemFromArray(stateSlice.originalData, oldID)];
+  const allIDs = [dataItem.ID, ...stateSlice.allIDs.filter((ID) => ID !== oldID)];
 
   return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
 };

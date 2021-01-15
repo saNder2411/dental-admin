@@ -130,10 +130,11 @@ export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY 
 // Sync Create Data Item
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
 
-export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: EntitiesKeys) => ({
+export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: EntitiesKeys, clientID?: number) => ({
   type: ActionTypes.CREATE_DATA_ITEM_SUCCESS,
   dataItem,
   entityName,
+  clientID
 });
 
 export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, errorMessage });
