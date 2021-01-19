@@ -5,7 +5,7 @@ export const transformAPIData = (apiResults: QueryServiceDataItem[]): ServiceDat
 
 export const transformAPIDataItem = ({ __metadata, ...dataItem }: QueryServiceDataItem): ServiceDataItem => dataItem;
 
-export const transformDataItemForAPI = ({ inEdit, isNew, ...dataItem }: ServiceDataItem): MutationServiceDataItem => ({
+export const transformDataItemForAPI = ({ inEdit, isNew, OfferingIconName, RoleSkills, ...dataItem }: ServiceDataItem): MutationServiceDataItem => ({
   ...dataItem,
   __metadata: { type: 'SP.Data.MetroBP02ListItem' },
 });
