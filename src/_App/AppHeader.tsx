@@ -9,6 +9,7 @@ import { selectMemoUser } from '../_bus/User/UserSelectors';
 import headerBg from '../_assets/header-bg.png';
 // Other
 import { SP_ROOT_URL } from '../_REST/config';
+import AppConfig from '../../public/app-config.json';
 
 interface Props {
   page: string;
@@ -50,7 +51,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
                   target="_blank"
                   rel="noopener noreferrer">
                   <span className="k-icon k-i-gear" />
-                  &nbsp;<span className="k-item-text">StyCal-Admin</span>
+                  &nbsp;<span className="k-item-text">{`${AppConfig.projectType}-Admin`}</span>
                 </a>
               )}
             </li>

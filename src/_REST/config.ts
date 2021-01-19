@@ -8,7 +8,7 @@ export const headers = {
   'content-type': 'application/json;odata=verbose',
 };
 
-export const SP_ROOT_URL = 'https://sa-toniguy01.metroapps.online/';
+export const SP_ROOT_URL = AppConfig.rootUrl;
 
 export const GuidList = {
   Appointment: 'D9DCCD8B-9F3D-4330-89E3-BDA20BB04348',
