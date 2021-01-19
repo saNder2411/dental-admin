@@ -1,7 +1,7 @@
 import { Web } from '@pnp/sp/presets/all';
 import { sp } from '@pnp/sp';
 // Config
-import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
+import { ROOT_URL, headers, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
 import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/_Appointments/AppointmentsTypes';
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/_Customers/CustomersTypes';
@@ -9,13 +9,15 @@ import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/_Staff/StaffT
 import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/_Services/ServicesTypes';
 import { UserInfo } from '../_bus/User/UserTypes';
 
-// const spPer = async () => {
-//   // const perms2 = await Web(SP_ROOT_URL).configure({ headers }).getCurrentUserEffectivePermissions
-//   const perms = await sp.configure({ headers }, SP_ROOT_URL).web.configure({ headers }).currentUser.select('IsSiteAdmin').get();
-//   console.log(perms);
-// };
+const spPer = async () => {
+  // const perms2 = await Web(SP_ROOT_URL).configure({ headers }).getCurrentUserEffectivePermissions
+  const perms = await sp.configure({ headers }, process.env.SP_ROOT_URL).web.configure({ headers }).firstUniqueAncestorSecurableObject.get();
+  console.log(perms);
+};
 
-// spPer();
+spPer();
+
+console.log(process.env)
 
 export type QueryAllData<T> = () => Promise<T>;
 export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
@@ -55,7 +57,7 @@ type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | Que
 
 type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationStaffDataItem;
 
-const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
+const SPLists = Web(process.env.SP_ROOT_URL!).configure({ headers }).lists;
 
 const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: string, select: string, orderBy: string, filter: string = '') =>
   SPLists.getById(listGuid)
@@ -101,7 +103,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -151,7 +153,7 @@ export const API: API = {
   auth: {
     getAuth: async () =>
       sp
-        .configure({ headers }, SP_ROOT_URL)
+        .configure({ headers },  process.env.SP_ROOT_URL)
         .web.configure({ headers })
         .currentUser.select('IsSiteAdmin')
         .get()
@@ -159,7 +161,7 @@ export const API: API = {
   },
 };
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 
