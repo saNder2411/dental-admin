@@ -39,7 +39,7 @@ import {
   createAppointmentDataItemInitAsyncAC,
   cancelEditAC,
 } from '../../../../_bus/Entities/EntitiesAC';
-import { changeUpdatedRecurringDataItemAC, setFormItemIdAC, discardAddNewItemToDataInSchedulerAC } from '../../../../_bus/Scheduler/SchedulerAC';
+import { changeUpdatedRecurringDataItemAC, discardAddNewItemToDataInSchedulerAC } from '../../../../_bus/Scheduler/SchedulerAC';
 // Instruments
 import {
   StatusDropDownListData,
@@ -71,8 +71,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const selectUpdatedRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
-  const updatedRecurringDataItem = useSelector(selectUpdatedRecurringDataItem);
+  const selectUpdatableRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
+  const updatableRecurringDataItem = useSelector(selectUpdatableRecurringDataItem);
 
   const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);
   const customer = useSelector(selectCustomer);
@@ -86,8 +86,8 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
 
     setIsDataItemLoading(true);
 
-    if (updatedRecurringDataItem && dataItem.isNew) {
-      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatedRecurringDataItem, newDataItem, () => {}));
+    if (updatableRecurringDataItem && dataItem.isNew) {
+      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, newDataItem, () => {}));
       return;
     }
 
@@ -102,7 +102,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
       return;
     }
 
-    if (updatedRecurringDataItem) {
+    if (updatableRecurringDataItem) {
       dispatch(changeUpdatedRecurringDataItemAC(null));
       return;
     }

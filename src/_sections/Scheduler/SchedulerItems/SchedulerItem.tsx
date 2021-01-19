@@ -21,9 +21,9 @@ import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 //Action Creators
 import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC, addItemToEditAC } from '../../../_bus/Entities/EntitiesAC';
-import { setFormItemIdAC, changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
+import { changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
-import { selectFormItemID, selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
+import { selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
 import { selectCustomerById, selectAppointmentsAllIds, selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
@@ -35,7 +35,6 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const intl = useInternationalization();
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
-  const formItemID = useSelector(selectFormItemID);
   const isOriginalDataItem = new Date(dataItem.EventDate).getTime() === dataItem.Start.getTime();
   const inEditValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, boolean>(dataItem.ID, EntitiesMap.Appointments, 'inEdit'));
   const inEdit = inEditValue && isOriginalDataItem;

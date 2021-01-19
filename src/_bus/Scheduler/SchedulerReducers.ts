@@ -29,19 +29,6 @@ const mapTeamToFilteredReducer = (
   }
 };
 
-const formItemIDReducer = (state: number | null = null, action: SchedulerActions | Actions): number | null => {
-  switch (action.type) {
-    case SchedulerActionTypes.SET_FORM_ITEM_ID:
-      return action.formItemID;
-
-    case ActionTypes.UPDATE_DATA_ITEM_SUCCESS:
-      return action.entityName === EntitiesMap.Appointments ? null : state;
-
-    default:
-      return state;
-  }
-};
-
 const selectedDateReducer = (state: Date = new Date(), action: SchedulerActions): Date => {
   switch (action.type) {
     case SchedulerActionTypes.CHANGE_SELECTED_DATE:
@@ -69,8 +56,8 @@ const newAppointmentDataItemReducer = (state: null | AppointmentDataItem = null,
     case SchedulerActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:
       return null;
 
-      case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
-        return action.entityName === EntitiesMap.Appointments ? null : state;
+    case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
+      return action.entityName === EntitiesMap.Appointments ? null : state;
 
     default:
       return state;
@@ -95,7 +82,6 @@ const updatableRecurringDataItemViewReducer = (
 
 export const SchedulerReducer = combineReducers({
   mapTeamToFiltered: mapTeamToFilteredReducer,
-  formItemID: formItemIDReducer,
   selectedDate: selectedDateReducer,
   selectedView: selectedViewReducer,
   newAppointmentDataItem: newAppointmentDataItemReducer,

@@ -358,16 +358,87 @@
       "CellPhone": "0798302214",
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          3
-        ]
-      },
       "ID": 626,
       "Modified": "2021-01-15T15:44:45.401Z",
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          3,
+          4
+        ]
+      },
       "FirstName": "Stephen",
       "LastNameAppt": "Pye",
       "Title": "S.Pye-0626",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 627,
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": "stevepye70@gmail.com",
+      "AppointmentStatus": "(1) Consultation",
+      "Gender": "(2) Male",
+      "Notes": "",
+      "ServiceCharge": 40,
+      "FilterStart": "2021-01-20T06:00:00.000Z",
+      "FilterEnd": "2021-01-20T07:00:00.000Z",
+      "MetroRRule": "FREQ=DAILY;INTERVAL=1;COUNT=5",
+      "MetroRecException": [
+        "2021-01-24T06:00:00.000Z",
+        "2021-01-21T06:00:00.000Z"
+      ],
+      "CellPhone": "0798302214",
+      "LookupCM102customersId": 1,
+      "LookupHR01teamId": 4,
+      "ID": 627,
+      "Modified": "2021-01-19T10:17:41.633Z",
+      "FirstName": "Stephen",
+      "LastNameAppt": "Pye",
+      "Title": "S.Pye-0627",
+      "EventDate": "2021-01-20T06:00:00.000Z",
+      "EndDate": "2021-01-20T07:00:00.000Z",
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          2
+        ]
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 628,
+      "EventDate": "2021-01-22T07:15:00.000Z",
+      "EndDate": "2021-01-22T08:15:00.000Z",
+      "Duration": 60,
+      "Description": "",
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": "stevepye70@gmail.com",
+      "AppointmentStatus": "(1) Consultation",
+      "Gender": "(2) Male",
+      "Notes": "",
+      "ServiceCharge": 40,
+      "FilterStart": "2021-01-22T07:15:00.000Z",
+      "FilterEnd": "2021-01-22T08:15:00.000Z",
+      "MetroRRule": "FREQ=DAILY;INTERVAL=1;COUNT=5",
+      "MetroRecException": null,
+      "CellPhone": "0798302214",
+      "LookupCM102customersId": 1,
+      "LookupHR01teamId": 3,
+      "ID": 628,
+      "Modified": "2021-01-19T10:45:04.243Z",
+      "FirstName": "Stephen",
+      "LastNameAppt": "Pye",
+      "Title": "S.Pye-0628",
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "occurrenceId": "3",
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }

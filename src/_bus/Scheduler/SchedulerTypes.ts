@@ -27,7 +27,6 @@ export interface InitDataForNewAppointmentDataItem {
 
 export interface SchedulerState {
   mapTeamToFiltered: { [key: string]: boolean };
-  formItemID: number | null;
   selectedDate: Date;
   selectedView: ViewType;
   newAppointmentDataItem: null | AppointmentDataItem;
