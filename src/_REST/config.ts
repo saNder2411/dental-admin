@@ -1,3 +1,6 @@
+import AppConfig from '../../public/app-config.json';
+console.log(AppConfig);
+
 export const ROOT_URL = 'http://localhost:4200';
 
 export const headers = {

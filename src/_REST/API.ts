@@ -1,7 +1,7 @@
 import { Web } from '@pnp/sp/presets/all';
 import { sp } from '@pnp/sp';
 // Config
-import { ROOT_URL, headers, GuidList, SelectFields, FilterItems, OrderBy } from './config';
+import { ROOT_URL, headers, SP_ROOT_URL, GuidList, SelectFields, FilterItems, OrderBy } from './config';
 // Types
 import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/_Appointments/AppointmentsTypes';
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/_Customers/CustomersTypes';
@@ -11,13 +11,11 @@ import { UserInfo } from '../_bus/User/UserTypes';
 
 const spPer = async () => {
   // const perms2 = await Web(SP_ROOT_URL).configure({ headers }).getCurrentUserEffectivePermissions
-  const perms = await sp.configure({ headers }, process.env.SP_ROOT_URL).web.configure({ headers }).firstUniqueAncestorSecurableObject.get();
+  const perms = await sp.configure({ headers }, SP_ROOT_URL).web.configure({ headers }).firstUniqueAncestorSecurableObject.get();
   console.log(perms);
 };
 
 spPer();
-
-console.log(process.env)
 
 export type QueryAllData<T> = () => Promise<T>;
 export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
@@ -57,7 +55,7 @@ type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | Que
 
 type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationStaffDataItem;
 
-const SPLists = Web(process.env.SP_ROOT_URL!).configure({ headers }).lists;
+const SPLists = Web(SP_ROOT_URL).configure({ headers }).lists;
 
 const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: string, select: string, orderBy: string, filter: string = '') =>
   SPLists.getById(listGuid)
@@ -153,7 +151,7 @@ export const API_: API = {
   auth: {
     getAuth: async () =>
       sp
-        .configure({ headers },  process.env.SP_ROOT_URL)
+        .configure({ headers }, SP_ROOT_URL)
         .web.configure({ headers })
         .currentUser.select('IsSiteAdmin')
         .get()
