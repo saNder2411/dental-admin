@@ -15,15 +15,16 @@ import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirm
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
-import { StatusNames } from '../../../_bus/Entities/EntitiesTypes';
+import { StatusNames, EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
+import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 //Action Creators
-import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
+import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC, addItemToEditAC } from '../../../_bus/Entities/EntitiesAC';
 import { setFormItemIdAC, changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectFormItemID, selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
-import { selectCustomerById, selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectCustomerById, selectAppointmentsAllIds, selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
@@ -36,7 +37,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
   const formItemID = useSelector(selectFormItemID);
   const isOriginalDataItem = new Date(dataItem.EventDate).getTime() === dataItem.Start.getTime();
-  const inEdit = formItemID === dataItem.ID && isOriginalDataItem;
+  const inEditValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, boolean>(dataItem.ID, EntitiesMap.Appointments, 'inEdit'));
+  const inEdit = inEditValue && isOriginalDataItem;
   const selectedView = useSelector(selectSelectedView);
 
   const [showPopup, setShowPopup] = useState(false);
@@ -85,7 +87,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       setShowEditOccurrenceDialog(true);
       return;
     }
-    dispatch(setFormItemIdAC(dataItem.ID));
+    dispatch(addItemToEditAC(dataItem.ID, EntitiesMap.Appointments));
   }, [dispatch, dataItem.ID, isRecurring]);
 
   const onDeleteBtnClick = useCallback(() => {
@@ -216,7 +218,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);
-            dispatch(setFormItemIdAC(dataItem.ID));
+            dispatch(addItemToEditAC(dataItem.ID, EntitiesMap.Appointments));
           }}
         />
       )}

@@ -47,7 +47,7 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
         ...state,
         [action.entityName]:
           action.entityName === EntitiesMap.Appointments
-            ? updateStateSliceOnCreateAppointmentDataItem(state.appointments, action.dataItem as AppointmentDataItem, action.clientID)
+            ? updateStateSliceOnCreateAppointmentDataItem(state.appointments, action.dataItem as AppointmentDataItem, action.clientID ?? -1)
             : updateStateSliceOnCreateDataItem(state[action.entityName], action.dataItem),
       };
 

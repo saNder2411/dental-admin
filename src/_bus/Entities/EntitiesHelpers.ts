@@ -55,12 +55,11 @@ export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = Gen
 export const updateStateSliceOnCreateAppointmentDataItem = (
   stateSlice: EntitiesStateSlice<AppointmentDataItem>,
   dataItem: AppointmentDataItem,
-  clientID: number | undefined
+  clientID: number
 ): EntitiesStateSlice<AppointmentDataItem> => {
-  const oldID = clientID ? clientID : -1;
   const newID = dataItem.ID;
 
-  if (oldID === newID) {
+  if (clientID === newID) {
     const hasID = stateSlice.allIDs.includes(newID);
     const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
     const originalData = hasID ? updateDataItemInArray(stateSlice.originalData, dataItem) : [dataItem, ...stateSlice.originalData];
@@ -69,10 +68,10 @@ export const updateStateSliceOnCreateAppointmentDataItem = (
     return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
   }
 
-  const { [oldID]: oldItem, ...oldProcessById } = stateSlice.processById;
+  const { [clientID]: oldItem, ...oldProcessById } = stateSlice.processById;
   const processById = { ...oldProcessById, [dataItem.ID]: dataItem };
-  const originalData = [dataItem, ...deleteDataItemFromArray(stateSlice.originalData, oldID)];
-  const allIDs = [dataItem.ID, ...stateSlice.allIDs.filter((ID) => ID !== oldID)];
+  const originalData = [dataItem, ...deleteDataItemFromArray(stateSlice.originalData, clientID)];
+  const allIDs = [dataItem.ID, ...stateSlice.allIDs.filter((ID) => ID !== clientID)];
 
   return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
 };

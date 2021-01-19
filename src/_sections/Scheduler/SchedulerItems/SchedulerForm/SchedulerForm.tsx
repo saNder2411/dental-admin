@@ -28,7 +28,7 @@ import {
 import { selectCustomerById } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 // Types
-import { StatusNames } from '../../../../_bus/Entities/EntitiesTypes';
+import { StatusNames, EntitiesMap } from '../../../../_bus/Entities/EntitiesTypes';
 import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
 import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
@@ -37,6 +37,7 @@ import {
   updateAppointmentRecurringDataItemInitAsyncAC,
   updateAppointmentDataItemInitAsyncAC,
   createAppointmentDataItemInitAsyncAC,
+  cancelEditAC,
 } from '../../../../_bus/Entities/EntitiesAC';
 import { changeUpdatedRecurringDataItemAC, setFormItemIdAC, discardAddNewItemToDataInSchedulerAC } from '../../../../_bus/Scheduler/SchedulerAC';
 // Instruments
@@ -106,7 +107,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
       return;
     }
 
-    dispatch(setFormItemIdAC(null));
+    dispatch(cancelEditAC(dataItem.ID, EntitiesMap.Appointments));
   };
 
   return (
