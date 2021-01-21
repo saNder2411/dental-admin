@@ -10,7 +10,7 @@
 
 # production
 /build
-
+/public/app-config.json
 kendo-ui-license.txt
 
 # misc

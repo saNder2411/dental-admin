@@ -5,6 +5,8 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
 import { selectLocaleState } from './AppSelectors';
 import { selectMemoUser } from '../_bus/User/UserSelectors';
+// Types
+import { UserRoles } from '../_bus/User/UserTypes';
 // Images
 import headerBg from '../_assets/header-bg.png';
 // Other
@@ -22,7 +24,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
   const dispatch = useDispatch();
   const selectUser = useMemo(() => selectMemoUser(), []);
   const user = useSelector(selectUser);
-  const showSupportStylist = user && user.IsSiteAdmin;
+  const showSupportLink = user && user.role !== UserRoles.NotAdmin;
 
   const currentLanguage = locales.find((item) => item.localeID === currentLocaleID);
 
@@ -44,7 +46,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
         <div className="settings">
           <ul className="nav justify-content-end" style={{ minHeight: '40px' }}>
             <li className="nav-item">
-              {showSupportStylist && (
+              {showSupportLink && (
                 <a
                   className="nav-link d-flex d-flex justify-content-between align-items-center"
                   href={`${SP_ROOT_URL}_layouts/15/viewlsts.aspx`}

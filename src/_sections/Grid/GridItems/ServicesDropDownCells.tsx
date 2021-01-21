@@ -11,7 +11,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
 // Const
-import { roleSkills } from '../../../_bus/Const';
+import { roleSkills } from '../../../_bus/Constants';
 
 export const ServicesCategoryMultiSelect: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string>(dataItemID, EntitiesMap.Services, field));

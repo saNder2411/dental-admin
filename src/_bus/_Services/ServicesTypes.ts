@@ -2,6 +2,11 @@ export enum OfferIcons {
   Tooth = 'Tooth',
 }
 
+export enum ContentTypes {
+  Services = '0x0100E03BE5D98FC3417B84A28F834BEAB5AD020300774B3F93ED0D784DA9C9B20DD43DE598',
+  Product = '0x0100E03BE5D98FC3417B84A28F834BEAB5AD0201002C808BD52BC06C4B8CA67C4E3245E35B',
+};
+
 interface BackendImmutableKey {
   Id: number;
   OfferingsName_Edit: string | null;
@@ -9,11 +14,12 @@ interface BackendImmutableKey {
   ConsultReq: boolean;
   MinutesDuration: number;
   Amount: number;
+  ContentTypeId: ContentTypes;
   OfferingCatType: string | null;
   OfferingDiscount: number;
   ID: number;
 
-  OfferingIconName?: null | OfferIcons;
+  ImageThumbnail?: null | OfferIcons;
   RoleSkills?: null | string[];
 }
 

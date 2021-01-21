@@ -1,7 +1,10 @@
 // Types
 import { AppointmentDataItem } from './../_Appointments/AppointmentsTypes';
 import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, EntitiesStateSlice } from './EntitiesTypes';
-import { OfferIcons } from '../_Services/ServicesTypes';
+import { OfferIcons, ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
+import { StaffDataItem } from './../_Staff/StaffTypes';
+// Constants
+import { WEEK_POINTS, MONDAY_CURRENT_WEEK, WEEK_RANGE } from '../Constants';
 
 export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
 
@@ -215,8 +218,9 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         Amount: 50,
         OfferingCatType: '',
         OfferingDiscount: 0,
+        ContentTypeId: ContentTypes.Services,
         ID,
-        OfferingIconName: OfferIcons.Tooth,
+        ImageThumbnail: OfferIcons.Tooth,
         RoleSkills: [],
         inEdit: true,
         isNew: true,
@@ -238,6 +242,20 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         JobTitle: '',
         Department: null,
         CalendarColHex: generateColor(),
+        WorkingDayStart01: null,
+        WorkingDayEnd01: null,
+        WorkingDayStart02: null,
+        WorkingDayEnd02: null,
+        WorkingDayStart03: null,
+        WorkingDayEnd03: null,
+        WorkingDayStart04: null,
+        WorkingDayEnd04: null,
+        WorkingDayStart05: null,
+        WorkingDayEnd05: null,
+        WorkingDayStart06: null,
+        WorkingDayEnd06: null,
+        WorkingDayStart07: null,
+        WorkingDayEnd07: null,
         ID,
 
         RoleSkills: [],
@@ -249,4 +267,71 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
     default:
       throw new Error(`Grid Data Name not correct`);
   }
+};
+
+export const getAppointmentSalesDataForChart = (appointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) => {
+  const totalChartData: number[] = [];
+  const servicesChartData: number[] = [];
+  const productChartData: number[] = [];
+
+  WEEK_POINTS.forEach(({ start, end }) => {
+    let totalSum = 0;
+    let serviceSum = 0;
+    let productSum = 0;
+
+    const sliceAppointments = appointments.filter(({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime());
+
+    sliceAppointments.forEach((appointment) => {
+      totalSum += appointment.ServiceCharge;
+      appointment.LookupMultiBP01offeringsId.results.forEach((Id) => {
+        const { Amount = 0, ContentTypeId = '' } = servicesById[Id] ?? {};
+        ContentTypeId === ContentTypes.Services ? (serviceSum += Amount) : (productSum += Amount);
+      });
+    });
+
+    totalChartData.push(totalSum);
+    servicesChartData.push(serviceSum);
+    productChartData.push(productSum);
+  });
+
+  return { totalChartData, servicesChartData, productChartData };
+};
+
+export const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string | null) => {
+  if (!startWorkDay || !endWorkDay) return 0;
+  const now = new Date();
+  const year = now.getFullYear();
+  const swapMonth = now.getMonth() + 1;
+  const month = swapMonth < 10 ? `0${swapMonth}` : swapMonth;
+  const date = now.getDate();
+
+  const delta = Date.parse(`${year}-${month}-${date}T${endWorkDay}`) - Date.parse(`${year}-${month}-${date}T${startWorkDay}`);
+
+  return delta / 1000 / 60 / 60;
+};
+
+export const calcStaffWorkWeekHours = (staffDataItem: StaffDataItem | undefined) => {
+  if (!staffDataItem) return 0;
+
+  let weekHours = 0;
+  for (let i = 1; i <= 7; i++) {
+    weekHours += calcStaffWorkDayHours(
+      staffDataItem[`WorkingDayStart0${i}` as keyof StaffDataItem] as string,
+      staffDataItem[`WorkingDayEnd0${i}` as keyof StaffDataItem] as string
+    );
+  }
+
+  return weekHours;
+};
+
+export const calcAllStaffWorkWeekHours = (staff: StaffDataItem[]) =>
+  staff.reduce((sum, staffDataItem) => (sum += calcStaffWorkWeekHours(staffDataItem)), 0);
+
+export const getStaffUtilizationDataForChart = (appointments: AppointmentDataItem[], staff: StaffDataItem[]): [number, number] => {
+  const sliceAppointments = appointments.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
+  const totalAppointmentHours = Math.round(sliceAppointments.reduce((sum, appointment) => (sum += appointment.Duration / 60 / 60), 0));
+  const totalStaffWorkHoursInWeekRange = calcAllStaffWorkWeekHours(staff) * WEEK_RANGE;
+  
+
+  return [totalStaffWorkHoursInWeekRange, totalAppointmentHours];
 };

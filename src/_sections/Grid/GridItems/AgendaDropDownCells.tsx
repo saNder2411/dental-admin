@@ -29,7 +29,7 @@ import { useTextFieldsValidation } from '../GridHooks';
 import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelpers';
 import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 // Const
-import { statusNameList } from '../../../_bus/Const';
+import { statusNameList } from '../../../_bus/Constants';
 
 export const AgendaStatusDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames>(dataItemID, EntitiesMap.Appointments, field));

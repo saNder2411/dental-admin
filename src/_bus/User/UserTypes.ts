@@ -15,8 +15,24 @@ export const ActionTypes = {
   FETCH_USER_DATA_FINALLY: `USER/FETCH_USER_DATA_FINALLY` as const,
 };
 
+type NumberAsString<T> = string extends T ? number : string;
+
+export interface EffectiveBasePermissions {
+  __metadata: {
+    type: 'SP.BasePermissions';
+  };
+  High: NumberAsString<string>;
+  Low: NumberAsString<string>;
+}
+
+export enum UserRoles {
+  Owner = 'Owner',
+  Manager = 'Manager',
+  NotAdmin = 'NotAdmin',
+}
+
 export interface UserInfo {
-  IsSiteAdmin: boolean;
+  role: UserRoles;
 }
 
 export interface UserState {

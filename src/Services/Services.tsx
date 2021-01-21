@@ -32,7 +32,7 @@ export const Services: FC = (): JSX.Element => {
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={servicesData} entityName={EntitiesMap.Services} labelNewItemBtn="New Service">
-          <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`OfferingIconName`} title={` `} />
+          <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`ImageThumbnail`} />
           <GridColumn
             field={'Id'}
             title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}

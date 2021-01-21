@@ -5,14 +5,17 @@ import { API } from '../../_REST';
 // Actions
 import * as actions from './UserAC';
 // Types
-import { UserInfo } from '../User/UserTypes';
+import { EffectiveBasePermissions } from './UserTypes';
+// Helpers
+import { transformAPIData } from './UserHelpers';
 
 export function* workerFetchAuth(): SagaIterator {
   try {
     // yield put(actions.fetchAuthDataRequestAC());
 
-    const result: UserInfo = yield apply(API, API.auth.getAuth, []);
-    yield put(actions.fetchUserDataSuccessAC(result));
+    const result: EffectiveBasePermissions = yield apply(API, API.user.getPermissions, []);
+    const userData = transformAPIData(result);
+    yield put(actions.fetchUserDataSuccessAC(userData));
   } catch (error) {
     yield put(actions.fetchUserDataFailureAC(`UserInfo fetch data Error: ${error.message}`));
   } finally {

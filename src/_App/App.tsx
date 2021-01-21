@@ -41,6 +41,7 @@ import { Calendar } from '../Calendar';
 import { Staff } from '../Staff';
 import { Customers } from '../Customers';
 import { Services } from '../Services';
+import { Dashboard } from '../Dashboard';
 // Styles
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './AppStyles.scss';
@@ -110,7 +111,7 @@ export const App: FC = (): JSX.Element => {
                   <Services />
                 </Route>
                 <Route exact path="/dashboard">
-                  <h1>Dashboard</h1>
+                  <Dashboard />
                 </Route>
               </Switch>
             </AppDrawerRouterContainer>

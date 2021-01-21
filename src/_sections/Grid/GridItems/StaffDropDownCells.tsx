@@ -11,7 +11,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
 // Const
-import { roleSkills } from '../../../_bus/Const';
+import { roleSkills } from '../../../_bus/Constants';
 
 export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);

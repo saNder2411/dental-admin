@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 // Types
 import { GlobalState } from '../../_init';
 import { GenericDataItem, EntitiesKeys } from './EntitiesTypes';
+// Helpers
+import { getAppointmentSalesDataForChart, getStaffUtilizationDataForChart } from './EntitiesHelpers';
 
 const selectProcessByIdData = (entityName: EntitiesKeys) => ({ Entities }: GlobalState) => Entities[entityName].processById;
 
@@ -93,3 +95,15 @@ export const selectServicesDataForDropDownListData = () =>
   createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => ({ text: byId[ID].OfferingsName_Edit ?? '', value: ID })));
 
 export const selectServicesCategory = () => createSelector(selectServices, ({ byId, allIDs }) => allIDs.map((ID) => byId[ID]?.OfferingCatType ?? ''));
+
+// Dashboard
+
+export const selectAppointmentsSalesChartData = () =>
+  createSelector(selectOriginalAppointmentsData, selectServicesByIdData, (appointments, servicesById) =>
+    getAppointmentSalesDataForChart(appointments, servicesById)
+  );
+
+export const selectStaffUtilizationChartData = () =>
+  createSelector(selectOriginalAppointmentsData, selectOriginalStaffData, (appointments, staff) =>
+    getStaffUtilizationDataForChart(appointments, staff)
+  );
