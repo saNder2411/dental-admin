@@ -1,4 +1,4 @@
-import { addWeeks, weekInYear, addDays } from '@progress/kendo-date-math';
+import { addWeeks, addDays } from '@progress/kendo-date-math';
 // Types
 import { StatusNames } from './Entities/EntitiesTypes';
 
@@ -7,20 +7,6 @@ export const MONDAY_CURRENT_WEEK = addDays(NOW, -(NOW.getDay() - 1));
 export const WEEK_RANGE = 12;
 export const PREV_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, -WEEK_RANGE);
 export const NEXT_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, WEEK_RANGE);
-
-export const getWeekPoints = (weekRange: number, startDate: Date) => {
-  const points = [];
-  for (let i = 0; i < weekRange; i++) {
-    const start = addWeeks(startDate, i);
-    const end = addWeeks(startDate, i + 1);
-    const weekNumber = weekInYear(start);
-    points.push({ start, end, weekNumber });
-  }
-  return points;
-};
-
-export const WEEK_POINTS = getWeekPoints(WEEK_RANGE, PREV_WEEKS);
-
 
 export const statusNameList = Object.values(StatusNames);
 

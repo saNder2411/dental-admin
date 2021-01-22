@@ -3,7 +3,11 @@ import { createSelector } from 'reselect';
 import { GlobalState } from '../../_init';
 import { GenericDataItem, EntitiesKeys } from './EntitiesTypes';
 // Helpers
-import { getAppointmentSalesDataForChart, getStaffUtilizationDataForChart } from './EntitiesHelpers';
+import {
+  getAppointmentSalesDataForChart,
+  getStaffUtilizationDataForChart,
+  getAppointmentPerStaffDataForChart,
+} from '../../_sections/Chart/ChartHelpers';
 
 const selectProcessByIdData = (entityName: EntitiesKeys) => ({ Entities }: GlobalState) => Entities[entityName].processById;
 
@@ -106,4 +110,9 @@ export const selectAppointmentsSalesChartData = () =>
 export const selectStaffUtilizationChartData = () =>
   createSelector(selectOriginalAppointmentsData, selectOriginalStaffData, (appointments, staff) =>
     getStaffUtilizationDataForChart(appointments, staff)
+  );
+
+export const selectAppointmentPerStaffChartData = () =>
+  createSelector(selectOriginalAppointmentsData, selectOriginalStaffData, (appointments, staff) =>
+    getAppointmentPerStaffDataForChart(appointments, staff)
   );

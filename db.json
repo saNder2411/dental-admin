@@ -330,6 +330,260 @@
       "ID": 7
     }
   ],
+  "skills": [
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(1)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(1)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 1,
+      "ID": 1,
+      "Title": "Active Listening",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(2)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(2)",
+        "etag": "\"3\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 2,
+      "ID": 2,
+      "Title": "Styling-Dusting",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(3)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(3)",
+        "etag": "\"3\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 3,
+      "ID": 3,
+      "Title": "Personal Dexterity",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(4)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(4)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 4,
+      "ID": 4,
+      "Title": "Artistic & Creative",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(5)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(5)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 5,
+      "ID": 5,
+      "Title": "Patience & Tolerance",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(6)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(6)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 6,
+      "ID": 6,
+      "Title": "Problem Solving",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(7)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(7)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 7,
+      "ID": 7,
+      "Title": "Physical Stamina",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(8)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(8)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 8,
+      "ID": 8,
+      "Title": "Decisive & Confident",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(9)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(9)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 9,
+      "ID": 9,
+      "Title": "Time Management",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(10)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(10)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 10,
+      "ID": 10,
+      "Title": "Marketing & Promoting",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(11)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(11)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 11,
+      "ID": 11,
+      "Title": "First Aid",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(12)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(12)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 12,
+      "ID": 12,
+      "Title": "Rapport Building",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(13)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(13)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 13,
+      "ID": 13,
+      "Title": "Consultative",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(14)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(14)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 14,
+      "ID": 14,
+      "Title": "Styling-Layering",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(15)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(15)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 15,
+      "ID": 15,
+      "Title": "Styling-Wispy",
+      "Description1": "Styling in wispy fashion involves creating texture that leaves the ends of the hair pointing in many different directions, not falling straight down"
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(16)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(16)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 16,
+      "ID": 16,
+      "Title": "Styling-Chunky",
+      "Description1": "This is a way to describe layers cut into large pieces, instead of straight and even. It can also be used to describe the placement of highlights, which tends to add volume, depth, and dimension to hair."
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(17)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(17)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 17,
+      "ID": 17,
+      "Title": "Styling-Blunt Cut",
+      "Description1": "A blunt cut is when hair is cut horizontally across the ends  with scissors, leaving all ends in a perfectly straight line."
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(18)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(18)",
+        "etag": "\"2\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 18,
+      "ID": 18,
+      "Title": "Colouring-Balayage",
+      "Description1": null
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(19)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(19)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 19,
+      "ID": 19,
+      "Title": "Colouring-Ombré",
+      "Description1": "Hair color that is dark at the root and gradually fades to lighter towards the ends of the hair. There are variations on this theme, including “sombré,” a more subtle version of ombré. Hair still gets gradually lighter from root to tip, but the color contrast is far less severe. "
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(20)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(20)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 20,
+      "ID": 20,
+      "Title": "Colouring-Base",
+      "Description1": "The main color applied all over the head or at the root area, before a more dimensional color technique is applied. For highlights, the base color is the natural haircolor."
+    },
+    {
+      "__metadata": {
+        "id": "Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(21)",
+        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7381575a-eee1-4be7-9fa8-0c357a9e25ce')/Items(21)",
+        "etag": "\"1\"",
+        "type": "SP.Data.MetroHR02_x005f_SkillsListItem"
+      },
+      "Id": 21,
+      "ID": 21,
+      "Title": "Styling-Undercut",
+      "Description1": "A technique by which hair underneath is cut shorter than the hair on top of your head. This can be anything from the bottom half of the head being shaved, to just trimmed by a few inches to remove weight and make hair less thick at the back of the neck."
+    }
+  ],
   "appointments": [
     {
       "__metadata": {
