@@ -1,22 +1,22 @@
 import { createSelector } from 'reselect';
 // Types
-import { GlobalState } from '../../_init';
+import { RootState } from '../../_init';
 
-export const selectMapTeamToFiltered = ({ Scheduler }: GlobalState) => Scheduler.mapTeamToFiltered;
+const getUpdatableRecurringDataItem = ({ Scheduler }: RootState) => Scheduler.updatableRecurringDataItem;
 
-export const selectSelectedDate = ({ Scheduler }: GlobalState) => Scheduler.selectedDate;
+const getNewAppointmentDataItem = ({ Scheduler }: RootState) => Scheduler.newAppointmentDataItem;
 
-export const selectSelectedView = ({ Scheduler }: GlobalState) => Scheduler.selectedView;
+export const selectMapTeamToFiltered = ({ Scheduler }: RootState) => Scheduler.mapTeamToFiltered;
 
-export const selectUpdatableRecurringDataItem = ({ Scheduler }: GlobalState) => Scheduler.updatableRecurringDataItem;
+export const selectSelectedDate = ({ Scheduler }: RootState) => Scheduler.selectedDate;
+
+export const selectSelectedView = ({ Scheduler }: RootState) => Scheduler.selectedView;
 
 export const selectMemoUpdatableRecurringDataItem = () =>
-  createSelector(selectUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);
-
-const selectNewAppointmentDataItem = ({ Scheduler }: GlobalState) => Scheduler.newAppointmentDataItem;
+  createSelector(getUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);
 
 export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
-  return createSelector(selectNewAppointmentDataItem, (newAppointmentDataItem) => {
+  return createSelector(getNewAppointmentDataItem, (newAppointmentDataItem) => {
     if (!newAppointmentDataItem) return null;
 
     return newAppointmentDataItem?.Start.getTime() === start.getTime() && newAppointmentDataItem.TeamID === TeamID ? newAppointmentDataItem : null;

@@ -1,6 +1,6 @@
 // Types
-import { GlobalState } from '../../_init';
+import { RootState } from '../../_init';
 
-export const selectDataIsLoading = ({ UI }: GlobalState) => UI.isDataLoading;
+export const selectDataIsLoading = ({ UI }: RootState) => UI.isDataLoading;
 
-export const selectDataItemIsLoading = ({ UI }: GlobalState) => UI.isDataItemLoading;
+export const selectDataItemIsLoading = ({ UI }: RootState) => UI.isDataItemLoading;

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 // Components
-import { ChartAppointmentSales, ChartAppointmentsPerStaff, ChartStaffUtilization } from './ChartItems';
+import { ChartAppointmentSales, ChartAppointmentsPerStaff, ChartStaffEmployment } from './ChartItems';
 
 export const Chart: FC = (): JSX.Element => {
   return (
@@ -11,12 +11,12 @@ export const Chart: FC = (): JSX.Element => {
       </section>
       <section className="col">
         <section className="row">
-          <ChartStaffUtilization className="border shadow-sm mb-2 mr-2 pt-2 rounded col" />
-          <ChartStaffUtilization className="border shadow-sm mb-2 pt-2 rounded col" />
+          <ChartStaffEmployment className="border shadow-sm mb-2 mr-2 pt-2 rounded col" />
+          <ChartStaffEmployment className="border shadow-sm mb-2 pt-2 rounded col" />
         </section>
         <section className="row">
-          <ChartStaffUtilization className="border shadow-sm mr-2 pt-2 rounded col" />
-          <ChartStaffUtilization className="border shadow-sm pt-2 rounded col" />
+          <ChartStaffEmployment className="border shadow-sm mr-2 pt-2 rounded col" />
+          <ChartStaffEmployment className="border shadow-sm pt-2 rounded col" />
         </section>
       </section>
     </section>

@@ -10,15 +10,18 @@ import {
   ChartCategoryAxisItem,
 } from '@progress/kendo-react-charts';
 // Constants
-import { WeekNumbers } from './ChartHelpers';
+import { WeekNumbers } from '../../_bus/Chart/ChartHelpers';
 // Selectors
 import {
   selectAppointmentsSalesChartData,
-  selectStaffUtilizationChartData,
+  selectTotalAppointmentHours,
+  selectTotalStaffWorkHoursInWeekRange,
   selectAppointmentPerStaffChartData,
-} from '../../_bus/Entities/EntitiesSelectors';
-// Types
-import { ChartItemProps } from './ChartTypes';
+} from '../../_bus/Chart/ChartSelectors';
+
+interface ChartItemProps {
+  className?: string;
+}
 
 export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const { totalChartData, servicesChartData, productChartData } = useSelector(selectAppointmentsSalesChartData());
@@ -64,8 +67,9 @@ export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JS
   );
 };
 
-export const ChartStaffUtilization: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const [totalAppointmentHours, totalStaffWorkHoursInWeekRange] = useSelector(selectStaffUtilizationChartData());
+export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const totalAppointmentHours = useSelector(selectTotalAppointmentHours);
+  const totalStaffWorkHoursInWeekRange = useSelector(selectTotalStaffWorkHoursInWeekRange);
   const data = [
     { name: 'Total Appointment Hours', share: totalAppointmentHours },
     { name: 'Total Staff Work Hours', share: totalStaffWorkHoursInWeekRange },
@@ -75,7 +79,7 @@ export const ChartStaffUtilization: FC<ChartItemProps> = ({ className }): JSX.El
 
   return (
     <section className={className}>
-      <h3 className="text-center">Staff Utilization</h3>
+      <h3 className="text-center">Staff Employment</h3>
       <KendoChart donutCenterRender={percentLabel}>
         <ChartTitle text="Last 12 weeks" />
         <ChartLegend position="top" orientation="horizontal" />

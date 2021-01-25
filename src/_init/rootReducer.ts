@@ -5,6 +5,7 @@ import { reducer as Entities } from '../_bus/Entities/EntitiesReducer';
 import { UIReducer as UI } from '../_bus/UI/UIReducers';
 import { UserReducer as User } from '../_bus/User/UserReducers';
 import { SchedulerReducer as Scheduler } from '../_bus/Scheduler/SchedulerReducers';
+import { ChartReducer as Chart } from '../_bus/Chart/ChartReducers';
 
 export const rootReducer = combineReducers({
   AppState,
@@ -12,4 +13,5 @@ export const rootReducer = combineReducers({
   UI,
   User,
   Scheduler,
+  Chart,
 });

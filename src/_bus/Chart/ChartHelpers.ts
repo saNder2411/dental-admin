@@ -5,9 +5,9 @@ import { StaffDataItem } from '../../_bus/_Staff/StaffTypes';
 import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
 import { ServiceDataItem, ContentTypes } from '../../_bus/_Services/ServicesTypes';
 // Constants
-import { WEEK_RANGE, PREV_WEEKS, MONDAY_CURRENT_WEEK } from '../../_bus/Constants';
+import { WEEK_RANGE, PREV_WEEKS } from '../../_bus/Constants';
 
-export const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint[], number[]] => {
+const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint[], number[]] => {
   let points: WeekPoint[] = [];
   let weekNumbers: number[] = [];
 
@@ -65,7 +65,7 @@ const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string |
   return delta / 1000 / 60 / 60;
 };
 
-const calcStaffMemberWorkWeekHours = (staffDataItem: StaffDataItem | undefined) => {
+export const calcStaffMemberWorkWeekHours = (staffDataItem: StaffDataItem | undefined) => {
   if (!staffDataItem) return 0;
 
   let weekHours = 0;
@@ -79,18 +79,9 @@ const calcStaffMemberWorkWeekHours = (staffDataItem: StaffDataItem | undefined) 
   return weekHours;
 };
 
-const calcAllStaffWorkWeekHours = (staff: StaffDataItem[]) =>
-  staff.reduce((sum, staffDataItem) => (sum += calcStaffMemberWorkWeekHours(staffDataItem)), 0);
+// ChartAppointmentsPerStaff
 
-export const getStaffUtilizationDataForChart = (appointments: AppointmentDataItem[], staff: StaffDataItem[]): [number, number] => {
-  const sliceAppointments = appointments.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
-  const totalAppointmentHours = Math.round(sliceAppointments.reduce((sum, appointment) => (sum += appointment.Duration / 60 / 60), 0));
-  const totalStaffWorkHoursInWeekRange = calcAllStaffWorkWeekHours(staff) * WEEK_RANGE;
-
-  return [totalAppointmentHours, totalStaffWorkHoursInWeekRange];
-};
-
-export const calcAmountAppointmentsDurationSalesPerWeekRangePerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {
+export const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {
   return appointments.reduce<{ amountAppointment: number; durationInHours: number; sales: number }>(
     (acc, appointment) => {
       if (appointment.LookupHR01teamId === staffMemberID) {
@@ -108,33 +99,33 @@ export const calcAmountAppointmentsDurationSalesPerWeekRangePerStaffMember = (st
   );
 };
 
-export const calcAmountAppointmentsDurationSalesPerWeekPerStaffMember = (
+export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   staffDataItem: StaffDataItem,
   sliceAppointmentsInWeekRange: AppointmentDataItem[]
 ) => {
   const staffMemberWorkWeekHours = calcStaffMemberWorkWeekHours(staffDataItem);
-  const { amountAppointment, durationInHours, sales } = calcAmountAppointmentsDurationSalesPerWeekRangePerStaffMember(
-    staffDataItem.ID,
-    sliceAppointmentsInWeekRange
-  );
-  // console.log(staffDataItem.FullName)
-  // console.log(`12 weeks`, { amountAppointment, durationInHours, sales })
+  const { amountAppointment, durationInHours, sales } = calcAppointmentsDurationSalesPerStaffMember(staffDataItem.ID, sliceAppointmentsInWeekRange);
+  console.log(staffDataItem.FullName);
+  console.log(`12 weeks`, { amountAppointment, durationInHours, sales });
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(
     ((durationInHours / WEEK_RANGE) * 100) / (staffMemberWorkWeekHours === 0 ? 100 : staffMemberWorkWeekHours)
   );
   const averageSalesPerWeekPerStaffMember = +(sales / WEEK_RANGE).toFixed(2);
 
-  // console.log(`AverageInWeek`, { averageAppointmentsPerWeekPerStaffMember, percentEmploymentPerWeekPerStaffMember, averageSalesPerWeekPerStaffMember })
+  console.log(`AverageInWeek`, {
+    averageAppointmentsPerWeekPerStaffMember,
+    percentEmploymentPerWeekPerStaffMember,
+    averageSalesPerWeekPerStaffMember,
+  });
 
   return { averageAppointmentsPerWeekPerStaffMember, percentEmploymentPerWeekPerStaffMember, averageSalesPerWeekPerStaffMember };
 };
 
 export const getAppointmentPerStaffDataForChart = (
-  appointments: AppointmentDataItem[],
+  sliceAppointments: AppointmentDataItem[],
   staff: StaffDataItem[]
 ): [string[], AppointmentPerStaffSeries[]] => {
-  const sliceAppointments = appointments.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
   let categories: string[] = [];
   let amountsAppointment: number[] = [];
   let percentsEmployment: number[] = [];
@@ -145,7 +136,7 @@ export const getAppointmentPerStaffDataForChart = (
       averageAppointmentsPerWeekPerStaffMember,
       percentEmploymentPerWeekPerStaffMember,
       averageSalesPerWeekPerStaffMember,
-    } = calcAmountAppointmentsDurationSalesPerWeekPerStaffMember(staffMember, sliceAppointments);
+    } = calcAppointmentsDurationSalesPerWeekPerStaffMember(staffMember, sliceAppointments);
     categories = [...categories, `${staffMember.FirstName[0]}.${staffMember.Title[0]}`];
     amountsAppointment = [...amountsAppointment, averageAppointmentsPerWeekPerStaffMember];
     percentsEmployment = [...percentsEmployment, percentEmploymentPerWeekPerStaffMember];

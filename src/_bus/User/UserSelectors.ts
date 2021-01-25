@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 // Types
-import { GlobalState } from '../../_init';
+import { RootState } from '../../_init';
 
-export const selectUser = ({ User }: GlobalState) => User.user;
+export const getUser = ({ User }: RootState) => User.user;
 
-export const selectMemoUser = () => createSelector(selectUser, (user) => user);
+export const selectMemoUser = () => createSelector(getUser, (user) => user);
