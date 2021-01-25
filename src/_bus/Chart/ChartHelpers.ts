@@ -1,11 +1,13 @@
 import { addWeeks, weekInYear } from '@progress/kendo-date-math';
 // Types
-import { WeekPoint, AppointmentPerStaffSeries } from './ChartTypes';
+import { WeekPoint, SeriesForChart } from './ChartTypes';
 import { StaffDataItem } from '../../_bus/_Staff/StaffTypes';
-import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
-import { ServiceDataItem, ContentTypes } from '../../_bus/_Services/ServicesTypes';
+import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
 // Constants
-import { WEEK_RANGE, PREV_WEEKS } from '../../_bus/Constants';
+import { WEEK_RANGE, PREV_WEEKS } from '../Constants';
+// Helpers
+// import { generateColor } from '../Entities/EntitiesHelpers';
 
 const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint[], number[]] => {
   let points: WeekPoint[] = [];
@@ -24,7 +26,7 @@ const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint
 
 export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, PREV_WEEKS);
 
-export const getAppointmentSalesDataForChart = (appointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) => {
+export const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) => {
   let totalChartData: number[] = [];
   let servicesChartData: number[] = [];
   let productChartData: number[] = [];
@@ -34,9 +36,11 @@ export const getAppointmentSalesDataForChart = (appointments: AppointmentDataIte
     let serviceSum = 0;
     let productSum = 0;
 
-    const sliceAppointments = appointments.filter(({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime());
+    const sliceAppointmentsInWeekPoint = sliceAppointments.filter(
+      ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime()
+    );
 
-    sliceAppointments.forEach((appointment) => {
+    sliceAppointmentsInWeekPoint.forEach((appointment) => {
       totalSum += appointment.ServiceCharge;
       appointment.LookupMultiBP01offeringsId.results.forEach((Id) => {
         const { Amount = 0, ContentTypeId = '' } = servicesById[Id] ?? {};
@@ -105,27 +109,27 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
 ) => {
   const staffMemberWorkWeekHours = calcStaffMemberWorkWeekHours(staffDataItem);
   const { amountAppointment, durationInHours, sales } = calcAppointmentsDurationSalesPerStaffMember(staffDataItem.ID, sliceAppointmentsInWeekRange);
-  console.log(staffDataItem.FullName);
-  console.log(`12 weeks`, { amountAppointment, durationInHours, sales });
+  // console.log(staffDataItem.FullName);
+  // console.log(`12 weeks`, { amountAppointment, durationInHours, sales });
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(
     ((durationInHours / WEEK_RANGE) * 100) / (staffMemberWorkWeekHours === 0 ? 100 : staffMemberWorkWeekHours)
   );
   const averageSalesPerWeekPerStaffMember = +(sales / WEEK_RANGE).toFixed(2);
 
-  console.log(`AverageInWeek`, {
-    averageAppointmentsPerWeekPerStaffMember,
-    percentEmploymentPerWeekPerStaffMember,
-    averageSalesPerWeekPerStaffMember,
-  });
+  // console.log(`AverageInWeek`, {
+  //   averageAppointmentsPerWeekPerStaffMember,
+  //   percentEmploymentPerWeekPerStaffMember,
+  //   averageSalesPerWeekPerStaffMember,
+  // });
 
   return { averageAppointmentsPerWeekPerStaffMember, percentEmploymentPerWeekPerStaffMember, averageSalesPerWeekPerStaffMember };
 };
 
-export const getAppointmentPerStaffDataForChart = (
+export const getAppointmentPerStaffData = (
   sliceAppointments: AppointmentDataItem[],
   staff: StaffDataItem[]
-): [string[], AppointmentPerStaffSeries[]] => {
+): [string[], SeriesForChart<number[]>[]] => {
   let categories: string[] = [];
   let amountsAppointment: number[] = [];
   let percentsEmployment: number[] = [];
@@ -151,3 +155,50 @@ export const getAppointmentPerStaffDataForChart = (
 
   return [categories, series];
 };
+
+export const getAverageHourlyPerServiceData = (sliceAppointments: AppointmentDataItem[], services: ServiceDataItem[]) =>
+  services.reduce<SeriesForChart<number>[]>((acc, service) => {
+    if (service.ContentTypeId !== ContentTypes.Services) return acc;
+
+    const name = service.OfferingCatType ?? 'null';
+
+    let totalSales = 0;
+    let totalHours = 0;
+    sliceAppointments.forEach(({ LookupMultiBP01offeringsId, ServiceCharge, Duration }) => {
+      if (!LookupMultiBP01offeringsId.results.includes(service.ID)) return;
+      const amountServicesInAppointment = LookupMultiBP01offeringsId.results.length;
+      totalSales += ServiceCharge / amountServicesInAppointment;
+      totalHours += Duration / 60 / 60 / amountServicesInAppointment;
+    });
+
+    const data = totalSales === 0 ? 0 : Math.round(totalSales / totalHours);
+
+    const prevAccValue = acc[acc.length - 1];
+
+    if (prevAccValue && prevAccValue.name === service.OfferingCatType) {
+      prevAccValue.data += data;
+      return acc;
+    }
+
+    return [...acc, { name, data }];
+  }, []);
+
+export const getAverageHourlyPerAllServiceData = (
+  sliceAppointments: AppointmentDataItem[],
+  servicesById: { [key: string]: ServiceDataItem }
+): [number, number] =>
+  sliceAppointments.reduce<[number, number]>(
+    (acc, { LookupMultiBP01offeringsId, ServiceCharge, Duration }) => {
+      let [sales, hours] = acc;
+
+      const amountProductSalesInAppointment = LookupMultiBP01offeringsId.results.reduce((sum, ID) => {
+        const service = servicesById[ID];
+        return service.ContentTypeId === ContentTypes.Product ? (sum += service.Amount) : sum;
+      }, 0);
+      sales += ServiceCharge - amountProductSalesInAppointment;
+      hours += Duration / 60 / 60;
+
+      return [sales, hours];
+    },
+    [0, 0]
+  );

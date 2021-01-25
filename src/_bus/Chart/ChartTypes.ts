@@ -6,9 +6,10 @@ export interface WeekPoint {
   end: Date;
 }
 
-export interface AppointmentPerStaffSeries {
+export interface SeriesForChart<T> {
   name: string;
-  data: number[];
+  data: T;
+  color?: string;
 }
 
 export interface AppointmentsDataForChartState {

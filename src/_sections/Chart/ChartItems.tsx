@@ -9,6 +9,7 @@ import {
   ChartCategoryAxis,
   ChartCategoryAxisItem,
 } from '@progress/kendo-react-charts';
+import { LinearGauge } from '@progress/kendo-react-gauges';
 // Constants
 import { WeekNumbers } from '../../_bus/Chart/ChartHelpers';
 // Selectors
@@ -17,6 +18,8 @@ import {
   selectTotalAppointmentHours,
   selectTotalStaffWorkHoursInWeekRange,
   selectAppointmentPerStaffChartData,
+  selectAverageHourlyPerServiceChartData,
+  selectAverageHourlyPerAllServiceChartData,
 } from '../../_bus/Chart/ChartSelectors';
 
 interface ChartItemProps {
@@ -33,8 +36,8 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
         <ChartTitle text="Last 12 weeks" align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
-          <ChartSeriesItem type="line" data={servicesChartData} name="Service" tooltip={{ visible: true }} />
           <ChartSeriesItem type="line" data={productChartData} name="Product" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={servicesChartData} name="Service" tooltip={{ visible: true }} />
           <ChartSeriesItem type="area" data={totalChartData} name="Total" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>
@@ -55,12 +58,38 @@ export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JS
         <ChartTitle text="Average per week" align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
-          {series.map((item, idx) => (
-            <ChartSeriesItem key={idx} type="column" data={item.data} name={item.name} tooltip={{ visible: true }} />
+          {series.map(({ data, name }) => (
+            <ChartSeriesItem key={Math.random()} type="column" data={data} name={name} tooltip={{ visible: true }} />
           ))}
         </ChartSeries>
         <ChartCategoryAxis>
-          <ChartCategoryAxisItem categories={categories} />
+          <ChartCategoryAxisItem title={{ text: 'STAFF' }} categories={categories} />
+        </ChartCategoryAxis>
+      </KendoChart>
+    </section>
+  );
+};
+
+export const ChartServiceSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const { servicesChartData, productChartData } = useSelector(selectAppointmentsSalesChartData());
+  const series = [
+    { name: 'Product', data: productChartData },
+    { name: 'Service', data: servicesChartData },
+  ];
+
+  return (
+    <section className={className}>
+      <h3 className="text-left">Product / Service Sales</h3>
+      <KendoChart>
+        <ChartTitle text="Last 12 weeks" align="left" />
+        <ChartLegend position="top" orientation="horizontal" align="start" />
+        <ChartSeries>
+          {series.map(({ data, name }) => (
+            <ChartSeriesItem key={Math.random()} type="column" data={data} name={name} tooltip={{ visible: true }} />
+          ))}
+        </ChartSeries>
+        <ChartCategoryAxis>
+          <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />
         </ChartCategoryAxis>
       </KendoChart>
     </section>
@@ -82,7 +111,7 @@ export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Ele
       <h3 className="text-center">Staff Employment</h3>
       <KendoChart donutCenterRender={percentLabel}>
         <ChartTitle text="Last 12 weeks" />
-        <ChartLegend position="top" orientation="horizontal" />
+        <ChartLegend position="top" orientation="vertical" />
         <ChartSeries>
           <ChartSeriesItem
             type="donut"
@@ -97,6 +126,46 @@ export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Ele
           />
         </ChartSeries>
       </KendoChart>
+    </section>
+  );
+};
+
+export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const data = useSelector(selectAverageHourlyPerServiceChartData());
+
+  return (
+    <section className={className}>
+      <h3 className="text-center">Average Hourly $ Per Service</h3>
+      <KendoChart>
+        <ChartTitle text="Last 12 weeks" />
+        <ChartLegend position="top" orientation="vertical" />
+        <ChartSeries>
+          <ChartSeriesItem
+            type="pie"
+            overlay={{
+              gradient: 'sharpBevel',
+            }}
+            tooltip={{ visible: true }}
+            data={data}
+            colorField="color"
+            categoryField="name"
+            field="data"
+          />
+        </ChartSeries>
+      </KendoChart>
+    </section>
+  );
+};
+
+export const ChartAverageHourlyPerAllService: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const [sales, hours] = useSelector(selectAverageHourlyPerAllServiceChartData());
+  const value = Math.round(sales / hours);
+
+  return (
+    <section className={className}>
+      <h3 className="mb-2">Average Hourly $ Per All Service</h3>
+      <div className="text-muted mb-3 pt-1">Last 12 weeks</div>
+      <LinearGauge pointer={{ value, color: '#28b4c8', size: 40 }} scale={{ max: value + 20 }} style={{ height: 320 }} />
     </section>
   );
 };

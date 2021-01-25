@@ -54,6 +54,7 @@
     "@progress/kendo-react-editor": "^3.17.0",
     "@progress/kendo-react-excel-export": "^3.17.0",
     "@progress/kendo-react-form": "^3.17.0",
+    "@progress/kendo-react-gauges": "^4.3.0",
     "@progress/kendo-react-grid": "^3.17.0",
     "@progress/kendo-react-indicators": "^4.1.0",
     "@progress/kendo-react-inputs": "^3.17.0",

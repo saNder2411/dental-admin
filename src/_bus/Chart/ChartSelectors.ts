@@ -2,9 +2,14 @@ import { createSelector } from 'reselect';
 // Types
 import { RootState } from '../../_init';
 // Selectors
-import { getServicesByIdData, selectOriginalStaffData } from '../Entities/EntitiesSelectors';
+import { getServicesByIdData, selectOriginalStaffData, selectOriginalServicesData } from '../Entities/EntitiesSelectors';
 // Helpers
-import { getAppointmentSalesDataForChart, getAppointmentPerStaffDataForChart } from './ChartHelpers';
+import {
+  getAppointmentSalesData,
+  getAppointmentPerStaffData,
+  getAverageHourlyPerServiceData,
+  getAverageHourlyPerAllServiceData,
+} from './ChartHelpers';
 
 const getSliceAppointmentsInLastWeekRange = ({ Chart }: RootState) => Chart.appointmentsDataForChart.sliceAppointmentsInLastWeekRange;
 
@@ -14,10 +19,20 @@ export const selectTotalStaffWorkHoursInWeekRange = ({ Chart }: RootState) => Ch
 
 export const selectAppointmentsSalesChartData = () =>
   createSelector(getSliceAppointmentsInLastWeekRange, getServicesByIdData, (sliceAppointments, servicesById) =>
-    getAppointmentSalesDataForChart(sliceAppointments, servicesById)
+    getAppointmentSalesData(sliceAppointments, servicesById)
   );
 
 export const selectAppointmentPerStaffChartData = () =>
   createSelector(getSliceAppointmentsInLastWeekRange, selectOriginalStaffData, (sliceAppointments, staff) =>
-    getAppointmentPerStaffDataForChart(sliceAppointments, staff)
+    getAppointmentPerStaffData(sliceAppointments, staff)
+  );
+
+export const selectAverageHourlyPerServiceChartData = () =>
+  createSelector(getSliceAppointmentsInLastWeekRange, selectOriginalServicesData, (sliceAppointments, services) =>
+    getAverageHourlyPerServiceData(sliceAppointments, services)
+  );
+
+export const selectAverageHourlyPerAllServiceChartData = () =>
+  createSelector(getSliceAppointmentsInLastWeekRange, getServicesByIdData, (sliceAppointments, servicesById) =>
+    getAverageHourlyPerAllServiceData(sliceAppointments, servicesById)
   );
