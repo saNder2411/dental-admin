@@ -10,8 +10,11 @@ interface BackendImmutableKey {
   Description: string;
   fAllDayEvent: null | boolean;
   AppointmentStatus: StatusNames;
+  AppointmentSource: string | null;
   Notes: null | string;
   ServiceCharge: number;
+  ExtraFees: number;
+  ServiceDiscount: number;
   FilterStart: string;
   FilterEnd: string;
   MetroRRule: null | string;
@@ -25,7 +28,7 @@ interface BackendImmutableKey {
   ID: number;
   Modified: string;
   LookupCM102customersId: number;
-  LookupHR01teamId: number;
+  LookupHR01teamId: number | null;
 }
 
 interface FrontendKey {
@@ -47,6 +50,7 @@ export interface QueryAppointmentDataItem extends BackendImmutableKey {
 }
 
 export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
+  LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
 }
 

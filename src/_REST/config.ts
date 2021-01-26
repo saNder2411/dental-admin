@@ -24,7 +24,7 @@ export const GuidList = {
 };
 
 export const SelectFields = {
-  Appointment: `ID,Title,EventDate,EndDate,AppointmentStatus,Description,Notes,MetroRRule,MetroRecException,RecurrenceID,Duration,ServiceCharge,fAllDayEvent,FirstName,LastNameAppt,Gender,CellPhone,Email,FilterStart,FilterEnd,Modified,LookupHR01teamId,LookupCM102customersId,LookupMultiBP01offeringsId`,
+  Appointment: `ID,Title,EventDate,EndDate,AppointmentStatus,AppointmentSource,Description,Notes,MetroRRule,MetroRecException,RecurrenceID,Duration,ServiceCharge,ExtraFees,ServiceDiscount,fAllDayEvent,FirstName,LastNameAppt,Gender,CellPhone,Email,FilterStart,FilterEnd,Modified,LookupHR01teamId,LookupCM102customersId,LookupMultiBP01offeringsId`,
   Customer: `ID,Title,FirstName,FullName,CellPhone,Email,Gender,ClientPhoto,Created,Modified,LookupMultiHR01teamId`,
   Staff: `ID,Title,FirstName,FullName,TeamProfilePhoto,ShowOnline,Email,CellPhone,JobTitle,Department,CalendarColHex,LookupMultiHR02SkillsId,WorkingDayStart01,WorkingDayEnd01,WorkingDayStart02,WorkingDayEnd02,WorkingDayStart03,WorkingDayEnd03,WorkingDayStart04,WorkingDayEnd04,WorkingDayStart05,WorkingDayEnd05,WorkingDayStart06,WorkingDayEnd06,WorkingDayStart07,WorkingDayEnd07`,
   Service: `ID,ContentTypeId,OfferingsName_Edit,OfferingCatType,ShowOnline,ConsultReq,MinutesDuration,Amount,OfferingDiscount,ImageThumbnail,LookupMultiHR02SkillsId`,

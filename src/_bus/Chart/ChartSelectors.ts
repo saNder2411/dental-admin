@@ -60,22 +60,22 @@ export const selectAppointmentFunnelChartData = () =>
     (appointmentReservations, appointmentBookings, appointmentAttended, paymentCompleted) => [
       {
         stat: 'Appointment Reservations',
-        data: 4,
+        data: appointmentReservations === 0 ? 0.44 : appointmentReservations,
         color: '#166f99',
       },
       {
         stat: 'Appointment Bookings',
-        data: 3,
+        data: appointmentBookings === 0 ? 0.43 : appointmentBookings,
         color: '#2185b4',
       },
       {
         stat: 'Appointment Attended',
-        data: 2,
+        data: appointmentAttended === 0 ? 0.42 : appointmentAttended,
         color: '#319fd2',
       },
       {
         stat: 'Payment Completed',
-        data: 1,
+        data: paymentCompleted === 0 ? 0.3 : paymentCompleted,
         color: '#3eaee2',
       },
     ]

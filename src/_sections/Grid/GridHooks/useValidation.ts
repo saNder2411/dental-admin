@@ -75,7 +75,6 @@ export const useStartDateEventValidation = (value: Date, LookupHR01teamId: numbe
   return { isValid, showPopup, setShowPopup, actualAppointments };
 };
 
-
 export const useEndDateEventValidation = (value: Date, LookupHR01teamId: number) => {
   const [isValid, setIsValid] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
