@@ -12,7 +12,7 @@ export const Dashboard: FC = (): JSX.Element => {
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
 
-  const contentTSX = !isDataLoading && <Chart />;
+  const contentTSX = appointmentsData.length > 0 && !isDataLoading && <Chart />;
 
   return (
     <>

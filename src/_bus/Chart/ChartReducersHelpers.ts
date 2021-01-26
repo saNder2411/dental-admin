@@ -16,9 +16,19 @@ export const updateAppointmentsDataForChart = (
   if (entityName !== EntitiesMap.Appointments) return state;
 
   const sliceAppointmentsInLastWeekRange = (data as AppointmentDataItem[]).filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
-  const totalAppointmentHours = Math.round(sliceAppointmentsInLastWeekRange.reduce((sum, appointment) => (sum += appointment.Duration / 60 / 60), 0));
+  const [totalAppointmentHours, totalAppointmentSales, activeCustomersSet] = sliceAppointmentsInLastWeekRange.reduce<[number, number, Set<number>]>(
+    (acc, { Duration, ServiceCharge, LookupCM102customersId }) => {
+      let [prevHours, prevSales, activeCustomers] = acc;
+      const nextHours = prevHours + Duration / 60 / 60;
+      const nextSales = prevSales + ServiceCharge;
+      activeCustomers.add(LookupCM102customersId);
 
-  return { sliceAppointmentsInLastWeekRange, totalAppointmentHours };
+      return [nextHours, nextSales, activeCustomers];
+    },
+    [0, 0, new Set()]
+  );
+
+  return { sliceAppointmentsInLastWeekRange, totalAppointmentHours, totalAppointmentSales, activeCustomersIDs: Array.from(activeCustomersSet) };
 };
 
 export const updateTotalStaffWorkHoursInWeekRange = (state: number, entityName: EntitiesKeys, data: GenericDataItem[]): number => {

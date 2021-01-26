@@ -15,4 +15,6 @@ export interface SeriesForChart<T> {
 export interface AppointmentsDataForChartState {
   sliceAppointmentsInLastWeekRange: AppointmentDataItem[];
   totalAppointmentHours: number;
+  totalAppointmentSales: number;
+  activeCustomersIDs: number[];
 }

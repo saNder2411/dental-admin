@@ -13,7 +13,13 @@ import {
 
 const getSliceAppointmentsInLastWeekRange = ({ Chart }: RootState) => Chart.appointmentsDataForChart.sliceAppointmentsInLastWeekRange;
 
+export const getActiveCustomersIDs = ({ Chart }: RootState) => Chart.appointmentsDataForChart.activeCustomersIDs;
+
 export const selectTotalAppointmentHours = ({ Chart }: RootState) => Chart.appointmentsDataForChart.totalAppointmentHours;
+
+export const selectTotalAppointmentSales = ({ Chart }: RootState) => Chart.appointmentsDataForChart.totalAppointmentSales;
+
+export const selectAmountActiveCustomers = ({ Chart }: RootState) => Chart.appointmentsDataForChart.activeCustomersIDs.length;
 
 export const selectTotalStaffWorkHoursInWeekRange = ({ Chart }: RootState) => Chart.totalStaffWorkHoursInWeekRange;
 

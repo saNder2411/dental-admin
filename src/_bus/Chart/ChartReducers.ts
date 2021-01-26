@@ -8,6 +8,8 @@ import { updateAppointmentsDataForChart, updateTotalStaffWorkHoursInWeekRange } 
 const initAppointmentsDataForChart = {
   sliceAppointmentsInLastWeekRange: [],
   totalAppointmentHours: 0,
+  totalAppointmentSales: 0,
+  activeCustomersIDs: [],
 };
 
 const appointmentsDataForChartReducer = (

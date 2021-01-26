@@ -9,9 +9,10 @@ import {
   ChartCategoryAxis,
   ChartCategoryAxisItem,
 } from '@progress/kendo-react-charts';
-import { LinearGauge } from '@progress/kendo-react-gauges';
+import { ArcGauge, LinearGauge } from '@progress/kendo-react-gauges';
 // Constants
 import { WeekNumbers } from '../../_bus/Chart/ChartHelpers';
+import { SeriesColors } from '../../_bus/Constants';
 // Selectors
 import {
   selectAppointmentsSalesChartData,
@@ -20,6 +21,8 @@ import {
   selectAppointmentPerStaffChartData,
   selectAverageHourlyPerServiceChartData,
   selectAverageHourlyPerAllServiceChartData,
+  selectTotalAppointmentSales,
+  selectAmountActiveCustomers,
 } from '../../_bus/Chart/ChartSelectors';
 
 interface ChartItemProps {
@@ -96,47 +99,13 @@ export const ChartServiceSales: FC<ChartItemProps> = ({ className }): JSX.Elemen
   );
 };
 
-export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const totalAppointmentHours = useSelector(selectTotalAppointmentHours);
-  const totalStaffWorkHoursInWeekRange = useSelector(selectTotalStaffWorkHoursInWeekRange);
-  const data = [
-    { name: 'Total Appointment Hours', share: totalAppointmentHours },
-    { name: 'Total Staff Work Hours', share: totalStaffWorkHoursInWeekRange },
-  ];
-
-  const percentLabel = () => <h3>{Math.round((totalAppointmentHours * 100) / totalStaffWorkHoursInWeekRange)}%</h3>;
-
-  return (
-    <section className={className}>
-      <h3 className="text-center">Staff Employment</h3>
-      <KendoChart donutCenterRender={percentLabel}>
-        <ChartTitle text="Last 12 weeks" />
-        <ChartLegend position="top" orientation="vertical" />
-        <ChartSeries>
-          <ChartSeriesItem
-            type="donut"
-            overlay={{
-              gradient: 'sharpBevel',
-            }}
-            tooltip={{ visible: true }}
-            data={data}
-            categoryField="name"
-            field="share"
-            holeSize={80}
-          />
-        </ChartSeries>
-      </KendoChart>
-    </section>
-  );
-};
-
 export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const data = useSelector(selectAverageHourlyPerServiceChartData());
 
   return (
     <section className={className}>
       <h3 className="text-center">Average Hourly $ Per Service</h3>
-      <KendoChart>
+      <KendoChart seriesColors={SeriesColors}>
         <ChartTitle text="Last 12 weeks" />
         <ChartLegend position="top" orientation="vertical" />
         <ChartSeries>
@@ -157,15 +126,43 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
   );
 };
 
-export const ChartAverageHourlyPerAllService: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const [sales, hours] = useSelector(selectAverageHourlyPerAllServiceChartData());
-  const value = Math.round(sales / hours);
+export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const totalAppointmentHours = useSelector(selectTotalAppointmentHours);
+  const totalStaffWorkHoursInWeekRange = useSelector(selectTotalStaffWorkHoursInWeekRange);
+  const value = totalAppointmentHours !== 0 ? Math.round((totalAppointmentHours * 100) / totalStaffWorkHoursInWeekRange) : 0;
 
   return (
     <section className={className}>
-      <h3 className="mb-2">Average Hourly $ Per All Service</h3>
+      <h3 className="mb-2">Staff Employment</h3>
+      <div className="text-muted mb-4 pt-1">Last 12 weeks</div>
+      <ArcGauge value={value} arcCenterRender={(currentValue: number, color: string) => <h3 style={{ color: color }}>{currentValue}%</h3>} />
+    </section>
+  );
+};
+
+export const ChartAverageHourlyPerAllServices: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const [sales, hours] = useSelector(selectAverageHourlyPerAllServiceChartData());
+  const value = sales !== 0 ? Math.round(sales / hours) : 0;
+
+  return (
+    <section className={className}>
+      <h3 className="mb-2">Average Hourly $ Per All Services</h3>
       <div className="text-muted mb-3 pt-1">Last 12 weeks</div>
       <LinearGauge pointer={{ value, color: '#28b4c8', size: 40 }} scale={{ max: value + 20 }} style={{ height: 320 }} />
+    </section>
+  );
+};
+
+export const ChartAverageCustomerOrders: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const totalSales = useSelector(selectTotalAppointmentSales);
+  const amountActiveCustomers = useSelector(selectAmountActiveCustomers);
+  const value = totalSales !== 0 ? Math.round(totalSales / amountActiveCustomers) : 0;
+
+  return (
+    <section className={className}>
+      <h3 className="mb-2">Average Customer Orders</h3>
+      <div className="text-muted mb-3 pt-1">Last 12 weeks</div>
+      <LinearGauge pointer={{ value, color: '#f6d245', size: 40 }} scale={{ max: value + 20, minorUnit: 1, majorUnit: 10 }} style={{ height: 320 }} />
     </section>
   );
 };

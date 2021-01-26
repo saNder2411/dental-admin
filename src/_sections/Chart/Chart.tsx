@@ -6,25 +6,34 @@ import {
   ChartStaffEmployment,
   ChartServiceSales,
   ChartAverageHourlyPerService,
-  ChartAverageHourlyPerAllService,
+  ChartAverageHourlyPerAllServices,
+  ChartAverageCustomerOrders,
 } from './ChartItems';
 
 export const Chart: FC = (): JSX.Element => {
   return (
     <section className="card-container row">
-      <section className="border shadow-sm mr-2 pt-2 rounded col-7">
+      <section className="border shadow-sm mr-2 pt-2 rounded col">
         <ChartAppointmentSales />
         <ChartAppointmentsPerStaff />
         <ChartServiceSales />
       </section>
-      <section className="col">
-        <section className="row">
-          <ChartStaffEmployment className="border shadow-sm mr-2 pt-2 rounded col" />
-          <ChartStaffEmployment className="border shadow-sm pt-2 rounded col" />
+      <section className="col-5">
+        <section className="row justify-content-between mb-2">
+          <div className="col px-1">
+            <ChartStaffEmployment className="h-100 border shadow-sm rounded pt-2" />
+          </div>
+          <div className="col px-1">
+            <ChartAverageHourlyPerService className="h-100 border shadow-sm rounded pt-2" />
+          </div>
         </section>
-        <section className="row">
-          <ChartAverageHourlyPerService className="border shadow-sm mb-2 mr-2 pt-2 rounded col" />
-          <ChartAverageHourlyPerAllService className="border shadow-sm mb-2 pt-2 rounded col" />
+        <section className="row row-cols-2 justify-content-between">
+          <div className="col px-1">
+            <ChartAverageHourlyPerAllServices className="h-100 border shadow-sm rounded py-2" />
+          </div>
+          <div className="col px-1">
+            <ChartAverageCustomerOrders className="h-100 border shadow-sm rounded py-2" />
+          </div>
         </section>
       </section>
     </section>

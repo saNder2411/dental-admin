@@ -10,6 +10,21 @@ export const NEXT_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, WEEK_RANGE);
 
 export const statusNameList = Object.values(StatusNames);
 
+export const SeriesColors = [
+  `#dc6a60`,
+  `#eed15d`,
+  `#7fc94b`,
+  `#4cabbb`,
+  `#3f6fd9`,
+  `#9e4daf`,
+  `LightSalmon`,
+  `PeachPuff`,
+  `Fuchsia`,
+  `Aqua`,
+  `RoyalBlue`,
+  `Plum`,
+];
+
 export const roleSkills = [
   `Active Listening`,
   `Artistic & Creative`,
