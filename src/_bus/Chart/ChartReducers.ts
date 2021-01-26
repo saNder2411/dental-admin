@@ -10,6 +10,10 @@ const initAppointmentsDataForChart = {
   totalAppointmentHours: 0,
   totalAppointmentSales: 0,
   activeCustomersIDs: [],
+  appointmentReservations: 0,
+  appointmentBookings: 0,
+  appointmentAttended: 0,
+  paymentCompleted: 0,
 };
 
 const appointmentsDataForChartReducer = (

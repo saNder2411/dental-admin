@@ -17,4 +17,8 @@ export interface AppointmentsDataForChartState {
   totalAppointmentHours: number;
   totalAppointmentSales: number;
   activeCustomersIDs: number[];
+  appointmentReservations: number;
+  appointmentBookings: number;
+  appointmentAttended: number;
+  paymentCompleted: number;
 }

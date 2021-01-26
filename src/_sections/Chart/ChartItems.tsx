@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { useSelector } from 'react-redux';
 import {
   Chart as KendoChart,
@@ -8,6 +8,10 @@ import {
   ChartSeriesItem,
   ChartCategoryAxis,
   ChartCategoryAxisItem,
+  ChartSeriesLabels,
+  ChartTooltip,
+  TooltipContext,
+  SharedTooltipContext,
 } from '@progress/kendo-react-charts';
 import { ArcGauge, LinearGauge } from '@progress/kendo-react-gauges';
 // Constants
@@ -23,11 +27,14 @@ import {
   selectAverageHourlyPerAllServiceChartData,
   selectTotalAppointmentSales,
   selectAmountActiveCustomers,
+  selectAppointmentFunnelChartData,
 } from '../../_bus/Chart/ChartSelectors';
 
 interface ChartItemProps {
   className?: string;
 }
+
+const TooltipRender = ({ point }: TooltipContext & SharedTooltipContext): ReactNode => point?.category;
 
 export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const { totalChartData, servicesChartData, productChartData } = useSelector(selectAppointmentsSalesChartData());
@@ -121,6 +128,26 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
             field="data"
           />
         </ChartSeries>
+      </KendoChart>
+    </section>
+  );
+};
+
+export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const data = useSelector(selectAppointmentFunnelChartData());
+
+  return (
+    <section className={className}>
+      <h3 className="text-center">Appointment Funnel</h3>
+      <KendoChart style={{ margin: '0 auto', width: '90%' }}>
+        <ChartTitle text="Next 12 weeks" />
+        <ChartSeries>
+          <ChartSeriesItem type="funnel" data={data} categoryField="stat" field="data" colorField="color" dynamicSlope dynamicHeight={false}>
+            <ChartSeriesLabels color="white" background="none" format="N0" />
+          </ChartSeriesItem>
+        </ChartSeries>
+        <ChartTooltip render={TooltipRender as any} />
+        <ChartLegend visible={false} />
       </KendoChart>
     </section>
   );
