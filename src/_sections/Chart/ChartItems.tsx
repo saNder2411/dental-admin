@@ -15,20 +15,24 @@ import {
 } from '@progress/kendo-react-charts';
 import { ArcGauge, LinearGauge } from '@progress/kendo-react-gauges';
 // Constants
-import { WeekNumbers } from '../../_bus/Chart/ChartHelpers';
+import { WeekNumbers } from '../../_bus/Entities/EntitiesChartHelpers';
 import { SeriesColors } from '../../_bus/Constants';
 // Selectors
 import {
-  selectAppointmentsSalesChartData,
+  selectTotalSalesForEveryWeekInWeekRange,
+  selectServiceSalesForEveryWeekInWeekRange,
+  selectProductSalesForEveryWeekInWeekRange,
+  selectCategoriesAppointmentPerStaff,
+  selectSeriesAppointmentPerStaff,
+  selectAverageHourlyPerService,
+  selectAppointmentFunnel,
   selectTotalAppointmentHours,
   selectTotalStaffWorkHoursInWeekRange,
-  selectAppointmentPerStaffChartData,
-  selectAverageHourlyPerServiceChartData,
-  selectAverageHourlyPerAllServiceChartData,
+  selectTotalServiceSales,
+  selectTotalServiceHours,
   selectTotalAppointmentSales,
   selectAmountActiveCustomers,
-  selectAppointmentFunnelChartData,
-} from '../../_bus/Chart/ChartSelectors';
+} from '../../_bus/Entities/EntitiesChartSelectors';
 
 interface ChartItemProps {
   className?: string;
@@ -37,7 +41,9 @@ interface ChartItemProps {
 const TooltipRender = ({ point }: TooltipContext & SharedTooltipContext): ReactNode => point?.category;
 
 export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const { totalChartData, servicesChartData, productChartData } = useSelector(selectAppointmentsSalesChartData());
+  const totalSalesForEveryWeek = useSelector(selectTotalSalesForEveryWeekInWeekRange);
+  const servicesSalesForEveryWeek = useSelector(selectServiceSalesForEveryWeekInWeekRange);
+  const productSalesForEveryWeek = useSelector(selectProductSalesForEveryWeekInWeekRange);
 
   return (
     <section className={className}>
@@ -46,9 +52,9 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
         <ChartTitle text="Last 12 weeks" align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
-          <ChartSeriesItem type="line" data={productChartData} name="Product" tooltip={{ visible: true }} />
-          <ChartSeriesItem type="line" data={servicesChartData} name="Service" tooltip={{ visible: true }} />
-          <ChartSeriesItem type="area" data={totalChartData} name="Total" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={productSalesForEveryWeek} name="Product" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={servicesSalesForEveryWeek} name="Service" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="area" data={totalSalesForEveryWeek} name="Total" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>
           <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />
@@ -59,7 +65,8 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
 };
 
 export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const [categories, series] = useSelector(selectAppointmentPerStaffChartData());
+  const categories = useSelector(selectCategoriesAppointmentPerStaff);
+  const series = useSelector(selectSeriesAppointmentPerStaff);
 
   return (
     <section className={className}>
@@ -81,10 +88,11 @@ export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JS
 };
 
 export const ChartServiceSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const { servicesChartData, productChartData } = useSelector(selectAppointmentsSalesChartData());
+  const servicesSalesForEveryWeek = useSelector(selectServiceSalesForEveryWeekInWeekRange);
+  const productSalesForEveryWeek = useSelector(selectProductSalesForEveryWeekInWeekRange);
   const series = [
-    { name: 'Product', data: productChartData },
-    { name: 'Service', data: servicesChartData },
+    { name: 'Product', data: productSalesForEveryWeek },
+    { name: 'Service', data: servicesSalesForEveryWeek },
   ];
 
   return (
@@ -107,7 +115,7 @@ export const ChartServiceSales: FC<ChartItemProps> = ({ className }): JSX.Elemen
 };
 
 export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const data = useSelector(selectAverageHourlyPerServiceChartData());
+  const data = useSelector(selectAverageHourlyPerService);
 
   return (
     <section className={className}>
@@ -134,7 +142,7 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
 };
 
 export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const data = useSelector(selectAppointmentFunnelChartData());
+  const data = useSelector(selectAppointmentFunnel());
 
   return (
     <section className={className}>
@@ -168,7 +176,8 @@ export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Ele
 };
 
 export const ChartAverageHourlyPerAllServices: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const [sales, hours] = useSelector(selectAverageHourlyPerAllServiceChartData());
+  const sales = useSelector(selectTotalServiceSales);
+  const hours = useSelector(selectTotalServiceHours);
   const value = sales !== 0 ? Math.round(sales / hours) : 0;
 
   return (

@@ -7,7 +7,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Types
 import { EditCellProps, InputChangeEvent } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Hooks
 import { usePhoneFieldsValidation } from '../GridHooks';
 // Helpers
@@ -15,7 +15,7 @@ import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/Sch
 
 export const CustomersTextInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string | number>(dataItemID, EntitiesMap.Customers, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string | number>(dataItemID, EntitiesKeys.Customers, field));
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
@@ -24,7 +24,7 @@ export const CustomersTextInput: FC<EditCellProps<CustomerDataItem>> = ({ dataIt
 
 export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesMap.Customers, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesKeys.Customers, field));
   const errorMessage = phoneValidator(value);
   const isValid = usePhoneFieldsValidation(errorMessage);
 
@@ -45,7 +45,7 @@ export const CustomersMobilePhoneInput: FC<EditCellProps<CustomerDataItem>> = ({
 
 export const CustomersAvatarInput: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesMap.Customers, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesKeys.Customers, field));
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });

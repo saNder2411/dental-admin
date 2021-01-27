@@ -11,7 +11,7 @@ import {
   UpdateAppointmentDataItemInitAsyncActionType,
   UpdateAppointmentRecurringDataItemInitAsyncActionType,
   DeleteAppointmentDataItemInitAsyncActionType,
-  EntitiesMap,
+  EntitiesKeys,
 } from '../Entities/EntitiesTypes';
 import { QueryAppointmentDataItem } from './AppointmentsTypes';
 import { QueryServiceDataItem } from '../_Services/ServicesTypes';
@@ -29,7 +29,7 @@ export function* workerFetchData({
   meta: { servicesDataLength, staffDataLength, customersDataLength },
 }: FetchAppointmentsDataInitAsyncActionType): SagaIterator {
   try {
-    yield put(actions.fetchDataRequestAC(EntitiesMap.Appointments));
+    yield put(actions.fetchDataRequestAC(EntitiesKeys.Appointments));
 
     const [agendaResult, staffResult, customersResult, servicesResult]: Results = yield all([
       apply(API, API.agenda.getData, []),
@@ -39,26 +39,26 @@ export function* workerFetchData({
     ]);
 
     const data = transformAPIData(agendaResult);
-    yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Appointments));
+    yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Appointments));
 
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);
-      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Staff));
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Staff));
     }
 
     if (customersResult) {
       const data = transformCustomersAPIData(customersResult);
-      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Customers));
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Customers));
     }
 
     if (servicesResult) {
       const data = transformServicesAPIData(servicesResult);
-      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Services));
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Services));
     }
   } catch (error) {
-    yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`, EntitiesMap.Appointments));
+    yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`, EntitiesKeys.Appointments));
   } finally {
-    yield put(actions.fetchDataFinallyAC());
+    yield put(actions.fetchDataFinallyAC(EntitiesKeys.Appointments));
   }
 }
 
@@ -72,7 +72,7 @@ export function* workerCreateDataItem({
     const result: QueryAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [transformDataItemForAPI(createdDataItem)]);
     const dataItem = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
-    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Appointments, createdDataItem.ID));
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Appointments, createdDataItem.ID));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {
@@ -90,7 +90,7 @@ export function* workerUpdateDataItem({
 
     const result: QueryAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
     const dataItem = transformAPIDataItem(result);
-    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesMap.Appointments));
+    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesKeys.Appointments));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Appointments update data item Error: ${error.message}`));
   } finally {
@@ -108,7 +108,7 @@ export function* workerDeleteDataItem({
 
     yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
     sideEffectAfterDeletedDataItem();
-    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesMap.Appointments));
+    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesKeys.Appointments));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Appointments delete data item Error: ${error.message}`));
   } finally {
@@ -132,11 +132,11 @@ export function* workerUpdateRecurringDataItem({
     ]);
 
     const updatedDataItemData = transformAPIDataItem(updateResult);
-    yield put(actions.updateDataItemSuccessAC(updatedDataItemData, EntitiesMap.Appointments));
+    yield put(actions.updateDataItemSuccessAC(updatedDataItemData, EntitiesKeys.Appointments));
 
     const createDataItemData = transformAPIDataItem(createResult);
     sideEffectAfterUpdatedDataItem();
-    yield put(actions.createDataItemSuccessAC(createDataItemData, EntitiesMap.Appointments));
+    yield put(actions.createDataItemSuccessAC(createDataItemData, EntitiesKeys.Appointments));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
   } finally {

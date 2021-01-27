@@ -21,7 +21,7 @@ import {
 import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-import { EntitiesMap } from '../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Hooks
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from './AgendaHooks';
 
@@ -35,7 +35,7 @@ export const Agenda: FC = (): JSX.Element => {
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={appointmentsData} entityName={EntitiesMap.Appointments} labelNewItemBtn="New Appointment">
+        <Grid data={appointmentsData} entityName={EntitiesKeys.Appointments} labelNewItemBtn="New Appointment">
           <GridColumn field={'AppointmentStatus'} title={` `} width={100} editable={false} cell={AgendaStatusIcon as CustomGridCell} />
           <GridColumn
             field={'AppointmentStatus'}

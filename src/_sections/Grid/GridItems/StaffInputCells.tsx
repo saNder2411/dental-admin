@@ -7,7 +7,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Types
 import { InputChangeEvent, EditCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Hooks
 import { useTextFieldsValidation, usePhoneFieldsValidation } from '../GridHooks';
 // Helpers
@@ -15,7 +15,7 @@ import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/Sch
 
 export const StaffTextInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string | number>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string | number>(dataItemID, EntitiesKeys.Staff, field));
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
@@ -24,7 +24,7 @@ export const StaffTextInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, f
 
 export const StaffFullNameInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesKeys.Staff, field));
   const isValid = useTextFieldsValidation(value);
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
@@ -34,7 +34,7 @@ export const StaffFullNameInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemI
 
 export const StaffJobTitleInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesKeys.Staff, field));
   const isValid = useTextFieldsValidation(value);
 
   const onTextChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
@@ -44,7 +44,7 @@ export const StaffJobTitleInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemI
 
 export const StaffMobilePhoneInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesKeys.Staff, field));
   const errorMessage = phoneValidator(value);
   const isValid = usePhoneFieldsValidation(errorMessage);
 
@@ -65,7 +65,7 @@ export const StaffMobilePhoneInput: FC<EditCellProps<StaffDataItem>> = ({ dataIt
 
 export const StaffAvatarInput: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(dataItemID, EntitiesKeys.Staff, field));
 
   const onAvatarChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });

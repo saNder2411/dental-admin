@@ -13,7 +13,7 @@ import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
-import { StatusNames, EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { StatusNames, EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import {
   selectProcessDataItemFieldValue,
@@ -28,7 +28,7 @@ import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 import { isString, isNumber } from './GridItemsHelpers';
 
 export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, string | null>(ID, EntitiesMap.Appointments, field));
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, string | null>(ID, EntitiesKeys.Appointments, field));
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const strValue = isString(cellValue) ? cellValue : '';
@@ -49,7 +49,7 @@ export const AgendaReferenceCell: FC<GridCellProps<AppointmentDataItem>> = ({ da
 };
 
 export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames | null>(ID, EntitiesMap.Appointments, field));
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, StatusNames | null>(ID, EntitiesKeys.Appointments, field));
   const iconName = cellValue ? cellValue : StatusNames.Consultation;
 
   return (
@@ -60,13 +60,13 @@ export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
 };
 
 export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(ID, EntitiesMap.Appointments, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(ID, EntitiesKeys.Appointments, field);
 
   return <td>{dataItemInEditValue ? <AgendaStatusDropDownList dataItemID={ID} field={field} onChange={onChange} /> : cellValue}</td>;
 };
 
 export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesMap.Appointments, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, field);
   const selectStaffLastName = useMemo(() => selectStaffLastNameByID(cellValue), [cellValue]);
   const staffLastName = useSelector(selectStaffLastName);
 
@@ -78,7 +78,7 @@ export const AgendaSvcStaffCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, { results: number[] }>(
     ID,
-    EntitiesMap.Appointments,
+    EntitiesKeys.Appointments,
     field
   );
 
@@ -89,7 +89,7 @@ export const AgendaServicesCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 };
 
 export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesMap.Appointments, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, field);
   const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(cellValue), [cellValue]);
   const customerFullName = useSelector(selectCustomerFullName);
 
@@ -99,7 +99,7 @@ export const AgendaFullNameCell: FC<GridCellProps<AppointmentDataItem>> = ({ dat
 };
 
 export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, Date>(ID, EntitiesMap.Appointments, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, Date>(ID, EntitiesKeys.Appointments, field);
   const intlService = useInternationalization();
 
   return (
@@ -114,7 +114,7 @@ export const AgendaStartDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ da
 };
 
 export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, Date>(ID, EntitiesMap.Appointments, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, Date>(ID, EntitiesKeys.Appointments, field);
   const intlService = useInternationalization();
 
   return (
@@ -129,14 +129,14 @@ export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ data
 };
 
 export const AgendaGenderCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(ID, EntitiesMap.Appointments, 'LookupCM102customersId'));
+  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, 'LookupCM102customersId'));
   const gender = useSelector(selectCustomerGenderByID(cellValue));
 
   return <td>{gender}</td>;
 };
 
 export const AgendaCurrencyCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesMap.Appointments, field);
+  const { cellValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, field);
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 50;
 

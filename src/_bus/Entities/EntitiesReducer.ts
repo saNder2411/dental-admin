@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, EntitiesState, Actions, GenericDataItem, EntitiesMap } from './EntitiesTypes';
+import { ActionTypes, EntitiesState, Actions, GenericDataItem, EntitiesKeys } from './EntitiesTypes';
 import { AppointmentDataItem } from './../_Appointments/AppointmentsTypes';
 // Helpers
 import {
@@ -13,12 +13,32 @@ import {
   updateStateSliceOnChangeDataItemInGrid,
   updateStateSliceOnAddNewItemToEditInGrid,
 } from './EntitiesHelpers';
+// Chart Helpers
+import { updateChartDataOnFinallyAppointmentsRequest } from './EntitiesChartReducerHelpers';
 
 const initialState = {
   appointments: { originalData: [], processById: {}, byId: {}, allIDs: [] },
   customers: { originalData: [], processById: {}, byId: {}, allIDs: [] },
   staff: { originalData: [], processById: {}, byId: {}, allIDs: [] },
   services: { originalData: [], processById: {}, byId: {}, allIDs: [] },
+  chartData: {
+    totalAppointmentHours: 0,
+    totalAppointmentSales: 0,
+    activeCustomersIDs: [],
+    appointmentReservations: 0,
+    appointmentBookings: 0,
+    appointmentAttended: 0,
+    paymentCompleted: 0,
+    totalStaffWorkHoursInWeekRange: 0,
+    totalSalesForEveryWeekInWeekRange: [],
+    serviceSalesForEveryWeekInWeekRange: [],
+    productSalesForEveryWeekInWeekRange: [],
+    appointmentPerStaffCategories: [],
+    appointmentPerStaffSeries: [],
+    averageHourlyPerService: [],
+    totalServiceSales: 0,
+    totalServiceHours: 0,
+  },
 };
 
 export const reducer = (state: EntitiesState = initialState, action: Actions): EntitiesState => {
@@ -46,7 +66,7 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
       return {
         ...state,
         [action.entityName]:
-          action.entityName === EntitiesMap.Appointments
+          action.entityName === EntitiesKeys.Appointments
             ? updateStateSliceOnCreateAppointmentDataItem(state.appointments, action.dataItem as AppointmentDataItem, action.clientID ?? -1)
             : updateStateSliceOnCreateDataItem(state[action.entityName], action.dataItem),
       };
@@ -91,6 +111,12 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
       return {
         ...state,
         [action.entityName]: updateStateSliceOnDeleteDataItem<GenericDataItem>(state[action.entityName], action.dataItemID),
+      };
+    // Chart
+    case ActionTypes.FETCH_DATA_FINALLY:
+      return {
+        ...state,
+        chartData: updateChartDataOnFinallyAppointmentsRequest(state, action.entityName),
       };
 
     default:

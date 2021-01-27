@@ -14,7 +14,7 @@ import { ServicesCategoryMultiSelect, ServicesBooleanFlagDropDownList, ServicesR
 import { OfferIcons } from '../../../_bus/_Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StatusNames, EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { StatusNames, EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
@@ -26,7 +26,7 @@ import { isNumber, isString } from './GridItemsHelpers';
 export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null | undefined>(
     ID,
-    EntitiesMap.Services,
+    EntitiesKeys.Services,
     field
   );
 
@@ -48,7 +48,7 @@ export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem:
 };
 
 export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesKeys.Services, field);
 
   return (
     <td>
@@ -62,7 +62,7 @@ export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataI
 };
 
 export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesKeys.Services, field);
 
   return (
     <td>{dataItemInEditValue ? <ServicesNumeric dataItemID={ID} field={field} onChange={onChange} step={5} min={5} /> : <span>{cellValue}</span>}</td>
@@ -70,8 +70,8 @@ export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataI
 };
 
 export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
-  const OfferingDiscount = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(ID, EntitiesMap.Services, 'OfferingDiscount'));
+  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesKeys.Services, field);
+  const OfferingDiscount = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(ID, EntitiesKeys.Services, 'OfferingDiscount'));
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 0;
   const numDiscount = isNumber(OfferingDiscount) ? OfferingDiscount : 0;
@@ -85,13 +85,13 @@ export const ServicesTotalPriceCell: FC<GridCellProps<ServiceDataItem>> = ({ dat
 };
 
 export const ServicesCategoryCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null>(ID, EntitiesMap.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null>(ID, EntitiesKeys.Services, field);
 
   return <td>{dataItemInEditValue ? <ServicesCategoryMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : cellValue}</td>;
 };
 
 export const ServicesReferenceCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, EntitiesMap.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, EntitiesKeys.Services, field);
 
   const anchorRef = useRef<HTMLTableDataCellElement | null>(null);
   const [showPopup, setShowPopup] = useState(false);
@@ -117,7 +117,7 @@ export const ServicesReferenceCell: FC<GridCellProps<ServiceDataItem>> = ({ data
 };
 
 export const ServicesCurrencyCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesMap.Services, field);
+  const { cellValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesKeys.Services, field);
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 50;
 
@@ -125,7 +125,7 @@ export const ServicesCurrencyCell: FC<GridCellProps<ServiceDataItem>> = ({ dataI
 };
 
 export const ServicesBooleanFlagCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, boolean>(ID, EntitiesMap.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, boolean>(ID, EntitiesKeys.Services, field);
 
   return dataItemInEditValue ? (
     <td>
@@ -139,7 +139,7 @@ export const ServicesBooleanFlagCell: FC<GridCellProps<ServiceDataItem>> = ({ da
 };
 
 export const ServicesRoleSkillsCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string[] | null>(ID, EntitiesMap.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string[] | null>(ID, EntitiesKeys.Services, field);
   const value = cellValue ? cellValue.join(' | ') : '';
 
   return <td>{dataItemInEditValue ? <ServicesRoleSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;

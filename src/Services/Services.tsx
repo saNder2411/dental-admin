@@ -18,7 +18,7 @@ import {
 import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-import { EntitiesMap } from '../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Hooks
 import { useSelectServicesData, useFetchServicesData } from './ServicesHooks';
 
@@ -31,7 +31,7 @@ export const Services: FC = (): JSX.Element => {
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={servicesData} entityName={EntitiesMap.Services} labelNewItemBtn="New Service">
+        <Grid data={servicesData} entityName={EntitiesKeys.Services} labelNewItemBtn="New Service">
           <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`ImageThumbnail`} />
           <GridColumn
             field={'Id'}

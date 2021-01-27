@@ -10,7 +10,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import { selectStaffLastNameByID, selectStaffLastNamesByID, selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
@@ -22,7 +22,7 @@ import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jp
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 
 export const CustomersTextCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string | number>(ID, EntitiesMap.Customers, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string | number>(ID, EntitiesKeys.Customers, field);
 
   const strValue = isString(cellValue) ? cellValue : '';
   const numValue = isNumber(cellValue) ? cellValue : '';
@@ -32,7 +32,7 @@ export const CustomersTextCell: FC<GridCellProps<CustomerDataItem>> = ({ dataIte
 };
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, number>(ID, EntitiesMap.Customers, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, number>(ID, EntitiesKeys.Customers, field);
 
   const selectStaffLastName = useMemo(() => selectStaffLastNameByID(cellValue), [cellValue]);
   const staffLastName = useSelector(selectStaffLastName);
@@ -45,7 +45,7 @@ export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = ({ dat
 export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, { results: number[] }>(
     ID,
-    EntitiesMap.Customers,
+    EntitiesKeys.Customers,
     field
   );
 
@@ -56,15 +56,15 @@ export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> 
 };
 
 export const CustomersMobilePhoneCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesKeys.Customers, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
   return <td>{dataItemInEditValue ? <CustomersMobilePhoneInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const CustomersAvatarCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
-  const Gender = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(ID, EntitiesMap.Customers, 'Gender'));
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesKeys.Customers, field);
+  const Gender = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(ID, EntitiesKeys.Customers, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
   const placeholderImageUrl = Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl =
@@ -82,7 +82,7 @@ export const CustomersAvatarCell: FC<GridCellProps<CustomerDataItem>> = ({ dataI
 };
 
 export const CustomersDateCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesKeys.Customers, field);
   const intlService = useInternationalization();
   const value = cellValue ? new Date(cellValue) : new Date();
 
@@ -94,7 +94,7 @@ export const CustomersDateCell: FC<GridCellProps<CustomerDataItem>> = ({ dataIte
 };
 
 export const CustomersDateCellNoEditable: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
-  const { cellValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
+  const { cellValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesKeys.Customers, field);
   const intlService = useInternationalization();
   const value = new Date(cellValue as string);
 
@@ -102,7 +102,7 @@ export const CustomersDateCellNoEditable: FC<GridCellProps<CustomerDataItem>> = 
 };
 
 export const CustomersGenderCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesMap.Customers, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, string>(ID, EntitiesKeys.Customers, field);
   const value = cellValue ? cellValue : '(1) Female';
 
   return <td>{dataItemInEditValue ? <CustomersGenderDropDownList dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;

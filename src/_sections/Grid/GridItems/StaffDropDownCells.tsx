@@ -4,7 +4,7 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
@@ -15,7 +15,7 @@ import { roleSkills } from '../../../_bus/Constants';
 
 export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, boolean>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, boolean>(dataItemID, EntitiesKeys.Staff, field));
 
   const dataForDropDownList = [
     { text: 'yes', value: true },
@@ -32,7 +32,7 @@ export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({
 
 export const StaffRoleSkillsMultiSelect: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string[] | null>(dataItemID, EntitiesMap.Staff, field));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string[] | null>(dataItemID, EntitiesKeys.Staff, field));
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
   const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];

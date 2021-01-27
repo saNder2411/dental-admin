@@ -10,7 +10,7 @@ import {
   CreateCustomerDataItemInitAsyncActionType,
   UpdatCustomerDataItemInitAsyncActionType,
   DeleteCustomerDataItemInitAsyncActionType,
-  EntitiesMap,
+  EntitiesKeys,
 } from '../Entities/EntitiesTypes';
 import { QueryCustomerDataItem } from './CustomersTypes';
 import { QueryStaffDataItem } from '../_Staff/StaffTypes';
@@ -22,7 +22,7 @@ type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null];
 
 export function* workerFetchData({ meta: { staffDataLength } }: FetchCustomersDataInitAsyncActionType): SagaIterator {
   try {
-    yield put(actions.fetchDataRequestAC(EntitiesMap.Customers));
+    yield put(actions.fetchDataRequestAC(EntitiesKeys.Customers));
 
     const [customersResult, staffResult]: Results = yield all([
       apply(API, API.customers.getData, []),
@@ -30,16 +30,16 @@ export function* workerFetchData({ meta: { staffDataLength } }: FetchCustomersDa
     ]);
 
     const data = transformAPIData(customersResult);
-    yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Customers));
+    yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Customers));
 
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);
-      yield put(actions.fetchDataSuccessAC(data, EntitiesMap.Staff));
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Staff));
     }
   } catch (error) {
-    yield put(actions.fetchDataFailureAC(`Customers fetch data Error: ${error.message}`, EntitiesMap.Customers));
+    yield put(actions.fetchDataFailureAC(`Customers fetch data Error: ${error.message}`, EntitiesKeys.Customers));
   } finally {
-    yield put(actions.fetchDataFinallyAC());
+    yield put(actions.fetchDataFinallyAC(EntitiesKeys.Customers));
   }
 }
 
@@ -52,7 +52,7 @@ export function* workerCreateDataItem({
 
     const result: QueryCustomerDataItem = yield apply(API, API.customers.createDataItem, [transformDataItemForAPI(createdDataItem)]);
     const dataItem = transformAPIDataItem(result);
-    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesMap.Customers));
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Customers));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Customers create data item Error: ${error.message}`));
   } finally {
@@ -70,7 +70,7 @@ export function* workerUpdateDataItem({
 
     const result: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
     const dataItem = transformAPIDataItem(result);
-    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesMap.Customers));
+    yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesKeys.Customers));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Customers update data item Error: ${error.message}`));
   } finally {
@@ -88,7 +88,7 @@ export function* workerDeleteDataItem({
 
     yield apply(API, API.customers.deleteDataItem, [deletedDataItemID]);
     sideEffectAfterDeletedDataItem();
-    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesMap.Customers));
+    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesKeys.Customers));
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Customers update data item Error: ${error.message}`));
   } finally {

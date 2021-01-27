@@ -4,7 +4,7 @@ import { MultiSelect, MultiSelectChangeEvent, DropDownList } from '@progress/ken
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue, selectServicesCategory } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
@@ -14,7 +14,7 @@ import { onGridDropDownChange } from './GridItemsHelpers';
 import { roleSkills } from '../../../_bus/Constants';
 
 export const ServicesCategoryMultiSelect: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
-  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string>(dataItemID, EntitiesMap.Services, field));
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string>(dataItemID, EntitiesKeys.Services, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesCategories = useMemo(selectServicesCategory, []);
   const categories = useSelector(selectServicesCategories);
@@ -35,7 +35,7 @@ export const ServicesCategoryMultiSelect: FC<EditCellProps<ServiceDataItem>> = (
 
 export const ServicesBooleanFlagDropDownList: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, boolean>(dataItemID, EntitiesMap.Services, field));
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, boolean>(dataItemID, EntitiesKeys.Services, field));
 
   const dataForDropDownList = [
     { text: 'yes', value: true },
@@ -52,7 +52,7 @@ export const ServicesBooleanFlagDropDownList: FC<EditCellProps<ServiceDataItem>>
 
 export const ServicesRoleSkillsMultiSelect: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string[] | null>(dataItemID, EntitiesMap.Services, field));
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, string[] | null>(dataItemID, EntitiesKeys.Services, field));
   const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
 
   const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];

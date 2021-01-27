@@ -5,7 +5,7 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
 import { createCustomerDataItemInitAsyncAC, updateCustomerDataItemInitAsyncAC, deleteCustomerDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
@@ -16,7 +16,7 @@ import { usePhoneFieldsValidation } from '../GridHooks';
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const selectDataItem = useMemo(() => selectMemoProcessDataItem<CustomerDataItem>(ID, EntitiesMap.Customers), [ID]);
+  const selectDataItem = useMemo(() => selectMemoProcessDataItem<CustomerDataItem>(ID, EntitiesKeys.Customers), [ID]);
   const dataItem = useSelector(selectDataItem);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = 
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
       isValidFields={isValidMobilePhone}
-      entityName={EntitiesMap.Customers}
+      entityName={EntitiesKeys.Customers}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

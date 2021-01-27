@@ -5,14 +5,14 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
 import { createServiceDataItemInitAsyncAC, updateServiceDataItemInitAsyncAC, deleteServiceDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
 import { selectMemoProcessDataItem } from '../../../_bus/Entities/EntitiesSelectors';
 
 export const ServicesActionsControlCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const selectDataItem = useMemo(() => selectMemoProcessDataItem<ServiceDataItem>(ID, EntitiesMap.Services), [ID]);
+  const selectDataItem = useMemo(() => selectMemoProcessDataItem<ServiceDataItem>(ID, EntitiesKeys.Services), [ID]);
   const dataItem = useSelector(selectDataItem);
 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
@@ -40,7 +40,7 @@ export const ServicesActionsControlCell: FC<GridCellProps<ServiceDataItem>> = ({
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
       isValidFields
-      entityName={EntitiesMap.Services}
+      entityName={EntitiesKeys.Services}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

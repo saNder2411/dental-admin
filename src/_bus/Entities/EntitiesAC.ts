@@ -125,7 +125,7 @@ export const fetchDataFailureAC = (errorMessage: string, entityName: EntitiesKey
   entityName,
 });
 
-export const fetchDataFinallyAC = () => ({ type: ActionTypes.FETCH_DATA_FINALLY });
+export const fetchDataFinallyAC = (entityName: EntitiesKeys) => ({ type: ActionTypes.FETCH_DATA_FINALLY, entityName });
 
 // Sync Create Data Item
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
@@ -134,7 +134,7 @@ export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: E
   type: ActionTypes.CREATE_DATA_ITEM_SUCCESS,
   dataItem,
   entityName,
-  clientID
+  clientID,
 });
 
 export const createDataItemFailureAC = (errorMessage: string) => ({ type: ActionTypes.CREATE_DATA_ITEM_FAILURE, errorMessage });

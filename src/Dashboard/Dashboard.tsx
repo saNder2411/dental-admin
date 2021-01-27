@@ -1,18 +1,21 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // Components
 import { Chart } from '../_sections/Chart';
 import { Loader } from '../_components';
 // Hooks
 import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from '../Agenda/AgendaHooks';
+// Selectors
+import { selectTotalAppointmentHours } from '../_bus/Entities/EntitiesChartSelectors';
 
 export const Dashboard: FC = (): JSX.Element => {
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
+  const appointmentTotalHours = useSelector(selectTotalAppointmentHours);
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
 
-  const contentTSX = appointmentsData.length > 0 && !isDataLoading && <Chart />;
+  const contentTSX = appointmentTotalHours > 0 && !isDataLoading && <Chart />;
 
   return (
     <>

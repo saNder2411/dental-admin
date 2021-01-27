@@ -15,7 +15,7 @@ import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirm
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
-import { StatusNames, EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { StatusNames, EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
@@ -36,7 +36,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
   const isOriginalDataItem = new Date(dataItem.EventDate).getTime() === dataItem.Start.getTime();
-  const inEditValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, boolean>(dataItem.ID, EntitiesMap.Appointments, 'inEdit'));
+  const inEditValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, boolean>(dataItem.ID, EntitiesKeys.Appointments, 'inEdit'));
   const inEdit = inEditValue && isOriginalDataItem;
   const selectedView = useSelector(selectSelectedView);
 
@@ -86,7 +86,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       setShowEditOccurrenceDialog(true);
       return;
     }
-    dispatch(addItemToEditAC(dataItem.ID, EntitiesMap.Appointments));
+    dispatch(addItemToEditAC(dataItem.ID, EntitiesKeys.Appointments));
   }, [dispatch, dataItem.ID, isRecurring]);
 
   const onDeleteBtnClick = useCallback(() => {
@@ -217,7 +217,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);
-            dispatch(addItemToEditAC(dataItem.ID, EntitiesMap.Appointments));
+            dispatch(addItemToEditAC(dataItem.ID, EntitiesKeys.Appointments));
           }}
         />
       )}

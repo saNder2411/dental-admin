@@ -8,7 +8,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
 // Helpers
@@ -20,7 +20,7 @@ import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jp
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 
 export const StaffTextCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string | number>(ID, EntitiesMap.Staff, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string | number>(ID, EntitiesKeys.Staff, field);
 
   const strValue = isString(cellValue) ? cellValue : '';
   const numValue = isNumber(cellValue) ? cellValue : '';
@@ -30,29 +30,29 @@ export const StaffTextCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID
 };
 
 export const StaffFullNameCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesKeys.Staff, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
   return <td>{dataItemInEditValue ? <StaffFullNameInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const StaffJobTitleCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesKeys.Staff, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
   return <td>{dataItemInEditValue ? <StaffJobTitleInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const StaffMobilePhoneCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesKeys.Staff, field);
   const strValue = isString(cellValue) ? cellValue : '';
 
   return <td>{dataItemInEditValue ? <StaffMobilePhoneInput dataItemID={ID} field={field} onChange={onChange} /> : strValue}</td>;
 };
 
 export const StaffAvatarCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesMap.Staff, field);
-  const Gender = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(ID, EntitiesMap.Staff, 'Gender'));
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesKeys.Staff, field);
+  const Gender = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(ID, EntitiesKeys.Staff, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
   const placeholderImageUrl = Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
   const imageUrl =
@@ -70,7 +70,7 @@ export const StaffAvatarCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { 
 };
 
 export const StaffBooleanFlagCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, boolean>(ID, EntitiesMap.Staff, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, boolean>(ID, EntitiesKeys.Staff, field);
 
   return dataItemInEditValue ? (
     <td>
@@ -84,7 +84,7 @@ export const StaffBooleanFlagCell: FC<GridCellProps<StaffDataItem>> = ({ dataIte
 };
 
 export const StaffRoleSkillsCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string[] | null>(ID, EntitiesMap.Staff, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string[] | null>(ID, EntitiesKeys.Staff, field);
   const value = cellValue ? cellValue.join(' | ') : '';
 
   return <td>{dataItemInEditValue ? <StaffRoleSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;

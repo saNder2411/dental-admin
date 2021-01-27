@@ -1,6 +1,6 @@
 // Types
 import { AppointmentDataItem } from './../_Appointments/AppointmentsTypes';
-import { GenericDataItem, EntitiesKeys, EntitiesMap, StatusNames, EntitiesStateSlice } from './EntitiesTypes';
+import { GenericDataItem, EntitiesKeys, StatusNames, EntitiesStateSlice } from './EntitiesTypes';
 import { OfferIcons, ContentTypes } from '../_Services/ServicesTypes';
 
 export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
@@ -144,7 +144,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
   const ID = generateId(allIDs);
 
   switch (entityName) {
-    case EntitiesMap.Appointments:
+    case EntitiesKeys.Appointments:
       return {
         Id: ID,
         Title: ``,
@@ -181,7 +181,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         inEdit: true,
         isNew: true,
       };
-    case EntitiesMap.Customers:
+    case EntitiesKeys.Customers:
       return {
         LookupMultiHR01teamId: { results: [] },
         Id: ID,
@@ -207,7 +207,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         isNew: true,
       };
 
-    case EntitiesMap.Services:
+    case EntitiesKeys.Services:
       return {
         Id: ID,
         Title: '',
@@ -225,7 +225,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         inEdit: true,
         isNew: true,
       };
-    case EntitiesMap.Staff:
+    case EntitiesKeys.Staff:
       return {
         Id: ID,
         Title: '',

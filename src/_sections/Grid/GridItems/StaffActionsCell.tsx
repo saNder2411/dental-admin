@@ -5,7 +5,7 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
 import { createStaffDataItemInitAsyncAC, updateStaffDataItemInitAsyncAC, deleteStaffDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
@@ -16,7 +16,7 @@ import { useTextFieldsValidation, usePhoneFieldsValidation } from '../GridHooks'
 import { phoneValidator } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const StaffActionsControlCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const selectDataItem = useMemo(() => selectMemoProcessDataItem<StaffDataItem>(ID, EntitiesMap.Staff), [ID]);
+  const selectDataItem = useMemo(() => selectMemoProcessDataItem<StaffDataItem>(ID, EntitiesKeys.Staff), [ID]);
   const dataItem = useSelector(selectDataItem);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ export const StaffActionsControlCell: FC<GridCellProps<StaffDataItem>> = ({ data
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
       isValidFields={isValidFullName && isValidJobTitle && isValidMobilePhone}
-      entityName={EntitiesMap.Staff}
+      entityName={EntitiesKeys.Staff}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

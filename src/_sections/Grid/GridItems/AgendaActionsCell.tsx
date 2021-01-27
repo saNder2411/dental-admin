@@ -5,7 +5,7 @@ import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
 import {
   createAppointmentDataItemInitAsyncAC,
@@ -18,7 +18,7 @@ import { selectMemoProcessDataItem, selectCustomerById } from '../../../_bus/Ent
 import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 
 export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const selectDataItem = useMemo(() => selectMemoProcessDataItem<AppointmentDataItem>(ID, EntitiesMap.Appointments), [ID]);
+  const selectDataItem = useMemo(() => selectMemoProcessDataItem<AppointmentDataItem>(ID, EntitiesKeys.Appointments), [ID]);
   const dataItem = useSelector(selectDataItem);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
@@ -52,7 +52,7 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
       dataItemID={dataItem.ID}
       isDataItemLoading={isDataItemLoading}
       isValidFields={isCustomerIDValid && isValidStartEvent && isValidEndEvent}
-      entityName={EntitiesMap.Appointments}
+      entityName={EntitiesKeys.Appointments}
       onCreateDataItem={onCreateDataItem}
       onUpdatedDataItem={onUpdatedDataItem}
       onDeleteDataItem={onDeleteDataItem}

@@ -3,6 +3,7 @@ import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
 import { ServiceDataItem } from '../_Services/ServicesTypes';
+import { SeriesForChart } from './EntitiesChartTypes';
 // Actions
 import * as actions from './EntitiesAC';
 
@@ -76,12 +77,12 @@ export enum StatusNames {
   Tooth = '(11) Tooth',
 }
 
-export const EntitiesMap = {
-  Appointments: 'appointments' as const,
-  Staff: 'staff' as const,
-  Customers: 'customers' as const,
-  Services: 'services' as const,
-};
+export enum EntitiesKeys {
+  Appointments = 'appointments',
+  Staff = 'staff',
+  Customers = 'customers',
+  Services = 'services',
+}
 
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
   originalData: T[];
@@ -89,15 +90,32 @@ export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem>
   byId: { [key: string]: T };
   allIDs: number[];
 }
-
-export interface EntitiesState {
-  [EntitiesMap.Appointments]: EntitiesStateSlice<AppointmentDataItem>;
-  [EntitiesMap.Customers]: EntitiesStateSlice<CustomerDataItem>;
-  [EntitiesMap.Staff]: EntitiesStateSlice<StaffDataItem>;
-  [EntitiesMap.Services]: EntitiesStateSlice<ServiceDataItem>;
+export interface ChartState {
+  totalAppointmentHours: number;
+  totalAppointmentSales: number;
+  activeCustomersIDs: number[];
+  appointmentReservations: number;
+  appointmentBookings: number;
+  appointmentAttended: number;
+  paymentCompleted: number;
+  totalStaffWorkHoursInWeekRange: number;
+  totalSalesForEveryWeekInWeekRange: number[];
+  serviceSalesForEveryWeekInWeekRange: number[];
+  productSalesForEveryWeekInWeekRange: number[];
+  appointmentPerStaffCategories: string[];
+  appointmentPerStaffSeries: SeriesForChart<number[]>[];
+  averageHourlyPerService: SeriesForChart<number>[];
+  totalServiceSales: number;
+  totalServiceHours: number;
 }
 
-export type EntitiesKeys = keyof EntitiesState;
+export interface EntitiesState {
+  [EntitiesKeys.Appointments]: EntitiesStateSlice<AppointmentDataItem>;
+  [EntitiesKeys.Customers]: EntitiesStateSlice<CustomerDataItem>;
+  [EntitiesKeys.Staff]: EntitiesStateSlice<StaffDataItem>;
+  [EntitiesKeys.Services]: EntitiesStateSlice<ServiceDataItem>;
+  chartData: ChartState;
+}
 
 export type FetchAppointmentsDataInitAsyncActionType = ReturnType<typeof actions.fetchAppointmentsDataInitAsyncAC>;
 

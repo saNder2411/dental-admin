@@ -16,7 +16,7 @@ import {
 import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
-import { EntitiesMap } from '../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Hooks
 import { useSelectStaffData, useFetchStaffData } from './StaffHooks';
 
@@ -30,7 +30,7 @@ export const Staff: FC = (): JSX.Element => {
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
-        <Grid data={staffData} entityName={EntitiesMap.Staff} labelNewItemBtn="New Staff">
+        <Grid data={staffData} entityName={EntitiesKeys.Staff} labelNewItemBtn="New Staff">
           <GridColumn
             field={'Id'}
             title={localizationService.toLanguageString('custom.teamID', 'Team ID')}

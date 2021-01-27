@@ -4,7 +4,7 @@ import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/ken
 // Types
 import { EditCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
-import { EntitiesMap } from '../../../_bus/Entities/EntitiesTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue, selectStaffDataForDropDownListData, selectStaffLastNameByID } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
@@ -12,7 +12,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 import { onGridDropDownChange } from './GridItemsHelpers';
 
 export const CustomersSvcStaffDropDownList: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, number>(dataItemID, EntitiesMap.Customers, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, number>(dataItemID, EntitiesKeys.Customers, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
   const dataForDropdownList = useSelector(selectStaffDropDownListData);
@@ -29,7 +29,7 @@ export const CustomersSvcStaffDropDownList: FC<EditCellProps<CustomerDataItem>> 
 };
 
 export const CustomersLastAppointmentsMultiSelect: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, { results: number[] }>(dataItemID, EntitiesMap.Customers, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, { results: number[] }>(dataItemID, EntitiesKeys.Customers, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectServicesDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
   const dataForDropdownList = useSelector(selectServicesDropDownListData);
@@ -51,7 +51,7 @@ export const CustomersLastAppointmentsMultiSelect: FC<EditCellProps<CustomerData
 
 export const CustomersGenderDropDownList: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesMap.Customers, field));
+  const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, string>(dataItemID, EntitiesKeys.Customers, field));
   const dataForDropDownList = [
     { text: '(1) Female', value: '(1) Female' },
     { text: '(2) Male', value: '(2) Male' },
