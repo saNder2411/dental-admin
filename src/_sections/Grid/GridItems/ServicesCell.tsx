@@ -14,7 +14,8 @@ import { ServicesCategoryMultiSelect, ServicesBooleanFlagDropDownList, ServicesR
 import { OfferIcons } from '../../../_bus/_Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { StatusNames, EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
+import { StatusNames } from '../../../_bus/_Appointments/AppointmentsTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 // Selectors
 import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';

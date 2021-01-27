@@ -3,6 +3,7 @@ import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
 import { ServiceDataItem } from '../_Services/ServicesTypes';
+import { RoleTeamSkillDataItem } from '../_RoleTeamSkills/RoleTeamSkillsTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
 // Actions
 import * as actions from './EntitiesAC';
@@ -13,6 +14,7 @@ export const ActionTypes = {
   FETCH_CUSTOMERS_DATA_INIT_ASYNC: 'ENTITIES/FETCH_CUSTOMERS_DATA_INIT_ASYNC' as const,
   FETCH_STAFF_DATA_INIT_ASYNC: 'ENTITIES/FETCH_STAFF_DATA_INIT_ASYNC' as const,
   FETCH_SERVICES_DATA_INIT_ASYNC: 'ENTITIES/FETCH_SERVICES_DATA_INIT_ASYNC' as const,
+  FETCH_ROLE_TEAM_SKILLS_DATA_INIT_ASYNC: 'ENTITIES/FETCH_ROLE_TEAM_SKILLS_DATA_INIT_ASYNC' as const,
   // Async Create Data Item
   CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC: 'ENTITIES/CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC' as const,
   CREATE_CUSTOMER_DATA_ITEM_INIT_ASYNC: 'ENTITIES/CREATE_CUSTOMER_DATA_ITEM_INIT_ASYNC' as const,
@@ -61,27 +63,20 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
-export type GenericDataItem = InferValueTypes<{ type1: AppointmentDataItem; type2: StaffDataItem; type3: CustomerDataItem; type4: ServiceDataItem }>;
-
-export enum StatusNames {
-  Consultation = '(1) Consultation',
-  Pending = '(2) Pending',
-  Reserved = '(3) Reserved',
-  Booked = '(4) Booked',
-  Paid = '(5) Paid',
-  Checking = '(6) Checking',
-  Cancelled = '(7) Cancelled',
-  Closed = '(8) Closed',
-  Unavailable = '(9) Unavailable',
-  Other = '(10) Other',
-  Tooth = '(11) Tooth',
-}
+export type GenericDataItem = InferValueTypes<{
+  type1: AppointmentDataItem;
+  type2: StaffDataItem;
+  type3: CustomerDataItem;
+  type4: ServiceDataItem;
+  type5: RoleTeamSkillDataItem;
+}>;
 
 export enum EntitiesKeys {
   Appointments = 'appointments',
   Staff = 'staff',
   Customers = 'customers',
   Services = 'services',
+  RoleTeamSkills = 'roleTeamSkills',
 }
 
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
@@ -90,6 +85,7 @@ export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem>
   byId: { [key: string]: T };
   allIDs: number[];
 }
+
 export interface ChartState {
   totalAppointmentHours: number;
   totalAppointmentSales: number;
@@ -114,6 +110,7 @@ export interface EntitiesState {
   [EntitiesKeys.Customers]: EntitiesStateSlice<CustomerDataItem>;
   [EntitiesKeys.Staff]: EntitiesStateSlice<StaffDataItem>;
   [EntitiesKeys.Services]: EntitiesStateSlice<ServiceDataItem>;
+  [EntitiesKeys.RoleTeamSkills]: EntitiesStateSlice<RoleTeamSkillDataItem>;
   chartData: ChartState;
 }
 

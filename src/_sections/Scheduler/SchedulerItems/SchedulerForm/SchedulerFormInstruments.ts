@@ -1,5 +1,5 @@
 // Types
-import { StatusNames } from '../../../../_bus/Entities/EntitiesTypes';
+import { StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
 
 export const StatusDropDownListData = Object.values(StatusNames);
 

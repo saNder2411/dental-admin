@@ -7,6 +7,7 @@ import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/_
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/_Customers/CustomersTypes';
 import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/_Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/_Services/ServicesTypes';
+import { QueryRoleTeamSkillDataItem } from '../_bus/_RoleTeamSkills/RoleTeamSkillsTypes';
 import { EffectiveBasePermissions } from '../_bus/User/UserTypes';
 
 export type QueryAllData<T> = () => Promise<T>;
@@ -41,30 +42,17 @@ interface API {
   user: {
     getPermissions: QueryAllData<EffectiveBasePermissions>;
   };
+  roleTeamSkills: {
+    getData: QueryAllData<QueryRoleTeamSkillDataItem[]>;
+  };
 }
 
-type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryStaffDataItem | QueryServiceDataItem;
+type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryStaffDataItem | QueryServiceDataItem | QueryRoleTeamSkillDataItem;
 
 type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationStaffDataItem;
 
 const SP = Web(SP_ROOT_URL).configure({ headers });
 const SPLists = SP.lists;
-
-// const filterServices = async () => {
-//   const res = await SPLists.getById(GuidList.BP02ProductServices).items.filter(`ContentType eq '0x0100E03BE5D98FC3417B84A28F834BEAB5AD0203'`).get();
-
-//   console.log(`res`, res);
-// };
-
-// filterServices();
-
-// const filterAppointments = async () => {
-//   const res = await SPLists.getById(GuidList.Appointment).items.filter(`ContentType eq '0x0100E03BE5D98FC3417B84A28F834BEAB5AD0203'`).get();
-
-//   console.log(`res`, res);
-// };
-
-// filterAppointments();
 
 const getSPData = <T extends TQueryDataResponse = TQueryDataResponse>(listGuid: string, select: string, orderBy: string, filter: string = '') =>
   SPLists.getById(listGuid)
@@ -110,7 +98,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
+export const API_: API = {
   agenda: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -165,9 +153,12 @@ export const API: API = {
         .getCurrentUserEffectivePermissions()
         .then((response) => (response as unknown) as EffectiveBasePermissions),
   },
+  roleTeamSkills: {
+    getData: async () => getSPData<QueryRoleTeamSkillDataItem>(GuidList.RoleTeamSkills, SelectFields.RoleTeamSkills, OrderBy.RoleTeamSkills),
+  },
 };
 
-export const API_: API = {
+export const API: API = {
   agenda: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 
@@ -274,5 +265,8 @@ export const API_: API = {
   },
   user: {
     getPermissions: async () => fetch(`${ROOT_URL}/permissions`).then<EffectiveBasePermissions>((response) => response.json()),
+  },
+  roleTeamSkills: {
+    getData: () => fetch(`${ROOT_URL}/skills`).then((response) => response.json()),
   },
 };

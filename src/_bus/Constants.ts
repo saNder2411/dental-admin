@@ -1,6 +1,6 @@
 import { addWeeks, addDays } from '@progress/kendo-date-math';
 // Types
-import { StatusNames } from './Entities/EntitiesTypes';
+import { StatusNames } from './_Appointments/AppointmentsTypes';
 
 const NOW = new Date(new Date().setHours(4, 0, 0));
 export const MONDAY_CURRENT_WEEK = addDays(NOW, -(NOW.getDay() - 1));

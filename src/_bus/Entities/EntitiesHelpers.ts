@@ -1,6 +1,6 @@
 // Types
-import { AppointmentDataItem } from './../_Appointments/AppointmentsTypes';
-import { GenericDataItem, EntitiesKeys, StatusNames, EntitiesStateSlice } from './EntitiesTypes';
+import { AppointmentDataItem, StatusNames } from './../_Appointments/AppointmentsTypes';
+import { GenericDataItem, EntitiesKeys, EntitiesStateSlice } from './EntitiesTypes';
 import { OfferIcons, ContentTypes } from '../_Services/ServicesTypes';
 
 export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
@@ -264,6 +264,13 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         inEdit: true,
         isNew: true,
       };
+    case EntitiesKeys.RoleTeamSkills:
+      return {
+        Id: ID,
+        ID,
+        Title: '',
+      };
+
     default:
       throw new Error(`Grid Data Name not correct`);
   }

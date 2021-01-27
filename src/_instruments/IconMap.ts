@@ -14,7 +14,7 @@ import {
 } from '@fortawesome/pro-duotone-svg-icons';
 import { faTooth } from '@fortawesome/pro-regular-svg-icons';
 // Types
-import { StatusNames } from '../_bus/Entities/EntitiesTypes';
+import { StatusNames } from '../_bus/_Appointments/AppointmentsTypes';
 
 interface IconStyle extends CSSProperties {
   '--fa-primary-color': string;

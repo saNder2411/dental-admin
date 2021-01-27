@@ -12,8 +12,8 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 import { IconMap } from '../../../_instruments';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
-import { StatusNames, EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
+import { AppointmentDataItem, StatusNames } from '../../../_bus/_Appointments/AppointmentsTypes';
+import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import {
   selectProcessDataItemFieldValue,
@@ -60,7 +60,11 @@ export const AgendaStatusIcon: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
 };
 
 export const AgendaStatusCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(ID, EntitiesKeys.Appointments, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, StatusNames>(
+    ID,
+    EntitiesKeys.Appointments,
+    field
+  );
 
   return <td>{dataItemInEditValue ? <AgendaStatusDropDownList dataItemID={ID} field={field} onChange={onChange} /> : cellValue}</td>;
 };
@@ -129,7 +133,9 @@ export const AgendaEndDateCell: FC<GridCellProps<AppointmentDataItem>> = ({ data
 };
 
 export const AgendaGenderCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
-  const cellValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, 'LookupCM102customersId'));
+  const cellValue = useSelector(
+    selectProcessDataItemFieldValue<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, 'LookupCM102customersId')
+  );
   const gender = useSelector(selectCustomerGenderByID(cellValue));
 
   return <td>{gender}</td>;

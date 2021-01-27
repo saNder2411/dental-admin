@@ -1,5 +1,16 @@
-// Types
-import { StatusNames } from '../Entities/EntitiesTypes';
+export enum StatusNames {
+  Consultation = '(1) Consultation',
+  Pending = '(2) Pending',
+  Reserved = '(3) Reserved',
+  Booked = '(4) Booked',
+  Paid = '(5) Paid',
+  Checking = '(6) Checking',
+  Cancelled = '(7) Cancelled',
+  Closed = '(8) Closed',
+  Unavailable = '(9) Unavailable',
+  Other = '(10) Other',
+  Tooth = '(11) Tooth',
+}
 
 interface BackendImmutableKey {
   Id: number;

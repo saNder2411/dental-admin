@@ -1,7 +1,6 @@
 // Types
 import { InitDataForNewAppointmentDataItem } from './SchedulerTypes';
-import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
-import { StatusNames } from '../Entities/EntitiesTypes';
+import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 // Helpers
 import { generateId } from '../Entities/EntitiesHelpers';
 

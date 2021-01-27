@@ -20,6 +20,8 @@ export const fetchStaffDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_STAFF_
 
 export const fetchServicesDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SERVICES_DATA_INIT_ASYNC });
 
+export const fetchRoleTeamSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_ROLE_TEAM_SKILLS_DATA_INIT_ASYNC });
+
 // Async Create Data Item
 export const createAppointmentDataItemInitAsyncAC = (
   createdDataItem: AppointmentDataItem,

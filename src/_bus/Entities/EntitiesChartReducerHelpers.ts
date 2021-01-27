@@ -1,7 +1,7 @@
 // Types
 import { ChartState } from './EntitiesTypes';
-import { EntitiesKeys, StatusNames, EntitiesState } from './EntitiesTypes';
-import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { EntitiesKeys, EntitiesState } from './EntitiesTypes';
+import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
