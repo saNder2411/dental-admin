@@ -143,6 +143,7 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
 
 export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const data = useSelector(selectAppointmentFunnel());
+  console.log(data);
 
   return (
     <section className={className}>

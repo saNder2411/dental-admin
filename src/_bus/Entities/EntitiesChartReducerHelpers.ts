@@ -10,35 +10,44 @@ import { MONDAY_CURRENT_WEEK, WEEK_RANGE } from '../Constants';
 // Helpers
 import { calcStaffMemberWorkWeekHours, WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember } from './EntitiesChartHelpers';
 
-const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) => {
-  let totalSalesForEveryWeekInWeekRange: number[] = [];
-  let serviceSalesForEveryWeekInWeekRange: number[] = [];
-  let productSalesForEveryWeekInWeekRange: number[] = [];
+const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) =>
+  WeekPoints.reduce<{
+    totalSalesForEveryWeekInWeekRange: number[];
+    serviceSalesForEveryWeekInWeekRange: number[];
+    productSalesForEveryWeekInWeekRange: number[];
+  }>(
+    (acc, { start, end }) => {
+      const { totalSalesForEveryWeekInWeekRange, serviceSalesForEveryWeekInWeekRange, productSalesForEveryWeekInWeekRange } = acc;
 
-  WeekPoints.forEach(({ start, end }) => {
-    let totalSum = 0;
-    let serviceSum = 0;
-    let productSum = 0;
+      const sliceAppointmentsInWeekPoint = sliceAppointments.filter(
+        ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime()
+      );
 
-    const sliceAppointmentsInWeekPoint = sliceAppointments.filter(
-      ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime()
-    );
+      const { totalSum, serviceSum, productSum } = sliceAppointmentsInWeekPoint.reduce(
+        (acc, { ServiceCharge, LookupMultiBP01offeringsId }) => {
+          const [serviceSum, productSum] = LookupMultiBP01offeringsId.results.reduce(
+            (acc, Id) => {
+              let [serviceSum, productSum] = acc;
+              const { Amount = 0, ContentTypeId = '' } = servicesById[Id] ?? {};
+              ContentTypeId === ContentTypes.Services ? (serviceSum += Amount) : (productSum += Amount);
+              return [serviceSum, productSum];
+            },
+            [0, 0]
+          );
 
-    sliceAppointmentsInWeekPoint.forEach((appointment) => {
-      totalSum += appointment.ServiceCharge;
-      appointment.LookupMultiBP01offeringsId.results.forEach((Id) => {
-        const { Amount = 0, ContentTypeId = '' } = servicesById[Id] ?? {};
-        ContentTypeId === ContentTypes.Services ? (serviceSum += Amount) : (productSum += Amount);
-      });
-    });
+          return { totalSum: acc.totalSum + ServiceCharge, serviceSum: acc.serviceSum + serviceSum, productSum: acc.productSum + productSum };
+        },
+        { totalSum: 0, serviceSum: 0, productSum: 0 }
+      );
 
-    totalSalesForEveryWeekInWeekRange = [...totalSalesForEveryWeekInWeekRange, totalSum];
-    serviceSalesForEveryWeekInWeekRange = [...serviceSalesForEveryWeekInWeekRange, serviceSum];
-    productSalesForEveryWeekInWeekRange = [...productSalesForEveryWeekInWeekRange, productSum];
-  });
-
-  return { totalSalesForEveryWeekInWeekRange, serviceSalesForEveryWeekInWeekRange, productSalesForEveryWeekInWeekRange };
-};
+      return {
+        totalSalesForEveryWeekInWeekRange: [...totalSalesForEveryWeekInWeekRange, totalSum],
+        serviceSalesForEveryWeekInWeekRange: [...serviceSalesForEveryWeekInWeekRange, serviceSum],
+        productSalesForEveryWeekInWeekRange: [...productSalesForEveryWeekInWeekRange, productSum],
+      };
+    },
+    { totalSalesForEveryWeekInWeekRange: [], serviceSalesForEveryWeekInWeekRange: [], productSalesForEveryWeekInWeekRange: [] }
+  );
 
 const getAppointmentPerStaffData = (
   sliceAppointments: AppointmentDataItem[],
@@ -132,7 +141,6 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   if (entityName !== EntitiesKeys.Appointments) return state.chartData;
 
   const appointmentsInLastWeekRange = state.appointments.originalData.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
-  const appointmentsInNextWeekRange = state.appointments.originalData.filter(({ Start }) => Start.getTime() >= MONDAY_CURRENT_WEEK.getTime());
 
   const [totalAppointmentHours, totalAppointmentSales, activeCustomersSet] = appointmentsInLastWeekRange.reduce(
     (acc, { Duration, ServiceCharge, LookupCM102customersId }) => {
@@ -146,13 +154,15 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     [0, 0, new Set<number>()]
   );
 
-  const [appointmentReservations, appointmentBookings, appointmentAttended, paymentCompleted] = appointmentsInNextWeekRange.reduce(
-    (acc, { AppointmentStatus }) => {
+  const [appointmentReservations, appointmentBookings, appointmentAttended, paymentCompleted] = state.appointments.originalData.reduce(
+    (acc, { AppointmentStatus, Start }) => {
       const [prevAppointmentReservations, prevAppointmentBookings, prevAppointmentAttended, prevPaymentCompleted] = acc;
+      const isFuture = Start.getTime() >= MONDAY_CURRENT_WEEK.getTime();
+
       const currentAppointmentReservations =
-        AppointmentStatus === StatusNames.Reserved ? prevAppointmentReservations + 1 : prevAppointmentReservations;
-      const currentAppointmentBookings = AppointmentStatus === StatusNames.Booked ? prevAppointmentBookings + 1 : prevAppointmentBookings;
-      const currentAppointmentAttended = AppointmentStatus === StatusNames.Paid ? prevAppointmentAttended + 1 : prevAppointmentAttended;
+        AppointmentStatus === StatusNames.Reserved && isFuture ? prevAppointmentReservations + 1 : prevAppointmentReservations;
+      const currentAppointmentBookings = AppointmentStatus === StatusNames.Booked && isFuture ? prevAppointmentBookings + 1 : prevAppointmentBookings;
+      const currentAppointmentAttended = AppointmentStatus === StatusNames.Paid && !isFuture ? prevAppointmentAttended + 1 : prevAppointmentAttended;
       const currentPaymentCompleted = AppointmentStatus === StatusNames.Paid ? prevPaymentCompleted + 1 : prevPaymentCompleted;
 
       return [currentAppointmentReservations, currentAppointmentBookings, currentAppointmentAttended, currentPaymentCompleted];
