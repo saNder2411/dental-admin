@@ -16,9 +16,15 @@ export const fetchCustomersDataInitAsyncAC = (meta: { staffDataLength: number })
   meta,
 });
 
-export const fetchStaffDataInitAsyncAC = (meta: { skillsDataLength: number }) => ({ type: ActionTypes.FETCH_STAFF_DATA_INIT_ASYNC, meta });
+export const fetchStaffDataInitAsyncAC = (meta: { staffDataLength: number; skillsDataLength: number }) => ({
+  type: ActionTypes.FETCH_STAFF_DATA_INIT_ASYNC,
+  meta,
+});
 
-export const fetchServicesDataInitAsyncAC = (meta: { skillsDataLength: number }) => ({ type: ActionTypes.FETCH_SERVICES_DATA_INIT_ASYNC, meta });
+export const fetchServicesDataInitAsyncAC = (meta: { servicesDataLength: number; skillsDataLength: number }) => ({
+  type: ActionTypes.FETCH_SERVICES_DATA_INIT_ASYNC,
+  meta,
+});
 
 export const fetchSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SKILLS_DATA_INIT_ASYNC });
 

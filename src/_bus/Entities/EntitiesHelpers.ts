@@ -140,7 +140,7 @@ export const updateStateSliceOnAddNewItemToEditInGrid = <T extends GenericDataIt
   return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
 };
 
-export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): GenericDataItem => {
+export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys) => {
   const ID = generateId(allIDs);
 
   switch (entityName) {

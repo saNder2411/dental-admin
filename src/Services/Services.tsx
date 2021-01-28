@@ -29,9 +29,10 @@ export const Services: FC = (): JSX.Element => {
   const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
   const dispatch = useDispatch();
   const localizationService = useLocalization();
-  useFetchServicesData(servicesData.length, skillsDataLength, dispatch);
+  useFetchServicesData(servicesData.length, skillsDataLength, isDataLoading, dispatch);
 
-  const contentTSX = !isDataLoading && (
+  const hasData = servicesData.length > 0 && skillsDataLength > 0;
+  const contentTSX = hasData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={servicesData} entityName={EntitiesKeys.Services} labelNewItemBtn="New Service">

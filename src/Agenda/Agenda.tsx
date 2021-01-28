@@ -36,12 +36,12 @@ export const Agenda: FC = (): JSX.Element => {
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={appointmentsData} entityName={EntitiesKeys.Appointments} labelNewItemBtn="New Appointment">
-          <GridColumn field={'AppointmentStatus'} title={` `} width={100} editable={false} cell={AgendaStatusIcon as CustomGridCell} />
+          <GridColumn field={'AppointmentStatus'} title={` `} width={100} editable={false} cell={(AgendaStatusIcon as unknown) as CustomGridCell} />
           <GridColumn
             field={'AppointmentStatus'}
             title={localizationService.toLanguageString('custom.status', 'Status')}
             columnMenu={ColumnMenu}
-            cell={AgendaStatusCell as CustomGridCell}
+            cell={(AgendaStatusCell as unknown) as CustomGridCell}
             minResizableWidth={160}
             filter={'text'}
           />
@@ -49,7 +49,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Title'}
             title={localizationService.toLanguageString('custom.references', 'References')}
             columnMenu={ColumnMenu}
-            cell={AgendaReferenceCell as CustomGridCell}
+            cell={(AgendaReferenceCell as unknown) as CustomGridCell}
             minResizableWidth={130}
             filter={'text'}
           />
@@ -59,7 +59,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             minResizableWidth={190}
-            cell={AgendaStartDateCell as CustomGridCell}
+            cell={(AgendaStartDateCell as unknown) as CustomGridCell}
           />
           <GridColumn
             field={'End'}
@@ -67,7 +67,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             filter={'text'}
             minResizableWidth={190}
-            cell={AgendaEndDateCell as CustomGridCell}
+            cell={(AgendaEndDateCell as unknown) as CustomGridCell}
           />
           <GridColumn
             field={'LookupHR01teamId'}
@@ -75,13 +75,13 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             minResizableWidth={160}
             filter={'text'}
-            cell={AgendaSvcStaffCell as CustomGridCell}
+            cell={(AgendaSvcStaffCell as unknown) as CustomGridCell}
           />
           <GridColumn
             field={'LookupMultiBP01offeringsId'}
             title={localizationService.toLanguageString('custom.services', 'Services')}
             columnMenu={ColumnMenu}
-            cell={AgendaServicesCell as CustomGridCell}
+            cell={(AgendaServicesCell as unknown) as CustomGridCell}
             minResizableWidth={190}
             filter={'text'}
           />
@@ -90,7 +90,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
             width={90}
-            cell={AgendaCurrencyCell as CustomGridCell}
+            cell={(AgendaCurrencyCell as unknown) as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn
@@ -98,20 +98,20 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.fullName', 'Full Name')}
             columnMenu={ColumnMenu}
             minResizableWidth={190}
-            cell={AgendaFullNameCell as CustomGridCell}
+            cell={(AgendaFullNameCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={AgendaGenderCell as CustomGridCell}
+            cell={(AgendaGenderCell as unknown) as CustomGridCell}
             filter={'text'}
             minResizableWidth={160}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
             minResizableWidth={140}
-            cell={AgendaActionsControlCell as CustomGridCell}
+            cell={(AgendaActionsControlCell as unknown) as CustomGridCell}
           />
         </Grid>
       </div>

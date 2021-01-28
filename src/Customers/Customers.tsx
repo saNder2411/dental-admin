@@ -46,14 +46,14 @@ export const Customers: FC = (): JSX.Element => {
           <GridColumn
             field={'Title'}
             title={localizationService.toLanguageString('custom.lastName', 'Last Name')}
-            cell={CustomersTextCell as CustomGridCell}
+            cell={((CustomersTextCell as unknown) as unknown) as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
           <GridColumn
             field={'FirstName'}
             title={localizationService.toLanguageString('custom.firstName', 'First Name')}
-            cell={CustomersTextCell as CustomGridCell}
+            cell={(CustomersTextCell as unknown) as CustomGridCell}
             columnMenu={ColumnMenu}
             filter={'text'}
           />
@@ -61,42 +61,42 @@ export const Customers: FC = (): JSX.Element => {
             field={'Gender'}
             title={localizationService.toLanguageString('custom.gender', 'Gender')}
             columnMenu={ColumnMenu}
-            cell={CustomersGenderCell as CustomGridCell}
+            cell={(CustomersGenderCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'SvcStaff'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
-            cell={CustomersSvcStaffCell as CustomGridCell}
+            cell={(CustomersSvcStaffCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'Upcoming'}
             title={localizationService.toLanguageString('custom.upcoming', 'Upcoming')}
             columnMenu={ColumnMenu}
-            cell={CustomersDateCell as CustomGridCell}
+            cell={(CustomersDateCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'LookupMultiHR01teamId'}
             title={localizationService.toLanguageString('custom.lastAppointments', 'Last Appointments')}
             columnMenu={ColumnMenu}
-            cell={CustomersLastAppointmentsCell as CustomGridCell}
+            cell={(CustomersLastAppointmentsCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'Email'}
             title={localizationService.toLanguageString('custom.email', 'Email')}
             columnMenu={ColumnMenu}
-            cell={CustomersTextCell as CustomGridCell}
+            cell={(CustomersTextCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
             field={'CellPhone'}
             title={localizationService.toLanguageString('custom.phone', 'Mobile Phone')}
             columnMenu={ColumnMenu}
-            cell={CustomersMobilePhoneCell as CustomGridCell}
+            cell={(CustomersMobilePhoneCell as unknown) as CustomGridCell}
             filter={'text'}
             width={140}
           />
@@ -104,7 +104,7 @@ export const Customers: FC = (): JSX.Element => {
             field={'Modified'}
             title={localizationService.toLanguageString('custom.lastUpdate', 'Last Update')}
             columnMenu={ColumnMenu}
-            cell={CustomersDateCellNoEditable as CustomGridCell}
+            cell={(CustomersDateCellNoEditable as unknown) as CustomGridCell}
             editable={false}
             filter={'date'}
             width={140}
@@ -112,12 +112,12 @@ export const Customers: FC = (): JSX.Element => {
           <GridColumn
             field={'ClientPhotoUrl'}
             title={localizationService.toLanguageString('custom.photo', 'Photo')}
-            cell={CustomersAvatarCell as CustomGridCell}
+            cell={(CustomersAvatarCell as unknown) as CustomGridCell}
             width={120}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.actions', 'Actions')}
-            cell={CustomersActionsControlCell as CustomGridCell}
+            cell={(CustomersActionsControlCell as unknown) as CustomGridCell}
             width={140}
           />
         </Grid>

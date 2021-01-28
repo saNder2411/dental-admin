@@ -18,18 +18,25 @@ import { QuerySkillDataItem } from '../_Skills/SkillsTypes';
 import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from './ServicesHelpers';
 import { transformAPIData as transformSkillsAPIData } from '../_Skills/SkillsHelpers';
 
-type Results = [QueryServiceDataItem[], QuerySkillDataItem[] | null];
+type Results = [QueryServiceDataItem[] | null, QuerySkillDataItem[] | null];
 
-export function* workerFetchData({ meta: { skillsDataLength } }: FetchServicesDataInitAsyncActionType): SagaIterator {
+export function* workerFetchData({ meta: { servicesDataLength, skillsDataLength } }: FetchServicesDataInitAsyncActionType): SagaIterator {
   try {
-    yield put(actions.fetchDataRequestAC(EntitiesKeys.Services));
+    if (servicesDataLength === 0) {
+      yield put(actions.fetchDataRequestAC(EntitiesKeys.Services));
+    } else {
+      yield put(actions.fetchDataRequestAC(EntitiesKeys.Skills));
+    }
 
     const [servicesResult, skillsResult]: Results = yield all([
-      apply(API, API.services.getData, []),
+      servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
       skillsDataLength === 0 ? apply(API, API.skills.getData, []) : call(() => null),
     ]);
-    const data = transformAPIData(servicesResult);
-    yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Services));
+
+    if (servicesResult) {
+      const data = transformAPIData(servicesResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Services));
+    }
 
     if (skillsResult) {
       const data = transformSkillsAPIData(skillsResult);

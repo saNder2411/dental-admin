@@ -15,7 +15,7 @@ export const ServicesIconInput: FC<EditCellProps<ServiceDataItem>> = ({ dataItem
 
   const onIconChange = ({ syntheticEvent, target: { value } }: InputChangeEvent) => onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
-  return <Input value={value} onChange={onIconChange} disabled={isDataItemLoading} />;
+  return <Input value={value ?? ''} onChange={onIconChange} disabled={isDataItemLoading} />;
 };
 
 export const ServicesReferenceInput: FC<EditCellProps<ServiceDataItem>> = ({ dataItemID, field, onChange }) => {
