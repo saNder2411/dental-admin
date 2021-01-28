@@ -142,32 +142,48 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
 
   const appointmentsInLastWeekRange = state.appointments.originalData.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
 
-  const [totalAppointmentHours, totalAppointmentSales, activeCustomersSet] = appointmentsInLastWeekRange.reduce(
-    (acc, { Duration, ServiceCharge, LookupCM102customersId }) => {
-      const [prevHours, prevSales, activeCustomers] = acc;
-      const currentHours = prevHours + Duration / 60 / 60;
-      const currentSales = prevSales + ServiceCharge;
-      activeCustomers.add(LookupCM102customersId);
-
-      return [currentHours, currentSales, activeCustomers];
-    },
-    [0, 0, new Set<number>()]
-  );
-
-  const [appointmentReservations, appointmentBookings, appointmentAttended, paymentCompleted] = state.appointments.originalData.reduce(
-    (acc, { AppointmentStatus, Start }) => {
-      const [prevAppointmentReservations, prevAppointmentBookings, prevAppointmentAttended, prevPaymentCompleted] = acc;
+  const [
+    appointmentReservations,
+    appointmentBookings,
+    appointmentAttended,
+    paymentCompleted,
+    totalAppointmentHours,
+    totalAppointmentSales,
+    activeCustomersSet,
+  ] = state.appointments.originalData.reduce(
+    (acc, { AppointmentStatus, Start, Duration, ServiceCharge, LookupCM102customersId }) => {
       const isFuture = Start.getTime() >= MONDAY_CURRENT_WEEK.getTime();
+      const [
+        prevAppointmentReservations,
+        prevAppointmentBookings,
+        prevAppointmentAttended,
+        prevPaymentCompleted,
+        prevHours,
+        prevSales,
+        activeCustomers,
+      ] = acc;
 
       const currentAppointmentReservations =
         AppointmentStatus === StatusNames.Reserved && isFuture ? prevAppointmentReservations + 1 : prevAppointmentReservations;
       const currentAppointmentBookings = AppointmentStatus === StatusNames.Booked && isFuture ? prevAppointmentBookings + 1 : prevAppointmentBookings;
-      const currentAppointmentAttended = AppointmentStatus === StatusNames.Paid && !isFuture ? prevAppointmentAttended + 1 : prevAppointmentAttended;
+      const currentAppointmentAttended = AppointmentStatus === StatusNames.Booked && !isFuture ? prevAppointmentAttended + 1 : prevAppointmentAttended;
       const currentPaymentCompleted = AppointmentStatus === StatusNames.Paid ? prevPaymentCompleted + 1 : prevPaymentCompleted;
 
-      return [currentAppointmentReservations, currentAppointmentBookings, currentAppointmentAttended, currentPaymentCompleted];
+      const currentHours = !isFuture ? prevHours + Duration / 60 / 60 : prevHours;
+      const currentSales = !isFuture ? prevSales + ServiceCharge : prevSales;
+      !isFuture && activeCustomers.add(LookupCM102customersId);
+
+      return [
+        currentAppointmentReservations,
+        currentAppointmentBookings,
+        currentAppointmentAttended,
+        currentPaymentCompleted,
+        currentHours,
+        currentSales,
+        activeCustomers,
+      ];
     },
-    [0, 0, 0, 0]
+    [0, 0, 0, 0, 0, 0, new Set<number>()]
   );
 
   const { totalSalesForEveryWeekInWeekRange, serviceSalesForEveryWeekInWeekRange, productSalesForEveryWeekInWeekRange } = getAppointmentSalesData(
