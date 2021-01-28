@@ -7,7 +7,7 @@ import { QueryAppointmentDataItem, MutationAppointmentDataItem } from '../_bus/_
 import { QueryCustomerDataItem, MutationCustomerDataItem } from '../_bus/_Customers/CustomersTypes';
 import { QueryStaffDataItem, MutationStaffDataItem } from '../_bus/_Staff/StaffTypes';
 import { QueryServiceDataItem, MutationServiceDataItem } from '../_bus/_Services/ServicesTypes';
-import { QueryRoleTeamSkillDataItem } from '../_bus/_RoleTeamSkills/RoleTeamSkillsTypes';
+import { QuerySkillDataItem } from '../_bus/_Skills/SkillsTypes';
 import { EffectiveBasePermissions } from '../_bus/User/UserTypes';
 
 export type QueryAllData<T> = () => Promise<T>;
@@ -42,12 +42,12 @@ interface API {
   user: {
     getPermissions: QueryAllData<EffectiveBasePermissions>;
   };
-  roleTeamSkills: {
-    getData: QueryAllData<QueryRoleTeamSkillDataItem[]>;
+  skills: {
+    getData: QueryAllData<QuerySkillDataItem[]>;
   };
 }
 
-type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryStaffDataItem | QueryServiceDataItem | QueryRoleTeamSkillDataItem;
+type TQueryDataResponse = QueryAppointmentDataItem | QueryCustomerDataItem | QueryStaffDataItem | QueryServiceDataItem | QuerySkillDataItem;
 
 type TMutationDataItemArg = MutationAppointmentDataItem | MutationCustomerDataItem | MutationServiceDataItem | MutationStaffDataItem;
 
@@ -153,8 +153,8 @@ export const API_: API = {
         .getCurrentUserEffectivePermissions()
         .then((response) => (response as unknown) as EffectiveBasePermissions),
   },
-  roleTeamSkills: {
-    getData: async () => getSPData<QueryRoleTeamSkillDataItem>(GuidList.RoleTeamSkills, SelectFields.RoleTeamSkills, OrderBy.RoleTeamSkills),
+  skills: {
+    getData: async () => getSPData<QuerySkillDataItem>(GuidList.Skills, SelectFields.Skills, OrderBy.Skills),
   },
 };
 
@@ -266,7 +266,7 @@ export const API: API = {
   user: {
     getPermissions: async () => fetch(`${ROOT_URL}/permissions`).then<EffectiveBasePermissions>((response) => response.json()),
   },
-  roleTeamSkills: {
+  skills: {
     getData: () => fetch(`${ROOT_URL}/skills`).then((response) => response.json()),
   },
 };

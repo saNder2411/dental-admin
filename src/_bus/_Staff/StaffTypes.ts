@@ -30,7 +30,6 @@ interface BackendImmutableKey {
   WorkingDayEnd07: string | null;
   ID: number;
 
-  RoleSkills?: null | string[];
   Gender?: null | '(2) Male' | '(1) Female';
 }
 
@@ -47,10 +46,14 @@ export interface QueryStaffDataItem extends BackendImmutableKey {
     etag: string;
     type: 'SP.Data.MetroHR01ListItem';
   };
+  LookupMultiHR02SkillsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
 }
 
-export interface StaffDataItem extends BackendImmutableKey, FrontendKey {}
+export interface StaffDataItem extends BackendImmutableKey, FrontendKey {
+  LookupMultiHR02SkillsId: { results: number[] };
+}
 
 export interface MutationStaffDataItem extends BackendImmutableKey {
   __metadata: { type: 'SP.Data.MetroHR01ListItem' };
+  LookupMultiHR02SkillsId: { results: number[] };
 }

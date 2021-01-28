@@ -18,12 +18,12 @@ import { CustomFieldRenderProps } from '../SchedulerItemTypes';
 import { WeekdayTypesType } from './SchedulerFormTypes';
 // Selectors
 import {
-  selectStaffDataForDropDownListData,
+  selectStaffForDropDownListData,
   selectStaffLastNameByID,
-  selectCustomersDataForDropDownListData,
-  selectCustomersByIdData,
+  selectCustomersForDropDownListData,
+  selectCustomersById,
   selectCustomerFullNameByID,
-  selectServicesDataForDropDownListData,
+  selectServicesForDropDownListData,
 } from '../../../../_bus/Entities/EntitiesSelectors';
 // Helpers
 import { getFormInputOptionalProps } from '../../SchedulerHelpers';
@@ -38,7 +38,7 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const LookupMultiBP01offeringsId = value as { results: number[] };
 
-  const selectServicesDropDownListData = useMemo(selectServicesDataForDropDownListData, []);
+  const selectServicesDropDownListData = useMemo(selectServicesForDropDownListData, []);
   const dataForDropdownList = useSelector(selectServicesDropDownListData);
   const memoMultiSelectData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
   const multiSelectValue = memoMultiSelectData.filter((item) => LookupMultiBP01offeringsId.results.find((ID) => ID === item.value));
@@ -76,7 +76,7 @@ export const StaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props) =>
   const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, ...others } = props;
   const LookupEntityId = value as number;
 
-  const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
+  const selectStaffDropDownListData = useMemo(selectStaffForDropDownListData, []);
   const dataForDropdownList = useSelector(selectStaffDropDownListData);
   const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
   const selectStaffLastName = useMemo(() => selectStaffLastNameByID(LookupEntityId), [LookupEntityId]);
@@ -115,7 +115,7 @@ export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) =>
   const LookupEntityId = value as number;
 
   const [filter, setFilter] = useState('');
-  const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
+  const selectCustomerDropDownListData = useMemo(selectCustomersForDropDownListData, []);
   const dataForComboBox = useSelector(selectCustomerDropDownListData);
   const memoComboBoxData = useMemo(() => dataForComboBox, [dataForComboBox]);
   const filteredDataForComboBox = !filter
@@ -125,7 +125,7 @@ export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) =>
   const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(LookupEntityId), [LookupEntityId]);
   const customerFullName = useSelector(selectCustomerFullName);
   const comboBoxValue = { text: customerFullName, value };
-  const customerById = useSelector(selectCustomersByIdData);
+  const customerById = useSelector(selectCustomersById);
 
   const onComboBoxValueChange = useCallback(
     (evt: ComboBoxChangeEvent) => {

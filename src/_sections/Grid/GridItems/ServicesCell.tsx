@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState } from 'react';
+import React, { FC, useRef, useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useInternationalization } from '@progress/kendo-react-intl';
@@ -10,7 +10,7 @@ import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Components
 import { ServicesIconInput, ServicesReferenceInput } from './ServicesInputCells';
 import { ServicesNumeric, ServicesNumericForDiscount } from './ServicesNumericCells';
-import { ServicesCategoryMultiSelect, ServicesBooleanFlagDropDownList, ServicesRoleSkillsMultiSelect } from './ServicesDropDownCells';
+import { ServicesCategoryMultiSelect, ServicesBooleanFlagDropDownList, ServicesSkillsMultiSelect } from './ServicesDropDownCells';
 import { OfferIcons } from '../../../_bus/_Services/ServicesTypes';
 // Types
 import { GridCellProps } from './GridItemsTypes';
@@ -18,7 +18,7 @@ import { StatusNames } from '../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 import { ServiceDataItem } from '../../../_bus/_Services/ServicesTypes';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectProcessDataItemFieldValue, selectSkillLabelsByID } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
@@ -139,9 +139,10 @@ export const ServicesBooleanFlagCell: FC<GridCellProps<ServiceDataItem>> = ({ da
   );
 };
 
-export const ServicesRoleSkillsCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string[] | null>(ID, EntitiesKeys.Services, field);
-  const value = cellValue ? cellValue.join(' | ') : '';
+export const ServicesSkillsCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, { results: number[] }>(ID, EntitiesKeys.Services, field);
+  const selectSkillLabels = useMemo(() => selectSkillLabelsByID(cellValue.results), [cellValue.results]);
+  const skillLabels = useSelector(selectSkillLabels);
 
-  return <td>{dataItemInEditValue ? <ServicesRoleSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;
+  return <td>{dataItemInEditValue ? <ServicesSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : skillLabels}</td>;
 };

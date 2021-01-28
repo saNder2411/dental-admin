@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { DropDownList, MultiSelect, MultiSelectChangeEvent } from '@progress/kendo-react-dropdowns';
 // Types
@@ -6,12 +6,10 @@ import { EditCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectProcessDataItemFieldValue, selectSkillsForDropDownListData } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
-// Const
-import { roleSkills } from '../../../_bus/Constants';
 
 export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }) => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
@@ -30,16 +28,16 @@ export const StaffBooleanFlagDropDownList: FC<EditCellProps<StaffDataItem>> = ({
   );
 };
 
-export const StaffRoleSkillsMultiSelect: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
+export const StaffSkillsMultiSelect: FC<EditCellProps<StaffDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string[] | null>(dataItemID, EntitiesKeys.Staff, field));
-  const multiSelectData = roleSkills.map((value) => ({ text: value, value }));
+  const value = useSelector(selectProcessDataItemFieldValue<StaffDataItem, { results: number[] }>(dataItemID, EntitiesKeys.Staff, field));
+  const selectDropDownListData = useMemo(selectSkillsForDropDownListData, []);
+  const dataForDropdownList = useSelector(selectDropDownListData);
+  const memoMultiSelectData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
+  const multiSelectValue = memoMultiSelectData.filter((item) => value.results.find((ID) => ID === item.value));
 
-  const multiSelectValue = value ? value.map((value) => ({ text: value, value })) : [];
+  const onValueChange = (evt: MultiSelectChangeEvent) =>
+    onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: { results: evt.target.value.map(({ value }) => value) } });
 
-  const onValueChange = (evt: MultiSelectChangeEvent) => {
-    onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: evt.target.value.map(({ value }) => value) });
-  };
-
-  return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={multiSelectData} textField="text" disabled={isDataItemLoading} />;
+  return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={memoMultiSelectData} textField="text" disabled={isDataItemLoading} />;
 };

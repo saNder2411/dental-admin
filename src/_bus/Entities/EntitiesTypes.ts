@@ -3,7 +3,7 @@ import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
 import { ServiceDataItem } from '../_Services/ServicesTypes';
-import { RoleTeamSkillDataItem } from '../_RoleTeamSkills/RoleTeamSkillsTypes';
+import { SkillDataItem } from '../_Skills/SkillsTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
 // Actions
 import * as actions from './EntitiesAC';
@@ -14,7 +14,7 @@ export const ActionTypes = {
   FETCH_CUSTOMERS_DATA_INIT_ASYNC: 'ENTITIES/FETCH_CUSTOMERS_DATA_INIT_ASYNC' as const,
   FETCH_STAFF_DATA_INIT_ASYNC: 'ENTITIES/FETCH_STAFF_DATA_INIT_ASYNC' as const,
   FETCH_SERVICES_DATA_INIT_ASYNC: 'ENTITIES/FETCH_SERVICES_DATA_INIT_ASYNC' as const,
-  FETCH_ROLE_TEAM_SKILLS_DATA_INIT_ASYNC: 'ENTITIES/FETCH_ROLE_TEAM_SKILLS_DATA_INIT_ASYNC' as const,
+  FETCH_SKILLS_DATA_INIT_ASYNC: 'ENTITIES/FETCH_SKILLS_DATA_INIT_ASYNC' as const,
   // Async Create Data Item
   CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC: 'ENTITIES/CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC' as const,
   CREATE_CUSTOMER_DATA_ITEM_INIT_ASYNC: 'ENTITIES/CREATE_CUSTOMER_DATA_ITEM_INIT_ASYNC' as const,
@@ -68,7 +68,7 @@ export type GenericDataItem = InferValueTypes<{
   type2: StaffDataItem;
   type3: CustomerDataItem;
   type4: ServiceDataItem;
-  type5: RoleTeamSkillDataItem;
+  type5: SkillDataItem;
 }>;
 
 export enum EntitiesKeys {
@@ -76,7 +76,7 @@ export enum EntitiesKeys {
   Staff = 'staff',
   Customers = 'customers',
   Services = 'services',
-  RoleTeamSkills = 'roleTeamSkills',
+  Skills = 'skills',
 }
 
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
@@ -110,13 +110,17 @@ export interface EntitiesState {
   [EntitiesKeys.Customers]: EntitiesStateSlice<CustomerDataItem>;
   [EntitiesKeys.Staff]: EntitiesStateSlice<StaffDataItem>;
   [EntitiesKeys.Services]: EntitiesStateSlice<ServiceDataItem>;
-  [EntitiesKeys.RoleTeamSkills]: EntitiesStateSlice<RoleTeamSkillDataItem>;
+  [EntitiesKeys.Skills]: EntitiesStateSlice<SkillDataItem>;
   chartData: ChartState;
 }
 
 export type FetchAppointmentsDataInitAsyncActionType = ReturnType<typeof actions.fetchAppointmentsDataInitAsyncAC>;
 
 export type FetchCustomersDataInitAsyncActionType = ReturnType<typeof actions.fetchCustomersDataInitAsyncAC>;
+
+export type FetchStaffDataInitAsyncActionType = ReturnType<typeof actions.fetchStaffDataInitAsyncAC>;
+
+export type FetchServicesDataInitAsyncActionType = ReturnType<typeof actions.fetchServicesDataInitAsyncAC>;
 
 export type CreateAppointmentDataItemInitAsyncActionType = ReturnType<typeof actions.createAppointmentDataItemInitAsyncAC>;
 

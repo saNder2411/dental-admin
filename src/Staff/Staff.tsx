@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -8,7 +8,7 @@ import {
   StaffAvatarCell,
   StaffFullNameCell,
   StaffJobTitleCell,
-  StaffRoleSkillsCell,
+  StaffSkillsCell,
   StaffBooleanFlagCell,
   StaffMobilePhoneCell,
   StaffActionsControlCell,
@@ -19,13 +19,16 @@ import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Hooks
 import { useSelectStaffData, useFetchStaffData } from './StaffHooks';
+// Selectors
+import { selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
 
 export const Staff: FC = (): JSX.Element => {
   const { staffData, isDataLoading } = useSelectStaffData();
+  const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchStaffData(staffData.length, dispatch);
+  useFetchStaffData(staffData.length, skillsDataLength, dispatch);
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">
@@ -60,10 +63,10 @@ export const Staff: FC = (): JSX.Element => {
             filter={'text'}
           />
           <GridColumn
-            field={'RoleSkills'}
+            field={'LookupMultiHR02SkillsId'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
             columnMenu={ColumnMenu}
-            cell={StaffRoleSkillsCell as CustomGridCell}
+            cell={StaffSkillsCell as CustomGridCell}
             filter={'text'}
           />
           <GridColumn

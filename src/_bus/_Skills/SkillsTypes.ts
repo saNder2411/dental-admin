@@ -9,7 +9,7 @@ interface FrontendKey {
   isNew?: boolean;
 }
 
-export interface QueryRoleTeamSkillDataItem extends BackendImmutableKey {
+export interface QuerySkillDataItem extends BackendImmutableKey {
   __metadata: {
     id: string;
     uri: string;
@@ -18,4 +18,4 @@ export interface QueryRoleTeamSkillDataItem extends BackendImmutableKey {
   };
 }
 
-export interface RoleTeamSkillDataItem extends BackendImmutableKey, FrontendKey {}
+export interface SkillDataItem extends BackendImmutableKey, FrontendKey {}

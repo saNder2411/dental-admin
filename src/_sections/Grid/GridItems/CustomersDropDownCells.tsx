@@ -6,7 +6,7 @@ import { EditCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
-import { selectProcessDataItemFieldValue, selectStaffDataForDropDownListData, selectStaffLastNameByID } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectProcessDataItemFieldValue, selectStaffForDropDownListData, selectStaffLastNameByID } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { onGridDropDownChange } from './GridItemsHelpers';
@@ -14,7 +14,7 @@ import { onGridDropDownChange } from './GridItemsHelpers';
 export const CustomersSvcStaffDropDownList: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, number>(dataItemID, EntitiesKeys.Customers, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
+  const selectStaffDropDownListData = useMemo(selectStaffForDropDownListData, []);
   const dataForDropdownList = useSelector(selectStaffDropDownListData);
   const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
   const selectStaffLastName = useMemo(() => selectStaffLastNameByID(value), [value]);
@@ -31,7 +31,7 @@ export const CustomersSvcStaffDropDownList: FC<EditCellProps<CustomerDataItem>> 
 export const CustomersLastAppointmentsMultiSelect: FC<EditCellProps<CustomerDataItem>> = ({ dataItemID, field, onChange }): JSX.Element => {
   const value = useSelector(selectProcessDataItemFieldValue<CustomerDataItem, { results: number[] }>(dataItemID, EntitiesKeys.Customers, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectServicesDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
+  const selectServicesDropDownListData = useMemo(selectStaffForDropDownListData, []);
   const dataForDropdownList = useSelector(selectServicesDropDownListData);
   const memoMultiSelectData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
   const multiSelectValue = memoMultiSelectData.filter((item) => value.results.find((ID) => ID === item.value));

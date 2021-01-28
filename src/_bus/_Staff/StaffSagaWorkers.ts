@@ -1,27 +1,40 @@
 import { SagaIterator } from '@redux-saga/core';
-import { put, apply } from 'redux-saga/effects';
+import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
 import * as actions from '../Entities/EntitiesAC';
 // Types
 import {
+  FetchStaffDataInitAsyncActionType,
   CreateStaffDataItemInitAsyncActionType,
   UpdateStaffDataItemInitAsyncActionType,
   DeleteStaffDataItemInitAsyncActionType,
   EntitiesKeys,
 } from '../Entities/EntitiesTypes';
 import { QueryStaffDataItem } from './StaffTypes';
+import { QuerySkillDataItem } from '../_Skills/SkillsTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './StaffHelpers';
+import { transformAPIData as transformSkillsAPIData } from '../_Skills/SkillsHelpers';
 
-export function* workerFetchData(): SagaIterator {
+type Results = [QueryStaffDataItem[], QuerySkillDataItem[] | null];
+
+export function* workerFetchData({ meta: { skillsDataLength } }: FetchStaffDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC(EntitiesKeys.Staff));
 
-    const result: QueryStaffDataItem[] = yield apply(API, API.staff.getData, []);
-    const data = transformAPIData(result);
+    const [staffResult, skillsResult]: Results = yield all([
+      apply(API, API.staff.getData, []),
+      skillsDataLength === 0 ? apply(API, API.skills.getData, []) : call(() => null),
+    ]);
+    const data = transformAPIData(staffResult);
     yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Staff));
+
+    if (skillsResult) {
+      const data = transformSkillsAPIData(skillsResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Skills));
+    }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Staff fetch data Error: ${error.message}`, EntitiesKeys.Staff));
   } finally {

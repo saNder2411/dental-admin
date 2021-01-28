@@ -221,7 +221,7 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         ContentTypeId: ContentTypes.Services,
         ID,
         ImageThumbnail: OfferIcons.Tooth,
-        RoleSkills: [],
+        LookupMultiHR02SkillsId: { results: [] },
         inEdit: true,
         isNew: true,
       };
@@ -256,15 +256,15 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys): Gene
         WorkingDayEnd06: null,
         WorkingDayStart07: null,
         WorkingDayEnd07: null,
+        LookupMultiHR02SkillsId: { results: [] },
         ID,
 
-        RoleSkills: [],
         Gender: '(1) Female' as const,
         TeamProfilePhotoUrl: '',
         inEdit: true,
         isNew: true,
       };
-    case EntitiesKeys.RoleTeamSkills:
+    case EntitiesKeys.Skills:
       return {
         Id: ID,
         ID,

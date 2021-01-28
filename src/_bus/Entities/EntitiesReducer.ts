@@ -21,7 +21,7 @@ const initialState = {
   customers: { originalData: [], processById: {}, byId: {}, allIDs: [] },
   staff: { originalData: [], processById: {}, byId: {}, allIDs: [] },
   services: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-  roleTeamSkills: { originalData: [], processById: {}, byId: {}, allIDs: [] },
+  skills: { originalData: [], processById: {}, byId: {}, allIDs: [] },
   chartData: {
     totalAppointmentHours: 0,
     totalAppointmentSales: 0,

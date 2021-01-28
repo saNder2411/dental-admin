@@ -1,28 +1,40 @@
 import { SagaIterator } from '@redux-saga/core';
-import { put, apply } from 'redux-saga/effects';
+import { put, apply, all, call } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
 import * as actions from '../Entities/EntitiesAC';
 // Types
 import {
+  FetchServicesDataInitAsyncActionType,
   CreateServiceDataItemInitAsyncActionType,
   UpdateServiceDataItemInitAsyncActionType,
   DeleteServiceDataItemInitAsyncActionType,
   EntitiesKeys,
 } from '../Entities/EntitiesTypes';
 import { QueryServiceDataItem } from './ServicesTypes';
+import { QuerySkillDataItem } from '../_Skills/SkillsTypes';
 // Helpers
 import { transformAPIDataItem, transformDataItemForAPI, transformAPIData } from './ServicesHelpers';
+import { transformAPIData as transformSkillsAPIData } from '../_Skills/SkillsHelpers';
 
-export function* workerFetchData(): SagaIterator {
+type Results = [QueryServiceDataItem[], QuerySkillDataItem[] | null];
+
+export function* workerFetchData({ meta: { skillsDataLength } }: FetchServicesDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC(EntitiesKeys.Services));
 
-    const result: QueryServiceDataItem[] = yield apply(API, API.services.getData, []);
-    const data = transformAPIData(result);
-
+    const [servicesResult, skillsResult]: Results = yield all([
+      apply(API, API.services.getData, []),
+      skillsDataLength === 0 ? apply(API, API.skills.getData, []) : call(() => null),
+    ]);
+    const data = transformAPIData(servicesResult);
     yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Services));
+
+    if (skillsResult) {
+      const data = transformSkillsAPIData(skillsResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Skills));
+    }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Services fetch data Error: ${error.message}`, EntitiesKeys.Services));
   } finally {

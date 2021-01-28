@@ -3,8 +3,8 @@ import { Dispatch } from 'redux';
 // Action Creators
 import { fetchServicesDataInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 
-export const useFetchServicesData = (servicesDataLength: number, dispatch: Dispatch) =>
+export const useFetchServicesData = (servicesDataLength: number, skillsDataLength: number, dispatch: Dispatch) =>
   useEffect(() => {
     if (servicesDataLength > 0) return;
-    dispatch(fetchServicesDataInitAsyncAC());
-  }, [dispatch, servicesDataLength]);
+    dispatch(fetchServicesDataInitAsyncAC({ skillsDataLength }));
+  }, [dispatch, servicesDataLength, skillsDataLength]);

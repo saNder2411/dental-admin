@@ -20,7 +20,6 @@ interface BackendImmutableKey {
   ID: number;
 
   ImageThumbnail?: null | OfferIcons;
-  RoleSkills?: null | string[];
 }
 
 interface FrontendKey {
@@ -35,10 +34,14 @@ export interface QueryServiceDataItem extends BackendImmutableKey {
     etag: string;
     type: 'SP.Data.MetroBP02ListItem';
   };
+  LookupMultiHR02SkillsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
 }
 
-export interface ServiceDataItem extends BackendImmutableKey, FrontendKey {}
+export interface ServiceDataItem extends BackendImmutableKey, FrontendKey {
+  LookupMultiHR02SkillsId: { results: number[] };
+}
 
 export interface MutationServiceDataItem extends BackendImmutableKey {
   __metadata: { type: `SP.Data.MetroBP02ListItem` };
+  LookupMultiHR02SkillsId: { results: number[] };
 }

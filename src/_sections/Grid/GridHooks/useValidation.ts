@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Selectors
-import { selectAppointmentByEmployeeID } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectAppointmentByStaffMemberID } from '../../../_bus/Entities/EntitiesSelectors';
 
 export const useTextFieldsValidation = (value: string | null) => {
   const [isValid, setIsValid] = useState(true);
@@ -45,7 +45,7 @@ export const useByIdValidation = (ID: number) => {
 export const useStartDateEventValidation = (value: Date, LookupHR01teamId: number) => {
   const [isValid, setIsValid] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
-  const selectEmployeeAppointments = useMemo(() => selectAppointmentByEmployeeID(LookupHR01teamId), [LookupHR01teamId]);
+  const selectEmployeeAppointments = useMemo(() => selectAppointmentByStaffMemberID(LookupHR01teamId), [LookupHR01teamId]);
   const employeeAppointments = useSelector(selectEmployeeAppointments);
   const actualAppointments = employeeAppointments.filter(({ Start }) => Date.now() < Start.getTime());
 
@@ -78,7 +78,7 @@ export const useStartDateEventValidation = (value: Date, LookupHR01teamId: numbe
 export const useEndDateEventValidation = (value: Date, LookupHR01teamId: number) => {
   const [isValid, setIsValid] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
-  const selectEmployeeAppointments = useMemo(() => selectAppointmentByEmployeeID(LookupHR01teamId), [LookupHR01teamId]);
+  const selectEmployeeAppointments = useMemo(() => selectAppointmentByStaffMemberID(LookupHR01teamId), [LookupHR01teamId]);
   const employeeAppointments = useSelector(selectEmployeeAppointments);
   const actualAppointments = employeeAppointments.filter(({ Start }) => Date.now() < Start.getTime());
 

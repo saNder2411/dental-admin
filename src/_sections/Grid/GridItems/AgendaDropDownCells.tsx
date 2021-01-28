@@ -15,12 +15,12 @@ import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
 import {
   selectProcessDataItemFieldValue,
-  selectStaffDataForDropDownListData,
+  selectStaffForDropDownListData,
   selectStaffLastNameByID,
-  selectCustomersDataForDropDownListData,
-  selectCustomersByIdData,
+  selectCustomersForDropDownListData,
+  selectCustomersById,
   selectCustomerFullNameByID,
-  selectServicesDataForDropDownListData,
+  selectServicesForDropDownListData,
 } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Hooks
@@ -47,7 +47,7 @@ export const AgendaStatusDropDownList: FC<EditCellProps<AppointmentDataItem>> = 
 export const AgendaSvcStaffDropDownList: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, EntitiesKeys.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectStaffDropDownListData = useMemo(selectStaffDataForDropDownListData, []);
+  const selectStaffDropDownListData = useMemo(selectStaffForDropDownListData, []);
   const dataForDropdownList = useSelector(selectStaffDropDownListData);
   const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
   const selectStaffLastName = useMemo(() => selectStaffLastNameByID(value), [value]);
@@ -65,7 +65,7 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
   const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, number>(dataItemID, EntitiesKeys.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
   const [filter, setFilter] = useState('');
-  const selectCustomerDropDownListData = useMemo(selectCustomersDataForDropDownListData, []);
+  const selectCustomerDropDownListData = useMemo(selectCustomersForDropDownListData, []);
   const dataForDropdownList = useSelector(selectCustomerDropDownListData);
   const memoDropDownListData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
 
@@ -77,8 +77,8 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
   const customerFullName = useSelector(selectCustomerFullName);
   const dropDownListValue = { text: customerFullName, value };
 
-  const selectCustomersById = useMemo(() => selectCustomersByIdData, []);
-  const customersById = useSelector(selectCustomersById);
+  const selectCustomers = useMemo(() => selectCustomersById, []);
+  const customersById = useSelector(selectCustomers);
 
   const isValid = useTextFieldsValidation(dropDownListValue.text);
 
@@ -110,23 +110,17 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
 };
 
 export const AgendaServicesMultiSelect: FC<EditCellProps<AppointmentDataItem>> = ({ dataItemID, field, onChange }) => {
-  const value = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, { results: number[] }>(dataItemID, EntitiesKeys.Appointments, field));
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const selectServicesDropDownListData = useMemo(selectServicesDataForDropDownListData, []);
+  const value = useSelector(
+    selectProcessDataItemFieldValue<AppointmentDataItem, { results: number[] }>(dataItemID, EntitiesKeys.Appointments, field)
+  );
+  const selectServicesDropDownListData = useMemo(selectServicesForDropDownListData, []);
   const dataForDropdownList = useSelector(selectServicesDropDownListData);
   const memoMultiSelectData = useMemo(() => dataForDropdownList, [dataForDropdownList]);
   const multiSelectValue = memoMultiSelectData.filter((item) => value.results.find((ID) => ID === item.value));
 
-  const onServicesChange = (evt: MultiSelectChangeEvent) => {
-    onChange({
-      dataItem: dataItemID,
-      field,
-      syntheticEvent: evt.syntheticEvent,
-      value: { results: evt.target.value.map(({ value }) => value) },
-    });
-  };
+  const onValueChange = (evt: MultiSelectChangeEvent) =>
+    onChange({ dataItem: dataItemID, field, syntheticEvent: evt.syntheticEvent, value: { results: evt.target.value.map(({ value }) => value) } });
 
-  return (
-    <MultiSelect onChange={onServicesChange} value={multiSelectValue} data={memoMultiSelectData} textField="text" disabled={isDataItemLoading} />
-  );
+  return <MultiSelect onChange={onValueChange} value={multiSelectValue} data={memoMultiSelectData} textField="text" disabled={isDataItemLoading} />;
 };

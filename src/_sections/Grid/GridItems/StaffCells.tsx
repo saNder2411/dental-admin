@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 // Components
 import { StaffTextInput, StaffFullNameInput, StaffJobTitleInput, StaffMobilePhoneInput, StaffAvatarInput } from './StaffInputCells';
-import { StaffBooleanFlagDropDownList, StaffRoleSkillsMultiSelect } from './StaffDropDownCells';
+import { StaffBooleanFlagDropDownList, StaffSkillsMultiSelect } from './StaffDropDownCells';
 // Styled Components
 import * as SC from '../GridItemsStyled/GridCellsStyled';
 // Types
@@ -10,7 +10,7 @@ import { GridCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
-import { selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectProcessDataItemFieldValue, selectSkillLabelsByID } from '../../../_bus/Entities/EntitiesSelectors';
 // Helpers
 import { isString, isNumber } from './GridItemsHelpers';
 // Hooks
@@ -83,9 +83,10 @@ export const StaffBooleanFlagCell: FC<GridCellProps<StaffDataItem>> = ({ dataIte
   );
 };
 
-export const StaffRoleSkillsCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string[] | null>(ID, EntitiesKeys.Staff, field);
-  const value = cellValue ? cellValue.join(' | ') : '';
+export const StaffSkillsCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, { results: number[] }>(ID, EntitiesKeys.Staff, field);
+  const selectSkillLabels = useMemo(() => selectSkillLabelsByID(cellValue.results), [cellValue.results]);
+  const skillLabels = useSelector(selectSkillLabels);
 
-  return <td>{dataItemInEditValue ? <StaffRoleSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;
+  return <td>{dataItemInEditValue ? <StaffSkillsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : skillLabels}</td>;
 };

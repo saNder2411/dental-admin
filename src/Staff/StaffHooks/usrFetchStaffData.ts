@@ -3,8 +3,8 @@ import { Dispatch } from 'redux';
 // Action Creators
 import { fetchStaffDataInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 
-export const useFetchStaffData = (staffDataLength: number, dispatch: Dispatch) =>
+export const useFetchStaffData = (staffDataLength: number, skillsDataLength: number, dispatch: Dispatch) =>
   useEffect(() => {
     if (staffDataLength > 0) return;
-    dispatch(fetchStaffDataInitAsyncAC());
-  }, [dispatch, staffDataLength]);
+    dispatch(fetchStaffDataInitAsyncAC({ skillsDataLength }));
+  }, [dispatch, skillsDataLength, staffDataLength]);

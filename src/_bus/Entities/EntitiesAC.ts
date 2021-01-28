@@ -16,11 +16,11 @@ export const fetchCustomersDataInitAsyncAC = (meta: { staffDataLength: number })
   meta,
 });
 
-export const fetchStaffDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_STAFF_DATA_INIT_ASYNC });
+export const fetchStaffDataInitAsyncAC = (meta: { skillsDataLength: number }) => ({ type: ActionTypes.FETCH_STAFF_DATA_INIT_ASYNC, meta });
 
-export const fetchServicesDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SERVICES_DATA_INIT_ASYNC });
+export const fetchServicesDataInitAsyncAC = (meta: { skillsDataLength: number }) => ({ type: ActionTypes.FETCH_SERVICES_DATA_INIT_ASYNC, meta });
 
-export const fetchRoleTeamSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_ROLE_TEAM_SKILLS_DATA_INIT_ASYNC });
+export const fetchSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SKILLS_DATA_INIT_ASYNC });
 
 // Async Create Data Item
 export const createAppointmentDataItemInitAsyncAC = (
