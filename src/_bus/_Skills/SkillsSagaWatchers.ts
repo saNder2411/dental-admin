@@ -5,7 +5,7 @@ import { ActionTypes } from '../Entities/EntitiesTypes';
 import { workerFetchData } from './SkillsSagaWorkers';
 
 function* watchFetchData() {
-  yield takeEvery(ActionTypes.FETCH_SERVICES_DATA_INIT_ASYNC, workerFetchData);
+  yield takeEvery(ActionTypes.FETCH_SKILLS_DATA_INIT_ASYNC, workerFetchData);
 }
 
 export function* watchSkills() {
