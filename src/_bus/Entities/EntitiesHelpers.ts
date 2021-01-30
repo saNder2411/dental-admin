@@ -183,7 +183,6 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys) => {
       };
     case EntitiesKeys.Customers:
       return {
-        LookupMultiHR01teamId: { results: [] },
         Id: ID,
         Title: '',
         FirstName: ``,
@@ -199,9 +198,9 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys) => {
         ID,
         Modified: new Date().toISOString(),
         Created: new Date().toISOString(),
+        LookupMultiHR01teamId: { results: [] },
+        LookupMultiHR03eventsId: { results: [] },
 
-        SvcStaff: 1,
-        Upcoming: new Date().toISOString(),
         ClientPhotoUrl: '',
         inEdit: true,
         isNew: true,

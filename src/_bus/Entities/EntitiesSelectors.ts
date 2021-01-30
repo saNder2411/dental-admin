@@ -73,6 +73,16 @@ export const selectCustomersForDropDownListData = () =>
 
 export const selectCustomerById = (ID: number) => createSelector(selectCustomersById, (byId) => byId[ID]);
 
+export const selectStaffMembersByLastAppointments = (appointmentsID: number[]) =>
+  createSelector(getAppointmentsById, getStaffById, (appointmentsById, staffById) =>
+    appointmentsID.map((appointmentID) => staffById[appointmentsById[appointmentID]?.LookupHR01teamId]?.Title ?? '').join(' | ')
+  );
+
+export const selectUpcomingAppointments = (appointmentsID: number[]) =>
+  createSelector(getAppointmentsById, (appointmentsById) =>
+    appointmentsID.map((appointmentID) => appointmentsById[appointmentID]?.Start).filter((date) => date?.getTime() >= Date.now())
+  );
+
 // Services
 const getServicesState = ({ Entities }: RootState) => Entities.services;
 

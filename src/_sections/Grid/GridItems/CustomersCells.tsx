@@ -2,7 +2,7 @@ import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useInternationalization } from '@progress/kendo-react-intl';
 // Components
-import { CustomersSvcStaffDropDownList, CustomersLastAppointmentsMultiSelect, CustomersGenderDropDownList } from './CustomersDropDownCells';
+import { CustomersSvcStaffDropDownList, CustomersGenderDropDownList } from './CustomersDropDownCells';
 import { CustomersTextInput, CustomersMobilePhoneInput, CustomersAvatarInput } from './CustomersInputCells';
 import { CustomersDateInput } from './CustomersDateCells';
 // Styled Components
@@ -12,7 +12,12 @@ import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
-import { selectStaffLastNameByID, selectStaffLastNamesByID, selectProcessDataItemFieldValue } from '../../../_bus/Entities/EntitiesSelectors';
+import {
+  selectStaffLastNamesByID,
+  selectProcessDataItemFieldValue,
+  selectStaffMembersByLastAppointments,
+  selectUpcomingAppointments,
+} from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Helpers
@@ -32,27 +37,34 @@ export const CustomersTextCell: FC<GridCellProps<CustomerDataItem>> = ({ dataIte
 };
 
 export const CustomersSvcStaffCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, number>(ID, EntitiesKeys.Customers, field);
-
-  const selectStaffLastName = useMemo(() => selectStaffLastNameByID(cellValue), [cellValue]);
-  const staffLastName = useSelector(selectStaffLastName);
-
-  const value = staffLastName ? staffLastName : '';
-
-  return <td>{dataItemInEditValue ? <CustomersSvcStaffDropDownList dataItemID={ID} field={field} onChange={onChange} /> : value}</td>;
-};
-
-export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<CustomerDataItem, { results: number[] }>(
     ID,
     EntitiesKeys.Customers,
     field
   );
 
-  const selectStaffLastNames = useMemo(() => selectStaffLastNamesByID(cellValue.results), [cellValue.results]);
+  const selectStaffLastNames = useMemo(() => selectStaffLastNamesByID(cellValue.results), [cellValue]);
+  const staffLastName = useSelector(selectStaffLastNames);
+
+  return <td>{dataItemInEditValue ? <CustomersSvcStaffDropDownList dataItemID={ID} field={field} onChange={onChange} /> : staffLastName}</td>;
+};
+
+export const CustomersLastAppointmentsCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const { cellValue } = useOriginalDataItemValuesForCells<CustomerDataItem, { results: number[] }>(ID, EntitiesKeys.Customers, field);
+
+  const selectStaffLastNames = useMemo(() => selectStaffMembersByLastAppointments(cellValue.results), [cellValue.results]);
   const staffLastNames = useSelector(selectStaffLastNames);
 
-  return <td>{dataItemInEditValue ? <CustomersLastAppointmentsMultiSelect dataItemID={ID} field={field} onChange={onChange} /> : staffLastNames}</td>;
+  return <td>{staffLastNames}</td>;
+};
+
+export const CustomersUpcomingCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+  const intlService = useInternationalization();
+  const { cellValue } = useOriginalDataItemValuesForCells<CustomerDataItem, { results: number[] }>(ID, EntitiesKeys.Customers, field);
+  const selectUpcoming = useMemo(() => selectUpcomingAppointments(cellValue.results), [cellValue.results]);
+  const upcomingAppointments = useSelector(selectUpcoming);
+
+  return <td>{upcomingAppointments.map((date) => intlService.formatDate(date, 'H:mm - dd/MM')).join(' | ')}</td>;
 };
 
 export const CustomersMobilePhoneCell: FC<GridCellProps<CustomerDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {

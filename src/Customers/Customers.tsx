@@ -7,7 +7,7 @@ import {
   CustomersTextCell,
   CustomersGenderCell,
   CustomersSvcStaffCell,
-  CustomersDateCell,
+  CustomersUpcomingCell,
   CustomersDateCellNoEditable,
   CustomersLastAppointmentsCell,
   CustomersMobilePhoneCell,
@@ -65,21 +65,21 @@ export const Customers: FC = (): JSX.Element => {
             filter={'text'}
           />
           <GridColumn
-            field={'SvcStaff'}
+            field={'LookupMultiHR01teamId'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
             cell={(CustomersSvcStaffCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
-            field={'Upcoming'}
+            field={'LookupMultiHR03eventsId'}
             title={localizationService.toLanguageString('custom.upcoming', 'Upcoming')}
             columnMenu={ColumnMenu}
-            cell={(CustomersDateCell as unknown) as CustomGridCell}
+            cell={(CustomersUpcomingCell as unknown) as CustomGridCell}
             filter={'text'}
           />
           <GridColumn
-            field={'LookupMultiHR01teamId'}
+            field={'LookupMultiHR03eventsId'}
             title={localizationService.toLanguageString('custom.lastAppointments', 'Last Appointments')}
             columnMenu={ColumnMenu}
             cell={(CustomersLastAppointmentsCell as unknown) as CustomGridCell}

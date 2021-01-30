@@ -14,9 +14,6 @@ interface BackendImmutableKey {
   ID: number;
   Modified: string;
   Created: string;
-
-  SvcStaff?: number;
-  Upcoming?: null | string;
 }
 
 interface FrontendKey {
@@ -33,13 +30,16 @@ export interface QueryCustomerDataItem extends BackendImmutableKey {
     type: 'SP.Data.MetroCM102ListItem';
   };
   LookupMultiHR01teamId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
+  LookupMultiHR03eventsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
 }
 
 export interface CustomerDataItem extends BackendImmutableKey, FrontendKey {
   LookupMultiHR01teamId: { results: number[] };
+  LookupMultiHR03eventsId: { results: number[] };
 }
 
 export interface MutationCustomerDataItem extends BackendImmutableKey {
   LookupMultiHR01teamId: { results: number[] };
+  LookupMultiHR03eventsId: { results: number[] };
   __metadata: { type: 'SP.Data.MetroCM102ListItem' };
 }
