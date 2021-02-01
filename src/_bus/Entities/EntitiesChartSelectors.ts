@@ -34,8 +34,6 @@ export const selectAverageHourlyPerService = ({ Entities }: RootState) => Entiti
 
 export const selectTotalServiceSales = ({ Entities }: RootState) => Entities.chartData.totalServiceSales;
 
-export const selectTotalServiceHours = ({ Entities }: RootState) => Entities.chartData.totalServiceHours;
-
 export const selectAppointmentFunnel = () =>
   createSelector(
     getAppointmentReservations,

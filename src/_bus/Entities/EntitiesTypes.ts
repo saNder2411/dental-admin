@@ -102,7 +102,6 @@ export interface ChartState {
   appointmentPerStaffSeries: SeriesForChart<number[]>[];
   averageHourlyPerService: SeriesForChart<number>[];
   totalServiceSales: number;
-  totalServiceHours: number;
 }
 
 export interface EntitiesState {

@@ -118,25 +118,6 @@ const getAverageHourlyPerServiceData = (sliceAppointments: AppointmentDataItem[]
     return [...acc, { name, data }];
   }, []);
 
-export const getAverageHourlyPerAllServiceData = (
-  sliceAppointments: AppointmentDataItem[],
-  servicesById: { [key: string]: ServiceDataItem }
-): [number, number] =>
-  sliceAppointments.reduce<[number, number]>(
-    (acc, { LookupMultiBP01offeringsId, ServiceCharge, Duration }) => {
-      const [prevSales, prevHours] = acc;
-      const amountProductSalesInAppointment = LookupMultiBP01offeringsId.results.reduce((sum, ID) => {
-        const service = servicesById[ID];
-        return service.ContentTypeId === ContentTypes.Product ? (sum += service.Amount) : sum;
-      }, 0);
-      const sales = prevSales + (ServiceCharge - amountProductSalesInAppointment);
-      const hours = prevHours + Duration / 60 / 60;
-
-      return [sales, hours];
-    },
-    [0, 0]
-  );
-
 export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState, entityName: EntitiesKeys): ChartState => {
   if (entityName !== EntitiesKeys.Appointments) return state.chartData;
 
@@ -149,9 +130,10 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     paymentCompleted,
     totalAppointmentHours,
     totalAppointmentSales,
+    totalServiceSales,
     activeCustomersSet,
   ] = state.appointments.originalData.reduce(
-    (acc, { AppointmentStatus, Start, Duration, ServiceCharge, LookupCM102customersId }) => {
+    (acc, { AppointmentStatus, Start, Duration, ServiceCharge, LookupCM102customersId, LookupMultiBP01offeringsId }) => {
       const isFuture = Start.getTime() >= MONDAY_CURRENT_WEEK.getTime();
       const [
         prevAppointmentReservations,
@@ -160,6 +142,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
         prevPaymentCompleted,
         prevHours,
         prevSales,
+        prevServiceSales,
         activeCustomers,
       ] = acc;
 
@@ -174,6 +157,16 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
       const currentSales = !isFuture ? prevSales + ServiceCharge : prevSales;
       !isFuture && activeCustomers.add(LookupCM102customersId);
 
+      let currentServiceSales = prevServiceSales;
+      if (!isFuture) {
+        const amountProductSalesInAppointment = LookupMultiBP01offeringsId.results.reduce((sum, ID) => {
+          const service = state.services.byId[ID];
+          return service.ContentTypeId === ContentTypes.Product ? (sum += service.Amount) : sum;
+        }, 0);
+
+        currentServiceSales += ServiceCharge - amountProductSalesInAppointment;
+      }
+
       return [
         currentAppointmentReservations,
         currentAppointmentBookings,
@@ -181,10 +174,11 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
         currentPaymentCompleted,
         currentHours,
         currentSales,
+        currentServiceSales,
         activeCustomers,
       ];
     },
-    [0, 0, 0, 0, 0, 0, new Set<number>()]
+    [0, 0, 0, 0, 0, 0, 0, new Set<number>()]
   );
 
   const { totalSalesForEveryWeekInWeekRange, serviceSalesForEveryWeekInWeekRange, productSalesForEveryWeekInWeekRange } = getAppointmentSalesData(
@@ -198,8 +192,6 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   );
 
   const averageHourlyPerService = getAverageHourlyPerServiceData(appointmentsInLastWeekRange, state.services.originalData);
-
-  const [totalServiceSales, totalServiceHours] = getAverageHourlyPerAllServiceData(appointmentsInLastWeekRange, state.services.byId);
 
   return {
     totalAppointmentHours,
@@ -217,6 +209,5 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     appointmentPerStaffSeries,
     averageHourlyPerService,
     totalServiceSales,
-    totalServiceHours,
   };
 };

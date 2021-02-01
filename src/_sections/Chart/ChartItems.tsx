@@ -29,7 +29,6 @@ import {
   selectTotalAppointmentHours,
   selectTotalStaffWorkHoursInWeekRange,
   selectTotalServiceSales,
-  selectTotalServiceHours,
   selectTotalAppointmentSales,
   selectAmountActiveCustomers,
 } from '../../_bus/Entities/EntitiesChartSelectors';
@@ -177,7 +176,7 @@ export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Ele
 
 export const ChartAverageHourlyPerAllServices: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const sales = useSelector(selectTotalServiceSales);
-  const hours = useSelector(selectTotalServiceHours);
+  const hours = useSelector(selectTotalAppointmentHours);
   const value = sales !== 0 ? Math.round(sales / hours) : 0;
 
   return (

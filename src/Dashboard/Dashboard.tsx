@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 // Components
 import { Chart } from '../_sections/Chart';
@@ -14,13 +14,13 @@ export const Dashboard: FC = (): JSX.Element => {
   const appointmentTotalHours = useSelector(selectTotalAppointmentHours);
   const dispatch = useDispatch();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
-  const renders = useRef(0);
+  // const renders = useRef(0);
 
   const contentTSX = appointmentTotalHours > 0 && !isDataLoading && <Chart />;
 
   return (
     <>
-      {renders.current++}
+      {/* {renders.current++} */}
       {contentTSX}
       <Loader className="mt-5" isLoading={isDataLoading} size={'large'} type="infinite-spinner" />
     </>
