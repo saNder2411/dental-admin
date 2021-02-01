@@ -7,6 +7,7 @@ export const MONDAY_CURRENT_WEEK = addDays(NOW, -(NOW.getDay() - 1));
 export const WEEK_RANGE = 12;
 export const PREV_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, -WEEK_RANGE);
 export const NEXT_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, WEEK_RANGE);
+export const DEFAULT_WORK_WEEK_HOURS = 35;
 
 export const statusNameList = Object.values(StatusNames);
 

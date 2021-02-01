@@ -4,7 +4,7 @@ import { WeekPoint } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 // Constants
-import { WEEK_RANGE, PREV_WEEKS } from '../Constants';
+import { WEEK_RANGE, PREV_WEEKS, DEFAULT_WORK_WEEK_HOURS } from '../Constants';
 
 const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint[], number[]] => {
   let points: WeekPoint[] = [];
@@ -29,11 +29,14 @@ const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string |
   const year = now.getFullYear();
   const swapMonth = now.getMonth() + 1;
   const month = swapMonth < 10 ? `0${swapMonth}` : swapMonth;
-  const date = now.getDate();
+  const swapDate = now.getDate();
+  const date = swapDate < 10 ? `0${swapDate}` : swapDate;
+  const parseStartDayDate = Date.parse(`${year}-${month}-${date}T${startWorkDay}`);
+  const parseEndDayDate = Date.parse(`${year}-${month}-${date}T${endWorkDay}`);
 
-  const delta = Date.parse(`${year}-${month}-${date}T${endWorkDay}`) - Date.parse(`${year}-${month}-${date}T${startWorkDay}`);
+  const workHours = (parseEndDayDate - parseStartDayDate) / 1000 / 60 / 60;
 
-  return delta / 1000 / 60 / 60;
+  return workHours;
 };
 
 export const calcStaffMemberWorkWeekHours = (staffDataItem: StaffDataItem | undefined) => {
@@ -76,7 +79,7 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   const { amountAppointment, durationInHours, sales } = calcAppointmentsDurationSalesPerStaffMember(staffDataItem.ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(
-    ((durationInHours / WEEK_RANGE) * 100) / (staffMemberWorkWeekHours === 0 ? 100 : staffMemberWorkWeekHours)
+    ((durationInHours / WEEK_RANGE) * 100) / (staffMemberWorkWeekHours === 0 ? DEFAULT_WORK_WEEK_HOURS : staffMemberWorkWeekHours)
   );
   const averageSalesPerWeekPerStaffMember = +(sales / WEEK_RANGE).toFixed(2);
 

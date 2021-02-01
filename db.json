@@ -581,1646 +581,6 @@
   "appointments": [
     {
       "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(526)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(526)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 526,
-      "Title": "C.Henstock-0526",
-      "EventDate": "2020-11-02T17:00:00Z",
-      "EndDate": "2020-11-02T17:35:00Z",
-      "Duration": 2100,
-      "Description": " | Stylist- | Customer-Caroline-Henstock_+189793647889-Caroline.Henstock@schedulingtoday.local | Services-Mens Wash+Cut+Dry S4 46.75 (-15%) | Services Total=46.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Caroline.Henstock@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Henstock",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 46.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.15,
-      "FilterStart": "2020-11-02T16:00:00Z",
-      "FilterEnd": "2020-11-02T17:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Caroline",
-      "CellPhone": "+189793647889",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [7]
-      },
-      "LookupCM102customersId": 1129,
-      "LookupHR01teamId": 1,
-      "ID": 526,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(528)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(528)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 528,
-      "Title": "C.Santagostini -0528",
-      "EventDate": "2020-11-05T10:30:00Z",
-      "EndDate": "2020-11-05T11:45:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-Cathrine-Santagostini _+189789350668-Cathrine.Santagostini-@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Cathrine.Santagostini-@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Santagostini ",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-05T09:30:00Z",
-      "FilterEnd": "2020-11-05T12:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Cathrine",
-      "CellPhone": "+189789350668",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 689,
-      "LookupHR01teamId": 4,
-      "ID": 528,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(539)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(539)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 539,
-      "Title": "A.Switzer-0539",
-      "EventDate": "2020-11-05T10:45:00Z",
-      "EndDate": "2020-11-05T12:15:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alain-Switzer_+189765635580-Alain.switzer@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alain.switzer@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Switzer",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-05T09:45:00Z",
-      "FilterEnd": "2020-11-05T10:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alain",
-      "CellPhone": "+189765635580",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 20,
-      "LookupHR01teamId": 2,
-      "ID": 539,
-      "Modified": "2021-01-27T11:03:34Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(540)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(540)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 540,
-      "Title": "A.Beresford-0540",
-      "EventDate": "2020-11-05T11:00:00Z",
-      "EndDate": "2020-11-05T12:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Amy-Beresford_+189792396018-Amy.Beresford@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Amy.Beresford@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Beresford",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-05T10:00:00Z",
-      "FilterEnd": "2020-11-05T12:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Amy",
-      "CellPhone": "+189792396018",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 328,
-      "LookupHR01teamId": 6,
-      "ID": 540,
-      "Modified": "2021-01-27T11:03:34Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(478)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(478)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 478,
-      "Title": "A.Kingdom-0478",
-      "EventDate": "2020-11-05T11:30:00Z",
-      "EndDate": "2020-11-05T13:00:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Aleksey-Kingdom_+189692975856-Aleksey.Kingdom@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Aleksey.Kingdom@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Kingdom",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-05T10:30:00Z",
-      "FilterEnd": "2020-11-05T11:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Aleksey",
-      "CellPhone": "+189692975856",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 997,
-      "LookupHR01teamId": 1,
-      "ID": 478,
-      "Modified": "2021-01-27T11:03:13Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(541)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(541)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 541,
-      "Title": "A.Warman-0541",
-      "EventDate": "2020-11-05T12:00:00Z",
-      "EndDate": "2020-11-05T12:50:00Z",
-      "Duration": 3000,
-      "Description": " | Stylist- | Customer-Alex-Warman_+189797842556-Alex.Warman@schedulingtoday.local | Services-Ladies Wash+Cut+Dry S2 49.50 (-10%) | Services Total=49.50(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alex.Warman@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Warman",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 49.5,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.1,
-      "FilterStart": "2020-11-05T11:00:00Z",
-      "FilterEnd": "2020-11-05T11:40:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alex",
-      "CellPhone": "+189797842556",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
-      "LookupCM102customersId": 174,
-      "LookupHR01teamId": 2,
-      "ID": 541,
-      "Modified": "2021-01-27T11:03:34Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(525)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(525)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 525,
-      "Title": "A.Thompson -0525",
-      "EventDate": "2020-11-05T13:15:00Z",
-      "EndDate": "2020-11-05T14:05:00Z",
-      "Duration": 3000,
-      "Description": " | Stylist- | Customer-Anna-Thompson _+189791052994-Anna.Thompson-@schedulingtoday.local | Services-Ladies Wash+Cut+Dry S2 49.50 (-10%) | Services Total=49.50(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Anna.Thompson-@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Thompson ",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 49.5,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.1,
-      "FilterStart": "2020-11-05T12:15:00Z",
-      "FilterEnd": "2020-11-05T12:55:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Anna",
-      "CellPhone": "+189791052994",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
-      "LookupCM102customersId": 76,
-      "LookupHR01teamId": 2,
-      "ID": 525,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(529)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(529)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 529,
-      "Title": "A.Papamichael-0529",
-      "EventDate": "2020-11-05T14:30:00Z",
-      "EndDate": "2020-11-05T16:00:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alain-Papamichael_+189765635580-Alain.Papamichael@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alain.Papamichael@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Papamichael",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-05T13:30:00Z",
-      "FilterEnd": "2020-11-05T15:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alain",
-      "CellPhone": "+189765635580",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 254,
-      "LookupHR01teamId": 3,
-      "ID": 529,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(531)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(531)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 531,
-      "Title": "C.Wong-0531",
-      "EventDate": "2020-11-06T08:30:00Z",
-      "EndDate": "2020-11-06T09:45:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-CBP Support-Wong_+189762823877-CBP-Support.Wong@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "CBP-Support.Wong@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Wong",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-06T07:30:00Z",
-      "FilterEnd": "2020-11-06T08:45:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "CBP Support",
-      "CellPhone": "+189762823877",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 60,
-      "LookupHR01teamId": 2,
-      "ID": 531,
-      "Modified": "2021-01-27T11:03:33Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(543)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(543)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 543,
-      "Title": "A.Rivard-0543",
-      "EventDate": "2020-11-06T09:00:00Z",
-      "EndDate": "2020-11-06T10:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Andrea-Rivard_+189789102525-Andrea.Rivard@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Andrea.Rivard@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Rivard",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-06T08:00:00Z",
-      "FilterEnd": "2020-11-06T08:45:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Andrea",
-      "CellPhone": "+189789102525",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 573,
-      "LookupHR01teamId": 4,
-      "ID": 543,
-      "Modified": "2021-01-27T11:03:34Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(477)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(477)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 477,
-      "Title": "A.Fouhy-0477",
-      "EventDate": "2020-11-06T11:15:00Z",
-      "EndDate": "2020-11-06T12:45:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Andre-Fouhy_+189791994609-Andre.Fouhy@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Andre.Fouhy@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Fouhy",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-06T10:15:00Z",
-      "FilterEnd": "2020-11-06T11:15:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Andre",
-      "CellPhone": "+189791994609",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 168,
-      "LookupHR01teamId": 3,
-      "ID": 477,
-      "Modified": "2021-01-27T11:03:13Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(470)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(470)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 470,
-      "Title": "C.Speidel-0470",
-      "EventDate": "2020-11-06T13:00:00Z",
-      "EndDate": "2020-11-06T14:15:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-Cathy-Speidel_+189791099681-Cathy.Speidel@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Cathy.Speidel@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Speidel",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-06T12:00:00Z",
-      "FilterEnd": "2020-11-06T13:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Cathy",
-      "CellPhone": "+189791099681",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 581,
-      "LookupHR01teamId": 4,
-      "ID": 470,
-      "Modified": "2021-01-27T11:03:06Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(461)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(461)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 461,
-      "Title": "A.Silver-0461",
-      "EventDate": "2020-11-06T14:15:00Z",
-      "EndDate": "2020-11-06T15:45:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alessandro-Silver_+189792992527-Alessandro.Silver@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alessandro.Silver@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Silver",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-06T13:15:00Z",
-      "FilterEnd": "2020-11-06T14:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alessandro",
-      "CellPhone": "+189792992527",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 388,
-      "LookupHR01teamId": 6,
-      "ID": 461,
-      "Modified": "2021-01-27T11:03:06Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(521)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(521)",
-        "etag": "\"3\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 521,
-      "Title": "A.Trunec-0521",
-      "EventDate": "2020-11-07T07:00:00Z",
-      "EndDate": "2020-11-07T10:30:00Z",
-      "Duration": 12600,
-      "Description": " | Stylist-Sara Khan | Customer-Anneli Trunec_+189792902699-Anneli.Trunec@schedulingtoday.local | Services-Boys Wash+Cut+Dry 20.00 (-20%) | Services Total=20.00(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Anneli.Trunec@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Trunec",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 20,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.2,
-      "FilterStart": "2020-11-07T06:00:00Z",
-      "FilterEnd": "2020-11-07T09:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Anneli",
-      "CellPhone": "+189792902699",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
-      "LookupCM102customersId": 517,
-      "LookupHR01teamId": 7,
-      "ID": 521,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(542)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(542)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 542,
-      "Title": "A.Treharne-0542",
-      "EventDate": "2020-11-07T07:15:00Z",
-      "EndDate": "2020-11-07T08:45:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Anders-Treharne_+189791965942-Anders.Treharne@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Anders.Treharne@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Treharne",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-07T06:15:00Z",
-      "FilterEnd": "2020-11-07T09:15:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Anders",
-      "CellPhone": "+189791965942",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 79,
-      "LookupHR01teamId": 2,
-      "ID": 542,
-      "Modified": "2021-01-27T11:03:34Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(522)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(522)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 522,
-      "Title": "C.Yiotopoulos-0522",
-      "EventDate": "2020-11-07T08:00:00Z",
-      "EndDate": "2020-11-07T12:50:00Z",
-      "Duration": 17400,
-      "Description": " | Stylist- | Customer-Christian-Yiotopoulos_+1898395913-Christian.Yiotopoulos@schedulingtoday.local | Services-Ladies Wash+Cut+Dry S2 49.50 (-10%), Balayage Natural S4 110.25 (-25%), Texture-Perm S3 72.75 (-25%) | Services Total=232.50(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Christian.Yiotopoulos@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Yiotopoulos",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 232.5,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.222408026755853,
-      "FilterStart": "2020-11-07T07:00:00Z",
-      "FilterEnd": "2020-11-07T07:45:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Christian",
-      "CellPhone": "+1898395913",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2, 27, 28]
-      },
-      "LookupCM102customersId": 29,
-      "LookupHR01teamId": 2,
-      "ID": 522,
-      "Modified": "2021-01-27T11:03:21Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(532)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(532)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 532,
-      "Title": "A.Treharne-0532",
-      "EventDate": "2020-11-07T09:00:00Z",
-      "EndDate": "2020-11-07T09:25:00Z",
-      "Duration": 1500,
-      "Description": " | Stylist- | Customer-Andrea-Treharne_+189764082608-Andrea.Treharne@schedulingtoday.local | Services-Boys Wash+Cut+Dry 20.00 (-20%) | Services Total=20.00(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Andrea.Treharne@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Treharne",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 20,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.2,
-      "FilterStart": "2020-11-07T08:00:00Z",
-      "FilterEnd": "2020-11-07T08:25:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Andrea",
-      "CellPhone": "+189764082608",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
-      "LookupCM102customersId": 519,
-      "LookupHR01teamId": 7,
-      "ID": 532,
-      "Modified": "2021-01-27T11:03:33Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(533)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(533)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 533,
-      "Title": "A.Lötscher-0533",
-      "EventDate": "2020-11-07T10:00:00Z",
-      "EndDate": "2020-11-07T11:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Amiee-Lötscher_+189796168794-Amiee.Lötscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Amiee.Lötscher@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Lötscher",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-07T09:00:00Z",
-      "FilterEnd": "2020-11-07T10:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Amiee",
-      "CellPhone": "+189796168794",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 178,
-      "LookupHR01teamId": 3,
-      "ID": 533,
-      "Modified": "2021-01-27T11:03:33Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(458)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(458)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 458,
-      "Title": "A.Dequeecker-0458",
-      "EventDate": "2020-11-07T11:00:00Z",
-      "EndDate": "2020-11-07T12:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Amy-Dequeecker_+189792396018-Amy.Dequeecker@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Amy.Dequeecker@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Dequeecker",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-07T10:00:00Z",
-      "FilterEnd": "2020-11-07T10:40:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Amy",
-      "CellPhone": "+189792396018",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 350,
-      "LookupHR01teamId": 6,
-      "ID": 458,
-      "Modified": "2021-01-27T11:03:05Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(434)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(434)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 434,
-      "Title": "A.Danyla-0434",
-      "EventDate": "2020-11-07T12:15:00Z",
-      "EndDate": "2020-11-07T13:05:00Z",
-      "Duration": 3000,
-      "Description": " | Stylist- | Customer-Amela-Danyla_+189786757290-amela.Danyla@schedulingtoday.local | Services-Ladies Wash+Cut+Dry S2 49.50 (-10%) | Services Total=49.50(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "amela.Danyla@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Danyla",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 49.5,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.1,
-      "FilterStart": "2020-11-07T11:15:00Z",
-      "FilterEnd": "2020-11-07T11:55:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Amela",
-      "CellPhone": "+189786757290",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
-      "LookupCM102customersId": 1221,
-      "LookupHR01teamId": 5,
-      "ID": 434,
-      "Modified": "2021-01-27T11:03:01Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(534)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(534)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 534,
-      "Title": "C.Lewis-0534",
-      "EventDate": "2020-11-07T13:30:00Z",
-      "EndDate": "2020-11-07T14:45:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-Carolina-Lewis_+189786636068-Carolina.Lewis@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Carolina.Lewis@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Lewis",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-07T12:30:00Z",
-      "FilterEnd": "2020-11-07T13:45:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Carolina",
-      "CellPhone": "+189786636068",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 172,
-      "LookupHR01teamId": 3,
-      "ID": 534,
-      "Modified": "2021-01-27T11:03:33Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(460)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(460)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 460,
-      "Title": "A.Callera-0460",
-      "EventDate": "2020-11-07T14:00:00Z",
-      "EndDate": "2020-11-07T15:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alicia-Callera_+1898395906-Alicia.Callera@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alicia.Callera@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Callera",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-07T13:00:00Z",
-      "FilterEnd": "2020-11-07T14:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alicia",
-      "CellPhone": "+1898395906",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 63,
-      "LookupHR01teamId": 2,
-      "ID": 460,
-      "Modified": "2021-01-27T11:03:05Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(578)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(578)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 578,
-      "Title": "A.Risi-0578",
-      "EventDate": "2020-11-07T14:00:00Z",
-      "EndDate": "2020-11-07T15:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Ana-Risi_+189799222397-Ana.Risi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Ana.Risi@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Risi",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-07T13:00:00Z",
-      "FilterEnd": "2020-11-07T13:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Ana",
-      "CellPhone": "+189799222397",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 751,
-      "LookupHR01teamId": 4,
-      "ID": 578,
-      "Modified": "2021-01-27T11:03:46Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(523)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(523)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 523,
-      "Title": "C.Beruchuk-0523",
-      "EventDate": "2020-11-08T08:00:00Z",
-      "EndDate": "2020-11-08T12:50:00Z",
-      "Duration": 17400,
-      "Description": " | Stylist- | Customer-Carolyn-Beruchuk_+189768938219-Carolyn.Beruchuk@schedulingtoday.local | Services-Ladies Wash+Cut+Dry S2 49.50 (-10%), Balayage Natural S4 110.25 (-25%), Texture-Perm S3 72.75 (-25%) | Services Total=232.50(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Carolyn.Beruchuk@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Beruchuk",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 232.5,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.222408026755853,
-      "FilterStart": "2020-11-08T07:00:00Z",
-      "FilterEnd": "2020-11-08T08:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Carolyn",
-      "CellPhone": "+189768938219",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2, 27, 28]
-      },
-      "LookupCM102customersId": 7,
-      "LookupHR01teamId": 2,
-      "ID": 523,
-      "Modified": "2021-01-27T11:03:21Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(568)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(568)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 568,
-      "Title": "C.Bibeau-0568",
-      "EventDate": "2020-11-08T08:00:00Z",
-      "EndDate": "2020-11-08T09:15:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-Cathy-Bibeau_+189791099681-Cathy.Bibeau@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Cathy.Bibeau@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Bibeau",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T07:00:00Z",
-      "FilterEnd": "2020-11-08T07:40:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Cathy",
-      "CellPhone": "+189791099681",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 323,
-      "LookupHR01teamId": 6,
-      "ID": 568,
-      "Modified": "2021-01-27T11:03:44Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(565)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(565)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 565,
-      "Title": "A.Lötscher-0565",
-      "EventDate": "2020-11-08T08:15:00Z",
-      "EndDate": "2020-11-08T09:45:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alexey-Lötscher_+189763613091-Alexey.Lötscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alexey.Lötscher@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Lötscher",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T07:15:00Z",
-      "FilterEnd": "2020-11-08T07:55:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alexey",
-      "CellPhone": "+189763613091",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 925,
-      "LookupHR01teamId": 1,
-      "ID": 565,
-      "Modified": "2021-01-27T11:03:44Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(513)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(513)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 513,
-      "Title": "S.Pye-0513",
-      "EventDate": "2020-11-08T08:30:00Z",
-      "EndDate": "2020-11-08T09:10:00Z",
-      "Duration": 2400,
-      "Description": " | Stylist- | Customer-Stephen-Pye_0798302214-stevep@metrobpm.com | Services-Mens Wash+Cut+Dry S2 34.00 (-15%) | Services Total=34.00(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "stevep@metrobpm.com",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Pye",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 34,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.15,
-      "FilterStart": "2020-11-08T07:30:00Z",
-      "FilterEnd": "2020-11-08T08:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Stephen",
-      "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [5]
-      },
-      "LookupCM102customersId": 1,
-      "LookupHR01teamId": 4,
-      "ID": 513,
-      "Modified": "2021-01-27T11:03:19Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(524)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(524)",
-        "etag": "\"3\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 524,
-      "Title": "C.Carre-0524",
-      "EventDate": "2020-11-08T09:45:00Z",
-      "EndDate": "2020-11-08T10:45:00Z",
-      "Duration": 3600,
-      "Description": " | Stylist-Christina Romanov | Customer-Catherine  Carre_+1898395919-Catherine-.Carre@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Catherine-.Carre@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Carre",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T08:45:00Z",
-      "FilterEnd": "2020-11-08T09:45:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Catherine ",
-      "CellPhone": "+1898395919",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 620,
-      "LookupHR01teamId": 4,
-      "ID": 524,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(451)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(451)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 451,
-      "Title": "C.Wong-0451",
-      "EventDate": "2020-11-08T10:00:00Z",
-      "EndDate": "2020-11-08T11:15:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-CBP Support-Wong_+189762823877-CBP-Support.Wong@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "CBP-Support.Wong@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Wong",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T09:00:00Z",
-      "FilterEnd": "2020-11-08T10:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "CBP Support",
-      "CellPhone": "+189762823877",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 60,
-      "LookupHR01teamId": 2,
-      "ID": 451,
-      "Modified": "2021-01-27T11:03:05Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(496)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(496)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 496,
-      "Title": "A.Carre-0496",
-      "EventDate": "2020-11-08T10:00:00Z",
-      "EndDate": "2020-11-08T11:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alexis-Carre_+189766050752-Alexis.Carre@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alexis.Carre@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Carre",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T09:00:00Z",
-      "FilterEnd": "2020-11-08T12:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alexis",
-      "CellPhone": "+189766050752",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 1251,
-      "LookupHR01teamId": 1,
-      "ID": 496,
-      "Modified": "2021-01-27T11:03:14Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(555)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(555)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 555,
-      "Title": "A.Carter-0555",
-      "EventDate": "2020-11-08T10:15:00Z",
-      "EndDate": "2020-11-08T11:45:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Andrea-Carter_+189788455373-Andrea.Carter@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Andrea.Carter@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Carter",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T09:15:00Z",
-      "FilterEnd": "2020-11-08T10:15:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Andrea",
-      "CellPhone": "+189788455373",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 956,
-      "LookupHR01teamId": 5,
-      "ID": 555,
-      "Modified": "2021-01-27T11:03:35Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(435)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(435)",
-        "etag": "\"3\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 435,
-      "Title": "A.Herrmann-0435",
-      "EventDate": "2020-11-08T11:30:00Z",
-      "EndDate": "2020-11-08T12:30:00Z",
-      "Duration": 3600,
-      "Description": " | Stylist-Any Stylist | Customer-Alison Herrmann_+1897879878382-Alison.Herrmann@schedulingtoday.local | Services- | Services Total=0.00 | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alison.Herrmann@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Herrmann",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 0,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0,
-      "FilterStart": "2020-11-08T10:30:00Z",
-      "FilterEnd": "2020-11-08T11:30:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alison",
-      "CellPhone": "+1897879878382",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
-      "LookupCM102customersId": 1126,
-      "LookupHR01teamId": 1,
-      "ID": 435,
-      "Modified": "2021-01-27T11:03:00Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(556)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(556)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 556,
-      "Title": "A.Doogan-0556",
-      "EventDate": "2020-11-08T11:30:00Z",
-      "EndDate": "2020-11-08T13:00:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Ailish-Doogan_+189768035613-Ailish.Doogan@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Ailish.Doogan@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Doogan",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T10:30:00Z",
-      "FilterEnd": "2020-11-08T11:10:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Ailish",
-      "CellPhone": "+189768035613",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 1203,
-      "LookupHR01teamId": 4,
-      "ID": 556,
-      "Modified": "2021-01-27T11:03:36Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(567)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(567)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 567,
-      "Title": "A.Thompson -0567",
-      "EventDate": "2020-11-08T12:45:00Z",
-      "EndDate": "2020-11-08T14:15:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Anna-Thompson _+189791052994-Anna.Thompson-@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Anna.Thompson-@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Thompson ",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T11:45:00Z",
-      "FilterEnd": "2020-11-08T12:45:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Anna",
-      "CellPhone": "+189791052994",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 76,
-      "LookupHR01teamId": 2,
-      "ID": 567,
-      "Modified": "2021-01-27T11:03:45Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(433)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(433)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 433,
-      "Title": "C.Lauer-0433",
-      "EventDate": "2020-11-08T13:00:00Z",
-      "EndDate": "2020-11-08T14:15:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-Caroline-Lauer_+189784066785-Caroline.Lauer@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Caroline.Lauer@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Lauer",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T12:00:00Z",
-      "FilterEnd": "2020-11-08T15:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Caroline",
-      "CellPhone": "+189784066785",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 1024,
-      "LookupHR01teamId": 1,
-      "ID": 433,
-      "Modified": "2021-01-27T11:03:01Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(497)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(497)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 497,
-      "Title": "C.Musar-0497",
-      "EventDate": "2020-11-08T13:00:00Z",
-      "EndDate": "2020-11-08T14:15:00Z",
-      "Duration": 4500,
-      "Description": " | Stylist- | Customer-Chiara-Musar_+189767200536-Chiara.Musar@schedulingtoday.local | Services-Highlights 1/2 S3 56.25 (-25%) | Services Total=56.25(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Chiara.Musar@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Musar",
-      "Gender": "(1) Female",
-      "Notes": null,
-      "ServiceCharge": 56.25,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T12:00:00Z",
-      "FilterEnd": "2020-11-08T12:40:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Chiara",
-      "CellPhone": "+189767200536",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
-      "LookupCM102customersId": 623,
-      "LookupHR01teamId": 4,
-      "ID": 497,
-      "Modified": "2021-01-27T11:03:14Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(527)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(527)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 527,
-      "Title": "A.Bronder-0527",
-      "EventDate": "2020-11-08T13:00:00Z",
-      "EndDate": "2020-11-08T14:30:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Alex-Bronder_+189798555995-Alex.Bronder@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alex.Bronder@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Bronder",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T12:00:00Z",
-      "FilterEnd": "2020-11-08T14:00:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alex",
-      "CellPhone": "+189798555995",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 1196,
-      "LookupHR01teamId": 1,
-      "ID": 527,
-      "Modified": "2021-01-27T11:03:20Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(535)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(535)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 535,
-      "Title": "A.Huber-0535",
-      "EventDate": "2020-11-08T13:30:00Z",
-      "EndDate": "2020-11-08T13:55:00Z",
-      "Duration": 1500,
-      "Description": " | Stylist- | Customer-Alex -Huber_+189799232038-Alex-.Huber@schedulingtoday.local | Services-Boys Wash+Cut+Dry 20.00 (-20%) | Services Total=20.00(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Alex-.Huber@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Huber",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 20,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.2,
-      "FilterStart": "2020-11-08T12:30:00Z",
-      "FilterEnd": "2020-11-08T12:55:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Alex ",
-      "CellPhone": "+189799232038",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
-      "LookupCM102customersId": 1128,
-      "LookupHR01teamId": 5,
-      "ID": 535,
-      "Modified": "2021-01-27T11:03:34Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(546)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(546)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 546,
-      "Title": "A.Dolan-0546",
-      "EventDate": "2020-11-08T14:30:00Z",
-      "EndDate": "2020-11-08T16:00:00Z",
-      "Duration": 5400,
-      "Description": " | Stylist- | Customer-Andrey-Dolan_+189764873509-Andrey.Dolan@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "Andrey.Dolan@schedulingtoday.local",
-      "AppointmentStatus": "(5) Paid",
-      "AppointmentSource": null,
-      "LastNameAppt": "Dolan",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 78.75,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.25,
-      "FilterStart": "2020-11-08T13:30:00Z",
-      "FilterEnd": "2020-11-08T14:10:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Andrey",
-      "CellPhone": "+189764873509",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
-      "LookupCM102customersId": 1010,
-      "LookupHR01teamId": 1,
-      "ID": 546,
-      "Modified": "2021-01-27T11:03:35Z"
-    },
-    {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(641)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(641)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 641,
-      "Title": "S.Pye-0641",
-      "EventDate": "2020-11-08T15:00:00Z",
-      "EndDate": "2020-11-08T15:40:00Z",
-      "Duration": 2400,
-      "Description": " | Stylist- | Customer-Stephen-Pye_0417900379-stevepye70@gmail.com | Services-Mens Wash+Cut+Dry S2 34.00 (-15%) | Services Total=34.00(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": "stevepye70@gmail.com",
-      "AppointmentStatus": "(7) Cancelled",
-      "AppointmentSource": null,
-      "LastNameAppt": "Pye",
-      "Gender": "(2) Male",
-      "Notes": null,
-      "ServiceCharge": 34,
-      "ExtraFees": 0,
-      "ServiceDiscount": 0.15,
-      "FilterStart": "2020-11-08T14:00:00Z",
-      "FilterEnd": "2020-11-08T14:40:00Z",
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": "Stephen",
-      "CellPhone": "0417900379",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [5]
-      },
-      "LookupCM102customersId": 1,
-      "LookupHR01teamId": 2,
-      "ID": 641,
-      "Modified": "2021-01-27T11:11:41Z"
-    },
-    {
-      "__metadata": {
         "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(493)",
         "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(493)",
         "etag": "\"4\"",
@@ -2249,12 +609,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [7, 9]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [7, 9] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 2,
       "ID": 493,
@@ -2290,12 +645,7 @@
       "MetroRecException": null,
       "FirstName": "Carrie",
       "CellPhone": "+189765598443",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 319,
       "LookupHR01teamId": 6,
       "ID": 559,
@@ -2331,12 +681,7 @@
       "MetroRecException": null,
       "FirstName": "Anna",
       "CellPhone": "+189792822535",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [9] },
       "LookupCM102customersId": 1137,
       "LookupHR01teamId": 3,
       "ID": 530,
@@ -2372,12 +717,7 @@
       "MetroRecException": null,
       "FirstName": "Alexander",
       "CellPhone": "+189798892931",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 522,
       "LookupHR01teamId": 5,
       "ID": 545,
@@ -2413,12 +753,7 @@
       "MetroRecException": null,
       "FirstName": "Alex",
       "CellPhone": "+189795922494",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [9] },
       "LookupCM102customersId": 525,
       "LookupHR01teamId": 7,
       "ID": 547,
@@ -2454,12 +789,7 @@
       "MetroRecException": null,
       "FirstName": "Anders",
       "CellPhone": "+189791965942",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 79,
       "LookupHR01teamId": 4,
       "ID": 562,
@@ -2495,12 +825,7 @@
       "MetroRecException": null,
       "FirstName": "Carmen",
       "CellPhone": "+189792242460",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 591,
       "LookupHR01teamId": 4,
       "ID": 476,
@@ -2536,12 +861,7 @@
       "MetroRecException": null,
       "FirstName": "Anke",
       "CellPhone": "+189786264822",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1150,
       "LookupHR01teamId": 2,
       "ID": 566,
@@ -2577,12 +897,7 @@
       "MetroRecException": null,
       "FirstName": "Ann-Charlott",
       "CellPhone": "+189764215702",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 875,
       "LookupHR01teamId": 1,
       "ID": 548,
@@ -2618,12 +933,7 @@
       "MetroRecException": null,
       "FirstName": "Alexey",
       "CellPhone": "+189787768867",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1050,
       "LookupHR01teamId": 1,
       "ID": 432,
@@ -2659,12 +969,7 @@
       "MetroRecException": null,
       "FirstName": "Caroline",
       "CellPhone": "+189799347632",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 47,
       "LookupHR01teamId": 2,
       "ID": 544,
@@ -2700,12 +1005,7 @@
       "MetroRecException": null,
       "FirstName": "Christian",
       "CellPhone": "+189787507312",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [7]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [7] },
       "LookupCM102customersId": 508,
       "LookupHR01teamId": 7,
       "ID": 459,
@@ -2741,12 +1041,7 @@
       "MetroRecException": null,
       "FirstName": "Christian",
       "CellPhone": "+189786533630",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [7]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [7] },
       "LookupCM102customersId": 1133,
       "LookupHR01teamId": 1,
       "ID": 498,
@@ -2782,12 +1077,7 @@
       "MetroRecException": null,
       "FirstName": "Alain",
       "CellPhone": "+189765635580",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 254,
       "LookupHR01teamId": 3,
       "ID": 537,
@@ -2823,12 +1113,7 @@
       "MetroRecException": null,
       "FirstName": "Charles",
       "CellPhone": "+189792282689",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 363,
       "LookupHR01teamId": 6,
       "ID": 563,
@@ -2864,12 +1149,7 @@
       "MetroRecException": null,
       "FirstName": "Alessio",
       "CellPhone": "+189789239360",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 208,
       "LookupHR01teamId": 3,
       "ID": 538,
@@ -2905,12 +1185,7 @@
       "MetroRecException": null,
       "FirstName": "Ana Maria",
       "CellPhone": "+189792828724",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 981,
       "LookupHR01teamId": 1,
       "ID": 549,
@@ -2946,12 +1221,7 @@
       "MetroRecException": null,
       "FirstName": "Alin",
       "CellPhone": "+189765635580",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 667,
       "LookupHR01teamId": 4,
       "ID": 536,
@@ -2987,12 +1257,7 @@
       "MetroRecException": null,
       "FirstName": "Andy",
       "CellPhone": "+189797096000",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 316,
       "LookupHR01teamId": 6,
       "ID": 479,
@@ -3028,12 +1293,7 @@
       "MetroRecException": null,
       "FirstName": "Amy-Victoria",
       "CellPhone": "+189791292680",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 50,
       "LookupHR01teamId": 2,
       "ID": 550,
@@ -3069,12 +1329,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [27]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [27] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
       "ID": 1378,
@@ -3110,12 +1365,7 @@
       "MetroRecException": null,
       "FirstName": "Alison",
       "CellPhone": "+189799586197",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 1217,
       "LookupHR01teamId": 1,
       "ID": 553,
@@ -3151,12 +1401,7 @@
       "MetroRecException": null,
       "FirstName": "Carolina",
       "CellPhone": "+189786636068",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 172,
       "LookupHR01teamId": 3,
       "ID": 554,
@@ -3192,12 +1437,7 @@
       "MetroRecException": null,
       "FirstName": "Carolyn",
       "CellPhone": "+189768938219",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 7,
       "LookupHR01teamId": 2,
       "ID": 551,
@@ -3233,12 +1473,7 @@
       "MetroRecException": null,
       "FirstName": "Christian",
       "CellPhone": "+189799387655",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 308,
       "LookupHR01teamId": 6,
       "ID": 511,
@@ -3274,12 +1509,7 @@
       "MetroRecException": null,
       "FirstName": "Christian",
       "CellPhone": "+1898395913",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2, 27, 22]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2, 27, 22] },
       "LookupCM102customersId": 29,
       "LookupHR01teamId": 4,
       "ID": 552,
@@ -3315,12 +1545,7 @@
       "MetroRecException": null,
       "FirstName": "Andrea",
       "CellPhone": "+189789102525",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 573,
       "LookupHR01teamId": 4,
       "ID": 581,
@@ -3356,12 +1581,7 @@
       "MetroRecException": null,
       "FirstName": "Alessandra",
       "CellPhone": "+1898395905",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 118,
       "LookupHR01teamId": 2,
       "ID": 577,
@@ -3397,12 +1617,7 @@
       "MetroRecException": null,
       "FirstName": "Chris",
       "CellPhone": "+189795555459",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 527,
       "LookupHR01teamId": 7,
       "ID": 557,
@@ -3438,12 +1653,7 @@
       "MetroRecException": null,
       "FirstName": "Adam",
       "CellPhone": "+189796035098",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 651,
       "LookupHR01teamId": 4,
       "ID": 558,
@@ -3479,12 +1689,7 @@
       "MetroRecException": null,
       "FirstName": "Adina",
       "CellPhone": "+189794594250",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 899,
       "LookupHR01teamId": 1,
       "ID": 560,
@@ -3520,12 +1725,7 @@
       "MetroRecException": null,
       "FirstName": "Catherine ",
       "CellPhone": "+1898395919",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 620,
       "LookupHR01teamId": 4,
       "ID": 561,
@@ -3561,12 +1761,7 @@
       "MetroRecException": null,
       "FirstName": "Alvaro ",
       "CellPhone": "+189768931174",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 16,
       "LookupHR01teamId": 2,
       "ID": 564,
@@ -3602,12 +1797,7 @@
       "MetroRecException": null,
       "FirstName": "Alex",
       "CellPhone": "+189797842556",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 174,
       "LookupHR01teamId": 3,
       "ID": 569,
@@ -3643,12 +1833,7 @@
       "MetroRecException": null,
       "FirstName": "Agnes ",
       "CellPhone": "+189786735020",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 1057,
       "LookupHR01teamId": 1,
       "ID": 570,
@@ -3684,12 +1869,7 @@
       "MetroRecException": null,
       "FirstName": "Angela",
       "CellPhone": "+189786705673",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1239,
       "LookupHR01teamId": 1,
       "ID": 571,
@@ -3725,12 +1905,7 @@
       "MetroRecException": null,
       "FirstName": "Alexandra",
       "CellPhone": "+189787435889",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1042,
       "LookupHR01teamId": 1,
       "ID": 572,
@@ -3766,12 +1941,7 @@
       "MetroRecException": null,
       "FirstName": "Charlie ",
       "CellPhone": "+189788007962",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 656,
       "LookupHR01teamId": 4,
       "ID": 573,
@@ -3807,12 +1977,7 @@
       "MetroRecException": null,
       "FirstName": "Caroline",
       "CellPhone": "+189793965397",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 281,
       "LookupHR01teamId": 6,
       "ID": 574,
@@ -3848,12 +2013,7 @@
       "MetroRecException": null,
       "FirstName": "Aline",
       "CellPhone": "+189791247839",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 497,
       "LookupHR01teamId": 6,
       "ID": 575,
@@ -3889,12 +2049,7 @@
       "MetroRecException": null,
       "FirstName": "Agota",
       "CellPhone": "+189799144774",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 229,
       "LookupHR01teamId": 3,
       "ID": 576,
@@ -3908,17 +2063,17 @@
         "type": "SP.Data.MetroHR03ListItem"
       },
       "Id": 579,
-      "Title": "A.Lötscher-0579",
+      "Title": "A.L\u00f6tscher-0579",
       "EventDate": "2020-11-27T08:00:00Z",
       "EndDate": "2020-11-27T09:30:00Z",
       "Duration": 5400,
-      "Description": " | Stylist- | Customer-Anna-Lötscher_+189799346937-Anna.Lötscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist- | Customer-Anna-L\u00f6tscher_+189799346937-Anna.L\u00f6tscher@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "RecurrenceID": null,
-      "Email": "Anna.Lötscher@schedulingtoday.local",
+      "Email": "Anna.L\u00f6tscher@schedulingtoday.local",
       "AppointmentStatus": "(5) Paid",
       "AppointmentSource": null,
-      "LastNameAppt": "Lötscher",
+      "LastNameAppt": "L\u00f6tscher",
       "Gender": "(1) Female",
       "Notes": null,
       "ServiceCharge": 78.75,
@@ -3930,12 +2085,7 @@
       "MetroRecException": null,
       "FirstName": "Anna",
       "CellPhone": "+189799346937",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 776,
       "LookupHR01teamId": 1,
       "ID": 579,
@@ -3971,12 +2121,7 @@
       "MetroRecException": null,
       "FirstName": "Annika",
       "CellPhone": "+189762187387",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 147,
       "LookupHR01teamId": 3,
       "ID": 580,
@@ -4012,12 +2157,7 @@
       "MetroRecException": null,
       "FirstName": "Agota",
       "CellPhone": "+189799144774",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 229,
       "LookupHR01teamId": 3,
       "ID": 582,
@@ -4053,12 +2193,7 @@
       "MetroRecException": null,
       "FirstName": "Casciano",
       "CellPhone": "+189791005050",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 30,
       "LookupHR01teamId": 2,
       "ID": 583,
@@ -4094,12 +2229,7 @@
       "MetroRecException": null,
       "FirstName": "Anneli",
       "CellPhone": "+189792902699",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [9] },
       "LookupCM102customersId": 517,
       "LookupHR01teamId": 7,
       "ID": 584,
@@ -4113,17 +2243,17 @@
         "type": "SP.Data.MetroHR03ListItem"
       },
       "Id": 585,
-      "Title": "A.Büschi-0585",
+      "Title": "A.B\u00fcschi-0585",
       "EventDate": "2020-11-29T10:30:00Z",
       "EndDate": "2020-11-29T12:00:00Z",
       "Duration": 5400,
-      "Description": " | Stylist- | Customer-Angelina-Büschi_+189798657749-angelina.Büschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist- | Customer-Angelina-B\u00fcschi_+189798657749-angelina.B\u00fcschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "RecurrenceID": null,
-      "Email": "angelina.Büschi@schedulingtoday.local",
+      "Email": "angelina.B\u00fcschi@schedulingtoday.local",
       "AppointmentStatus": "(5) Paid",
       "AppointmentSource": null,
-      "LastNameAppt": "Büschi",
+      "LastNameAppt": "B\u00fcschi",
       "Gender": "(1) Female",
       "Notes": null,
       "ServiceCharge": 78.75,
@@ -4135,12 +2265,7 @@
       "MetroRecException": null,
       "FirstName": "Angelina",
       "CellPhone": "+189798657749",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1231,
       "LookupHR01teamId": 1,
       "ID": 585,
@@ -4176,12 +2301,7 @@
       "MetroRecException": null,
       "FirstName": "Alper",
       "CellPhone": "+189789263636",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 643,
       "LookupHR01teamId": 4,
       "ID": 586,
@@ -4217,12 +2337,7 @@
       "MetroRecException": null,
       "FirstName": "Adam",
       "CellPhone": "+1393454251665",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1244,
       "LookupHR01teamId": 1,
       "ID": 587,
@@ -4258,12 +2373,7 @@
       "MetroRecException": null,
       "FirstName": "Steve",
       "CellPhone": "+41798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
       "ID": 588,
@@ -4299,12 +2409,7 @@
       "MetroRecException": null,
       "FirstName": "Steve",
       "CellPhone": "+41798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
       "ID": 589,
@@ -4340,12 +2445,7 @@
       "MetroRecException": null,
       "FirstName": "Andrea",
       "CellPhone": "+189764082608",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [9] },
       "LookupCM102customersId": 519,
       "LookupHR01teamId": 7,
       "ID": 590,
@@ -4381,12 +2481,7 @@
       "MetroRecException": null,
       "FirstName": "Ana",
       "CellPhone": "+189799222397",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 903,
       "LookupHR01teamId": 1,
       "ID": 591,
@@ -4422,12 +2517,7 @@
       "MetroRecException": null,
       "FirstName": "Paddy",
       "CellPhone": "+353863863966",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": null,
       "LookupHR01teamId": 4,
       "ID": 592,
@@ -4463,12 +2553,7 @@
       "MetroRecException": null,
       "FirstName": "Paddy",
       "CellPhone": "+353863863966",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": null,
       "LookupHR01teamId": 4,
       "ID": 593,
@@ -4504,12 +2589,7 @@
       "MetroRecException": null,
       "FirstName": "Carly",
       "CellPhone": "+189792500976",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 857,
       "LookupHR01teamId": 1,
       "ID": 594,
@@ -4545,12 +2625,7 @@
       "MetroRecException": null,
       "FirstName": "Alex",
       "CellPhone": "+189797842556",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 174,
       "LookupHR01teamId": 3,
       "ID": 595,
@@ -4586,12 +2661,7 @@
       "MetroRecException": null,
       "FirstName": "Alexandra",
       "CellPhone": "+189765739780",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1222,
       "LookupHR01teamId": 1,
       "ID": 601,
@@ -4627,12 +2697,7 @@
       "MetroRecException": null,
       "FirstName": "Annika",
       "CellPhone": "+189762187387",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 147,
       "LookupHR01teamId": 3,
       "ID": 602,
@@ -4668,12 +2733,7 @@
       "MetroRecException": null,
       "FirstName": "Alex",
       "CellPhone": "+189795922494",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [9]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [9] },
       "LookupCM102customersId": 525,
       "LookupHR01teamId": 7,
       "ID": 603,
@@ -4709,12 +2769,7 @@
       "MetroRecException": null,
       "FirstName": "Annika",
       "CellPhone": "+189762187387",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 455,
       "LookupHR01teamId": 6,
       "ID": 604,
@@ -4750,12 +2805,7 @@
       "MetroRecException": null,
       "FirstName": "Anders",
       "CellPhone": "+189791965942",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 79,
       "LookupHR01teamId": 2,
       "ID": 606,
@@ -4791,12 +2841,7 @@
       "MetroRecException": null,
       "FirstName": "Chris",
       "CellPhone": "+189795555459",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [7]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [7] },
       "LookupCM102customersId": 527,
       "LookupHR01teamId": 7,
       "ID": 607,
@@ -4832,12 +2877,7 @@
       "MetroRecException": null,
       "FirstName": "Alain",
       "CellPhone": "+189765635580",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 473,
       "LookupHR01teamId": 6,
       "ID": 608,
@@ -4873,12 +2913,7 @@
       "MetroRecException": null,
       "FirstName": "Consultation",
       "CellPhone": "+234567890",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 1269,
       "LookupHR01teamId": 2,
       "ID": 1381,
@@ -4914,12 +2949,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [8]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [8] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 6,
       "ID": 1380,
@@ -4955,12 +2985,7 @@
       "MetroRecException": null,
       "FirstName": "Consultation",
       "CellPhone": "+123456789",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 2,
       "ID": 1382,
@@ -4996,12 +3021,7 @@
       "MetroRecException": null,
       "FirstName": "Alexander",
       "CellPhone": "+1891743092883",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 173,
       "LookupHR01teamId": 3,
       "ID": 617,
@@ -5037,12 +3057,7 @@
       "MetroRecException": null,
       "FirstName": "Thinira",
       "CellPhone": "0763217378",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [4]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [4] },
       "LookupCM102customersId": null,
       "LookupHR01teamId": 3,
       "ID": 1383,
@@ -5078,12 +3093,7 @@
       "MetroRecException": null,
       "FirstName": "Aline",
       "CellPhone": "+189796720428",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 368,
       "LookupHR01teamId": 6,
       "ID": 618,
@@ -5119,12 +3129,7 @@
       "MetroRecException": null,
       "FirstName": "Anna",
       "CellPhone": "+189791052994",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 76,
       "LookupHR01teamId": 2,
       "ID": 619,
@@ -5160,12 +3165,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [3]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [3] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
       "ID": 1405,
@@ -5201,12 +3201,7 @@
       "MetroRecException": null,
       "FirstName": "Ilona",
       "CellPhone": "+1189793677442",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 4,
       "ID": 1390,
@@ -5242,12 +3237,7 @@
       "MetroRecException": null,
       "FirstName": "Thini dd",
       "CellPhone": "0123456789",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 1269,
       "LookupHR01teamId": 2,
       "ID": 1385,
@@ -5283,12 +3273,7 @@
       "MetroRecException": null,
       "FirstName": "Alexander",
       "CellPhone": "+189798892931",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 522,
       "LookupHR01teamId": 6,
       "ID": 596,
@@ -5324,12 +3309,7 @@
       "MetroRecException": null,
       "FirstName": "Ilona",
       "CellPhone": "+1189793677442",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 3,
       "ID": 1392,
@@ -5365,12 +3345,7 @@
       "MetroRecException": null,
       "FirstName": "Caroll",
       "CellPhone": null,
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 1142,
       "LookupHR01teamId": 3,
       "ID": 620,
@@ -5406,12 +3381,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [52, 55]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [52, 55] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": null,
       "ID": 1418,
@@ -5447,12 +3417,7 @@
       "MetroRecException": null,
       "FirstName": "Chantal",
       "CellPhone": "+189794712782",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 705,
       "LookupHR01teamId": 1,
       "ID": 612,
@@ -5488,12 +3453,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [3]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [3] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
       "ID": 1398,
@@ -5529,12 +3489,7 @@
       "MetroRecException": null,
       "FirstName": "CBP Support",
       "CellPhone": "+189762823877",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 60,
       "LookupHR01teamId": 2,
       "ID": 597,
@@ -5570,12 +3525,7 @@
       "MetroRecException": null,
       "FirstName": "Alin",
       "CellPhone": "+189765635580",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 667,
       "LookupHR01teamId": 4,
       "ID": 599,
@@ -5589,17 +3539,17 @@
         "type": "SP.Data.MetroHR03ListItem"
       },
       "Id": 598,
-      "Title": "A.Büschi-0598",
+      "Title": "A.B\u00fcschi-0598",
       "EventDate": "2021-01-11T16:00:00Z",
       "EndDate": "2021-01-11T17:30:00Z",
       "Duration": 5400,
-      "Description": " | Stylist- | Customer-Angelina-Büschi_+189798657749-angelina.Büschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
+      "Description": " | Stylist- | Customer-Angelina-B\u00fcschi_+189798657749-angelina.B\u00fcschi@schedulingtoday.local | Services-Highlights 1/1 S4 78.75 (-25%) | Services Total=78.75(-0%) | (Extra Fees =0.00) | ",
       "fAllDayEvent": null,
       "RecurrenceID": null,
-      "Email": "angelina.Büschi@schedulingtoday.local",
+      "Email": "angelina.B\u00fcschi@schedulingtoday.local",
       "AppointmentStatus": "(5) Paid",
       "AppointmentSource": null,
-      "LastNameAppt": "Büschi",
+      "LastNameAppt": "B\u00fcschi",
       "Gender": "(1) Female",
       "Notes": null,
       "ServiceCharge": 78.75,
@@ -5611,12 +3561,7 @@
       "MetroRecException": null,
       "FirstName": "Angelina",
       "CellPhone": "+189798657749",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 1231,
       "LookupHR01teamId": 5,
       "ID": 598,
@@ -5652,12 +3597,7 @@
       "MetroRecException": null,
       "FirstName": "Elizabete",
       "CellPhone": "+1189764214858",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 1268,
       "LookupHR01teamId": 1,
       "ID": 1389,
@@ -5693,12 +3633,7 @@
       "MetroRecException": null,
       "FirstName": "Catarina",
       "CellPhone": "+189795108847",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [14]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [14] },
       "LookupCM102customersId": 6,
       "LookupHR01teamId": 1,
       "ID": 624,
@@ -5734,12 +3669,7 @@
       "MetroRecException": null,
       "FirstName": "Oliver",
       "CellPhone": "+1189764251327",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 290,
       "LookupHR01teamId": 2,
       "ID": 1391,
@@ -5775,12 +3705,7 @@
       "MetroRecException": null,
       "FirstName": "Dani",
       "CellPhone": "0776579183",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 54,
       "LookupHR01teamId": 2,
       "ID": 1409,
@@ -5816,12 +3741,7 @@
       "MetroRecException": null,
       "FirstName": "Alexander",
       "CellPhone": "+1891743092883",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 981,
       "LookupHR01teamId": 3,
       "ID": 621,
@@ -5857,12 +3777,7 @@
       "MetroRecException": null,
       "FirstName": "Ilona",
       "CellPhone": "+1189793677442",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 2,
       "ID": 1411,
@@ -5898,12 +3813,7 @@
       "MetroRecException": null,
       "FirstName": "Jenna",
       "CellPhone": "+189793856728",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 1213,
       "LookupHR01teamId": 1,
       "ID": 1388,
@@ -5939,12 +3849,7 @@
       "MetroRecException": null,
       "FirstName": "Annina ",
       "CellPhone": "+189795752363",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 1167,
       "LookupHR01teamId": 1,
       "ID": 613,
@@ -5980,12 +3885,7 @@
       "MetroRecException": null,
       "FirstName": "Steve",
       "CellPhone": "+41798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2, 27, 28]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2, 27, 28] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 6,
       "ID": 622,
@@ -6021,12 +3921,7 @@
       "MetroRecException": null,
       "FirstName": "Steve",
       "CellPhone": "+41798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
       "ID": 623,
@@ -6062,12 +3957,7 @@
       "MetroRecException": null,
       "FirstName": "Ilona",
       "CellPhone": "+1189793677442",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 2,
       "ID": 1393,
@@ -6103,12 +3993,7 @@
       "MetroRecException": null,
       "FirstName": "Constantin",
       "CellPhone": "+189799424665",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 185,
       "LookupHR01teamId": 2,
       "ID": 1397,
@@ -6144,12 +4029,7 @@
       "MetroRecException": null,
       "FirstName": "Carolina",
       "CellPhone": "+189786636068",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [7]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [7] },
       "LookupCM102customersId": 172,
       "LookupHR01teamId": 3,
       "ID": 611,
@@ -6185,12 +4065,7 @@
       "MetroRecException": null,
       "FirstName": "Aliisa",
       "CellPhone": "+189788196561",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 236,
       "LookupHR01teamId": 3,
       "ID": 615,
@@ -6226,12 +4101,7 @@
       "MetroRecException": null,
       "FirstName": "Andrea",
       "CellPhone": "+189797169742",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 661,
       "LookupHR01teamId": 4,
       "ID": 605,
@@ -6267,12 +4137,7 @@
       "MetroRecException": null,
       "FirstName": "Alper",
       "CellPhone": "+189789263636",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 643,
       "LookupHR01teamId": 4,
       "ID": 610,
@@ -6308,12 +4173,7 @@
       "MetroRecException": null,
       "FirstName": "Alexandra",
       "CellPhone": "+189692975856",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 797,
       "LookupHR01teamId": 1,
       "ID": 616,
@@ -6349,12 +4209,7 @@
       "MetroRecException": null,
       "FirstName": "Andrea",
       "CellPhone": "+189797169742",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [2]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [2] },
       "LookupCM102customersId": 661,
       "LookupHR01teamId": 4,
       "ID": 614,
@@ -6390,12 +4245,7 @@
       "MetroRecException": null,
       "FirstName": "Amanda",
       "CellPhone": "+189764895853",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 296,
       "LookupHR01teamId": 6,
       "ID": 600,
@@ -6431,12 +4281,7 @@
       "MetroRecException": null,
       "FirstName": "Aliisa",
       "CellPhone": "+189788196561",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [13]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [13] },
       "LookupCM102customersId": 236,
       "LookupHR01teamId": 2,
       "ID": 609,
@@ -6472,12 +4317,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [3]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [3] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
       "ID": 1414,
@@ -6513,12 +4353,7 @@
       "MetroRecException": null,
       "FirstName": "Stephen",
       "CellPhone": "0798302214",
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [1]
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [1] },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
       "ID": 1417,
@@ -6554,12 +4389,7 @@
       "MetroRecException": null,
       "FirstName": null,
       "CellPhone": null,
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
+      "LookupMultiBP01offeringsId": { "__metadata": { "type": "Collection(Edm.Int32)" }, "results": [] },
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 3,
       "ID": 1413,

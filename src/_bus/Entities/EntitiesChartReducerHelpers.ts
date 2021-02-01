@@ -166,7 +166,8 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
       const currentAppointmentReservations =
         AppointmentStatus === StatusNames.Reserved && isFuture ? prevAppointmentReservations + 1 : prevAppointmentReservations;
       const currentAppointmentBookings = AppointmentStatus === StatusNames.Booked && isFuture ? prevAppointmentBookings + 1 : prevAppointmentBookings;
-      const currentAppointmentAttended = AppointmentStatus === StatusNames.Booked && !isFuture ? prevAppointmentAttended + 1 : prevAppointmentAttended;
+      const currentAppointmentAttended =
+        AppointmentStatus === StatusNames.Booked && !isFuture ? prevAppointmentAttended + 1 : prevAppointmentAttended;
       const currentPaymentCompleted = AppointmentStatus === StatusNames.Paid ? prevPaymentCompleted + 1 : prevPaymentCompleted;
 
       const currentHours = !isFuture ? prevHours + Duration / 60 / 60 : prevHours;

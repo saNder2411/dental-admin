@@ -50,12 +50,12 @@ export const selectAppointmentFunnel = () =>
       },
       {
         stat: 'Appointment Bookings',
-        data: appointmentBookings === 0 ? 0.43 : appointmentBookings,
+        data: appointmentBookings === 0 ? 0.4 : appointmentBookings,
         color: '#2185b4',
       },
       {
         stat: 'Appointment Attended',
-        data: appointmentAttended === 0 ? 0.42 : appointmentAttended,
+        data: appointmentAttended === 0 ? 0.34 : appointmentAttended,
         color: '#319fd2',
       },
       {
