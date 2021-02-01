@@ -29,8 +29,6 @@ interface BackendImmutableKey {
   WorkingDayStart07: string | null;
   WorkingDayEnd07: string | null;
   ID: number;
-
-  Gender?: null | '(2) Male' | '(1) Female';
 }
 
 interface FrontendKey {

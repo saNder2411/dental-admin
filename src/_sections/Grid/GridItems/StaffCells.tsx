@@ -10,13 +10,12 @@ import { GridCellProps } from './GridItemsTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Selectors
-import { selectProcessDataItemFieldValue, selectSkillLabelsByID } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectSkillLabelsByID } from '../../../_bus/Entities/EntitiesSelectors';
 // Helpers
 import { isString, isNumber } from './GridItemsHelpers';
 // Hooks
 import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 // Images
-import MalePhotoPlaceholder from '../../../_assets/customers/male_placeholder.jpg';
 import FemalePhotoPlaceholder from '../../../_assets/customers/female_placeholder.jpg';
 
 export const StaffTextCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
@@ -52,9 +51,8 @@ export const StaffMobilePhoneCell: FC<GridCellProps<StaffDataItem>> = ({ dataIte
 
 export const StaffAvatarCell: FC<GridCellProps<StaffDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
   const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<StaffDataItem, string>(ID, EntitiesKeys.Staff, field);
-  const Gender = useSelector(selectProcessDataItemFieldValue<StaffDataItem, string>(ID, EntitiesKeys.Staff, 'Gender'));
   const strValue = isString(cellValue) ? cellValue : '';
-  const placeholderImageUrl = Gender === '(2) Male' ? MalePhotoPlaceholder : FemalePhotoPlaceholder;
+  const placeholderImageUrl = FemalePhotoPlaceholder;
   const imageUrl =
     strValue.includes('png') || strValue.includes('jpg') || strValue.includes('jpeg') || strValue.includes('images') ? strValue : placeholderImageUrl;
 

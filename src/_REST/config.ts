@@ -21,6 +21,9 @@ export const GuidList = {
   HR02RoleTasksAndDuties: '0bffdb5a-e7da-404b-93a5-c7baa53cb16f',
   HR03TeamCalendarSettings: 'ea71d929-5163-4784-bfb3-597c38d53460',
   SiteUserInfoList: 'e6c0d93c-1202-46d7-8cd4-14b341ca66fb',
+  OrgProfile: '09346137-c704-40f4-ade8-713db2b030e5',
+  CalendarSettings: 'ea71d929-5163-4784-bfb3-597c38d53460',
+  Notifications: '408ebd3c-e6cb-4273-843b-62fb4a757307',
 };
 
 export const SelectFields = {

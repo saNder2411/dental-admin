@@ -18,7 +18,6 @@ export const transformDataItemForAPI = ({
   TeamProfilePhotoUrl,
   TeamProfilePhoto,
   FullName,
-  // Gender,
   inEdit,
   isNew,
   ...dataItem
