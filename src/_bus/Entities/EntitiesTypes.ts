@@ -110,10 +110,14 @@ export interface ChartState {
   totalSalesForEveryWeekInWeekRange: number[];
   serviceSalesForEveryWeekInWeekRange: number[];
   productSalesForEveryWeekInWeekRange: number[];
-  appointmentPerStaffCategories: string[];
-  appointmentPerStaffSeries: SeriesForChart<number[]>[];
+  staffCategories: string[];
+  appointmentPerStaffPerWeekSeries: number[];
+  percentsEmploymentPerWeekSeries: number[];
+  salesPerStaffPerWeekData: SeriesForChart<number>[];
   averageHourlyPerService: SeriesForChart<number>[];
   totalServiceSales: number;
+  serviceCategories: string[];
+  salesPerServicePerWeekSeries: number[];
 }
 
 export interface EntitiesState {

@@ -12,15 +12,17 @@ const getAppointmentAttended = ({ Entities }: RootState) => Entities.chartData.a
 
 const getPaymentCompleted = ({ Entities }: RootState) => Entities.chartData.paymentCompleted;
 
+const getAppointmentPerStaffPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.appointmentPerStaffPerWeekSeries;
+
+const getPercentsEmploymentPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.percentsEmploymentPerWeekSeries;
+
 export const selectTotalSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.totalSalesForEveryWeekInWeekRange;
 
 export const selectServiceSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.serviceSalesForEveryWeekInWeekRange;
 
 export const selectProductSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.productSalesForEveryWeekInWeekRange;
 
-export const selectCategoriesAppointmentPerStaff = ({ Entities }: RootState) => Entities.chartData.appointmentPerStaffCategories;
-
-export const selectSeriesAppointmentPerStaff = ({ Entities }: RootState) => Entities.chartData.appointmentPerStaffSeries;
+export const selectStaffCategories = ({ Entities }: RootState) => Entities.chartData.staffCategories;
 
 export const selectTotalAppointmentHours = ({ Entities }: RootState) => Entities.chartData.totalAppointmentHours;
 
@@ -33,6 +35,18 @@ export const selectTotalStaffWorkHoursInWeekRange = ({ Entities }: RootState) =>
 export const selectAverageHourlyPerService = ({ Entities }: RootState) => Entities.chartData.averageHourlyPerService;
 
 export const selectTotalServiceSales = ({ Entities }: RootState) => Entities.chartData.totalServiceSales;
+
+export const selectSalesPerStaffPerWeekData = ({ Entities }: RootState) => Entities.chartData.salesPerStaffPerWeekData;
+
+export const selectServiceCategories = ({ Entities }: RootState) => Entities.chartData.serviceCategories;
+
+export const selectSalesPerServicePerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerServicePerWeekSeries;
+
+export const selectSeriesAppointmentPerStaff = () =>
+  createSelector(getAppointmentPerStaffPerWeekSeries, getPercentsEmploymentPerWeekSeries, (amountsAppointmentSeries, percentsEmploymentSeries) => [
+    { name: 'Amount Appointment', data: amountsAppointmentSeries },
+    { name: 'Percent Employment', data: percentsEmploymentSeries },
+  ]);
 
 export const selectAppointmentFunnel = () =>
   createSelector(

@@ -25,11 +25,11 @@ export const Dashboard: FC = (): JSX.Element => {
   );
   const isDataLoading = useFetchData(hasAllData, initAsyncAC);
 
-  useEffect(() => {
-    if (hasAllData && totalAppointmentHours === 0) {
-      dispatch(calcChartDataAC());
-    }
-  }, [dispatch, hasAllData, isDataLoading, totalAppointmentHours]);
+  // useEffect(() => {
+  //   if (hasAllData && totalAppointmentHours === 0) {
+  //     dispatch(calcChartDataAC());
+  //   }
+  // }, [dispatch, hasAllData, isDataLoading, totalAppointmentHours]);
 
   const contentTSX = hasAllData && !isDataLoading && totalAppointmentHours > 0 && <Chart />;
 

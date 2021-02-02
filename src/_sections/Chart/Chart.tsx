@@ -4,11 +4,12 @@ import {
   ChartAppointmentSales,
   ChartAppointmentsPerStaff,
   ChartStaffEmployment,
-  ChartServiceSales,
+  ChartServiceProductSales,
   ChartAverageHourlyPerService,
   ChartAverageHourlyPerAllServices,
   ChartAverageCustomerOrders,
   ChartAppointmentFunnel,
+  ChartSalesPerStaffPerWeek,
 } from './ChartItems';
 
 export const Chart: FC = (): JSX.Element => (
@@ -16,7 +17,7 @@ export const Chart: FC = (): JSX.Element => (
     <section className="border shadow-sm mr-2 pt-2 rounded col">
       <ChartAppointmentSales />
       <ChartAppointmentsPerStaff />
-      <ChartServiceSales />
+      <ChartServiceProductSales />
     </section>
     <section className="col-5">
       <section className="row mb-2">
@@ -38,6 +39,9 @@ export const Chart: FC = (): JSX.Element => (
       <section className="row">
         <div className="col-6 px-1">
           <ChartAverageCustomerOrders className="h-100 border shadow-sm rounded py-2" />
+        </div>
+        <div className="col-6 px-1">
+          <ChartSalesPerStaffPerWeek className="h-100 border shadow-sm rounded pt-2" />
         </div>
       </section>
     </section>

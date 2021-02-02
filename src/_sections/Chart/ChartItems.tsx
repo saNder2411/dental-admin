@@ -22,7 +22,7 @@ import {
   selectTotalSalesForEveryWeekInWeekRange,
   selectServiceSalesForEveryWeekInWeekRange,
   selectProductSalesForEveryWeekInWeekRange,
-  selectCategoriesAppointmentPerStaff,
+  selectStaffCategories,
   selectSeriesAppointmentPerStaff,
   selectAverageHourlyPerService,
   selectAppointmentFunnel,
@@ -31,6 +31,9 @@ import {
   selectTotalServiceSales,
   selectTotalAppointmentSales,
   selectAmountActiveCustomers,
+  selectSalesPerStaffPerWeekData,
+  selectServiceCategories,
+  selectSalesPerServicePerWeekSeries,
 } from '../../_bus/Entities/EntitiesChartSelectors';
 
 interface ChartItemProps {
@@ -64,8 +67,8 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
 };
 
 export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const categories = useSelector(selectCategoriesAppointmentPerStaff);
-  const series = useSelector(selectSeriesAppointmentPerStaff);
+  const categories = useSelector(selectStaffCategories);
+  const series = useSelector(selectSeriesAppointmentPerStaff());
 
   return (
     <section className={className}>
@@ -86,19 +89,16 @@ export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JS
   );
 };
 
-export const ChartServiceSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const servicesSalesForEveryWeek = useSelector(selectServiceSalesForEveryWeekInWeekRange);
-  const productSalesForEveryWeek = useSelector(selectProductSalesForEveryWeekInWeekRange);
-  const series = [
-    { name: 'Product', data: productSalesForEveryWeek },
-    { name: 'Service', data: servicesSalesForEveryWeek },
-  ];
+export const ChartServiceProductSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const categories = useSelector(selectServiceCategories);
+  const salesPerServicePerWeekSeries = useSelector(selectSalesPerServicePerWeekSeries);
+  const series = [{ name: 'Service', data: salesPerServicePerWeekSeries }];
 
   return (
     <section className={className}>
-      <h3 className="text-left">Product / Service Sales</h3>
+      <h3 className="text-left">Service Sales</h3>
       <KendoChart>
-        <ChartTitle text="Last 12 weeks" align="left" />
+        <ChartTitle text="Average per week" align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
           {series.map(({ data, name }) => (
@@ -106,8 +106,28 @@ export const ChartServiceSales: FC<ChartItemProps> = ({ className }): JSX.Elemen
           ))}
         </ChartSeries>
         <ChartCategoryAxis>
-          <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />
+          <ChartCategoryAxisItem title={{ text: 'SERVICE Category' }} categories={categories} />
         </ChartCategoryAxis>
+      </KendoChart>
+    </section>
+  );
+};
+
+export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const data = useSelector(selectAppointmentFunnel());
+
+  return (
+    <section className={className}>
+      <h3 className="text-center">Appointment Funnel</h3>
+      <KendoChart style={{ margin: '0 auto', width: '90%' }}>
+        <ChartTitle text="Next 12 weeks" />
+        <ChartSeries>
+          <ChartSeriesItem type="funnel" data={data} categoryField="stat" field="data" colorField="color" dynamicSlope dynamicHeight={false}>
+            <ChartSeriesLabels color="white" background="none" format="N0" />
+          </ChartSeriesItem>
+        </ChartSeries>
+        <ChartTooltip render={TooltipRender as any} />
+        <ChartLegend visible={false} />
       </KendoChart>
     </section>
   );
@@ -118,7 +138,7 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
 
   return (
     <section className={className}>
-      <h3 className="text-center">Average Hourly $ Per Service</h3>
+      <h3 className="text-center">Average Hourly Rate Per Service</h3>
       <KendoChart seriesColors={SeriesColors}>
         <ChartTitle text="Last 12 weeks" />
         <ChartLegend position="top" orientation="vertical" />
@@ -140,21 +160,28 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
   );
 };
 
-export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const data = useSelector(selectAppointmentFunnel());
+export const ChartSalesPerStaffPerWeek: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const data = useSelector(selectSalesPerStaffPerWeekData);
 
   return (
     <section className={className}>
-      <h3 className="text-center">Appointment Funnel</h3>
-      <KendoChart style={{ margin: '0 auto', width: '90%' }}>
-        <ChartTitle text="Next 12 weeks" />
+      <h3 className="text-center">Average Sales Rate Per Staff</h3>
+      <KendoChart seriesColors={SeriesColors}>
+        <ChartTitle text="Last 12 weeks" />
+        <ChartLegend position="top" orientation="vertical" />
         <ChartSeries>
-          <ChartSeriesItem type="funnel" data={data} categoryField="stat" field="data" colorField="color" dynamicSlope dynamicHeight={false}>
-            <ChartSeriesLabels color="white" background="none" format="N0" />
-          </ChartSeriesItem>
+          <ChartSeriesItem
+            type="pie"
+            overlay={{
+              gradient: 'sharpBevel',
+            }}
+            tooltip={{ visible: true }}
+            data={data}
+            colorField="color"
+            categoryField="name"
+            field="data"
+          />
         </ChartSeries>
-        <ChartTooltip render={TooltipRender as any} />
-        <ChartLegend visible={false} />
       </KendoChart>
     </section>
   );
@@ -181,7 +208,7 @@ export const ChartAverageHourlyPerAllServices: FC<ChartItemProps> = ({ className
 
   return (
     <section className={className}>
-      <h3 className="mb-2">Average Hourly $ Per All Services</h3>
+      <h3 className="mb-2">Average Hourly Rate - All Services</h3>
       <div className="text-muted mb-3 pt-1">Last 12 weeks</div>
       <LinearGauge pointer={{ value, color: '#28b4c8', size: 40 }} scale={{ max: value + 20 }} style={{ height: 320 }} />
     </section>
