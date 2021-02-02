@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -27,9 +27,8 @@ import { selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelecto
 export const Services: FC = (): JSX.Element => {
   const { servicesData, isDataLoading } = useSelectServicesData();
   const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
-  const dispatch = useDispatch();
   const localizationService = useLocalization();
-  useFetchServicesData(servicesData.length, skillsDataLength, isDataLoading, dispatch);
+  useFetchServicesData(servicesData.length, skillsDataLength, isDataLoading);
 
   const hasData = servicesData.length > 0 && skillsDataLength > 0;
   const contentTSX = hasData && !isDataLoading && (

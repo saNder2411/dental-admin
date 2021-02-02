@@ -8,7 +8,7 @@ export const useFetchAgendaData = (
   servicesDataLength: number,
   staffDataLength: number,
   customersDataLength: number,
-  isDataLoading: boolean
+  isDataLoading: boolean,
 ) => {
   const dispatch = useDispatch();
   useEffect(() => {

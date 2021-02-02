@@ -16,7 +16,7 @@ export const fetchAppointmentsDataInitAsyncAC = (meta: {
   meta,
 });
 
-export const fetchCustomersDataInitAsyncAC = (meta: { staffDataLength: number; appointmentsDataLength: number }) => ({
+export const fetchCustomersDataInitAsyncAC = (meta: { customersDataLength: number; staffDataLength: number; appointmentsDataLength: number }) => ({
   type: ActionTypes.FETCH_CUSTOMERS_DATA_INIT_ASYNC,
   meta,
 });

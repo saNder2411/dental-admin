@@ -37,7 +37,9 @@ export const Calendar: FC = () => {
 
   const onAddNewItemClick = () => dispatch(addNewItemToEditFormAC(initDataForNewDataItem, appointmentsAllIDs));
 
-  const contentTSX = !isDataLoading && (
+  const hasAllData = appointmentsData.length > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
+
+  const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid position-relative">
       <LoaderDataItem isLoading={isAgendaDataItemLoading} />
       <h3 className="card-title">{localizationService.toLanguageString('custom.teamCalendar', 'Team Calendar')}</h3>

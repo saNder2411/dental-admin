@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import { Grid, GridColumn, ColumnMenu } from '../_sections';
@@ -27,12 +27,12 @@ export const Customers: FC = (): JSX.Element => {
   const { customersData, isDataLoading } = useSelectCustomersData();
   const staffDataLength = useSelector(selectOriginalStaffDataLength);
   const appointmentsDataLength = useSelector(selectOriginalAppointmentsDataLength);
-  const dispatch = useDispatch();
   const localizationService = useLocalization();
+  useFetchCustomersData(customersData.length, staffDataLength, appointmentsDataLength, isDataLoading);
 
-  useFetchCustomersData(customersData.length, staffDataLength, appointmentsDataLength, dispatch);
+  const hasAllData = customersData.length > 0 && staffDataLength > 0 && appointmentsDataLength > 0;
 
-  const contentTSX = !isDataLoading && (
+  const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={customersData} entityName={EntitiesKeys.Customers} labelNewItemBtn="New Customer">

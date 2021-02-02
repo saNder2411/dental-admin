@@ -20,20 +20,24 @@ import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from 
 import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
 import { transformAPIData as transformAppointmentsAPIData } from '../_Appointments/AppointmentsHelpers';
 
-type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null, QueryAppointmentDataItem[] | null];
+type Results = [QueryCustomerDataItem[] | null, QueryStaffDataItem[] | null, QueryAppointmentDataItem[] | null];
 
-export function* workerFetchData({ meta: { staffDataLength, appointmentsDataLength } }: FetchCustomersDataInitAsyncActionType): SagaIterator {
+export function* workerFetchData({
+  meta: { customersDataLength, staffDataLength, appointmentsDataLength },
+}: FetchCustomersDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC(EntitiesKeys.Customers));
 
     const [customersResult, staffResult, appointmentsResult]: Results = yield all([
-      apply(API, API.customers.getData, []),
+      customersDataLength === 0 ? apply(API, API.customers.getData, []) : call(() => null),
       staffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
       appointmentsDataLength === 0 ? apply(API, API.appointments.getData, []) : call(() => null),
     ]);
 
-    const data = transformAPIData(customersResult);
-    yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Customers));
+    if (customersResult) {
+      const data = transformAPIData(customersResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Customers));
+    }
 
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);

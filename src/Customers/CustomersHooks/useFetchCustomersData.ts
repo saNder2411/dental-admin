@@ -1,10 +1,18 @@
 import { useEffect } from 'react';
-import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 // Action Creators
 import { fetchCustomersDataInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 
-export const useFetchCustomersData = (customersDataLength: number, staffDataLength: number, appointmentsDataLength: number, dispatch: Dispatch) =>
+export const useFetchCustomersData = (
+  customersDataLength: number,
+  staffDataLength: number,
+  appointmentsDataLength: number,
+  isDataLoading: boolean
+) => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (customersDataLength > 0) return;
-    dispatch(fetchCustomersDataInitAsyncAC({ staffDataLength, appointmentsDataLength }));
-  }, [dispatch, customersDataLength, staffDataLength, appointmentsDataLength]);
+    const hasAllData = customersDataLength > 0 && staffDataLength > 0 && appointmentsDataLength > 0;
+    if (hasAllData || isDataLoading) return;
+    dispatch(fetchCustomersDataInitAsyncAC({ customersDataLength, staffDataLength, appointmentsDataLength }));
+  }, [dispatch, customersDataLength, staffDataLength, appointmentsDataLength, isDataLoading]);
+};

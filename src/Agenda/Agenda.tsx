@@ -30,7 +30,9 @@ export const Agenda: FC = (): JSX.Element => {
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, isDataLoading);
 
-  const contentTSX = !isDataLoading && (
+  const hasAllData = appointmentsData.length > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
+
+  const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={appointmentsData} entityName={EntitiesKeys.Appointments} labelNewItemBtn="New Appointment">

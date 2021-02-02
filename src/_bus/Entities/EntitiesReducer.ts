@@ -50,12 +50,6 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
         ...state,
         [action.entityName]: updateStateSliceOnFetchDataSuccess(state[action.entityName], action.data),
       };
-
-    case ActionTypes.FETCH_DATA_FAILURE:
-      return {
-        ...state,
-        [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-      };
     // Sync Data Item
     case ActionTypes.CREATE_DATA_ITEM_SUCCESS:
       return {
