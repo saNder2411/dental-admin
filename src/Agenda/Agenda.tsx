@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
 import {
@@ -29,8 +28,7 @@ export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
-  const dispatch = useDispatch();
-  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
+  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, isDataLoading);
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">

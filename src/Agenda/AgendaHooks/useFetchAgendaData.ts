@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Dispatch } from 'redux';
+import { useDispatch } from 'react-redux';
 // Action Creators
 import { fetchAppointmentsDataInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 
@@ -8,9 +8,12 @@ export const useFetchAgendaData = (
   servicesDataLength: number,
   staffDataLength: number,
   customersDataLength: number,
-  dispatch: Dispatch
-) =>
+  isDataLoading: boolean
+) => {
+  const dispatch = useDispatch();
   useEffect(() => {
-    if (appointmentsDataLength > 0) return;
-    dispatch(fetchAppointmentsDataInitAsyncAC({ servicesDataLength, staffDataLength, customersDataLength }));
-  }, [dispatch, appointmentsDataLength, servicesDataLength, customersDataLength, staffDataLength]);
+    const hasAllData = appointmentsDataLength > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
+    if (hasAllData || isDataLoading) return;
+    dispatch(fetchAppointmentsDataInitAsyncAC({ appointmentsDataLength, servicesDataLength, staffDataLength, customersDataLength }));
+  }, [dispatch, appointmentsDataLength, servicesDataLength, customersDataLength, staffDataLength, isDataLoading]);
+};

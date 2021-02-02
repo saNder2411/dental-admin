@@ -15,7 +15,7 @@ export type MutationDataItem<T, U = T> = (dataItem: T) => Promise<U>;
 export type DeleteDataItem = (deletedItemID: number) => Promise<number>;
 
 interface API {
-  agenda: {
+  appointments: {
     getData: QueryAllData<QueryAppointmentDataItem[]>;
     createDataItem: MutationDataItem<MutationAppointmentDataItem, QueryAppointmentDataItem>;
     updateDataItem: MutationDataItem<MutationAppointmentDataItem, QueryAppointmentDataItem>;
@@ -98,8 +98,8 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
-  agenda: {
+export const API_: API = {
+  appointments: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
 
@@ -158,8 +158,8 @@ export const API: API = {
   },
 };
 
-export const API_: API = {
-  agenda: {
+export const API: API = {
+  appointments: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 
     createDataItem: (createdDataItem: MutationAppointmentDataItem) =>

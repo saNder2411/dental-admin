@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 // Components
 import { Chart } from '../_sections/Chart';
 import { Loader } from '../_components';
@@ -12,8 +12,7 @@ export const Dashboard: FC = (): JSX.Element => {
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const appointmentTotalHours = useSelector(selectTotalAppointmentHours);
-  const dispatch = useDispatch();
-  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
+  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, isDataLoading);
   // const renders = useRef(0);
 
   const contentTSX = appointmentTotalHours > 0 && !isDataLoading && <Chart />;

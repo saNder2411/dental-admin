@@ -23,7 +23,7 @@ export const Calendar: FC = () => {
   const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
-  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, dispatch);
+  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, isDataLoading);
 
   const { staffData, mapTeamToFiltered } = useStaffDataForScheduler();
 

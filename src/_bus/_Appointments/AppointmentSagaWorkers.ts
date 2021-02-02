@@ -23,23 +23,25 @@ import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHe
 import { transformAPIData as transformCustomersAPIData } from '../_Customers/CustomersHelpers';
 import { transformAPIData as transformServicesAPIData } from '../_Services/ServicesHelpers';
 
-type Results = [QueryAppointmentDataItem[], QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
+type Results = [QueryAppointmentDataItem[] | null, QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
 
 export function* workerFetchData({
-  meta: { servicesDataLength, staffDataLength, customersDataLength },
+  meta: { appointmentsDataLength, servicesDataLength, staffDataLength, customersDataLength },
 }: FetchAppointmentsDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC(EntitiesKeys.Appointments));
 
-    const [agendaResult, staffResult, customersResult, servicesResult]: Results = yield all([
-      apply(API, API.agenda.getData, []),
+    const [appointmentsResult, staffResult, customersResult, servicesResult]: Results = yield all([
+      appointmentsDataLength === 0 ? apply(API, API.appointments.getData, []) : call(() => null),
       staffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
       customersDataLength === 0 ? apply(API, API.customers.getData, []) : call(() => null),
       servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
     ]);
 
-    const data = transformAPIData(agendaResult);
-    yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Appointments));
+    if (appointmentsResult) {
+      const data = transformAPIData(appointmentsResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Appointments));
+    }
 
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);
@@ -69,7 +71,7 @@ export function* workerCreateDataItem({
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: QueryAppointmentDataItem = yield apply(API, API.agenda.createDataItem, [transformDataItemForAPI(createdDataItem)]);
+    const result: QueryAppointmentDataItem = yield apply(API, API.appointments.createDataItem, [transformDataItemForAPI(createdDataItem)]);
     const dataItem = transformAPIDataItem(result);
     onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
     yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Appointments, createdDataItem.ID));
@@ -88,7 +90,7 @@ export function* workerUpdateDataItem({
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: QueryAppointmentDataItem = yield apply(API, API.agenda.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
+    const result: QueryAppointmentDataItem = yield apply(API, API.appointments.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
     const dataItem = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesKeys.Appointments));
   } catch (error) {
@@ -106,7 +108,7 @@ export function* workerDeleteDataItem({
   try {
     yield put(actions.deleteDataItemRequestAC());
 
-    yield apply(API, API.agenda.deleteDataItem, [deletedDataItemID]);
+    yield apply(API, API.appointments.deleteDataItem, [deletedDataItemID]);
     sideEffectAfterDeletedDataItem();
     yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesKeys.Appointments));
   } catch (error) {
@@ -127,8 +129,8 @@ export function* workerUpdateRecurringDataItem({
     yield put(actions.updateDataItemRequestAC());
 
     const [updateResult, createResult]: UpdateAppointmentRecurringDataItemResults = yield all([
-      apply(API, API.agenda.updateDataItem, [transformDataItemForAPI(updatedDataItem)]),
-      apply(API, API.agenda.createDataItem, [transformDataItemForAPI(createDataItem)]),
+      apply(API, API.appointments.updateDataItem, [transformDataItemForAPI(updatedDataItem)]),
+      apply(API, API.appointments.createDataItem, [transformDataItemForAPI(createDataItem)]),
     ]);
 
     const updatedDataItemData = transformAPIDataItem(updateResult);

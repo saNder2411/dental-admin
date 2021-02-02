@@ -19,17 +19,18 @@ import { Loader } from '../_components';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Selectors
-import { selectOriginalStaffDataLength } from '../_bus/Entities/EntitiesSelectors';
+import { selectOriginalStaffDataLength, selectOriginalAppointmentsDataLength } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useSelectCustomersData, useFetchCustomersData } from './CustomersHooks';
 
 export const Customers: FC = (): JSX.Element => {
   const { customersData, isDataLoading } = useSelectCustomersData();
   const staffDataLength = useSelector(selectOriginalStaffDataLength);
+  const appointmentsDataLength = useSelector(selectOriginalAppointmentsDataLength);
   const dispatch = useDispatch();
   const localizationService = useLocalization();
 
-  useFetchCustomersData(customersData.length, staffDataLength, dispatch);
+  useFetchCustomersData(customersData.length, staffDataLength, appointmentsDataLength, dispatch);
 
   const contentTSX = !isDataLoading && (
     <div className="card-container grid">
@@ -40,7 +41,7 @@ export const Customers: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.ID', 'ID')}
             columnMenu={ColumnMenu}
             editable={false}
-            width={120}
+            width={80}
             filter={'numeric'}
           />
           <GridColumn

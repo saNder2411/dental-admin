@@ -6,12 +6,17 @@ import { StaffDataItem } from '../_Staff/StaffTypes';
 import { ServiceDataItem } from '../_Services/ServicesTypes';
 
 // Async Fetch Data
-export const fetchAppointmentsDataInitAsyncAC = (meta: { servicesDataLength: number; staffDataLength: number; customersDataLength: number }) => ({
+export const fetchAppointmentsDataInitAsyncAC = (meta: {
+  appointmentsDataLength: number;
+  servicesDataLength: number;
+  staffDataLength: number;
+  customersDataLength: number;
+}) => ({
   type: ActionTypes.FETCH_APPOINTMENTS_DATA_INIT_ASYNC,
   meta,
 });
 
-export const fetchCustomersDataInitAsyncAC = (meta: { staffDataLength: number }) => ({
+export const fetchCustomersDataInitAsyncAC = (meta: { staffDataLength: number; appointmentsDataLength: number }) => ({
   type: ActionTypes.FETCH_CUSTOMERS_DATA_INIT_ASYNC,
   meta,
 });

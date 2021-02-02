@@ -14,19 +14,22 @@ import {
 } from '../Entities/EntitiesTypes';
 import { QueryCustomerDataItem } from './CustomersTypes';
 import { QueryStaffDataItem } from '../_Staff/StaffTypes';
+import { QueryAppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './CustomersHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
+import { transformAPIData as transformAppointmentsAPIData } from '../_Appointments/AppointmentsHelpers';
 
-type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null];
+type Results = [QueryCustomerDataItem[], QueryStaffDataItem[] | null, QueryAppointmentDataItem[] | null];
 
-export function* workerFetchData({ meta: { staffDataLength } }: FetchCustomersDataInitAsyncActionType): SagaIterator {
+export function* workerFetchData({ meta: { staffDataLength, appointmentsDataLength } }: FetchCustomersDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC(EntitiesKeys.Customers));
 
-    const [customersResult, staffResult]: Results = yield all([
+    const [customersResult, staffResult, appointmentsResult]: Results = yield all([
       apply(API, API.customers.getData, []),
       staffDataLength === 0 ? apply(API, API.staff.getData, []) : call(() => null),
+      appointmentsDataLength === 0 ? apply(API, API.appointments.getData, []) : call(() => null),
     ]);
 
     const data = transformAPIData(customersResult);
@@ -35,6 +38,11 @@ export function* workerFetchData({ meta: { staffDataLength } }: FetchCustomersDa
     if (staffResult) {
       const data = transformTeamStaffAPIData(staffResult);
       yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Staff));
+    }
+
+    if (appointmentsResult) {
+      const data = transformAppointmentsAPIData(appointmentsResult);
+      yield put(actions.fetchDataSuccessAC(data, EntitiesKeys.Appointments));
     }
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Customers fetch data Error: ${error.message}`, EntitiesKeys.Customers));

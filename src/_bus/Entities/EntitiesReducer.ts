@@ -45,12 +45,6 @@ const initialState = {
 export const reducer = (state: EntitiesState = initialState, action: Actions): EntitiesState => {
   switch (action.type) {
     // Sync Data
-    case ActionTypes.FETCH_DATA_REQUEST:
-      return {
-        ...state,
-        [action.entityName]: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-      };
-
     case ActionTypes.FETCH_DATA_SUCCESS:
       return {
         ...state,

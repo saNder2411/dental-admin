@@ -22,11 +22,7 @@ type Results = [QueryServiceDataItem[] | null, QuerySkillDataItem[] | null];
 
 export function* workerFetchData({ meta: { servicesDataLength, skillsDataLength } }: FetchServicesDataInitAsyncActionType): SagaIterator {
   try {
-    if (servicesDataLength === 0) {
-      yield put(actions.fetchDataRequestAC(EntitiesKeys.Staff));
-    } else {
-      yield put(actions.fetchDataRequestAC(EntitiesKeys.Skills));
-    }
+    yield put(actions.fetchDataRequestAC(EntitiesKeys.Services));
 
     const [servicesResult, skillsResult]: Results = yield all([
       servicesDataLength === 0 ? apply(API, API.services.getData, []) : call(() => null),
