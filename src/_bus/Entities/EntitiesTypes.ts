@@ -57,6 +57,8 @@ export const ActionTypes = {
   CHANGE_ITEM: 'ENTITIES/CHANGE_ITEM' as const,
   ADD_NEW_ITEM_TO_EDIT: 'ENTITIES/ADD_NEW_ITEM_TO_EDIT' as const,
   DISCARD_ADD_NEW_ITEM_TO_DATA: 'ENTITIES/DISCARD_ADD_NEW_ITEM_TO_DATA' as const,
+  // Chart
+  CALC_CHART_DATA: 'ENTITIES/CALC_CHART_DATA' as const,
 };
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;

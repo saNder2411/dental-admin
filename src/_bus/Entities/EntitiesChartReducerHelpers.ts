@@ -1,6 +1,6 @@
 // Types
 import { ChartState } from './EntitiesTypes';
-import { EntitiesKeys, EntitiesState } from './EntitiesTypes';
+import { EntitiesState } from './EntitiesTypes';
 import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
@@ -124,9 +124,7 @@ const getAverageHourlyPerServiceData = (sliceAppointments: AppointmentDataItem[]
     return [...acc, { name, data }];
   }, []);
 
-export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState, entityName: EntitiesKeys): ChartState => {
-  if (entityName !== EntitiesKeys.Appointments) return state.chartData;
-
+export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState): ChartState => {
   const appointmentsInLastWeekRange = state.appointments.originalData.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
 
   const {

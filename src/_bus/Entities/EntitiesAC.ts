@@ -202,3 +202,6 @@ export const discardAddNewItemToDataAC = (dataItemID: number, entityName: Entiti
   dataItemID,
   entityName,
 });
+
+// Chart
+export const calcChartDataAC = () => ({ type: ActionTypes.CALC_CHART_DATA });

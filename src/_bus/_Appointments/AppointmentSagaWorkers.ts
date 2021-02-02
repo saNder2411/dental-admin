@@ -60,6 +60,7 @@ export function* workerFetchData({
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`, EntitiesKeys.Appointments));
   } finally {
+    yield put(actions.calcChartDataAC());
     yield put(actions.fetchDataFinallyAC(EntitiesKeys.Appointments));
   }
 }

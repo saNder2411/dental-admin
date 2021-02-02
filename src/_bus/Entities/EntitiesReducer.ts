@@ -102,10 +102,10 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
         [action.entityName]: updateStateSliceOnDeleteDataItem<GenericDataItem>(state[action.entityName], action.dataItemID),
       };
     // Chart
-    case ActionTypes.FETCH_DATA_FINALLY:
+    case ActionTypes.CALC_CHART_DATA:
       return {
         ...state,
-        chartData: updateChartDataOnFinallyAppointmentsRequest(state, action.entityName),
+        chartData: updateChartDataOnFinallyAppointmentsRequest(state),
       };
 
     default:
