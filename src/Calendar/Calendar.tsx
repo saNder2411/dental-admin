@@ -11,19 +11,29 @@ import * as SC from './CalendarStyled/CalendarStyled';
 import { selectSelectedDate, selectSelectedView } from '../_bus/Scheduler/SchedulerSelectors';
 import { selectAppointmentsAllIds } from '../_bus/Entities/EntitiesSelectors';
 // Action Creators
+import { fetchAppointmentsDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 import { changeMapTeamToFilteredAC, addNewItemToEditFormAC } from '../_bus/Scheduler/SchedulerAC';
+// Selectors
+import { selectOriginalAppointmentsData } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
-import { useSelectAppointmentsData, useSelectBindDataLengthForAgenda, useFetchAgendaData } from '../Agenda/AgendaHooks';
+import { useSelectBindDataLengthForAgenda } from '../Agenda/AgendaHooks';
 import { useStaffDataForScheduler } from './CalendarHooks';
+import { useFetchData } from '../_bus/Hooks/useFetchData';
 // Helpers
 import { customModelFields, getInitDataForNewDataItem } from '../_sections/Scheduler/SchedulerHelpers';
 
 export const Calendar: FC = () => {
   const localizationService = useLocalization();
-  const { appointmentsData, isDataLoading } = useSelectAppointmentsData();
-  const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const dispatch = useDispatch();
-  useFetchAgendaData(appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength, isDataLoading);
+  const appointmentsData = useSelector(selectOriginalAppointmentsData);
+  const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
+  const hasAllData = appointmentsData.length > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
+  const initAsyncAC = useCallback(
+    () =>
+      fetchAppointmentsDataInitAsyncAC({ appointmentsDataLength: appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength }),
+    [appointmentsData.length, customersDataLength, servicesDataLength, staffDataLength]
+  );
+  const isDataLoading = useFetchData(hasAllData, initAsyncAC);
 
   const { staffData, mapTeamToFiltered } = useStaffDataForScheduler();
 
@@ -36,8 +46,6 @@ export const Calendar: FC = () => {
   const onEmployeeClick = useCallback((employeeID: number) => () => dispatch(changeMapTeamToFilteredAC(employeeID)), [dispatch]);
 
   const onAddNewItemClick = () => dispatch(addNewItemToEditFormAC(initDataForNewDataItem, appointmentsAllIDs));
-
-  const hasAllData = appointmentsData.length > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
 
   const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid position-relative">

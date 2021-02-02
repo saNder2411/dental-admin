@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -18,19 +18,24 @@ import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
+// Action Creators
+import { fetchCustomersDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalStaffDataLength, selectOriginalAppointmentsDataLength } from '../_bus/Entities/EntitiesSelectors';
+import { selectOriginalCustomersData, selectOriginalStaffDataLength, selectOriginalAppointmentsDataLength } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
-import { useSelectCustomersData, useFetchCustomersData } from './CustomersHooks';
+import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Customers: FC = (): JSX.Element => {
-  const { customersData, isDataLoading } = useSelectCustomersData();
+  const localizationService = useLocalization();
+  const customersData = useSelector(selectOriginalCustomersData);
   const staffDataLength = useSelector(selectOriginalStaffDataLength);
   const appointmentsDataLength = useSelector(selectOriginalAppointmentsDataLength);
-  const localizationService = useLocalization();
-  useFetchCustomersData(customersData.length, staffDataLength, appointmentsDataLength, isDataLoading);
-
   const hasAllData = customersData.length > 0 && staffDataLength > 0 && appointmentsDataLength > 0;
+  const initAsyncAC = useCallback(
+    () => fetchCustomersDataInitAsyncAC({ customersDataLength: customersData.length, staffDataLength, appointmentsDataLength }),
+    [appointmentsDataLength, customersData.length, staffDataLength]
+  );
+  const isDataLoading = useFetchData(hasAllData, initAsyncAC);
 
   const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid">

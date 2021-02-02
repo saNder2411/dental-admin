@@ -63,6 +63,16 @@ export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : neve
 
 export type Actions = ReturnType<InferValueTypes<typeof actions>>;
 
+export type InitAsyncACReturnType = ReturnType<
+  InferValueTypes<{
+    type1: typeof actions.fetchAppointmentsDataInitAsyncAC;
+    type2: typeof actions.fetchCustomersDataInitAsyncAC;
+    type3: typeof actions.fetchStaffDataInitAsyncAC;
+    type4: typeof actions.fetchServicesDataInitAsyncAC;
+    type5: typeof actions.fetchSkillsDataInitAsyncAC;
+  }>
+>;
+
 export type GenericDataItem = InferValueTypes<{
   type1: AppointmentDataItem;
   type2: StaffDataItem;

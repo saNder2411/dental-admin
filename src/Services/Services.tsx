@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -19,19 +19,25 @@ import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
-// Hooks
-import { useSelectServicesData, useFetchServicesData } from './ServicesHooks';
+// Action Creators
+import { fetchServicesDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
+import { selectOriginalServicesData, selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
+// Hooks
+import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Services: FC = (): JSX.Element => {
-  const { servicesData, isDataLoading } = useSelectServicesData();
-  const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
   const localizationService = useLocalization();
-  useFetchServicesData(servicesData.length, skillsDataLength, isDataLoading);
+  const servicesData = useSelector(selectOriginalServicesData);
+  const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
+  const hasAllData = servicesData.length > 0 && skillsDataLength > 0;
+  const initAsyncAC = useCallback(() => fetchServicesDataInitAsyncAC({ servicesDataLength: servicesData.length, skillsDataLength }), [
+    servicesData.length,
+    skillsDataLength,
+  ]);
+  const isDataLoading = useFetchData(hasAllData, initAsyncAC);
 
-  const hasData = servicesData.length > 0 && skillsDataLength > 0;
-  const contentTSX = hasData && !isDataLoading && (
+  const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={servicesData} entityName={EntitiesKeys.Services} labelNewItemBtn="New Service">

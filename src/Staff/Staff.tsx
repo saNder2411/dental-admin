@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
@@ -17,19 +17,25 @@ import { Loader } from '../_components';
 // Types
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
-// Hooks
-import { useSelectStaffData, useFetchStaffData } from './StaffHooks';
+// Action Creators
+import { fetchStaffDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
+import { selectOriginalStaffData, selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
+// Hooks
+import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Staff: FC = (): JSX.Element => {
-  const { staffData, isDataLoading } = useSelectStaffData();
-  const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
   const localizationService = useLocalization();
-  useFetchStaffData(staffData.length, skillsDataLength, isDataLoading);
+  const staffData = useSelector(selectOriginalStaffData);
+  const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
+  const hasAllData = staffData.length > 0 && skillsDataLength > 0;
+  const initAsyncAC = useCallback(() => fetchStaffDataInitAsyncAC({ staffDataLength: staffData.length, skillsDataLength }), [
+    staffData.length,
+    skillsDataLength,
+  ]);
+  const isDataLoading = useFetchData(hasAllData, initAsyncAC);
 
-  const hasData = staffData.length > 0 && skillsDataLength > 0;
-  const contentTSX = hasData && !isDataLoading && (
+  const contentTSX = hasAllData && !isDataLoading && (
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={staffData} entityName={EntitiesKeys.Staff} labelNewItemBtn="New Staff">
