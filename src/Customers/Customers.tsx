@@ -19,9 +19,14 @@ import { Loader } from '../_components';
 import { CustomGridCell } from '../_sections/Grid/GridItems/GridItemsTypes';
 import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Action Creators
-import { fetchCustomersDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
+import { fetchAppointmentsDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalCustomersData, selectOriginalStaffDataLength, selectOriginalAppointmentsDataLength } from '../_bus/Entities/EntitiesSelectors';
+import {
+  selectOriginalCustomersData,
+  selectOriginalStaffDataLength,
+  selectOriginalAppointmentsDataLength,
+  selectOriginalServicesDataLength,
+} from '../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useFetchData } from '../_bus/Hooks/useFetchData';
 
@@ -30,10 +35,12 @@ export const Customers: FC = (): JSX.Element => {
   const customersData = useSelector(selectOriginalCustomersData);
   const staffDataLength = useSelector(selectOriginalStaffDataLength);
   const appointmentsDataLength = useSelector(selectOriginalAppointmentsDataLength);
+  const servicesDataLength = useSelector(selectOriginalServicesDataLength);
   const hasAllData = customersData.length > 0 && staffDataLength > 0 && appointmentsDataLength > 0;
   const initAsyncAC = useCallback(
-    () => fetchCustomersDataInitAsyncAC({ customersDataLength: customersData.length, staffDataLength, appointmentsDataLength }),
-    [appointmentsDataLength, customersData.length, staffDataLength]
+    () =>
+      fetchAppointmentsDataInitAsyncAC({ appointmentsDataLength, servicesDataLength, staffDataLength, customersDataLength: customersData.length }),
+    [appointmentsDataLength, customersData.length, servicesDataLength, staffDataLength]
   );
   const isDataLoading = useFetchData(hasAllData, initAsyncAC);
 
