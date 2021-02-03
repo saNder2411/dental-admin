@@ -332,3 +332,12 @@ a:hover {
     }
   }
 }
+
+.k-notification {
+  font-size: 18px;
+  padding: 10px 16px;
+
+  .k-notification-wrap {
+    align-items: center;
+  }
+}

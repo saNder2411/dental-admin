@@ -35,6 +35,7 @@ import itDateFields from 'cldr-dates-full/main/it/dateFields.json';
 import { enMessages, deMessages, frMessages, esMessages, itMessages } from '../_messages';
 // Components
 import { AppDrawerRouterContainer } from '.';
+import { ErrorIndictor } from '../_components';
 // Pages
 import { Agenda } from '../Agenda';
 import { Calendar } from '../Calendar';
@@ -116,6 +117,7 @@ export const App: FC = (): JSX.Element => {
               </Switch>
             </AppDrawerRouterContainer>
           </Router>
+          <ErrorIndictor />
         </IntlProvider>
       </LocalizationProvider>
     </div>
