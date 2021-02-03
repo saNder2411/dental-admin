@@ -11,8 +11,7 @@ export const useFetchData = (hasAllData: boolean, initAsyncAC: () => InitAsyncAC
   const errorMessage = useSelector(selectDataErrorMessage);
 
   useEffect(() => {
-    if (hasAllData || isDataLoading) return;
-    if (errorMessage) return;
+    if (hasAllData || isDataLoading || errorMessage) return;
     dispatch(initAsyncAC());
   }, [dispatch, errorMessage, hasAllData, initAsyncAC, isDataLoading]);
 

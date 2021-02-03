@@ -1,7 +1,13 @@
 // Types
-import { AppointmentDataItem, StatusNames } from './../_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
+import { CustomerDataItem } from '../_Customers/CustomersTypes';
+import { ServiceDataItem } from '../_Services/ServicesTypes';
+import { SkillDataItem } from '../_Skills/SkillsTypes';
+import { StaffDataItem } from '../_Staff/StaffTypes';
 import { GenericDataItem, EntitiesKeys, EntitiesStateSlice } from './EntitiesTypes';
 import { OfferIcons, ContentTypes } from '../_Services/ServicesTypes';
+// Constants
+import { DEFAULT_WORK_WEEK_HOURS } from '../Constants';
 
 export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
 
@@ -140,7 +146,10 @@ export const updateStateSliceOnAddNewItemToEditInGrid = <T extends GenericDataIt
   return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
 };
 
-export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys) => {
+export const getNewDataItem = (
+  allIDs: number[],
+  entityName: EntitiesKeys
+): AppointmentDataItem | CustomerDataItem | ServiceDataItem | StaffDataItem | SkillDataItem => {
   const ID = generateId(allIDs);
 
   switch (entityName) {
@@ -239,26 +248,11 @@ export const getNewDataItem = (allIDs: number[], entityName: EntitiesKeys) => {
         Email: '',
         CellPhone: '',
         JobTitle: '',
-        Department: null,
         CalendarColHex: generateColor(),
-        WorkingDayStart01: null,
-        WorkingDayEnd01: null,
-        WorkingDayStart02: null,
-        WorkingDayEnd02: null,
-        WorkingDayStart03: null,
-        WorkingDayEnd03: null,
-        WorkingDayStart04: null,
-        WorkingDayEnd04: null,
-        WorkingDayStart05: null,
-        WorkingDayEnd05: null,
-        WorkingDayStart06: null,
-        WorkingDayEnd06: null,
-        WorkingDayStart07: null,
-        WorkingDayEnd07: null,
+        StaffWeekHours: DEFAULT_WORK_WEEK_HOURS,
         LookupMultiHR02SkillsId: { results: [] },
         ID,
 
-        Gender: '(1) Female' as const,
         TeamProfilePhotoUrl: '',
         inEdit: true,
         isNew: true,

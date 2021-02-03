@@ -12,22 +12,8 @@ interface BackendImmutableKey {
   Email: string | null;
   CellPhone: string | null;
   JobTitle: string;
-  Department: null | string;
   CalendarColHex: string;
-  WorkingDayStart01: string | null;
-  WorkingDayEnd01: string | null;
-  WorkingDayStart02: string | null;
-  WorkingDayEnd02: string | null;
-  WorkingDayStart03: string | null;
-  WorkingDayEnd03: string | null;
-  WorkingDayStart04: string | null;
-  WorkingDayEnd04: string | null;
-  WorkingDayStart05: string | null;
-  WorkingDayEnd05: string | null;
-  WorkingDayStart06: string | null;
-  WorkingDayEnd06: string | null;
-  WorkingDayStart07: string | null;
-  WorkingDayEnd07: string | null;
+  StaffWeekHours: number | null;
   ID: number;
 }
 

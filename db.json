@@ -8,398 +8,302 @@
   },
   "staff": [
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(1)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(1)",
-        "etag": "\"20\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Id": 1,
-      "Title": "Stylist--",
-      "FirstName": "--Team",
-      "FullName": "--Team Stylist--",
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(1)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(1)",
+            "etag": "\"20\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png"
-      },
-      "ShowOnline": true,
-      "Email": "any.stylist@metroapps.online",
-      "CellPhone": "+89 7955 99888",
-      "JobTitle": "Various",
-      "Department": null,
-      "WorkingDayStart02": "08:30",
-      "WorkingDayEnd02": "16:30",
-      "WorkingDayStart03": "08:30",
-      "WorkingDayEnd03": "16:30",
-      "WorkingDayStart04": "08:30",
-      "WorkingDayEnd04": "17:30",
-      "WorkingDayStart05": "09:00",
-      "WorkingDayEnd05": "14:00",
-      "WorkingDayStart06": "09:00",
-      "WorkingDayEnd06": "15:00",
-      "WorkingDayStart07": "07:00",
-      "WorkingDayEnd07": "07:00",
-      "CalendarColHex": "#b55717",
-      "LookupMultiHR02SkillsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
+        "Id": 1,
+        "Title": "Stylist--",
+        "FirstName": "--Team",
+        "FullName": "--Team Stylist--",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Any-Stylist-Portrait-85x85.png"
         },
-        "results": [
-          16,
-          14,
-          2,
-          21,
-          15,
-          17
-        ]
-      },
-      "WorkingDayStart01": "09:00",
-      "WorkingDayEnd01": "12:00",
-      "ID": 1
+        "ShowOnline": true,
+        "Email": "any.stylist@metroapps.online",
+        "CellPhone": "+89 7955 99888",
+        "JobTitle": "Various",
+        "CalendarColHex": "#b55717",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": [
+                16,
+                14,
+                2,
+                21,
+                15,
+                17
+            ]
+        },
+        "StaffWeekHours": null,
+        "ID": 1
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(2)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(2)",
-        "etag": "\"12\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Id": 2,
-      "Title": "Giroud",
-      "FirstName": "Amelia",
-      "FullName": "Amelia Giroud",
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(2)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(2)",
+            "etag": "\"14\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png"
-      },
-      "ShowOnline": true,
-      "Email": "amelia.giroud@metroapps.online",
-      "CellPhone": "+89 7955 99888",
-      "JobTitle": "Art Director",
-      "Department": null,
-      "WorkingDayStart02": "08:00",
-      "WorkingDayEnd02": "12:00",
-      "WorkingDayStart03": "08:00",
-      "WorkingDayEnd03": "12:00",
-      "WorkingDayStart04": "08:00",
-      "WorkingDayEnd04": "12:00",
-      "WorkingDayStart05": "08:00",
-      "WorkingDayEnd05": "19:00",
-      "WorkingDayStart06": "09:00",
-      "WorkingDayEnd06": "15:30",
-      "WorkingDayStart07": "06:00",
-      "WorkingDayEnd07": "06:00",
-      "CalendarColHex": "#457d30",
-      "LookupMultiHR02SkillsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
+        "Id": 2,
+        "Title": "Giroud",
+        "FirstName": "Amelia",
+        "FullName": "Amelia Giroud",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Amelia-Giroud-Portrait-85x85.png"
         },
-        "results": [
-          18,
-          20,
-          19,
-          15,
-          21,
-          14,
-          2,
-          16,
-          17
-        ]
-      },
-      "WorkingDayStart01": "08:00",
-      "WorkingDayEnd01": "08:00",
-      "ID": 2
+        "ShowOnline": true,
+        "Email": "amelia.giroud@metroapps.online",
+        "CellPhone": "+89 7955 99888",
+        "JobTitle": "Art Director",
+        "CalendarColHex": "#457d30",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": [
+                18,
+                20,
+                19,
+                15,
+                21,
+                14,
+                2,
+                16,
+                17
+            ]
+        },
+        "StaffWeekHours": 55,
+        "ID": 2
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(3)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(3)",
-        "etag": "\"6\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Id": 3,
-      "Title": "Robinson",
-      "FirstName": "Grace",
-      "FullName": "Grace Robinson",
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(3)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(3)",
+            "etag": "\"10\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/Grace-Robinson-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Grace-Robinson-Portrait-85x85.png"
-      },
-      "ShowOnline": true,
-      "Email": "grace.robinson@metroapps.online",
-      "CellPhone": "+89 7955 99444",
-      "JobTitle": "Junior Stylist",
-      "Department": null,
-      "WorkingDayStart02": "09:00",
-      "WorkingDayEnd02": "13:00",
-      "WorkingDayStart03": "09:00",
-      "WorkingDayEnd03": "13:00",
-      "WorkingDayStart04": "12:00",
-      "WorkingDayEnd04": "19:00",
-      "WorkingDayStart05": "08:00",
-      "WorkingDayEnd05": "08:00",
-      "WorkingDayStart06": "08:30",
-      "WorkingDayEnd06": "15:30",
-      "WorkingDayStart07": "08:00",
-      "WorkingDayEnd07": "08:00",
-      "CalendarColHex": "#39a9e0",
-      "LookupMultiHR02SkillsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
+        "Id": 3,
+        "Title": "Robinson",
+        "FirstName": "Grace",
+        "FullName": "Grace Robinson",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/Grace-Robinson-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Grace-Robinson-Portrait-85x85.png"
         },
-        "results": [
-          17,
-          16,
-          2,
-          14,
-          21,
-          15
-        ]
-      },
-      "WorkingDayStart01": "09:00",
-      "WorkingDayEnd01": "12:00",
-      "ID": 3
+        "ShowOnline": true,
+        "Email": "grace.robinson@metroapps.online",
+        "CellPhone": "+89 7955 99444",
+        "JobTitle": "Junior Stylist",
+        "CalendarColHex": "#39a9e0",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": [
+                17,
+                16,
+                2,
+                14,
+                21,
+                15
+            ]
+        },
+        "StaffWeekHours": 30,
+        "ID": 3
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(4)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(4)",
-        "etag": "\"8\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Id": 4,
-      "Title": "Romanov",
-      "FirstName": "Christina",
-      "FullName": "Christina Romanov",
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(4)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(4)",
+            "etag": "\"10\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png"
-      },
-      "ShowOnline": true,
-      "Email": "christine.romanov@metroapps.online",
-      "CellPhone": "+89 7955 99666",
-      "JobTitle": "Senior Stylist",
-      "Department": null,
-      "WorkingDayStart02": "09:00",
-      "WorkingDayEnd02": "15:00",
-      "WorkingDayStart03": "09:00",
-      "WorkingDayEnd03": "15:00",
-      "WorkingDayStart04": "10:00",
-      "WorkingDayEnd04": "19:00",
-      "WorkingDayStart05": "09:00",
-      "WorkingDayEnd05": "17:00",
-      "WorkingDayStart06": "08:00",
-      "WorkingDayEnd06": "14:00",
-      "WorkingDayStart07": "08:00",
-      "WorkingDayEnd07": "08:00",
-      "CalendarColHex": "#9fa91e",
-      "LookupMultiHR02SkillsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
+        "Id": 4,
+        "Title": "Romanov",
+        "FirstName": "Christina",
+        "FullName": "Christina Romanov",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Christina-Romanov-Portrait-85x85.png"
         },
-        "results": [
-          18,
-          20,
-          19,
-          10,
-          16,
-          2,
-          21,
-          14,
-          15
-        ]
-      },
-      "WorkingDayStart01": "08:00",
-      "WorkingDayEnd01": "08:00",
-      "ID": 4
+        "ShowOnline": true,
+        "Email": "christine.romanov@metroapps.online",
+        "CellPhone": "+89 7955 99666",
+        "JobTitle": "Senior Stylist",
+        "CalendarColHex": "#9fa91e",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": [
+                18,
+                20,
+                19,
+                10,
+                16,
+                2,
+                21,
+                14,
+                15
+            ]
+        },
+        "StaffWeekHours": 40,
+        "ID": 4
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(5)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(5)",
-        "etag": "\"8\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Id": 5,
-      "Title": "Wenger",
-      "FirstName": "David",
-      "FullName": "David Wenger",
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(5)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(5)",
+            "etag": "\"10\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png"
-      },
-      "ShowOnline": false,
-      "Email": "david.wenger@metroapps.online",
-      "CellPhone": "+89 7955 99555",
-      "JobTitle": "Senior Stylist",
-      "Department": null,
-      "WorkingDayStart02": "08:00",
-      "WorkingDayEnd02": "17:00",
-      "WorkingDayStart03": "08:00",
-      "WorkingDayEnd03": "17:00",
-      "WorkingDayStart04": "08:00",
-      "WorkingDayEnd04": "17:00",
-      "WorkingDayStart05": "09:00",
-      "WorkingDayEnd05": "18:00",
-      "WorkingDayStart06": "08:00",
-      "WorkingDayEnd06": "12:00",
-      "WorkingDayStart07": "08:00",
-      "WorkingDayEnd07": "08:00",
-      "CalendarColHex": "#ef7e26",
-      "LookupMultiHR02SkillsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
+        "Id": 5,
+        "Title": "Wenger",
+        "FirstName": "David",
+        "FullName": "David Wenger",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/David-Wenger-Portrait-85x85.png"
         },
-        "results": [
-          1,
-          4,
-          18,
-          20,
-          19,
-          13,
-          8,
-          11,
-          10,
-          5,
-          3,
-          7,
-          6,
-          12,
-          17,
-          16,
-          2,
-          14,
-          21,
-          15
-        ]
-      },
-      "WorkingDayStart01": "09:00",
-      "WorkingDayEnd01": "12:00",
-      "ID": 5
+        "ShowOnline": false,
+        "Email": "david.wenger@metroapps.online",
+        "CellPhone": "+89 7955 99555",
+        "JobTitle": "Senior Stylist",
+        "CalendarColHex": "#ef7e26",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": [
+                1,
+                4,
+                18,
+                20,
+                19,
+                13,
+                8,
+                11,
+                10,
+                5,
+                3,
+                7,
+                6,
+                12,
+                17,
+                16,
+                2,
+                14,
+                21,
+                15
+            ]
+        },
+        "StaffWeekHours": 40,
+        "ID": 5
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(6)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(6)",
-        "etag": "\"6\"",
-        "type": "SP.Data.MetroHR01ListItem"
-      },
-      "Id": 6,
-      "Title": "Locatelli",
-      "FirstName": "Alex",
-      "FullName": "Alex Locatelli",
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(6)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(6)",
+            "etag": "\"8\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png"
-      },
-      "ShowOnline": true,
-      "Email": "alex.locatelli@metroapps.online",
-      "CellPhone": "+89 7955 99777",
-      "JobTitle": "Stylist Director",
-      "Department": null,
-      "WorkingDayStart02": "09:00",
-      "WorkingDayEnd02": "18:00",
-      "WorkingDayStart03": "09:00",
-      "WorkingDayEnd03": "18:00",
-      "WorkingDayStart04": "13:00",
-      "WorkingDayEnd04": "20:00",
-      "WorkingDayStart05": "09:00",
-      "WorkingDayEnd05": "18:00",
-      "WorkingDayStart06": "08:00",
-      "WorkingDayEnd06": "12:00",
-      "WorkingDayStart07": "08:00",
-      "WorkingDayEnd07": "08:00",
-      "CalendarColHex": "#b2c7d9",
-      "LookupMultiHR02SkillsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
+        "Id": 6,
+        "Title": "Locatelli",
+        "FirstName": "Alex",
+        "FullName": "Alex Locatelli",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Alex-Locatelli-Portrait-85x85.png"
         },
-        "results": [
-          4,
-          18,
-          20,
-          19,
-          11,
-          3,
-          10,
-          6,
-          7,
-          17,
-          16,
-          2,
-          14,
-          21,
-          15,
-          9
-        ]
-      },
-      "WorkingDayStart01": "08:00",
-      "WorkingDayEnd01": "08:00",
-      "ID": 6
+        "ShowOnline": true,
+        "Email": "alex.locatelli@metroapps.online",
+        "CellPhone": "+89 7955 99777",
+        "JobTitle": "Stylist Director",
+        "CalendarColHex": "#b2c7d9",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": [
+                4,
+                18,
+                20,
+                19,
+                11,
+                3,
+                10,
+                6,
+                7,
+                17,
+                16,
+                2,
+                14,
+                21,
+                15,
+                9
+            ]
+        },
+        "StaffWeekHours": 40,
+        "ID": 6
     },
     {
-      "Id": 7,
-      "Title": "Khan",
-      "FirstName": "Sara",
-      "ShowOnline": true,
-      "Email": "sara.khan@metroapps.online",
-      "CellPhone": "+89 7955 99333",
-      "JobTitle": "Senior Stylist",
-      "Department": null,
-      "WorkingDayStart02": null,
-      "WorkingDayEnd02": null,
-      "WorkingDayStart03": null,
-      "WorkingDayEnd03": null,
-      "WorkingDayStart04": null,
-      "WorkingDayEnd04": null,
-      "WorkingDayStart05": null,
-      "WorkingDayEnd05": null,
-      "WorkingDayStart06": null,
-      "WorkingDayEnd06": null,
-      "WorkingDayStart07": null,
-      "WorkingDayEnd07": null,
-      "CalendarColHex": "#a51a22",
-      "WorkingDayStart01": null,
-      "WorkingDayEnd01": null,
-      "ID": 7,
-      "LookupMultiHR02SkillsId": {
-        "results": [
-          18,
-          20,
-          14
-        ]
-      },
-      "TeamProfilePhoto": {
         "__metadata": {
-          "type": "SP.FieldUrlValue"
+            "id": "Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(7)",
+            "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'7d03d3f4-87da-4c2c-b288-3177bd0d5f44')/Items(7)",
+            "etag": "\"8\"",
+            "type": "SP.Data.MetroHR01ListItem"
         },
-        "Description": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png",
-        "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png"
-      },
-      "FullName": "Sara Khan",
-      "__metadata": {
-        "type": "SP.Data.MetroHR01ListItem"
-      }
+        "Id": 7,
+        "Title": "Khan",
+        "FirstName": "Sara",
+        "FullName": "Sara Khan",
+        "TeamProfilePhoto": {
+            "__metadata": {
+                "type": "SP.FieldUrlValue"
+            },
+            "Description": "/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png",
+            "Url": "https://sa-toniguy01.metroapps.online/_layouts/15/images/Metro_HR_01/Sara-Khan-Portrait-85x85.png"
+        },
+        "ShowOnline": true,
+        "Email": "sara.khan@metroapps.online",
+        "CellPhone": "+89 7955 99333",
+        "JobTitle": "Senior Stylist",
+        "CalendarColHex": "#a51a22",
+        "LookupMultiHR02SkillsId": {
+            "__metadata": {
+                "type": "Collection(Edm.Int32)"
+            },
+            "results": []
+        },
+        "StaffWeekHours": 25,
+        "ID": 7
     }
-  ],
+],
   "skills": [
     {
       "__metadata": {
@@ -689,10 +593,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          7,
-          9
-        ]
+        "results": [7, 9]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 2,
@@ -733,9 +634,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 319,
       "LookupHR01teamId": 6,
@@ -776,9 +675,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          9
-        ]
+        "results": [9]
       },
       "LookupCM102customersId": 1137,
       "LookupHR01teamId": 3,
@@ -860,9 +757,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          9
-        ]
+        "results": [9]
       },
       "LookupCM102customersId": 525,
       "LookupHR01teamId": 7,
@@ -903,9 +798,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 79,
       "LookupHR01teamId": 4,
@@ -946,9 +839,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 591,
       "LookupHR01teamId": 4,
@@ -989,9 +880,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1150,
       "LookupHR01teamId": 2,
@@ -1032,9 +921,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 875,
       "LookupHR01teamId": 1,
@@ -1075,9 +962,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1050,
       "LookupHR01teamId": 1,
@@ -1118,9 +1003,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 47,
       "LookupHR01teamId": 2,
@@ -1161,9 +1044,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          7
-        ]
+        "results": [7]
       },
       "LookupCM102customersId": 508,
       "LookupHR01teamId": 7,
@@ -1204,9 +1085,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          7
-        ]
+        "results": [7]
       },
       "LookupCM102customersId": 1133,
       "LookupHR01teamId": 1,
@@ -1247,9 +1126,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 254,
       "LookupHR01teamId": 3,
@@ -1290,9 +1167,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 363,
       "LookupHR01teamId": 6,
@@ -1333,9 +1208,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 208,
       "LookupHR01teamId": 3,
@@ -1376,9 +1249,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 981,
       "LookupHR01teamId": 1,
@@ -1419,9 +1290,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 667,
       "LookupHR01teamId": 4,
@@ -1462,9 +1331,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 316,
       "LookupHR01teamId": 6,
@@ -1505,9 +1372,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 50,
       "LookupHR01teamId": 2,
@@ -1548,9 +1413,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          27
-        ]
+        "results": [27]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
@@ -1591,9 +1454,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 1217,
       "LookupHR01teamId": 1,
@@ -1634,9 +1495,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 172,
       "LookupHR01teamId": 3,
@@ -1677,9 +1536,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 7,
       "LookupHR01teamId": 2,
@@ -1720,9 +1577,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 308,
       "LookupHR01teamId": 6,
@@ -1763,11 +1618,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2,
-          27,
-          22
-        ]
+        "results": [2, 27, 22]
       },
       "LookupCM102customersId": 29,
       "LookupHR01teamId": 4,
@@ -1808,9 +1659,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 573,
       "LookupHR01teamId": 4,
@@ -1851,9 +1700,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 118,
       "LookupHR01teamId": 2,
@@ -1935,9 +1782,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 651,
       "LookupHR01teamId": 4,
@@ -1978,9 +1823,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 899,
       "LookupHR01teamId": 1,
@@ -2021,9 +1864,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 620,
       "LookupHR01teamId": 4,
@@ -2064,9 +1905,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 16,
       "LookupHR01teamId": 2,
@@ -2107,9 +1946,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 174,
       "LookupHR01teamId": 3,
@@ -2150,9 +1987,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 1057,
       "LookupHR01teamId": 1,
@@ -2193,9 +2028,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1239,
       "LookupHR01teamId": 1,
@@ -2236,9 +2069,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1042,
       "LookupHR01teamId": 1,
@@ -2279,9 +2110,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 656,
       "LookupHR01teamId": 4,
@@ -2322,9 +2151,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 281,
       "LookupHR01teamId": 6,
@@ -2365,9 +2192,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 497,
       "LookupHR01teamId": 6,
@@ -2408,9 +2233,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 229,
       "LookupHR01teamId": 3,
@@ -2451,9 +2274,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 776,
       "LookupHR01teamId": 1,
@@ -2494,9 +2315,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 147,
       "LookupHR01teamId": 3,
@@ -2537,9 +2356,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 229,
       "LookupHR01teamId": 3,
@@ -2580,9 +2397,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 30,
       "LookupHR01teamId": 2,
@@ -2623,9 +2438,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          9
-        ]
+        "results": [9]
       },
       "LookupCM102customersId": 517,
       "LookupHR01teamId": 7,
@@ -2666,9 +2479,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1231,
       "LookupHR01teamId": 1,
@@ -2709,9 +2520,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 643,
       "LookupHR01teamId": 4,
@@ -2752,9 +2561,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1244,
       "LookupHR01teamId": 1,
@@ -2795,9 +2602,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
@@ -2838,9 +2643,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
@@ -2881,9 +2684,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          9
-        ]
+        "results": [9]
       },
       "LookupCM102customersId": 519,
       "LookupHR01teamId": 7,
@@ -2924,9 +2725,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 903,
       "LookupHR01teamId": 1,
@@ -2967,9 +2766,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": null,
       "LookupHR01teamId": 4,
@@ -3010,9 +2807,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": null,
       "LookupHR01teamId": 4,
@@ -3053,9 +2848,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 857,
       "LookupHR01teamId": 1,
@@ -3096,9 +2889,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 174,
       "LookupHR01teamId": 3,
@@ -3139,9 +2930,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1222,
       "LookupHR01teamId": 1,
@@ -3182,9 +2971,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 147,
       "LookupHR01teamId": 3,
@@ -3225,9 +3012,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          9
-        ]
+        "results": [9]
       },
       "LookupCM102customersId": 525,
       "LookupHR01teamId": 7,
@@ -3268,9 +3053,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 455,
       "LookupHR01teamId": 6,
@@ -3311,9 +3094,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 79,
       "LookupHR01teamId": 2,
@@ -3354,9 +3135,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          7
-        ]
+        "results": [7]
       },
       "LookupCM102customersId": 527,
       "LookupHR01teamId": 7,
@@ -3397,9 +3176,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 473,
       "LookupHR01teamId": 6,
@@ -3440,9 +3217,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 1269,
       "LookupHR01teamId": 2,
@@ -3483,9 +3258,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          8
-        ]
+        "results": [8]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 6,
@@ -3526,9 +3299,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 1270,
       "LookupHR01teamId": 2,
@@ -3569,9 +3340,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 173,
       "LookupHR01teamId": 3,
@@ -3612,9 +3381,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          4
-        ]
+        "results": [4]
       },
       "LookupCM102customersId": null,
       "LookupHR01teamId": 3,
@@ -3655,9 +3422,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 368,
       "LookupHR01teamId": 6,
@@ -3698,9 +3463,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 76,
       "LookupHR01teamId": 2,
@@ -3741,9 +3504,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          3
-        ]
+        "results": [3]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
@@ -3784,9 +3545,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 4,
@@ -3827,9 +3586,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 1269,
       "LookupHR01teamId": 2,
@@ -3911,9 +3668,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 3,
@@ -3954,9 +3709,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 1142,
       "LookupHR01teamId": 3,
@@ -3997,10 +3750,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          52,
-          55
-        ]
+        "results": [52, 55]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": null,
@@ -4041,9 +3791,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 705,
       "LookupHR01teamId": 1,
@@ -4084,9 +3832,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          3
-        ]
+        "results": [3]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
@@ -4127,9 +3873,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 60,
       "LookupHR01teamId": 2,
@@ -4211,9 +3955,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 1231,
       "LookupHR01teamId": 5,
@@ -4295,9 +4037,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "LookupCM102customersId": 6,
       "LookupHR01teamId": 1,
@@ -4338,9 +4078,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 290,
       "LookupHR01teamId": 2,
@@ -4381,9 +4119,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 54,
       "LookupHR01teamId": 2,
@@ -4424,9 +4160,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 981,
       "LookupHR01teamId": 3,
@@ -4549,9 +4283,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 1167,
       "LookupHR01teamId": 1,
@@ -4592,11 +4324,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2,
-          27,
-          28
-        ]
+        "results": [2, 27, 28]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 6,
@@ -4637,9 +4365,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 4,
@@ -4680,9 +4406,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 77,
       "LookupHR01teamId": 2,
@@ -4723,9 +4447,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "LookupCM102customersId": 185,
       "LookupHR01teamId": 2,
@@ -4766,9 +4488,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          7
-        ]
+        "results": [7]
       },
       "LookupCM102customersId": 172,
       "LookupHR01teamId": 3,
@@ -4809,9 +4529,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 236,
       "LookupHR01teamId": 3,
@@ -4852,9 +4570,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 661,
       "LookupHR01teamId": 4,
@@ -4895,9 +4611,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 643,
       "LookupHR01teamId": 4,
@@ -4938,9 +4652,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 797,
       "LookupHR01teamId": 1,
@@ -4981,9 +4693,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          2
-        ]
+        "results": [2]
       },
       "LookupCM102customersId": 661,
       "LookupHR01teamId": 4,
@@ -5024,9 +4734,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 296,
       "LookupHR01teamId": 6,
@@ -5067,9 +4775,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          13
-        ]
+        "results": [13]
       },
       "LookupCM102customersId": 236,
       "LookupHR01teamId": 2,
@@ -5110,9 +4816,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          3
-        ]
+        "results": [3]
       },
       "LookupCM102customersId": 1,
       "LookupHR01teamId": 3,
@@ -5148,9 +4852,7 @@
       "Modified": "2021-01-15T14:22:11Z",
       "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
+        "results": [1]
       },
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
@@ -5220,14 +4922,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 1
     },
@@ -5252,14 +4947,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 2
     },
@@ -5284,14 +4972,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 3
     },
@@ -5316,14 +4997,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 4
     },
@@ -5348,14 +5022,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 5
     },
@@ -5380,14 +5047,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 6
     },
@@ -5412,14 +5072,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 7
     },
@@ -5444,14 +5097,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 8
     },
@@ -5476,14 +5122,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 9
     },
@@ -5508,14 +5147,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 10
     },
@@ -5540,14 +5172,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14,
-          21,
-          16,
-          2,
-          15,
-          17
-        ]
+        "results": [14, 21, 16, 2, 15, 17]
       },
       "ID": 11
     },
@@ -5572,10 +5197,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 12
     },
@@ -5600,10 +5222,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 13
     },
@@ -5628,10 +5247,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 14
     },
@@ -5656,10 +5272,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 15
     },
@@ -5684,10 +5297,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 16
     },
@@ -5712,10 +5322,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 17
     },
@@ -5740,10 +5347,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 18
     },
@@ -5768,10 +5372,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 19
     },
@@ -5796,10 +5397,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20,
-          19
-        ]
+        "results": [20, 19]
       },
       "ID": 20
     },
@@ -5824,9 +5422,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          17
-        ]
+        "results": [17]
       },
       "ID": 21
     },
@@ -5851,9 +5447,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          17
-        ]
+        "results": [17]
       },
       "ID": 22
     },
@@ -5878,9 +5472,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20
-        ]
+        "results": [20]
       },
       "ID": 23
     },
@@ -5905,9 +5497,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20
-        ]
+        "results": [20]
       },
       "ID": 24
     },
@@ -5932,9 +5522,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20
-        ]
+        "results": [20]
       },
       "ID": 25
     },
@@ -5959,9 +5547,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20
-        ]
+        "results": [20]
       },
       "ID": 26
     },
@@ -5986,11 +5572,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          18,
-          20,
-          19
-        ]
+        "results": [18, 20, 19]
       },
       "ID": 27
     },
@@ -6015,9 +5597,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          15
-        ]
+        "results": [15]
       },
       "ID": 28
     },
@@ -6042,9 +5622,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "ID": 29
     },
@@ -6069,9 +5647,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          14
-        ]
+        "results": [14]
       },
       "ID": 30
     },
@@ -6764,9 +6340,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1391
-        ]
+        "results": [1391]
       },
       "ID": 290,
       "Modified": "2020-12-29T11:02:16Z",
@@ -6803,12 +6377,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1390,
-          1392,
-          1393,
-          1411
-        ]
+        "results": [1390, 1392, 1393, 1411]
       },
       "ID": 77,
       "Modified": "2021-01-14T17:13:08Z",
@@ -6913,9 +6482,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1389
-        ]
+        "results": [1389]
       },
       "ID": 1268,
       "Modified": "2020-12-28T16:30:42Z",
@@ -7051,9 +6618,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1388
-        ]
+        "results": [1388]
       },
       "ID": 1213,
       "Modified": "2020-12-28T16:25:39Z",
@@ -7239,9 +6804,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1361
-        ]
+        "results": [1361]
       },
       "ID": 164,
       "Modified": "2020-08-27T15:02:53Z",
@@ -7272,12 +6835,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          94,
-          100,
-          101,
-          103
-        ]
+        "results": [94, 100, 101, 103]
       },
       "ID": 987,
       "Modified": "2020-02-12T14:52:09Z",
@@ -7618,10 +7176,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          316,
-          752
-        ]
+        "results": [316, 752]
       },
       "ID": 346,
       "Modified": "2020-02-12T15:06:36Z",
@@ -7714,9 +7269,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1397
-        ]
+        "results": [1397]
       },
       "ID": 185,
       "Modified": "2020-12-30T12:10:05Z",
@@ -8088,12 +7641,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          692,
-          701,
-          694,
-          697
-        ]
+        "results": [692, 701, 694, 697]
       },
       "ID": 1260,
       "Modified": "2020-02-12T15:06:25Z",
@@ -8155,12 +7703,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          96,
-          420,
-          406,
-          424
-        ]
+        "results": [96, 420, 406, 424]
       },
       "ID": 1125,
       "Modified": "2020-02-12T14:52:10Z",
@@ -8501,9 +8044,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          770
-        ]
+        "results": [770]
       },
       "ID": 47,
       "Modified": "2020-02-12T15:06:40Z",
@@ -9712,15 +9253,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          299,
-          290,
-          300,
-          293,
-          288,
-          297,
-          292
-        ]
+        "results": [299, 290, 300, 293, 288, 297, 292]
       },
       "ID": 661,
       "Modified": "2019-09-16T05:33:47Z",
@@ -10278,10 +9811,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          534,
-          1140
-        ]
+        "results": [534, 1140]
       },
       "ID": 328,
       "Modified": "2020-02-12T15:10:49Z",
@@ -10405,12 +9935,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          201,
-          190,
-          198,
-          195
-        ]
+        "results": [201, 190, 198, 195]
       },
       "ID": 7,
       "Modified": "2019-09-16T05:33:03Z",
@@ -10782,9 +10307,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          559
-        ]
+        "results": [559]
       },
       "ID": 319,
       "Modified": "2020-02-12T14:52:36Z",
@@ -11311,11 +10834,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          379,
-          368,
-          982
-        ]
+        "results": [379, 368, 982]
       },
       "ID": 622,
       "Modified": "2020-02-12T15:10:22Z",
@@ -11377,9 +10896,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          75
-        ]
+        "results": [75]
       },
       "ID": 37,
       "Modified": "2019-09-16T05:32:09Z",
@@ -11472,13 +10989,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          114,
-          438,
-          444,
-          442,
-          709
-        ]
+        "results": [114, 438, 444, 442, 709]
       },
       "ID": 150,
       "Modified": "2020-02-12T15:06:29Z",
@@ -12656,14 +12167,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          305,
-          304,
-          397,
-          400,
-          403,
-          404
-        ]
+        "results": [305, 304, 397, 400, 403, 404]
       },
       "ID": 236,
       "Modified": "2020-02-12T14:52:07Z",
@@ -12973,14 +12477,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          153,
-          161,
-          159,
-          163,
-          162,
-          158
-        ]
+        "results": [153, 161, 159, 163, 162, 158]
       },
       "ID": 545,
       "Modified": "2019-09-16T05:32:51Z",
@@ -13290,12 +12787,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          85,
-          90,
-          147,
-          149
-        ]
+        "results": [85, 90, 147, 149]
       },
       "ID": 50,
       "Modified": "2019-09-16T05:32:46Z",
@@ -14163,13 +13655,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          28,
-          798,
-          1027,
-          1025,
-          1036
-        ]
+        "results": [28, 798, 1027, 1025, 1036]
       },
       "ID": 63,
       "Modified": "2020-02-12T15:10:31Z",
@@ -14293,12 +13779,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          91,
-          152,
-          358,
-          361
-        ]
+        "results": [91, 152, 358, 361]
       },
       "ID": 104,
       "Modified": "2020-02-12T14:52:27Z",
@@ -14484,13 +13965,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          510,
-          521,
-          524,
-          522,
-          505
-        ]
+        "results": [510, 521, 524, 522, 505]
       },
       "ID": 620,
       "Modified": "2020-02-12T15:06:54Z",
@@ -14676,12 +14151,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          652,
-          963,
-          977,
-          975
-        ]
+        "results": [652, 963, 977, 975]
       },
       "ID": 118,
       "Modified": "2020-02-12T15:10:19Z",
@@ -15518,10 +14988,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          711,
-          715
-        ]
+        "results": [711, 715]
       },
       "ID": 803,
       "Modified": "2020-02-12T15:06:31Z",
@@ -16141,10 +15608,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          271,
-          276
-        ]
+        "results": [271, 276]
       },
       "ID": 1222,
       "Modified": "2019-09-16T05:33:31Z",
@@ -16671,12 +16135,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          454,
-          461,
-          765,
-          773
-        ]
+        "results": [454, 461, 765, 773]
       },
       "ID": 162,
       "Modified": "2020-02-12T15:10:38Z",
@@ -16738,9 +16197,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          824
-        ]
+        "results": [824]
       },
       "ID": 436,
       "Modified": "2020-02-12T15:06:49Z",
@@ -17577,11 +17034,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          234,
-          679,
-          666
-        ]
+        "results": [234, 679, 666]
       },
       "ID": 1203,
       "Modified": "2020-02-12T15:06:22Z",
@@ -17860,9 +17313,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          26
-        ]
+        "results": [26]
       },
       "ID": 965,
       "Modified": "2019-09-03T11:40:14Z",
@@ -18420,13 +17871,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          56,
-          60,
-          59,
-          62,
-          64
-        ]
+        "results": [56, 60, 59, 62, 64]
       },
       "ID": 365,
       "Modified": "2019-09-16T05:32:03Z",
@@ -19542,11 +18987,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          478,
-          474,
-          482
-        ]
+        "results": [478, 474, 482]
       },
       "ID": 168,
       "Modified": "2020-02-12T14:52:23Z",
@@ -20383,11 +19824,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          287,
-          1001,
-          1014
-        ]
+        "results": [287, 1001, 1014]
       },
       "ID": 1167,
       "Modified": "2020-02-12T15:10:25Z",
@@ -21317,14 +20754,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          983,
-          1068,
-          1070,
-          1074,
-          1073,
-          1072
-        ]
+        "results": [983, 1068, 1070, 1074, 1073, 1072]
       },
       "ID": 1175,
       "Modified": "2020-02-12T15:10:36Z",
@@ -21417,11 +20847,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          877,
-          1178,
-          1177
-        ]
+        "results": [877, 1178, 1177]
       },
       "ID": 1150,
       "Modified": "2020-02-12T15:10:56Z",
@@ -22134,11 +21560,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          241,
-          245,
-          246
-        ]
+        "results": [241, 245, 246]
       },
       "ID": 363,
       "Modified": "2019-09-16T05:33:19Z",
@@ -24401,9 +23823,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          676
-        ]
+        "results": [676]
       },
       "ID": 62,
       "Modified": "2020-02-12T15:06:22Z",
@@ -26418,9 +25838,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          667
-        ]
+        "results": [667]
       },
       "ID": 1045,
       "Modified": "2020-02-12T15:06:21Z",
@@ -26823,9 +26241,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1180
-        ]
+        "results": [1180]
       },
       "ID": 522,
       "Modified": "2020-02-12T15:10:56Z",
@@ -27228,12 +26644,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          255,
-          252,
-          254,
-          264
-        ]
+        "results": [255, 252, 254, 264]
       },
       "ID": 497,
       "Modified": "2019-09-16T05:33:27Z",
@@ -27481,11 +26892,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          733,
-          1042,
-          1044
-        ]
+        "results": [733, 1042, 1044]
       },
       "ID": 959,
       "Modified": "2020-02-12T15:10:32Z",
@@ -27795,10 +27202,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          27,
-          314
-        ]
+        "results": [27, 314]
       },
       "ID": 1011,
       "Modified": "2020-02-12T15:10:18Z",
@@ -27891,10 +27295,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          729,
-          1055
-        ]
+        "results": [729, 1055]
       },
       "ID": 337,
       "Modified": "2020-02-12T15:10:33Z",
@@ -29289,10 +28690,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1266,
-          1268
-        ]
+        "results": [1266, 1268]
       },
       "ID": 976,
       "Modified": "2020-02-12T15:15:03Z",
@@ -29695,15 +29093,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          281,
-          278,
-          277,
-          273,
-          282,
-          279,
-          285
-        ]
+        "results": [281, 278, 277, 273, 282, 279, 285]
       },
       "ID": 147,
       "Modified": "2019-09-16T05:33:34Z",
@@ -30788,9 +30178,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          20
-        ]
+        "results": [20]
       },
       "ID": 938,
       "Modified": "2019-07-23T07:54:38Z",
@@ -31255,9 +30643,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          967
-        ]
+        "results": [967]
       },
       "ID": 273,
       "Modified": "2020-02-12T15:10:18Z",
@@ -31722,9 +31108,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          239
-        ]
+        "results": [239]
       },
       "ID": 899,
       "Modified": "2019-09-16T05:33:18Z",
@@ -32468,9 +31852,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          415
-        ]
+        "results": [415]
       },
       "ID": 656,
       "Modified": "2020-02-12T14:52:11Z",
@@ -33586,11 +32968,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          834,
-          832,
-          839
-        ]
+        "results": [834, 832, 839]
       },
       "ID": 254,
       "Modified": "2020-02-12T15:06:51Z",
@@ -33621,10 +32999,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1206,
-          1201
-        ]
+        "results": [1206, 1201]
       },
       "ID": 651,
       "Modified": "2020-02-12T15:11:00Z",
@@ -34368,11 +33743,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1104,
-          1110,
-          1113
-        ]
+        "results": [1104, 1110, 1113]
       },
       "ID": 818,
       "Modified": "2020-02-12T15:10:43Z",
@@ -34682,14 +34053,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          895,
-          935,
-          936,
-          937,
-          941,
-          940
-        ]
+        "results": [895, 935, 936, 937, 941, 940]
       },
       "ID": 527,
       "Modified": "2020-02-12T15:07:09Z",
@@ -36206,10 +35570,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          260,
-          263
-        ]
+        "results": [260, 263]
       },
       "ID": 573,
       "Modified": "2019-09-16T05:33:24Z",
@@ -36488,11 +35849,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          655,
-          658,
-          661
-        ]
+        "results": [655, 658, 661]
       },
       "ID": 741,
       "Modified": "2020-02-12T15:06:18Z",
@@ -37050,9 +36407,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          272
-        ]
+        "results": [272]
       },
       "ID": 525,
       "Modified": "2019-09-16T05:33:32Z",
@@ -37269,9 +36624,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          459
-        ]
+        "results": [459]
       },
       "ID": 508,
       "Modified": "2020-02-12T14:52:18Z",
@@ -37643,9 +36996,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          25
-        ]
+        "results": [25]
       },
       "ID": 490,
       "Modified": "2020-02-12T14:51:52Z",
@@ -38141,9 +37492,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1246
-        ]
+        "results": [1246]
       },
       "ID": 473,
       "Modified": "2020-02-12T15:11:06Z",
@@ -38174,21 +37523,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          137,
-          132,
-          127,
-          140,
-          138,
-          139,
-          146,
-          142,
-          221,
-          1080,
-          1089,
-          1090,
-          1093
-        ]
+        "results": [137, 132, 127, 140, 138, 139, 146, 142, 221, 1080, 1089, 1090, 1093]
       },
       "ID": 689,
       "Modified": "2020-02-12T15:10:39Z",
@@ -41381,9 +40716,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          1358
-        ]
+        "results": [1358]
       },
       "ID": 210,
       "Modified": "2020-08-27T07:37:28Z",
@@ -41693,16 +41026,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          69,
-          78,
-          82,
-          83,
-          81,
-          554,
-          558,
-          564
-        ]
+        "results": [69, 78, 82, 83, 81, 554, 558, 564]
       },
       "ID": 16,
       "Modified": "2020-02-12T14:52:35Z",
@@ -42043,13 +41367,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          117,
-          118,
-          122,
-          123,
-          121
-        ]
+        "results": [117, 118, 122, 123, 121]
       },
       "ID": 540,
       "Modified": "2019-09-16T05:32:33Z",
@@ -42142,11 +41460,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          390,
-          388,
-          1143
-        ]
+        "results": [390, 388, 1143]
       },
       "ID": 76,
       "Modified": "2020-02-12T15:10:50Z",
@@ -42518,19 +41832,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          220,
-          224,
-          219,
-          210,
-          226,
-          208,
-          213,
-          536,
-          539,
-          543,
-          863
-        ]
+        "results": [220, 224, 219, 210, 226, 208, 213, 536, 539, 543, 863]
       },
       "ID": 79,
       "Modified": "2020-02-12T15:06:57Z",
@@ -42685,13 +41987,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          574,
-          580,
-          576,
-          581,
-          578
-        ]
+        "results": [574, 580, 576, 581, 578]
       },
       "ID": 517,
       "Modified": "2020-02-12T14:52:38Z",
@@ -43962,10 +43258,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          349,
-          757
-        ]
+        "results": [349, 757]
       },
       "ID": 310,
       "Modified": "2020-02-12T15:06:35Z",
@@ -45484,11 +44777,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          499,
-          861,
-          1165
-        ]
+        "results": [499, 861, 1165]
       },
       "ID": 60,
       "Modified": "2020-02-12T15:10:53Z",
@@ -45550,9 +44839,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          758
-        ]
+        "results": [758]
       },
       "ID": 383,
       "Modified": "2020-02-12T15:06:36Z",
@@ -45831,11 +45118,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          71,
-          380,
-          685
-        ]
+        "results": [71, 380, 685]
       },
       "ID": 24,
       "Modified": "2020-02-12T15:06:27Z",
@@ -45866,10 +45149,7 @@
         "__metadata": {
           "type": "Collection(Edm.Int32)"
         },
-        "results": [
-          881,
-          880
-        ]
+        "results": [881, 880]
       },
       "ID": 29,
       "Modified": "2020-02-12T15:06:58Z",

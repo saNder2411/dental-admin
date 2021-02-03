@@ -8,7 +8,7 @@ import { StaffDataItem } from '../_Staff/StaffTypes';
 // Constants
 import { MONDAY_CURRENT_WEEK, WEEK_RANGE, PREV_WEEK } from '../Constants';
 // Helpers
-import { calcStaffMemberWorkWeekHours, WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember } from './EntitiesChartHelpers';
+import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember } from './EntitiesChartHelpers';
 
 const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) =>
   WeekPoints.reduce<{
@@ -62,6 +62,7 @@ const getAppointmentPerStaffData = (sliceAppointments: AppointmentDataItem[], st
         averageAppointmentsPerWeekPerStaffMember,
         percentEmploymentPerWeekPerStaffMember,
         averageSalesPerWeekPerStaffMember,
+        staffMemberWorkWeekHours,
       } = calcAppointmentsDurationSalesPerWeekPerStaffMember(staffMember, sliceAppointments);
 
       return {
@@ -69,7 +70,7 @@ const getAppointmentPerStaffData = (sliceAppointments: AppointmentDataItem[], st
         appointmentPerStaffPerWeekSeries: [...acc.appointmentPerStaffPerWeekSeries, averageAppointmentsPerWeekPerStaffMember],
         percentsEmploymentPerWeekSeries: [...acc.percentsEmploymentPerWeekSeries, percentEmploymentPerWeekPerStaffMember],
         salesPerStaffPerWeekData: [...acc.salesPerStaffPerWeekData, { name: staffMember.FullName, data: averageSalesPerWeekPerStaffMember }],
-        totalStaffWorkHoursInWeekRange: acc.totalStaffWorkHoursInWeekRange + calcStaffMemberWorkWeekHours(staffMember) * WEEK_RANGE,
+        totalStaffWorkHoursInWeekRange: acc.totalStaffWorkHoursInWeekRange + staffMemberWorkWeekHours * WEEK_RANGE,
       };
     },
     {

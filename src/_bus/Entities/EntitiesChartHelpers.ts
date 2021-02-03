@@ -23,35 +23,35 @@ const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint
 
 export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, PREV_WEEKS);
 
-const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string | null) => {
-  if (!startWorkDay || !endWorkDay) return 0;
-  const now = new Date();
-  const year = now.getFullYear();
-  const swapMonth = now.getMonth() + 1;
-  const month = swapMonth < 10 ? `0${swapMonth}` : swapMonth;
-  const swapDate = now.getDate();
-  const date = swapDate < 10 ? `0${swapDate}` : swapDate;
-  const parseStartDayDate = Date.parse(`${year}-${month}-${date}T${startWorkDay}`);
-  const parseEndDayDate = Date.parse(`${year}-${month}-${date}T${endWorkDay}`);
+// const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string | null) => {
+//   if (!startWorkDay || !endWorkDay) return 0;
+//   const now = new Date();
+//   const year = now.getFullYear();
+//   const swapMonth = now.getMonth() + 1;
+//   const month = swapMonth < 10 ? `0${swapMonth}` : swapMonth;
+//   const swapDate = now.getDate();
+//   const date = swapDate < 10 ? `0${swapDate}` : swapDate;
+//   const parseStartDayDate = Date.parse(`${year}-${month}-${date}T${startWorkDay}`);
+//   const parseEndDayDate = Date.parse(`${year}-${month}-${date}T${endWorkDay}`);
 
-  const workHours = (parseEndDayDate - parseStartDayDate) / 1000 / 60 / 60;
+//   const workHours = (parseEndDayDate - parseStartDayDate) / 1000 / 60 / 60;
 
-  return workHours;
-};
+//   return workHours;
+// };
 
-export const calcStaffMemberWorkWeekHours = (staffDataItem: StaffDataItem | undefined) => {
-  if (!staffDataItem) return 0;
+// export const calcStaffMemberWorkWeekHours = (staffDataItem: StaffDataItem | undefined) => {
+//   if (!staffDataItem) return 0;
 
-  let weekHours = 0;
-  for (let i = 1; i <= 7; i++) {
-    weekHours += calcStaffWorkDayHours(
-      staffDataItem[`WorkingDayStart0${i}` as keyof StaffDataItem] as string,
-      staffDataItem[`WorkingDayEnd0${i}` as keyof StaffDataItem] as string
-    );
-  }
+//   let weekHours = 0;
+//   for (let i = 1; i <= 7; i++) {
+//     weekHours += calcStaffWorkDayHours(
+//       staffDataItem[`WorkingDayStart0${i}` as keyof StaffDataItem] as string,
+//       staffDataItem[`WorkingDayEnd0${i}` as keyof StaffDataItem] as string
+//     );
+//   }
 
-  return weekHours;
-};
+//   return weekHours;
+// };
 
 const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {
   return appointments.reduce<{ amountAppointment: number; durationInHours: number; sales: number }>(
@@ -75,13 +75,16 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   staffDataItem: StaffDataItem,
   sliceAppointmentsInWeekRange: AppointmentDataItem[]
 ) => {
-  const staffMemberWorkWeekHours = calcStaffMemberWorkWeekHours(staffDataItem);
+  const staffMemberWorkWeekHours = staffDataItem.StaffWeekHours ?? DEFAULT_WORK_WEEK_HOURS;
   const { amountAppointment, durationInHours, sales } = calcAppointmentsDurationSalesPerStaffMember(staffDataItem.ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
-  const percentEmploymentPerWeekPerStaffMember = Math.round(
-    ((durationInHours / WEEK_RANGE) * 100) / (staffMemberWorkWeekHours === 0 ? DEFAULT_WORK_WEEK_HOURS : staffMemberWorkWeekHours)
-  );
+  const percentEmploymentPerWeekPerStaffMember = Math.round(((durationInHours / WEEK_RANGE) * 100) / staffMemberWorkWeekHours);
   const averageSalesPerWeekPerStaffMember = +(sales / WEEK_RANGE).toFixed(2);
 
-  return { averageAppointmentsPerWeekPerStaffMember, percentEmploymentPerWeekPerStaffMember, averageSalesPerWeekPerStaffMember };
+  return {
+    averageAppointmentsPerWeekPerStaffMember,
+    percentEmploymentPerWeekPerStaffMember,
+    averageSalesPerWeekPerStaffMember,
+    staffMemberWorkWeekHours,
+  };
 };

@@ -83,6 +83,14 @@ export type GenericDataItem = InferValueTypes<{
   type5: SkillDataItem;
 }>;
 
+export type GenericKeyDataItem = InferValueTypes<{
+  type1: keyof AppointmentDataItem;
+  type2: keyof StaffDataItem;
+  type3: keyof CustomerDataItem;
+  type4: keyof ServiceDataItem;
+  type5: keyof SkillDataItem;
+}>;
+
 export enum EntitiesKeys {
   Appointments = 'appointments',
   Staff = 'staff',
