@@ -22,6 +22,7 @@ export const getNewAppointmentDataItemForScheduler = (
     Email: null,
     AppointmentStatus: StatusNames.Consultation,
     AppointmentSource: '',
+    FirstAppointment: false,
     LastNameAppt: ``,
     Gender: '(1) Female',
     Notes: '',

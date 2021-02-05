@@ -37,6 +37,9 @@ const initialState = {
     totalSalesForEveryWeekInWeekRange: [],
     serviceSalesForEveryWeekInWeekRange: [],
     productSalesForEveryWeekInWeekRange: [],
+    totalAmountAppointmentsForEveryWeekPerWeekRange: [],
+    amountNewCustomerAppointmentsForEveryWeekPerWeekRange: [],
+    amountExistCustomerAppointmentsForEveryWeekPerWeekRange: [],
     staffCategories: [],
     appointmentPerStaffPerWeekSeries: [],
     percentsEmploymentPerWeekSeries: [],
@@ -50,6 +53,7 @@ const initialState = {
     salesPerServicePerWeekSeries: [],
     salesPerProductPerWeekSeries: [],
     salesPerOtherServicePerWeekSeries: { name: 'Other', data: 0 },
+    appointmentValue: [],
   },
 };
 

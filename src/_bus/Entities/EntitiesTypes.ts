@@ -121,6 +121,9 @@ export interface ChartState {
   totalSalesForEveryWeekInWeekRange: number[];
   serviceSalesForEveryWeekInWeekRange: number[];
   productSalesForEveryWeekInWeekRange: number[];
+  totalAmountAppointmentsForEveryWeekPerWeekRange: number[];
+  amountNewCustomerAppointmentsForEveryWeekPerWeekRange: number[];
+  amountExistCustomerAppointmentsForEveryWeekPerWeekRange: number[];
   staffCategories: string[];
   appointmentPerStaffPerWeekSeries: number[];
   percentsEmploymentPerWeekSeries: number[];
@@ -132,6 +135,7 @@ export interface ChartState {
   salesPerServicePerWeekSeries: SeriesForChart<number>[];
   salesPerProductPerWeekSeries: SeriesForChart<number>[];
   salesPerOtherServicePerWeekSeries: SeriesForChart<number>;
+  appointmentValue: number[];
 }
 
 export interface EntitiesState {

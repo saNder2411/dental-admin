@@ -22,6 +22,7 @@ interface BackendImmutableKey {
   fAllDayEvent: null | boolean;
   AppointmentStatus: StatusNames;
   AppointmentSource: string | null;
+  FirstAppointment: boolean;
   Notes: null | string;
   ServiceCharge: number;
   ExtraFees: number;

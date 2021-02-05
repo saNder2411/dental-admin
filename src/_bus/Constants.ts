@@ -1,10 +1,12 @@
-import { addWeeks, addDays, addYears } from '@progress/kendo-date-math';
+import { addWeeks, addMonths, firstDayOfMonth, addDays, addYears } from '@progress/kendo-date-math';
 // Types
 import { StatusNames } from './_Appointments/AppointmentsTypes';
 
 const NOW = new Date(new Date().setHours(4, 0, 0));
 export const MONDAY_CURRENT_WEEK = addDays(NOW, -(NOW.getDay() - 1));
 export const WEEK_RANGE = 12;
+export const MONTH_RANGE = 3;
+export const START_PREV_MONTH_DATE = addMonths(firstDayOfMonth(NOW), -MONTH_RANGE);
 export const START_PREV_WEEKS_DATE = addWeeks(MONDAY_CURRENT_WEEK, -WEEK_RANGE);
 export const END_NEXT_WEEKS_DATE = addWeeks(MONDAY_CURRENT_WEEK, WEEK_RANGE);
 export const PREV_WEEK = addWeeks(MONDAY_CURRENT_WEEK, -1);
@@ -27,3 +29,5 @@ export const SeriesColors = [
   `RoyalBlue`,
   `Plum`,
 ];
+
+export const Months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];

@@ -1,13 +1,13 @@
-import { addWeeks, weekInYear } from '@progress/kendo-date-math';
+import { addWeeks, weekInYear, addMonths } from '@progress/kendo-date-math';
 // Types
-import { WeekPoint } from './EntitiesChartTypes';
+import { DateRange } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 // Constants
-import { WEEK_RANGE, START_PREV_WEEKS_DATE, DEFAULT_WORK_WEEK_HOURS } from '../Constants';
+import { WEEK_RANGE, START_PREV_WEEKS_DATE, DEFAULT_WORK_WEEK_HOURS, MONTH_RANGE, START_PREV_MONTH_DATE, Months } from '../Constants';
 
-const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint[], number[]] => {
-  let points: WeekPoint[] = [];
+const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [DateRange[], number[]] => {
+  let points: DateRange[] = [];
   let weekNumbers: number[] = [];
 
   for (let i = 0; i < weekRange; i++) {
@@ -22,6 +22,22 @@ const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint
 };
 
 export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, START_PREV_WEEKS_DATE);
+
+const getMontPointsAndNames = (monthRange: number, startDate: Date): [DateRange[], string[]] => {
+  let points: DateRange[] = [];
+  let monthNames: string[] = [];
+
+  for (let i = 0; i < monthRange; i++) {
+    const start = addMonths(startDate, i);
+    const end = addMonths(startDate, i + 1);
+    points = [...points, { start, end }];
+    monthNames = [...monthNames, Months[start.getMonth()]];
+  }
+
+  return [points, monthNames];
+};
+
+export const [MonthPoints, MonthNames] = getMontPointsAndNames(MONTH_RANGE, START_PREV_MONTH_DATE);
 
 // const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string | null) => {
 //   if (!startWorkDay || !endWorkDay) return 0;

@@ -15,13 +15,16 @@ import {
 } from '@progress/kendo-react-charts';
 import { ArcGauge, LinearGauge } from '@progress/kendo-react-gauges';
 // Constants
-import { WeekNumbers } from '../../_bus/Entities/EntitiesChartHelpers';
-import { SeriesColors, WEEK_RANGE } from '../../_bus/Constants';
+import { WeekNumbers, MonthNames } from '../../_bus/Entities/EntitiesChartHelpers';
+import { SeriesColors, WEEK_RANGE, MONTH_RANGE } from '../../_bus/Constants';
 // Selectors
 import {
   selectTotalSalesForEveryWeekInWeekRange,
   selectServiceSalesForEveryWeekInWeekRange,
   selectProductSalesForEveryWeekInWeekRange,
+  selectTotalAmountAppointmentsForEveryWeekPerWeekRange,
+  selectAmountNewCustomerAppointmentsForEveryWeekPerWeekRange,
+  selectAmountExistCustomerAppointmentsForEveryWeekPerWeekRange,
   selectStaffCategories,
   selectSeriesStaffStatistic,
   selectAverageHourlyPerService,
@@ -39,6 +42,7 @@ import {
   selectSalesPerOtherServicePerWeekSeries,
   selectCanceledAppointment,
   selectAmountAppointmentPerNextWeekRangeAndLastWeek,
+  selectAppointmentValue,
 } from '../../_bus/Entities/EntitiesChartSelectors';
 
 interface ChartItemProps {
@@ -71,6 +75,30 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
   );
 };
 
+export const ChartAppointmentsPerWeek: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const totalAmountAppointmentsForEveryWeek = useSelector(selectTotalAmountAppointmentsForEveryWeekPerWeekRange);
+  const amountNewCustomerAppointmentsForEveryWeek = useSelector(selectAmountNewCustomerAppointmentsForEveryWeekPerWeekRange);
+  const amountExistCustomerAppointmentsForEveryWeek = useSelector(selectAmountExistCustomerAppointmentsForEveryWeekPerWeekRange);
+
+  return (
+    <section className={className}>
+      <h3 className="text-left">Appointments Per Week</h3>
+      <KendoChart>
+        <ChartTitle text={`Last ${WEEK_RANGE} weeks`} align="left" />
+        <ChartLegend position="top" orientation="horizontal" align="start" />
+        <ChartSeries>
+          <ChartSeriesItem type="line" data={amountNewCustomerAppointmentsForEveryWeek} name="New Customers" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={amountExistCustomerAppointmentsForEveryWeek} name="Existing Customers" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="area" data={totalAmountAppointmentsForEveryWeek} name="Total Appointments" tooltip={{ visible: true }} />
+        </ChartSeries>
+        <ChartCategoryAxis>
+          <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />
+        </ChartCategoryAxis>
+      </KendoChart>
+    </section>
+  );
+};
+
 export const ChartStaffStatistics: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const categories = useSelector(selectStaffCategories);
   const series = useSelector(selectSeriesStaffStatistic());
@@ -88,6 +116,25 @@ export const ChartStaffStatistics: FC<ChartItemProps> = ({ className }): JSX.Ele
         </ChartSeries>
         <ChartCategoryAxis>
           <ChartCategoryAxisItem title={{ text: 'STAFF' }} categories={categories} />
+        </ChartCategoryAxis>
+      </KendoChart>
+    </section>
+  );
+};
+
+export const ChartAppointmentValue: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const series = useSelector(selectAppointmentValue);
+
+  return (
+    <section className={className}>
+      <h3 className="text-center">Average Appointment Value</h3>
+      <KendoChart>
+        <ChartTitle text={`Last ${MONTH_RANGE} months`} align="center" />
+        <ChartSeries>
+          <ChartSeriesItem type="column" data={series} color={SeriesColors[2]} tooltip={{ visible: true }} />
+        </ChartSeries>
+        <ChartCategoryAxis>
+          <ChartCategoryAxisItem title={{ text: 'MONTHS' }} categories={MonthNames} labels={{ rotation: 'auto' }} />
         </ChartCategoryAxis>
       </KendoChart>
     </section>

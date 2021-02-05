@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 // Components
 import {
+  ChartAppointmentsPerWeek,
   ChartAppointmentSales,
   ChartStaffStatistics,
   ChartCancellationRate,
@@ -11,11 +12,13 @@ import {
   ChartAverageCustomerValue,
   ChartAppointmentFunnel,
   ChartStaffSales,
+  ChartAppointmentValue,
 } from './ChartItems';
 
 export const Chart: FC = (): JSX.Element => (
   <section className="card-container row">
     <section className="border shadow-sm mr-2 pt-2 rounded col">
+      <ChartAppointmentsPerWeek />
       <ChartStaffStatistics />
       <ChartSalesByOfferingCategory />
       <ChartAppointmentSales />
@@ -49,7 +52,9 @@ export const Chart: FC = (): JSX.Element => (
         <div className="col-6 px-1">
           <ChartStaffUtilization className="h-100 border shadow-sm rounded pt-2" />
         </div>
-        <div className="col-6 px-1"></div>
+        <div className="col-6 px-1">
+          <ChartAppointmentValue className="h-100 border shadow-sm rounded pt-2" />
+        </div>
       </section>
     </section>
   </section>
