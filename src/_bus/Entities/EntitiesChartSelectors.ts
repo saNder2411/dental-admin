@@ -26,7 +26,7 @@ export const selectStaffCategories = ({ Entities }: RootState) => Entities.chart
 
 export const selectTotalAppointmentHours = ({ Entities }: RootState) => Entities.chartData.totalAppointmentHours;
 
-export const selectTotalAppointmentSales = ({ Entities }: RootState) => Entities.chartData.totalAppointmentSales;
+export const selectTotalAppointmentSalesPerLast12Months = ({ Entities }: RootState) => Entities.chartData.totalAppointmentSalesPerLast12Months;
 
 export const selectAmountActiveCustomers = ({ Entities }: RootState) => Entities.chartData.activeCustomersIDs.length;
 
@@ -40,12 +40,22 @@ export const selectSalesPerStaffPerWeekData = ({ Entities }: RootState) => Entit
 
 export const selectServiceCategories = ({ Entities }: RootState) => Entities.chartData.serviceCategories;
 
+export const selectProductCategories = ({ Entities }: RootState) => Entities.chartData.productCategories;
+
 export const selectSalesPerServicePerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerServicePerWeekSeries;
 
-export const selectSeriesAppointmentPerStaff = () =>
+export const selectSalesPerProductPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerProductPerWeekSeries;
+
+export const selectSalesPerOtherServicePerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerOtherServicePerWeekSeries;
+
+export const selectCanceledAppointment = ({ Entities }: RootState) => Entities.chartData.canceledAppointment;
+
+export const selectAmountAppointmentPerNextWeekRangeAndLastWeek = ({ Entities }: RootState) => Entities.chartData.amountAppointmentPerNextWeekRangeAndLastWeek;
+
+export const selectSeriesStaffStatistic = () =>
   createSelector(getAppointmentPerStaffPerWeekSeries, getPercentsEmploymentPerWeekSeries, (amountsAppointmentSeries, percentsEmploymentSeries) => [
-    { name: 'Amount Appointment', data: amountsAppointmentSeries },
-    { name: 'Percent Employment', data: percentsEmploymentSeries },
+    { name: 'Appointments', data: amountsAppointmentSeries },
+    { name: 'Utilization %', data: percentsEmploymentSeries },
   ]);
 
 export const selectAppointmentFunnel = () =>

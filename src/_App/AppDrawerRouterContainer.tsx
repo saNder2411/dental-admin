@@ -9,17 +9,17 @@ import * as SC from './AppItemsStyled/CustomDrawerItemStyled';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
 
-const items = [
-  { name: 'agenda', iconSvg: 'home-icon', selected: true, route: '/' },
-  { name: 'calendar', iconSvg: 'k-i-calendar-date', selected: false, route: '/calendar' },
+const Items = [
+  { name: 'agenda', iconSvg: 'k-i-bell', selected: true, route: '/' },
+  { name: 'calendar', iconSvg: 'k-i-calendar', selected: false, route: '/calendar' },
   { name: 'teamStaff', iconSvg: 'profile-icon', selected: false, route: '/team-staff' },
   { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
-  { name: 'services', iconSvg: 'k-i-currency', selected: false, route: '/services' },
+  { name: 'services', iconSvg: 'k-i-ungroup', selected: false, route: '/services' },
   { name: 'dashboard', iconSvg: 'dashboard-icon', selected: false, route: '/dashboard' },
 ];
 
 const getSelectedItemName = (pathname: string): string => {
-  const currentItem = items.find((item) => item.route === pathname);
+  const currentItem = Items.find((item) => item.route === pathname);
   if (currentItem) {
     return currentItem.name;
   }
@@ -65,7 +65,7 @@ export const AppDrawerRouterContainer: FC<Props> = ({ children }): JSX.Element =
       />
       <Drawer
         expanded={isExpended}
-        items={items.map((item) => ({
+        items={Items.map((item) => ({
           ...item,
           text: localizationService.toLanguageString(`custom.${item.name}`, `${item.name}`),
           selected: item.name === selectedItemName,

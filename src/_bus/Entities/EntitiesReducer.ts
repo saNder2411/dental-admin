@@ -25,11 +25,14 @@ const initialState = {
   chartData: {
     totalAppointmentHours: 0,
     totalAppointmentSales: 0,
+    totalAppointmentSalesPerLast12Months: 0,
     activeCustomersIDs: [],
     appointmentReservations: 0,
     appointmentBookings: 0,
     appointmentAttended: 0,
     paymentCompleted: 0,
+    canceledAppointment: 0,
+    amountAppointmentPerNextWeekRangeAndLastWeek: 0,
     totalStaffWorkHoursInWeekRange: 0,
     totalSalesForEveryWeekInWeekRange: [],
     serviceSalesForEveryWeekInWeekRange: [],
@@ -43,7 +46,10 @@ const initialState = {
     totalServiceSales: 0,
     totalServiceHours: 0,
     serviceCategories: [],
+    productCategories: [],
     salesPerServicePerWeekSeries: [],
+    salesPerProductPerWeekSeries: [],
+    salesPerOtherServicePerWeekSeries: { name: 'Other', data: 0 },
   },
 };
 

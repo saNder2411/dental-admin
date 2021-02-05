@@ -6,7 +6,7 @@ import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 // Constants
-import { MONDAY_CURRENT_WEEK, WEEK_RANGE, PREV_WEEK } from '../Constants';
+import { MONDAY_CURRENT_WEEK, START_PREV_WEEKS_DATE, WEEK_RANGE, PREV_WEEK, SeriesColors } from '../Constants';
 // Helpers
 import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember } from './EntitiesChartHelpers';
 
@@ -25,6 +25,8 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
 
       const { totalSum, serviceSum, productSum } = sliceAppointmentsInWeekPoint.reduce(
         (acc, appointment) => {
+          if (appointment.AppointmentStatus === StatusNames.Cancelled || appointment.AppointmentStatus === StatusNames.Consultation) return acc;
+
           const { ServiceCharge, LookupMultiBP01offeringsId } = appointment;
           const [serviceSum, productSum] = LookupMultiBP01offeringsId.results.reduce(
             (acc, Id) => {
@@ -55,21 +57,25 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
     { totalSalesForEveryWeekInWeekRange: [], serviceSalesForEveryWeekInWeekRange: [], productSalesForEveryWeekInWeekRange: [] }
   );
 
-const getAppointmentPerStaffData = (sliceAppointments: AppointmentDataItem[], staff: StaffDataItem[]) =>
+const getStaffCalcData = (sliceAppointments: AppointmentDataItem[], staff: StaffDataItem[], totalAppointmentSales: number) =>
   staff.reduce(
     (acc, staffMember) => {
       const {
         averageAppointmentsPerWeekPerStaffMember,
         percentEmploymentPerWeekPerStaffMember,
         averageSalesPerWeekPerStaffMember,
+        percentStaffMemberSaleOfTotalSales,
         staffMemberWorkWeekHours,
-      } = calcAppointmentsDurationSalesPerWeekPerStaffMember(staffMember, sliceAppointments);
+      } = calcAppointmentsDurationSalesPerWeekPerStaffMember(staffMember, sliceAppointments, totalAppointmentSales);
 
       return {
         staffCategories: [...acc.staffCategories, `${staffMember.FirstName[0]}.${staffMember.Title[0]}`],
         appointmentPerStaffPerWeekSeries: [...acc.appointmentPerStaffPerWeekSeries, averageAppointmentsPerWeekPerStaffMember],
         percentsEmploymentPerWeekSeries: [...acc.percentsEmploymentPerWeekSeries, percentEmploymentPerWeekPerStaffMember],
-        salesPerStaffPerWeekData: [...acc.salesPerStaffPerWeekData, { name: staffMember.FullName, data: averageSalesPerWeekPerStaffMember }],
+        salesPerStaffPerWeekData: [
+          ...acc.salesPerStaffPerWeekData,
+          { name: staffMember.FullName, data: averageSalesPerWeekPerStaffMember, percent: percentStaffMemberSaleOfTotalSales },
+        ],
         totalStaffWorkHoursInWeekRange: acc.totalStaffWorkHoursInWeekRange + staffMemberWorkWeekHours * WEEK_RANGE,
       };
     },
@@ -82,76 +88,116 @@ const getAppointmentPerStaffData = (sliceAppointments: AppointmentDataItem[], st
     }
   );
 
-const getAverageHourlyPerServiceData = (sliceAppointments: AppointmentDataItem[], services: ServiceDataItem[]) =>
+const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], services: ServiceDataItem[]) =>
   services.reduce(
     (acc, service) => {
-      if (service.ContentTypeId !== ContentTypes.Services) return acc;
-
-      const name = service.OfferingCatType ?? 'null';
+      const name = service.OfferingCatType?.slice(5) ?? 'Other';
 
       const [totalSales, totalHours] = sliceAppointments.reduce(
-        (acc, { LookupMultiBP01offeringsId, ServiceCharge, Duration }) => {
-          if (!LookupMultiBP01offeringsId.results.includes(service.ID)) return acc;
+        (acc, { LookupMultiBP01offeringsId }) => {
+          const servicesOrProductInAppointment = LookupMultiBP01offeringsId.results.filter((id) => id === service.ID);
+
+          if (servicesOrProductInAppointment.length === 0) return acc;
+
           const [prevSales, prevHours] = acc;
 
-          const amountServicesInAppointment = LookupMultiBP01offeringsId.results.length;
-          const totalSales = prevSales + ServiceCharge / amountServicesInAppointment;
-          const totalHours = prevHours + Duration / 60 / 60 / amountServicesInAppointment;
-          return [totalSales, totalHours];
+          const nextSales = prevSales + (service.Amount - service.Amount * service.OfferingDiscount) * servicesOrProductInAppointment.length;
+          const nextHours = service.ContentTypeId === ContentTypes.Services ? prevHours + service.MinutesDuration / 60 : 0;
+          return [nextSales, nextHours];
         },
         [0, 0]
       );
 
-      const data = totalSales === 0 ? 0 : Math.round(totalSales / totalHours);
-      const salesServicePerWeekRange = totalSales === 0 ? 0 : Math.round(totalSales / WEEK_RANGE);
+      const salesServiceOrProductPerWeekRange = totalSales === 0 ? 0 : Math.round(totalSales / WEEK_RANGE);
 
-      const prevAverageHourlyPerServiceItem = acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1];
+      switch (service.ContentTypeId) {
+        case ContentTypes.Services:
+          const data = totalSales === 0 ? 0 : Math.round(totalSales / totalHours);
+          const prevServiceCategory = acc.serviceCategories[acc.serviceCategories.length - 1];
 
-      if (prevAverageHourlyPerServiceItem && prevAverageHourlyPerServiceItem.name === service.OfferingCatType) {
-        prevAverageHourlyPerServiceItem.data += data;
-        acc.salesPerServicePerWeekSeries[acc.salesPerServicePerWeekSeries.length - 1] += salesServicePerWeekRange;
-        return acc;
+          if (prevServiceCategory && prevServiceCategory === name) {
+            acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data += data;
+            acc.salesPerServicePerWeekSeries[acc.salesPerServicePerWeekSeries.length - 1].data += salesServiceOrProductPerWeekRange;
+            return acc;
+          }
+
+          return {
+            ...acc,
+            averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
+            serviceCategories: [...acc.serviceCategories, name],
+            salesPerServicePerWeekSeries: [
+              ...acc.salesPerServicePerWeekSeries,
+              { name, data: salesServiceOrProductPerWeekRange + 20, color: SeriesColors[5] },
+            ],
+          };
+        case ContentTypes.Product:
+          const prevProductCategory = acc.productCategories[acc.productCategories.length - 1];
+
+          if (prevProductCategory && prevProductCategory === name) {
+            acc.salesPerProductPerWeekSeries[acc.salesPerProductPerWeekSeries.length - 1].data += salesServiceOrProductPerWeekRange;
+            return acc;
+          }
+
+          return {
+            ...acc,
+            productCategories: [...acc.productCategories, name],
+            salesPerProductPerWeekSeries: [
+              ...acc.salesPerProductPerWeekSeries,
+              { name, data: salesServiceOrProductPerWeekRange + 40, color: SeriesColors[6] },
+            ],
+          };
+
+        default:
+          return {
+            ...acc,
+            salesPerOtherServicePerWeekSeries: {
+              ...acc.salesPerOtherServicePerWeekSeries,
+              data: acc.salesPerOtherServicePerWeekSeries.data + salesServiceOrProductPerWeekRange,
+            },
+          };
       }
-
-      return {
-        averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
-        serviceCategories: [...acc.serviceCategories, name.slice(5)],
-        salesPerServicePerWeekSeries: [...acc.salesPerServicePerWeekSeries, salesServicePerWeekRange],
-      };
     },
     {
       averageHourlyPerService: new Array<SeriesForChart<number>>(),
       serviceCategories: new Array<string>(),
-      salesPerServicePerWeekSeries: new Array<number>(),
+      productCategories: new Array<string>(),
+      salesPerServicePerWeekSeries: new Array<SeriesForChart<number>>(),
+      salesPerProductPerWeekSeries: new Array<SeriesForChart<number>>(),
+      salesPerOtherServicePerWeekSeries: { name: 'Other', data: 90, color: SeriesColors[9] },
     }
   );
 
 export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState): ChartState => {
-  const appointmentsInLastWeekRange = state.appointments.originalData.filter(({ End }) => End.getTime() <= MONDAY_CURRENT_WEEK.getTime());
+  const appointmentsInLastWeeksRange = state.appointments.originalData.filter(
+    ({ Start, End }) => Start.getTime() >= START_PREV_WEEKS_DATE.getTime() && End.getTime() <= MONDAY_CURRENT_WEEK.getTime()
+  );
 
   const {
     appointmentReservations,
     appointmentBookings,
     appointmentAttended,
     paymentCompleted,
+    canceledAppointment,
+    amountAppointmentPerNextWeekRangeAndLastWeek,
     totalAppointmentHours,
     totalAppointmentSales,
+    totalAppointmentSalesPerLast12Months,
     totalServiceSales,
     activeCustomersSet,
   } = state.appointments.originalData.reduce(
     (acc, { AppointmentStatus, Start, End, Duration, ServiceCharge, LookupCM102customersId, LookupMultiBP01offeringsId }) => {
       const isFuture = Start.getTime() >= MONDAY_CURRENT_WEEK.getTime();
       const isPrevWeek = Start.getTime() >= PREV_WEEK.getTime() && End.getTime() < MONDAY_CURRENT_WEEK.getTime();
+      const inLastWeeksRange = Start.getTime() >= START_PREV_WEEKS_DATE.getTime() && End.getTime() < MONDAY_CURRENT_WEEK.getTime();
 
       if (isFuture) {
         AppointmentStatus === StatusNames.Reserved && acc.appointmentReservations++;
         AppointmentStatus === StatusNames.Booked && acc.appointmentBookings++;
       }
 
-      if (!isFuture) {
+      if (inLastWeeksRange) {
         acc.totalAppointmentHours += Duration / 60 / 60;
         acc.totalAppointmentSales += ServiceCharge;
-        acc.activeCustomersSet.add(LookupCM102customersId);
         const amountProductSalesInAppointment = LookupMultiBP01offeringsId.results.reduce((sum, ID) => {
           const service = state.services.byId[ID];
           return service.ContentTypeId === ContentTypes.Product ? (sum += service.Amount) : sum;
@@ -159,9 +205,20 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
         acc.totalServiceSales += ServiceCharge - amountProductSalesInAppointment;
       }
 
+      if (!isFuture && AppointmentStatus !== StatusNames.Cancelled) {
+        acc.totalAppointmentSalesPerLast12Months += ServiceCharge;
+        acc.activeCustomersSet.add(LookupCM102customersId);
+      }
+
       if (isPrevWeek) {
         AppointmentStatus === StatusNames.Booked && acc.appointmentAttended++;
         AppointmentStatus === StatusNames.Paid && acc.paymentCompleted++;
+      }
+
+      if (isPrevWeek || isFuture) {
+        (AppointmentStatus === StatusNames.Booked || AppointmentStatus === StatusNames.Reserved || AppointmentStatus === StatusNames.Paid) &&
+          acc.amountAppointmentPerNextWeekRangeAndLastWeek++;
+        AppointmentStatus === StatusNames.Cancelled && acc.canceledAppointment++;
       }
 
       return acc;
@@ -171,15 +228,18 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
       appointmentBookings: 0,
       appointmentAttended: 0,
       paymentCompleted: 0,
+      canceledAppointment: 0,
+      amountAppointmentPerNextWeekRangeAndLastWeek: 0,
       totalAppointmentHours: 0,
       totalAppointmentSales: 0,
+      totalAppointmentSalesPerLast12Months: 0,
       totalServiceSales: 0,
       activeCustomersSet: new Set<number>(),
     }
   );
 
   const { totalSalesForEveryWeekInWeekRange, serviceSalesForEveryWeekInWeekRange, productSalesForEveryWeekInWeekRange } = getAppointmentSalesData(
-    appointmentsInLastWeekRange,
+    appointmentsInLastWeeksRange,
     state.services.byId
   );
 
@@ -189,21 +249,28 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     percentsEmploymentPerWeekSeries,
     salesPerStaffPerWeekData,
     totalStaffWorkHoursInWeekRange,
-  } = getAppointmentPerStaffData(appointmentsInLastWeekRange, state.staff.originalData);
+  } = getStaffCalcData(appointmentsInLastWeeksRange, state.staff.originalData, totalAppointmentSales);
 
-  const { averageHourlyPerService, serviceCategories, salesPerServicePerWeekSeries } = getAverageHourlyPerServiceData(
-    appointmentsInLastWeekRange,
-    state.services.originalData
-  );
+  const {
+    averageHourlyPerService,
+    serviceCategories,
+    productCategories,
+    salesPerServicePerWeekSeries,
+    salesPerProductPerWeekSeries,
+    salesPerOtherServicePerWeekSeries,
+  } = getServiceProductCalcData(appointmentsInLastWeeksRange, state.services.originalData);
 
   return {
     totalAppointmentHours,
     totalAppointmentSales,
+    totalAppointmentSalesPerLast12Months,
     activeCustomersIDs: Array.from(activeCustomersSet),
     appointmentReservations,
     appointmentBookings,
     appointmentAttended,
     paymentCompleted,
+    canceledAppointment,
+    amountAppointmentPerNextWeekRangeAndLastWeek,
     totalStaffWorkHoursInWeekRange,
     totalSalesForEveryWeekInWeekRange,
     serviceSalesForEveryWeekInWeekRange,
@@ -215,6 +282,9 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     averageHourlyPerService,
     totalServiceSales,
     serviceCategories,
+    productCategories,
     salesPerServicePerWeekSeries,
+    salesPerProductPerWeekSeries,
+    salesPerOtherServicePerWeekSeries,
   };
 };

@@ -7,4 +7,5 @@ export interface SeriesForChart<T> {
   name: string;
   data: T;
   color?: string;
+  percent?: number;
 }

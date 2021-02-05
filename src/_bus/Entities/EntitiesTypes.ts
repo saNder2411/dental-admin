@@ -109,11 +109,14 @@ export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem>
 export interface ChartState {
   totalAppointmentHours: number;
   totalAppointmentSales: number;
+  totalAppointmentSalesPerLast12Months: number;
   activeCustomersIDs: number[];
   appointmentReservations: number;
   appointmentBookings: number;
   appointmentAttended: number;
   paymentCompleted: number;
+  canceledAppointment: number;
+  amountAppointmentPerNextWeekRangeAndLastWeek: number;
   totalStaffWorkHoursInWeekRange: number;
   totalSalesForEveryWeekInWeekRange: number[];
   serviceSalesForEveryWeekInWeekRange: number[];
@@ -125,7 +128,10 @@ export interface ChartState {
   averageHourlyPerService: SeriesForChart<number>[];
   totalServiceSales: number;
   serviceCategories: string[];
-  salesPerServicePerWeekSeries: number[];
+  productCategories: string[];
+  salesPerServicePerWeekSeries: SeriesForChart<number>[];
+  salesPerProductPerWeekSeries: SeriesForChart<number>[];
+  salesPerOtherServicePerWeekSeries: SeriesForChart<number>;
 }
 
 export interface EntitiesState {

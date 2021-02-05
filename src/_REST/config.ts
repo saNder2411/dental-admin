@@ -1,5 +1,5 @@
 // Constants
-import { PREV_WEEKS, NEXT_WEEKS } from '../_bus/Constants';
+import { END_NEXT_WEEKS_DATE, LAST_12_MONTHS_DATE } from '../_bus/Constants';
 // App Configure
 import AppConfig from '../../public/app-config.json';
 
@@ -35,7 +35,7 @@ export const SelectFields = {
 };
 
 export const FilterItems = {
-  Appointments: `(FilterStart ge datetime'${PREV_WEEKS.toISOString()}') and (FilterEnd le datetime'${NEXT_WEEKS.toISOString()}')`,
+  Appointments: `(FilterStart ge datetime'${LAST_12_MONTHS_DATE.toISOString()}') and (FilterEnd le datetime'${END_NEXT_WEEKS_DATE.toISOString()}')`,
 };
 
 export const OrderBy = {

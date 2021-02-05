@@ -16,24 +16,29 @@ import {
 import { ArcGauge, LinearGauge } from '@progress/kendo-react-gauges';
 // Constants
 import { WeekNumbers } from '../../_bus/Entities/EntitiesChartHelpers';
-import { SeriesColors } from '../../_bus/Constants';
+import { SeriesColors, WEEK_RANGE } from '../../_bus/Constants';
 // Selectors
 import {
   selectTotalSalesForEveryWeekInWeekRange,
   selectServiceSalesForEveryWeekInWeekRange,
   selectProductSalesForEveryWeekInWeekRange,
   selectStaffCategories,
-  selectSeriesAppointmentPerStaff,
+  selectSeriesStaffStatistic,
   selectAverageHourlyPerService,
   selectAppointmentFunnel,
   selectTotalAppointmentHours,
   selectTotalStaffWorkHoursInWeekRange,
   selectTotalServiceSales,
-  selectTotalAppointmentSales,
+  selectTotalAppointmentSalesPerLast12Months,
   selectAmountActiveCustomers,
   selectSalesPerStaffPerWeekData,
   selectServiceCategories,
+  selectProductCategories,
   selectSalesPerServicePerWeekSeries,
+  selectSalesPerProductPerWeekSeries,
+  selectSalesPerOtherServicePerWeekSeries,
+  selectCanceledAppointment,
+  selectAmountAppointmentPerNextWeekRangeAndLastWeek,
 } from '../../_bus/Entities/EntitiesChartSelectors';
 
 interface ChartItemProps {
@@ -51,7 +56,7 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
     <section className={className}>
       <h3 className="text-left">Appointment Sales</h3>
       <KendoChart>
-        <ChartTitle text="Last 12 weeks" align="left" />
+        <ChartTitle text={`Last ${WEEK_RANGE} weeks`} align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
           <ChartSeriesItem type="line" data={productSalesForEveryWeek} name="Product" tooltip={{ visible: true }} />
@@ -66,15 +71,15 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
   );
 };
 
-export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JSX.Element => {
+export const ChartStaffStatistics: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const categories = useSelector(selectStaffCategories);
-  const series = useSelector(selectSeriesAppointmentPerStaff());
+  const series = useSelector(selectSeriesStaffStatistic());
 
   return (
     <section className={className}>
-      <h3 className="text-left">Appointments / Staff</h3>
+      <h3 className="text-left">Staff Statistics</h3>
       <KendoChart>
-        <ChartTitle text="Average per week" align="left" />
+        <ChartTitle text={`Average weekly for the last ${WEEK_RANGE} weeks`} align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
           {series.map(({ data, name }) => (
@@ -89,24 +94,28 @@ export const ChartAppointmentsPerStaff: FC<ChartItemProps> = ({ className }): JS
   );
 };
 
-export const ChartServiceProductSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const categories = useSelector(selectServiceCategories);
+export const ChartSalesByOfferingCategory: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const serviceCategories = useSelector(selectServiceCategories);
+  const productCategories = useSelector(selectProductCategories);
   const salesPerServicePerWeekSeries = useSelector(selectSalesPerServicePerWeekSeries);
-  const series = [{ name: 'Service', data: salesPerServicePerWeekSeries }];
+  const salesPerProductPerWeekSeries = useSelector(selectSalesPerProductPerWeekSeries);
+  const salesPerOtherServicePerWeekSeries = useSelector(selectSalesPerOtherServicePerWeekSeries);
+  const series = [...salesPerServicePerWeekSeries, ...salesPerProductPerWeekSeries, salesPerOtherServicePerWeekSeries];
 
   return (
     <section className={className}>
-      <h3 className="text-left">Service Sales</h3>
+      <h3 className="text-left">Sales by Offering Category</h3>
       <KendoChart>
-        <ChartTitle text="Average per week" align="left" />
-        <ChartLegend position="top" orientation="horizontal" align="start" />
+        <ChartTitle text={`Average weekly for the last ${WEEK_RANGE} weeks`} align="left" />
         <ChartSeries>
-          {series.map(({ data, name }) => (
-            <ChartSeriesItem key={Math.random()} type="column" data={data} name={name} tooltip={{ visible: true }} />
-          ))}
+          <ChartSeriesItem type="column" data={series} field="data" colorField="color" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>
-          <ChartCategoryAxisItem title={{ text: 'SERVICE Category' }} categories={categories} />
+          <ChartCategoryAxisItem
+            title={{ text: 'CATEGORY' }}
+            categories={[...serviceCategories, ...productCategories, 'Other']}
+            labels={{ rotation: 'auto' }}
+          />
         </ChartCategoryAxis>
       </KendoChart>
     </section>
@@ -120,7 +129,7 @@ export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.E
     <section className={className}>
       <h3 className="text-center">Appointment Funnel</h3>
       <KendoChart style={{ margin: '0 auto', width: '90%' }}>
-        <ChartTitle text="Next 12 weeks" />
+        <ChartTitle text={`Next ${WEEK_RANGE} weeks & Last Week`} />
         <ChartSeries>
           <ChartSeriesItem type="funnel" data={data} categoryField="stat" field="data" colorField="color" dynamicSlope dynamicHeight={false}>
             <ChartSeriesLabels color="white" background="none" format="N0" />
@@ -133,14 +142,14 @@ export const ChartAppointmentFunnel: FC<ChartItemProps> = ({ className }): JSX.E
   );
 };
 
-export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }): JSX.Element => {
+export const ChartAverageHourlyRatePerService: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const data = useSelector(selectAverageHourlyPerService);
 
   return (
     <section className={className}>
       <h3 className="text-center">Average Hourly Rate Per Service</h3>
       <KendoChart seriesColors={SeriesColors}>
-        <ChartTitle text="Last 12 weeks" />
+        <ChartTitle text={`Last ${WEEK_RANGE} weeks`} />
         <ChartLegend position="top" orientation="vertical" />
         <ChartSeries>
           <ChartSeriesItem
@@ -160,14 +169,14 @@ export const ChartAverageHourlyPerService: FC<ChartItemProps> = ({ className }):
   );
 };
 
-export const ChartSalesPerStaffPerWeek: FC<ChartItemProps> = ({ className }): JSX.Element => {
+export const ChartStaffSales: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const data = useSelector(selectSalesPerStaffPerWeekData);
 
   return (
     <section className={className}>
-      <h3 className="text-center">Average Sales Rate Per Staff</h3>
+      <h3 className="text-center">Staff Sales %</h3>
       <KendoChart seriesColors={SeriesColors}>
-        <ChartTitle text="Last 12 weeks" />
+        <ChartTitle text={`Last ${WEEK_RANGE} weeks`} />
         <ChartLegend position="top" orientation="vertical" />
         <ChartSeries>
           <ChartSeriesItem
@@ -179,7 +188,7 @@ export const ChartSalesPerStaffPerWeek: FC<ChartItemProps> = ({ className }): JS
             data={data}
             colorField="color"
             categoryField="name"
-            field="data"
+            field="percent"
           />
         </ChartSeries>
       </KendoChart>
@@ -187,44 +196,62 @@ export const ChartSalesPerStaffPerWeek: FC<ChartItemProps> = ({ className }): JS
   );
 };
 
-export const ChartStaffEmployment: FC<ChartItemProps> = ({ className }): JSX.Element => {
+export const ChartStaffUtilization: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const totalAppointmentHours = useSelector(selectTotalAppointmentHours);
   const totalStaffWorkHoursInWeekRange = useSelector(selectTotalStaffWorkHoursInWeekRange);
   const value = totalAppointmentHours !== 0 ? Math.round((totalAppointmentHours * 100) / totalStaffWorkHoursInWeekRange) : 0;
 
   return (
     <section className={className}>
-      <h3 className="mb-2">Staff Employment</h3>
-      <div className="text-muted mb-4 pt-1">Last 12 weeks</div>
-      <ArcGauge value={value} arcCenterRender={(currentValue: number, color: string) => <h3 style={{ color: color }}>{currentValue}%</h3>} />
+      <h3 className="mb-2">Staff Utilization</h3>
+      <div className="text-muted mb-4 pt-1">{`Last ${WEEK_RANGE} weeks`}</div>
+      <ArcGauge value={value} arcCenterRender={(currentValue: number, color: string) => <h3 style={{ color }}>{currentValue}%</h3>} />
     </section>
   );
 };
 
-export const ChartAverageHourlyPerAllServices: FC<ChartItemProps> = ({ className }): JSX.Element => {
+export const ChartCancellationRate: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const canceledAppointments = useSelector(selectCanceledAppointment);
+  const appointmentsPerNextWeekRangeAndLastWeek = useSelector(selectAmountAppointmentPerNextWeekRangeAndLastWeek);
+  const value = canceledAppointments !== 0 ? Math.round((canceledAppointments * 100) / appointmentsPerNextWeekRangeAndLastWeek) : 0;
+
+  return (
+    <section className={className}>
+      <h3 className="mb-2">Cancellation Rate</h3>
+      <div className="text-muted mb-4 pt-1">{`Next ${WEEK_RANGE} weeks & Last Week`}</div>
+      <ArcGauge value={value} arcCenterRender={(currentValue: number, color: string) => <h3 style={{ color }}>{currentValue}%</h3>} />
+    </section>
+  );
+};
+
+export const ChartAverageHourlyRateAllServices: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const sales = useSelector(selectTotalServiceSales);
   const hours = useSelector(selectTotalAppointmentHours);
   const value = sales !== 0 ? Math.round(sales / hours) : 0;
 
   return (
     <section className={className}>
-      <h3 className="mb-2">Average Hourly Rate - All Services</h3>
-      <div className="text-muted mb-3 pt-1">Last 12 weeks</div>
+      <h3 className="mb-2">Average Hourly Rate All Services</h3>
+      <div className="text-muted mb-3 pt-1">{`Last ${WEEK_RANGE} weeks`}</div>
       <LinearGauge pointer={{ value, color: '#28b4c8', size: 40 }} scale={{ max: value + 20 }} style={{ height: 320 }} />
     </section>
   );
 };
 
-export const ChartAverageCustomerOrders: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const totalSales = useSelector(selectTotalAppointmentSales);
+export const ChartAverageCustomerValue: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const totalSales = useSelector(selectTotalAppointmentSalesPerLast12Months);
   const amountActiveCustomers = useSelector(selectAmountActiveCustomers);
   const value = totalSales !== 0 ? Math.round(totalSales / amountActiveCustomers) : 0;
 
   return (
     <section className={className}>
-      <h3 className="mb-2">Average Order Value</h3>
-      <div className="text-muted mb-3 pt-1">Last 12 weeks</div>
-      <LinearGauge pointer={{ value, color: '#f6d245', size: 40 }} scale={{ max: value + 20, minorUnit: 1, majorUnit: 10 }} style={{ height: 320 }} />
+      <h3 className="mb-2">Average Customer Value</h3>
+      <div className="text-muted mb-3 pt-1">{`Last ${WEEK_RANGE} months`}</div>
+      <LinearGauge
+        pointer={{ value, color: '#f6d245', size: 40 }}
+        scale={{ max: value + 20, minorUnit: 10, majorUnit: 50 }}
+        style={{ height: 320 }}
+      />
     </section>
   );
 };

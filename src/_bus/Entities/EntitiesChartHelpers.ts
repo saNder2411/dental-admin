@@ -4,7 +4,7 @@ import { WeekPoint } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 // Constants
-import { WEEK_RANGE, PREV_WEEKS, DEFAULT_WORK_WEEK_HOURS } from '../Constants';
+import { WEEK_RANGE, START_PREV_WEEKS_DATE, DEFAULT_WORK_WEEK_HOURS } from '../Constants';
 
 const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint[], number[]] => {
   let points: WeekPoint[] = [];
@@ -21,7 +21,7 @@ const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [WeekPoint
   return [points, weekNumbers];
 };
 
-export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, PREV_WEEKS);
+export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, START_PREV_WEEKS_DATE);
 
 // const calcStaffWorkDayHours = (startWorkDay: string | null, endWorkDay: string | null) => {
 //   if (!startWorkDay || !endWorkDay) return 0;
@@ -54,37 +54,41 @@ export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, PRE
 // };
 
 const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {
-  return appointments.reduce<{ amountAppointment: number; durationInHours: number; sales: number }>(
+  return appointments.reduce(
     (acc, appointment) => {
       if (appointment.LookupHR01teamId === staffMemberID) {
         return {
           ...acc,
           amountAppointment: acc.amountAppointment + 1,
           durationInHours: acc.durationInHours + appointment.Duration / 60 / 60,
-          sales: acc.sales + appointment.ServiceCharge,
+          staffMemberSales: acc.staffMemberSales + appointment.ServiceCharge,
         };
       }
 
       return acc;
     },
-    { amountAppointment: 0, durationInHours: 0, sales: 0 }
+    { amountAppointment: 0, durationInHours: 0, staffMemberSales: 0 }
   );
 };
 
 export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
-  staffDataItem: StaffDataItem,
-  sliceAppointmentsInWeekRange: AppointmentDataItem[]
+  { StaffWeekHours, ID }: StaffDataItem,
+  sliceAppointmentsInWeekRange: AppointmentDataItem[],
+  totalAppointmentSales: number
 ) => {
-  const staffMemberWorkWeekHours = staffDataItem.StaffWeekHours ?? DEFAULT_WORK_WEEK_HOURS;
-  const { amountAppointment, durationInHours, sales } = calcAppointmentsDurationSalesPerStaffMember(staffDataItem.ID, sliceAppointmentsInWeekRange);
+  const staffMemberWorkWeekHours = StaffWeekHours ?? DEFAULT_WORK_WEEK_HOURS;
+  const { amountAppointment, durationInHours, staffMemberSales } = calcAppointmentsDurationSalesPerStaffMember(ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(((durationInHours / WEEK_RANGE) * 100) / staffMemberWorkWeekHours);
-  const averageSalesPerWeekPerStaffMember = +(sales / WEEK_RANGE).toFixed(2);
+  const averageSalesPerWeekPerStaffMember = +(staffMemberSales / WEEK_RANGE).toFixed(2);
+  const percentStaffMemberSaleOfTotalSales = staffMemberSales !== 0 ? Math.round((staffMemberSales * 100) / totalAppointmentSales) : 0;
 
   return {
     averageAppointmentsPerWeekPerStaffMember,
     percentEmploymentPerWeekPerStaffMember,
     averageSalesPerWeekPerStaffMember,
+    percentStaffMemberSaleOfTotalSales,
+    staffMemberSales,
     staffMemberWorkWeekHours,
   };
 };

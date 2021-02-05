@@ -1,14 +1,15 @@
-import { addWeeks, addDays } from '@progress/kendo-date-math';
+import { addWeeks, addDays, addYears } from '@progress/kendo-date-math';
 // Types
 import { StatusNames } from './_Appointments/AppointmentsTypes';
 
 const NOW = new Date(new Date().setHours(4, 0, 0));
 export const MONDAY_CURRENT_WEEK = addDays(NOW, -(NOW.getDay() - 1));
 export const WEEK_RANGE = 12;
-export const PREV_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, -WEEK_RANGE);
-export const NEXT_WEEKS = addWeeks(MONDAY_CURRENT_WEEK, WEEK_RANGE);
+export const START_PREV_WEEKS_DATE = addWeeks(MONDAY_CURRENT_WEEK, -WEEK_RANGE);
+export const END_NEXT_WEEKS_DATE = addWeeks(MONDAY_CURRENT_WEEK, WEEK_RANGE);
 export const PREV_WEEK = addWeeks(MONDAY_CURRENT_WEEK, -1);
 export const DEFAULT_WORK_WEEK_HOURS = 40;
+export const LAST_12_MONTHS_DATE = addYears(MONDAY_CURRENT_WEEK, -1);
 
 export const statusNameList = Object.values(StatusNames);
 
