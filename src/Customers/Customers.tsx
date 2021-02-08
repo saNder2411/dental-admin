@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
+import { GridColumn } from '@progress/kendo-react-grid';
 // Components
-import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { Grid, ColumnMenu } from '../_sections/Grid';
 import {
   CustomersTextCell,
   CustomersGenderCell,
@@ -80,23 +81,23 @@ export const Customers: FC = (): JSX.Element => {
           <GridColumn
             field={'LookupMultiHR01teamId'}
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
-            columnMenu={ColumnMenu}
+            // columnMenu={ColumnMenu}
             cell={(CustomersSvcStaffCell as unknown) as CustomGridCell}
-            filter={'text'}
+            // filter={'text'}
           />
           <GridColumn
             field={'LookupMultiHR03eventsId'}
             title={localizationService.toLanguageString('custom.upcoming', 'Upcoming')}
-            columnMenu={ColumnMenu}
+            // columnMenu={ColumnMenu}
             cell={(CustomersUpcomingCell as unknown) as CustomGridCell}
-            filter={'text'}
+            // filter={'text'}
           />
           <GridColumn
             field={'LookupMultiHR03eventsId'}
             title={localizationService.toLanguageString('custom.lastAppointments', 'Last Appointments')}
-            columnMenu={ColumnMenu}
+            // columnMenu={ColumnMenu}
             cell={(CustomersLastAppointmentsCell as unknown) as CustomGridCell}
-            filter={'text'}
+            // filter={'text'}
           />
           <GridColumn
             field={'Email'}

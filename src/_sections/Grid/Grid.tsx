@@ -1,38 +1,32 @@
-import React, { FC, useRef, useState, useCallback, useEffect } from 'react';
+import React, { FC, useRef, useState, useCallback, useEffect, ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   Grid as KendoGrid,
-  GridColumn,
-  GridColumnMenuSort,
+  GridColumnProps,
+  GridColumnMenuProps,
   GridColumnMenuFilter,
   GridToolbar,
   GridItemChangeEvent,
+  GridDataStateChangeEvent,
 } from '@progress/kendo-react-grid';
 import { Button } from '@progress/kendo-react-buttons';
 import { PDFExport } from '@progress/kendo-react-pdf';
 import { ExcelExport } from '@progress/kendo-react-excel-export';
-import { process } from '@progress/kendo-data-query';
-import { Input } from '@progress/kendo-react-inputs';
+import { process, State, SortDescriptor, CompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { Input, InputChangeEvent } from '@progress/kendo-react-inputs';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Types
 import { GenericDataItem, EntitiesKeys } from '../../_bus/Entities/EntitiesTypes';
 // Action Creators
 import { changeItemAC, addNewItemToEditAC } from '../../_bus/Entities/EntitiesAC';
 
-export const ColumnMenu: FC<any> = (props) => {
-  return (
-    <div>
-      <GridColumnMenuSort {...props} />
-      <GridColumnMenuFilter {...props} />
-    </div>
-  );
-};
+export const ColumnMenu: FC<GridColumnMenuProps> = (props) => <GridColumnMenuFilter {...props} expanded />;
 
 interface Props {
   data: GenericDataItem[];
   entityName: EntitiesKeys;
   labelNewItemBtn: string;
-  children: JSX.Element[];
+  children: ReactElement<GridColumnProps>[];
 }
 
 export const Grid: FC<Props> = ({ data, entityName, labelNewItemBtn, children }) => {
@@ -48,67 +42,36 @@ export const Grid: FC<Props> = ({ data, entityName, labelNewItemBtn, children })
     [dispatch, entityName]
   );
 
-  const [take, setTake] = useState(10);
-  const [skip, setSkip] = useState(0);
-  const [sort, setSort] = useState([]);
-  const [group, setGroup] = useState([]);
-  const [filter, setFilter] = useState();
+  const [take, setTake] = useState<number | undefined>(10);
+  const [skip, setSkip] = useState<number | undefined>(0);
+  const [sort, setSort] = useState<SortDescriptor[] | undefined>([]);
+  const [filter, setFilter] = useState<CompositeFilterDescriptor | undefined>();
   const [allColumnFilter, setAllColumnFilter] = useState('');
   const localizationService = useLocalization();
 
-  const dataState = { take, skip, sort, group, filter };
+  const dataState: State = { take, skip, sort, filter };
 
   const onDataStateChange = useCallback(
-    (event) => {
-      setTake(event.data.take);
-      setSkip(event.data.skip);
-      setSort(event.data.sort);
-      setGroup(event.data.group);
-      setFilter(event.data.filter);
+    ({ dataState }: GridDataStateChangeEvent) => {
+      setTake(dataState.take);
+      setSkip(dataState.skip);
+      setSort(dataState.sort);
+      setFilter(dataState.filter);
     },
-    [setTake, setSkip, setSort, setGroup]
+    [setTake, setSkip, setSort]
   );
 
   const onExcelExport = useCallback(() => excelExportRef?.current.save(), []);
 
-  const onAllColumnFilterChange = useCallback(
-    (evt) => {
-      console.log(evt);
-      setAllColumnFilter('');
-    },
-    [setAllColumnFilter]
-  );
+  const onAllColumnFilterChange = useCallback((evt: InputChangeEvent) => setAllColumnFilter(evt.value), [setAllColumnFilter]);
 
-  const textColumns = children
-    .map((col: any) => {
-      if (col.props.children) {
-        return col.props.children.map((child: any) => {
-          if (!child.props.filter || child.props.filter === 'text') {
-            return child.props.field;
-          }
-          return child;
-        });
-      } else if (col.props.field) {
-        if (!col.props.filter || col.props.filter === 'text') {
-          return col.props.field;
-        }
+  const textColumns = children.map(({ props }) => (props.filter === 'text' && props.field ? props.field : '')).filter((field) => field);
 
-        return col;
-      }
-      return col;
-    })
-    .flat()
-    .filter((field: any) => field);
-
-  const allColumnsFilters = textColumns.map((column: any) => ({
-    field: column,
-    operator: 'contains',
-    value: allColumnFilter,
-  }));
+  const allColumnsFilters = textColumns.map((field) => ({ field, operator: 'contains', value: allColumnFilter }));
 
   const allColumnFilteredData = allColumnFilter ? process(data, { filter: { logic: 'or', filters: allColumnsFilters } }).data : data;
 
-  const processedData = process(allColumnFilteredData, dataState as any);
+  const processedData = process(allColumnFilteredData, dataState);
 
   useEffect(() => {
     if (!processedData.data.length) {
@@ -125,10 +88,10 @@ export const Grid: FC<Props> = ({ data, entityName, labelNewItemBtn, children })
   const GridElement = (
     <KendoGrid
       {...dataState}
-      rowHeight={40}
-      pageable
       sortable
+      pageable
       data={processedData}
+      pageSize={10}
       onItemChange={onGridItemChange}
       onDataStateChange={onDataStateChange}>
       <GridToolbar>
@@ -171,5 +134,3 @@ export const Grid: FC<Props> = ({ data, entityName, labelNewItemBtn, children })
     </>
   );
 };
-
-export { GridColumn };

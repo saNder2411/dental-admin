@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
+import { GridColumn } from '@progress/kendo-react-grid';
 // Components
-import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { Grid, ColumnMenu } from '../_sections/Grid';
 import {
   StaffTextCell,
   StaffAvatarCell,
@@ -70,9 +71,9 @@ export const Staff: FC = (): JSX.Element => {
           <GridColumn
             field={'LookupMultiHR02SkillsId'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
-            columnMenu={ColumnMenu}
+            // columnMenu={ColumnMenu}
             cell={(StaffSkillsCell as unknown) as CustomGridCell}
-            filter={'text'}
+            // filter={'text'}
           />
           <GridColumn
             field={'ShowOnline'}

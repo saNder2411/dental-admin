@@ -1,10 +1,10 @@
 import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
+import { GridColumn } from '@progress/kendo-react-grid';
 // Components
 import {
   Grid,
-  GridColumn,
   ColumnMenu,
   AgendaStatusIcon,
   AgendaStatusCell,
@@ -67,7 +67,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'Start'}
             title={localizationService.toLanguageString('custom.start', 'Start')}
             columnMenu={ColumnMenu}
-            filter={'text'}
+            filter={'date'}
             minResizableWidth={190}
             cell={(AgendaStartDateCell as unknown) as CustomGridCell}
           />
@@ -75,7 +75,7 @@ export const Agenda: FC = (): JSX.Element => {
             field={'End'}
             title={localizationService.toLanguageString('custom.end', 'End')}
             columnMenu={ColumnMenu}
-            filter={'text'}
+            filter={'date'}
             minResizableWidth={190}
             cell={(AgendaEndDateCell as unknown) as CustomGridCell}
           />
@@ -84,16 +84,16 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.svcStaff', 'Svc Staff')}
             columnMenu={ColumnMenu}
             minResizableWidth={160}
-            filter={'text'}
+            filter={'numeric'}
             cell={(AgendaSvcStaffCell as unknown) as CustomGridCell}
           />
           <GridColumn
             field={'LookupMultiBP01offeringsId'}
             title={localizationService.toLanguageString('custom.services', 'Services')}
-            columnMenu={ColumnMenu}
+            // columnMenu={ColumnMenu}
             cell={(AgendaServicesCell as unknown) as CustomGridCell}
             minResizableWidth={190}
-            filter={'text'}
+            // filter={'numeric'}
           />
           <GridColumn
             field={'ServiceCharge'}
@@ -109,7 +109,7 @@ export const Agenda: FC = (): JSX.Element => {
             columnMenu={ColumnMenu}
             minResizableWidth={190}
             cell={(AgendaFullNameCell as unknown) as CustomGridCell}
-            filter={'text'}
+            filter={'numeric'}
           />
           <GridColumn
             title={localizationService.toLanguageString('custom.gender', 'Gender')}

@@ -1,8 +1,9 @@
 import React, { FC, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocalization } from '@progress/kendo-react-intl';
+import { GridColumn } from '@progress/kendo-react-grid';
 // Components
-import { Grid, GridColumn, ColumnMenu } from '../_sections';
+import { Grid, ColumnMenu } from '../_sections/Grid';
 import {
   ServicesIconCell,
   ServicesReferenceCell,
@@ -41,12 +42,12 @@ export const Services: FC = (): JSX.Element => {
     <div className="card-container grid">
       <div className="card-component">
         <Grid data={servicesData} entityName={EntitiesKeys.Services} labelNewItemBtn="New Service">
-          <GridColumn width={100} cell={ServicesIconCell as CustomGridCell} field={`ImageThumbnail`} />
+          <GridColumn width={100} title={` `} cell={ServicesIconCell as CustomGridCell} field={`ImageThumbnail`} />
           <GridColumn
             field={'Id'}
             title={localizationService.toLanguageString('custom.offeringId', 'Offering ID')}
             columnMenu={ColumnMenu}
-            filter={'text'}
+            filter={'numeric'}
             editable={false}
             width={120}
           />
@@ -67,9 +68,9 @@ export const Services: FC = (): JSX.Element => {
           <GridColumn
             field={'LookupMultiHR02SkillsId'}
             title={localizationService.toLanguageString('custom.skills', 'Skills')}
-            columnMenu={ColumnMenu}
+            // columnMenu={ColumnMenu}
             cell={ServicesSkillsCell as CustomGridCell}
-            filter={'text'}
+            // filter={'text'}
           />
           <GridColumn
             field={'MinutesDuration'}
