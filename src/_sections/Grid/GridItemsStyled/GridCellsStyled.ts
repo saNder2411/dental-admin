@@ -40,10 +40,6 @@ export const ServicesImageCell = styled.td<{ imageUrl: string }>`
 `;
 
 export const PhotoCell = styled.td<{ imageUrl: string }>`
-  && {
-    padding: 20;
-  }
-
   & .Grid__avatar {
     margin: auto;
     width: 90px;
