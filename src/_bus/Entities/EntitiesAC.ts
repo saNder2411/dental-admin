@@ -143,7 +143,7 @@ export const fetchDataFinallyAC = (entityName: EntitiesKeys) => ({ type: ActionT
 // Sync Create Data Item
 export const createDataItemRequestAC = () => ({ type: ActionTypes.CREATE_DATA_ITEM_REQUEST });
 
-export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: EntitiesKeys, clientID?: number) => ({
+export const createDataItemSuccessAC = (dataItem: GenericDataItem, entityName: EntitiesKeys, clientID: number) => ({
   type: ActionTypes.CREATE_DATA_ITEM_SUCCESS,
   dataItem,
   entityName,

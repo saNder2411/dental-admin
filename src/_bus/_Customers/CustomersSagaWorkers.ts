@@ -64,7 +64,7 @@ export function* workerCreateDataItem({
 
     const result: QueryCustomerDataItem = yield apply(API, API.customers.createDataItem, [transformDataItemForAPI(createdDataItem)]);
     const dataItem = transformAPIDataItem(result);
-    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Customers));
+    yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Customers, createdDataItem.ID));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Customers create data item Error: ${error.message}`));
   } finally {

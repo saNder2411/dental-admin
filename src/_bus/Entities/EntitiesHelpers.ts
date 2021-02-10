@@ -48,25 +48,25 @@ export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = G
   return { ...stateSlice, originalData: data, processById: { ...byId }, byId, allIDs };
 };
 
+// export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(
+//   stateSlice: EntitiesStateSlice<T>,
+//   dataItem: T
+// ): EntitiesStateSlice<T> => {
+//   const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
+//   const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
+
+//   return { ...stateSlice, originalData, processById, byId: { ...processById } };
+// };
+
 export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(
   stateSlice: EntitiesStateSlice<T>,
-  dataItem: T
-): EntitiesStateSlice<T> => {
-  const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
-  const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
-
-  return { ...stateSlice, originalData, processById, byId: { ...processById } };
-};
-
-export const updateStateSliceOnCreateAppointmentDataItem = (
-  stateSlice: EntitiesStateSlice<AppointmentDataItem>,
-  dataItem: AppointmentDataItem,
+  dataItem: T,
   clientID: number
-): EntitiesStateSlice<AppointmentDataItem> => {
-  const newID = dataItem.ID;
+): EntitiesStateSlice<T> => {
+  const serverID = dataItem.ID;
 
-  if (clientID === newID) {
-    const hasID = stateSlice.allIDs.includes(newID);
+  if (clientID === serverID) {
+    const hasID = stateSlice.allIDs.includes(serverID);
     const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
     const originalData = hasID ? updateDataItemInArray(stateSlice.originalData, dataItem) : [dataItem, ...stateSlice.originalData];
     const allIDs = hasID ? stateSlice.allIDs : [dataItem.ID, ...stateSlice.allIDs];
@@ -219,7 +219,6 @@ export const getNewDataItem = (
     case EntitiesKeys.Services:
       return {
         Id: ID,
-        Title: '',
         OfferingsName_Edit: '',
         ShowOnline: false,
         ConsultReq: false,

@@ -139,7 +139,7 @@ export function* workerUpdateRecurringDataItem({
 
     const createDataItemData = transformAPIDataItem(createResult);
     sideEffectAfterUpdatedDataItem();
-    yield put(actions.createDataItemSuccessAC(createDataItemData, EntitiesKeys.Appointments));
+    yield put(actions.createDataItemSuccessAC(createDataItemData, EntitiesKeys.Appointments, createDataItem.ID));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(error.message));
   } finally {
