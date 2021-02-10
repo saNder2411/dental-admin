@@ -228,8 +228,14 @@ export const getNewDataItem = (
         OfferingDiscount: 0,
         ContentTypeId: ContentTypes.Services,
         ID,
-        ImageThumbnail: OfferIcons.Tooth,
+        ImageThumbnail: {
+          Description: '',
+          Url: '',
+          __metadata: { type: 'SP.FieldUrlValue' },
+        },
         LookupMultiHR02SkillsId: { results: [] },
+
+        ImageThumbnailUrl: OfferIcons.Tooth,
         inEdit: true,
         isNew: true,
       };

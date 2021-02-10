@@ -25,13 +25,9 @@ import { useOriginalDataItemValuesForCells } from './GridItemsHooks';
 import { isNumber, isString } from './GridItemsHelpers';
 
 export const ServicesIconCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string | null | undefined>(
-    ID,
-    EntitiesKeys.Services,
-    field
-  );
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, string>(ID, EntitiesKeys.Services, field);
 
-  const isImageUrl = cellValue && (cellValue.includes('png') || cellValue.includes('jpg') || cellValue.includes('jpeg'));
+  const isImageUrl = cellValue.includes('png') || cellValue.includes('jpg') || cellValue.includes('jpeg');
 
   return dataItemInEditValue ? (
     <td>
@@ -140,7 +136,11 @@ export const ServicesBooleanFlagCell: FC<GridCellProps<ServiceDataItem>> = ({ da
 };
 
 export const ServicesSkillsCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, { results: number[] }>(ID, EntitiesKeys.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, { results: number[] }>(
+    ID,
+    EntitiesKeys.Services,
+    field
+  );
   const selectSkillLabels = useMemo(() => selectSkillLabelsByID(cellValue.results), [cellValue.results]);
   const skillLabels = useSelector(selectSkillLabels);
 

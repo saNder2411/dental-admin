@@ -15,7 +15,7 @@ export const ErrorIndictor = () => {
   useEffect(() => {
     let delay: NodeJS.Timeout;
     if (dataErrorMessage) {
-      delay = setTimeout(() => setShowDataError(false), 4000);
+      delay = setTimeout(() => setShowDataError(false), 8000);
     }
     return () => clearTimeout(delay);
   }, [dataErrorMessage]);
@@ -23,7 +23,7 @@ export const ErrorIndictor = () => {
   useEffect(() => {
     let delay: NodeJS.Timeout;
     if (dataItemErrorMessage) {
-      delay = setTimeout(() => setShowDataItemError(false), 4000);
+      delay = setTimeout(() => setShowDataItemError(false), 8000);
     }
     return () => clearTimeout(delay);
   }, [dataItemErrorMessage]);
