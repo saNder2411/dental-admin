@@ -59,10 +59,12 @@ export const ServicesDiscountCell: FC<GridCellProps<ServiceDataItem>> = ({ dataI
 };
 
 export const ServicesDurationCell: FC<GridCellProps<ServiceDataItem>> = ({ dataItem: { ID }, onChange, field }): JSX.Element => {
-  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number>(ID, EntitiesKeys.Services, field);
+  const { cellValue, dataItemInEditValue } = useOriginalDataItemValuesForCells<ServiceDataItem, number | null>(ID, EntitiesKeys.Services, field);
 
   return (
-    <td>{dataItemInEditValue ? <ServicesNumeric dataItemID={ID} field={field} onChange={onChange} step={5} min={5} /> : <span>{cellValue}</span>}</td>
+    <td>
+      {dataItemInEditValue ? <ServicesNumeric dataItemID={ID} field={field} onChange={onChange} step={5} min={5} /> : <span>{cellValue ?? 0}</span>}
+    </td>
   );
 };
 

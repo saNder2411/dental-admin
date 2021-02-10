@@ -1,5 +1,5 @@
 // Types
-import { ServiceDataItem, QueryServiceDataItem, MutationServiceDataItem } from './ServicesTypes';
+import { ServiceDataItem, QueryServiceDataItem, MutationServiceDataItem, ContentTypes } from './ServicesTypes';
 
 export const transformAPIData = (apiResults: QueryServiceDataItem[]): ServiceDataItem[] =>
   apiResults.map(({ __metadata, LookupMultiHR02SkillsId, ...dataItem }) => ({
@@ -22,6 +22,11 @@ export const transformDataItemForAPI = ({
   ...dataItem
 }: ServiceDataItem): MutationServiceDataItem => ({
   ...dataItem,
+  ContentTypeId: isNew
+    ? dataItem.MinutesDuration === null || dataItem.MinutesDuration === 0
+      ? ContentTypes.Product
+      : ContentTypes.Services
+    : dataItem.ContentTypeId,
   ImageThumbnail: ImageThumbnail
     ? { ...ImageThumbnail, Url: ImageThumbnailUrl }
     : { Description: ImageThumbnailUrl, Url: ImageThumbnailUrl, __metadata: { type: 'SP.FieldUrlValue' } },

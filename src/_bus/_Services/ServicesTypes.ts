@@ -12,7 +12,7 @@ interface BackendImmutableKey {
   OfferingsName_Edit: string | null;
   ShowOnline: boolean;
   ConsultReq: boolean;
-  MinutesDuration: number;
+  MinutesDuration: number | null;
   Amount: number;
   ContentTypeId: ContentTypes;
   OfferingCatType: string | null;

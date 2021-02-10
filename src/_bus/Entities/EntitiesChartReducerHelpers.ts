@@ -140,7 +140,7 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
           const [prevSales, prevHours] = acc;
 
           const nextSales = prevSales + (service.Amount - service.Amount * service.OfferingDiscount) * servicesOrProductInAppointment.length;
-          const nextHours = service.ContentTypeId === ContentTypes.Services ? prevHours + service.MinutesDuration / 60 : 0;
+          const nextHours = service.ContentTypeId === ContentTypes.Services ? prevHours + (service.MinutesDuration ?? 0) / 60 : 0;
           return [nextSales, nextHours];
         },
         [0, 0]

@@ -11,12 +11,12 @@ import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 
 export const ServicesNumeric: FC<EditCellNumericProps<ServiceDataItem>> = ({ dataItemID, field, onChange, step, min }): JSX.Element => {
   const isDataItemLoading = useSelector(selectDataItemIsLoading);
-  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number>(dataItemID, EntitiesKeys.Services, field));
+  const value = useSelector(selectProcessDataItemFieldValue<ServiceDataItem, number | null>(dataItemID, EntitiesKeys.Services, field));
 
   const onNumericChange = ({ syntheticEvent, target: { value } }: NumericTextBoxChangeEvent) =>
     onChange({ dataItem: dataItemID, field, syntheticEvent, value });
 
-  return <NumericTextBox value={value} step={step} min={min} onChange={onNumericChange} disabled={isDataItemLoading} />;
+  return <NumericTextBox value={value ?? 0} step={step} min={min} onChange={onNumericChange} disabled={isDataItemLoading} />;
 };
 
 export const ServicesNumericForDiscount: FC<EditCellNumericProps<ServiceDataItem>> = ({ dataItemID, field, onChange, step, min }): JSX.Element => {
