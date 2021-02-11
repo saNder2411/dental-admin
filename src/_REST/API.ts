@@ -73,7 +73,7 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
     .then(
       (res) =>
         SPLists.getById(listGuid)
-          .items.filter(`ID eq '${res.data.ID}'`)
+          .items.filter(`(ID eq '${res.data.ID}')`)
           // .getById(res.data.ID)
           .select(selectFields)
           .get<U[]>()
