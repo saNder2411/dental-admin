@@ -76,14 +76,12 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
           setTimeout(
             () =>
               resolve(
-                SPLists.getById(listGuid)
-                  .items.filter(`(ID eq '${res.data.ID}')`)
-                  // .getById(res.data.ID)
+                res.item
                   .select(selectFields)
-                  .get<U[]>()
-                  .then((newServerDataItem) => newServerDataItem[0])
+                  .get()
+                  .then<U>((newServerDataItem: U) => newServerDataItem)
               ),
-            3000
+            100
           )
         )
 
