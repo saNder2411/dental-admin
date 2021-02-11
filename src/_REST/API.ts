@@ -72,12 +72,21 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
     .items.add(newDataItem)
     .then(
       (res) =>
-        SPLists.getById(listGuid)
-          .items.filter(`(ID eq '${res.data.ID}')`)
-          // .getById(res.data.ID)
-          .select(selectFields)
-          .get<U[]>()
-          .then((newServerDataItem) => newServerDataItem[0])
+        new Promise((resolve) =>
+          setTimeout(
+            () =>
+              resolve(
+                SPLists.getById(listGuid)
+                  .items.filter(`(ID eq '${res.data.ID}')`)
+                  // .getById(res.data.ID)
+                  .select(selectFields)
+                  .get<U[]>()
+                  .then((newServerDataItem) => newServerDataItem[0])
+              ),
+            3000
+          )
+        )
+
       // res.item
       //   .select(selectFields)
       //   .get()
