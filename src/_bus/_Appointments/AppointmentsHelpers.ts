@@ -27,11 +27,17 @@ export const transformAPIDataItem = ({
   LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
 });
 
-export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...dataItem }: AppointmentDataItem): MutationAppointmentDataItem => ({
+export const transformDataItemForAPI = ({
+  TeamID,
+  Start,
+  End,
+  isNew,
+  inEdit,
+  Description,
+  ...dataItem
+}: AppointmentDataItem): MutationAppointmentDataItem => ({
   ...dataItem,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),
-  FilterStart: Start.toISOString(),
-  FilterEnd: End.toISOString(),
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });

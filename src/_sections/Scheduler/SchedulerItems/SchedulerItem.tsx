@@ -180,7 +180,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
               </CardHeader>
               <CardHeader>Mobile Phone: {CellPhone}</CardHeader>
               <CardHeader>Email: {Email}</CardHeader>
-              <CardHeader>Notes: {dataItem.Description}</CardHeader>
+              <CardHeader>Description: {dataItem.Description}</CardHeader>
             </CardBody>
           </CardHeader>
         </div>

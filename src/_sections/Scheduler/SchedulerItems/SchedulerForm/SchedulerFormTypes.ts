@@ -54,4 +54,6 @@ export interface CustomerFields {
   CellPhone: string | null;
 }
 
-export interface InitialFormValue extends AppointmentDataItem, RepeatOptions {}
+export interface InitialFormValue extends AppointmentDataItem, RepeatOptions {
+  Gender: '(1) Female' | '(2) Male';
+}

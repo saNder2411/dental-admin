@@ -18,23 +18,16 @@ interface BackendImmutableKey {
   EventDate: string;
   EndDate: string;
   Duration: number;
-  Description: string;
   fAllDayEvent: null | boolean;
   AppointmentStatus: StatusNames;
-  AppointmentSource: string | null;
   FirstAppointment: boolean;
   Notes: null | string;
   ServiceCharge: number;
-  ExtraFees: number;
-  ServiceDiscount: number;
-  FilterStart: string;
-  FilterEnd: string;
   MetroRRule: null | string;
   MetroRecException: null | Date[];
   RecurrenceID: null | number;
   LastNameAppt: string | null;
   Email: string | null;
-  Gender: null | '(1) Female' | '(2) Male';
   FirstName: string | null;
   CellPhone: string | null;
   ID: number;
@@ -58,10 +51,12 @@ export interface QueryAppointmentDataItem extends BackendImmutableKey {
     etag: string;
     type: 'SP.Data.MetroHR03ListItem';
   };
+  Description: string | null;
   LookupMultiBP01offeringsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
 }
 
 export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
+  Description: string | null;
   LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
 }

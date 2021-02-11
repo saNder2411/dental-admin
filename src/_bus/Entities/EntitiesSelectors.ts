@@ -77,7 +77,10 @@ export const selectCustomerById = (ID: number) => createSelector(selectCustomers
 
 export const selectStaffMembersByLastAppointments = (appointmentsID: number[]) =>
   createSelector(getAppointmentsById, getStaffById, (appointmentsById, staffById) =>
-    appointmentsID.map((appointmentID) => staffById[appointmentsById[appointmentID]?.LookupHR01teamId]?.Title ?? '').join(' | ')
+    appointmentsID
+      .map((appointmentID) => staffById[appointmentsById[appointmentID]?.LookupHR01teamId]?.Title ?? '')
+      .filter((staffMemberLastName) => staffMemberLastName)
+      .join(' | ')
   );
 
 export const selectUpcomingAppointments = (appointmentsID: number[]) =>

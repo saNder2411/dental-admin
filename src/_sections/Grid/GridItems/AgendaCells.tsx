@@ -141,7 +141,7 @@ export const AgendaGenderCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataI
   return <td>{gender}</td>;
 };
 
-export const AgendaCurrencyCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
+export const AgendaServiceChargeCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID }, field }): JSX.Element => {
   const { cellValue } = useOriginalDataItemValuesForCells<AppointmentDataItem, number>(ID, EntitiesKeys.Appointments, field);
   const intlService = useInternationalization();
   const numValue = isNumber(cellValue) ? cellValue : 50;

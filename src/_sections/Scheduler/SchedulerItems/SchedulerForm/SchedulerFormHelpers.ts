@@ -147,6 +147,7 @@ export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDa
   const {
     FirstName,
     LastNameAppt,
+    Gender,
     Title,
     Repeat,
     EndRepeat,

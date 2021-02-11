@@ -13,7 +13,6 @@ interface BackendImmutableKey {
   } | null;
   ID: number;
   Modified: string;
-  Created: string;
 }
 
 interface FrontendKey {

@@ -13,7 +13,7 @@ import {
   AgendaEndDateCell,
   AgendaSvcStaffCell,
   AgendaServicesCell,
-  AgendaCurrencyCell,
+  AgendaServiceChargeCell,
   AgendaFullNameCell,
   AgendaGenderCell,
   AgendaActionsControlCell,
@@ -100,7 +100,7 @@ export const Agenda: FC = (): JSX.Element => {
             title={localizationService.toLanguageString('custom.total', 'Total')}
             columnMenu={ColumnMenu}
             width={90}
-            cell={(AgendaCurrencyCell as unknown) as CustomGridCell}
+            cell={(AgendaServiceChargeCell as unknown) as CustomGridCell}
             filter={'numeric'}
           />
           <GridColumn
