@@ -118,7 +118,6 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
           initialValues={initialValue}
           onSubmit={onFormSubmit as any}
           render={(formRenderProps) => {
-            // console.log(`formRenderProps`, formRenderProps);
             const repeatValue = formRenderProps.valueGetter('Repeat');
             const endRepeatValue = formRenderProps.valueGetter('EndRepeat');
             const repeatOnMonthlyValue = formRenderProps.valueGetter('RepeatOnMonthly');
