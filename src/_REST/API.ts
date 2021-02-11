@@ -74,10 +74,10 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
       (res) =>
         SPLists.getById(listGuid)
           .items.filter(`ID eq '${res.data.ID}'`)
-          .getById(res.data.ID)
+          // .getById(res.data.ID)
           .select(selectFields)
-          .get()
-          .then<U>((newServerDataItem: U) => newServerDataItem)
+          .get<U[]>()
+          .then((newServerDataItem) => newServerDataItem[0])
       // res.item
       //   .select(selectFields)
       //   .get()
