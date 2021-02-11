@@ -70,11 +70,17 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
 ): Promise<U> =>
   SPLists.getById(listGuid)
     .items.add(newDataItem)
-    .then((res) =>
-      res.item
-        .select(selectFields)
-        .get()
-        .then<U>((newServerDataItem: U) => newServerDataItem)
+    .then(
+      (res) =>
+        SPLists.getById(listGuid)
+          .items.getById(res.data.ID)
+          .select(selectFields)
+          .get()
+          .then<U>((newServerDataItem: U) => newServerDataItem)
+      // res.item
+      //   .select(selectFields)
+      //   .get()
+      //   .then<U>((newServerDataItem: U) => newServerDataItem)
     );
 
 const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
