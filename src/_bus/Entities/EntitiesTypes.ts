@@ -99,10 +99,14 @@ export enum EntitiesKeys {
   Skills = 'skills',
 }
 
+export interface ById<T> {
+  [key: string]: T
+}
+
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
   originalData: T[];
-  processById: { [key: string]: T };
-  byId: { [key: string]: T };
+  processById: ById<T>;
+  byId: ById<T>;
   allIDs: number[];
 }
 

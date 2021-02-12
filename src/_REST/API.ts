@@ -72,23 +72,24 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
     .items.add(newDataItem)
     .then(
       (res) =>
-        new Promise((resolve) =>
-          setTimeout(
-            () =>
-              resolve(
-                res.item
-                  .select(selectFields)
-                  .get()
-                  .then<U>((newServerDataItem: U) => newServerDataItem)
-              ),
-            100
-          )
-        )
-
-      // res.item
-      //   .select(selectFields)
-      //   .get()
-      //   .then<U>((newServerDataItem: U) => newServerDataItem)
+        res.item
+          .select(selectFields)
+          .get()
+          .then<U>((newServerDataItem: U) => newServerDataItem)
+      // new Promise((resolve) =>
+      //   setTimeout(
+      //     () =>
+      //       resolve(
+      //         SPLists.getById(listGuid)
+      //           .items
+      //           .getById(res.data.ID)
+      //           .select(selectFields)
+      //           .get<U>()
+      //           .then((newServerDataItem) => newServerDataItem)
+      //       ),
+      //     3000
+      //   )
+      // )
     );
 
 const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
@@ -112,7 +113,7 @@ const deleteSPDataItem = (listGuid: string, dataItemID: number) =>
     .delete()
     .then(() => dataItemID);
 
-export const API: API = {
+export const API_: API = {
   appointments: {
     getData: async () =>
       getSPData<QueryAppointmentDataItem>(GuidList.Appointment, SelectFields.Appointment, OrderBy.Appointment, FilterItems.Appointments),
@@ -172,7 +173,7 @@ export const API: API = {
   },
 };
 
-export const API_: API = {
+export const API: API = {
   appointments: {
     getData: () => fetch(`${ROOT_URL}/appointments`).then((response) => response.json()),
 

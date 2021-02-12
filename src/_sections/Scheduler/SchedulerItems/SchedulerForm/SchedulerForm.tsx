@@ -25,7 +25,7 @@ import {
   FormDropDownList,
 } from './SchedulerFormItems';
 // Selectors
-import { selectCustomerById } from '../../../../_bus/Entities/EntitiesSelectors';
+import { selectCustomersById, selectStaffById, selectServicesById } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 // Types
 import { StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
@@ -67,6 +67,7 @@ import {
   emailValidator,
   getSecondLabelForRepeatEvery,
 } from './SchedulerFormHelpers';
+import { computedAppointmentDurationServiceChargeDescription } from '../../../../_bus/_Appointments/AppointmentsHelpers';
 
 export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
@@ -75,15 +76,16 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
   const selectUpdatableRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
   const updatableRecurringDataItem = useSelector(selectUpdatableRecurringDataItem);
 
-  const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);
-  const customer = useSelector(selectCustomer);
-  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customer ? customer : {};
+  const servicesById = useSelector(selectServicesById());
+  const staffById = useSelector(selectStaffById());
+  const customersById = useSelector(selectCustomersById());
+  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customersById[dataItem.LookupCM102customersId] ?? {};
 
   const initialValue = getInitialFormValue(dataItem, { FirstName, Title, Email, Gender, CellPhone });
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const newDataItem = getDataItemForApi(formDataItem);
+    const newDataItem = computedAppointmentDurationServiceChargeDescription(getDataItemForApi(formDataItem))(servicesById)(staffById)(customersById);
 
     setIsDataItemLoading(true);
 

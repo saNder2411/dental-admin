@@ -1,4 +1,8 @@
 // Types
+import { StaffDataItem } from '../../Staff';
+import { ById } from '../Entities/EntitiesTypes';
+import { CustomerDataItem } from '../_Customers/CustomersTypes';
+import { ServiceDataItem } from '../_Services/ServicesTypes';
 import { QueryAppointmentDataItem, AppointmentDataItem, MutationAppointmentDataItem } from './AppointmentsTypes';
 
 export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): AppointmentDataItem[] =>
@@ -27,17 +31,44 @@ export const transformAPIDataItem = ({
   LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
 });
 
-export const transformDataItemForAPI = ({
-  TeamID,
-  Start,
-  End,
-  isNew,
-  inEdit,
-  Description,
-  ...dataItem
-}: AppointmentDataItem): MutationAppointmentDataItem => ({
+export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...dataItem }: AppointmentDataItem): MutationAppointmentDataItem => ({
   ...dataItem,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });
+
+export const computedAppointmentDurationServiceChargeDescription = (appointment: AppointmentDataItem) => (servicesById: ById<ServiceDataItem>) => (
+  staffById: ById<StaffDataItem>
+) => (customersById: ById<CustomerDataItem>): AppointmentDataItem => {
+  const { LookupMultiBP01offeringsId, LookupHR01teamId, LookupCM102customersId } = appointment;
+  const { Duration, ServiceCharge, ServiceDescription } = LookupMultiBP01offeringsId.results.reduce(
+    (acc, serviceID) => {
+      const { Amount, MinutesDuration, OfferingDiscount, OfferingsName_Edit } = servicesById[serviceID];
+      const ServiceCharge = Amount - Amount * OfferingDiscount;
+
+      return {
+        ...acc,
+        Duration: acc.Duration + (MinutesDuration ?? 0) * 60,
+        ServiceCharge: acc.ServiceCharge + ServiceCharge,
+        ServiceDescription: [...acc.ServiceDescription, `${OfferingsName_Edit} ${ServiceCharge} (-${OfferingDiscount * 100}%)`],
+      };
+    },
+    {
+      Duration: 0,
+      ServiceCharge: 0,
+      ServiceDescription: new Array<string>(),
+    }
+  );
+  const { FullName = '', CellPhone = '', Email = '' } = customersById[LookupCM102customersId] ?? {};
+  const Description = `Appointment with - ${
+    staffById[LookupHR01teamId].FullName
+  } | Contact Reference - ${FullName}, ${CellPhone}, ${Email} | Service Type - ${ServiceDescription.join(`, `)}`;
+
+  return {
+    ...appointment,
+    Duration,
+    ServiceCharge,
+    Description,
+  };
+};

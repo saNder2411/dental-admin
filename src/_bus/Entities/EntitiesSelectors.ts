@@ -49,6 +49,8 @@ const getStaffState = ({ Entities }: RootState) => Entities.staff;
 
 export const getStaffById = ({ Entities }: RootState) => Entities.staff.byId;
 
+export const selectStaffById = () => createSelector(getStaffById, (staffById) => staffById);
+
 export const selectOriginalStaffData = ({ Entities }: RootState) => Entities.staff.originalData;
 
 export const selectStaffLastNameByID = (ID: number) => createSelector(getStaffById, (staffById) => staffById[ID]?.Title ?? '');
@@ -64,16 +66,18 @@ const getCustomersState = ({ Entities }: RootState) => Entities.customers;
 
 export const selectOriginalCustomersData = ({ Entities }: RootState) => Entities.customers.originalData;
 
-export const selectCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
+export const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
 
-export const selectCustomerFullNameByID = (ID: number) => createSelector(selectCustomersById, (customersById) => customersById[ID]?.FullName ?? '');
+export const selectCustomersById = () => createSelector(getCustomersById, (customersById) => customersById);
 
-export const selectCustomerGenderByID = (ID: number) => createSelector(selectCustomersById, (customersById) => customersById[ID]?.Gender ?? '');
+export const selectCustomerFullNameByID = (ID: number) => createSelector(getCustomersById, (customersById) => customersById[ID]?.FullName ?? '');
+
+export const selectCustomerGenderByID = (ID: number) => createSelector(getCustomersById, (customersById) => customersById[ID]?.Gender ?? '');
 
 export const selectCustomersForDropDownListData = () =>
   createSelector(getCustomersState, ({ byId, allIDs }) => allIDs.map((ID) => ({ text: byId[ID].FullName ?? '', value: ID })));
 
-export const selectCustomerById = (ID: number) => createSelector(selectCustomersById, (byId) => byId[ID]);
+export const selectCustomerById = (ID: number) => createSelector(getCustomersById, (byId) => byId[ID]);
 
 export const selectStaffMembersByLastAppointments = (appointmentsID: number[]) =>
   createSelector(getAppointmentsById, getStaffById, (appointmentsById, staffById) =>
@@ -94,6 +98,8 @@ const getServicesState = ({ Entities }: RootState) => Entities.services;
 export const getServicesById = ({ Entities }: RootState) => Entities.services.byId;
 
 export const selectOriginalServicesData = ({ Entities }: RootState) => Entities.services.originalData;
+
+export const selectServicesById = () => createSelector(getServicesById, (servicesById) => servicesById);
 
 export const selectServicesNameByID = (IDs: number[]) =>
   createSelector(getServicesById, (servicesById) => IDs.map((ID) => servicesById[ID]?.OfferingsName_Edit ?? '').join(' | '));

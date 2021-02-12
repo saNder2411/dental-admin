@@ -77,7 +77,7 @@ export const AgendaFullNameDropDownList: FC<EditCellProps<AppointmentDataItem>> 
   const customerFullName = useSelector(selectCustomerFullName);
   const dropDownListValue = { text: customerFullName, value };
 
-  const selectCustomers = useMemo(() => selectCustomersById, []);
+  const selectCustomers = useMemo(selectCustomersById, []);
   const customersById = useSelector(selectCustomers);
 
   const isValid = useTextFieldsValidation(dropDownListValue.text);

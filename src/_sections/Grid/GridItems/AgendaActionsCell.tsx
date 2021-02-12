@@ -13,32 +13,46 @@ import {
   deleteAppointmentDataItemInitAsyncAC,
 } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectMemoProcessDataItem, selectCustomerById } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoProcessDataItem, selectCustomersById, selectStaffById, selectServicesById } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
+// Helpers
+import { computedAppointmentDurationServiceChargeDescription } from '../../../_bus/_Appointments/AppointmentsHelpers';
 
 export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
+  const dispatch = useDispatch();
+
   const selectDataItem = useMemo(() => selectMemoProcessDataItem<AppointmentDataItem>(ID, EntitiesKeys.Appointments), [ID]);
   const dataItem = useSelector(selectDataItem);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
-  const dispatch = useDispatch();
+
   const isCustomerIDValid = useByIdValidation(dataItem.LookupCM102customersId);
   const { isValid: isValidStartEvent } = useStartDateEventValidation(dataItem.Start, dataItem.LookupHR01teamId);
   const { isValid: isValidEndEvent } = useEndDateEventValidation(dataItem.End, dataItem.LookupHR01teamId);
-  const selectCustomer = useMemo(() => selectCustomerById(dataItem.LookupCM102customersId), [dataItem.LookupCM102customersId]);
-  const customer = useSelector(selectCustomer);
-  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customer ? customer : {};
+
+  const servicesById = useSelector(selectServicesById());
+  const staffById = useSelector(selectStaffById());
+  const customersById = useSelector(selectCustomersById());
+  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customersById[dataItem.LookupCM102customersId] ?? {};
+
+  const newDataItem = {
+    ...computedAppointmentDurationServiceChargeDescription(dataItem)(servicesById)(staffById)(customersById),
+    Email,
+    CellPhone,
+    FirstName,
+    LastNameAppt: Title,
+    Gender,
+  };
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    const newDataItem = { ...dataItem, Email, CellPhone, FirstName, LastNameAppt: Title, Gender };
     dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, () => setIsDataItemLoading(false)));
-  }, [CellPhone, Email, FirstName, Gender, Title, dataItem, dispatch]);
+  }, [dispatch, newDataItem]);
 
   const onUpdatedDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(updateAppointmentDataItemInitAsyncAC(dataItem, () => setIsDataItemLoading(false)));
-  }, [dataItem, dispatch]);
+    dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => setIsDataItemLoading(false)));
+  }, [dispatch, newDataItem]);
 
   const onDeleteDataItem = useCallback(() => {
     setIsDataItemLoading(true);

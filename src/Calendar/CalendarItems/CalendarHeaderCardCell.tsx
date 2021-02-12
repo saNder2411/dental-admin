@@ -15,7 +15,7 @@ export const CalendarHeaderCardCell: FC<Props> = ({ cardColor, employeeImage, fu
     <SC.CalendarHeaderCardCell cardColor={cardColor}>
       <Card>
         <CardHeader className="k-hbox">
-          <Avatar type="image" shape="circle">
+          <Avatar type="image" shape="circle" style={{ background: cardColor }}>
             <img src={employeeImage} alt="employee avatar" />
           </Avatar>
           <div>

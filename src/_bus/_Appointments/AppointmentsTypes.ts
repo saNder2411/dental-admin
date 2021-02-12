@@ -15,20 +15,21 @@ export enum StatusNames {
 interface BackendImmutableKey {
   Id: number;
   Title: string;
+  AppointmentStatus: StatusNames;
   EventDate: string;
   EndDate: string;
+  Description: string | null;
   Duration: number;
-  fAllDayEvent: null | boolean;
-  AppointmentStatus: StatusNames;
-  FirstAppointment: boolean;
-  Notes: null | string;
   ServiceCharge: number;
+  Notes: null | string;
+  fAllDayEvent: null | boolean;
   MetroRRule: null | string;
   MetroRecException: null | Date[];
   RecurrenceID: null | number;
+  FirstAppointment: boolean;
+  FirstName: string | null;
   LastNameAppt: string | null;
   Email: string | null;
-  FirstName: string | null;
   CellPhone: string | null;
   ID: number;
   Modified: string;
@@ -51,12 +52,10 @@ export interface QueryAppointmentDataItem extends BackendImmutableKey {
     etag: string;
     type: 'SP.Data.MetroHR03ListItem';
   };
-  Description: string | null;
   LookupMultiBP01offeringsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
 }
 
 export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
-  Description: string | null;
   LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
 }

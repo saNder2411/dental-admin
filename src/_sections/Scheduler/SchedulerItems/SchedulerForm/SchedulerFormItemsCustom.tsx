@@ -125,7 +125,7 @@ export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) =>
   const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(LookupEntityId), [LookupEntityId]);
   const customerFullName = useSelector(selectCustomerFullName);
   const comboBoxValue = { text: customerFullName, value };
-  const customerById = useSelector(selectCustomersById);
+  const customerById = useSelector(selectCustomersById());
 
   const onComboBoxValueChange = useCallback(
     (evt: ComboBoxChangeEvent) => {
