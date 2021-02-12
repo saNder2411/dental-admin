@@ -134,11 +134,8 @@ export const updateStateSliceOnChangeDataItemInGrid = <T extends GenericDataItem
   return { ...stateSlice, processById };
 };
 
-export const updateStateSliceOnAddNewItemToEditInGrid = <T extends GenericDataItem = GenericDataItem>(
-  stateSlice: EntitiesStateSlice<T>,
-  entityName: EntitiesKeys
-): EntitiesStateSlice<T> => {
-  const newDataItem = getNewDataItem(stateSlice.allIDs, entityName) as T;
+export const updateStateSliceOnAddNewItemToEditInGrid = (stateSlice: EntitiesStateSlice, entityName: EntitiesKeys): EntitiesStateSlice => {
+  const newDataItem = getDefaultNewDataItem(generateId(stateSlice.allIDs))(entityName);
   const originalData = [newDataItem, ...stateSlice.originalData];
   const processById = { ...stateSlice.processById, [newDataItem.ID]: newDataItem };
   const allIDs = [newDataItem.ID, ...stateSlice.allIDs];
@@ -146,12 +143,7 @@ export const updateStateSliceOnAddNewItemToEditInGrid = <T extends GenericDataIt
   return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
 };
 
-export const getNewDataItem = (
-  allIDs: number[],
-  entityName: EntitiesKeys
-): AppointmentDataItem | CustomerDataItem | ServiceDataItem | StaffDataItem | SkillDataItem => {
-  const ID = generateId(allIDs);
-
+export const getNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewItem[EntitiesKeys] => {
   switch (entityName) {
     case EntitiesKeys.Appointments:
       return {
@@ -267,3 +259,118 @@ export const getNewDataItem = (
       throw new Error(`Grid Data Name not correct`);
   }
 };
+
+interface NewItem {
+  [EntitiesKeys.Appointments]: AppointmentDataItem;
+  [EntitiesKeys.Services]: ServiceDataItem;
+  [EntitiesKeys.Staff]: StaffDataItem;
+  [EntitiesKeys.Customers]: CustomerDataItem;
+  [EntitiesKeys.Skills]: SkillDataItem;
+}
+
+const getDefaultNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewItem[EntitiesKeys] =>
+  ({
+    [EntitiesKeys.Appointments]: {
+      Id: ID,
+      Title: ``,
+      AppointmentStatus: StatusNames.Consultation,
+      EventDate: new Date().toISOString(),
+      EndDate: new Date().toISOString(),
+      Description: null,
+      Duration: 3600,
+      Notes: '',
+      ServiceCharge: 0,
+      fAllDayEvent: null,
+      RecurrenceID: null,
+      Email: null,
+      MetroRRule: null,
+      MetroRecException: null,
+      FirstAppointment: false,
+      FirstName: ``,
+      LastNameAppt: ``,
+      CellPhone: null,
+      LookupCM102customersId: -1,
+      LookupHR01teamId: 1,
+      LookupMultiBP01offeringsId: { results: [] },
+      ID,
+      Modified: new Date().toISOString(),
+
+      TeamID: 1,
+      Start: new Date(),
+      End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
+      inEdit: true,
+      isNew: true,
+    },
+    [EntitiesKeys.Customers]: {
+      Id: ID,
+      Title: '',
+      FirstName: ``,
+      FullName: '',
+      CellPhone: '',
+      Email: '',
+      Gender: '(1) Female' as const,
+      ClientPhoto: {
+        Description: '',
+        Url: '',
+        __metadata: { type: 'SP.FieldUrlValue' },
+      },
+      ID,
+      Modified: new Date().toISOString(),
+      LookupMultiHR01teamId: { results: [] },
+      LookupMultiHR03eventsId: { results: [] },
+
+      ClientPhotoUrl: '',
+      inEdit: true,
+      isNew: true,
+    },
+    [EntitiesKeys.Services]: {
+      Id: ID,
+      OfferingsName_Edit: '',
+      ShowOnline: false,
+      ConsultReq: false,
+      MinutesDuration: 60,
+      Amount: 50,
+      OfferingCatType: '',
+      OfferingDiscount: 0,
+      ContentTypeId: ContentTypes.Services,
+      ID,
+      ImageThumbnail: {
+        Description: '',
+        Url: '',
+        __metadata: { type: 'SP.FieldUrlValue' },
+      },
+      LookupMultiHR02SkillsId: { results: [] },
+
+      ImageThumbnailUrl: OfferIcons.Tooth,
+      inEdit: true,
+      isNew: true,
+    },
+    [EntitiesKeys.Staff]: {
+      Id: ID,
+      Title: '',
+      FirstName: '',
+      FullName: '',
+      TeamProfilePhoto: {
+        __metadata: { type: 'SP.FieldUrlValue' },
+        Description: '',
+        Url: '',
+      },
+      ShowOnline: false,
+      Email: '',
+      CellPhone: '',
+      JobTitle: '',
+      CalendarColHex: generateColor(),
+      StaffWeekHours: DEFAULT_WORK_WEEK_HOURS,
+      LookupMultiHR02SkillsId: { results: [] },
+      ID,
+
+      TeamProfilePhotoUrl: '',
+      inEdit: true,
+      isNew: true,
+    },
+    [EntitiesKeys.Skills]: {
+      Id: ID,
+      ID,
+      Title: '',
+    },
+  }[entityName]);

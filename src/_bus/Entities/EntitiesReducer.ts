@@ -103,7 +103,7 @@ export const reducer = (state: EntitiesState = initialState, action: Actions): E
     case ActionTypes.ADD_NEW_ITEM_TO_EDIT:
       return {
         ...state,
-        [action.entityName]: updateStateSliceOnAddNewItemToEditInGrid<GenericDataItem>(state[action.entityName], action.entityName),
+        [action.entityName]: updateStateSliceOnAddNewItemToEditInGrid(state[action.entityName], action.entityName),
       };
 
     case ActionTypes.DISCARD_ADD_NEW_ITEM_TO_DATA:

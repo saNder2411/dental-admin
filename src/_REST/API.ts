@@ -72,23 +72,23 @@ const createSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg,
     .items.add(newDataItem)
     .then(
       (res) =>
-        // res.item
-        //   .select(selectFields)
-        //   .get()
-        //   .then<U>((newServerDataItem: U) => newServerDataItem)
-        new Promise((resolve) =>
-          setTimeout(
-            () =>
-              resolve(
-                SPLists.getById(listGuid)
-                  .items.getById(res.data.ID)
-                  .select(selectFields)
-                  .get<U>()
-                  .then((newServerDataItem) => newServerDataItem)
-              ),
-            0
-          )
-        )
+        res.item
+          .select(selectFields)
+          .get()
+          .then<U>((newServerDataItem: U) => newServerDataItem)
+        // new Promise((resolve) =>
+        //   setTimeout(
+        //     () =>
+        //       resolve(
+        //         SPLists.getById(listGuid)
+        //           .items.getById(res.data.ID)
+        //           .select(selectFields)
+        //           .get<U>()
+        //           .then((newServerDataItem) => newServerDataItem)
+        //       ),
+        //     100
+        //   )
+        // )
     );
 
 const updateSPDataItem = <T extends TMutationDataItemArg = TMutationDataItemArg, U extends TQueryDataResponse = TQueryDataResponse>(
