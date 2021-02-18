@@ -39,7 +39,7 @@ export const Calendar: FC = () => {
 
   const selectedDate = useSelector(selectSelectedDate);
   const selectedView = useSelector(selectSelectedView);
-  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, 1);
+  const initDataForNewDataItem = getInitDataForNewDataItem(selectedDate, selectedView, staffData.find(({ ID }) => mapTeamToFiltered[ID])?.ID ?? 1);
   const [isAgendaDataItemLoading, setIsAgendaDataItemLoading] = useState(false);
   const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
 

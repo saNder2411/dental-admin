@@ -1,23 +1,21 @@
 import React, { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { SchedulerEditItem as KendoSchedulerEditItem } from '@progress/kendo-react-scheduler';
 // Components
 import { SchedulerForm } from './SchedulerForm';
-// Types
-import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Selectors
 import { selectMemoAppointmentProcessByID } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoNewAppointmentDataItemForItem } from '../../../_bus/Scheduler/SchedulerSelectors';
 
 interface Props {
   dataItemID: number;
-  onHideForm?: () => void;
+  onHideForm: () => void;
 }
 
-export const SchedulerEditItem: FC<Props> = ({ dataItemID, onHideForm }): JSX.Element => {
+export const SchedulerEditItem: FC<Props> = ({ dataItemID, onHideForm }): JSX.Element | null => {
   const selectProcessDataItem = useMemo(() => selectMemoAppointmentProcessByID(dataItemID), [dataItemID]);
   const processDataItem = useSelector(selectProcessDataItem);
+  const selectNewAppointment = useMemo(selectMemoNewAppointmentDataItemForItem, []);
+  const newDataItem = useSelector(selectNewAppointment);
 
-  // return <KendoSchedulerEditItem {...props} formItem={processDataItem?.isNew ? null : processDataItem} form={SchedulerForm} />;
-
-  return <SchedulerForm dataItem={processDataItem} onHideForm={onHideForm} />;
+  return newDataItem ? null : <SchedulerForm dataItem={processDataItem} onHideForm={onHideForm} />;
 };

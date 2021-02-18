@@ -15,10 +15,13 @@ export const selectSelectedView = ({ Scheduler }: RootState) => Scheduler.select
 export const selectMemoUpdatableRecurringDataItem = () =>
   createSelector(getUpdatableRecurringDataItem, (updatableRecurringDataItem) => updatableRecurringDataItem);
 
-export const selectMemoNewAppointmentDataItem = (start: Date, TeamID: number) => {
+export const selectMemoNewAppointmentDataItemForSlot = (start: Date, TeamID: number) => {
   return createSelector(getNewAppointmentDataItem, (newAppointmentDataItem) => {
     if (!newAppointmentDataItem) return null;
 
     return newAppointmentDataItem?.Start.getTime() === start.getTime() && newAppointmentDataItem.TeamID === TeamID ? newAppointmentDataItem : null;
   });
 };
+
+export const selectMemoNewAppointmentDataItemForItem = () =>
+  createSelector(getNewAppointmentDataItem, (newAppointmentDataItem) => newAppointmentDataItem);

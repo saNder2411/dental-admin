@@ -1,16 +1,13 @@
 import React, { FC, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerItem as KendoSchedulerItem } from '@progress/kendo-react-scheduler';
-import { useAsyncFocusBlur } from '@progress/kendo-react-common';
 import { Popup } from '@progress/kendo-react-popup';
-import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { CardHeader, CardBody } from '@progress/kendo-react-layout';
-import { Button } from '@progress/kendo-react-buttons';
 // Styled Components
 import * as SC from '../SchedulerItemsStyled/SchedulerItemStyled';
 // Components
 import { SchedulerEditItem } from './SchedulerEditItem';
+import { SchedulerItemPopupContent } from './SchedulerItemPopupContent';
 import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirmModal } from './SchedulerConfirmModals';
 // Instruments
 import { IconMap } from '../../../_instruments';
@@ -24,20 +21,15 @@ import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyn
 import { changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
-import { selectCustomerById, selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element | null => {
-  const { dataItem, children, zonedStart, zonedEnd, _ref, group, onClick, onBlur, onFocus, isRecurring } = props;
-
-  const intl = useInternationalization();
+  const { dataItem, children, _ref, group, isRecurring } = props;
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
-  // const isOriginalDataItem = new Date(dataItem.EventDate).getTime() === dataItem.Start.getTime();
-  // const inEditValue = useSelector(selectProcessDataItemFieldValue<AppointmentDataItem, boolean>(dataItem.ID, EntitiesKeys.Appointments, 'inEdit'));
-  // const inEdit = inEditValue && isOriginalDataItem;
   const selectedView = useSelector(selectSelectedView);
 
   const [showEditForm, setShowEditForm] = useState(false);
@@ -49,35 +41,17 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
   const resource = (group.resources[0] as unknown) as StaffDataItem | undefined;
-  console.log(`SchedulerItemProps`, props, showEditForm);
-  const color = resource?.CalendarColHex;
+  // console.log(`SchedulerItemProps`, props, showEditForm);
   const iconName = dataItem.AppointmentStatus;
   const iconDentalName = StatusNames.Tooth;
   const width = _ref.current?.element?.offsetWidth;
   const height = _ref.current?.element?.offsetHeight;
 
-  const customer = useSelector(selectCustomerById(dataItem.LookupCM102customersId));
-  const { Email = '', CellPhone = '' } = customer ? customer : {};
-
   const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
 
-  const onSchedulerItemClick = useCallback(
-    (evt) => {
-      if (appointmentIsDataItemLoading) return;
-
-      setShowPopup((prevState) => !prevState);
-      onClick && onClick(evt);
-    },
-    [appointmentIsDataItemLoading, onClick]
-  );
-
-  const onSchedulerItemBlur = useCallback(
-    (evt) => {
-      setShowPopup(false);
-      onBlur && onBlur(evt);
-    },
-    [onBlur]
-  );
+  const onSchedulerItemClick = useCallback(() => !appointmentIsDataItemLoading && setShowPopup((prevState) => !prevState), [
+    appointmentIsDataItemLoading,
+  ]);
 
   const onCloseBtnClick = useCallback(() => setShowPopup(false), [setShowPopup]);
 
@@ -103,8 +77,6 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     setShowRemoveDialog(true);
   }, [isRecurring]);
 
-  const { onFocus: onFocusAsync, onBlur: onBlurAsync } = useAsyncFocusBlur({ onFocus, onBlur: onSchedulerItemBlur });
-
   const onConfirmDeleteDataItem = () => {
     setIsDataItemLoading(true);
     if (isRemoveOccurrence) {
@@ -119,13 +91,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   return resource ? (
     <>
-      <KendoSchedulerItem
-        {...props}
-        onClick={onSchedulerItemClick}
-        onDoubleClick={onEditBtnClick}
-        onFocus={onFocusAsync}
-        onBlur={onBlurAsync}
-        onRemoveClick={onDeleteBtnClick}>
+      <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onDoubleClick={onEditBtnClick} onRemoveClick={onDeleteBtnClick}>
         {height && height > 25 && (
           <SC.SchedulerItemTopWrapper isSmallDisplay={!!(width && width < 120)}>
             {width && width > 120 && children}
@@ -147,46 +113,13 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         popupClass="SchedulerItemContent-popup-content"
         anchor={_ref.current?.element as any}
         style={{ width: 330 }}>
-        <div className="rounded" tabIndex={-1} onFocus={onFocusAsync as any} onBlur={onBlurAsync as any}>
-          <CardHeader>
-            <CardHeader>
-              <div className="d-flex align-items-center">
-                <div className="team-marker" style={{ backgroundColor: color }} />
-                <h5>{dataItem.Title}</h5>
-                <div className="ml-auto">
-                  <Button iconClass="k-icon k-i-edit" look="flat" onClick={onEditBtnClick} />
-                  <Button iconClass="k-icon k-i-delete" look="flat" onClick={onDeleteBtnClick} />
-                  <Button iconClass="k-icon k-i-close" look="flat" onClick={onCloseBtnClick} />
-                </div>
-              </div>
-            </CardHeader>
-            <CardBody>
-              <CardHeader>
-                <div className="row">
-                  <span className="col-md-9">Status: {dataItem.AppointmentStatus}</span>
-                  <div className="col-md-4 row">
-                    <div className="col-md-6">
-                      <FontAwesomeIcon icon={IconMap[iconDentalName].icon} color={IconMap[iconDentalName].statusColor} />
-                    </div>
-                    <div className="col-md-6">
-                      <FontAwesomeIcon icon={IconMap[iconName].icon} style={IconMap[iconName].style} />
-                    </div>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardHeader>Ref ID: {dataItem.Title}</CardHeader>
-              <CardHeader>
-                <span className="k-icon k-i-clock" /> Start: {intl.formatDate(zonedStart, 't')}
-              </CardHeader>
-              <CardHeader>
-                <span className="k-icon k-i-clock" /> End: {intl.formatDate(zonedEnd, 't')}
-              </CardHeader>
-              <CardHeader>Mobile Phone: {CellPhone}</CardHeader>
-              <CardHeader>Email: {Email}</CardHeader>
-              <CardHeader>Description: {dataItem.Description}</CardHeader>
-            </CardBody>
-          </CardHeader>
-        </div>
+        <SchedulerItemPopupContent
+          resource={resource}
+          dataItem={dataItem}
+          onEditBtnClick={onEditBtnClick}
+          onDeleteBtnClick={onDeleteBtnClick}
+          onCloseBtnClick={onCloseBtnClick}
+        />
       </Popup>
       {showRemoveDialog && (
         <RemoveConfirmModal
@@ -217,7 +150,6 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
             setShowEditOccurrenceDialog(false);
             dispatch(changeUpdatedRecurringDataItemAC(getNewDataItemWithUpdateException(dataItem, new Date(dataItem.Start.getTime()))));
             dispatch(addNewItemToEditFormAC(getInitDataForNewDataItem(dataItem.Start, selectedView, resource?.ID ?? 1), appointmentsAllIDs));
-            setShowEditForm(true);
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);

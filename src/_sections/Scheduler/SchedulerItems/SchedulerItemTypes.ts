@@ -1,4 +1,4 @@
-import { SchedulerItemProps, SchedulerFormProps, SchedulerSlotProps } from '@progress/kendo-react-scheduler';
+import { SchedulerItemProps } from '@progress/kendo-react-scheduler';
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Types
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
@@ -17,13 +17,4 @@ export interface CustomSchedulerItemProps<T = KendoDataItem> extends SchedulerIt
 
 export interface CustomFieldRenderProps<T = Array<CustomerDataItem | StaffDataItem>> extends FieldRenderProps {
   domainData: T;
-}
-
-export interface CustomSchedulerFormProps<T = KendoDataItem>  {
-  dataItem: T;
-  onHideForm?: () => void;
-}
-
-export interface CustomSchedulerSlotProps<T = KendoDataItem> extends SchedulerSlotProps {
-  dataItem: T;
 }

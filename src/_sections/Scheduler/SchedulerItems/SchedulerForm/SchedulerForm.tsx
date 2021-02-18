@@ -28,10 +28,9 @@ import {
 import { selectCustomersById, selectStaffById, selectServicesById } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 // Types
-import { StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
+import { AppointmentDataItem ,StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../../_bus/Entities/EntitiesTypes';
 import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
-import { CustomSchedulerFormProps } from '../SchedulerItemTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
 import {
@@ -69,9 +68,15 @@ import {
 } from './SchedulerFormHelpers';
 import { computedAppointmentDurationServiceChargeDescription } from '../../../../_bus/_Appointments/AppointmentsHelpers';
 
-export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onHideForm = () => void 0 }): JSX.Element => {
+interface Props {
+  dataItem: AppointmentDataItem;
+  onHideForm?: () => void;
+}
+
+export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
+  console.log(`SchedulerFormDataItem`, dataItem);
 
   const selectUpdatableRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
   const updatableRecurringDataItem = useSelector(selectUpdatableRecurringDataItem);
@@ -100,16 +105,19 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onHideFo
   };
 
   const onDialogClose = () => {
+    onHideForm();
+
+    if (dataItem.isNew && updatableRecurringDataItem) {
+      dispatch(discardAddNewItemToDataInSchedulerAC());
+      dispatch(changeUpdatedRecurringDataItemAC(null));
+      return;
+    }
+
     if (dataItem.isNew) {
       dispatch(discardAddNewItemToDataInSchedulerAC());
       return;
     }
 
-    if (updatableRecurringDataItem) {
-      dispatch(changeUpdatedRecurringDataItemAC(null));
-      return;
-    }
-    onHideForm();
     dispatch(cancelEditAC(dataItem.ID, EntitiesKeys.Appointments));
   };
 

@@ -25,6 +25,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   const onDataChange = useCallback(
     ({ updated }: SchedulerDataChangeEvent) => {
       if (typeof updated[0] === 'number' || !updated[0]) return;
+
       setIsAgendaDataItemLoading(true);
 
       const [updatedDataItem] = updated as AppointmentDataItem[];
