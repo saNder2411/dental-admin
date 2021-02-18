@@ -23,7 +23,7 @@ import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 import { fetchAppointmentsDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
 import {
-  selectOriginalCustomersData,
+  selectProcessCustomersData,
   selectOriginalStaffDataLength,
   selectOriginalAppointmentsDataLength,
   selectOriginalServicesDataLength,
@@ -33,7 +33,7 @@ import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Customers: FC = (): JSX.Element => {
   const localizationService = useLocalization();
-  const customersData = useSelector(selectOriginalCustomersData);
+  const customersData = useSelector(selectProcessCustomersData);
   const staffDataLength = useSelector(selectOriginalStaffDataLength);
   const appointmentsDataLength = useSelector(selectOriginalAppointmentsDataLength);
   const servicesDataLength = useSelector(selectOriginalServicesDataLength);

@@ -69,7 +69,7 @@ import {
 } from './SchedulerFormHelpers';
 import { computedAppointmentDurationServiceChargeDescription } from '../../../../_bus/_Appointments/AppointmentsHelpers';
 
-export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.Element => {
+export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem, onHideForm = () => void 0 }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -90,13 +90,13 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
     setIsDataItemLoading(true);
 
     if (updatableRecurringDataItem && dataItem.isNew) {
-      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, newDataItem, () => {}));
+      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, newDataItem, onHideForm));
       return;
     }
 
     dataItem.isNew
-      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, () => {}))
-      : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => {}));
+      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, onHideForm))
+      : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, onHideForm));
   };
 
   const onDialogClose = () => {
@@ -109,7 +109,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
       dispatch(changeUpdatedRecurringDataItemAC(null));
       return;
     }
-
+    onHideForm();
     dispatch(cancelEditAC(dataItem.ID, EntitiesKeys.Appointments));
   };
 
@@ -358,7 +358,7 @@ export const SchedulerForm: FC<CustomSchedulerFormProps> = ({ dataItem }): JSX.E
                   <CustomMemoField
                     id="staff"
                     name="LookupHR01teamId"
-                    label="Support Stuff"
+                    label="Support Staff"
                     component={StaffFormDropDownList}
                     disabled={isDataItemLoading}
                   />

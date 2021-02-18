@@ -38204,47 +38204,11 @@
       "Modified": "2021-01-15T14:22:11Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1413)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1413)",
-        "etag": "\"1\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 1413,
-      "Title": ".-01412",
-      "EventDate": "2021-02-04T09:00:00Z",
-      "EndDate": "2021-02-04T10:00:00Z",
-      "Duration": 3600,
-      "Description": null,
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "Email": null,
-      "AppointmentStatus": "(1) Consultation",
-      "LastNameAppt": null,
-      "Notes": null,
-      "FirstAppointment": false,
-      "ServiceCharge": 40,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstName": null,
-      "CellPhone": null,
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
-      "LookupCM102customersId": 1270,
-      "LookupHR01teamId": 3,
-      "ID": 1413,
-      "Modified": "2021-01-14T17:18:23Z"
-    },
-    {
       "Id": 1419,
       "AppointmentStatus": "(2) Pending",
       "EventDate": "2021-02-12T07:15:00.000Z",
       "EndDate": "2021-02-12T08:15:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Alexandra Prior, +189692975856, Alexandra.Prior@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S2 49.5 (-10%)",
+      "Description": "Appointment with - Christina Romanov | Contact Reference - Helen Prieto, +189788869846, Helen.Prieto@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S2 49.5 (-10%)",
       "Duration": 6600,
       "Notes": "",
       "ServiceCharge": 96.25,
@@ -38253,9 +38217,11 @@
       "MetroRRule": null,
       "MetroRecException": null,
       "FirstAppointment": false,
-      "Email": "Alexandra.Prior@schedulingtoday.local",
-      "CellPhone": "+189692975856",
-      "LookupCM102customersId": 797,
+      "Email": "Helen.Prieto@schedulingtoday.local",
+      "CellPhone": "+189788869846",
+      "LookupCM102customersId": 616,
+      "ID": 1419,
+      "Modified": "2021-02-12T15:39:04.313Z",
       "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
         "results": [
@@ -38263,11 +38229,170 @@
           2
         ]
       },
-      "ID": 1419,
-      "Modified": "2021-02-12T15:39:04.313Z",
-      "FirstName": "Alexandra",
+      "FirstName": "Helen",
+      "LastNameAppt": "Prieto",
+      "Title": "H.Prieto-1419",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1420,
+      "Title": "E.Adame-1420",
+      "AppointmentStatus": "(1) Consultation",
+      "EventDate": "2021-02-17T12:09:57.489Z",
+      "EndDate": "2021-02-17T13:00:00.000Z",
+      "Description": "Appointment with - David Wenger | Contact Reference - Elizabete Adame, +1189764214858, Elizabete.Adame@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S2 49.5 (-10%), Highlights T-Section S4 48.75 (-25%)",
+      "Duration": 5700,
+      "Notes": "",
+      "ServiceCharge": 98.25,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": "Elizabete.Adame@schedulingtoday.local",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "FirstName": "Elizabete",
+      "LastNameAppt": "Adame",
+      "CellPhone": "+1189764214858",
+      "LookupCM102customersId": 1268,
+      "ID": 1420,
+      "Modified": "2021-02-17T12:09:57.489Z",
+      "Gender": "(1) Female",
+      "LookupHR01teamId": 5,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          2,
+          17
+        ]
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1421,
+      "Title": "T.Acciardi-1421",
+      "AppointmentStatus": "(4) Booked",
+      "EventDate": "2021-02-17T12:10:13.058Z",
+      "EndDate": "2021-02-17T13:00:00.000Z",
+      "Description": "Appointment with - Amelia Giroud | Contact Reference - Tom Acciardi, +1189774400329, Tom.Acciardi@schedulingtoday.local | Service Type - Mens Wash+Cut+Dry S2 34 (-15%)",
+      "Duration": 2400,
+      "Notes": "",
+      "ServiceCharge": 34,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "Email": "Tom.Acciardi@schedulingtoday.local",
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "FirstName": "Tom",
+      "LastNameAppt": "Acciardi",
+      "CellPhone": "+1189774400329",
+      "LookupCM102customersId": 200,
+      "LookupHR01teamId": 2,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          5
+        ]
+      },
+      "ID": 1421,
+      "Modified": "2021-02-17T12:10:13.058Z",
+      "Gender": "(2) Male",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1422,
+      "AppointmentStatus": "(1) Consultation",
+      "EventDate": "2021-03-02T06:00:00.000Z",
+      "EndDate": "2021-03-02T07:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Stephen Pye, 0798302214, stevepye70@gmail.com | Service Type - ",
+      "Duration": 0,
+      "Notes": "",
+      "ServiceCharge": 0,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=7;BYDAY=TU",
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "Email": "stevepye70@gmail.com",
+      "CellPhone": "0798302214",
+      "LookupCM102customersId": 1,
+      "ID": 1422,
+      "Modified": "2021-02-17T18:05:58.816Z",
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "FirstName": "Stephen",
+      "LastNameAppt": "Pye",
+      "Title": "S.Pye-1422",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1423,
+      "AppointmentStatus": "(3) Reserved",
+      "EventDate": "2021-03-03T06:00:00.000Z",
+      "EndDate": "2021-03-03T07:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Ueli Prior, +189795435404, Ueli.Prior@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "Email": "Ueli.Prior@schedulingtoday.local",
+      "CellPhone": "+189795435404",
+      "LookupCM102customersId": 641,
+      "ID": 1423,
+      "Modified": "2021-02-17T18:40:58.226Z",
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
+      "FirstName": "Ueli",
       "LastNameAppt": "Prior",
-      "Title": "A.Prior-1419",
+      "Title": "U.Prior-1423",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1424,
+      "AppointmentStatus": "(2) Pending",
+      "EventDate": "2021-04-27T05:00:00.000Z",
+      "EndDate": "2021-04-27T06:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Helen Prieto, +189788869846, Helen.Prieto@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": "FREQ=DAILY;INTERVAL=1;COUNT=4",
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "Email": "Helen.Prieto@schedulingtoday.local",
+      "CellPhone": "+189788869846",
+      "LookupCM102customersId": 616,
+      "ID": 1424,
+      "Modified": "2021-02-18T09:21:24.931Z",
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
+      "FirstName": "Helen",
+      "LastNameAppt": "Prieto",
+      "Title": "H.Prieto-1424",
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }

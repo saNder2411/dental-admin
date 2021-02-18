@@ -25,11 +25,15 @@ export const selectProcessDataItemFieldValue = <T extends GenericDataItem = Gene
 // Appointment
 export const getAppointmentsById = ({ Entities }: RootState) => Entities.appointments.byId;
 
+export const getAppointmentsProcessById = ({ Entities }: RootState) => Entities.appointments.processById;
+
 export const selectOriginalAppointmentsData = ({ Entities }: RootState) => Entities.appointments.originalData;
+
+export const selectProcessAppointmentsData = ({ Entities }: RootState) => Entities.appointments.processData;
 
 export const selectOriginalAppointmentsDataLength = ({ Entities }: RootState) => Entities.appointments.originalData.length;
 
-export const selectMemoAppointmentByID = (dataItemID: number) => createSelector(getAppointmentsById, (byID) => byID[dataItemID]);
+export const selectMemoAppointmentProcessByID = (dataItemID: number) => createSelector(getAppointmentsProcessById, (processById) => processById[dataItemID]);
 
 export const selectAppointmentsAllIds = ({ Entities }: RootState) => Entities.appointments.allIDs;
 
@@ -53,6 +57,8 @@ export const selectStaffById = () => createSelector(getStaffById, (staffById) =>
 
 export const selectOriginalStaffData = ({ Entities }: RootState) => Entities.staff.originalData;
 
+export const selectProcessStaffData = ({ Entities }: RootState) => Entities.staff.processData;
+
 export const selectStaffLastNameByID = (ID: number) => createSelector(getStaffById, (staffById) => staffById[ID]?.Title ?? '');
 
 export const selectStaffLastNamesByID = (IDs: number[]) =>
@@ -64,9 +70,11 @@ export const selectStaffForDropDownListData = () =>
 // Customers
 const getCustomersState = ({ Entities }: RootState) => Entities.customers;
 
+export const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
+
 export const selectOriginalCustomersData = ({ Entities }: RootState) => Entities.customers.originalData;
 
-export const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
+export const selectProcessCustomersData = ({ Entities }: RootState) => Entities.customers.processData;
 
 export const selectCustomersById = () => createSelector(getCustomersById, (customersById) => customersById);
 
@@ -98,6 +106,8 @@ const getServicesState = ({ Entities }: RootState) => Entities.services;
 export const getServicesById = ({ Entities }: RootState) => Entities.services.byId;
 
 export const selectOriginalServicesData = ({ Entities }: RootState) => Entities.services.originalData;
+
+export const selectProcessServicesData = ({ Entities }: RootState) => Entities.services.processData;
 
 export const selectServicesById = () => createSelector(getServicesById, (servicesById) => servicesById);
 

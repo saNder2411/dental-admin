@@ -21,13 +21,13 @@ import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Action Creators
 import { fetchStaffDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalStaffData, selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
+import { selectProcessStaffData, selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Staff: FC = (): JSX.Element => {
   const localizationService = useLocalization();
-  const staffData = useSelector(selectOriginalStaffData);
+  const staffData = useSelector(selectProcessStaffData);
   const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
   const hasAllData = staffData.length > 0 && skillsDataLength > 0;
   const initAsyncAC = useCallback(() => fetchStaffDataInitAsyncAC({ staffDataLength: staffData.length, skillsDataLength }), [

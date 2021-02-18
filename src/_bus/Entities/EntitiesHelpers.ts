@@ -45,18 +45,9 @@ export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = G
 ): EntitiesStateSlice<T> => {
   const [byId, allIDs] = transformArrayDataToByIdData(data);
 
-  return { ...stateSlice, originalData: data, processById: { ...byId }, byId, allIDs };
+  return { ...stateSlice, originalData: data, processData: [...data], processById: { ...byId }, byId, allIDs };
 };
 
-// export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(
-//   stateSlice: EntitiesStateSlice<T>,
-//   dataItem: T
-// ): EntitiesStateSlice<T> => {
-//   const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
-//   const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
-
-//   return { ...stateSlice, originalData, processById, byId: { ...processById } };
-// };
 
 export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(
   stateSlice: EntitiesStateSlice<T>,
@@ -64,22 +55,23 @@ export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = Gen
   clientID: number
 ): EntitiesStateSlice<T> => {
   const serverID = dataItem.ID;
+  const originalData =  [dataItem, ...stateSlice.originalData];
 
   if (clientID === serverID) {
     const hasID = stateSlice.allIDs.includes(serverID);
     const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
-    const originalData = hasID ? updateDataItemInArray(stateSlice.originalData, dataItem) : [dataItem, ...stateSlice.originalData];
+    const processData = hasID ? updateDataItemInArray(stateSlice.processData, dataItem) : [dataItem, ...stateSlice.processData];
     const allIDs = hasID ? stateSlice.allIDs : [dataItem.ID, ...stateSlice.allIDs];
 
-    return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+    return { ...stateSlice, originalData, processData, processById, byId: { ...processById }, allIDs };
   }
 
   const { [clientID]: oldItem, ...oldProcessById } = stateSlice.processById;
   const processById = { ...oldProcessById, [dataItem.ID]: dataItem };
-  const originalData = [dataItem, ...deleteDataItemFromArray(stateSlice.originalData, clientID)];
+  const processData = [dataItem, ...deleteDataItemFromArray(stateSlice.processData, clientID)];
   const allIDs = [dataItem.ID, ...stateSlice.allIDs.filter((ID) => ID !== clientID)];
 
-  return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+  return { ...stateSlice, originalData, processData, processById, byId: { ...processById }, allIDs };
 };
 
 export const updateStateSliceOnUpdateDataItem = <T extends GenericDataItem = GenericDataItem>(
@@ -87,9 +79,10 @@ export const updateStateSliceOnUpdateDataItem = <T extends GenericDataItem = Gen
   dataItem: T
 ): EntitiesStateSlice<T> => {
   const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
+  const processData = updateDataItemInArray(stateSlice.processData, dataItem);
   const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
 
-  return { ...stateSlice, originalData, processById, byId: { ...processById } };
+  return { ...stateSlice, originalData, processData, processById, byId: { ...processById } };
 };
 
 export const updateStateSliceOnDeleteDataItem = <T extends GenericDataItem = GenericDataItem>(
@@ -97,10 +90,11 @@ export const updateStateSliceOnDeleteDataItem = <T extends GenericDataItem = Gen
   deleteDataItemID: number
 ): EntitiesStateSlice<T> => {
   const originalData = deleteDataItemFromArray(stateSlice.originalData, deleteDataItemID);
+  const processData = deleteDataItemFromArray(stateSlice.processData, deleteDataItemID);
   const { [deleteDataItemID]: deletedItem, ...processById } = stateSlice.processById;
   const allIDs = stateSlice.allIDs.filter((ID) => ID !== deleteDataItemID);
 
-  return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+  return { ...stateSlice, originalData, processData, processById, byId: { ...processById }, allIDs };
 };
 
 // Edit in Grid
@@ -136,11 +130,11 @@ export const updateStateSliceOnChangeDataItemInGrid = <T extends GenericDataItem
 
 export const updateStateSliceOnAddNewItemToEditInGrid = (stateSlice: EntitiesStateSlice, entityName: EntitiesKeys): EntitiesStateSlice => {
   const newDataItem = getDefaultNewDataItem(generateId(stateSlice.allIDs))(entityName);
-  const originalData = [newDataItem, ...stateSlice.originalData];
+  const processData = [newDataItem, ...stateSlice.processData];
   const processById = { ...stateSlice.processById, [newDataItem.ID]: newDataItem };
   const allIDs = [newDataItem.ID, ...stateSlice.allIDs];
 
-  return { ...stateSlice, originalData, processById, byId: { ...processById }, allIDs };
+  return { ...stateSlice, processData, processById, byId: { ...processById }, allIDs };
 };
 
 export const getNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewItem[EntitiesKeys] => {

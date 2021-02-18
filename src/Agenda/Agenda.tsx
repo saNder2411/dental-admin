@@ -25,14 +25,14 @@ import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Action Creators
 import { fetchAppointmentsDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalAppointmentsData } from '../_bus/Entities/EntitiesSelectors';
+import { selectProcessAppointmentsData } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useSelectBindDataLengthForAgenda } from './AgendaHooks';
 import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Agenda: FC = (): JSX.Element => {
   const localizationService = useLocalization();
-  const appointmentsData = useSelector(selectOriginalAppointmentsData);
+  const appointmentsData = useSelector(selectProcessAppointmentsData);
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const hasAllData = appointmentsData.length > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
   const initAsyncAC = useCallback(

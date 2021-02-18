@@ -105,6 +105,7 @@ export interface ById<T> {
 
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
   originalData: T[];
+  processData: T[];
   processById: ById<T>;
   byId: ById<T>;
   allIDs: number[];

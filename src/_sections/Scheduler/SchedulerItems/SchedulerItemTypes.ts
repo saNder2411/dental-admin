@@ -12,14 +12,16 @@ export interface KendoDataItem extends AppointmentDataItem {
 
 export interface CustomSchedulerItemProps<T = KendoDataItem> extends SchedulerItemProps {
   dataItem: T;
+  onHideForm?: () => void;
 }
 
 export interface CustomFieldRenderProps<T = Array<CustomerDataItem | StaffDataItem>> extends FieldRenderProps {
   domainData: T;
 }
 
-export interface CustomSchedulerFormProps<T = KendoDataItem> extends SchedulerFormProps {
+export interface CustomSchedulerFormProps<T = KendoDataItem>  {
   dataItem: T;
+  onHideForm?: () => void;
 }
 
 export interface CustomSchedulerSlotProps<T = KendoDataItem> extends SchedulerSlotProps {

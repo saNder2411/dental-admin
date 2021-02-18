@@ -15,11 +15,11 @@ import {
 import { updateChartDataOnFinallyAppointmentsRequest } from './EntitiesChartReducerHelpers';
 
 const initialState = {
-  appointments: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-  customers: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-  staff: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-  services: { originalData: [], processById: {}, byId: {}, allIDs: [] },
-  skills: { originalData: [], processById: {}, byId: {}, allIDs: [] },
+  appointments: { originalData: [], processData: [], processById: {}, byId: {}, allIDs: [] },
+  customers: { originalData: [], processData: [], processById: {}, byId: {}, allIDs: [] },
+  staff: { originalData: [], processData: [], processById: {}, byId: {}, allIDs: [] },
+  services: { originalData: [], processData: [], processById: {}, byId: {}, allIDs: [] },
+  skills: { originalData: [], processData: [], processById: {}, byId: {}, allIDs: [] },
   chartData: {
     totalAppointmentHours: 0,
     totalAppointmentSales: 0,

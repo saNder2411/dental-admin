@@ -1,4 +1,4 @@
-import React, { FC, useCallback, memo } from 'react';
+import React, { FC, useCallback, memo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerSlot as KendoSchedulerSlot, SchedulerSlotProps } from '@progress/kendo-react-scheduler';
 // Components
@@ -26,18 +26,33 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
       resource.ID,
       appointmentsAllIDs,
     ]);
+    const render = useRef(0);
 
     return (
       <>
+        <span style={{ color: `red` }}>{render.current++}</span>
         <KendoSchedulerSlot {...props} onDoubleClick={onSlotDoubleClick} />
-        {newDataItem && <SchedulerEditSlot {...props} dataItem={newDataItem} />}
+        {/* {newDataItem && <SchedulerEditSlot {...props} dataItem={newDataItem} />} */}
       </>
     );
   },
   (prevProps: SchedulerSlotProps, nextProps: SchedulerSlotProps) => {
     const prevStaff = (prevProps.group.resources[0] as unknown) as StaffDataItem;
     const nextStaff = (nextProps.group.resources[0] as unknown) as StaffDataItem;
+    if (prevProps.start.getTime() !== nextProps.start.getTime()) {
+      // console.log(`prevProps`, prevProps);
+      // console.log(`nextProps`, nextProps);
+      return false;
+    }
 
-    return prevProps.start.getTime() !== nextProps.start.getTime() || prevStaff.ID === nextStaff.ID;
+    if (prevStaff.ID !== nextStaff.ID) {
+      // console.log(`prevProps`, prevProps);
+      // console.log(`nextProps`, nextProps);
+      return false;
+    }
+
+    return true;
+
+    // return prevProps.start.getTime() !== nextProps.start.getTime() || prevStaff.ID === nextStaff.ID;
   }
 );

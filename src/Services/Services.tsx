@@ -23,13 +23,13 @@ import { EntitiesKeys } from '../_bus/Entities/EntitiesTypes';
 // Action Creators
 import { fetchServicesDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectOriginalServicesData, selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
+import { selectProcessServicesData, selectOriginalSkillsDataLength } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useFetchData } from '../_bus/Hooks/useFetchData';
 
 export const Services: FC = (): JSX.Element => {
   const localizationService = useLocalization();
-  const servicesData = useSelector(selectOriginalServicesData);
+  const servicesData = useSelector(selectProcessServicesData);
   const skillsDataLength = useSelector(selectOriginalSkillsDataLength);
   const hasAllData = servicesData.length > 0 && skillsDataLength > 0;
   const initAsyncAC = useCallback(() => fetchServicesDataInitAsyncAC({ servicesDataLength: servicesData.length, skillsDataLength }), [

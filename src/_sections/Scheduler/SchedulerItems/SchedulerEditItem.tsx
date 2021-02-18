@@ -6,12 +6,18 @@ import { SchedulerForm } from './SchedulerForm';
 // Types
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 // Selectors
-import { selectMemoAppointmentByID } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoAppointmentProcessByID } from '../../../_bus/Entities/EntitiesSelectors';
 
-export const SchedulerEditItem: FC<CustomSchedulerItemProps> = (props): JSX.Element => {
-  const { dataItem } = props;
-  const selectOriginalDataItem = useMemo(() => selectMemoAppointmentByID(dataItem.ID), [dataItem.ID]);
-  const originalDataItem = useSelector(selectOriginalDataItem) ?? null;
+interface Props {
+  dataItemID: number;
+  onHideForm?: () => void;
+}
 
-  return <KendoSchedulerEditItem {...props} formItem={originalDataItem?.isNew ? null : originalDataItem} form={SchedulerForm} />;
+export const SchedulerEditItem: FC<Props> = ({ dataItemID, onHideForm }): JSX.Element => {
+  const selectProcessDataItem = useMemo(() => selectMemoAppointmentProcessByID(dataItemID), [dataItemID]);
+  const processDataItem = useSelector(selectProcessDataItem);
+
+  // return <KendoSchedulerEditItem {...props} formItem={processDataItem?.isNew ? null : processDataItem} form={SchedulerForm} />;
+
+  return <SchedulerForm dataItem={processDataItem} onHideForm={onHideForm} />;
 };
