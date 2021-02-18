@@ -1,7 +1,5 @@
-import React, { FC, RefObject } from 'react';
+import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { SchedulerItemHandle } from '@progress/kendo-react-scheduler';
-import { Popup } from '@progress/kendo-react-popup';
 import { useInternationalization } from '@progress/kendo-react-intl';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { CardHeader, CardBody } from '@progress/kendo-react-layout';

@@ -31,17 +31,18 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
           const [serviceSum, productSum] = LookupMultiBP01offeringsId.results.reduce(
             (acc, Id) => {
               let [serviceSum, productSum] = acc;
-              const { Amount = 0, ContentTypeId = '' } = servicesById[Id] ?? {};
-              ContentTypeId === ContentTypes.Services ? (serviceSum += Amount) : (productSum += Amount);
+              const { Amount = 0, ContentTypeId = '', OfferingDiscount = 0 } = servicesById[Id] ?? {};
+              const price = +(Amount - Amount * OfferingDiscount).toFixed(2);
+              ContentTypeId === ContentTypes.Services ? (serviceSum += price) : (productSum += price);
               return [serviceSum, productSum];
             },
             [0, 0]
           );
 
           return {
-            totalSum: serviceSum + productSum > 0 ? acc.totalSum + ServiceCharge : acc.totalSum,
-            serviceSum: acc.serviceSum + serviceSum,
-            productSum: acc.productSum + productSum,
+            totalSum: serviceSum + productSum > 0 ? +(acc.totalSum + ServiceCharge).toFixed(2) : acc.totalSum,
+            serviceSum: +(acc.serviceSum + serviceSum).toFixed(2),
+            productSum: +(acc.productSum + productSum).toFixed(2),
             totalAmountAppointment: acc.totalAmountAppointment + 1,
             amountNewCustomerAppointment: FirstAppointment ? acc.amountNewCustomerAppointment + 1 : acc.amountNewCustomerAppointment,
             amountExistCustomerAppointment: !FirstAppointment ? acc.amountExistCustomerAppointment + 1 : acc.amountExistCustomerAppointment,

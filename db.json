@@ -38433,12 +38433,12 @@
     {
       "Id": 1429,
       "AppointmentStatus": "(2) Pending",
-      "EventDate": "2021-02-18T08:45:00.000Z",
-      "EndDate": "2021-02-18T10:45:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Ueli Prior, +189795435404, Ueli.Prior@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
-      "Duration": 3600,
+      "EventDate": "2021-02-18T08:00:00.000Z",
+      "EndDate": "2021-02-18T09:00:00.000Z",
+      "Description": "Appointment with - Grace Robinson | Contact Reference - Ueli Prior, +189795435404, Ueli.Prior@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S3 55.25 (-15%)",
+      "Duration": 6300,
       "Notes": "",
-      "ServiceCharge": 46.75,
+      "ServiceCharge": 102,
       "fAllDayEvent": null,
       "RecurrenceID": null,
       "MetroRRule": null,
@@ -38455,7 +38455,8 @@
       "LookupHR01teamId": 3,
       "LookupMultiBP01offeringsId": {
         "results": [
-          1
+          1,
+          3
         ]
       },
       "__metadata": {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Notification, NotificationGroup } from '@progress/kendo-react-notification';
-import { Fade } from '@progress/kendo-react-animation';
 
 // Selectors
 import { selectDataErrorMessage, selectDataItemErrorMessage } from '../_bus/UI/UISelectors';
@@ -30,20 +29,17 @@ export const ErrorIndictor = () => {
 
   return (
     <NotificationGroup style={{ top: 90, right: 10, alignItems: 'flex-start', flexWrap: 'wrap-reverse' }}>
-      <Fade enter={true} exit={true}>
-        {dataErrorMessage && showDataError && (
-          <Notification type={{ style: 'error', icon: true }} closable={true} onClose={() => setShowDataError(false)}>
-            <span>{dataErrorMessage}</span>
-          </Notification>
-        )}
-      </Fade>
-      <Fade enter={true} exit={true}>
-        {dataItemErrorMessage && showDataItemError && (
-          <Notification type={{ style: 'error', icon: true }} closable={true} onClose={() => setShowDataItemError(false)}>
-            <span>{dataItemErrorMessage}</span>
-          </Notification>
-        )}
-      </Fade>
+      {dataErrorMessage && showDataError && (
+        <Notification type={{ style: 'error', icon: true }} closable={true} onClose={() => setShowDataError(false)}>
+          <span>{dataErrorMessage}</span>
+        </Notification>
+      )}
+
+      {dataItemErrorMessage && showDataItemError && (
+        <Notification type={{ style: 'error', icon: true }} closable={true} onClose={() => setShowDataItemError(false)}>
+          <span>{dataItemErrorMessage}</span>
+        </Notification>
+      )}
     </NotificationGroup>
   );
 };

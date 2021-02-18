@@ -1,4 +1,4 @@
-import React, { FC, useMemo, useState, SyntheticEvent } from 'react';
+import React, { FC, useMemo, useState, useCallback, useEffect, SyntheticEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Dialog, DialogActionsBar } from '@progress/kendo-react-dialogs';
 import { Form, FormElement } from '@progress/kendo-react-form';
@@ -27,8 +27,9 @@ import {
 // Selectors
 import { selectCustomersById, selectStaffById, selectServicesById } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
+import { selectDataItemErrorMessage } from '../../../../_bus/UI/UISelectors';
 // Types
-import { AppointmentDataItem ,StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../../_bus/Entities/EntitiesTypes';
 import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
@@ -77,6 +78,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
   console.log(`SchedulerFormDataItem`, dataItem);
+  const dataItemErrorMessage = useSelector(selectDataItemErrorMessage);
 
   const selectUpdatableRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
   const updatableRecurringDataItem = useSelector(selectUpdatableRecurringDataItem);
@@ -104,7 +106,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
       : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, onHideForm));
   };
 
-  const onDialogClose = () => {
+  const onDialogClose = useCallback(() => {
     onHideForm();
 
     if (dataItem.isNew && updatableRecurringDataItem) {
@@ -119,7 +121,13 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
     }
 
     dispatch(cancelEditAC(dataItem.ID, EntitiesKeys.Appointments));
-  };
+  }, [dataItem.ID, dataItem.isNew, dispatch, onHideForm, updatableRecurringDataItem]);
+
+  useEffect(() => {
+    if (dataItemErrorMessage) {
+      onDialogClose();
+    }
+  }, [dataItemErrorMessage, onDialogClose]);
 
   return (
     <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose()} minWidth={700} height="73%">
@@ -449,7 +457,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                           `Save`
                         )}
                       </button>
-                      <button className="k-button" onClick={() => onDialogClose()} disabled={isDataItemLoading}>
+                      <button className="k-button" onClick={onDialogClose} disabled={isDataItemLoading}>
                         Cancel
                       </button>
                     </DialogActionsBar>
