@@ -16,8 +16,6 @@ import {
 import { selectMemoProcessDataItem, selectCustomersById, selectStaffById, selectServicesById } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
-// Helpers
-import { computedAppointmentDurationServiceChargeDescription } from '../../../_bus/_Appointments/AppointmentsHelpers';
 
 export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = ({ dataItem: { ID } }): JSX.Element => {
   const dispatch = useDispatch();
@@ -33,26 +31,16 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
   const servicesById = useSelector(selectServicesById());
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
-  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customersById[dataItem.LookupCM102customersId] ?? {};
-
-  const newDataItem = {
-    ...computedAppointmentDurationServiceChargeDescription(dataItem)(servicesById)(staffById)(customersById),
-    Email,
-    CellPhone,
-    FirstName,
-    LastNameAppt: Title,
-    Gender,
-  };
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, () => setIsDataItemLoading(false)));
-  }, [dispatch, newDataItem]);
+    dispatch(createAppointmentDataItemInitAsyncAC(dataItem, null, servicesById, staffById, customersById, () => setIsDataItemLoading(false)));
+  }, [customersById, dataItem, dispatch, servicesById, staffById]);
 
   const onUpdatedDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => setIsDataItemLoading(false)));
-  }, [dispatch, newDataItem]);
+    dispatch(updateAppointmentDataItemInitAsyncAC({ ...dataItem, Modified: new Date().toISOString() }, () => setIsDataItemLoading(false)));
+  }, [dataItem, dispatch]);
 
   const onDeleteDataItem = useCallback(() => {
     setIsDataItemLoading(true);

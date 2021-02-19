@@ -1,5 +1,5 @@
 // Types
-import { ActionTypes, GenericDataItem, EntitiesKeys } from './EntitiesTypes';
+import { ActionTypes, GenericDataItem, EntitiesKeys, ById } from './EntitiesTypes';
 import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
@@ -36,12 +36,15 @@ export const fetchSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SKILL
 // Async Create Data Item
 export const createAppointmentDataItemInitAsyncAC = (
   createdDataItem: AppointmentDataItem,
-  sideEffectAfterCreatedDataItem: () => void,
-  onAddDataItemToSchedulerData?: () => void
+  newCustomerDataItem: CustomerDataItem | null,
+  servicesById: ById<ServiceDataItem>,
+  staffById: ById<StaffDataItem>,
+  customersById: ById<CustomerDataItem>,
+  sideEffectAfterCreatedDataItem: () => void
 ) => ({
   type: ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  createdDataItem,
-  meta: { sideEffectAfterCreatedDataItem, onAddDataItemToSchedulerData },
+  payload: { createdDataItem, newCustomerDataItem, servicesById, staffById, customersById },
+  meta: { sideEffectAfterCreatedDataItem },
 });
 
 export const createCustomerDataItemInitAsyncAC = (createdDataItem: CustomerDataItem, sideEffectAfterCreatedDataItem: () => void) => ({

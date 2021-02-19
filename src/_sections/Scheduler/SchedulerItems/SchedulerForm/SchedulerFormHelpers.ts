@@ -9,9 +9,9 @@ import {
   MonthNameTypesType,
   WeekdayTypesType,
   MonthlyWeekNumberType,
-  CustomerFields,
 } from './SchedulerFormTypes';
 import { AppointmentDataItem } from '../../../../_bus/_Appointments/AppointmentsTypes';
+import { CustomerDataItem } from './../../../../_bus/_Customers/CustomersTypes';
 // Instruments
 import {
   EndRepeatTypes,
@@ -53,8 +53,6 @@ export const getSecondLabelForRepeatEvery = (Repeat: RepeatTypesType) => {
   }
 };
 
-export const setTitleProp = (firstName: string | null, lastName: string | null, ID: number) =>
-  `${firstName ? firstName[0] : ''}.${lastName}-${ID < 1000 ? `0${ID}` : ID}`;
 
 const getEndRepeatRule = (endRepeatType: EndRepeatTypesType, repeatInterval: number, endCount: number, endUntil: Date) => {
   switch (endRepeatType) {
@@ -145,10 +143,7 @@ const setRecurrenceRule = ({
 
 export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDataItem => {
   const {
-    FirstName,
-    LastNameAppt,
     Gender,
-    Title,
     Repeat,
     EndRepeat,
     RepeatInterval,
@@ -168,9 +163,6 @@ export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDa
   } = formDataItem;
   return {
     ...others,
-    FirstName,
-    LastNameAppt,
-    Title: setTitleProp(FirstName, LastNameAppt, formDataItem.ID),
     MetroRRule: setRecurrenceRule({
       Repeat,
       EndRepeat,
@@ -533,10 +525,7 @@ const transformRecurrenceRuleInInitialRepaetPropsForm = (recRule: string | null)
   }
 };
 
-export const getInitialFormValue = (
-  dataItem: AppointmentDataItem,
-  { FirstName, Title, Email, Gender, CellPhone }: CustomerFields
-): InitialFormValue => {
+export const getInitialFormValue = (dataItem: AppointmentDataItem, initCustomer: CustomerDataItem): InitialFormValue => {
   const startHours = dataItem.Start.getHours() === 0 ? 8 : dataItem.Start.getHours();
   const Start = new Date(dataItem.Start.getFullYear(), dataItem.Start.getMonth(), dataItem.Start.getDate(), startHours, dataItem.Start.getMinutes());
   const End = new Date(
@@ -546,6 +535,7 @@ export const getInitialFormValue = (
     startHours + 1,
     dataItem.Start.getMinutes()
   );
+  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = initCustomer;
 
   return {
     ...dataItem,

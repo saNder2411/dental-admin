@@ -38,9 +38,12 @@ export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });
 
-export const computedAppointmentDurationServiceChargeDescription = (appointment: AppointmentDataItem) => (servicesById: ById<ServiceDataItem>) => (
-  staffById: ById<StaffDataItem>
-) => (customersById: ById<CustomerDataItem>): AppointmentDataItem => {
+export const setTitleProp = (firstName: string | null, lastName: string | null, ID: number) =>
+  `${firstName ? firstName[0] : ''}.${lastName}-${ID < 1000 ? `0${ID}` : ID}`;
+
+export const calculateAppointmentFieldsAssociatedWithCustomerServiceStaff = (appointment: AppointmentDataItem) => (
+  servicesById: ById<ServiceDataItem>
+) => (staffById: ById<StaffDataItem>) => (customersById: ById<CustomerDataItem>): AppointmentDataItem => {
   const { LookupMultiBP01offeringsId, LookupHR01teamId, LookupCM102customersId } = appointment;
   const { Duration, ServiceCharge, ServiceDescription } = LookupMultiBP01offeringsId.results.reduce(
     (acc, serviceID) => {
@@ -60,15 +63,21 @@ export const computedAppointmentDurationServiceChargeDescription = (appointment:
       ServiceDescription: new Array<string>(),
     }
   );
-  const { FullName = '', CellPhone = '', Email = '' } = customersById[LookupCM102customersId] ?? {};
+  const { FullName = '', CellPhone = '', Email = '', FirstName = '', Title = '' } = customersById[LookupCM102customersId] ?? {};
   const Description = `Appointment with - ${
     staffById[LookupHR01teamId].FullName
   } | Contact Reference - ${FullName}, ${CellPhone}, ${Email} | Service Type - ${ServiceDescription.join(`, `)}`;
 
   return {
     ...appointment,
+    Title: setTitleProp(FirstName, Title, appointment.ID),
     Duration,
     ServiceCharge,
     Description,
+    FirstName,
+    LastNameAppt: Title,
+    Email,
+    CellPhone,
+    Modified: new Date().toISOString(),
   };
 };

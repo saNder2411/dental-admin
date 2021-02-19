@@ -12,15 +12,25 @@ import {
   UpdateAppointmentRecurringDataItemInitAsyncActionType,
   DeleteAppointmentDataItemInitAsyncActionType,
   EntitiesKeys,
+  ById,
 } from '../Entities/EntitiesTypes';
-import { QueryAppointmentDataItem } from './AppointmentsTypes';
+import { AppointmentDataItem, QueryAppointmentDataItem } from './AppointmentsTypes';
 import { QueryServiceDataItem } from '../_Services/ServicesTypes';
 import { QueryStaffDataItem } from '../_Staff/StaffTypes';
-import { QueryCustomerDataItem } from '../_Customers/CustomersTypes';
+import { QueryCustomerDataItem, CustomerDataItem } from '../_Customers/CustomersTypes';
 // Helpers
-import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './AppointmentsHelpers';
+import {
+  transformAPIData,
+  transformAPIDataItem,
+  transformDataItemForAPI,
+  calculateAppointmentFieldsAssociatedWithCustomerServiceStaff,
+} from './AppointmentsHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
-import { transformAPIData as transformCustomersAPIData } from '../_Customers/CustomersHelpers';
+import {
+  transformAPIData as transformCustomersAPIData,
+  transformDataItemForAPI as customerTransformDataItemForAPI,
+  transformAPIDataItem as customerTransformAPIDataItem,
+} from '../_Customers/CustomersHelpers';
 import { transformAPIData as transformServicesAPIData } from '../_Services/ServicesHelpers';
 
 type Results = [QueryAppointmentDataItem[] | null, QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
@@ -66,16 +76,66 @@ export function* workerFetchData({
 }
 
 export function* workerCreateDataItem({
-  createdDataItem,
-  meta: { sideEffectAfterCreatedDataItem, onAddDataItemToSchedulerData },
+  payload: { createdDataItem, newCustomerDataItem, servicesById, staffById, customersById },
+  meta: { sideEffectAfterCreatedDataItem },
 }: CreateAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.createDataItemRequestAC());
 
-    const result: QueryAppointmentDataItem = yield apply(API, API.appointments.createDataItem, [transformDataItemForAPI(createdDataItem)]);
+    if (newCustomerDataItem) {
+      const newCustomerResult: QueryCustomerDataItem = yield apply(API, API.customers.createDataItem, [
+        customerTransformDataItemForAPI(newCustomerDataItem),
+      ]);
+      const createdCustomerDataItem = customerTransformAPIDataItem(newCustomerResult);
+      yield put(actions.createDataItemSuccessAC(createdCustomerDataItem, EntitiesKeys.Customers, newCustomerDataItem.ID));
+
+      const refreshCustomersById: ById<CustomerDataItem> = { ...customersById, [createdCustomerDataItem.ID]: createdCustomerDataItem };
+      const refreshAppointmentDataItem: AppointmentDataItem = {
+        ...createdDataItem,
+        FirstAppointment: true,
+        LookupCM102customersId: createdCustomerDataItem.ID,
+      };
+
+      const result: QueryAppointmentDataItem = yield apply(API, API.appointments.createDataItem, [
+        transformDataItemForAPI(
+          calculateAppointmentFieldsAssociatedWithCustomerServiceStaff(refreshAppointmentDataItem)(servicesById)(staffById)(refreshCustomersById)
+        ),
+      ]);
+      const dataItem = transformAPIDataItem(result);
+
+      const refreshedCustomerDataItem: CustomerDataItem = {
+        ...createdCustomerDataItem,
+        LookupMultiHR01teamId: { results: [...createdCustomerDataItem.LookupMultiHR01teamId.results, dataItem.LookupHR01teamId] },
+        LookupMultiHR03eventsId: { results: [...createdCustomerDataItem.LookupMultiHR03eventsId.results, dataItem.ID] },
+      };
+      const customerResult: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [
+        customerTransformDataItemForAPI(refreshedCustomerDataItem),
+      ]);
+      const updatedCustomerDataItem = customerTransformAPIDataItem(customerResult);
+
+      yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Appointments, createdDataItem.ID));
+      yield put(actions.updateDataItemSuccessAC(updatedCustomerDataItem, EntitiesKeys.Customers));
+      return;
+    }
+
+    const result: QueryAppointmentDataItem = yield apply(API, API.appointments.createDataItem, [
+      transformDataItemForAPI(calculateAppointmentFieldsAssociatedWithCustomerServiceStaff(createdDataItem)(servicesById)(staffById)(customersById)),
+    ]);
     const dataItem = transformAPIDataItem(result);
-    onAddDataItemToSchedulerData && onAddDataItemToSchedulerData();
+    const customerDataItem = customersById[dataItem.LookupCM102customersId];
+
+    const refreshedCustomerDataItem: CustomerDataItem = {
+      ...customerDataItem,
+      LookupMultiHR01teamId: { results: [...customerDataItem.LookupMultiHR01teamId.results, dataItem.LookupHR01teamId] },
+      LookupMultiHR03eventsId: { results: [...customerDataItem.LookupMultiHR03eventsId.results, dataItem.ID] },
+    };
+    const customerResult: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [
+      customerTransformDataItemForAPI(refreshedCustomerDataItem),
+    ]);
+    const updatedCustomerDataItem = customerTransformAPIDataItem(customerResult);
+
     yield put(actions.createDataItemSuccessAC(dataItem, EntitiesKeys.Appointments, createdDataItem.ID));
+    yield put(actions.updateDataItemSuccessAC(updatedCustomerDataItem, EntitiesKeys.Customers));
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {

@@ -67,7 +67,6 @@ import {
   emailValidator,
   getSecondLabelForRepeatEvery,
 } from './SchedulerFormHelpers';
-import { computedAppointmentDurationServiceChargeDescription } from '../../../../_bus/_Appointments/AppointmentsHelpers';
 
 interface Props {
   dataItem: AppointmentDataItem;
@@ -86,13 +85,13 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
   const servicesById = useSelector(selectServicesById());
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
-  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = customersById[dataItem.LookupCM102customersId] ?? {};
+  const initCustomer = customersById[dataItem.LookupCM102customersId] ?? {};
 
-  const initialValue = getInitialFormValue(dataItem, { FirstName, Title, Email, Gender, CellPhone });
+  const initialValue = getInitialFormValue(dataItem, initCustomer);
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const newDataItem = computedAppointmentDurationServiceChargeDescription(getDataItemForApi(formDataItem))(servicesById)(staffById)(customersById);
+    const newDataItem = getDataItemForApi(formDataItem);
 
     setIsDataItemLoading(true);
 
@@ -102,7 +101,28 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
     }
 
     dataItem.isNew
-      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, onHideForm))
+      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, {
+        Id: 1269,
+        Title: 'Test',
+        FirstName: `Test`,
+        FullName: 'Test Test',
+        CellPhone: '+123456789887766',
+        Email: 'test',
+        Gender: '(1) Female' as const,
+        ClientPhoto: {
+          Description: 'https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(2).jpg',
+          Url: 'https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(2).jpg',
+          __metadata: { type: 'SP.FieldUrlValue' },
+        },
+        ID: 1269,
+        Modified: new Date().toISOString(),
+        LookupMultiHR01teamId: { results: [] },
+        LookupMultiHR03eventsId: { results: [] },
+  
+        ClientPhotoUrl: 'https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(2).jpg',
+        inEdit: true,
+        isNew: true,
+      }, servicesById, staffById, customersById, onHideForm))
       : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, onHideForm));
   };
 

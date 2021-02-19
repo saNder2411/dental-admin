@@ -38462,6 +38462,68 @@
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
+    },
+    {
+      "Id": 1430,
+      "AppointmentStatus": "(2) Pending",
+      "EventDate": "2021-02-18T08:45:00.000Z",
+      "EndDate": "2021-02-18T09:45:00.000Z",
+      "Description": "Appointment with - Christina Romanov | Contact Reference - Cornelia Bohatschek, +189794860181, Cornelia.Bohatschek@schedulingtoday.local | Service Type - ",
+      "Duration": 0,
+      "Notes": "",
+      "ServiceCharge": 0,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "Email": "Cornelia.Bohatschek@schedulingtoday.local",
+      "CellPhone": "+189794860181",
+      "LookupCM102customersId": 122,
+      "ID": 1430,
+      "Modified": "2021-02-18T17:39:46.109Z",
+      "FirstName": "Cornelia",
+      "LastNameAppt": "Bohatschek",
+      "Title": "C.Bohatschek-1430",
+      "LookupHR01teamId": 4,
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1431,
+      "AppointmentStatus": "(2) Pending",
+      "EventDate": "2021-02-19T07:00:00.000Z",
+      "EndDate": "2021-02-19T08:00:00.000Z",
+      "Description": "Appointment with - Christina Romanov | Contact Reference - Helen Prieto, +189788869846, Helen.Prieto@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "Email": "Helen.Prieto@schedulingtoday.local",
+      "CellPhone": "+189788869846",
+      "LookupCM102customersId": 616,
+      "LookupHR01teamId": 4,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
+      "ID": 1431,
+      "Modified": "2021-02-19T10:09:22.664Z",
+      "FirstName": "Helen",
+      "LastNameAppt": "Prieto",
+      "Title": "H.Prieto-1431",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
     }
   ],
   "services": [
@@ -68018,12 +68080,6 @@
       "Created": "2019-07-23T07:17:56Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(616)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(616)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 616,
       "Title": "Prieto",
       "FirstName": "Helen",
@@ -68031,22 +68087,29 @@
       "CellPhone": "+189788869846",
       "Email": "Helen.Prieto@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
-      "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
-      "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
       "ID": 616,
       "Modified": "2019-07-23T07:18:32Z",
-      "Created": "2019-07-23T07:18:33Z"
+      "Created": "2019-07-23T07:18:33Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          4
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1431
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {

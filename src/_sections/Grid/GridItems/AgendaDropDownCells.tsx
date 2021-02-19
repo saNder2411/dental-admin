@@ -27,7 +27,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 import { useTextFieldsValidation } from '../GridHooks';
 // Helpers
 import { onGridDropDownChange, EmptyDropDownListDataItem } from './GridItemsHelpers';
-import { setTitleProp } from '../../Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
+import { setTitleProp } from '../../../_bus/_Appointments/AppointmentsHelpers';
 // Const
 import { statusNameList } from '../../../_bus/Constants';
 

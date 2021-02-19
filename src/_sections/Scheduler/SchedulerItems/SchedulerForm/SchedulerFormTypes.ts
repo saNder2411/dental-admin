@@ -46,14 +46,6 @@ export interface RepeatOptions {
   YearlyDayType: MonthlyDayTypesType;
 }
 
-export interface CustomerFields {
-  FirstName: string | null;
-  Title: string | null;
-  Email: string | null;
-  Gender: '(1) Female' | '(2) Male';
-  CellPhone: string | null;
-}
-
 export interface InitialFormValue extends AppointmentDataItem, RepeatOptions {
   Gender: '(1) Female' | '(2) Male';
 }

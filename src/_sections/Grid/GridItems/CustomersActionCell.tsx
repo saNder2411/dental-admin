@@ -7,7 +7,11 @@ import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
-import { createCustomerDataItemInitAsyncAC, updateCustomerDataItemInitAsyncAC, deleteCustomerDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
+import {
+  createCustomerDataItemInitAsyncAC,
+  updateCustomerDataItemInitAsyncAC,
+  deleteCustomerDataItemInitAsyncAC,
+} from '../../../_bus/Entities/EntitiesAC';
 // Selectors
 import { selectMemoProcessDataItem } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
@@ -24,12 +28,12 @@ export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = 
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(createCustomerDataItemInitAsyncAC(dataItem, () => setIsDataItemLoading(false)));
+    dispatch(createCustomerDataItemInitAsyncAC({ ...dataItem, Modified: new Date().toISOString() }, () => setIsDataItemLoading(false)));
   }, [dataItem, dispatch]);
 
   const onUpdatedDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(updateCustomerDataItemInitAsyncAC(dataItem, () => setIsDataItemLoading(false)));
+    dispatch(updateCustomerDataItemInitAsyncAC({ ...dataItem, Modified: new Date().toISOString() }, () => setIsDataItemLoading(false)));
   }, [dataItem, dispatch]);
 
   const onDeleteDataItem = useCallback(() => {
