@@ -1,4 +1,4 @@
-import React, { FC, useCallback, memo, useRef } from 'react';
+import React, { FC, useCallback, memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { SchedulerSlot as KendoSchedulerSlot, SchedulerSlotProps } from '@progress/kendo-react-scheduler';
 // Components
@@ -26,13 +26,13 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
       resource.ID,
       appointmentsAllIDs,
     ]);
-    const render = useRef(0);
+    // const render = useRef(0);
 
     return (
       <>
         <KendoSchedulerSlot {...props} onDoubleClick={onSlotDoubleClick} />
         {newDataItem && <SchedulerForm dataItem={newDataItem} />}
-        {++render.current}
+        {/* {++render.current} */}
       </>
     );
   },
