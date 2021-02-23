@@ -133,4 +133,12 @@ export const SchedulerForm = styled.section`
   .yearly-group-dropdown {
     margin: 0;
   }
+
+  && .customer-fields .k-widget.k-combobox.k-header.k-combobox-clearable {
+    width: 100%;
+  }
+
+  && .customer-fields .k-form-field:first-child {
+    margin-right: 20px;
+  }
 `;

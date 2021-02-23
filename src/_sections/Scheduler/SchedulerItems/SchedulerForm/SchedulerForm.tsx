@@ -23,9 +23,10 @@ import {
   FormTextArea,
   FormNumericTextBox,
   FormDropDownList,
+  FormCheckbox,
 } from './SchedulerFormItems';
 // Selectors
-import { selectCustomersById, selectStaffById, selectServicesById } from '../../../../_bus/Entities/EntitiesSelectors';
+import { selectCustomersById, selectStaffById, selectServicesById, selectMemoCustomersAllIds } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 import { selectDataItemErrorMessage } from '../../../../_bus/UI/UISelectors';
 // Types
@@ -60,7 +61,7 @@ import {
 // Helpers
 import {
   getInitialFormValue,
-  getDataItemForApi,
+  parseFormDataItem,
   requiredValidator,
   requiredDropDownListValidator,
   phoneValidator,
@@ -85,13 +86,15 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
   const servicesById = useSelector(selectServicesById());
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
-  const initCustomer = customersById[dataItem.LookupCM102customersId] ?? {};
 
-  const initialValue = getInitialFormValue(dataItem, initCustomer);
+  const selectCustomersAllIds = useMemo(selectMemoCustomersAllIds, []);
+  const customersAllIds = useSelector(selectCustomersAllIds);
+
+  const initialValue = getInitialFormValue(dataItem);
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const newDataItem = getDataItemForApi(formDataItem);
+    const { newDataItem, newCustomer } = parseFormDataItem(formDataItem, customersAllIds);
 
     setIsDataItemLoading(true);
 
@@ -101,28 +104,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
     }
 
     dataItem.isNew
-      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, {
-        Id: 1269,
-        Title: 'Test',
-        FirstName: `Test`,
-        FullName: 'Test Test',
-        CellPhone: '+123456789887766',
-        Email: 'test',
-        Gender: '(1) Female' as const,
-        ClientPhoto: {
-          Description: 'https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(2).jpg',
-          Url: 'https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(2).jpg',
-          __metadata: { type: 'SP.FieldUrlValue' },
-        },
-        ID: 1269,
-        Modified: new Date().toISOString(),
-        LookupMultiHR01teamId: { results: [] },
-        LookupMultiHR03eventsId: { results: [] },
-  
-        ClientPhotoUrl: 'https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(2).jpg',
-        inEdit: true,
-        isNew: true,
-      }, servicesById, staffById, customersById, onHideForm))
+      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm))
       : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, onHideForm));
   };
 
@@ -162,13 +144,15 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
             const repeatOnYearlyValue = formRenderProps.valueGetter('RepeatOnYearly');
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             const secondLabelForRepeatEvery = getSecondLabelForRepeatEvery(repeatValue);
+            const isNewCustomer = formRenderProps.valueGetter('IsNewCustomer');
+            console.log(isNewCustomer);
 
-            const setCustomerField = (dataItem: CustomerDataItem | undefined) => {
-              formRenderProps.onChange(`FirstName`, { value: dataItem?.FirstName });
-              formRenderProps.onChange(`LastNameAppt`, { value: dataItem?.Title });
-              formRenderProps.onChange(`Email`, { value: dataItem?.Email ?? '' });
-              formRenderProps.onChange(`Gender`, { value: dataItem?.Gender ?? '(1) Female' });
-              formRenderProps.onChange(`CellPhone`, { value: dataItem?.CellPhone ?? '' });
+            const setCustomerField = (customerDataItem: CustomerDataItem | undefined) => {
+              formRenderProps.onChange(`FirstName`, { value: customerDataItem?.FirstName });
+              formRenderProps.onChange(`LastName`, { value: customerDataItem?.Title });
+              formRenderProps.onChange(`Email`, { value: customerDataItem?.Email ?? '' });
+              formRenderProps.onChange(`Gender`, { value: customerDataItem?.Gender ?? '(1) Female' });
+              formRenderProps.onChange(`CellPhone`, { value: customerDataItem?.CellPhone ?? '' });
             };
 
             return (
@@ -401,63 +385,76 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
 
                   {isStatusConsultation ? null : (
                     <>
-                      <CustomMemoField
-                        id="customer"
-                        name="LookupCM102customersId"
-                        label="Customer"
-                        setCustomerField={setCustomerField}
-                        component={CustomersFormComboBox}
-                        disabled={isDataItemLoading}
-                        validator={requiredDropDownListValidator}
-                      />
+                      <div className="customer-fields d-flex align-items-center">
+                        <CustomMemoField
+                          id="customer"
+                          name="LookupCM102customersId"
+                          label="Customer"
+                          setCustomerField={setCustomerField}
+                          component={CustomersFormComboBox}
+                          disabled={isDataItemLoading || isNewCustomer}
+                          validator={requiredDropDownListValidator}
+                        />
+                        <CustomMemoField
+                          id={'isNewCustomer'}
+                          name={'IsNewCustomer'}
+                          label={'New Customer?'}
+                          component={FormCheckbox}
+                          disabled={isDataItemLoading}
+                        />
+                      </div>
 
-                      <CustomMemoField
-                        id="firstName"
-                        name="FirstName"
-                        label="First Name"
-                        component={FormInput}
-                        validator={requiredValidator}
-                        disabled={isDataItemLoading}
-                      />
+                      {isNewCustomer ? (
+                        <>
+                          <CustomMemoField
+                            id="firstName"
+                            name="FirstName"
+                            label="First Name"
+                            component={FormInput}
+                            validator={requiredValidator}
+                            disabled={isDataItemLoading}
+                          />
 
-                      <CustomMemoField
-                        id="lastName"
-                        name="LastNameAppt"
-                        label="Last Name"
-                        component={FormInput}
-                        validator={requiredValidator}
-                        disabled={isDataItemLoading}
-                      />
+                          <CustomMemoField
+                            id="lastName"
+                            name="LastName"
+                            label="Last Name"
+                            component={FormInput}
+                            validator={requiredValidator}
+                            disabled={isDataItemLoading}
+                          />
 
-                      <CustomMemoField
-                        id="gender"
-                        name="Gender"
-                        label="Gender"
-                        layout="horizontal"
-                        component={FormRadioGroup}
-                        data={GendersRadioGroupData}
-                        disabled={isDataItemLoading}
-                      />
+                          <CustomMemoField
+                            id="gender"
+                            name="Gender"
+                            label="Gender"
+                            layout="horizontal"
+                            component={FormRadioGroup}
+                            data={GendersRadioGroupData}
+                            disabled={isDataItemLoading}
+                          />
 
-                      <CustomMemoField
-                        id="email"
-                        name="Email"
-                        label="Email"
-                        type="email"
-                        component={FormInput}
-                        validator={emailValidator}
-                        disabled={isDataItemLoading}
-                      />
+                          <CustomMemoField
+                            id="email"
+                            name="Email"
+                            label="Email"
+                            type="email"
+                            component={FormInput}
+                            validator={emailValidator}
+                            disabled={isDataItemLoading}
+                          />
 
-                      <CustomMemoField
-                        id="phone"
-                        name="CellPhone"
-                        label="Mobile Phone"
-                        mask="+(000) 000-00-00"
-                        component={FormMaskedTextBox}
-                        validator={phoneValidator}
-                        disabled={isDataItemLoading}
-                      />
+                          <CustomMemoField
+                            id="phone"
+                            name="CellPhone"
+                            label="Mobile Phone"
+                            mask="+(000) 000-00-00"
+                            component={FormMaskedTextBox}
+                            validator={phoneValidator}
+                            disabled={isDataItemLoading}
+                          />
+                        </>
+                      ) : null}
                     </>
                   )}
 

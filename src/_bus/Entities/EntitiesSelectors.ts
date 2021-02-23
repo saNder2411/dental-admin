@@ -33,7 +33,8 @@ export const selectProcessAppointmentsData = ({ Entities }: RootState) => Entiti
 
 export const selectOriginalAppointmentsDataLength = ({ Entities }: RootState) => Entities.appointments.originalData.length;
 
-export const selectMemoAppointmentProcessByID = (dataItemID: number) => createSelector(getAppointmentsProcessById, (processById) => processById[dataItemID]);
+export const selectMemoAppointmentProcessByID = (dataItemID: number) =>
+  createSelector(getAppointmentsProcessById, (processById) => processById[dataItemID]);
 
 export const selectAppointmentsAllIds = ({ Entities }: RootState) => Entities.appointments.allIDs;
 
@@ -70,11 +71,15 @@ export const selectStaffForDropDownListData = () =>
 // Customers
 const getCustomersState = ({ Entities }: RootState) => Entities.customers;
 
-export const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
+const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
+
+const getCustomersAllIds = ({ Entities }: RootState) => Entities.customers.allIDs;
 
 export const selectOriginalCustomersData = ({ Entities }: RootState) => Entities.customers.originalData;
 
 export const selectProcessCustomersData = ({ Entities }: RootState) => Entities.customers.processData;
+
+export const selectMemoCustomersAllIds = () => createSelector(getCustomersAllIds, (customersAllIds) => customersAllIds);
 
 export const selectCustomersById = () => createSelector(getCustomersById, (customersById) => customersById);
 

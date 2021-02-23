@@ -24,6 +24,8 @@ import {
   MonthlyDayTypeDropDownListData,
   RepeatOnYearlyRadioGroupData,
 } from './SchedulerFormInstruments';
+// Helpers
+import { generateId } from '../../../../_bus/Entities/EntitiesHelpers';
 
 const phoneRegex = new RegExp(/^[0-9 ()+-]+$/);
 const emailRegex = new RegExp(/\S+@\S+\.\S+/);
@@ -52,7 +54,6 @@ export const getSecondLabelForRepeatEvery = (Repeat: RepeatTypesType) => {
       return '';
   }
 };
-
 
 const getEndRepeatRule = (endRepeatType: EndRepeatTypesType, repeatInterval: number, endCount: number, endUntil: Date) => {
   switch (endRepeatType) {
@@ -141,8 +142,19 @@ const setRecurrenceRule = ({
   }
 };
 
-export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDataItem => {
+interface ResultParseFormDataItem {
+  newDataItem: AppointmentDataItem;
+  newCustomer: CustomerDataItem | null;
+}
+
+export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllIds: number[]): ResultParseFormDataItem => {
   const {
+    IsNewCustomer,
+    FirstName,
+    LastName,
+    CellPhone,
+    Email,
+    ClientPhotoUrl,
     Gender,
     Repeat,
     EndRepeat,
@@ -161,7 +173,8 @@ export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDa
     YearlyDayType,
     ...others
   } = formDataItem;
-  return {
+
+  const newDataItem = {
     ...others,
     MetroRRule: setRecurrenceRule({
       Repeat,
@@ -181,6 +194,32 @@ export const getDataItemForApi = (formDataItem: InitialFormValue): AppointmentDa
       YearlyDayType,
     }),
   };
+
+  const ID = generateId(customersAllIds);
+
+  const newCustomer = IsNewCustomer
+    ? {
+        Id: ID,
+        Title: LastName,
+        FirstName,
+        FullName: `${FirstName} ${LastName}`,
+        CellPhone,
+        Email,
+        Gender,
+        ClientPhoto: {
+          Description: ClientPhotoUrl,
+          Url: ClientPhotoUrl,
+          __metadata: { type: 'SP.FieldUrlValue' },
+        },
+        ID,
+        Modified: new Date().toISOString(),
+        LookupMultiHR01teamId: { results: [] },
+        LookupMultiHR03eventsId: { results: [] },
+        ClientPhotoUrl,
+      }
+    : null;
+
+  return { newDataItem, newCustomer };
 };
 
 const parseRuleStrInValue = (rule: string) => {
@@ -525,7 +564,7 @@ const transformRecurrenceRuleInInitialRepaetPropsForm = (recRule: string | null)
   }
 };
 
-export const getInitialFormValue = (dataItem: AppointmentDataItem, initCustomer: CustomerDataItem): InitialFormValue => {
+export const getInitialFormValue = (dataItem: AppointmentDataItem): InitialFormValue => {
   const startHours = dataItem.Start.getHours() === 0 ? 8 : dataItem.Start.getHours();
   const Start = new Date(dataItem.Start.getFullYear(), dataItem.Start.getMonth(), dataItem.Start.getDate(), startHours, dataItem.Start.getMinutes());
   const End = new Date(
@@ -535,18 +574,19 @@ export const getInitialFormValue = (dataItem: AppointmentDataItem, initCustomer:
     startHours + 1,
     dataItem.Start.getMinutes()
   );
-  const { FirstName = '', Title = '', Email = '', Gender = '(1) Female', CellPhone = '' } = initCustomer;
 
   return {
     ...dataItem,
     Start,
     End,
-    FirstName: FirstName ?? '',
-    LastNameAppt: Title ?? '',
-    Email: Email ?? '',
-    Gender,
-    CellPhone: CellPhone ?? '',
+    FirstName: '',
+    LastName: '',
+    Email: '',
+    CellPhone: '',
+    ClientPhotoUrl: '',
+    Gender: '(1) Female' as const,
     Notes: dataItem.Notes ?? '',
+    IsNewCustomer: false,
     ...transformRecurrenceRuleInInitialRepaetPropsForm(dataItem.MetroRRule),
   };
 };

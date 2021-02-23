@@ -74,10 +74,6 @@ export const calculateAppointmentFieldsAssociatedWithCustomerServiceStaff = (app
     Duration,
     ServiceCharge,
     Description,
-    FirstName,
-    LastNameAppt: Title,
-    Email,
-    CellPhone,
     Modified: new Date().toISOString(),
   };
 };

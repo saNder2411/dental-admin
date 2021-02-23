@@ -27,7 +27,7 @@ export const GuidList = {
 };
 
 export const SelectFields = {
-  Appointment: `ID,Title,AppointmentStatus,Duration,ServiceCharge,Description,Notes,EventDate,EndDate,MetroRRule,MetroRecException,RecurrenceID,fAllDayEvent,FirstAppointment,FirstName,LastNameAppt,CellPhone,Email,Modified,LookupHR01teamId,LookupCM102customersId,LookupMultiBP01offeringsId`,
+  Appointment: `ID,Title,AppointmentStatus,Duration,ServiceCharge,Description,Notes,EventDate,EndDate,MetroRRule,MetroRecException,RecurrenceID,fAllDayEvent,FirstAppointment,Modified,LookupHR01teamId,LookupCM102customersId,LookupMultiBP01offeringsId`,
   Customer: `ID,Title,FirstName,FullName,CellPhone,Email,Gender,ClientPhoto,Modified,LookupMultiHR01teamId,LookupMultiHR03eventsId`,
   Staff: `ID,Title,FirstName,FullName,TeamProfilePhoto,ShowOnline,Email,CellPhone,JobTitle,Department,CalendarColHex,StaffWeekHours,LookupMultiHR02SkillsId`,
   Service: `ID,ContentTypeId,OfferingsName_Edit,OfferingCatType,ShowOnline,ConsultReq,MinutesDuration,Amount,OfferingDiscount,ImageThumbnail,LookupMultiHR02SkillsId`,

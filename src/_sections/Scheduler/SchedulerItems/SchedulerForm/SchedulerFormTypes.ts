@@ -47,5 +47,11 @@ export interface RepeatOptions {
 }
 
 export interface InitialFormValue extends AppointmentDataItem, RepeatOptions {
+  FirstName: string | null;
+  LastName: string | null;
+  CellPhone: string | null;
+  Email: string | null;
+  ClientPhotoUrl: string;
   Gender: '(1) Female' | '(2) Male';
+  IsNewCustomer: boolean;
 }
