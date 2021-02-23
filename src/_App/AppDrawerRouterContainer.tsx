@@ -3,19 +3,21 @@ import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
 // Components
-import { AppHeader } from '.';
+import { AppHeader } from './AppHeader';
 // SC
 import * as SC from './AppItemsStyled/CustomDrawerItemStyled';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
+// App-Config
+import AppConfig from '../../public/app-config.json';
 
 const Items = [
-  { name: 'agenda', iconSvg: 'k-i-bell', selected: true, route: '/' },
-  { name: 'calendar', iconSvg: 'k-i-calendar', selected: false, route: '/calendar' },
-  { name: 'teamStaff', iconSvg: 'profile-icon', selected: false, route: '/team-staff' },
-  { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: '/customers' },
-  { name: 'services', iconSvg: 'k-i-ungroup', selected: false, route: '/services' },
-  { name: 'dashboard', iconSvg: 'dashboard-icon', selected: false, route: '/dashboard' },
+  { name: 'agenda', iconSvg: 'k-i-bell', selected: true, route: `${AppConfig.prefixUrl}${AppConfig.indexFileName}/` },
+  { name: 'calendar', iconSvg: 'k-i-calendar', selected: false, route: `${AppConfig.prefixUrl}${AppConfig.indexFileName}/calendar` },
+  { name: 'teamStaff', iconSvg: 'profile-icon', selected: false, route: `${AppConfig.prefixUrl}${AppConfig.indexFileName}/team-staff` },
+  { name: 'customers', iconSvg: 'k-i-tell-a-friend', selected: false, route: `${AppConfig.prefixUrl}${AppConfig.indexFileName}/customers` },
+  { name: 'services', iconSvg: 'k-i-ungroup', selected: false, route: `${AppConfig.prefixUrl}${AppConfig.indexFileName}/services` },
+  { name: 'dashboard', iconSvg: 'dashboard-icon', selected: false, route: `${AppConfig.prefixUrl}${AppConfig.indexFileName}/dashboard` },
 ];
 
 const getSelectedItemName = (pathname: string): string => {

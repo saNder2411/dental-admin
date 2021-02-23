@@ -26,13 +26,11 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
       resource.ID,
       appointmentsAllIDs,
     ]);
-    // const render = useRef(0);
 
     return (
       <>
         <KendoSchedulerSlot {...props} onDoubleClick={onSlotDoubleClick} />
         {newDataItem && <SchedulerForm dataItem={newDataItem} />}
-        {/* {++render.current} */}
       </>
     );
   },

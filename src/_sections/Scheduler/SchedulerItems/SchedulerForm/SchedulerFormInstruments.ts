@@ -22,13 +22,13 @@ export const EndRepeatTypes = {
 export const EndRepeatRadioGroupData = Object.entries(EndRepeatTypes).map(([label, value]) => ({ label, value }));
 
 export const WeekdayTypes = {
-  Sun: 'SU' as const,
   Mon: 'MO' as const,
   Tue: 'TU' as const,
   Wed: 'WE' as const,
   Thu: 'TH' as const,
   Fri: 'FR' as const,
   Sat: 'SA' as const,
+  Sun: 'SU' as const,
 };
 
 export const WeekdayButtonGroupData = Object.entries(WeekdayTypes).map(([label, value]) => ({ label, value, isSelected: false }));

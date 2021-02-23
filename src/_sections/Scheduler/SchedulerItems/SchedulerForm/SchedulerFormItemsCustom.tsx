@@ -201,12 +201,10 @@ export const WeekdayFormButtonGroup: FC<FieldRenderProps> = memo((props) => {
   const btnData = WeekdayButtonGroupData.map((item) => ({ ...item, isSelected: value.includes(item.value) }));
 
   const onBtnClick = useCallback(
-    (clickedBtn: { label: string; isSelected: boolean; value: WeekdayTypesType }) => {
-      const updatedBtnData = btnData.map((item) => (item.value === clickedBtn.value ? { ...item, isSelected: !item.isSelected } : item));
-      onChange({ value: updatedBtnData.filter(({ isSelected }) => isSelected).map(({ value }) => value) });
-    },
-    [btnData, onChange]
+    (clickedBtn: { label: string; isSelected: boolean; value: WeekdayTypesType }) => onChange({ value: [clickedBtn.value] }),
+    [onChange]
   );
+  console.log(`value`, value);
 
   return (
     <FieldWrapper>

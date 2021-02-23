@@ -50,6 +50,8 @@ import './AppStyles.scss';
 import { selectLocaleId } from './AppSelectors';
 // Action Creators
 import { fetchUserDataInitAsyncAC } from '../_bus/User/UserAC';
+// App-Config
+import AppConfig from '../../public/app-config.json';
 load(
   likelySubtags,
   currencyData,
@@ -96,22 +98,22 @@ export const App: FC = (): JSX.Element => {
           <Router>
             <AppDrawerRouterContainer>
               <Switch>
-                <Route exact path="/">
+                <Route exact path={`${AppConfig.prefixUrl}${AppConfig.indexFileName}/`}>
                   <Agenda />
                 </Route>
-                <Route exact path="/calendar">
+                <Route exact path={`${AppConfig.prefixUrl}${AppConfig.indexFileName}/calendar`}>
                   <Calendar />
                 </Route>
-                <Route exact path="/team-staff">
+                <Route exact path={`${AppConfig.prefixUrl}${AppConfig.indexFileName}/team-staff`}>
                   <Staff />
                 </Route>
-                <Route exact path="/customers">
+                <Route exact path={`${AppConfig.prefixUrl}${AppConfig.indexFileName}/customers`}>
                   <Customers />
                 </Route>
-                <Route exact path="/services">
+                <Route exact path={`${AppConfig.prefixUrl}${AppConfig.indexFileName}/services`}>
                   <Services />
                 </Route>
-                <Route exact path="/dashboard">
+                <Route exact path={`${AppConfig.prefixUrl}${AppConfig.indexFileName}/dashboard`}>
                   <Dashboard />
                 </Route>
               </Switch>
