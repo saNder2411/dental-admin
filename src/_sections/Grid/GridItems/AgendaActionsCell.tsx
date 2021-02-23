@@ -24,7 +24,7 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
   const dataItem = useSelector(selectDataItem);
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
-  const isCustomerIDValid = useByIdValidation(dataItem.LookupCM102customersId);
+  const isCustomerIDValid = useByIdValidation(dataItem.LookupCM102customersId ?? -1);
   const { isValid: isValidStartEvent } = useStartDateEventValidation(dataItem.Start, dataItem.LookupHR01teamId);
   const { isValid: isValidEndEvent } = useEndDateEventValidation(dataItem.End, dataItem.LookupHR01teamId);
 

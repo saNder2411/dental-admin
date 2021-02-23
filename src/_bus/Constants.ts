@@ -1,6 +1,7 @@
 import { addWeeks, addMonths, firstDayOfMonth, addDays, addYears } from '@progress/kendo-date-math';
 // Types
 import { StatusNames } from './_Appointments/AppointmentsTypes';
+import { CustomerDataItem } from './_Customers/CustomersTypes';
 
 const NOW = new Date(new Date().setHours(4, 0, 0));
 export const MONDAY_CURRENT_WEEK = addDays(NOW, -(NOW.getDay() - 1));
@@ -31,3 +32,24 @@ export const SeriesColors = [
 ];
 
 export const Months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
+
+export const DefaultCustomer: CustomerDataItem = {
+  Id: -1,
+  Title: 'Consultation',
+  FirstName: `Female`,
+  FullName: 'Female Consultation',
+  CellPhone: '',
+  Email: '',
+  Gender: '(1) Female' as const,
+  ClientPhoto: {
+    Description: '',
+    Url: '',
+    __metadata: { type: 'SP.FieldUrlValue' },
+  },
+  ID: -1,
+  Modified: new Date().toISOString(),
+  LookupMultiHR01teamId: { results: [] },
+  LookupMultiHR03eventsId: { results: [] },
+
+  ClientPhotoUrl: '',
+};

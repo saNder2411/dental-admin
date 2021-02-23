@@ -154,7 +154,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
             //   formRenderProps.onChange(`CellPhone`, { value: customerDataItem?.CellPhone ?? '' });
             // };
 
-            const resetCustomerId = () => formRenderProps.onChange(`LookupCM102customersId`, { value: -2 });
+            const resetCustomerId = () => formRenderProps.onChange(`LookupCM102customersId`, { value: null });
 
             return (
               <FormElement horizontal={true}>

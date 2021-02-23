@@ -41,7 +41,6 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
 
   const resource = (group.resources[0] as unknown) as StaffDataItem | undefined;
-  // console.log(`SchedulerItemProps`, props, showEditForm);
   const iconName = dataItem.AppointmentStatus;
   const iconDentalName = StatusNames.Tooth;
   const width = _ref.current?.element?.offsetWidth;

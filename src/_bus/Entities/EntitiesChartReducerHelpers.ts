@@ -249,7 +249,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
 
       if (!isFuture && AppointmentStatus !== StatusNames.Cancelled) {
         acc.totalAppointmentSalesPerLast12Months += ServiceCharge;
-        acc.activeCustomersSet.add(LookupCM102customersId);
+        LookupCM102customersId && acc.activeCustomersSet.add(LookupCM102customersId);
       }
 
       if (isPrevWeek) {

@@ -33,7 +33,7 @@ interface BackendImmutableKey {
   // CellPhone: string | null;
   ID: number;
   Modified: string;
-  LookupCM102customersId: number;
+  LookupCM102customersId: number | null;
   LookupHR01teamId: number | null;
 }
 

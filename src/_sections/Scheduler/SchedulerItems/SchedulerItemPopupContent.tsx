@@ -24,7 +24,7 @@ export const SchedulerItemPopupContent: FC<Props> = ({ resource, dataItem, onEdi
   const intl = useInternationalization();
   const { AppointmentStatus, Title, Description, Start, End, LookupCM102customersId } = dataItem;
 
-  const customer = useSelector(selectCustomerById(LookupCM102customersId));
+  const customer = useSelector(selectCustomerById(LookupCM102customersId ?? -1));
   const { Email = '', CellPhone = '' } = customer ? customer : {};
 
   const color = resource?.CalendarColHex;

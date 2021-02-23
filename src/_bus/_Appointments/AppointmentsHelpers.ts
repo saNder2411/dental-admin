@@ -63,7 +63,7 @@ export const calculateAppointmentFieldsAssociatedWithCustomerServiceStaff = (app
       ServiceDescription: new Array<string>(),
     }
   );
-  const { FullName = '', CellPhone = '', Email = '', FirstName = '', Title = '' } = customersById[LookupCM102customersId] ?? {};
+  const { FullName = 'Female Consultation', CellPhone = '', Email = '', FirstName = 'Female', Title = 'Consultation' } = customersById[LookupCM102customersId ?? -1] ?? {};
   const Description = `Appointment with - ${
     staffById[LookupHR01teamId].FullName
   } | Contact Reference - ${FullName}, ${CellPhone}, ${Email} | Service Type - ${ServiceDescription.join(`, `)}`;

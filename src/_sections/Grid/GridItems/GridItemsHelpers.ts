@@ -33,4 +33,4 @@ export const transformDomainDataToMultiSelectData = (domainData: ServiceDataItem
 export const transformTeamStaffDataToMultiSelectData = (domainData: StaffDataItem[]) =>
   domainData.map(({ Title, Id }) => ({ text: Title ?? '', value: Id }));
 
-export const EmptyDropDownListDataItem = { text: '', value: -1 };
+export const EmptyDropDownListDataItem = { text: '', value: null };
