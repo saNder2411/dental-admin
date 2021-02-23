@@ -21,7 +21,7 @@ import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyn
 import { changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
-import { selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectAppointmentsAllIds, selectServicesById, selectStaffById, selectCustomersById } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
@@ -48,6 +48,9 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const height = _ref.current?.element?.offsetHeight;
 
   const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
+  const servicesById = useSelector(selectServicesById());
+  const staffById = useSelector(selectStaffById());
+  const customersById = useSelector(selectCustomersById());
 
   const onSchedulerItemClick = useCallback(() => !appointmentIsDataItemLoading && setShowPopup((prevState) => !prevState), [
     appointmentIsDataItemLoading,
@@ -67,7 +70,8 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   }, [dispatch, dataItem.ID, isRecurring]);
 
   const onDeleteBtnClick = useCallback(() => {
-    setShowPopup(false);
+    setShowPopup((prevState) => !prevState);
+    // setShowPopup(true);
 
     if (isRecurring) {
       setShowRemoveOccurrenceDialog(true);
@@ -83,7 +87,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       const exception = new Date(dataItem.Start.getTime());
       const newDataItem = getNewDataItemWithUpdateException(dataItem, exception);
 
-      dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, () => {}));
+      dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, null, servicesById, staffById, customersById, () => {}));
       return;
     }
     dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem.ID, () => {}));

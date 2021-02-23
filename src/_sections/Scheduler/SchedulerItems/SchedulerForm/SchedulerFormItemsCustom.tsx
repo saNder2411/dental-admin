@@ -13,6 +13,7 @@ import {
 import { ButtonGroup, Button } from '@progress/kendo-react-buttons';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
 import { FieldRenderProps, Field, FieldProps } from '@progress/kendo-react-form';
+import { Checkbox, CheckboxChangeEvent } from '@progress/kendo-react-inputs';
 // Types
 import { CustomFieldRenderProps } from '../SchedulerItemTypes';
 import { WeekdayTypesType } from './SchedulerFormTypes';
@@ -21,7 +22,7 @@ import {
   selectStaffForDropDownListData,
   selectStaffLastNameByID,
   selectCustomersForDropDownListData,
-  selectCustomersById,
+  // selectCustomersById,
   selectCustomerFullNameByID,
   selectServicesForDropDownListData,
 } from '../../../../_bus/Entities/EntitiesSelectors';
@@ -111,7 +112,7 @@ export const StaffFormDropDownList: FC<CustomFieldRenderProps> = memo((props) =>
 
 export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) => {
   const { showValidationMessage, hintId, errorId, labelId } = getFormInputOptionalProps(props);
-  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, setCustomerField, ...others } = props;
+  const { validationMessage, touched, label, id, valid, disabled, hint, value, onChange, isNewCustomer, ...others } = props;
   const LookupEntityId = value as number;
 
   const [filter, setFilter] = useState('');
@@ -125,30 +126,30 @@ export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) =>
   const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(LookupEntityId), [LookupEntityId]);
   const customerFullName = useSelector(selectCustomerFullName);
   const comboBoxValue = { text: customerFullName, value };
-  const customerById = useSelector(selectCustomersById());
+  // const customerById = useSelector(selectCustomersById());
 
   const onComboBoxValueChange = useCallback(
     (evt: ComboBoxChangeEvent) => {
       const evtValue = evt.value ? evt.value : EmptyDropDownListDataItem;
-      setCustomerField(customerById[evtValue.value]);
+      // setCustomerField(customerById[evtValue.value]);
 
       onChange({ value: evtValue.value });
     },
-    [customerById, onChange, setCustomerField]
+    [onChange]
   );
 
   const onFilterChange = (evt: ComboBoxFilterChangeEvent) => setFilter(evt.filter.value);
 
   return (
     <FieldWrapper>
-      <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
+      <Label id={labelId} editorId={id} editorValid={valid || isNewCustomer} editorDisabled={disabled}>
         {label}
       </Label>
       <div className={'k-form-field-wrap'}>
         <ComboBox
           ariaLabelledBy={labelId}
           ariaDescribedBy={`${hintId} ${errorId}`}
-          valid={valid}
+          valid={valid || isNewCustomer}
           id={id}
           value={comboBoxValue}
           data={filteredDataForComboBox}
@@ -160,8 +161,30 @@ export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) =>
           dataItemKey="value"
           {...others}
         />
-        {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
+        {showValidationMessage && !isNewCustomer && <Error id={errorId}>{validationMessage}</Error>}
       </div>
+    </FieldWrapper>
+  );
+});
+
+export const IsNewCustomerFormCheckbox: FC<FieldRenderProps> = memo((props) => {
+  const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, onChange, resetCustomerId, ...others } = props;
+  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
+
+  const onCheckboxValueChange = useCallback(
+    (evt: CheckboxChangeEvent) => {
+      resetCustomerId();
+
+      onChange(evt);
+    },
+    [onChange, resetCustomerId]
+  );
+
+  return (
+    <FieldWrapper>
+      <Checkbox ariaDescribedBy={`${hintId} ${errorId}`} label={label} id={id} onChange={onCheckboxValueChange} disabled={disabled} {...others} />
+      {showHint && <Hint id={hintId}>{hint}</Hint>}
+      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>
   );
 });
@@ -204,7 +227,6 @@ export const WeekdayFormButtonGroup: FC<FieldRenderProps> = memo((props) => {
     (clickedBtn: { label: string; isSelected: boolean; value: WeekdayTypesType }) => onChange({ value: [clickedBtn.value] }),
     [onChange]
   );
-  console.log(`value`, value);
 
   return (
     <FieldWrapper>

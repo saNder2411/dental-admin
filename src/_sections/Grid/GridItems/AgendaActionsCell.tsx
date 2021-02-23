@@ -39,8 +39,8 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
 
   const onUpdatedDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(updateAppointmentDataItemInitAsyncAC({ ...dataItem, Modified: new Date().toISOString() }, () => setIsDataItemLoading(false)));
-  }, [dataItem, dispatch]);
+    dispatch(updateAppointmentDataItemInitAsyncAC(dataItem, null, servicesById, staffById, customersById, () => setIsDataItemLoading(false)));
+  }, [customersById, dataItem, dispatch, servicesById, staffById]);
 
   const onDeleteDataItem = useCallback(() => {
     setIsDataItemLoading(true);

@@ -66,10 +66,17 @@ export const createServiceDataItemInitAsyncAC = (createdDataItem: ServiceDataIte
 });
 
 // Async Update Data Item
-export const updateAppointmentDataItemInitAsyncAC = (updatedDataItem: AppointmentDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
+export const updateAppointmentDataItemInitAsyncAC = (
+  updatedDataItem: AppointmentDataItem,
+  newCustomerDataItem: CustomerDataItem | null,
+  servicesById: ById<ServiceDataItem>,
+  staffById: ById<StaffDataItem>,
+  customersById: ById<CustomerDataItem>,
+  sideEffectAfterUpdatedDataItem: () => void
+) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  updatedDataItem,
-  meta: sideEffectAfterUpdatedDataItem,
+  payload: { updatedDataItem, newCustomerDataItem, servicesById, staffById, customersById },
+  meta: { sideEffectAfterUpdatedDataItem },
 });
 
 export const updateAppointmentRecurringDataItemInitAsyncAC = (

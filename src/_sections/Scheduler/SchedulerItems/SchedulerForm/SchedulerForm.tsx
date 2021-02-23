@@ -14,6 +14,7 @@ import {
   CustomersFormComboBox,
   FormDropDownListWithCustomData,
   WeekdayFormButtonGroup,
+  IsNewCustomerFormCheckbox,
 } from './SchedulerFormItemsCustom';
 import {
   FormInput,
@@ -23,7 +24,6 @@ import {
   FormTextArea,
   FormNumericTextBox,
   FormDropDownList,
-  FormCheckbox,
 } from './SchedulerFormItems';
 // Selectors
 import { selectCustomersById, selectStaffById, selectServicesById, selectMemoCustomersAllIds } from '../../../../_bus/Entities/EntitiesSelectors';
@@ -32,7 +32,7 @@ import { selectDataItemErrorMessage } from '../../../../_bus/UI/UISelectors';
 // Types
 import { AppointmentDataItem, StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../../_bus/Entities/EntitiesTypes';
-import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
+// import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
 import {
@@ -77,7 +77,7 @@ interface Props {
 export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }): JSX.Element => {
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
-  console.log(`SchedulerFormDataItem`, dataItem);
+  // console.log(`SchedulerFormDataItem`, dataItem);
   const dataItemErrorMessage = useSelector(selectDataItemErrorMessage);
 
   const selectUpdatableRecurringDataItem = useMemo(selectMemoUpdatableRecurringDataItem, []);
@@ -105,7 +105,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
 
     dataItem.isNew
       ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm))
-      : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, onHideForm));
+      : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm));
   };
 
   const onDialogClose = useCallback(() => {
@@ -145,15 +145,16 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             const secondLabelForRepeatEvery = getSecondLabelForRepeatEvery(repeatValue);
             const isNewCustomer = formRenderProps.valueGetter('IsNewCustomer');
-            console.log(isNewCustomer);
 
-            const setCustomerField = (customerDataItem: CustomerDataItem | undefined) => {
-              formRenderProps.onChange(`FirstName`, { value: customerDataItem?.FirstName });
-              formRenderProps.onChange(`LastName`, { value: customerDataItem?.Title });
-              formRenderProps.onChange(`Email`, { value: customerDataItem?.Email ?? '' });
-              formRenderProps.onChange(`Gender`, { value: customerDataItem?.Gender ?? '(1) Female' });
-              formRenderProps.onChange(`CellPhone`, { value: customerDataItem?.CellPhone ?? '' });
-            };
+            // const setCustomerField = (customerDataItem: CustomerDataItem | undefined) => {
+            //   formRenderProps.onChange(`FirstName`, { value: customerDataItem?.FirstName });
+            //   formRenderProps.onChange(`LastName`, { value: customerDataItem?.Title });
+            //   formRenderProps.onChange(`Email`, { value: customerDataItem?.Email ?? '' });
+            //   formRenderProps.onChange(`Gender`, { value: customerDataItem?.Gender ?? '(1) Female' });
+            //   formRenderProps.onChange(`CellPhone`, { value: customerDataItem?.CellPhone ?? '' });
+            // };
+
+            const resetCustomerId = () => formRenderProps.onChange(`LookupCM102customersId`, { value: -2 });
 
             return (
               <FormElement horizontal={true}>
@@ -385,12 +386,13 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
 
                   {isStatusConsultation ? null : (
                     <>
-                      <div className="customer-fields d-flex align-items-center">
+                      <div className="customer-fields d-flex">
                         <CustomMemoField
                           id="customer"
                           name="LookupCM102customersId"
                           label="Customer"
-                          setCustomerField={setCustomerField}
+                          isNewCustomer={isNewCustomer}
+                          // setCustomerField={setCustomerField}
                           component={CustomersFormComboBox}
                           disabled={isDataItemLoading || isNewCustomer}
                           validator={requiredDropDownListValidator}
@@ -399,7 +401,8 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                           id={'isNewCustomer'}
                           name={'IsNewCustomer'}
                           label={'New Customer?'}
-                          component={FormCheckbox}
+                          resetCustomerId={resetCustomerId}
+                          component={IsNewCustomerFormCheckbox}
                           disabled={isDataItemLoading}
                         />
                       </div>
@@ -451,6 +454,16 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                             mask="+(000) 000-00-00"
                             component={FormMaskedTextBox}
                             validator={phoneValidator}
+                            disabled={isDataItemLoading}
+                          />
+
+                          <CustomMemoField
+                            id="clientPhotoUrl"
+                            name="ClientPhotoUrl"
+                            label="Photo"
+                            type="text"
+                            placeholder="Link to customer photo"
+                            component={FormInput}
                             disabled={isDataItemLoading}
                           />
                         </>

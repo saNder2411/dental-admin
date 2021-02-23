@@ -1,6 +1,6 @@
 import React, { FC, memo } from 'react';
 import { FieldWrapper } from '@progress/kendo-react-form';
-import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup, Checkbox } from '@progress/kendo-react-inputs';
+import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup } from '@progress/kendo-react-inputs';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
 import { DateTimePicker } from '@progress/kendo-react-dateinputs';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
@@ -124,19 +124,6 @@ export const FormRadioGroup: FC<FieldRenderProps> = memo((props) => {
         {label}
       </Label>
       <RadioGroup ariaDescribedBy={`${hintId} ${errorId}`} ariaLabelledBy={labelId} valid={valid} disabled={disabled} {...others} />
-      {showHint && <Hint id={hintId}>{hint}</Hint>}
-      {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
-    </FieldWrapper>
-  );
-});
-
-export const FormCheckbox: FC<FieldRenderProps> = memo((props) => {
-  const { validationMessage, touched, id, label, valid, disabled, hint, visited, modified, ...others } = props;
-  const { showValidationMessage, showHint, hintId, errorId } = getFormInputOptionalProps(props);
-
-  return (
-    <FieldWrapper>
-      <Checkbox ariaDescribedBy={`${hintId} ${errorId}`} label={label} id={id} disabled={disabled} {...others} />
       {showHint && <Hint id={hintId}>{hint}</Hint>}
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>

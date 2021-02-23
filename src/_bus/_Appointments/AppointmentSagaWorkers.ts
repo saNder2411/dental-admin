@@ -126,8 +126,8 @@ export function* workerCreateDataItem({
 
     const refreshedCustomerDataItem: CustomerDataItem = {
       ...customerDataItem,
-      LookupMultiHR01teamId: { results: [...customerDataItem.LookupMultiHR01teamId.results, dataItem.LookupHR01teamId] },
-      LookupMultiHR03eventsId: { results: [...customerDataItem.LookupMultiHR03eventsId.results, dataItem.ID] },
+      LookupMultiHR01teamId: { results: Array.from(new Set([...customerDataItem.LookupMultiHR01teamId.results, dataItem.LookupHR01teamId])) },
+      LookupMultiHR03eventsId: { results: Array.from(new Set([...customerDataItem.LookupMultiHR03eventsId.results, dataItem.ID])) },
     };
     const customerResult: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [
       customerTransformDataItemForAPI(refreshedCustomerDataItem),
@@ -145,15 +145,74 @@ export function* workerCreateDataItem({
 }
 
 export function* workerUpdateDataItem({
-  updatedDataItem,
-  meta: sideEffectAfterUpdatedDataItem,
+  payload: { updatedDataItem, newCustomerDataItem, servicesById, staffById, customersById },
+  meta: { sideEffectAfterUpdatedDataItem },
 }: UpdateAppointmentDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    const result: QueryAppointmentDataItem = yield apply(API, API.appointments.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
+    if (newCustomerDataItem) {
+      const newCustomerResult: QueryCustomerDataItem = yield apply(API, API.customers.createDataItem, [
+        customerTransformDataItemForAPI(newCustomerDataItem),
+      ]);
+      const createdCustomerDataItem = customerTransformAPIDataItem(newCustomerResult);
+      yield put(actions.createDataItemSuccessAC(createdCustomerDataItem, EntitiesKeys.Customers, newCustomerDataItem.ID));
+
+      const refreshCustomersById: ById<CustomerDataItem> = { ...customersById, [createdCustomerDataItem.ID]: createdCustomerDataItem };
+      const refreshAppointmentDataItem: AppointmentDataItem = {
+        ...updatedDataItem,
+        FirstAppointment: true,
+        LookupCM102customersId: createdCustomerDataItem.ID,
+        Modified: new Date().toISOString(),
+      };
+
+      const result: QueryAppointmentDataItem = yield apply(API, API.appointments.updateDataItem, [
+        transformDataItemForAPI(
+          calculateAppointmentFieldsAssociatedWithCustomerServiceStaff(refreshAppointmentDataItem)(servicesById)(staffById)(refreshCustomersById)
+        ),
+      ]);
+      const dataItem = transformAPIDataItem(result);
+
+      const refreshedCustomerDataItem: CustomerDataItem = {
+        ...createdCustomerDataItem,
+        LookupMultiHR01teamId: { results: [...createdCustomerDataItem.LookupMultiHR01teamId.results, dataItem.LookupHR01teamId] },
+        LookupMultiHR03eventsId: { results: [...createdCustomerDataItem.LookupMultiHR03eventsId.results, dataItem.ID] },
+        Modified: new Date().toISOString(),
+      };
+      const customerResult: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [
+        customerTransformDataItemForAPI(refreshedCustomerDataItem),
+      ]);
+      const updatedCustomerDataItem = customerTransformAPIDataItem(customerResult);
+
+      yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesKeys.Appointments));
+      yield put(actions.updateDataItemSuccessAC(updatedCustomerDataItem, EntitiesKeys.Customers));
+      return;
+    }
+
+    const result: QueryAppointmentDataItem = yield apply(API, API.appointments.updateDataItem, [
+      transformDataItemForAPI(calculateAppointmentFieldsAssociatedWithCustomerServiceStaff(updatedDataItem)(servicesById)(staffById)(customersById)),
+    ]);
     const dataItem = transformAPIDataItem(result);
     yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesKeys.Appointments));
+
+    const customerDataItem = customersById[dataItem.LookupCM102customersId];
+
+    const refreshedCustomerDataItem: CustomerDataItem = {
+      ...customerDataItem,
+      LookupMultiHR01teamId: { results: Array.from(new Set([...customerDataItem.LookupMultiHR01teamId.results, dataItem.LookupHR01teamId])) },
+      LookupMultiHR03eventsId: { results: Array.from(new Set([...customerDataItem.LookupMultiHR03eventsId.results, dataItem.ID])) },
+      Modified: new Date().toISOString(),
+    };
+
+    const customerResult: QueryCustomerDataItem = yield apply(API, API.customers.updateDataItem, [
+      customerTransformDataItemForAPI(refreshedCustomerDataItem),
+    ]);
+
+    yield put(actions.updateDataItemSuccessAC(customerTransformAPIDataItem(customerResult), EntitiesKeys.Customers));
+
+    // const result: QueryAppointmentDataItem = yield apply(API, API.appointments.updateDataItem, [transformDataItemForAPI(updatedDataItem)]);
+    // const dataItem = transformAPIDataItem(result);
+    // yield put(actions.updateDataItemSuccessAC(dataItem, EntitiesKeys.Appointments));
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Appointments update data item Error: ${error.message}`));
   } finally {

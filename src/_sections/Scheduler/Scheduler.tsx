@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   Scheduler as KendoScheduler,
   DayView,
@@ -15,12 +15,17 @@ import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell
 import { CustomSchedulerProps } from './SchedulerTypes';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
 import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
+// Selectors
+import { selectCustomersById, selectStaffById, selectServicesById } from '../../_bus/Entities/EntitiesSelectors';
 // Action Creators
 import { updateAppointmentDataItemInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
 import { changeSelectedDateAC, changeSelectedViewAC } from '../../_bus/Scheduler/SchedulerAC';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
   const dispatch = useDispatch();
+  const servicesById = useSelector(selectServicesById());
+  const staffById = useSelector(selectStaffById());
+  const customersById = useSelector(selectCustomersById());
 
   const onDataChange = useCallback(
     ({ updated }: SchedulerDataChangeEvent) => {
@@ -34,9 +39,11 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         updatedDataItem.LookupHR01teamId = updatedDataItem.TeamID;
       }
 
-      dispatch(updateAppointmentDataItemInitAsyncAC(updatedDataItem, () => setIsAgendaDataItemLoading(false)));
+      dispatch(
+        updateAppointmentDataItemInitAsyncAC(updatedDataItem, null, servicesById, staffById, customersById, () => setIsAgendaDataItemLoading(false))
+      );
     },
-    [dispatch, setIsAgendaDataItemLoading]
+    [customersById, dispatch, servicesById, setIsAgendaDataItemLoading, staffById]
   );
 
   const onDateChange = useCallback((evt: SchedulerDateChangeEvent) => dispatch(changeSelectedDateAC(evt.value)), [dispatch]);
