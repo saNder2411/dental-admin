@@ -101,7 +101,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
           remove: true,
           drag: true,
           resize: true,
-          edit: false,
+          edit: true,
           select: false,
         }}>
         <DayView workDayStart={'08:00'} workDayEnd={'20:00'} slotDuration={60} slotDivisions={4} />
