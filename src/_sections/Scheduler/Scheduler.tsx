@@ -45,7 +45,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
 
-  // const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
   const selectedView = useSelector(selectSelectedView);
   const [showEditOccurrenceDialog, setShowEditOccurrenceDialog] = useState(false);
@@ -101,7 +101,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
           remove: true,
           drag: true,
           resize: true,
-          edit: true,
+          edit: false,
           select: false,
         }}>
         <DayView workDayStart={'08:00'} workDayEnd={'20:00'} slotDuration={60} slotDivisions={4} />
@@ -109,10 +109,10 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         <MonthView dateHeaderCell={CustomDateHeaderCell} />
         {/* <AgendaView /> */}
       </KendoScheduler>
-      {/* {showPopup && (
+      {showPopup && (
         <CancelDragModal onCancel={() => setShowPopup(false)} onClose={() => setShowPopup(false)} onConfirm={() => setShowPopup(false)} />
-      )} */}
-      {showEditOccurrenceDialog && dataItem && (
+      )}
+      {/* {showEditOccurrenceDialog && dataItem && (
         <EditOccurrenceConfirmModal
           onClose={() => setShowEditOccurrenceDialog(false)}
           onCancel={() => {
@@ -151,7 +151,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
             );
           }}
         />
-      )}
+      )} */}
     </>
   );
 };

@@ -38693,6 +38693,62 @@
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
+    },
+    {
+      "Id": 1674,
+      "Title": "F.Consultation-1674",
+      "AppointmentStatus": "(1) Consultation",
+      "EventDate": "2021-05-31T05:00:00.000Z",
+      "EndDate": "2021-05-31T06:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Female Consultation, ,  | Service Type - Ladies Wash+Cut+Dry S2 49.5 (-10%)",
+      "Duration": 3000,
+      "Notes": "",
+      "ServiceCharge": 49.5,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": true,
+      "LookupCM102customersId": 1281,
+      "ID": 1674,
+      "Modified": "2021-02-24T15:54:10.020Z",
+      "fRecurrence": false,
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          2
+        ]
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1675,
+      "Title": "F.Consultation-1675",
+      "AppointmentStatus": "(1) Consultation",
+      "EventDate": "2021-06-01T05:00:00.000Z",
+      "EndDate": "2021-06-01T06:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Female Consultation, ,  | Service Type - ",
+      "Duration": 0,
+      "Notes": "",
+      "ServiceCharge": 0,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=8;BYDAY=WE",
+      "MetroRecException": null,
+      "FirstAppointment": true,
+      "LookupCM102customersId": 1282,
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": []
+      },
+      "ID": 1675,
+      "Modified": "2021-02-24T15:54:31.852Z",
+      "fRecurrence": true,
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
     }
   ],
   "services": [
@@ -80370,6 +80426,68 @@
       "LookupMultiHR03eventsId": {
         "results": [
           1673
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1281,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1281,
+      "Modified": "2021-02-24T15:54:10.486Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          6
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1674
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1282,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1282,
+      "Modified": "2021-02-24T15:54:33.739Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          6
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1675
         ]
       },
       "ClientPhoto": {
