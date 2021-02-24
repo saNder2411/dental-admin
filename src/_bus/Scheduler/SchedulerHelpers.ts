@@ -29,7 +29,7 @@ export const getNewAppointmentDataItemForScheduler = (
     // LastNameAppt: ``,
     // Email: null,
     // CellPhone: null,
-    LookupCM102customersId: 1,
+    LookupCM102customersId: -1,
     LookupHR01teamId: TeamID,
     LookupMultiBP01offeringsId: { results: [] },
     ID,

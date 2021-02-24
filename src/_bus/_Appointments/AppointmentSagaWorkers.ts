@@ -33,7 +33,6 @@ import {
 } from '../_Customers/CustomersHelpers';
 import { transformAPIData as transformServicesAPIData } from '../_Services/ServicesHelpers';
 import { getDefaultConsultationCustomer } from '../Constants';
-import { generateId } from '../Entities/EntitiesHelpers';
 
 type Results = [QueryAppointmentDataItem[] | null, QueryStaffDataItem[] | null, QueryCustomerDataItem[] | null, QueryServiceDataItem[] | null];
 
