@@ -8,7 +8,7 @@ import * as SC from '../SchedulerItemsStyled/SchedulerItemStyled';
 // Components
 import { SchedulerEditItem } from './SchedulerEditItem';
 import { SchedulerItemPopupContent } from './SchedulerItemPopupContent';
-import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirmModal } from './SchedulerConfirmModals';
+import { RemoveConfirmModal, EditOccurrenceConfirmModal, RemoveOccurrenceConfirmModal, CancelDragModal } from './SchedulerConfirmModals';
 // Instruments
 import { IconMap } from '../../../_instruments';
 // Types
@@ -31,6 +31,12 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectedView = useSelector(selectSelectedView);
+
+  const [showCancelDragPopup, setShowCancelDragPopup] = useState(false);
+  const [titleCancelDragPopup, setTitleCancelDragPopup] = useState(`Edit Recurring Item`);
+  const [messageCancelDragPopup, setMessageCancelDragPopup] = useState(
+    `Editing Recurring items is not supported here. please request admin assitance`
+  );
 
   const [showEditForm, setShowEditForm] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -61,7 +67,10 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     setShowPopup(false);
 
     if (isRecurring) {
-      setShowEditOccurrenceDialog(true);
+      // setShowEditOccurrenceDialog(true);
+      setTitleCancelDragPopup(`Edit Recurring Item`);
+      setMessageCancelDragPopup(`Editing Recurring items is not supported here. please request admin assitance`);
+      setShowCancelDragPopup(true);
       return;
     }
     dispatch(addItemToEditAC(dataItem.ID, EntitiesKeys.Appointments));
@@ -73,7 +82,10 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     // setShowPopup(true);
 
     if (isRecurring) {
-      setShowRemoveOccurrenceDialog(true);
+      // setShowRemoveOccurrenceDialog(true);
+      setTitleCancelDragPopup(`Delete Recurring Item`);
+      setMessageCancelDragPopup(`Deleting Recurring items is not supported here. please request admin assitance`);
+      setShowCancelDragPopup(true);
       return;
     }
 
@@ -156,12 +168,20 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
           }}
           onConfirm={() => {
             setShowEditOccurrenceDialog(false);
-            dispatch(addItemToEditAC(dataItem.ID, EntitiesKeys.Appointments));
             setShowEditForm(true);
+            dispatch(addItemToEditAC(dataItem.ID, EntitiesKeys.Appointments));
           }}
         />
       )}
       {showEditForm && <SchedulerEditItem dataItemID={dataItem.ID} onHideForm={() => setShowEditForm(false)} />}
+      {showCancelDragPopup && (
+        <CancelDragModal
+          onCancel={() => setShowCancelDragPopup(false)}
+          onClose={() => setShowCancelDragPopup(false)}
+          title={titleCancelDragPopup}
+          message={messageCancelDragPopup}
+        />
+      )}
     </>
   ) : null;
 };

@@ -45,7 +45,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
 
-  const [showPopup, setShowPopup] = useState(false);
+  const [showCancelDragPopup, setShowCancelDragPopup] = useState(false);
   const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
   const selectedView = useSelector(selectSelectedView);
   const [showEditOccurrenceDialog, setShowEditOccurrenceDialog] = useState(false);
@@ -56,10 +56,10 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
       if (typeof updated[0] === 'number' || !updated[0]) return;
 
       const [updatedDataItem] = updated as AppointmentDataItem[];
-      console.log(`updated`, updated);
+      // console.log(`updated`, updated);
 
       if (updatedDataItem.MetroRRule) {
-        setShowEditOccurrenceDialog(true);
+        setShowCancelDragPopup(true);
         setDataItem(updatedDataItem);
         return;
       }
@@ -109,8 +109,13 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         <MonthView dateHeaderCell={CustomDateHeaderCell} />
         {/* <AgendaView /> */}
       </KendoScheduler>
-      {showPopup && (
-        <CancelDragModal onCancel={() => setShowPopup(false)} onClose={() => setShowPopup(false)} onConfirm={() => setShowPopup(false)} />
+      {showCancelDragPopup && (
+        <CancelDragModal
+          onCancel={() => setShowCancelDragPopup(false)}
+          onClose={() => setShowCancelDragPopup(false)}
+          title="Edit Recurring Item"
+          message="Editing Recurring items is not supported here. please request admin assitance"
+        />
       )}
       {/* {showEditOccurrenceDialog && dataItem && (
         <EditOccurrenceConfirmModal

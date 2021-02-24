@@ -36930,42 +36930,6 @@
     },
     {
       "__metadata": {
-        "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1473)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1473)",
-        "etag": "\"3\"",
-        "type": "SP.Data.MetroHR03ListItem"
-      },
-      "Id": 1473,
-      "Title": "S.Pye-1473",
-      "EventDate": "2021-02-24T00:00:00Z",
-      "EndDate": "2021-02-24T23:59:00Z",
-      "Duration": 86340,
-      "Description": " | Stylist-David Wenger | Customer-Stephen Pye_0798302214-paddy@revcurv.com | Services-Amplify Protein Conditioner 300ml 4.04 (-15%), Strong Daily Conditioner 1L 16.99 (-15%), Freeze+Shine Super Spray 500ml 16.14 (-15%) | Services Total=37.1705(-0%) | (Extra Fees =0.00) | ",
-      "fAllDayEvent": true,
-      "RecurrenceID": null,
-      "AppointmentStatus": "(10) Other",
-      "Notes": null,
-      "FirstAppointment": false,
-      "ServiceCharge": 37.1705,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "LookupMultiBP01offeringsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": [
-          44,
-          43,
-          49
-        ]
-      },
-      "LookupCM102customersId": 1,
-      "LookupHR01teamId": 5,
-      "ID": 1473,
-      "Modified": "2021-02-18T08:14:24Z"
-    },
-    {
-      "__metadata": {
         "id": "Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1474)",
         "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'd9dccd8b-9f3d-4330-89e3-bda20bb04348')/Items(1474)",
         "etag": "\"3\"",
@@ -38520,35 +38484,6 @@
       }
     },
     {
-      "Id": 1668,
-      "Title": "F.Consultation-1668",
-      "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-02-24T08:00:00.000Z",
-      "EndDate": "2021-02-24T09:00:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Female Consultation, ,  | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
-      "Duration": 3600,
-      "Notes": "",
-      "ServiceCharge": 46.75,
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstAppointment": true,
-      "LookupCM102customersId": 1271,
-      "LookupHR01teamId": 4,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
-      },
-      "ID": 1668,
-      "Modified": "2021-02-24T12:05:00.760Z",
-      "fRecurrence": false,
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
       "Id": 1669,
       "Title": "J.Adamson-1669",
       "AppointmentStatus": "(4) Booked",
@@ -38573,35 +38508,6 @@
       },
       "ID": 1669,
       "Modified": "2021-02-24T12:05:34.556Z",
-      "fRecurrence": false,
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 1670,
-      "Title": "N.Test-1670",
-      "AppointmentStatus": "(3) Reserved",
-      "EventDate": "2021-02-24T10:15:00.000Z",
-      "EndDate": "2021-02-24T11:15:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - NewTest Test, +(489) 093-84-09, test@mail.com | Service Type - Ladies Wash+Cut+Dry S2 49.5 (-10%)",
-      "Duration": 3000,
-      "Notes": "",
-      "ServiceCharge": 49.5,
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstAppointment": true,
-      "LookupCM102customersId": 1272,
-      "LookupHR01teamId": 4,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          2
-        ]
-      },
-      "ID": 1670,
-      "Modified": "2021-02-24T12:06:37.249Z",
       "fRecurrence": false,
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
@@ -38698,8 +38604,8 @@
       "Id": 1674,
       "Title": "F.Consultation-1674",
       "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-05-31T05:00:00.000Z",
-      "EndDate": "2021-05-31T06:00:00.000Z",
+      "EventDate": "2021-06-20T05:00:00.000Z",
+      "EndDate": "2021-06-20T06:00:00.000Z",
       "Description": "Appointment with - Alex Locatelli | Contact Reference - Female Consultation, ,  | Service Type - Ladies Wash+Cut+Dry S2 49.5 (-10%)",
       "Duration": 3000,
       "Notes": "",
@@ -38711,7 +38617,7 @@
       "FirstAppointment": true,
       "LookupCM102customersId": 1281,
       "ID": 1674,
-      "Modified": "2021-02-24T15:54:10.020Z",
+      "Modified": "2021-02-24T17:22:09.127Z",
       "fRecurrence": false,
       "LookupHR01teamId": 6,
       "LookupMultiBP01offeringsId": {
@@ -38735,17 +38641,17 @@
       "ServiceCharge": 0,
       "fAllDayEvent": null,
       "RecurrenceID": null,
-      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=8;BYDAY=WE",
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=8;BYDAY=FR",
       "MetroRecException": null,
       "FirstAppointment": true,
-      "LookupCM102customersId": 1282,
+      "LookupCM102customersId": 1286,
+      "ID": 1675,
+      "Modified": "2021-02-24T17:27:48.061Z",
+      "fRecurrence": true,
       "LookupHR01teamId": 6,
       "LookupMultiBP01offeringsId": {
         "results": []
       },
-      "ID": 1675,
-      "Modified": "2021-02-24T15:54:31.852Z",
-      "fRecurrence": true,
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
@@ -40381,11 +40287,12 @@
       "Email": "Ilona.Acciardi@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 77,
-      "Modified": "2021-02-24T13:46:29.797Z",
+      "Modified": "2021-02-24T17:49:06.869Z",
       "Created": "2019-07-23T07:17:06Z",
       "LookupMultiHR01teamId": {
         "results": [
-          6
+          6,
+          5
         ]
       },
       "LookupMultiHR03eventsId": {
@@ -80166,10 +80073,11 @@
       "Email": "",
       "Gender": "(1) Female",
       "ID": 1271,
-      "Modified": "2021-02-24T12:05:02.959Z",
+      "Modified": "2021-02-24T17:36:13.188Z",
       "LookupMultiHR01teamId": {
         "results": [
-          4
+          4,
+          5
         ]
       },
       "LookupMultiHR03eventsId": {
@@ -80197,7 +80105,7 @@
       "Email": "test@mail.com",
       "Gender": "(1) Female",
       "ID": 1272,
-      "Modified": "2021-02-24T12:06:38.776Z",
+      "Modified": "2021-02-24T17:46:04.873Z",
       "LookupMultiHR01teamId": {
         "results": [
           4
@@ -80477,7 +80385,7 @@
       "Email": "",
       "Gender": "(1) Female",
       "ID": 1281,
-      "Modified": "2021-02-24T15:54:10.486Z",
+      "Modified": "2021-02-24T17:22:09.668Z",
       "LookupMultiHR01teamId": {
         "results": [
           6
@@ -80548,6 +80456,130 @@
       "LookupMultiHR03eventsId": {
         "results": [
           1676
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1284,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1284,
+      "Modified": "2021-02-24T17:23:04.799Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          6
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1675
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1285,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1285,
+      "Modified": "2021-02-24T17:25:55.489Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          6
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1675
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1286,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1286,
+      "Modified": "2021-02-24T17:27:49.632Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          6
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1675
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1287,
+      "Title": "Test",
+      "FirstName": "NewTesetNew",
+      "FullName": "NewTesetNew Test",
+      "CellPhone": "+(905) 849-58-60",
+      "Email": "test@mail.com",
+      "Gender": "(1) Female",
+      "ID": 1287,
+      "Modified": "2021-02-24T17:48:34.619Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          5
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1677
         ]
       },
       "ClientPhoto": {
