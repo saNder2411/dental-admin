@@ -33,23 +33,19 @@ export const SeriesColors = [
 
 export const Months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
-export const DefaultCustomer: CustomerDataItem = {
-  Id: -1,
+export const getDefaultConsultationCustomer = (Id: number): CustomerDataItem => ({
+  Id,
   Title: 'Consultation',
   FirstName: `Female`,
   FullName: 'Female Consultation',
   CellPhone: '',
   Email: '',
   Gender: '(1) Female' as const,
-  ClientPhoto: {
-    Description: '',
-    Url: '',
-    __metadata: { type: 'SP.FieldUrlValue' },
-  },
-  ID: -1,
+  ClientPhoto: null,
+  ID: Id,
   Modified: new Date().toISOString(),
   LookupMultiHR01teamId: { results: [] },
   LookupMultiHR03eventsId: { results: [] },
 
   ClientPhotoUrl: '',
-};
+});

@@ -10,7 +10,7 @@ import {
   WeekdayTypesType,
   MonthlyWeekNumberType,
 } from './SchedulerFormTypes';
-import { AppointmentDataItem } from '../../../../_bus/_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
 import { CustomerDataItem } from './../../../../_bus/_Customers/CustomersTypes';
 // Instruments
 import {
@@ -26,12 +26,13 @@ import {
 } from './SchedulerFormInstruments';
 // Helpers
 import { generateId } from '../../../../_bus/Entities/EntitiesHelpers';
+import { getDefaultConsultationCustomer } from '../../../../_bus/Constants';
 
 const phoneRegex = new RegExp(/^[0-9 ()+-]+$/);
 const emailRegex = new RegExp(/\S+@\S+\.\S+/);
 
 export const requiredValidator = (value: string) => (value ? '' : 'Error: This field is required.');
-export const requiredDropDownListValidator = (value: number) => (value === -1 ? 'Error: This field is required.' : '');
+export const requiredCustomerDropDownListValidator = (isNewCustomer: boolean) => (value: number) => (isNewCustomer ? '' : value === -1 || !value ? 'Error: This field is required.' : '');
 export const phoneValidator = (value: string | null) =>
   !value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.';
 export const emailValidator = (value: string) => (!value ? 'Email field is required.' : emailRegex.test(value) ? '' : 'Email is not valid format.');
@@ -140,86 +141,6 @@ const setRecurrenceRule = ({
     default:
       return null;
   }
-};
-
-interface ResultParseFormDataItem {
-  newDataItem: AppointmentDataItem;
-  newCustomer: CustomerDataItem | null;
-}
-
-export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllIds: number[]): ResultParseFormDataItem => {
-  const {
-    IsNewCustomer,
-    FirstName,
-    LastName,
-    CellPhone,
-    Email,
-    ClientPhotoUrl,
-    Gender,
-    Repeat,
-    EndRepeat,
-    RepeatInterval,
-    EndCount,
-    EndUntil,
-    RepeatOnWeekday,
-    RepeatOnMonthly,
-    MonthlyDay,
-    MonthlyWeekNumber,
-    MonthlyDayType,
-    RepeatOnYearly,
-    YearlyMonth,
-    YearlyMonthDay,
-    YearlyWeekNumber,
-    YearlyDayType,
-    ...others
-  } = formDataItem;
-
-  const newDataItem = {
-    ...others,
-    MetroRRule: setRecurrenceRule({
-      Repeat,
-      EndRepeat,
-      RepeatInterval,
-      EndCount,
-      EndUntil,
-      RepeatOnWeekday,
-      RepeatOnMonthly,
-      MonthlyDay,
-      MonthlyWeekNumber,
-      MonthlyDayType,
-      RepeatOnYearly,
-      YearlyMonth,
-      YearlyMonthDay,
-      YearlyWeekNumber,
-      YearlyDayType,
-    }),
-  };
-
-  const ID = generateId(customersAllIds);
-
-  const newCustomer = IsNewCustomer
-    ? {
-        Id: ID,
-        Title: LastName,
-        FirstName,
-        FullName: `${FirstName} ${LastName}`,
-        CellPhone,
-        Email,
-        Gender,
-        ClientPhoto: {
-          Description: ClientPhotoUrl,
-          Url: ClientPhotoUrl,
-          __metadata: { type: 'SP.FieldUrlValue' },
-        },
-        ID,
-        Modified: new Date().toISOString(),
-        LookupMultiHR01teamId: { results: [] },
-        LookupMultiHR03eventsId: { results: [] },
-        ClientPhotoUrl,
-      }
-    : null;
-
-  return { newDataItem, newCustomer };
 };
 
 const parseRuleStrInValue = (rule: string) => {
@@ -589,4 +510,86 @@ export const getInitialFormValue = (dataItem: AppointmentDataItem): InitialFormV
     IsNewCustomer: false,
     ...transformRecurrenceRuleInInitialRepaetPropsForm(dataItem.MetroRRule),
   };
+};
+
+interface ResultParseFormDataItem {
+  newDataItem: AppointmentDataItem;
+  newCustomer: CustomerDataItem | null;
+}
+
+export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllIds: number[]): ResultParseFormDataItem => {
+  const {
+    IsNewCustomer,
+    FirstName,
+    LastName,
+    CellPhone,
+    Email,
+    ClientPhotoUrl,
+    Gender,
+    Repeat,
+    EndRepeat,
+    RepeatInterval,
+    EndCount,
+    EndUntil,
+    RepeatOnWeekday,
+    RepeatOnMonthly,
+    MonthlyDay,
+    MonthlyWeekNumber,
+    MonthlyDayType,
+    RepeatOnYearly,
+    YearlyMonth,
+    YearlyMonthDay,
+    YearlyWeekNumber,
+    YearlyDayType,
+    ...others
+  } = formDataItem;
+
+  const newDataItem = {
+    ...others,
+    MetroRRule: setRecurrenceRule({
+      Repeat,
+      EndRepeat,
+      RepeatInterval,
+      EndCount,
+      EndUntil,
+      RepeatOnWeekday,
+      RepeatOnMonthly,
+      MonthlyDay,
+      MonthlyWeekNumber,
+      MonthlyDayType,
+      RepeatOnYearly,
+      YearlyMonth,
+      YearlyMonthDay,
+      YearlyWeekNumber,
+      YearlyDayType,
+    }),
+  };
+
+  const ID = generateId(customersAllIds);
+
+  const defaultConsultationCustomer = newDataItem.AppointmentStatus === StatusNames.Consultation ? getDefaultConsultationCustomer(ID) : null;
+
+  const newCustomer = IsNewCustomer
+    ? {
+        Id: ID,
+        Title: LastName,
+        FirstName,
+        FullName: `${FirstName} ${LastName}`,
+        CellPhone,
+        Email,
+        Gender,
+        ClientPhoto: {
+          Description: ClientPhotoUrl,
+          Url: ClientPhotoUrl,
+          __metadata: { type: 'SP.FieldUrlValue' },
+        },
+        ID,
+        Modified: new Date().toISOString(),
+        LookupMultiHR01teamId: { results: [] },
+        LookupMultiHR03eventsId: { results: [] },
+        ClientPhotoUrl,
+      }
+    : defaultConsultationCustomer;
+
+  return { newDataItem, newCustomer };
 };

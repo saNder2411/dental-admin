@@ -62,5 +62,6 @@ export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
 
 export interface MutationAppointmentDataItem extends BackendImmutableKey {
   __metadata: { type: 'SP.Data.MetroHR03ListItem' };
+  fRecurrence: null | boolean;
   LookupMultiBP01offeringsId: { results: number[] };
 }

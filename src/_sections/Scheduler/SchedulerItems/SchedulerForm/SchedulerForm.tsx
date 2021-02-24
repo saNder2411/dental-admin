@@ -63,7 +63,7 @@ import {
   getInitialFormValue,
   parseFormDataItem,
   requiredValidator,
-  requiredDropDownListValidator,
+  requiredCustomerDropDownListValidator,
   phoneValidator,
   emailValidator,
   getSecondLabelForRepeatEvery,
@@ -99,7 +99,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
     setIsDataItemLoading(true);
 
     if (updatableRecurringDataItem && dataItem.isNew) {
-      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, newDataItem, onHideForm));
+      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm));
       return;
     }
 
@@ -395,7 +395,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                           // setCustomerField={setCustomerField}
                           component={CustomersFormComboBox}
                           disabled={isDataItemLoading || isNewCustomer}
-                          validator={requiredDropDownListValidator}
+                          validator={requiredCustomerDropDownListValidator(isNewCustomer)}
                         />
                         <CustomMemoField
                           id={'isNewCustomer'}

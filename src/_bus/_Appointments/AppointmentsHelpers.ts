@@ -35,6 +35,7 @@ export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...
   ...dataItem,
   EventDate: Start.toISOString(),
   EndDate: End.toISOString(),
+  fRecurrence: !!dataItem.MetroRRule,
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });
 

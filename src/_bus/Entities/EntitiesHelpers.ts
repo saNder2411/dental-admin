@@ -48,14 +48,13 @@ export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = G
   return { ...stateSlice, originalData: data, processData: [...data], processById: { ...byId }, byId, allIDs };
 };
 
-
 export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = GenericDataItem>(
   stateSlice: EntitiesStateSlice<T>,
   dataItem: T,
   clientID: number
 ): EntitiesStateSlice<T> => {
   const serverID = dataItem.ID;
-  const originalData =  [dataItem, ...stateSlice.originalData];
+  const originalData = [dataItem, ...stateSlice.originalData];
 
   if (clientID === serverID) {
     const hasID = stateSlice.allIDs.includes(serverID);

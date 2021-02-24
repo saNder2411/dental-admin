@@ -64,3 +64,19 @@ export const EditOccurrenceConfirmModal: FC<ConfirmModalProps> = ({ onClose, onC
     </Dialog>
   );
 };
+
+export const CancelDragModal: FC<ConfirmModalProps> = ({ onClose, onCancel, onConfirm }) => {
+  return (
+    <Dialog title="Text" onClose={onClose}>
+      <p style={{ margin: 25, textAlign: 'center' }}>text</p>
+      <DialogActionsBar>
+        <button className="k-button" onClick={onCancel}>
+          Confirm
+        </button>
+        <button className="k-button" onClick={onConfirm}>
+          Cancel
+        </button>
+      </DialogActionsBar>
+    </Dialog>
+  );
+};
