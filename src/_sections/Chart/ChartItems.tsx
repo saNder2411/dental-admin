@@ -88,7 +88,7 @@ export const ChartAppointmentsPerWeek: FC<ChartItemProps> = ({ className }): JSX
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
           <ChartSeriesItem type="line" data={amountNewCustomerAppointmentsForEveryWeek} name="New Customers" tooltip={{ visible: true }} />
-          <ChartSeriesItem type="line" data={amountExistCustomerAppointmentsForEveryWeek} name="Existing Customers" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={amountExistCustomerAppointmentsForEveryWeek} name="Customers" color="#ec8237" tooltip={{ visible: true }} />
           <ChartSeriesItem type="area" data={totalAmountAppointmentsForEveryWeek} name="Total Appointments" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>

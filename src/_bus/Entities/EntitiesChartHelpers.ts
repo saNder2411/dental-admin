@@ -2,9 +2,9 @@ import { addWeeks, weekInYear, addMonths } from '@progress/kendo-date-math';
 // Types
 import { DateRange } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
-import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 // Constants
-import { WEEK_RANGE, START_PREV_WEEKS_DATE, DEFAULT_WORK_WEEK_HOURS, MONTH_RANGE, START_PREV_MONTH_DATE, Months } from '../Constants';
+import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, START_PREV_MONTH_DATE, Months } from '../Constants';
 
 const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [DateRange[], number[]] => {
   let points: DateRange[] = [];
@@ -41,13 +41,13 @@ export const [MonthPoints, MonthNames] = getMontPointsAndNames(MONTH_RANGE, STAR
 
 const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {
   return appointments.reduce(
-    (acc, appointment) => {
-      if (appointment.LookupHR01teamId === staffMemberID) {
+    (acc, { LookupHR01teamId, Duration, ServiceCharge, fAllDayEvent, AppointmentStatus }) => {
+      if (LookupHR01teamId === staffMemberID && AppointmentStatus !== StatusNames.Cancelled && AppointmentStatus !== StatusNames.Consultation) {
         return {
           ...acc,
           amountAppointment: acc.amountAppointment + 1,
-          durationInHours: acc.durationInHours + appointment.Duration / 60 / 60,
-          staffMemberSales: acc.staffMemberSales + appointment.ServiceCharge,
+          durationInHours: acc.durationInHours + (fAllDayEvent ? 8 : Duration / 60 / 60),
+          staffMemberSales: acc.staffMemberSales + ServiceCharge,
         };
       }
 
@@ -62,7 +62,7 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   sliceAppointmentsInWeekRange: AppointmentDataItem[],
   totalAppointmentSales: number
 ) => {
-  const staffMemberWorkWeekHours = StaffWeekHours ?? DEFAULT_WORK_WEEK_HOURS;
+  const staffMemberWorkWeekHours = (StaffWeekHours ?? 0) * WEEK_RANGE;
   const { amountAppointment, durationInHours, staffMemberSales } = calcAppointmentsDurationSalesPerStaffMember(ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(((durationInHours / WEEK_RANGE) * 100) / staffMemberWorkWeekHours);
@@ -76,5 +76,6 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
     percentStaffMemberSaleOfTotalSales,
     staffMemberSales,
     staffMemberWorkWeekHours,
+    durationInHours,
   };
 };
