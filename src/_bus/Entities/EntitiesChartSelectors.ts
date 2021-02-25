@@ -18,6 +18,10 @@ const getPercentsEmploymentPerWeekSeries = ({ Entities }: RootState) => Entities
 
 export const selectTotalSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.totalSalesForEveryWeekInWeekRange;
 
+export const selectServiceSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.serviceSalesForEveryWeekInWeekRange;
+
+export const selectProductSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.productSalesForEveryWeekInWeekRange;
+
 export const selectTotalAmountAppointmentsForEveryWeekPerWeekRange = ({ Entities }: RootState) =>
   Entities.chartData.totalAmountAppointmentsForEveryWeekPerWeekRange;
 
@@ -26,10 +30,6 @@ export const selectAmountNewCustomerAppointmentsForEveryWeekPerWeekRange = ({ En
 
 export const selectAmountExistCustomerAppointmentsForEveryWeekPerWeekRange = ({ Entities }: RootState) =>
   Entities.chartData.amountExistCustomerAppointmentsForEveryWeekPerWeekRange;
-
-export const selectServiceSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.serviceSalesForEveryWeekInWeekRange;
-
-export const selectProductSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.productSalesForEveryWeekInWeekRange;
 
 export const selectStaffCategories = ({ Entities }: RootState) => Entities.chartData.staffCategories;
 

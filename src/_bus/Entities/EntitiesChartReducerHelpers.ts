@@ -1,6 +1,6 @@
 // Types
 import { ChartState } from './EntitiesTypes';
-import { EntitiesState } from './EntitiesTypes';
+import { EntitiesState, ById } from './EntitiesTypes';
 import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
@@ -10,11 +10,11 @@ import { MONDAY_CURRENT_WEEK, START_PREV_WEEKS_DATE, WEEK_RANGE, PREV_WEEK, Seri
 // Helpers
 import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember, MonthPoints } from './EntitiesChartHelpers';
 
-const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: { [key: string]: ServiceDataItem }) =>
+const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: ById<ServiceDataItem>) =>
   WeekPoints.reduce(
     (acc, { start, end }) => {
       const sliceAppointmentsInWeekPoint = sliceAppointments.filter(
-        ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime()
+        ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() <= end.getTime()
       );
 
       const {
@@ -32,7 +32,7 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
             (acc, Id) => {
               let [serviceSum, productSum] = acc;
               const { Amount = 0, ContentTypeId = '', OfferingDiscount = 0 } = servicesById[Id] ?? {};
-              const price = +(Amount - Amount * OfferingDiscount).toFixed(2);
+              const price = Amount - Amount * OfferingDiscount;
               ContentTypeId === ContentTypes.Services ? (serviceSum += price) : (productSum += price);
               return [serviceSum, productSum];
             },
@@ -40,7 +40,8 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
           );
 
           return {
-            totalSum: serviceSum + productSum > 0 ? +(acc.totalSum + ServiceCharge).toFixed(2) : acc.totalSum,
+            // totalSum: serviceSum + productSum > 0 ? +(acc.totalSum + ServiceCharge).toFixed(2) : acc.totalSum,
+            totalSum: +(acc.totalSum + serviceSum + productSum).toFixed(2),
             serviceSum: +(acc.serviceSum + serviceSum).toFixed(2),
             productSum: +(acc.productSum + productSum).toFixed(2),
             totalAmountAppointment: acc.totalAmountAppointment + 1,

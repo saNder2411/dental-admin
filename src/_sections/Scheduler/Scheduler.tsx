@@ -52,13 +52,16 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   const [dataItem, setDataItem] = useState<AppointmentDataItem | null>(null);
 
   const onDataChange = useCallback(
-    ({ updated }: SchedulerDataChangeEvent) => {
+    (props: SchedulerDataChangeEvent) => {
+      const { updated } = props;
+      console.log(`onDataChangeProps`, props)
       if (typeof updated[0] === 'number' || !updated[0]) return;
 
       const [updatedDataItem] = updated as AppointmentDataItem[];
-      // console.log(`updated`, updated);
+      console.log(`updated`, updated);
 
       if (updatedDataItem.MetroRRule) {
+        // setShowEditOccurrenceDialog(true);
         setShowCancelDragPopup(true);
         setDataItem(updatedDataItem);
         return;
@@ -117,7 +120,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
           message="Editing Recurring items is not supported here. please request admin assitance"
         />
       )}
-      {/* {showEditOccurrenceDialog && dataItem && (
+      {showEditOccurrenceDialog && dataItem && (
         <EditOccurrenceConfirmModal
           onClose={() => setShowEditOccurrenceDialog(false)}
           onCancel={() => {
@@ -156,7 +159,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
             );
           }}
         />
-      )} */}
+      )}
     </>
   );
 };

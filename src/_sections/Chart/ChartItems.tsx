@@ -63,8 +63,8 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
         <ChartTitle text={`Last ${WEEK_RANGE} weeks`} align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
-          <ChartSeriesItem type="line" data={productSalesForEveryWeek} name="Product" tooltip={{ visible: true }} />
-          <ChartSeriesItem type="line" data={servicesSalesForEveryWeek} name="Service" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={productSalesForEveryWeek} name="Product" color="#4ca8df" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={servicesSalesForEveryWeek} name="Service" color="#367ea2" tooltip={{ visible: true }} />
           <ChartSeriesItem type="area" data={totalSalesForEveryWeek} name="Total" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>
