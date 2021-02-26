@@ -4,7 +4,7 @@ import { DateRange } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 // Constants
-import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, START_PREV_MONTH_DATE, Months } from '../Constants';
+import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, DEFAULT_WORK_WEEK_HOURS, START_PREV_MONTH_DATE, Months } from '../Constants';
 
 const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [DateRange[], number[]] => {
   let points: DateRange[] = [];
@@ -62,7 +62,7 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   sliceAppointmentsInWeekRange: AppointmentDataItem[],
   totalAppointmentSales: number
 ) => {
-  const staffMemberWorkWeekHours = (StaffWeekHours ?? 0) * WEEK_RANGE;
+  const staffMemberWorkWeekHours = (StaffWeekHours ?? DEFAULT_WORK_WEEK_HOURS) * WEEK_RANGE;
   const { amountAppointment, durationInHours, staffMemberSales } = calcAppointmentsDurationSalesPerStaffMember(ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(((durationInHours / WEEK_RANGE) * 100) / staffMemberWorkWeekHours);
