@@ -39,6 +39,14 @@ export const deleteDataItemFromArray = <T extends GenericDataItem = GenericDataI
   return [...data.slice(0, index), ...data.slice(index + 1)];
 };
 
+export const deleteId = (ids: number[], deletedId: number) => {
+  const index = ids.lastIndexOf(deletedId);
+
+  if (index < 0) return ids;
+
+  return [...ids.slice(0, index), ...ids.slice(index + 1)];
+};
+
 export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = GenericDataItem>(
   stateSlice: EntitiesStateSlice<T>,
   data: T[]

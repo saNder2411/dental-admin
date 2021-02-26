@@ -38835,38 +38835,70 @@
       "Id": 1688,
       "Title": "F.Consultation-1688",
       "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-02-26T07:00:00.000Z",
-      "EndDate": "2021-02-26T08:00:00.000Z",
-      "Description": "Appointment with - Grace Robinson | Contact Reference - Female Consultation, ,  | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Description": "Appointment with - Sara Khan | Contact Reference - Female Consultation, ,  | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
       "Duration": 3600,
       "Notes": "",
       "ServiceCharge": 46.75,
       "fAllDayEvent": null,
       "RecurrenceID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=8;BYDAY=TU",
+      "MetroRecException": [
+        "2021-03-30T05:00:00.000Z",
+        "2021-04-06T05:00:00.000Z"
+      ],
       "FirstAppointment": true,
-      "LookupCM102customersId": 1304,
+      "LookupCM102customersId": 1309,
       "ID": 1688,
-      "Modified": "2021-02-26T09:22:35.902Z",
-      "fRecurrence": false,
-      "LookupHR01teamId": 3,
+      "Modified": "2021-02-26T10:30:54.471Z",
+      "fRecurrence": true,
+      "LookupHR01teamId": 7,
       "LookupMultiBP01offeringsId": {
         "results": [
           1
         ]
       },
+      "EventDate": "2021-03-02T06:00:00.000Z",
+      "EndDate": "2021-03-02T07:00:00.000Z",
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
     },
     {
       "Id": 1689,
-      "Title": "T.Reset-1689",
-      "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-02-26T07:00:00.000Z",
-      "EndDate": "2021-02-26T08:00:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Treset Reset, +(495) 034-05-90, teseet@mail.com | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Title": "E.Adame-1689",
+      "AppointmentStatus": "(2) Pending",
+      "EventDate": "2021-03-31T05:00:00.000Z",
+      "EndDate": "2021-03-31T06:00:00.000Z",
+      "Description": "Appointment with - Sara Khan | Contact Reference - Elizabete Adame, +1189764214858, Elizabete.Adame@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": null,
+      "RecurrenceID": null,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "LookupCM102customersId": 1268,
+      "LookupHR01teamId": 7,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
+      "ID": 1689,
+      "Modified": "2021-02-26T10:28:50.176Z",
+      "fRecurrence": false,
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 1690,
+      "Title": "R.Testlllll-1690",
+      "AppointmentStatus": "(2) Pending",
+      "EventDate": "2021-04-07T05:00:00.000Z",
+      "EndDate": "2021-04-07T06:00:00.000Z",
+      "Description": "Appointment with - Sara Khan | Contact Reference - Rtest Testlllll, +(343) 424-98-54, test23@mail.com | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
       "Duration": 3600,
       "Notes": "",
       "ServiceCharge": 46.75,
@@ -38875,11 +38907,11 @@
       "MetroRRule": null,
       "MetroRecException": null,
       "FirstAppointment": true,
-      "LookupCM102customersId": 1305,
-      "ID": 1689,
-      "Modified": "2021-02-26T09:24:26.310Z",
+      "LookupCM102customersId": 1310,
+      "ID": 1690,
+      "Modified": "2021-02-26T10:32:19.604Z",
       "fRecurrence": false,
-      "LookupHR01teamId": 4,
+      "LookupHR01teamId": 7,
       "LookupMultiBP01offeringsId": {
         "results": [
           1
@@ -40422,18 +40454,20 @@
       "Email": "Coralie.Abraham@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 54,
-      "Modified": "2021-02-24T11:20:22.244Z",
+      "Modified": "2021-02-26T10:00:47.745Z",
       "Created": "2019-07-23T07:17:02Z",
       "LookupMultiHR01teamId": {
         "results": [
           3,
-          4
+          4,
+          2
         ]
       },
       "LookupMultiHR03eventsId": {
         "results": [
           1662,
-          1667
+          1667,
+          1691
         ]
       },
       "ClientPhoto": {
@@ -40601,12 +40635,13 @@
       "Email": "Elizabete.Adame@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 1268,
-      "Modified": "2021-02-24T14:30:15.805Z",
+      "Modified": "2021-02-26T10:28:50.581Z",
       "Created": "2019-07-23T07:20:06Z",
       "LookupMultiHR01teamId": {
         "results": [
           3,
-          6
+          6,
+          7
         ]
       },
       "LookupMultiHR03eventsId": {
@@ -40614,7 +40649,8 @@
           1389,
           1662,
           1674,
-          1675
+          1675,
+          1689
         ]
       },
       "ClientPhoto": {
@@ -81348,6 +81384,296 @@
         "results": [
           1689
         ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1306,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1306,
+      "Modified": "2021-02-26T10:00:24.670Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          2
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1690
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1307,
+      "Title": "Test22",
+      "FirstName": "ITest",
+      "FullName": "ITest Test22",
+      "CellPhone": "+(950) 498-60-98",
+      "Email": "test2@mail.com",
+      "Gender": "(2) Male",
+      "ID": 1307,
+      "Modified": "2021-02-26T10:04:47.047Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          3
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1692
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1308,
+      "Title": "Trest",
+      "FirstName": "Testeee",
+      "FullName": "Testeee Trest",
+      "CellPhone": "+(493) 054-98-54",
+      "Email": "test@mail.comd",
+      "Gender": "(1) Female",
+      "ID": 1308,
+      "Modified": "2021-02-26T10:06:27.015Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          2
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1691
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1309,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1309,
+      "Modified": "2021-02-26T10:25:48.973Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          7
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1688
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1310,
+      "Title": "Testlllll",
+      "FirstName": "Rtest",
+      "FullName": "Rtest Testlllll",
+      "CellPhone": "+(343) 424-98-54",
+      "Email": "test23@mail.com",
+      "Gender": "(1) Female",
+      "ID": 1310,
+      "Modified": "2021-02-26T10:32:20.106Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          7
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          1690
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1311,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1311,
+      "Modified": "2021-02-26T11:57:17.701Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1312,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1312,
+      "Modified": "2021-02-26T11:58:52.557Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1313,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1313,
+      "Modified": "2021-02-26T12:00:48.422Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1314,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1314,
+      "Modified": "2021-02-26T12:01:06.067Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1315,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1315,
+      "Modified": "2021-02-26T12:18:03.616Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
       },
       "ClientPhoto": {
         "Description": "",

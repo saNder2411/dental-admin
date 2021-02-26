@@ -7,11 +7,7 @@ import { GridCellProps } from './GridItemsTypes';
 import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
-import {
-  createAppointmentDataItemInitAsyncAC,
-  updateAppointmentDataItemInitAsyncAC,
-  deleteAppointmentDataItemInitAsyncAC,
-} from '../../../_bus/Entities/EntitiesAC';
+import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
 import { selectMemoProcessDataItem, selectCustomersById, selectStaffById, selectServicesById } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
@@ -44,8 +40,8 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
 
   const onDeleteDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem.ID, () => setIsDataItemLoading(false)));
-  }, [dataItem.ID, dispatch]);
+    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, customersById, () => setIsDataItemLoading(false)));
+  }, [customersById, dataItem, dispatch]);
 
   return (
     <ViewActionsControlCell

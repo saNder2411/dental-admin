@@ -112,9 +112,13 @@ export const updateServiceDataItemInitAsyncAC = (updatedDataItem: ServiceDataIte
 });
 
 // Async Delete Data Item
-export const deleteAppointmentDataItemInitAsyncAC = (deletedDataItemID: number, sideEffectAfterDeletedDataItem: () => void) => ({
+export const deleteAppointmentDataItemInitAsyncAC = (
+  processDataItem: AppointmentDataItem,
+  customersById: ById<CustomerDataItem>,
+  sideEffectAfterDeletedDataItem: () => void
+) => ({
   type: ActionTypes.DELETE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  deletedDataItemID,
+  payload: { processDataItem, customersById },
   meta: sideEffectAfterDeletedDataItem,
 });
 

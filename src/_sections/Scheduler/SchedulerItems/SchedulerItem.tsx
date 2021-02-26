@@ -34,9 +34,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
 
   const [showCancelDragPopup, setShowCancelDragPopup] = useState(false);
   const [titleCancelDragPopup, setTitleCancelDragPopup] = useState(`Edit Recurring Item`);
-  const [messageCancelDragPopup, setMessageCancelDragPopup] = useState(
-    `Editing Recurring items is not supported here. please request admin assitance`
-  );
+  const [messageCancelDragPopup, setMessageCancelDragPopup] = useState(`Editing Recurring items is not supported here. please request admin assitance`);
 
   const [showEditForm, setShowEditForm] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
@@ -57,9 +55,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
 
-  const onSchedulerItemClick = useCallback(() => !appointmentIsDataItemLoading && setShowPopup((prevState) => !prevState), [
-    appointmentIsDataItemLoading,
-  ]);
+  const onSchedulerItemClick = useCallback(() => !appointmentIsDataItemLoading && setShowPopup((prevState) => !prevState), [appointmentIsDataItemLoading]);
 
   const onCloseBtnClick = useCallback(() => setShowPopup(false), [setShowPopup]);
 
@@ -67,10 +63,10 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     setShowPopup(false);
 
     if (isRecurring) {
-      // setShowEditOccurrenceDialog(true);
-      setTitleCancelDragPopup(`Edit Recurring Item`);
-      setMessageCancelDragPopup(`Editing Recurring items is not supported here. please request admin assitance`);
-      setShowCancelDragPopup(true);
+      setShowEditOccurrenceDialog(true);
+      // setTitleCancelDragPopup(`Edit Recurring Item`);
+      // setMessageCancelDragPopup(`Editing Recurring items is not supported here. please request admin assitance`);
+      // setShowCancelDragPopup(true);
       return;
     }
     dispatch(addItemToEditAC(dataItem.ID, EntitiesKeys.Appointments));
@@ -101,7 +97,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, null, servicesById, staffById, customersById, () => {}));
       return;
     }
-    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem.ID, () => {}));
+    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, customersById, () => {}));
   };
 
   return resource ? (
