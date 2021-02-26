@@ -32,9 +32,9 @@ const phoneRegex = new RegExp(/^[0-9 ()+-]+$/);
 const emailRegex = new RegExp(/\S+@\S+\.\S+/);
 
 export const requiredValidator = (value: string) => (value ? '' : 'Error: This field is required.');
-export const requiredCustomerDropDownListValidator = (isNewCustomer: boolean) => (value: number) => (isNewCustomer ? '' : value === -1 || !value ? 'Error: This field is required.' : '');
-export const phoneValidator = (value: string | null) =>
-  !value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.';
+export const requiredCustomerDropDownListValidator = (isNewCustomer: boolean) => (value: number) =>
+  isNewCustomer ? '' : value === -1 || !value ? 'Error: This field is required.' : '';
+export const phoneValidator = (value: string | null) => (!value ? 'Phone number is required.' : phoneRegex.test(value) ? '' : 'Not a valid phone number.');
 export const emailValidator = (value: string) => (!value ? 'Email field is required.' : emailRegex.test(value) ? '' : 'Email is not valid format.');
 
 export const getSecondLabelForRepeatEvery = (Repeat: RepeatTypesType) => {
@@ -82,12 +82,7 @@ const getMonthlyRepeatForWeekdayType = (MonthlyWeekNumber: number, MonthlyDayTyp
   }
 };
 
-const getMonthlyRepeatRule = (
-  RepeatOnMonthly: MonthlyTypesType,
-  MonthlyDay: number,
-  MonthlyWeekNumber: number,
-  MonthlyDayType: MonthlyDayTypesType
-) => {
+const getMonthlyRepeatRule = (RepeatOnMonthly: MonthlyTypesType, MonthlyDay: number, MonthlyWeekNumber: number, MonthlyDayType: MonthlyDayTypesType) => {
   switch (RepeatOnMonthly) {
     case MonthlyTypes.Day:
       return `${RepeatOnMonthly}=${MonthlyDay}`;
@@ -421,12 +416,7 @@ const getFormRepeatPropsForWeeklyCase = (interval: string, firstRuleAfterInterva
   };
 };
 
-const getFormRepeatPropsForMonthlyCase = (
-  interval: string,
-  firstRuleAfterInterval: string | undefined,
-  nextRule1: string | undefined,
-  nextRule2: string | undefined
-) => {
+const getFormRepeatPropsForMonthlyCase = (interval: string, firstRuleAfterInterval: string | undefined, nextRule1: string | undefined, nextRule2: string | undefined) => {
   const RepeatOnMonthly = setRepeatOnMonthly(firstRuleAfterInterval, nextRule1);
 
   return {
@@ -488,13 +478,7 @@ const transformRecurrenceRuleInInitialRepaetPropsForm = (recRule: string | null)
 export const getInitialFormValue = (dataItem: AppointmentDataItem): InitialFormValue => {
   const startHours = dataItem.Start.getHours() === 0 ? 8 : dataItem.Start.getHours();
   const Start = new Date(dataItem.Start.getFullYear(), dataItem.Start.getMonth(), dataItem.Start.getDate(), startHours, dataItem.Start.getMinutes());
-  const End = new Date(
-    dataItem.Start.getFullYear(),
-    dataItem.Start.getMonth(),
-    dataItem.Start.getDate(),
-    startHours + 1,
-    dataItem.Start.getMinutes()
-  );
+  const End = new Date(dataItem.Start.getFullYear(), dataItem.Start.getMonth(), dataItem.Start.getDate(), startHours + 1, dataItem.Start.getMinutes());
 
   return {
     ...dataItem,
@@ -567,7 +551,8 @@ export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllId
 
   const ID = generateId(customersAllIds);
 
-  const defaultConsultationCustomer = newDataItem.AppointmentStatus === StatusNames.Consultation ? getDefaultConsultationCustomer(ID) : null;
+  const defaultConsultationCustomer =
+    newDataItem.AppointmentStatus === StatusNames.Consultation && !newDataItem.LookupCM102customersId ? getDefaultConsultationCustomer(ID) : null;
 
   const newCustomer = IsNewCustomer
     ? {

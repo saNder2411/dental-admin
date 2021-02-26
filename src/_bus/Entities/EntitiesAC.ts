@@ -35,7 +35,7 @@ export const fetchSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SKILL
 
 // Async Create Data Item
 export const createAppointmentDataItemInitAsyncAC = (
-  createdDataItem: AppointmentDataItem,
+  processDataItem: AppointmentDataItem,
   newCustomerDataItem: CustomerDataItem | null,
   servicesById: ById<ServiceDataItem>,
   staffById: ById<StaffDataItem>,
@@ -43,7 +43,7 @@ export const createAppointmentDataItemInitAsyncAC = (
   sideEffectAfterCreatedDataItem: () => void
 ) => ({
   type: ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: { createdDataItem, newCustomerDataItem, servicesById, staffById, customersById },
+  payload: { processDataItem, newCustomerDataItem, servicesById, staffById, customersById },
   meta: { sideEffectAfterCreatedDataItem },
 });
 
@@ -67,7 +67,7 @@ export const createServiceDataItemInitAsyncAC = (createdDataItem: ServiceDataIte
 
 // Async Update Data Item
 export const updateAppointmentDataItemInitAsyncAC = (
-  updatedDataItem: AppointmentDataItem,
+  processDataItem: AppointmentDataItem,
   newCustomerDataItem: CustomerDataItem | null,
   servicesById: ById<ServiceDataItem>,
   staffById: ById<StaffDataItem>,
@@ -75,7 +75,7 @@ export const updateAppointmentDataItemInitAsyncAC = (
   sideEffectAfterUpdatedDataItem: () => void
 ) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: { updatedDataItem, newCustomerDataItem, servicesById, staffById, customersById },
+  payload: { processDataItem, newCustomerDataItem, servicesById, staffById, customersById },
   meta: { sideEffectAfterUpdatedDataItem },
 });
 
