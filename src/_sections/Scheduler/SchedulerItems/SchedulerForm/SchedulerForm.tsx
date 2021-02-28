@@ -16,15 +16,7 @@ import {
   WeekdayFormButtonGroup,
   IsNewCustomerFormCheckbox,
 } from './SchedulerFormItemsCustom';
-import {
-  FormInput,
-  FormRadioGroup,
-  FormMaskedTextBox,
-  FormDateTimePicker,
-  FormTextArea,
-  FormNumericTextBox,
-  FormDropDownList,
-} from './SchedulerFormItems';
+import { FormInput, FormRadioGroup, FormMaskedTextBox, FormDateTimePicker, FormTextArea, FormNumericTextBox, FormDropDownList } from './SchedulerFormItems';
 // Selectors
 import { selectCustomersById, selectStaffById, selectServicesById, selectMemoCustomersAllIds } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
@@ -125,11 +117,14 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
     dispatch(cancelEditAC(dataItem.ID, EntitiesKeys.Appointments));
   }, [dataItem.ID, dataItem.isNew, dispatch, onHideForm, updatableRecurringDataItem]);
 
-  useEffect(() => {
-    if (dataItemErrorMessage) {
-      onDialogClose();
-    }
-  }, [dataItemErrorMessage, onDialogClose]);
+  useEffect(
+    () => () => {
+      if (dataItemErrorMessage) {
+        onDialogClose();
+      }
+    },
+    [dataItemErrorMessage, onDialogClose]
+  );
 
   return (
     <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose()} minWidth={700} height="73%">
@@ -145,6 +140,8 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
             const isStatusConsultation = formRenderProps.valueGetter('AppointmentStatus') === StatusNames.Consultation;
             const secondLabelForRepeatEvery = getSecondLabelForRepeatEvery(repeatValue);
             const isNewCustomer = formRenderProps.valueGetter('IsNewCustomer');
+            const startAppointmentValue = formRenderProps.valueGetter('Start') as Date;
+            const endAppointmentValue = formRenderProps.valueGetter('End') as Date;
 
             // const setCustomerField = (customerDataItem: CustomerDataItem | undefined) => {
             //   formRenderProps.onChange(`FirstName`, { value: customerDataItem?.FirstName });
@@ -155,6 +152,12 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
             // };
 
             const resetCustomerId = () => formRenderProps.onChange(`LookupCM102customersId`, { value: null });
+            const setEndDateOnServiceChange = (startDate: Date) => (serviceById: typeof servicesById) => (servicesId: number[]) => {
+              const allServicesDurationMs = servicesId.reduce((sum, serviceID) => (sum += serviceById[serviceID].MinutesDuration ?? 0), 0) * 60 * 1000;
+              allServicesDurationMs > 0 && formRenderProps.onChange('End', { value: new Date(startDate.getTime() + allServicesDurationMs) });
+            };
+            const setEndDateOnStartChange = (dateRangeInMs: number) => (startDate: Date) =>
+              formRenderProps.onChange('End', { value: new Date(startDate.getTime() + dateRangeInMs) });
 
             return (
               <FormElement horizontal={true}>
@@ -163,6 +166,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                     id="services"
                     name="LookupMultiBP01offeringsId"
                     label="Services"
+                    setEndDateOnServiceChange={setEndDateOnServiceChange(startAppointmentValue)(servicesById)}
                     component={ServicesFormMultiSelect}
                     disabled={isDataItemLoading}
                   />
@@ -180,19 +184,13 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                     id="start"
                     name="Start"
                     label="Start"
+                    setEndDateOnStartChange={setEndDateOnStartChange(endAppointmentValue.getTime() - startAppointmentValue.getTime())}
                     component={FormDateTimePicker}
                     validator={requiredValidator}
                     disabled={isDataItemLoading}
                   />
 
-                  <CustomMemoField
-                    id="end"
-                    name="End"
-                    label="End"
-                    component={FormDateTimePicker}
-                    validator={requiredValidator}
-                    disabled={isDataItemLoading}
-                  />
+                  <CustomMemoField id="end" name="End" label="End" component={FormDateTimePicker} validator={requiredValidator} disabled={isDataItemLoading} />
 
                   <CustomMemoField
                     id="repeat"
@@ -219,13 +217,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                   )}
 
                   {repeatValue === RepeatTypes.Weekly && (
-                    <CustomMemoField
-                      id="RepeatOnWeekday"
-                      name="RepeatOnWeekday"
-                      label="Repeat on"
-                      component={WeekdayFormButtonGroup}
-                      disabled={isDataItemLoading}
-                    />
+                    <CustomMemoField id="RepeatOnWeekday" name="RepeatOnWeekday" label="Repeat on" component={WeekdayFormButtonGroup} disabled={isDataItemLoading} />
                   )}
 
                   {repeatValue === RepeatTypes.Monthly && (
@@ -376,13 +368,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                     </div>
                   )}
 
-                  <CustomMemoField
-                    id="staff"
-                    name="LookupHR01teamId"
-                    label="Support Staff"
-                    component={StaffFormDropDownList}
-                    disabled={isDataItemLoading}
-                  />
+                  <CustomMemoField id="staff" name="LookupHR01teamId" label="Support Staff" component={StaffFormDropDownList} disabled={isDataItemLoading} />
 
                   {isStatusConsultation ? null : (
                     <>
@@ -477,12 +463,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                     <DialogActionsBar>
                       <button className="k-button" type="submit" disabled={isDataItemLoading || !formRenderProps.allowSubmit}>
                         {isDataItemLoading ? (
-                          <Loader
-                            className="d-flex justify-content-center align-items-center"
-                            type="pulsing"
-                            isLoading={isDataItemLoading}
-                            themeColor="primary"
-                          />
+                          <Loader className="d-flex justify-content-center align-items-center" type="pulsing" isLoading={isDataItemLoading} themeColor="primary" />
                         ) : (
                           `Save`
                         )}

@@ -81,7 +81,7 @@ const helperCreateAppointment = (processAppointment: AppointmentDataItem) => (se
     return createdAppointment;
   };
 
-const helperUpdateAppointment = (processAppointment: AppointmentDataItem) => (servicesById: ById<ServiceDataItem>) => (staffById: ById<StaffDataItem>) =>
+export const helperUpdateAppointment = (processAppointment: AppointmentDataItem) => (servicesById: ById<ServiceDataItem>) => (staffById: ById<StaffDataItem>) =>
   function* (customersById: ById<CustomerDataItem>) {
     const updatedAppointmentResult: QueryAppointmentDataItem = yield apply(API, API.appointments.updateDataItem, [
       transformDataItemForAPI(calculateAppointmentFieldsAssociatedWithCustomerServiceStaff(processAppointment)(servicesById)(staffById)(customersById)),
@@ -92,7 +92,7 @@ const helperUpdateAppointment = (processAppointment: AppointmentDataItem) => (se
     return updatedAppointment;
   };
 
-function* helperDeleteAppointment(processAppointment: AppointmentDataItem) {
+export function* helperDeleteAppointment(processAppointment: AppointmentDataItem) {
   yield apply(API, API.appointments.deleteDataItem, [processAppointment.ID]);
 
   yield put(actions.deleteDataItemSuccessAC(processAppointment.ID, EntitiesKeys.Appointments));
@@ -148,13 +148,14 @@ const refreshProcessCustomer = (processStatus: ProcessStatus) => (customer: Cust
         ...customer,
         LookupMultiHR01teamId: { results: deleteId(customer.LookupMultiHR01teamId.results, LookupHR01teamId) },
         LookupMultiHR03eventsId: { results: deleteId(customer.LookupMultiHR03eventsId.results, ID) },
+        Modified: new Date().toISOString(),
       };
 
 const workerHelperProcessAppointmentWithNewCustomer = (processStatus: ProcessStatus.Create | ProcessStatus.Update) => (processAppointment: AppointmentDataItem) => (
   newCustomer: CustomerDataItem
 ) => (servicesById: ById<ServiceDataItem>) => (staffById: ById<StaffDataItem>) =>
   function* (customersById: ById<CustomerDataItem>) {
-    const createdCustomer = yield* helperCreateNewCustomer(newCustomer);
+    const createdCustomer = yield call(helperCreateNewCustomer, newCustomer);
 
     const { refreshCustomersById, refreshProcessAppointment } = refreshCustomersByIdAndProcessAppointment(createdCustomer)(customersById)(processAppointment)(true);
 
@@ -162,7 +163,7 @@ const workerHelperProcessAppointmentWithNewCustomer = (processStatus: ProcessSta
 
     const refreshCreatedCustomer = refreshProcessCustomer(processStatus)(createdCustomer)(createdOrUpdatedAppointment);
 
-    yield* helperUpdateCustomer(refreshCreatedCustomer);
+    yield call(helperUpdateCustomer, refreshCreatedCustomer);
   };
 
 const workerHelperProcessAppointment = (processStatus: ProcessStatus) => (processAppointment: AppointmentDataItem) => (servicesById: ById<ServiceDataItem>) => (
@@ -178,7 +179,7 @@ const workerHelperProcessAppointment = (processStatus: ProcessStatus) => (proces
 
     const refreshCustomerDataItem = refreshProcessCustomer(processStatus)(customer)(createdOrUpdatedAppointment);
 
-    yield* helperUpdateCustomer(refreshCustomerDataItem);
+    yield call(helperUpdateCustomer, refreshCustomerDataItem);
   };
 
 export function* workerCreateDataItem({

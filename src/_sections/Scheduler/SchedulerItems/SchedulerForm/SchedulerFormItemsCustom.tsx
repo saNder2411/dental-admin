@@ -35,7 +35,7 @@ import { WeekdayButtonGroupData } from './SchedulerFormInstruments';
 export const CustomMemoField: FC<FieldProps> = memo((props) => <Field {...props} />);
 
 export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, ...others } = props;
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, value, onChange, setEndDateOnServiceChange, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
   const LookupMultiBP01offeringsId = value as { results: number[] };
 
@@ -45,8 +45,12 @@ export const ServicesFormMultiSelect: FC<FieldRenderProps> = memo((props) => {
   const multiSelectValue = memoMultiSelectData.filter((item) => LookupMultiBP01offeringsId.results.find((ID) => ID === item.value));
 
   const onMultiSelectValueChange = useCallback(
-    (evt: MultiSelectChangeEvent) => onChange({ value: { results: evt.target.value.map(({ value }) => value) } }),
-    [onChange]
+    (evt: MultiSelectChangeEvent) => {
+      const results = evt.target.value.map(({ value }) => value) as number[];
+      setEndDateOnServiceChange(results);
+      onChange({ value: { results } });
+    },
+    [onChange, setEndDateOnServiceChange]
   );
 
   return (
@@ -119,9 +123,7 @@ export const CustomersFormComboBox: FC<CustomFieldRenderProps> = memo((props) =>
   const selectCustomerDropDownListData = useMemo(selectCustomersForDropDownListData, []);
   const dataForComboBox = useSelector(selectCustomerDropDownListData);
   const memoComboBoxData = useMemo(() => dataForComboBox, [dataForComboBox]);
-  const filteredDataForComboBox = !filter
-    ? memoComboBoxData
-    : memoComboBoxData.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
+  const filteredDataForComboBox = !filter ? memoComboBoxData : memoComboBoxData.filter(({ text }) => text.toLocaleLowerCase().indexOf(filter.toLocaleLowerCase()) > -1);
 
   const selectCustomerFullName = useMemo(() => selectCustomerFullNameByID(LookupEntityId), [LookupEntityId]);
   const customerFullName = useSelector(selectCustomerFullName);
@@ -224,10 +226,7 @@ export const WeekdayFormButtonGroup: FC<FieldRenderProps> = memo((props) => {
   const { labelId } = getFormInputOptionalProps(props);
   const btnData = WeekdayButtonGroupData.map((item) => ({ ...item, isSelected: value.includes(item.value) }));
 
-  const onBtnClick = useCallback(
-    (clickedBtn: { label: string; isSelected: boolean; value: WeekdayTypesType }) => onChange({ value: [clickedBtn.value] }),
-    [onChange]
-  );
+  const onBtnClick = useCallback((clickedBtn: { label: string; isSelected: boolean; value: WeekdayTypesType }) => onChange({ value: [clickedBtn.value] }), [onChange]);
 
   return (
     <FieldWrapper>

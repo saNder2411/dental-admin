@@ -7,13 +7,9 @@ import { GridCellProps } from './GridItemsTypes';
 import { CustomerDataItem } from '../../../_bus/_Customers/CustomersTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
-import {
-  createCustomerDataItemInitAsyncAC,
-  updateCustomerDataItemInitAsyncAC,
-  deleteCustomerDataItemInitAsyncAC,
-} from '../../../_bus/Entities/EntitiesAC';
+import { createCustomerDataItemInitAsyncAC, updateCustomerDataItemInitAsyncAC, deleteCustomerDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectMemoProcessDataItem } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoProcessDataItem, selectAppointmentsById, selectServicesById, selectStaffById, selectCustomersById } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { usePhoneFieldsValidation } from '../GridHooks';
 // Helpers
@@ -25,6 +21,11 @@ export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = 
   const [isDataItemLoading, setIsDataItemLoading] = useState(false);
   const dispatch = useDispatch();
   const isValidMobilePhone = usePhoneFieldsValidation(phoneValidator(dataItem.CellPhone));
+
+  const appointmentsById = useSelector(selectAppointmentsById());
+  const servicesById = useSelector(selectServicesById());
+  const staffById = useSelector(selectStaffById());
+  const customersById = useSelector(selectCustomersById());
 
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
@@ -38,8 +39,8 @@ export const CustomersActionsControlCell: FC<GridCellProps<CustomerDataItem>> = 
 
   const onDeleteDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(deleteCustomerDataItemInitAsyncAC(dataItem.ID, () => setIsDataItemLoading(false)));
-  }, [dataItem.ID, dispatch]);
+    dispatch(deleteCustomerDataItemInitAsyncAC(dataItem, appointmentsById, servicesById, staffById, customersById, () => setIsDataItemLoading(false)));
+  }, [appointmentsById, customersById, dataItem, dispatch, servicesById, staffById]);
 
   return (
     <ViewActionsControlCell

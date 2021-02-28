@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import { FieldWrapper } from '@progress/kendo-react-form';
 import { Input, MaskedTextBox, TextArea, NumericTextBox, RadioGroup } from '@progress/kendo-react-inputs';
 import { DropDownList } from '@progress/kendo-react-dropdowns';
-import { DateTimePicker } from '@progress/kendo-react-dateinputs';
+import { DateTimePicker, DateTimePickerChangeEvent } from '@progress/kendo-react-dateinputs';
 import { Label, Error, Hint } from '@progress/kendo-react-labels';
 import { FieldRenderProps } from '@progress/kendo-react-form';
 // Helpers
@@ -60,15 +60,20 @@ export const FormDropDownList: FC<FieldRenderProps> = memo((props) => {
 });
 
 export const FormDateTimePicker: FC<FieldRenderProps> = memo((props) => {
-  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, ...others } = props;
+  const { validationMessage, touched, label, id, valid, disabled, hint, wrapperStyle, onChange, setEndDateOnStartChange, ...others } = props;
   const { showValidationMessage, showHint, hintId, errorId, labelId } = getFormInputOptionalProps(props);
+
+  const onValueChange = ({ value }: DateTimePickerChangeEvent) => {
+    setEndDateOnStartChange && setEndDateOnStartChange(value);
+    onChange({ value });
+  };
 
   return (
     <FieldWrapper style={wrapperStyle}>
       <Label id={labelId} editorId={id} editorValid={valid} editorDisabled={disabled}>
         {label}
       </Label>
-      <DateTimePicker ariaLabelledBy={labelId} ariaDescribedBy={`${hintId} ${errorId}`} valid={valid} id={id} disabled={disabled} {...others} />
+      <DateTimePicker ariaLabelledBy={labelId} ariaDescribedBy={`${hintId} ${errorId}`} onChange={onValueChange} valid={valid} id={id} disabled={disabled} {...others} />
       {showHint && <Hint id={hintId}>{hint}</Hint>}
       {showValidationMessage && <Error id={errorId}>{validationMessage}</Error>}
     </FieldWrapper>

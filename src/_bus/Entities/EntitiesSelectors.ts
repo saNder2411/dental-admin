@@ -31,6 +31,8 @@ export const selectOriginalAppointmentsData = ({ Entities }: RootState) => Entit
 
 export const selectProcessAppointmentsData = ({ Entities }: RootState) => Entities.appointments.processData;
 
+export const selectAppointmentsById = () => createSelector(getAppointmentsById, (appointmentsById) => appointmentsById);
+
 export const selectOriginalAppointmentsDataLength = ({ Entities }: RootState) => Entities.appointments.originalData.length;
 
 export const selectMemoAppointmentProcessByID = (dataItemID: number) =>

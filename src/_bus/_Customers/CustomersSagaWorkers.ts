@@ -14,17 +14,16 @@ import {
 } from '../Entities/EntitiesTypes';
 import { QueryCustomerDataItem } from './CustomersTypes';
 import { QueryStaffDataItem } from '../_Staff/StaffTypes';
-import { QueryAppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, QueryAppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 // Helpers
 import { transformAPIData, transformAPIDataItem, transformDataItemForAPI } from './CustomersHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
 import { transformAPIData as transformAppointmentsAPIData } from '../_Appointments/AppointmentsHelpers';
+import { helperDeleteAppointment, helperUpdateAppointment } from '../_Appointments/AppointmentSagaWorkers';
 
 type Results = [QueryCustomerDataItem[] | null, QueryStaffDataItem[] | null, QueryAppointmentDataItem[] | null];
 
-export function* workerFetchData({
-  meta: { customersDataLength, staffDataLength, appointmentsDataLength },
-}: FetchCustomersDataInitAsyncActionType): SagaIterator {
+export function* workerFetchData({ meta: { customersDataLength, staffDataLength, appointmentsDataLength } }: FetchCustomersDataInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.fetchDataRequestAC(EntitiesKeys.Customers));
 
@@ -55,10 +54,7 @@ export function* workerFetchData({
   }
 }
 
-export function* workerCreateDataItem({
-  createdDataItem,
-  meta: sideEffectAfterCreatedDataItem,
-}: CreateCustomerDataItemInitAsyncActionType): SagaIterator {
+export function* workerCreateDataItem({ createdDataItem, meta: sideEffectAfterCreatedDataItem }: CreateCustomerDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.createDataItemRequestAC());
 
@@ -73,10 +69,7 @@ export function* workerCreateDataItem({
   }
 }
 
-export function* workerUpdateDataItem({
-  updatedDataItem,
-  meta: sideEffectAfterUpdatedDataItem,
-}: UpdatCustomerDataItemInitAsyncActionType): SagaIterator {
+export function* workerUpdateDataItem({ updatedDataItem, meta: sideEffectAfterUpdatedDataItem }: UpdatCustomerDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.updateDataItemRequestAC());
 
@@ -92,18 +85,37 @@ export function* workerUpdateDataItem({
 }
 
 export function* workerDeleteDataItem({
-  deletedDataItemID,
+  payload: { processDataItem, appointmentsById, servicesById, staffById, customersById },
   meta: sideEffectAfterDeletedDataItem,
 }: DeleteCustomerDataItemInitAsyncActionType): SagaIterator {
   try {
     yield put(actions.deleteDataItemRequestAC());
+    yield apply(API, API.customers.deleteDataItem, [processDataItem.ID]);
+    yield put(actions.deleteDataItemSuccessAC(processDataItem.ID, EntitiesKeys.Customers));
 
-    yield apply(API, API.customers.deleteDataItem, [deletedDataItemID]);
-    sideEffectAfterDeletedDataItem();
-    yield put(actions.deleteDataItemSuccessAC(deletedDataItemID, EntitiesKeys.Customers));
+    const appointmentToDeleteOrUpdate = processDataItem.LookupMultiHR03eventsId.results
+      .map((appointmentId) => appointmentsById[appointmentId])
+      .filter((appointment) => appointment);
+
+    for (const appointment of appointmentToDeleteOrUpdate) {
+      console.log(`appointment`, appointment);
+      if (
+        appointment.AppointmentStatus === StatusNames.Consultation ||
+        appointment.AppointmentStatus === StatusNames.Cancelled ||
+        appointment.Start.getTime() > Date.now()
+      ) {
+        yield* helperDeleteAppointment(appointment);
+      } else {
+        const refreshAppointment: AppointmentDataItem = { ...appointment, LookupCM102customersId: 1 };
+        yield* helperUpdateAppointment(refreshAppointment)(servicesById)(staffById)(customersById);
+      }
+    }
+
+    console.log(`processDataItem`, processDataItem);
   } catch (error) {
     yield put(actions.deleteDataItemFailureAC(`Customers update data item Error: ${error.message}`));
   } finally {
+    sideEffectAfterDeletedDataItem();
     yield put(actions.deleteDataItemFinallyAC());
   }
 }
