@@ -16,7 +16,7 @@ interface RemoveConfirmModalProps extends ConfirmModalProps {
 export const RemoveConfirmModal: FC<RemoveConfirmModalProps> = ({ isDataItemLoading, onClose, onCancel, onConfirm }) => {
   return (
     <Dialog title="Delete Event" onClose={onClose}>
-      <p style={{ margin: 25, textAlign: 'center' }}>Are you sure you want to delete this event?</p>
+      <span>Are you sure you want to delete this event?</span>
       <DialogActionsBar>
         <button className="k-button" onClick={onCancel} disabled={isDataItemLoading}>
           Cancel
@@ -36,7 +36,7 @@ export const RemoveConfirmModal: FC<RemoveConfirmModalProps> = ({ isDataItemLoad
 export const RemoveOccurrenceConfirmModal: FC<ConfirmModalProps> = ({ onClose, onCancel, onConfirm }) => {
   return (
     <Dialog title="Delete Recurring Item" onClose={onClose}>
-      <p style={{ margin: 25, textAlign: 'center' }}>Do you want to delete only this event occurrence or the whole series?</p>
+      <span>Do you want to delete only this event occurrence or the whole series?</span>
       <DialogActionsBar>
         <button className="k-button" onClick={onCancel}>
           Delete current occurrence
@@ -52,7 +52,7 @@ export const RemoveOccurrenceConfirmModal: FC<ConfirmModalProps> = ({ onClose, o
 export const EditOccurrenceConfirmModal: FC<ConfirmModalProps> = ({ onClose, onCancel, onConfirm }) => {
   return (
     <Dialog title="Edit Recurring Item" onClose={onClose}>
-      <p style={{ margin: 25, textAlign: 'center' }}>Do you want to edit only this event occurrence or the whole series?</p>
+      <span>Do you want to edit only this event occurrence or the whole series?</span>
       <DialogActionsBar>
         <button className="k-button" onClick={onCancel}>
           Edit current occurrence
@@ -75,7 +75,7 @@ interface CancelDragModalProps {
 export const CancelDragModal: FC<CancelDragModalProps> = ({ onClose, onCancel, title, message }) => {
   return (
     <Dialog title={title} onClose={onClose}>
-      <p style={{ margin: 25, textAlign: 'center' }}>{message}</p>
+      <span>{message}</span>
       <DialogActionsBar>
         {/* <button className="k-button" onClick={onCancel}>
           Confirm

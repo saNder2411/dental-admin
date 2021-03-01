@@ -3,6 +3,8 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
 import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
+// Helpers
+import { generateId } from '../../_bus/Entities/EntitiesHelpers';
 
 export const customModelFields = {
   id: 'ID',
@@ -52,5 +54,22 @@ export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, excep
     End: new Date(EndDate),
     MetroRecException,
     RecurrenceID: null,
+  };
+};
+
+export const getNewDataItemOnRecurrenceDragEvent = (dataItem: KendoDataItem) => (allIds: number[]): AppointmentDataItem => {
+  const ID = generateId(allIds);
+  const { occurrenceId, originalStart, Start, End, TeamID, ...newDataItem } = dataItem;
+
+  return {
+    ...newDataItem,
+    Start,
+    End,
+    EventDate: Start.toISOString(),
+    EndDate: End.toISOString(),
+    TeamID,
+    LookupHR01teamId: TeamID,
+    ID,
+    Id: ID,
   };
 };

@@ -33,19 +33,19 @@ export const SchedulerSlot: FC<SchedulerSlotProps> = memo(
         {newDataItem && <SchedulerForm dataItem={newDataItem} />}
       </>
     );
-  },
-  (prevProps: SchedulerSlotProps, nextProps: SchedulerSlotProps) => {
-    const prevStaff = (prevProps.group.resources[0] as unknown) as StaffDataItem;
-    const nextStaff = (nextProps.group.resources[0] as unknown) as StaffDataItem;
-
-    if (prevProps.start.getTime() !== nextProps.start.getTime()) {
-      return false;
-    }
-
-    if (prevStaff.ID !== nextStaff.ID) {
-      return false;
-    }
-
-    return true;
   }
+  // (prevProps: SchedulerSlotProps, nextProps: SchedulerSlotProps) => {
+  //   const prevStaff = (prevProps.group.resources[0] as unknown) as StaffDataItem;
+  //   const nextStaff = (nextProps.group.resources[0] as unknown) as StaffDataItem;
+
+  //   if (prevProps.start.getTime() !== nextProps.start.getTime()) {
+  //     return false;
+  //   }
+
+  //   if (prevStaff.ID !== nextStaff.ID) {
+  //     return false;
+  //   }
+
+  //   return true;
+  // }
 );
