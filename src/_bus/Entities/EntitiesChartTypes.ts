@@ -1,6 +1,7 @@
 export interface DateRange {
   start: Date;
   end: Date;
+  weekNumber?: number;
 }
 
 export interface SeriesForChart<T> {

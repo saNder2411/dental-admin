@@ -27,6 +27,7 @@ import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element | null => {
+  console.log(`SchedulerItemProps===>`, props)
   const { dataItem, children, _ref, group, isRecurring } = props;
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);

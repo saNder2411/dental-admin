@@ -4,10 +4,7 @@ import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsT
 // Helpers
 import { generateId } from '../Entities/EntitiesHelpers';
 
-export const getNewAppointmentDataItemForScheduler = (
-  allIDs: number[],
-  { Start, End, TeamID }: InitDataForNewAppointmentDataItem
-): AppointmentDataItem => {
+export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start, End, TeamID }: InitDataForNewAppointmentDataItem): AppointmentDataItem => {
   const ID = generateId(allIDs);
 
   return {
@@ -25,10 +22,6 @@ export const getNewAppointmentDataItemForScheduler = (
     MetroRRule: null,
     MetroRecException: null,
     FirstAppointment: false,
-    // FirstName: ``,
-    // LastNameAppt: ``,
-    // Email: null,
-    // CellPhone: null,
     LookupCM102customersId: null,
     LookupHR01teamId: TeamID,
     LookupMultiBP01offeringsId: { results: [] },

@@ -5,17 +5,16 @@ import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsT
 import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
 import { SeriesForChart } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
+import { DateRange } from '../Entities/EntitiesChartTypes';
 // Constants
 import { MONDAY_CURRENT_WEEK, START_PREV_WEEKS_DATE, WEEK_RANGE, PREV_WEEK, SeriesColors, START_PREV_MONTH_DATE } from '../Constants';
 // Helpers
 import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember, MonthPoints } from './EntitiesChartHelpers';
 
-const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servicesById: ById<ServiceDataItem>) =>
-  WeekPoints.reduce(
+const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments: AppointmentDataItem[]) => (servicesById: ById<ServiceDataItem>) =>
+  weekPoints.reduce(
     (acc, { start, end }) => {
-      const sliceAppointmentsInWeekPoint = sliceAppointments.filter(
-        ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() <= end.getTime()
-      );
+      const sliceAppointmentsInWeekPoint = sliceAppointments.filter(({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() <= end.getTime());
 
       const {
         totalSum,
@@ -40,7 +39,6 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
           );
 
           return {
-            // totalSum: serviceSum + productSum > 0 ? +(acc.totalSum + ServiceCharge).toFixed(2) : acc.totalSum,
             totalSum: +(acc.totalSum + serviceSum + productSum).toFixed(2),
             serviceSum: +(acc.serviceSum + serviceSum).toFixed(2),
             productSum: +(acc.productSum + productSum).toFixed(2),
@@ -64,14 +62,8 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
         serviceSalesForEveryWeekInWeekRange: [...acc.serviceSalesForEveryWeekInWeekRange, serviceSum],
         productSalesForEveryWeekInWeekRange: [...acc.productSalesForEveryWeekInWeekRange, productSum],
         totalAmountAppointmentsForEveryWeekPerWeekRange: [...acc.totalAmountAppointmentsForEveryWeekPerWeekRange, totalAmountAppointment],
-        amountNewCustomerAppointmentsForEveryWeekPerWeekRange: [
-          ...acc.amountNewCustomerAppointmentsForEveryWeekPerWeekRange,
-          amountNewCustomerAppointment,
-        ],
-        amountExistCustomerAppointmentsForEveryWeekPerWeekRange: [
-          ...acc.amountExistCustomerAppointmentsForEveryWeekPerWeekRange,
-          amountExistCustomerAppointment,
-        ],
+        amountNewCustomerAppointmentsForEveryWeekPerWeekRange: [...acc.amountNewCustomerAppointmentsForEveryWeekPerWeekRange, amountNewCustomerAppointment],
+        amountExistCustomerAppointmentsForEveryWeekPerWeekRange: [...acc.amountExistCustomerAppointmentsForEveryWeekPerWeekRange, amountExistCustomerAppointment],
       };
     },
     {
@@ -86,9 +78,7 @@ const getAppointmentSalesData = (sliceAppointments: AppointmentDataItem[], servi
 
 export const getAppointmentValue = (sliceAppointments: AppointmentDataItem[]) =>
   MonthPoints.reduce((acc, { start, end }) => {
-    const sliceAppointmentsInMonthPoint = sliceAppointments.filter(
-      ({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime()
-    );
+    const sliceAppointmentsInMonthPoint = sliceAppointments.filter(({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime());
     const { totalSum, totalAmountAppointment } = sliceAppointmentsInMonthPoint.reduce(
       (acc, { ServiceCharge, AppointmentStatus }) => ({
         totalSum: AppointmentStatus === StatusNames.Paid || AppointmentStatus === StatusNames.Booked ? acc.totalSum + ServiceCharge : acc.totalSum,
@@ -175,10 +165,7 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
             ...acc,
             averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
             serviceCategories: [...acc.serviceCategories, name],
-            salesPerServicePerWeekSeries: [
-              ...acc.salesPerServicePerWeekSeries,
-              { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[5] },
-            ],
+            salesPerServicePerWeekSeries: [...acc.salesPerServicePerWeekSeries, { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[5] }],
           };
         case ContentTypes.Product:
           const prevProductCategory = acc.productCategories[acc.productCategories.length - 1];
@@ -191,10 +178,7 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
           return {
             ...acc,
             productCategories: [...acc.productCategories, name],
-            salesPerProductPerWeekSeries: [
-              ...acc.salesPerProductPerWeekSeries,
-              { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[6] },
-            ],
+            salesPerProductPerWeekSeries: [...acc.salesPerProductPerWeekSeries, { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[6] }],
           };
 
         default:
@@ -281,7 +265,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     totalAmountAppointmentsForEveryWeekPerWeekRange,
     amountNewCustomerAppointmentsForEveryWeekPerWeekRange,
     amountExistCustomerAppointmentsForEveryWeekPerWeekRange,
-  } = getAppointmentSalesData(appointmentsInLastWeeksRange, state.services.byId);
+  } = getAppointmentSalesData(WeekPoints)(appointmentsInLastWeeksRange)(state.services.byId);
 
   const totalAppointmentSales = totalSalesForEveryWeekInWeekRange.reduce((sum, item) => (sum += item), 0);
   const totalServiceSales = serviceSalesForEveryWeekInWeekRange.reduce((sum, item) => (sum += item), 0);

@@ -6,20 +6,24 @@ import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsT
 // Constants
 import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, DEFAULT_WORK_WEEK_HOURS, START_PREV_MONTH_DATE, Months } from '../Constants';
 
-const getWeekPointsAndNumbers = (weekRange: number, startDate: Date): [DateRange[], number[]] => {
+const getWeekPointsAndNumbers = (weekRange: number, startDateWeekRange: Date): [DateRange[], number[]] => {
   let points: DateRange[] = [];
   let weekNumbers: number[] = [];
 
   for (let i = 0; i < weekRange; i++) {
-    const start = addWeeks(startDate, i);
-    const end = addWeeks(startDate, i + 1);
+    const start = addWeeks(startDateWeekRange, i);
+    const end = addWeeks(startDateWeekRange, i + 1);
     const weekNumber = weekInYear(start);
-    points = [...points, { start, end }];
+    points = [...points, { start, end, weekNumber }];
     weekNumbers = [...weekNumbers, weekNumber];
   }
 
   return [points, weekNumbers];
 };
+
+export const transformAppointmentsDataToAppointmentsWhithRecurrningItems = (appointmentsData: AppointmentDataItem[]) => {
+  
+}
 
 export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, START_PREV_WEEKS_DATE);
 
@@ -45,8 +49,8 @@ const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appo
       if (LookupHR01teamId === staffMemberID && AppointmentStatus !== StatusNames.Cancelled && AppointmentStatus !== StatusNames.Consultation) {
         return {
           ...acc,
-          amountAppointment: acc.amountAppointment + 1,
-          durationInHours: acc.durationInHours + (fAllDayEvent ? 8 : Duration / 60 / 60),
+          amountAppointment: acc.amountAppointment + (fAllDayEvent ? 0 : 1),
+          durationInHours: acc.durationInHours + (fAllDayEvent ? 0 : Duration / 60 / 60),
           staffMemberSales: acc.staffMemberSales + ServiceCharge,
         };
       }
