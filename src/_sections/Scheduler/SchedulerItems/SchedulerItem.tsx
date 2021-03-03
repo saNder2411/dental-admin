@@ -25,10 +25,11 @@ import { selectAppointmentsAllIds, selectServicesById, selectStaffById, selectCu
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
+import { parseRecurrenceRule } from '../../../_bus/Entities/EntitiesChartHelpers';
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element | null => {
-  console.log(`SchedulerItemProps===>`, props)
   const { dataItem, children, _ref, group, isRecurring } = props;
+  parseRecurrenceRule(dataItem);
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectedView = useSelector(selectSelectedView);
@@ -101,7 +102,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, customersById, () => {}));
   };
 
-  return resource ? (
+  return  (
     <>
       <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onDoubleClick={onEditBtnClick} onRemoveClick={onDeleteBtnClick}>
         {height && height > 25 && (
@@ -180,5 +181,5 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         />
       )} */}
     </>
-  ) : null;
+  ) 
 };

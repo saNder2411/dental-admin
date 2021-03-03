@@ -1,7 +1,8 @@
 // Types
 import {
-  EndRepeatTypes,
   RepeatTypes,
+  ParseRepeatTypes,
+  EndRepeatTypes,
   WeekdayTypes,
   MonthlyTypes,
   MonthlyDayTypes,
@@ -15,6 +16,8 @@ import { AppointmentDataItem } from '../../../../_bus/_Appointments/Appointments
 export type EndRepeatTypesType = InferValueTypes<typeof EndRepeatTypes>;
 
 export type RepeatTypesType = InferValueTypes<typeof RepeatTypes>;
+
+export type ParseRepeatType = InferValueTypes<typeof ParseRepeatTypes>;
 
 export type WeekdayTypesType = InferValueTypes<typeof WeekdayTypes>;
 

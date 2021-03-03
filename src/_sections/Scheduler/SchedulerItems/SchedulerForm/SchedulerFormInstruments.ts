@@ -11,6 +11,20 @@ export const RepeatTypes = {
   Yearly: 'FREQ=YEARLY' as const,
 };
 
+export const ParseRepeatTypes = {
+  Daily: 'FREQ=DAILY' as const,
+  Weekly: 'FREQ=WEEKLY' as const,
+  Monthly: 'FREQ=MONTHLY' as const,
+  Yearly: 'FREQ=YEARLY' as const,
+};
+
+export const RepeatTypesMapToDayRange = {
+  [RepeatTypes.Daily]: 1,
+  [RepeatTypes.Weekly]: 7,
+  [RepeatTypes.Monthly]: 30,
+  [RepeatTypes.Yearly]: 365,
+};
+
 export const RepeatDropDownListData = Object.entries(RepeatTypes).map(([text, value]) => ({ text, value }));
 
 export const EndRepeatTypes = {

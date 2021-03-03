@@ -60,6 +60,7 @@ export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, excep
 export const getNewDataItemOnRecurrenceDragEvent = (dataItem: KendoDataItem) => (allIds: number[]): AppointmentDataItem => {
   const ID = generateId(allIds);
   const { occurrenceId, originalStart, Start, End, TeamID, ...newDataItem } = dataItem;
+  console.log(`dataItem`, dataItem)
 
   return {
     ...newDataItem,

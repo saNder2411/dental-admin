@@ -3,8 +3,13 @@ import { addWeeks, weekInYear, addMonths } from '@progress/kendo-date-math';
 import { DateRange } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
+import { ParseRepeatType } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormTypes';
 // Constants
 import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, DEFAULT_WORK_WEEK_HOURS, START_PREV_MONTH_DATE, Months } from '../Constants';
+// Helpers
+import { parseRuleStrInValue } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
+// Instruments
+import { ParseRepeatTypes, RepeatTypesMapToDayRange } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormInstruments';
 
 const getWeekPointsAndNumbers = (weekRange: number, startDateWeekRange: Date): [DateRange[], number[]] => {
   let points: DateRange[] = [];
@@ -21,9 +26,72 @@ const getWeekPointsAndNumbers = (weekRange: number, startDateWeekRange: Date): [
   return [points, weekNumbers];
 };
 
-export const transformAppointmentsDataToAppointmentsWhithRecurrningItems = (appointmentsData: AppointmentDataItem[]) => {
+export const transformAppointmentsDataToAppointmentsWhithRecurrningItems = (appointmentsData: AppointmentDataItem[]) => {};
+
+export const parseRecurrenceRule = (appointment: AppointmentDataItem) => {
+  if (!appointment.MetroRRule) return;
+
+  const [repeatType, interval, countOrUntilOrByDayOrByMonthDayOrByMonth, byDayOrByMonthDayOrBySetPos, lastByDayOrByMonthDayOrBySetPos] = appointment.MetroRRule.split(
+    ';'
+  ) as [ParseRepeatType, string, string | undefined, string | undefined, string | undefined];
+
+  const count =
+    countOrUntilOrByDayOrByMonthDayOrByMonth && countOrUntilOrByDayOrByMonthDayOrByMonth.includes(`COUNT`)
+      ? +parseRuleStrInValue(countOrUntilOrByDayOrByMonthDayOrByMonth)
+      : null;
+  const until =
+    countOrUntilOrByDayOrByMonthDayOrByMonth && countOrUntilOrByDayOrByMonthDayOrByMonth.includes(`UNTIL`)
+      ? new Date(parseRuleStrInValue(countOrUntilOrByDayOrByMonthDayOrByMonth))
+      : null;
+  const byDay =
+    countOrUntilOrByDayOrByMonthDayOrByMonth && countOrUntilOrByDayOrByMonthDayOrByMonth.includes(`BYDAY`)
+      ? parseRuleStrInValue(countOrUntilOrByDayOrByMonthDayOrByMonth)
+      : byDayOrByMonthDayOrBySetPos && byDayOrByMonthDayOrBySetPos.includes(`BYDAY`)
+      ? parseRuleStrInValue(byDayOrByMonthDayOrBySetPos)
+      : lastByDayOrByMonthDayOrBySetPos && lastByDayOrByMonthDayOrBySetPos.includes(`BYDAY`)
+      ? parseRuleStrInValue(lastByDayOrByMonthDayOrBySetPos)
+      : null;
+  const byMonthDay =
+    countOrUntilOrByDayOrByMonthDayOrByMonth && countOrUntilOrByDayOrByMonthDayOrByMonth.includes(`BYMONTHDAY`)
+      ? +parseRuleStrInValue(countOrUntilOrByDayOrByMonthDayOrByMonth)
+      : byDayOrByMonthDayOrBySetPos && byDayOrByMonthDayOrBySetPos.includes(`BYMONTHDAY`)
+      ? +parseRuleStrInValue(byDayOrByMonthDayOrBySetPos)
+      : repeatType === ParseRepeatTypes.Yearly && lastByDayOrByMonthDayOrBySetPos && lastByDayOrByMonthDayOrBySetPos.includes(`BYMONTHDAY`)
+      ? +parseRuleStrInValue(lastByDayOrByMonthDayOrBySetPos)
+      : null;
+  const byMonth =
+    repeatType === ParseRepeatTypes.Yearly && countOrUntilOrByDayOrByMonthDayOrByMonth && countOrUntilOrByDayOrByMonthDayOrByMonth.includes(`BYMONTH`)
+      ? +parseRuleStrInValue(countOrUntilOrByDayOrByMonthDayOrByMonth)
+      : repeatType === ParseRepeatTypes.Yearly && byDayOrByMonthDayOrBySetPos && byDayOrByMonthDayOrBySetPos.includes(`BYMONTH`)
+      ? +parseRuleStrInValue(byDayOrByMonthDayOrBySetPos)
+      : null;
+  const bySetPos =
+    byDayOrByMonthDayOrBySetPos && byDayOrByMonthDayOrBySetPos.includes(`BYSETPOS`)
+      ? parseRuleStrInValue(byDayOrByMonthDayOrBySetPos)
+      : lastByDayOrByMonthDayOrBySetPos && lastByDayOrByMonthDayOrBySetPos.includes(`BYSETPOS`)
+      ? parseRuleStrInValue(lastByDayOrByMonthDayOrBySetPos)
+      : null;
+
+  const isNeverEnd = !count && !until;
+
+  const repeatOptions = {
+    dayRange: RepeatTypesMapToDayRange[repeatType],
+    interval: +parseRuleStrInValue(interval),
+    count,
+    until,
+    isNeverEnd,
+    byDay,
+    byMonthDay,
+    byMonth,
+    bySetPos,
+    exceptions: appointment.MetroRecException,
+  };
+
   
-}
+
+  console.log(`repeatType ----->`, repeatType, interval, countOrUntilOrByDayOrByMonthDayOrByMonth, byDayOrByMonthDayOrBySetPos, lastByDayOrByMonthDayOrBySetPos);
+  console.log(`RepeatOptions`, repeatOptions);
+};
 
 export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, START_PREV_WEEKS_DATE);
 

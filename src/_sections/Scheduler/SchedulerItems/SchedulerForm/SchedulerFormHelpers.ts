@@ -138,7 +138,7 @@ const setRecurrenceRule = ({
   }
 };
 
-const parseRuleStrInValue = (rule: string) => {
+export const parseRuleStrInValue = (rule: string) => {
   const startValue = rule.indexOf('=') + 1;
   const value = rule.slice(startValue);
   return value;
@@ -528,25 +528,28 @@ export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllId
     ...others
   } = formDataItem;
 
+  const repeatOptions = {
+    Repeat,
+    EndRepeat,
+    RepeatInterval,
+    EndCount,
+    EndUntil,
+    RepeatOnWeekday,
+    RepeatOnMonthly,
+    MonthlyDay,
+    MonthlyWeekNumber,
+    MonthlyDayType,
+    RepeatOnYearly,
+    YearlyMonth,
+    YearlyMonthDay,
+    YearlyWeekNumber,
+    YearlyDayType,
+  };
+  // console.log(`repeatOptions`, repeatOptions);
+
   const newDataItem = {
     ...others,
-    MetroRRule: setRecurrenceRule({
-      Repeat,
-      EndRepeat,
-      RepeatInterval,
-      EndCount,
-      EndUntil,
-      RepeatOnWeekday,
-      RepeatOnMonthly,
-      MonthlyDay,
-      MonthlyWeekNumber,
-      MonthlyDayType,
-      RepeatOnYearly,
-      YearlyMonth,
-      YearlyMonthDay,
-      YearlyWeekNumber,
-      YearlyDayType,
-    }),
+    MetroRRule: setRecurrenceRule(repeatOptions),
   };
 
   const ID = generateId(customersAllIds);

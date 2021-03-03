@@ -27,10 +27,6 @@ interface BackendImmutableKey {
   MetroRecException: null | Date[];
   RecurrenceID: null | number;
   FirstAppointment: boolean;
-  // FirstName: string | null;
-  // LastNameAppt: string | null;
-  // Email: string | null;
-  // CellPhone: string | null;
   ID: number;
   Modified: string;
   LookupCM102customersId: number | null;
