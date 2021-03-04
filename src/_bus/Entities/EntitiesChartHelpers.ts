@@ -1,11 +1,11 @@
-import { addWeeks, weekInYear, addMonths } from '@progress/kendo-date-math';
+import { addWeeks, weekInYear, addMonths, addDays, addYears, isEqualDate } from '@progress/kendo-date-math';
 // Types
 import { DateRange } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 import { ParseRepeatType } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormTypes';
 // Constants
-import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, DEFAULT_WORK_WEEK_HOURS, START_PREV_MONTH_DATE, Months } from '../Constants';
+import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, DEFAULT_WORK_WEEK_HOURS, START_PREV_MONTH_DATE, Months, NEVER_END_RECURRENCE_MONTH_AMOUNT } from '../Constants';
 // Helpers
 import { parseRuleStrInValue } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 // Instruments
@@ -34,6 +34,9 @@ export const parseRecurrenceRule = (appointment: AppointmentDataItem) => {
   const [repeatType, interval, countOrUntilOrByDayOrByMonthDayOrByMonth, byDayOrByMonthDayOrBySetPos, lastByDayOrByMonthDayOrBySetPos] = appointment.MetroRRule.split(
     ';'
   ) as [ParseRepeatType, string, string | undefined, string | undefined, string | undefined];
+
+  const dayRange = RepeatTypesMapToDayRange[repeatType];
+  const intervalNum = +parseRuleStrInValue(interval);
 
   const count =
     countOrUntilOrByDayOrByMonthDayOrByMonth && countOrUntilOrByDayOrByMonthDayOrByMonth.includes(`COUNT`)
@@ -67,16 +70,16 @@ export const parseRecurrenceRule = (appointment: AppointmentDataItem) => {
       : null;
   const bySetPos =
     byDayOrByMonthDayOrBySetPos && byDayOrByMonthDayOrBySetPos.includes(`BYSETPOS`)
-      ? parseRuleStrInValue(byDayOrByMonthDayOrBySetPos)
+      ? +parseRuleStrInValue(byDayOrByMonthDayOrBySetPos)
       : lastByDayOrByMonthDayOrBySetPos && lastByDayOrByMonthDayOrBySetPos.includes(`BYSETPOS`)
-      ? parseRuleStrInValue(lastByDayOrByMonthDayOrBySetPos)
+      ? +parseRuleStrInValue(lastByDayOrByMonthDayOrBySetPos)
       : null;
 
   const isNeverEnd = !count && !until;
 
   const repeatOptions = {
-    dayRange: RepeatTypesMapToDayRange[repeatType],
-    interval: +parseRuleStrInValue(interval),
+    dayRange,
+    intervalNum,
     count,
     until,
     isNeverEnd,
@@ -87,10 +90,103 @@ export const parseRecurrenceRule = (appointment: AppointmentDataItem) => {
     exceptions: appointment.MetroRecException,
   };
 
-  
+  const recurrenceAppointments: AppointmentDataItem[] = [];
+  const originalStart = appointment.Start;
+  const originalEnd = appointment.End;
+  const isMonthlyRecurrence = dayRange === 30;
+  const isYearlyRecurrence = dayRange === 365;
+
+  if (count) {
+    for (let i = 1; i < count; i++) {
+      const countDays = i * intervalNum * dayRange;
+      const nextDayStart = addDays(originalStart, countDays);
+      const nextDayEnd = addDays(originalEnd, countDays);
+      const nextMonthStart = addMonths(originalStart, i * intervalNum);
+      const nextMonthEnd = addMonths(originalEnd, i * intervalNum);
+      const nextYearsStart = addYears(originalStart, i * intervalNum);
+      const nextYearsEnd = addYears(originalEnd, i * intervalNum);
+      const Start = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayStart : isMonthlyRecurrence ? nextMonthStart : nextYearsStart;
+      const End = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayEnd : isMonthlyRecurrence ? nextMonthEnd : nextYearsEnd;
+
+      const isExceptionDate = appointment.MetroRecException ? appointment.MetroRecException.find((exception) => isEqualDate(Start, exception)) : false;
+
+      if (isExceptionDate) {
+        continue;
+      }
+
+      const recurrenceAppointment: AppointmentDataItem = {
+        ...appointment,
+        Start,
+        End,
+        EventDate: Start.toISOString(),
+        EndDate: End.toISOString(),
+        MetroRRule: null,
+        MetroRecException: null,
+      };
+      recurrenceAppointments.push(recurrenceAppointment);
+    }
+  }
+
+  if (until) {
+    const rangeDays = (until.getTime() - appointment.Start.getTime()) / 1000 / 60 / 60 / 24;
+    const countRec = rangeDays / intervalNum / dayRange;
+
+    for (let i = 1; i < countRec; i++) {
+      const countDays = i * intervalNum * dayRange;
+      const nextDayStart = addDays(originalStart, countDays);
+      const nextDayEnd = addDays(originalEnd, countDays);
+      const nextMonthStart = addMonths(originalStart, i * intervalNum);
+      const nextMonthEnd = addMonths(originalEnd, i * intervalNum);
+      const nextYearsStart = addYears(originalStart, i * intervalNum);
+      const nextYearsEnd = addYears(originalEnd, i * intervalNum);
+      const Start = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayStart : isMonthlyRecurrence ? nextMonthStart : nextYearsStart;
+      const End = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayEnd : isMonthlyRecurrence ? nextMonthEnd : nextYearsEnd;
+
+      const recurrenceAppointment: AppointmentDataItem = {
+        ...appointment,
+        Start,
+        End,
+        EventDate: Start.toISOString(),
+        EndDate: End.toISOString(),
+        MetroRRule: null,
+        MetroRecException: null,
+      };
+      recurrenceAppointments.push(recurrenceAppointment);
+    }
+  }
+
+  if (isNeverEnd) {
+    const until = addMonths(appointment.Start, NEVER_END_RECURRENCE_MONTH_AMOUNT);
+    const rangeDays = (until.getTime() - appointment.Start.getTime()) / 1000 / 60 / 60 / 24;
+    const countRec = rangeDays / intervalNum / dayRange;
+
+    for (let i = 1; i < countRec; i++) {
+      const countDays = i * intervalNum * dayRange;
+      const nextDayStart = addDays(originalStart, countDays);
+      const nextDayEnd = addDays(originalEnd, countDays);
+      const nextMonthStart = addMonths(originalStart, i * intervalNum);
+      const nextMonthEnd = addMonths(originalEnd, i * intervalNum);
+      const nextYearsStart = addYears(originalStart, i * intervalNum);
+      const nextYearsEnd = addYears(originalEnd, i * intervalNum);
+      const Start = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayStart : isMonthlyRecurrence ? nextMonthStart : nextYearsStart;
+      const End = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayEnd : isMonthlyRecurrence ? nextMonthEnd : nextYearsEnd;
+
+      const recurrenceAppointment: AppointmentDataItem = {
+        ...appointment,
+        Start,
+        End,
+        EventDate: Start.toISOString(),
+        EndDate: End.toISOString(),
+        MetroRRule: null,
+        MetroRecException: null,
+      };
+      recurrenceAppointments.push(recurrenceAppointment);
+    }
+  }
 
   console.log(`repeatType ----->`, repeatType, interval, countOrUntilOrByDayOrByMonthDayOrByMonth, byDayOrByMonthDayOrBySetPos, lastByDayOrByMonthDayOrBySetPos);
   console.log(`RepeatOptions`, repeatOptions);
+  console.log(`recurrenceAppointments`, recurrenceAppointments);
 };
 
 export const [WeekPoints, WeekNumbers] = getWeekPointsAndNumbers(WEEK_RANGE, START_PREV_WEEKS_DATE);

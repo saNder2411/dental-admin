@@ -29,6 +29,7 @@ import { parseRecurrenceRule } from '../../../_bus/Entities/EntitiesChartHelpers
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element | null => {
   const { dataItem, children, _ref, group, isRecurring } = props;
+  console.log(`SchedulerItem==>`, props);
   parseRecurrenceRule(dataItem);
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
