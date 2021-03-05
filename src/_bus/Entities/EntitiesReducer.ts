@@ -42,6 +42,8 @@ const initialState = {
     salesPerProductPerMonthSeries: [],
     salesPerOtherServicePerMonthSeries: { name: 'Other', data: 0 },
 
+    averageHourlyPerService: [],
+
     totalAppointmentSales: 0,
     totalAppointmentSalesPerLast12Months: 0,
     activeCustomersIDs: [],
@@ -53,7 +55,6 @@ const initialState = {
     amountAppointmentPerNextWeekRangeAndLastWeek: 0,
     salesPerStaffPerWeekData: [],
     appointmentPerStaffSeries: [],
-    averageHourlyPerService: [],
     totalServiceSales: 0,
     totalServiceHours: 0,
     appointmentValue: [],

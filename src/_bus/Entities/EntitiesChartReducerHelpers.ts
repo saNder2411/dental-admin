@@ -166,19 +166,19 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
           const prevServiceCategory = acc.serviceCategories[acc.serviceCategories.length - 1];
 
           if (prevServiceCategory && prevServiceCategory === name) {
-            const prevAverageHourlyPerServiceData = acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data;
             const prevServiceData = acc.salesPerServicePerMonthSeries[acc.salesPerServicePerMonthSeries.length - 1].data;
+            const prevAverageHourlyData = acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data;
 
-            acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data = +(prevAverageHourlyPerServiceData + data).toFixed(2);
             acc.salesPerServicePerMonthSeries[acc.salesPerServicePerMonthSeries.length - 1].data = +(prevServiceData + salesServiceOrProductPerWeekRange).toFixed(2);
+            acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data = +(prevAverageHourlyData + data).toFixed(2);
             return acc;
           }
 
           return {
             ...acc,
-            averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
             serviceCategories: [...acc.serviceCategories, name],
             salesPerServicePerMonthSeries: [...acc.salesPerServicePerMonthSeries, { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[5] }],
+            averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
           };
         case ContentTypes.Product:
           const prevProductCategory = acc.productCategories[acc.productCategories.length - 1];
@@ -206,12 +206,12 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
       }
     },
     {
-      averageHourlyPerService: new Array<SeriesForChart<number>>(),
       serviceCategories: new Array<string>(),
       productCategories: new Array<string>(),
       salesPerServicePerMonthSeries: new Array<SeriesForChart<number>>(),
       salesPerProductPerMonthSeries: new Array<SeriesForChart<number>>(),
       salesPerOtherServicePerMonthSeries: { name: 'Other', data: 0, color: SeriesColors[9] },
+      averageHourlyPerService: new Array<SeriesForChart<number>>(),
     }
   );
 
@@ -297,12 +297,12 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   } = getStaffCalcData(appointmentsInLastWeeksRange, state.staff.originalData, totalAppointmentSales);
 
   const {
-    averageHourlyPerService,
     serviceCategories,
     productCategories,
     salesPerServicePerMonthSeries,
     salesPerProductPerMonthSeries,
     salesPerOtherServicePerMonthSeries,
+    averageHourlyPerService,
   } = getServiceProductCalcData(appointmentsInLastMonthsRange, state.services.originalData);
 
   const appointmentValue = getAppointmentValue(appointmentsInLastMonthsRange);
@@ -329,6 +329,8 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     salesPerProductPerMonthSeries,
     salesPerOtherServicePerMonthSeries,
 
+    averageHourlyPerService,
+
     totalAppointmentSales,
     totalAppointmentSalesPerLast12Months,
     activeCustomersIDs: Array.from(activeCustomersSet),
@@ -339,7 +341,6 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     canceledAppointment,
     amountAppointmentPerNextWeekRangeAndLastWeek,
     salesPerStaffPerWeekData,
-    averageHourlyPerService,
     totalServiceSales,
     appointmentValue,
   };

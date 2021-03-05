@@ -132,7 +132,9 @@ export interface ChartState {
   salesPerServicePerMonthSeries: SeriesForChart<number>[];
   salesPerProductPerMonthSeries: SeriesForChart<number>[];
   salesPerOtherServicePerMonthSeries: SeriesForChart<number>;
-
+  
+  averageHourlyPerService: SeriesForChart<number>[];
+  
   totalAppointmentSales: number;
   totalAppointmentSalesPerLast12Months: number;
   activeCustomersIDs: number[];
@@ -143,7 +145,6 @@ export interface ChartState {
   canceledAppointment: number;
   amountAppointmentPerNextWeekRangeAndLastWeek: number;
   salesPerStaffPerWeekData: SeriesForChart<number>[];
-  averageHourlyPerService: SeriesForChart<number>[];
   totalServiceSales: number;
   appointmentValue: number[];
 }

@@ -217,7 +217,7 @@ export const ChartAverageHourlyRatePerService: FC<ChartItemProps> = ({ className
     <section className={className}>
       <h3 className="text-center">Average Hourly Rate Per Service</h3>
       <KendoChart seriesColors={SeriesColors}>
-        <ChartTitle text={`Last ${WEEK_RANGE} weeks`} />
+        <ChartTitle text={`Last ${MONTH_RANGE} months`} />
         <ChartLegend position="top" orientation="vertical" />
         <ChartSeries>
           <ChartSeriesItem
