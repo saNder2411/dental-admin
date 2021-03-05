@@ -44,6 +44,15 @@ const getMontPointsAndNames = (monthRange: number, startDate: Date): [DateRange[
 
 export const [MonthPoints, MonthNames] = getMontPointsAndNames(MONTH_RANGE, START_PREV_MONTH_DATE);
 
+export const isExcludeAppointment = (status: StatusNames) =>
+  status === StatusNames.Cancelled ||
+  status === StatusNames.Checking ||
+  status === StatusNames.Closed ||
+  status === StatusNames.Unavailable ||
+  status === StatusNames.Other;
+
+export const getPercentFromFull = (part: number) => (full: number) => (part !== 0 && full !== 0 ? +((part * 100) / full).toFixed(2) : 0);
+
 const parseRecurrenceRule = (rule: string) => {
   const [repeatType, intervalStr, countOrUntil] = rule.split(';') as [ParseRepeatType, string, string | undefined];
   const dayRange = RepeatTypesMapToDayRange[repeatType];
@@ -124,18 +133,17 @@ export const getRecurrenceAppointments = (appointment: AppointmentDataItem): App
 const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {
   return appointments.reduce(
     (acc, { LookupHR01teamId, Duration, ServiceCharge, fAllDayEvent, AppointmentStatus }) => {
-      if (LookupHR01teamId === staffMemberID && AppointmentStatus !== StatusNames.Cancelled && AppointmentStatus !== StatusNames.Consultation) {
+      if (LookupHR01teamId === staffMemberID && !isExcludeAppointment(AppointmentStatus)) {
         return {
-          ...acc,
           amountAppointment: acc.amountAppointment + (fAllDayEvent ? 0 : 1),
-          durationInHours: acc.durationInHours + (fAllDayEvent ? 0 : Duration / 60 / 60),
+          staffMemberAppointmentDurationInHours: acc.staffMemberAppointmentDurationInHours + (fAllDayEvent ? 0 : Duration / 60 / 60),
           staffMemberSales: acc.staffMemberSales + ServiceCharge,
         };
       }
 
       return acc;
     },
-    { amountAppointment: 0, durationInHours: 0, staffMemberSales: 0 }
+    { amountAppointment: 0, staffMemberAppointmentDurationInHours: 0, staffMemberSales: 0 }
   );
 };
 
@@ -144,10 +152,10 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   sliceAppointmentsInWeekRange: AppointmentDataItem[],
   totalAppointmentSales: number
 ) => {
-  const staffMemberWorkWeekHours = (StaffWeekHours ?? 0) * WEEK_RANGE;
-  const { amountAppointment, durationInHours, staffMemberSales } = calcAppointmentsDurationSalesPerStaffMember(ID, sliceAppointmentsInWeekRange);
+  const staffMemberWorkWeekHoursInWeekRange = (StaffWeekHours ?? 0) * WEEK_RANGE;
+  const { amountAppointment, staffMemberAppointmentDurationInHours, staffMemberSales } = calcAppointmentsDurationSalesPerStaffMember(ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
-  const percentEmploymentPerWeekPerStaffMember = Math.round(((durationInHours / WEEK_RANGE) * 100) / staffMemberWorkWeekHours);
+  const percentEmploymentPerWeekPerStaffMember = getPercentFromFull(staffMemberAppointmentDurationInHours / WEEK_RANGE)(StaffWeekHours ?? 0);
   const averageSalesPerWeekPerStaffMember = +(staffMemberSales / WEEK_RANGE).toFixed(2);
   const percentStaffMemberSaleOfTotalSales = staffMemberSales !== 0 ? Math.round((staffMemberSales * 100) / totalAppointmentSales) : 0;
 
@@ -157,7 +165,7 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
     averageSalesPerWeekPerStaffMember,
     percentStaffMemberSaleOfTotalSales,
     staffMemberSales,
-    staffMemberWorkWeekHours,
-    durationInHours,
+    staffMemberWorkWeekHoursInWeekRange,
+    staffMemberAppointmentDurationInHours,
   };
 };

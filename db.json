@@ -563,8 +563,8 @@
       "Id": 1,
       "Title": "C.Abraham-01",
       "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-03-05T10:50:00.000Z",
-      "EndDate": "2021-03-05T11:50:00.000Z",
+      "EventDate": "2021-06-04T09:50:00.000Z",
+      "EndDate": "2021-06-04T10:50:00.000Z",
       "Description": "Appointment with - --Team Stylist-- | Contact Reference - Corinne Abraham, +11189763244570, Coralie.Abraham@schedulingtoday.local | Service Type - ",
       "Duration": 3600,
       "Notes": "",
@@ -576,163 +576,12 @@
       "FirstAppointment": false,
       "LookupCM102customersId": 54,
       "ID": 1,
-      "Modified": "2021-03-04T18:10:44.252Z",
+      "Modified": "2021-03-05T15:54:04.693Z",
       "fRecurrence": false,
       "LookupHR01teamId": 1,
       "LookupMultiBP01offeringsId": {
         "results": []
       },
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 2,
-      "Title": "C.Abraham-02",
-      "AppointmentStatus": "(5) Paid",
-      "EventDate": "2020-12-14T06:00:00.000Z",
-      "EndDate": "2020-12-14T07:00:00.000Z",
-      "Description": "Appointment with - Grace Robinson | Contact Reference - Corinne Abraham, +11189763244570, Coralie.Abraham@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
-      "Duration": 3600,
-      "Notes": "",
-      "ServiceCharge": 46.75,
-      "fAllDayEvent": null,
-      "RecurrenceID": null,
-      "MetroRRule": "FREQ=DAILY;INTERVAL=1;COUNT=4",
-      "MetroRecException": null,
-      "FirstAppointment": false,
-      "LookupCM102customersId": 54,
-      "LookupHR01teamId": 3,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          1
-        ]
-      },
-      "ID": 2,
-      "Modified": "2021-03-04T18:19:40.429Z",
-      "fRecurrence": true,
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 3,
-      "Title": "E.Adame-03",
-      "AppointmentStatus": "(5) Paid",
-      "EventDate": "2021-01-25T06:00:00.000Z",
-      "EndDate": "2021-01-25T06:50:00.000Z",
-      "Description": "Appointment with - Grace Robinson | Contact Reference - Elizabete Adame, +1189764214858, Elizabete.Adame@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S2 49.5 (-10%), Color Freeze Treatment 200ml 11.0075 (-15%), Style Sculpting Foam 200ml 12.7075 (-15%)",
-      "Duration": 3000,
-      "Notes": "",
-      "ServiceCharge": 73.215,
-      "fAllDayEvent": false,
-      "RecurrenceID": null,
-      "MetroRRule": "FREQ=DAILY;INTERVAL=2;COUNT=2",
-      "MetroRecException": null,
-      "FirstAppointment": false,
-      "LookupCM102customersId": 1268,
-      "ID": 3,
-      "Modified": "2021-03-05T13:02:42.517Z",
-      "fRecurrence": true,
-      "LookupHR01teamId": 3,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          2,
-          55,
-          53
-        ]
-      },
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 4,
-      "Title": "T.Acciardi-04",
-      "AppointmentStatus": "(5) Paid",
-      "EventDate": "2021-02-08T06:00:00.000Z",
-      "EndDate": "2021-02-08T06:45:00.000Z",
-      "Description": "Appointment with - Grace Robinson | Contact Reference - Tom Acciardi, +1189774400329, Tom.Acciardi@schedulingtoday.local | Service Type - Mens Wash+Cut+Dry S1 29.75 (-15%), Original The Conditioner 300ml 15.2915 (-15%), Fast Dry Sculpting Spray 250ml 11.041500000000001 (-15%)",
-      "Duration": 2700,
-      "Notes": "",
-      "ServiceCharge": 56.083,
-      "fAllDayEvent": false,
-      "RecurrenceID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstAppointment": false,
-      "LookupCM102customersId": 200,
-      "LookupHR01teamId": 3,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          4,
-          42,
-          48
-        ]
-      },
-      "ID": 4,
-      "Modified": "2021-03-05T13:04:17.072Z",
-      "fRecurrence": false,
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 5,
-      "Title": "T.Acciardi-05",
-      "AppointmentStatus": "(5) Paid",
-      "EventDate": "2020-12-21T06:00:00.000Z",
-      "EndDate": "2020-12-21T07:00:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Tom Acciardi, +1189774400329, Tom.Acciardi@schedulingtoday.local | Service Type - Bed Head Mens Shampoo-250ml 4.2415 (-15%), Bed Head Recovery-250ml 10.1915 (-15%)",
-      "Duration": 3600,
-      "Notes": "",
-      "ServiceCharge": 14.433,
-      "fAllDayEvent": true,
-      "RecurrenceID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstAppointment": false,
-      "LookupCM102customersId": 200,
-      "LookupHR01teamId": 4,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          32,
-          33
-        ]
-      },
-      "ID": 5,
-      "Modified": "2021-03-05T13:37:23.963Z",
-      "fRecurrence": false,
-      "__metadata": {
-        "type": "SP.Data.MetroHR03ListItem"
-      }
-    },
-    {
-      "Id": 6,
-      "Title": "C.Aitio-06",
-      "AppointmentStatus": "(5) Paid",
-      "EventDate": "2021-01-04T06:00:00.000Z",
-      "EndDate": "2021-01-04T07:45:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Carmen Aitio, +189792242460, Carmen.Aitio@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S3 55.25 (-15%)",
-      "Duration": 6300,
-      "Notes": "",
-      "ServiceCharge": 102,
-      "fAllDayEvent": false,
-      "RecurrenceID": null,
-      "MetroRRule": null,
-      "MetroRecException": null,
-      "FirstAppointment": false,
-      "LookupCM102customersId": 987,
-      "LookupHR01teamId": 4,
-      "LookupMultiBP01offeringsId": {
-        "results": [
-          1,
-          3
-        ]
-      },
-      "ID": 6,
-      "Modified": "2021-03-05T14:11:21.535Z",
-      "fRecurrence": false,
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
@@ -2233,31 +2082,6 @@
       "__metadata": {
         "type": "SP.Data.MetroBP02ListItem"
       }
-    },
-    {
-      "Id": 56,
-      "OfferingsName_Edit": "eerr",
-      "ShowOnline": false,
-      "ConsultReq": false,
-      "MinutesDuration": 60,
-      "Amount": 50,
-      "OfferingCatType": "(02) Mens Hair Cut",
-      "OfferingDiscount": 0,
-      "ContentTypeId": "0x0100E03BE5D98FC3417B84A28F834BEAB5AD020300774B3F93ED0D784DA9C9B20DD43DE598",
-      "ID": 56,
-      "LookupMultiHR02SkillsId": {
-        "results": []
-      },
-      "ImageThumbnail": {
-        "Description": "",
-        "Url": "data:image/png;base64,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",
-        "__metadata": {
-          "type": "SP.FieldUrlValue"
-        }
-      },
-      "__metadata": {
-        "type": "SP.Data.MetroBP02ListItem"
-      }
     }
   ],
   "customers": [
@@ -2270,7 +2094,7 @@
       "Email": "Coralie.Abraham@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 54,
-      "Modified": "2021-03-04T18:19:41.686Z",
+      "Modified": "2021-03-05T17:10:55.884Z",
       "LookupMultiHR01teamId": {
         "results": [
           1,
@@ -2279,14 +2103,15 @@
           3,
           3,
           1,
-          3
+          1,
+          1,
+          1
         ]
       },
       "LookupMultiHR03eventsId": {
         "results": [
           null,
-          1,
-          2
+          1
         ]
       },
       "ClientPhoto": {
@@ -2336,7 +2161,7 @@
       "Email": "Ilona.Acciardi@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 77,
-      "Modified": "2021-03-04T18:35:49.251Z",
+      "Modified": "2021-03-05T17:36:54.714Z",
       "LookupMultiHR01teamId": {
         "results": []
       },
@@ -2363,18 +2188,12 @@
       "Email": "Tom.Acciardi@schedulingtoday.local",
       "Gender": "(2) Male",
       "ID": 200,
-      "Modified": "2021-03-05T13:37:24.414Z",
+      "Modified": "2021-03-05T17:10:50.259Z",
       "LookupMultiHR01teamId": {
-        "results": [
-          3,
-          4
-        ]
+        "results": []
       },
       "LookupMultiHR03eventsId": {
-        "results": [
-          4,
-          5
-        ]
+        "results": []
       },
       "ClientPhoto": {
         "__metadata": {
@@ -2423,7 +2242,7 @@
       "Email": "Elizabete.Adame@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 1268,
-      "Modified": "2021-03-05T13:36:31.264Z",
+      "Modified": "2021-03-05T17:36:50.870Z",
       "LookupMultiHR01teamId": {
         "results": [
           3,
@@ -2432,9 +2251,7 @@
         ]
       },
       "LookupMultiHR03eventsId": {
-        "results": [
-          3
-        ]
+        "results": []
       },
       "ClientPhoto": {
         "__metadata": {
@@ -2514,12 +2331,6 @@
       "Modified": "2019-07-23T07:45:30Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1165)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1165)",
-        "etag": "\"8\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 1165,
       "Title": "Adamson",
       "FirstName": "Jan",
@@ -2527,6 +2338,14 @@
       "CellPhone": "+1189792544997",
       "Email": "Jan.Adamson@schedulingtoday.local",
       "Gender": "(2) Male",
+      "ID": 1165,
+      "Modified": "2021-03-05T17:10:38.269Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
+      },
       "ClientPhoto": {
         "__metadata": {
           "type": "SP.FieldUrlValue"
@@ -2534,20 +2353,9 @@
         "Description": "https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(18).jpg",
         "Url": "https://sa-toniguy01.metroapps.online/Lists/MetroCM102_Photos/StyCal-Customer-Photo-S1%20(18).jpg"
       },
-      "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
-      "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
-      },
-      "ID": 1165,
-      "Modified": "2019-07-23T07:45:55Z"
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "Id": 1213,
@@ -2607,12 +2415,6 @@
       "Modified": "2019-07-23T07:17:32Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(247)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(247)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 247,
       "Title": "Agresta",
       "FirstName": "Patricia",
@@ -2620,21 +2422,26 @@
       "CellPhone": "+189793686680",
       "Email": "Patricia.Agresta@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 247,
+      "Modified": "2021-03-05T17:36:46.912Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          4
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 247,
-      "Modified": "2019-07-23T07:17:31Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {
@@ -2759,19 +2566,16 @@
       "Email": "Carmen.Aitio@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 987,
-      "Modified": "2021-03-05T14:11:22.162Z",
+      "Modified": "2021-03-05T17:10:45.353Z",
       "LookupMultiHR01teamId": {
-        "results": [
-          4
-        ]
+        "results": []
       },
       "LookupMultiHR03eventsId": {
         "results": [
           94,
           100,
           101,
-          103,
-          6
+          103
         ]
       },
       "ClientPhoto": {
@@ -2843,12 +2647,6 @@
       "Modified": "2019-07-23T07:19:50Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1219)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(1219)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 1219,
       "Title": "Aj",
       "FirstName": "Isabel",
@@ -2856,21 +2654,27 @@
       "CellPhone": "+189797529114",
       "Email": "Isabel.Aj@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 1219,
+      "Modified": "2021-03-05T17:36:42.185Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          5,
+          5
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 1219,
-      "Modified": "2019-07-23T07:19:59Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {
@@ -3226,12 +3030,6 @@
       "Modified": "2019-07-23T07:20:06Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(345)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(345)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 345,
       "Title": "Altmann",
       "FirstName": "Jan",
@@ -3239,21 +3037,27 @@
       "CellPhone": "+189788040854",
       "Email": "Jan.Altmann@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 345,
+      "Modified": "2021-03-05T17:36:34.026Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          1,
+          1
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 345,
-      "Modified": "2019-07-23T07:17:51Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {
@@ -3376,12 +3180,6 @@
       "Modified": "2019-07-23T07:17:51Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(112)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(112)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 112,
       "Title": "Andersen",
       "FirstName": "Nathalie ",
@@ -3389,21 +3187,26 @@
       "CellPhone": "+189767681308",
       "Email": "Nathalie-.Andersen@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 112,
+      "Modified": "2021-03-05T17:36:39.146Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          6
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 112,
-      "Modified": "2019-07-23T07:17:11Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {
@@ -3827,12 +3630,6 @@
       "Modified": "2019-07-23T07:17:50Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(341)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(341)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 341,
       "Title": "Arkley",
       "FirstName": "Sara",
@@ -3840,21 +3637,26 @@
       "CellPhone": "+189799619870",
       "Email": "Sara.Arkley@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 341,
+      "Modified": "2021-03-05T17:36:36.624Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          7
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 341,
-      "Modified": "2019-07-23T07:17:50Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {

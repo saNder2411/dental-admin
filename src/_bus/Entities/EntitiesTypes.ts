@@ -100,7 +100,7 @@ export enum EntitiesKeys {
 }
 
 export interface ById<T> {
-  [key: string]: T
+  [key: string]: T;
 }
 
 export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem> {
@@ -123,6 +123,16 @@ export interface ChartState {
   totalAppointmentHours: number;
   totalStaffWorkHoursInWeekRange: number;
 
+  staffCategories: string[];
+  amountAppointmentsPerStaffPerWeekSeries: number[];
+  percentsEmploymentPerStaffPerWeekSeries: number[];
+
+  serviceCategories: string[];
+  productCategories: string[];
+  salesPerServicePerMonthSeries: SeriesForChart<number>[];
+  salesPerProductPerMonthSeries: SeriesForChart<number>[];
+  salesPerOtherServicePerMonthSeries: SeriesForChart<number>;
+
   totalAppointmentSales: number;
   totalAppointmentSalesPerLast12Months: number;
   activeCustomersIDs: number[];
@@ -132,17 +142,9 @@ export interface ChartState {
   paymentCompleted: number;
   canceledAppointment: number;
   amountAppointmentPerNextWeekRangeAndLastWeek: number;
-  staffCategories: string[];
-  appointmentPerStaffPerWeekSeries: number[];
-  percentsEmploymentPerWeekSeries: number[];
   salesPerStaffPerWeekData: SeriesForChart<number>[];
   averageHourlyPerService: SeriesForChart<number>[];
   totalServiceSales: number;
-  serviceCategories: string[];
-  productCategories: string[];
-  salesPerServicePerWeekSeries: SeriesForChart<number>[];
-  salesPerProductPerWeekSeries: SeriesForChart<number>[];
-  salesPerOtherServicePerWeekSeries: SeriesForChart<number>;
   appointmentValue: number[];
 }
 

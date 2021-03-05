@@ -12,9 +12,9 @@ const getAppointmentAttended = ({ Entities }: RootState) => Entities.chartData.a
 
 const getPaymentCompleted = ({ Entities }: RootState) => Entities.chartData.paymentCompleted;
 
-const getAppointmentPerStaffPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.appointmentPerStaffPerWeekSeries;
+const getAmountsAppointmentsPerStaffPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.amountAppointmentsPerStaffPerWeekSeries;
 
-const getPercentsEmploymentPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.percentsEmploymentPerWeekSeries;
+const getPercentsEmploymentPerStaffPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.percentsEmploymentPerStaffPerWeekSeries;
 
 export const selectTotalSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.totalSalesForEveryWeekInWeekRange;
 
@@ -52,11 +52,11 @@ export const selectServiceCategories = ({ Entities }: RootState) => Entities.cha
 
 export const selectProductCategories = ({ Entities }: RootState) => Entities.chartData.productCategories;
 
-export const selectSalesPerServicePerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerServicePerWeekSeries;
+export const selectSalesPerServicePerMonthSeries = ({ Entities }: RootState) => Entities.chartData.salesPerServicePerMonthSeries;
 
-export const selectSalesPerProductPerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerProductPerWeekSeries;
+export const selectSalesPerProductPerMonthSeries = ({ Entities }: RootState) => Entities.chartData.salesPerProductPerMonthSeries;
 
-export const selectSalesPerOtherServicePerWeekSeries = ({ Entities }: RootState) => Entities.chartData.salesPerOtherServicePerWeekSeries;
+export const selectSalesPerOtherServicePerMonthSeries = ({ Entities }: RootState) => Entities.chartData.salesPerOtherServicePerMonthSeries;
 
 export const selectCanceledAppointment = ({ Entities }: RootState) => Entities.chartData.canceledAppointment;
 
@@ -65,7 +65,7 @@ export const selectAppointmentValue = ({ Entities }: RootState) => Entities.char
 export const selectAmountAppointmentPerNextWeekRangeAndLastWeek = ({ Entities }: RootState) => Entities.chartData.amountAppointmentPerNextWeekRangeAndLastWeek;
 
 export const selectSeriesStaffStatistic = () =>
-  createSelector(getAppointmentPerStaffPerWeekSeries, getPercentsEmploymentPerWeekSeries, (amountsAppointmentSeries, percentsEmploymentSeries) => [
+  createSelector(getAmountsAppointmentsPerStaffPerWeekSeries, getPercentsEmploymentPerStaffPerWeekSeries, (amountsAppointmentSeries, percentsEmploymentSeries) => [
     { name: 'Appointments', data: amountsAppointmentSeries },
     { name: 'Utilization %', data: percentsEmploymentSeries },
   ]);
