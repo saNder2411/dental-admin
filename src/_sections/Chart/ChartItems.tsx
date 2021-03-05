@@ -283,7 +283,7 @@ export const ChartStaffUtilization: FC<ChartItemProps> = ({ className }): JSX.El
 export const ChartCancellationRate: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const canceledAppointments = useSelector(selectCanceledAppointment);
   const appointmentsPerNextWeekRangeAndLastWeek = useSelector(selectAmountAppointmentPerNextWeekRangeAndLastWeek);
-  const value = canceledAppointments !== 0 ? Math.round((canceledAppointments * 100) / appointmentsPerNextWeekRangeAndLastWeek) : 0;
+  const value = getPercentFromFull(canceledAppointments)(appointmentsPerNextWeekRangeAndLastWeek);
 
   return (
     <section className={className}>

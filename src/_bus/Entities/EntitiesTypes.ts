@@ -144,12 +144,15 @@ export interface ChartState {
   appointmentAttended: number;
   paymentCompleted: number;
 
-  totalAppointmentSales: number;
   canceledAppointment: number;
   amountAppointmentPerNextWeekRangeAndLastWeek: number;
+
   salesPerStaffPerWeekData: SeriesForChart<number>[];
-  totalServiceSales: number;
+
   appointmentValue: number[];
+
+  totalAppointmentSales: number;
+  totalServiceSales: number;
 }
 
 export interface EntitiesState {

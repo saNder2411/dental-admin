@@ -2132,7 +2132,7 @@
       "Email": "Oliver.Abraham@schedulingtoday.local",
       "Gender": "(2) Male",
       "ID": 290,
-      "Modified": "2021-03-04T17:24:41.720Z",
+      "Modified": "2021-03-05T22:07:15.759Z",
       "LookupMultiHR01teamId": {
         "results": []
       },
@@ -2186,9 +2186,11 @@
       "Email": "Tom.Acciardi@schedulingtoday.local",
       "Gender": "(2) Male",
       "ID": 200,
-      "Modified": "2021-03-05T19:06:32.837Z",
+      "Modified": "2021-03-05T22:07:13.669Z",
       "LookupMultiHR01teamId": {
-        "results": []
+        "results": [
+          3
+        ]
       },
       "LookupMultiHR03eventsId": {
         "results": []

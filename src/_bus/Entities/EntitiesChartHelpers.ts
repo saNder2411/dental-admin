@@ -157,7 +157,7 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = getPercentFromFull(staffMemberAppointmentDurationInHours / WEEK_RANGE)(StaffWeekHours ?? 0);
   const averageSalesPerWeekPerStaffMember = +(staffMemberSales / WEEK_RANGE).toFixed(2);
-  const percentStaffMemberSaleOfTotalSales = staffMemberSales !== 0 ? Math.round((staffMemberSales * 100) / totalAppointmentSales) : 0;
+  const percentStaffMemberSaleOfTotalSales = getPercentFromFull(staffMemberSales)(totalAppointmentSales);
 
   return {
     averageAppointmentsPerWeekPerStaffMember,

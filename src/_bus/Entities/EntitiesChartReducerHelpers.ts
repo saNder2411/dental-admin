@@ -87,17 +87,22 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
 export const getAppointmentValue = (sliceAppointments: AppointmentDataItem[]) =>
   MonthPoints.reduce((acc, { start, end }) => {
     const sliceAppointmentsInMonthPoint = sliceAppointments.filter(({ Start, End }) => Start.getTime() >= start.getTime() && End.getTime() < end.getTime());
+
     const { totalSum, totalAmountAppointment } = sliceAppointmentsInMonthPoint.reduce(
-      (acc, { ServiceCharge, AppointmentStatus }) => ({
-        totalSum: AppointmentStatus === StatusNames.Paid || AppointmentStatus === StatusNames.Booked ? acc.totalSum + ServiceCharge : acc.totalSum,
-        totalAmountAppointment: acc.totalAmountAppointment + 1,
-      }),
+      (acc, { ServiceCharge, AppointmentStatus, fAllDayEvent }) => {
+        if (isExcludeAppointment(AppointmentStatus)) return acc;
+
+        return {
+          totalSum: fAllDayEvent ? acc.totalSum : acc.totalSum + ServiceCharge,
+          totalAmountAppointment: fAllDayEvent ? acc.totalAmountAppointment : acc.totalAmountAppointment + 1,
+        };
+      },
       {
         totalSum: 0,
         totalAmountAppointment: 0,
       }
     );
-    const data = totalSum > 0 ? Math.round(totalSum / totalAmountAppointment) : 0;
+    const data = totalSum > 0 ? +(totalSum / totalAmountAppointment).toFixed(2) : 0;
 
     return [...acc, data];
   }, new Array<number>());
@@ -261,7 +266,10 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
       }
 
       if (isPrevWeek || isFuture) {
-        (AppointmentStatus === StatusNames.Booked || AppointmentStatus === StatusNames.Reserved || AppointmentStatus === StatusNames.Paid) &&
+        (AppointmentStatus === StatusNames.Booked ||
+          AppointmentStatus === StatusNames.Reserved ||
+          AppointmentStatus === StatusNames.Paid ||
+          AppointmentStatus === StatusNames.Cancelled) &&
           acc.amountAppointmentPerNextWeekRangeAndLastWeek++;
         AppointmentStatus === StatusNames.Cancelled && acc.canceledAppointment++;
       }
@@ -350,11 +358,14 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     appointmentAttended,
     paymentCompleted,
 
-    totalAppointmentSales,
     canceledAppointment,
     amountAppointmentPerNextWeekRangeAndLastWeek,
+
     salesPerStaffPerWeekData,
-    totalServiceSales,
+
     appointmentValue,
+
+    totalAppointmentSales,
+    totalServiceSales,
   };
 };

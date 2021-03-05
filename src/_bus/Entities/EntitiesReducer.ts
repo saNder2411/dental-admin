@@ -53,14 +53,15 @@ const initialState = {
     appointmentAttended: 0,
     paymentCompleted: 0,
 
-    totalAppointmentSales: 0,
     canceledAppointment: 0,
     amountAppointmentPerNextWeekRangeAndLastWeek: 0,
+
     salesPerStaffPerWeekData: [],
-    appointmentPerStaffSeries: [],
-    totalServiceSales: 0,
-    totalServiceHours: 0,
+
     appointmentValue: [],
+
+    totalAppointmentSales: 0,
+    totalServiceSales: 0,
   },
 };
 
