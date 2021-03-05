@@ -250,7 +250,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
         AppointmentStatus === StatusNames.Booked && acc.appointmentBookings++;
       }
 
-      if (!isFuture && AppointmentStatus !== StatusNames.Cancelled && AppointmentStatus !== StatusNames.Consultation) {
+      if (!isFuture && !isExcludeAppointment(AppointmentStatus)) {
         acc.totalAppointmentSalesPerLast12Months += ServiceCharge;
         LookupCM102customersId && acc.activeCustomersSet.add(LookupCM102customersId);
       }
@@ -342,13 +342,15 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     averageHourlyPerService,
     averageHourlyRateAllServices,
 
-    totalAppointmentSales,
     totalAppointmentSalesPerLast12Months,
     activeCustomersIDs: Array.from(activeCustomersSet),
+
     appointmentReservations,
     appointmentBookings,
     appointmentAttended,
     paymentCompleted,
+
+    totalAppointmentSales,
     canceledAppointment,
     amountAppointmentPerNextWeekRangeAndLastWeek,
     salesPerStaffPerWeekData,

@@ -309,12 +309,12 @@ export const ChartAverageHourlyRateAllServices: FC<ChartItemProps> = ({ classNam
 export const ChartAverageCustomerValue: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const totalSales = useSelector(selectTotalAppointmentSalesPerLast12Months);
   const amountActiveCustomers = useSelector(selectAmountActiveCustomers);
-  const value = totalSales !== 0 ? Math.round(totalSales / amountActiveCustomers) : 0;
+  const value = totalSales !== 0 ? +(totalSales / amountActiveCustomers).toFixed(2) : 0;
 
   return (
     <section className={className}>
       <h3 className="mb-2">Average Customer Value</h3>
-      <div className="text-muted mb-3 pt-1">{`Last ${WEEK_RANGE} months`}</div>
+      <div className="text-muted mb-3 pt-1">{`Last 12 months`}</div>
       <LinearGauge pointer={{ value, color: '#f6d245', size: 40 }} scale={{ max: value + 20, minorUnit: 10, majorUnit: 50 }} style={{ height: 320 }} />
     </section>
   );

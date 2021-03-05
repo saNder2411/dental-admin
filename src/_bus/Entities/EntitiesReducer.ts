@@ -45,13 +45,15 @@ const initialState = {
     averageHourlyPerService: [],
     averageHourlyRateAllServices: 0,
 
-    totalAppointmentSales: 0,
     totalAppointmentSalesPerLast12Months: 0,
     activeCustomersIDs: [],
+
     appointmentReservations: 0,
     appointmentBookings: 0,
     appointmentAttended: 0,
     paymentCompleted: 0,
+
+    totalAppointmentSales: 0,
     canceledAppointment: 0,
     amountAppointmentPerNextWeekRangeAndLastWeek: 0,
     salesPerStaffPerWeekData: [],

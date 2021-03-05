@@ -80,22 +80,22 @@ export const selectAppointmentFunnel = () =>
     getPaymentCompleted,
     (appointmentReservations, appointmentBookings, appointmentAttended, paymentCompleted) => [
       {
-        stat: 'Appointment Reservations',
+        stat: 'Reservations',
         data: appointmentReservations === 0 ? 0.44 : appointmentReservations,
         color: '#166f99',
       },
       {
-        stat: 'Appointment Bookings',
+        stat: 'Bookings',
         data: appointmentBookings === 0 ? 0.4 : appointmentBookings,
         color: '#2185b4',
       },
       {
-        stat: 'Appointment Attended',
+        stat: 'Attended',
         data: appointmentAttended === 0 ? 0.34 : appointmentAttended,
         color: '#319fd2',
       },
       {
-        stat: 'Payment Completed',
+        stat: 'Paid',
         data: paymentCompleted === 0 ? 0.3 : paymentCompleted,
         color: '#3eaee2',
       },
