@@ -23,7 +23,7 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
         totalAmountAppointment,
         totalProductUnits,
         amountNewCustomerAppointment,
-        amountExistCustomerAppointment,
+        amountCustomerAppointment,
       } = sliceAppointmentsInWeekPoint.reduce(
         (acc, { AppointmentStatus, FirstAppointment, LookupMultiBP01offeringsId, fAllDayEvent }) => {
           if (isExcludeAppointment(AppointmentStatus)) return acc;
@@ -48,8 +48,8 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
             productSum: +(acc.productSum + productSum).toFixed(2),
             totalAmountAppointment: fAllDayEvent ? acc.totalAmountAppointment : acc.totalAmountAppointment + 1,
             totalProductUnits: acc.totalProductUnits + productUnitsCount,
-            amountNewCustomerAppointment: FirstAppointment ? acc.amountNewCustomerAppointment + 1 : acc.amountNewCustomerAppointment,
-            amountExistCustomerAppointment: !FirstAppointment ? acc.amountExistCustomerAppointment + 1 : acc.amountExistCustomerAppointment,
+            amountNewCustomerAppointment: FirstAppointment && !fAllDayEvent ? acc.amountNewCustomerAppointment + 1 : acc.amountNewCustomerAppointment,
+            amountCustomerAppointment: !FirstAppointment && !fAllDayEvent ? acc.amountCustomerAppointment + 1 : acc.amountCustomerAppointment,
           };
         },
         {
@@ -59,7 +59,7 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
           totalAmountAppointment: 0,
           totalProductUnits: 0,
           amountNewCustomerAppointment: 0,
-          amountExistCustomerAppointment: 0,
+          amountCustomerAppointment: 0,
         }
       );
 
@@ -70,7 +70,7 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
         totalAmountAppointmentsForEveryWeekInWeekRange: [...acc.totalAmountAppointmentsForEveryWeekInWeekRange, totalAmountAppointment],
         totalAmountProductUnitsForEveryWeekInWeekRange: [...acc.totalAmountProductUnitsForEveryWeekInWeekRange, totalProductUnits],
         amountNewCustomerAppointmentsForEveryWeekInWeekRange: [...acc.amountNewCustomerAppointmentsForEveryWeekInWeekRange, amountNewCustomerAppointment],
-        amountCustomerAppointmentsForEveryWeekInWeekRange: [...acc.amountCustomerAppointmentsForEveryWeekInWeekRange, amountExistCustomerAppointment],
+        amountCustomerAppointmentsForEveryWeekInWeekRange: [...acc.amountCustomerAppointmentsForEveryWeekInWeekRange, amountCustomerAppointment],
       };
     },
     {
