@@ -44,6 +44,8 @@ export const selectTotalStaffWorkHoursInWeekRange = ({ Entities }: RootState) =>
 
 export const selectAverageHourlyPerService = ({ Entities }: RootState) => Entities.chartData.averageHourlyPerService;
 
+export const selectAverageHourlyRateAllServices = ({ Entities }: RootState) => Entities.chartData.averageHourlyRateAllServices;
+
 export const selectTotalServiceSales = ({ Entities }: RootState) => Entities.chartData.totalServiceSales;
 
 export const selectSalesPerStaffPerWeekData = ({ Entities }: RootState) => Entities.chartData.salesPerStaffPerWeekData;

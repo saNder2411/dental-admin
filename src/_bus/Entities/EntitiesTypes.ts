@@ -134,7 +134,8 @@ export interface ChartState {
   salesPerOtherServicePerMonthSeries: SeriesForChart<number>;
   
   averageHourlyPerService: SeriesForChart<number>[];
-  
+  averageHourlyRateAllServices: number;
+
   totalAppointmentSales: number;
   totalAppointmentSalesPerLast12Months: number;
   activeCustomersIDs: number[];

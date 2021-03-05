@@ -29,6 +29,7 @@ import {
   selectStaffCategories,
   selectSeriesStaffStatistic,
   selectAverageHourlyPerService,
+  selectAverageHourlyRateAllServices,
   selectAppointmentFunnel,
   selectTotalAppointmentHours,
   selectTotalStaffWorkHoursInWeekRange,
@@ -294,9 +295,7 @@ export const ChartCancellationRate: FC<ChartItemProps> = ({ className }): JSX.El
 };
 
 export const ChartAverageHourlyRateAllServices: FC<ChartItemProps> = ({ className }): JSX.Element => {
-  const sales = useSelector(selectTotalServiceSales);
-  const hours = useSelector(selectTotalAppointmentHours);
-  const value = sales !== 0 ? Math.round(sales / hours) : 0;
+  const value = useSelector(selectAverageHourlyRateAllServices);
 
   return (
     <section className={className}>

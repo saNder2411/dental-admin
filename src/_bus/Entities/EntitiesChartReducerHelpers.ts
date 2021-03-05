@@ -171,6 +171,8 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
 
             acc.salesPerServicePerMonthSeries[acc.salesPerServicePerMonthSeries.length - 1].data = +(prevServiceData + salesServiceOrProductPerWeekRange).toFixed(2);
             acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data = +(prevAverageHourlyData + data).toFixed(2);
+            acc.serviceTotalSales = acc.serviceTotalSales + totalSales;
+            acc.serviceTotalHours = acc.serviceTotalHours + totalHours;
             return acc;
           }
 
@@ -179,6 +181,8 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
             serviceCategories: [...acc.serviceCategories, name],
             salesPerServicePerMonthSeries: [...acc.salesPerServicePerMonthSeries, { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[5] }],
             averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
+            serviceTotalSales: acc.serviceTotalSales + totalSales,
+            serviceTotalHours: acc.serviceTotalHours + totalHours,
           };
         case ContentTypes.Product:
           const prevProductCategory = acc.productCategories[acc.productCategories.length - 1];
@@ -212,6 +216,8 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
       salesPerProductPerMonthSeries: new Array<SeriesForChart<number>>(),
       salesPerOtherServicePerMonthSeries: { name: 'Other', data: 0, color: SeriesColors[9] },
       averageHourlyPerService: new Array<SeriesForChart<number>>(),
+      serviceTotalSales: 0,
+      serviceTotalHours: 0,
     }
   );
 
@@ -303,7 +309,11 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     salesPerProductPerMonthSeries,
     salesPerOtherServicePerMonthSeries,
     averageHourlyPerService,
+    serviceTotalSales,
+    serviceTotalHours,
   } = getServiceProductCalcData(appointmentsInLastMonthsRange, state.services.originalData);
+
+  const averageHourlyRateAllServices = serviceTotalSales !== 0 ? +(serviceTotalSales / serviceTotalHours).toFixed(2) : 0;
 
   const appointmentValue = getAppointmentValue(appointmentsInLastMonthsRange);
 
@@ -330,6 +340,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     salesPerOtherServicePerMonthSeries,
 
     averageHourlyPerService,
+    averageHourlyRateAllServices,
 
     totalAppointmentSales,
     totalAppointmentSalesPerLast12Months,

@@ -43,6 +43,7 @@ const initialState = {
     salesPerOtherServicePerMonthSeries: { name: 'Other', data: 0 },
 
     averageHourlyPerService: [],
+    averageHourlyRateAllServices: 0,
 
     totalAppointmentSales: 0,
     totalAppointmentSalesPerLast12Months: 0,
