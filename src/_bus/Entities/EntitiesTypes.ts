@@ -112,7 +112,17 @@ export interface EntitiesStateSlice<T extends GenericDataItem = GenericDataItem>
 }
 
 export interface ChartState {
+  totalSalesForEveryWeekInWeekRange: number[];
+  serviceSalesForEveryWeekInWeekRange: number[];
+  productSalesForEveryWeekInWeekRange: number[];
+  totalAmountAppointmentsForEveryWeekInWeekRange: number[];
+  totalAmountProductUnitsForEveryWeekInWeekRange: number[];
+  amountNewCustomerAppointmentsForEveryWeekInWeekRange: number[];
+  amountCustomerAppointmentsForEveryWeekInWeekRange: number[];
+
   totalAppointmentHours: number;
+  totalStaffWorkHoursInWeekRange: number;
+
   totalAppointmentSales: number;
   totalAppointmentSalesPerLast12Months: number;
   activeCustomersIDs: number[];
@@ -122,13 +132,6 @@ export interface ChartState {
   paymentCompleted: number;
   canceledAppointment: number;
   amountAppointmentPerNextWeekRangeAndLastWeek: number;
-  totalStaffWorkHoursInWeekRange: number;
-  totalSalesForEveryWeekInWeekRange: number[];
-  serviceSalesForEveryWeekInWeekRange: number[];
-  productSalesForEveryWeekInWeekRange: number[];
-  totalAmountAppointmentsForEveryWeekPerWeekRange: number[];
-  amountNewCustomerAppointmentsForEveryWeekPerWeekRange: number[];
-  amountExistCustomerAppointmentsForEveryWeekPerWeekRange: number[];
   staffCategories: string[];
   appointmentPerStaffPerWeekSeries: number[];
   percentsEmploymentPerWeekSeries: number[];

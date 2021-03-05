@@ -86,7 +86,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const { newDataItem, newCustomer } = parseFormDataItem(formDataItem, customersAllIds);
+    const { newDataItem, newCustomer } = parseFormDataItem(formDataItem, customersAllIds, servicesById);
 
     setIsDataItemLoading(true);
 

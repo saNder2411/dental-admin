@@ -66,8 +66,8 @@ export function* workerFetchData({
   } catch (error) {
     yield put(actions.fetchDataFailureAC(`Appointments fetch data Error: ${error.message}`, EntitiesKeys.Appointments));
   } finally {
-    yield put(actions.calcChartDataAC());
     yield put(actions.fetchDataFinallyAC(EntitiesKeys.Appointments));
+    yield put(actions.calcChartDataAC());
   }
 }
 
@@ -155,7 +155,7 @@ const workerHelperProcessAppointmentWithNewCustomer = (processStatus: ProcessSta
   newCustomer: CustomerDataItem
 ) => (servicesById: ById<ServiceDataItem>) => (staffById: ById<StaffDataItem>) =>
   function* (customersById: ById<CustomerDataItem>) {
-    const createdCustomer = yield call(helperCreateNewCustomer, newCustomer);
+    const createdCustomer: CustomerDataItem = yield call(helperCreateNewCustomer, newCustomer);
 
     const { refreshCustomersById, refreshProcessAppointment } = refreshCustomersByIdAndProcessAppointment(createdCustomer)(customersById)(processAppointment)(true);
 
@@ -200,6 +200,7 @@ export function* workerCreateDataItem({
   } finally {
     sideEffectAfterCreatedDataItem();
     yield put(actions.createDataItemFinallyAC());
+    yield put(actions.calcChartDataAC());
   }
 }
 
@@ -221,6 +222,7 @@ export function* workerUpdateDataItem({
   } finally {
     sideEffectAfterUpdatedDataItem();
     yield put(actions.updateDataItemFinallyAC());
+    yield put(actions.calcChartDataAC());
   }
 }
 
@@ -243,6 +245,7 @@ export function* workerUpdateRecurringDataItem({
   } finally {
     sideEffectAfterUpdatedDataItem();
     yield put(actions.updateDataItemFinallyAC());
+    yield put(actions.calcChartDataAC());
   }
 }
 
@@ -259,5 +262,6 @@ export function* workerDeleteDataItem({
   } finally {
     sideEffectAfterDeletedDataItem();
     yield put(actions.deleteDataItemFinallyAC());
+    yield put(actions.calcChartDataAC());
   }
 }

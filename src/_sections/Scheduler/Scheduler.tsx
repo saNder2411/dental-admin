@@ -75,7 +75,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         item={SchedulerItem}
         slot={SchedulerSlot}
         task={SchedulerAgendaTask}
-        defaultView={'day'}
+        defaultView={'month'}
         editable={{
           add: true,
           remove: true,

@@ -9,7 +9,14 @@ import { DateRange } from '../Entities/EntitiesChartTypes';
 // Constants
 import { MONDAY_CURRENT_WEEK, START_PREV_WEEKS_DATE, WEEK_RANGE, PREV_WEEK, SeriesColors, START_PREV_MONTH_DATE } from '../Constants';
 // Helpers
-import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember, MonthPoints } from './EntitiesChartHelpers';
+import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember, MonthPoints, getRecurrenceAppointments } from './EntitiesChartHelpers';
+
+const isExcludeAppointment = (status: StatusNames) =>
+  status === StatusNames.Cancelled ||
+  status === StatusNames.Checking ||
+  status === StatusNames.Closed ||
+  status === StatusNames.Unavailable ||
+  status === StatusNames.Other;
 
 const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments: AppointmentDataItem[]) => (servicesById: ById<ServiceDataItem>) =>
   weekPoints.reduce(
@@ -21,28 +28,33 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
         serviceSum,
         productSum,
         totalAmountAppointment,
+        totalProductUnits,
         amountNewCustomerAppointment,
         amountExistCustomerAppointment,
       } = sliceAppointmentsInWeekPoint.reduce(
-        (acc, { AppointmentStatus, FirstAppointment, LookupMultiBP01offeringsId, Duration, fAllDayEvent }) => {
-          if (AppointmentStatus === StatusNames.Cancelled || AppointmentStatus === StatusNames.Consultation) return acc;
+        (acc, { AppointmentStatus, FirstAppointment, LookupMultiBP01offeringsId, fAllDayEvent }) => {
+          if (isExcludeAppointment(AppointmentStatus)) return acc;
 
-          const [serviceSum, productSum] = LookupMultiBP01offeringsId.results.reduce(
-            (acc, Id) => {
-              let [serviceSum, productSum] = acc;
-              const { Amount = 0, ContentTypeId = '', OfferingDiscount = 0 } = servicesById[Id] ?? {};
+          const { serviceSum, productSum, productUnitsCount } = LookupMultiBP01offeringsId.results.reduce(
+            ({ serviceSum, productSum, productUnitsCount }, Id) => {
+              const { Amount = 0, ContentTypeId = ContentTypes.Default, OfferingDiscount = 0 } = servicesById[Id] ?? {};
+
               const price = Amount - Amount * OfferingDiscount;
-              ContentTypeId === ContentTypes.Services ? (serviceSum += price) : (productSum += price);
-              return [serviceSum, productSum];
+
+              ContentTypeId === ContentTypes.Services && (serviceSum += price);
+              ContentTypeId === ContentTypes.Product && (productSum += price) && productUnitsCount++;
+
+              return { serviceSum, productSum, productUnitsCount };
             },
-            [0, 0]
+            { serviceSum: 0, productSum: 0, productUnitsCount: 0 }
           );
 
           return {
             totalSum: +(acc.totalSum + serviceSum + productSum).toFixed(2),
             serviceSum: +(acc.serviceSum + serviceSum).toFixed(2),
             productSum: +(acc.productSum + productSum).toFixed(2),
-            totalAmountAppointment: acc.totalAmountAppointment + 1,
+            totalAmountAppointment: fAllDayEvent ? acc.totalAmountAppointment : acc.totalAmountAppointment + 1,
+            totalProductUnits: acc.totalProductUnits + productUnitsCount,
             amountNewCustomerAppointment: FirstAppointment ? acc.amountNewCustomerAppointment + 1 : acc.amountNewCustomerAppointment,
             amountExistCustomerAppointment: !FirstAppointment ? acc.amountExistCustomerAppointment + 1 : acc.amountExistCustomerAppointment,
           };
@@ -52,6 +64,7 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
           serviceSum: 0,
           productSum: 0,
           totalAmountAppointment: 0,
+          totalProductUnits: 0,
           amountNewCustomerAppointment: 0,
           amountExistCustomerAppointment: 0,
         }
@@ -61,18 +74,20 @@ const getAppointmentSalesData = (weekPoints: DateRange[]) => (sliceAppointments:
         totalSalesForEveryWeekInWeekRange: [...acc.totalSalesForEveryWeekInWeekRange, totalSum],
         serviceSalesForEveryWeekInWeekRange: [...acc.serviceSalesForEveryWeekInWeekRange, serviceSum],
         productSalesForEveryWeekInWeekRange: [...acc.productSalesForEveryWeekInWeekRange, productSum],
-        totalAmountAppointmentsForEveryWeekPerWeekRange: [...acc.totalAmountAppointmentsForEveryWeekPerWeekRange, totalAmountAppointment],
-        amountNewCustomerAppointmentsForEveryWeekPerWeekRange: [...acc.amountNewCustomerAppointmentsForEveryWeekPerWeekRange, amountNewCustomerAppointment],
-        amountExistCustomerAppointmentsForEveryWeekPerWeekRange: [...acc.amountExistCustomerAppointmentsForEveryWeekPerWeekRange, amountExistCustomerAppointment],
+        totalAmountAppointmentsForEveryWeekInWeekRange: [...acc.totalAmountAppointmentsForEveryWeekInWeekRange, totalAmountAppointment],
+        totalAmountProductUnitsForEveryWeekInWeekRange: [...acc.totalAmountProductUnitsForEveryWeekInWeekRange, totalProductUnits],
+        amountNewCustomerAppointmentsForEveryWeekInWeekRange: [...acc.amountNewCustomerAppointmentsForEveryWeekInWeekRange, amountNewCustomerAppointment],
+        amountCustomerAppointmentsForEveryWeekInWeekRange: [...acc.amountCustomerAppointmentsForEveryWeekInWeekRange, amountExistCustomerAppointment],
       };
     },
     {
       totalSalesForEveryWeekInWeekRange: new Array<number>(),
       serviceSalesForEveryWeekInWeekRange: new Array<number>(),
       productSalesForEveryWeekInWeekRange: new Array<number>(),
-      totalAmountAppointmentsForEveryWeekPerWeekRange: new Array<number>(),
-      amountNewCustomerAppointmentsForEveryWeekPerWeekRange: new Array<number>(),
-      amountExistCustomerAppointmentsForEveryWeekPerWeekRange: new Array<number>(),
+      totalAmountAppointmentsForEveryWeekInWeekRange: new Array<number>(),
+      totalAmountProductUnitsForEveryWeekInWeekRange: new Array<number>(),
+      amountNewCustomerAppointmentsForEveryWeekInWeekRange: new Array<number>(),
+      amountCustomerAppointmentsForEveryWeekInWeekRange: new Array<number>(),
     }
   );
 
@@ -202,10 +217,12 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
   );
 
 export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState): ChartState => {
-  const appointmentsInLastWeeksRange = state.appointments.originalData.filter(
+  const appointmentsWithRecItems = state.appointments.originalData.flatMap((appointment) => [appointment, ...getRecurrenceAppointments(appointment)]);
+  console.log(`appointmentsWithRecItems`, appointmentsWithRecItems);
+  const appointmentsInLastWeeksRange = appointmentsWithRecItems.filter(
     ({ Start, End }) => Start.getTime() >= START_PREV_WEEKS_DATE.getTime() && End.getTime() <= MONDAY_CURRENT_WEEK.getTime()
   );
-  const appointmentsInLastMonthsRange = state.appointments.originalData.filter(
+  const appointmentsInLastMonthsRange = appointmentsWithRecItems.filter(
     ({ Start, End }) => Start.getTime() >= START_PREV_MONTH_DATE.getTime() && End.getTime() <= MONDAY_CURRENT_WEEK.getTime()
   );
 
@@ -218,7 +235,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     amountAppointmentPerNextWeekRangeAndLastWeek,
     totalAppointmentSalesPerLast12Months,
     activeCustomersSet,
-  } = state.appointments.originalData.reduce(
+  } = appointmentsWithRecItems.reduce(
     (acc, { AppointmentStatus, Start, End, ServiceCharge, LookupCM102customersId }) => {
       const isFuture = Start.getTime() >= MONDAY_CURRENT_WEEK.getTime();
       const isPrevWeek = Start.getTime() >= PREV_WEEK.getTime() && End.getTime() < MONDAY_CURRENT_WEEK.getTime();
@@ -262,9 +279,10 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     totalSalesForEveryWeekInWeekRange,
     serviceSalesForEveryWeekInWeekRange,
     productSalesForEveryWeekInWeekRange,
-    totalAmountAppointmentsForEveryWeekPerWeekRange,
-    amountNewCustomerAppointmentsForEveryWeekPerWeekRange,
-    amountExistCustomerAppointmentsForEveryWeekPerWeekRange,
+    totalAmountAppointmentsForEveryWeekInWeekRange,
+    totalAmountProductUnitsForEveryWeekInWeekRange,
+    amountNewCustomerAppointmentsForEveryWeekInWeekRange,
+    amountCustomerAppointmentsForEveryWeekInWeekRange,
   } = getAppointmentSalesData(WeekPoints)(appointmentsInLastWeeksRange)(state.services.byId);
 
   const totalAppointmentSales = totalSalesForEveryWeekInWeekRange.reduce((sum, item) => (sum += item), 0);
@@ -291,7 +309,17 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   const appointmentValue = getAppointmentValue(appointmentsInLastMonthsRange);
 
   return {
+    totalSalesForEveryWeekInWeekRange,
+    serviceSalesForEveryWeekInWeekRange,
+    productSalesForEveryWeekInWeekRange,
+    totalAmountAppointmentsForEveryWeekInWeekRange,
+    totalAmountProductUnitsForEveryWeekInWeekRange,
+    amountNewCustomerAppointmentsForEveryWeekInWeekRange,
+    amountCustomerAppointmentsForEveryWeekInWeekRange,
+
     totalAppointmentHours,
+    totalStaffWorkHoursInWeekRange,
+
     totalAppointmentSales,
     totalAppointmentSalesPerLast12Months,
     activeCustomersIDs: Array.from(activeCustomersSet),
@@ -301,13 +329,6 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     paymentCompleted,
     canceledAppointment,
     amountAppointmentPerNextWeekRangeAndLastWeek,
-    totalStaffWorkHoursInWeekRange,
-    totalSalesForEveryWeekInWeekRange,
-    serviceSalesForEveryWeekInWeekRange,
-    productSalesForEveryWeekInWeekRange,
-    totalAmountAppointmentsForEveryWeekPerWeekRange,
-    amountNewCustomerAppointmentsForEveryWeekPerWeekRange,
-    amountExistCustomerAppointmentsForEveryWeekPerWeekRange,
     staffCategories,
     appointmentPerStaffPerWeekSeries,
     percentsEmploymentPerWeekSeries,

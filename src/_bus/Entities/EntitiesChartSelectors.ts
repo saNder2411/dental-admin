@@ -22,14 +22,15 @@ export const selectServiceSalesForEveryWeekInWeekRange = ({ Entities }: RootStat
 
 export const selectProductSalesForEveryWeekInWeekRange = ({ Entities }: RootState) => Entities.chartData.productSalesForEveryWeekInWeekRange;
 
-export const selectTotalAmountAppointmentsForEveryWeekPerWeekRange = ({ Entities }: RootState) =>
-  Entities.chartData.totalAmountAppointmentsForEveryWeekPerWeekRange;
+export const selectTotalAmountAppointmentsForEveryWeekPerWeekRange = ({ Entities }: RootState) => Entities.chartData.totalAmountAppointmentsForEveryWeekInWeekRange;
+
+export const selectTotalProductUnitsForEveryWeekPerWeekRange = ({ Entities }: RootState) => Entities.chartData.totalAmountProductUnitsForEveryWeekInWeekRange;
 
 export const selectAmountNewCustomerAppointmentsForEveryWeekPerWeekRange = ({ Entities }: RootState) =>
-  Entities.chartData.amountNewCustomerAppointmentsForEveryWeekPerWeekRange;
+  Entities.chartData.amountNewCustomerAppointmentsForEveryWeekInWeekRange;
 
 export const selectAmountExistCustomerAppointmentsForEveryWeekPerWeekRange = ({ Entities }: RootState) =>
-  Entities.chartData.amountExistCustomerAppointmentsForEveryWeekPerWeekRange;
+  Entities.chartData.amountCustomerAppointmentsForEveryWeekInWeekRange;
 
 export const selectStaffCategories = ({ Entities }: RootState) => Entities.chartData.staffCategories;
 
@@ -61,8 +62,7 @@ export const selectCanceledAppointment = ({ Entities }: RootState) => Entities.c
 
 export const selectAppointmentValue = ({ Entities }: RootState) => Entities.chartData.appointmentValue;
 
-export const selectAmountAppointmentPerNextWeekRangeAndLastWeek = ({ Entities }: RootState) =>
-  Entities.chartData.amountAppointmentPerNextWeekRangeAndLastWeek;
+export const selectAmountAppointmentPerNextWeekRangeAndLastWeek = ({ Entities }: RootState) => Entities.chartData.amountAppointmentPerNextWeekRangeAndLastWeek;
 
 export const selectSeriesStaffStatistic = () =>
   createSelector(getAppointmentPerStaffPerWeekSeries, getPercentsEmploymentPerWeekSeries, (amountsAppointmentSeries, percentsEmploymentSeries) => [

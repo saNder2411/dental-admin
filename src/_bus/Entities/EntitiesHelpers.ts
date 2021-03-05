@@ -9,7 +9,7 @@ import { OfferIcons, ContentTypes } from '../_Services/ServicesTypes';
 // Constants
 import { DEFAULT_WORK_WEEK_HOURS } from '../Constants';
 
-export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1;
+export const generateId = (allIDs: number[]) => Math.max(...allIDs) + 1 ?? 1;
 
 export const generateColor = () => `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 

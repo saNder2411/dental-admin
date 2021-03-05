@@ -23,6 +23,7 @@ import {
   selectServiceSalesForEveryWeekInWeekRange,
   selectProductSalesForEveryWeekInWeekRange,
   selectTotalAmountAppointmentsForEveryWeekPerWeekRange,
+  selectTotalProductUnitsForEveryWeekPerWeekRange,
   selectAmountNewCustomerAppointmentsForEveryWeekPerWeekRange,
   selectAmountExistCustomerAppointmentsForEveryWeekPerWeekRange,
   selectStaffCategories,
@@ -66,6 +67,28 @@ export const ChartAppointmentSales: FC<ChartItemProps> = ({ className }): JSX.El
           <ChartSeriesItem type="line" data={productSalesForEveryWeek} name="Product" color="#4ca8df" tooltip={{ visible: true }} />
           <ChartSeriesItem type="line" data={servicesSalesForEveryWeek} name="Service" color="#367ea2" tooltip={{ visible: true }} />
           <ChartSeriesItem type="area" data={totalSalesForEveryWeek} name="Total" tooltip={{ visible: true }} />
+        </ChartSeries>
+        <ChartCategoryAxis>
+          <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />
+        </ChartCategoryAxis>
+      </KendoChart>
+    </section>
+  );
+};
+
+export const ChartSalesAndAppointments: FC<ChartItemProps> = ({ className }): JSX.Element => {
+  const totalAmountAppointmentsForEveryWeek = useSelector(selectTotalAmountAppointmentsForEveryWeekPerWeekRange);
+  const totalAmountProductUnitsForEveryWeek = useSelector(selectTotalProductUnitsForEveryWeekPerWeekRange)
+
+  return (
+    <section className={className}>
+      <h3 className="text-left">Sales & Appointments</h3>
+      <KendoChart>
+        <ChartTitle text={`Last ${WEEK_RANGE} weeks`} align="left" />
+        <ChartLegend position="top" orientation="horizontal" align="start" />
+        <ChartSeries>
+          <ChartSeriesItem type="line" data={totalAmountAppointmentsForEveryWeek} name="Appointments Made"tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={totalAmountProductUnitsForEveryWeek} name="Product Units" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>
           <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />

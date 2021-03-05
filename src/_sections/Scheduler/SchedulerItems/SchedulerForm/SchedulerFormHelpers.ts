@@ -11,7 +11,9 @@ import {
   MonthlyWeekNumberType,
 } from './SchedulerFormTypes';
 import { AppointmentDataItem, StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
-import { CustomerDataItem } from './../../../../_bus/_Customers/CustomersTypes';
+import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
+import { ServiceDataItem, ContentTypes } from '../../../../_bus/_Services/ServicesTypes';
+import { ById } from '../../../../_bus/Entities/EntitiesTypes';
 // Instruments
 import {
   EndRepeatTypes,
@@ -501,7 +503,7 @@ interface ResultParseFormDataItem {
   newCustomer: CustomerDataItem | null;
 }
 
-export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllIds: number[]): ResultParseFormDataItem => {
+export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllIds: number[], servicesById: ById<ServiceDataItem>): ResultParseFormDataItem => {
   const {
     IsNewCustomer,
     FirstName,
@@ -545,11 +547,13 @@ export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllId
     YearlyWeekNumber,
     YearlyDayType,
   };
-  // console.log(`repeatOptions`, repeatOptions);
+
+  const hasService = Boolean(others.LookupMultiBP01offeringsId.results.find((serviceId) => servicesById[serviceId].ContentTypeId === ContentTypes.Services));
 
   const newDataItem = {
     ...others,
     MetroRRule: setRecurrenceRule(repeatOptions),
+    fAllDayEvent: !hasService,
   };
 
   const ID = generateId(customersAllIds);

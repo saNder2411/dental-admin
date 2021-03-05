@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import {
   ChartAppointmentsPerWeek,
   ChartAppointmentSales,
+  ChartSalesAndAppointments,
   ChartStaffStatistics,
   ChartCancellationRate,
   ChartStaffUtilization,
@@ -28,6 +29,7 @@ export const Chart: FC = (): JSX.Element => {
   return (
     <section className="card-container row">
       <section className="border shadow-sm mr-2 pt-2 rounded col">
+        <ChartSalesAndAppointments />
         <ChartAppointmentsPerWeek />
         <ChartStaffStatistics />
         <ChartSalesByOfferingCategory />
