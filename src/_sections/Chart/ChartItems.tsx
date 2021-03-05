@@ -269,12 +269,13 @@ export const ChartStaffSales: FC<ChartItemProps> = ({ className }): JSX.Element 
 export const ChartStaffUtilization: FC<ChartItemProps> = ({ className }): JSX.Element => {
   const totalAppointmentHours = useSelector(selectTotalAppointmentHours);
   const totalStaffWorkHoursInWeekRange = useSelector(selectTotalStaffWorkHoursInWeekRange);
-  const value = totalAppointmentHours !== 0 ? Math.round((totalAppointmentHours * 100) / totalStaffWorkHoursInWeekRange) : 0;
+  const value = totalAppointmentHours !== 0 ? +((totalAppointmentHours * 100) / totalStaffWorkHoursInWeekRange).toFixed(2) : 0;
 
   return (
     <section className={className}>
       <h3 className="mb-2">Staff Utilization</h3>
       <div className="text-muted mb-4 pt-1">{`Last ${WEEK_RANGE} weeks`}</div>
+      <div className="text-muted mb-4 pt-1">{`Appointment Hours: ${totalAppointmentHours}; All Staff Work Hours: ${totalStaffWorkHoursInWeekRange}`}</div>
       <ArcGauge value={value} arcCenterRender={(currentValue: number, color: string) => <h3 style={{ color }}>{currentValue}%</h3>} />
     </section>
   );

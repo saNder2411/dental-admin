@@ -5,7 +5,7 @@ import { StaffDataItem } from '../_Staff/StaffTypes';
 import { AppointmentDataItem, StatusNames } from '../_Appointments/AppointmentsTypes';
 import { ParseRepeatType } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormTypes';
 // Constants
-import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, DEFAULT_WORK_WEEK_HOURS, START_PREV_MONTH_DATE, Months, NEVER_END_RECURRENCE_MONTH_AMOUNT } from '../Constants';
+import { WEEK_RANGE, START_PREV_WEEKS_DATE, MONTH_RANGE, START_PREV_MONTH_DATE, Months, NEVER_END_RECURRENCE_MONTH_AMOUNT } from '../Constants';
 // Helpers
 import { parseRuleStrInValue } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 // Instruments
@@ -144,7 +144,7 @@ export const calcAppointmentsDurationSalesPerWeekPerStaffMember = (
   sliceAppointmentsInWeekRange: AppointmentDataItem[],
   totalAppointmentSales: number
 ) => {
-  const staffMemberWorkWeekHours = (StaffWeekHours ?? DEFAULT_WORK_WEEK_HOURS) * WEEK_RANGE;
+  const staffMemberWorkWeekHours = (StaffWeekHours ?? 0) * WEEK_RANGE;
   const { amountAppointment, durationInHours, staffMemberSales } = calcAppointmentsDurationSalesPerStaffMember(ID, sliceAppointmentsInWeekRange);
   const averageAppointmentsPerWeekPerStaffMember = +(amountAppointment / WEEK_RANGE).toFixed(2);
   const percentEmploymentPerWeekPerStaffMember = Math.round(((durationInHours / WEEK_RANGE) * 100) / staffMemberWorkWeekHours);
