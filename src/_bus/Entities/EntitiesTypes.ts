@@ -131,7 +131,7 @@ export interface ChartState {
   productCategories: string[];
   salesPerServicePerMonthSeries: SeriesForChart<number>[];
   salesPerProductPerMonthSeries: SeriesForChart<number>[];
-  salesPerOtherServicePerMonthSeries: SeriesForChart<number>;
+  salesPerOtherServicePerMonthSeries: SeriesForChart<number>[];
 
   averageHourlyPerService: SeriesForChart<number>[];
   averageHourlyRateAllServices: number;

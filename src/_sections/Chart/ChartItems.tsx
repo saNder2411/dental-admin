@@ -90,8 +90,8 @@ export const ChartSalesAndAppointments: FC<ChartItemProps> = ({ className }): JS
         <ChartTitle text={`Last ${WEEK_RANGE} weeks`} align="left" />
         <ChartLegend position="top" orientation="horizontal" align="start" />
         <ChartSeries>
-          <ChartSeriesItem type="line" data={totalAmountAppointmentsForEveryWeek} name="Appointments Made" tooltip={{ visible: true }} />
-          <ChartSeriesItem type="line" data={totalAmountProductUnitsForEveryWeek} name="Product Units" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={totalAmountAppointmentsForEveryWeek} name="Appointments Made" color="#367ea2" tooltip={{ visible: true }} />
+          <ChartSeriesItem type="line" data={totalAmountProductUnitsForEveryWeek} name="Product Units" color="#4ca8df" tooltip={{ visible: true }} />
         </ChartSeries>
         <ChartCategoryAxis>
           <ChartCategoryAxisItem title={{ text: 'WEEK Number' }} categories={WeekNumbers} />
@@ -173,7 +173,7 @@ export const ChartSalesByOfferingCategory: FC<ChartItemProps> = ({ className }):
   const salesPerServicePerMonthSeries = useSelector(selectSalesPerServicePerMonthSeries);
   const salesPerProductPerMonthSeries = useSelector(selectSalesPerProductPerMonthSeries);
   const salesPerOtherServicePerMonthSeries = useSelector(selectSalesPerOtherServicePerMonthSeries);
-  const series = [...salesPerServicePerMonthSeries, ...salesPerProductPerMonthSeries, salesPerOtherServicePerMonthSeries];
+  const series = [...salesPerServicePerMonthSeries, ...salesPerProductPerMonthSeries, ...salesPerOtherServicePerMonthSeries];
 
   return (
     <section className={className}>

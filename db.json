@@ -585,6 +585,65 @@
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
+    },
+    {
+      "Id": 10,
+      "Title": "C.Abraham-010",
+      "AppointmentStatus": "(5) Paid",
+      "EventDate": "2020-12-15T06:00:00.000Z",
+      "EndDate": "2020-12-15T07:00:00.000Z",
+      "Description": "Appointment with - Amelia Giroud | Contact Reference - Corinne Abraham, +11189763244570, Coralie.Abraham@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": false,
+      "RecurrenceID": null,
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=13;BYDAY=TU",
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "LookupCM102customersId": 54,
+      "ID": 10,
+      "Modified": "2021-03-07T18:32:14.223Z",
+      "fRecurrence": true,
+      "LookupHR01teamId": 2,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
+      "occurrenceId": "0",
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 11,
+      "Title": "J.Adamson-011",
+      "AppointmentStatus": "(5) Paid",
+      "EventDate": "2020-12-15T06:00:00.000Z",
+      "EndDate": "2020-12-15T06:45:00.000Z",
+      "Description": "Appointment with - Grace Robinson | Contact Reference - Jan Adamson, +1189792544997, Jan.Adamson@schedulingtoday.local | Service Type - Mens Wash+Cut+Dry S1 29.75 (-15%)",
+      "Duration": 2700,
+      "Notes": "",
+      "ServiceCharge": 29.75,
+      "fAllDayEvent": false,
+      "RecurrenceID": null,
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;COUNT=14;BYDAY=TU",
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "LookupCM102customersId": 1165,
+      "LookupHR01teamId": 3,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          4
+        ]
+      },
+      "ID": 11,
+      "Modified": "2021-03-07T18:38:46.846Z",
+      "fRecurrence": true,
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
     }
   ],
   "services": [
@@ -2094,7 +2153,7 @@
       "Email": "Coralie.Abraham@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 54,
-      "Modified": "2021-03-05T19:45:26.998Z",
+      "Modified": "2021-03-07T18:32:14.715Z",
       "LookupMultiHR01teamId": {
         "results": [
           1,
@@ -2104,12 +2163,16 @@
           3,
           1,
           1,
-          1
+          1,
+          2,
+          2,
+          2
         ]
       },
       "LookupMultiHR03eventsId": {
         "results": [
-          null
+          null,
+          10
         ]
       },
       "ClientPhoto": {
@@ -2132,9 +2195,12 @@
       "Email": "Oliver.Abraham@schedulingtoday.local",
       "Gender": "(2) Male",
       "ID": 290,
-      "Modified": "2021-03-05T22:07:15.759Z",
+      "Modified": "2021-03-07T18:15:45.794Z",
       "LookupMultiHR01teamId": {
-        "results": []
+        "results": [
+          3,
+          3
+        ]
       },
       "LookupMultiHR03eventsId": {
         "results": []
@@ -2159,12 +2225,21 @@
       "Email": "Ilona.Acciardi@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 77,
-      "Modified": "2021-03-05T19:45:28.911Z",
+      "Modified": "2021-03-07T18:15:56.370Z",
       "LookupMultiHR01teamId": {
-        "results": []
+        "results": [
+          2,
+          3,
+          3,
+          3,
+          4,
+          4
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "results": []
+        "results": [
+          11
+        ]
       },
       "ClientPhoto": {
         "__metadata": {
@@ -2186,10 +2261,11 @@
       "Email": "Tom.Acciardi@schedulingtoday.local",
       "Gender": "(2) Male",
       "ID": 200,
-      "Modified": "2021-03-05T22:07:13.669Z",
+      "Modified": "2021-03-05T22:41:18.561Z",
       "LookupMultiHR01teamId": {
         "results": [
-          3
+          3,
+          4
         ]
       },
       "LookupMultiHR03eventsId": {
@@ -2242,7 +2318,7 @@
       "Email": "Elizabete.Adame@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 1268,
-      "Modified": "2021-03-05T19:45:32.611Z",
+      "Modified": "2021-03-07T18:15:51.060Z",
       "LookupMultiHR01teamId": {
         "results": [
           3,
@@ -2340,12 +2416,16 @@
       "Email": "Jan.Adamson@schedulingtoday.local",
       "Gender": "(2) Male",
       "ID": 1165,
-      "Modified": "2021-03-05T17:10:38.269Z",
+      "Modified": "2021-03-07T18:38:47.352Z",
       "LookupMultiHR01teamId": {
-        "results": []
+        "results": [
+          3
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "results": []
+        "results": [
+          11
+        ]
       },
       "ClientPhoto": {
         "__metadata": {
@@ -2386,12 +2466,6 @@
       }
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(252)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(252)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 252,
       "Title": "Adler",
       "FirstName": "Renate",
@@ -2399,21 +2473,27 @@
       "CellPhone": "+189792085982",
       "Email": "Renate.Adler@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 252,
+      "Modified": "2021-03-05T23:13:51.420Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          4,
+          4
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 252,
-      "Modified": "2019-07-23T07:17:32Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "Id": 247,
@@ -2735,12 +2815,6 @@
       "Modified": "2019-07-23T07:19:55Z"
     },
     {
-      "__metadata": {
-        "id": "Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(246)",
-        "uri": "https://sa-toniguy01.metroapps.online/_api/Web/Lists(guid'27f5d039-9c85-4e09-a869-45b65150829f')/Items(246)",
-        "etag": "\"4\"",
-        "type": "SP.Data.MetroCM102ListItem"
-      },
       "Id": 246,
       "Title": "Alaia",
       "FirstName": "Metayer",
@@ -2748,21 +2822,33 @@
       "CellPhone": "+189787740595",
       "Email": "metayer.Alaia@schedulingtoday.local",
       "Gender": "(1) Female",
-      "ClientPhoto": null,
+      "ID": 246,
+      "Modified": "2021-03-05T22:26:04.174Z",
       "LookupMultiHR01teamId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
-        "results": []
+        "results": [
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3,
+          3
+        ]
       },
       "LookupMultiHR03eventsId": {
-        "__metadata": {
-          "type": "Collection(Edm.Int32)"
-        },
         "results": []
       },
-      "ID": 246,
-      "Modified": "2019-07-23T07:17:31Z"
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
     },
     {
       "__metadata": {
@@ -40046,6 +40132,60 @@
         "results": [
           9
         ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1273,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1273,
+      "Modified": "2021-03-05T22:47:23.820Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1274,
+      "Title": "Consultation",
+      "FirstName": "Female",
+      "FullName": "Female Consultation",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1274,
+      "Modified": "2021-03-07T18:15:48.519Z",
+      "LookupMultiHR01teamId": {
+        "results": []
+      },
+      "LookupMultiHR03eventsId": {
+        "results": []
       },
       "ClientPhoto": {
         "Description": "",

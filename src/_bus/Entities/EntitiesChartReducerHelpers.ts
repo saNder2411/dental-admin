@@ -157,35 +157,28 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
           const totalSalesInAppointment = price * servicesOrProductInAppointment.length;
 
           const nextSales = prevSales + totalSalesInAppointment;
-          const nextHours = service.ContentTypeId === ContentTypes.Services ? prevHours + (service.MinutesDuration ?? 0) / 60 : 0;
+          const nextHours = service.ContentTypeId === ContentTypes.Services ? prevHours + (service.MinutesDuration ?? 0) / 60 : prevHours;
           return [nextSales, nextHours];
         },
         [0, 0]
       );
 
-      const salesServiceOrProductPerWeekRange = totalSales === 0 ? 0 : +(totalSales / MONTH_RANGE).toFixed(2);
-
       switch (service.ContentTypeId) {
         case ContentTypes.Services:
-          const data = totalSales === 0 ? 0 : +(totalSales / totalHours).toFixed(2);
           const prevServiceCategory = acc.serviceCategories[acc.serviceCategories.length - 1];
 
           if (prevServiceCategory && prevServiceCategory === name) {
-            const prevServiceData = acc.salesPerServicePerMonthSeries[acc.salesPerServicePerMonthSeries.length - 1].data;
-            const prevAverageHourlyData = acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data;
-
-            acc.salesPerServicePerMonthSeries[acc.salesPerServicePerMonthSeries.length - 1].data = +(prevServiceData + salesServiceOrProductPerWeekRange).toFixed(2);
-            acc.averageHourlyPerService[acc.averageHourlyPerService.length - 1].data = +(prevAverageHourlyData + data).toFixed(2);
-            acc.serviceTotalSales = acc.serviceTotalSales + totalSales;
-            acc.serviceTotalHours = acc.serviceTotalHours + totalHours;
+            acc.serviceCategoryData[acc.serviceCategoryData.length - 1].totalSales += totalSales;
+            acc.serviceCategoryData[acc.serviceCategoryData.length - 1].totalHours += totalHours;
+            acc.serviceTotalSales += totalSales;
+            acc.serviceTotalHours += totalHours;
             return acc;
           }
 
           return {
             ...acc,
             serviceCategories: [...acc.serviceCategories, name],
-            salesPerServicePerMonthSeries: [...acc.salesPerServicePerMonthSeries, { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[5] }],
-            averageHourlyPerService: [...acc.averageHourlyPerService, { name, data }],
+            serviceCategoryData: [...acc.serviceCategoryData, { name, totalSales, totalHours }],
             serviceTotalSales: acc.serviceTotalSales + totalSales,
             serviceTotalHours: acc.serviceTotalHours + totalHours,
           };
@@ -193,34 +186,31 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
           const prevProductCategory = acc.productCategories[acc.productCategories.length - 1];
 
           if (prevProductCategory && prevProductCategory === name) {
-            const prevProductData = acc.salesPerProductPerMonthSeries[acc.salesPerProductPerMonthSeries.length - 1].data;
-            acc.salesPerProductPerMonthSeries[acc.salesPerProductPerMonthSeries.length - 1].data = +(prevProductData + salesServiceOrProductPerWeekRange).toFixed();
+            acc.productCategoryData[acc.productCategoryData.length - 1].totalSales = +totalSales;
             return acc;
           }
 
           return {
             ...acc,
             productCategories: [...acc.productCategories, name],
-            salesPerProductPerMonthSeries: [...acc.salesPerProductPerMonthSeries, { name, data: salesServiceOrProductPerWeekRange, color: SeriesColors[6] }],
+            productCategoryData: [...acc.productCategoryData, { name, totalSales }],
           };
 
         default:
           return {
             ...acc,
-            salesPerOtherServicePerMonthSeries: {
-              ...acc.salesPerOtherServicePerMonthSeries,
-              data: acc.salesPerOtherServicePerMonthSeries.data + salesServiceOrProductPerWeekRange,
-            },
+            otherCategories: [...acc.otherCategories, name],
+            otherCategoryData: [...acc.otherCategoryData, { name, totalSales }],
           };
       }
     },
     {
       serviceCategories: new Array<string>(),
       productCategories: new Array<string>(),
-      salesPerServicePerMonthSeries: new Array<SeriesForChart<number>>(),
-      salesPerProductPerMonthSeries: new Array<SeriesForChart<number>>(),
-      salesPerOtherServicePerMonthSeries: { name: 'Other', data: 0, color: SeriesColors[9] },
-      averageHourlyPerService: new Array<SeriesForChart<number>>(),
+      otherCategories: new Array<string>(),
+      serviceCategoryData: new Array<{ name: string; totalSales: number; totalHours: number }>(),
+      productCategoryData: new Array<{ name: string; totalSales: number }>(),
+      otherCategoryData: new Array<{ name: string; totalSales: number }>(),
       serviceTotalSales: 0,
       serviceTotalHours: 0,
     }
@@ -313,15 +303,32 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   const {
     serviceCategories,
     productCategories,
-    salesPerServicePerMonthSeries,
-    salesPerProductPerMonthSeries,
-    salesPerOtherServicePerMonthSeries,
-    averageHourlyPerService,
+    serviceCategoryData,
+    productCategoryData,
+    otherCategoryData,
     serviceTotalSales,
     serviceTotalHours,
   } = getServiceProductCalcData(appointmentsInLastMonthsRange, state.services.originalData);
+  console.log(`serviceCategoryData`, serviceCategoryData);
+  console.log(`productCategoryData`, productCategoryData);
 
   const averageHourlyRateAllServices = serviceTotalSales !== 0 ? +(serviceTotalSales / serviceTotalHours).toFixed(2) : 0;
+  const salesPerServicePerMonthSeries = serviceCategoryData.map(({ name, totalSales }) => ({
+    name,
+    data: +(totalSales / MONTH_RANGE).toFixed(2),
+    color: SeriesColors[5],
+  }));
+  const salesPerProductPerMonthSeries = productCategoryData.map(({ name, totalSales }) => ({
+    name,
+    data: +(totalSales / MONTH_RANGE).toFixed(2),
+    color: SeriesColors[6],
+  }));
+  const salesPerOtherServicePerMonthSeries = otherCategoryData.map(({ name, totalSales }) => ({
+    name,
+    data: +(totalSales / MONTH_RANGE).toFixed(2),
+    color: SeriesColors[9],
+  }));
+  const averageHourlyPerService = serviceCategoryData.map(({ name, totalSales, totalHours }) => ({ name, data: totalSales > 0 ? +(totalSales / totalHours).toFixed(2) : 0 }));
 
   const appointmentValue = getAppointmentValue(appointmentsInLastMonthsRange);
 

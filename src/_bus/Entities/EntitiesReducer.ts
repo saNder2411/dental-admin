@@ -40,7 +40,7 @@ const initialState = {
     productCategories: [],
     salesPerServicePerMonthSeries: [],
     salesPerProductPerMonthSeries: [],
-    salesPerOtherServicePerMonthSeries: { name: 'Other', data: 0 },
+    salesPerOtherServicePerMonthSeries: [{ name: 'Other', data: 0 }],
 
     averageHourlyPerService: [],
     averageHourlyRateAllServices: 0,
