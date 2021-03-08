@@ -14,7 +14,7 @@ import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell
 // Types
 import { CustomSchedulerProps } from './SchedulerTypes';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
-import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
+import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 // Selectors
 import { selectCustomersById, selectStaffById, selectServicesById, selectAppointmentsAllIds } from '../../_bus/Entities/EntitiesSelectors';
 // Action Creators
@@ -34,7 +34,8 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
     ({ updated, created }: SchedulerDataChangeEvent) => {
       if (typeof updated[0] === 'number' || !updated[0]) return;
 
-      const [updatedDataItem] = updated as AppointmentDataItem[];
+      const [{ occurrenceId, originalStart, ...updatedDataItem }] = updated as KendoDataItem[];
+      console.log(`updatedDataItem`, updatedDataItem);
 
       if (updatedDataItem.MetroRRule && created[0]) {
         setIsAgendaDataItemLoading(true);
@@ -75,7 +76,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         item={SchedulerItem}
         slot={SchedulerSlot}
         task={SchedulerAgendaTask}
-        defaultView={'month'}
+        defaultView={'day'}
         editable={{
           add: true,
           remove: true,

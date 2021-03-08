@@ -33,7 +33,7 @@ import {
   selectAppointmentFunnel,
   selectTotalAppointmentHours,
   selectTotalStaffWorkHoursInWeekRange,
-  selectTotalServiceSales,
+  // selectTotalServiceSales,
   selectTotalAppointmentSalesPerLast12Months,
   selectAmountActiveCustomers,
   selectSalesPerStaffPerWeekData,
@@ -274,7 +274,6 @@ export const ChartStaffUtilization: FC<ChartItemProps> = ({ className }): JSX.El
     <section className={className}>
       <h3 className="mb-2">Staff Utilization</h3>
       <div className="text-muted mb-4 pt-1">{`Last ${WEEK_RANGE} weeks`}</div>
-      <div className="text-muted mb-4 pt-1">{`Appointment Hours: ${totalAppointmentHours}; All Staff Work Hours: ${totalStaffWorkHoursInWeekRange}`}</div>
       <ArcGauge value={value} arcCenterRender={(currentValue: number, color: string) => <h3 style={{ color }}>{currentValue}%</h3>} />
     </section>
   );

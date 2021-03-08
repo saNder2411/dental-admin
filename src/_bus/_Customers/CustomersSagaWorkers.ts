@@ -100,12 +100,13 @@ export function* workerDeleteDataItem({
     for (const appointment of appointmentToDeleteOrUpdate) {
       console.log(`appointment`, appointment);
       if (
-        appointment.AppointmentStatus === StatusNames.Consultation ||
-        appointment.AppointmentStatus === StatusNames.Cancelled ||
-        appointment.Start.getTime() > Date.now()
+        (appointment.AppointmentStatus === StatusNames.Consultation ||
+          appointment.AppointmentStatus === StatusNames.Cancelled ||
+          appointment.Start.getTime() > Date.now()) &&
+        processDataItem.ID === appointment.LookupCM102customersId
       ) {
         yield* helperDeleteAppointment(appointment);
-      } else {
+      } else if (processDataItem.ID === appointment.LookupCM102customersId) {
         const refreshAppointment: AppointmentDataItem = { ...appointment, LookupCM102customersId: 1 };
         yield* helperUpdateAppointment(refreshAppointment)(servicesById)(staffById)(customersById);
       }
