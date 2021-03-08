@@ -124,7 +124,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         popupAlign={{ horizontal: 'left', vertical: 'center' }}
         popupClass="SchedulerItemContent-popup-content"
         anchor={_ref.current?.element as any}
-        style={{ width: 330 }}>
+        style={{ width: 350 }}>
         <SchedulerItemPopupContent
           resource={resource}
           dataItem={dataItem}

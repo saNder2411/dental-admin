@@ -15,7 +15,7 @@ export const customModelFields = {
   isAllDay: 'fAllDayEvent',
   recurrenceRule: 'MetroRRule',
   recurrenceId: 'RecurrenceID',
-  recurrenceExceptions: 'MetroRecException',
+  recurrenceExceptions: 'RecException',
 };
 
 export const getFormInputOptionalProps = ({ touched, validationMessage, showValidationMessage, hint, id, showHint, label }: FieldRenderProps) => ({
@@ -44,7 +44,7 @@ export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: View
 };
 
 export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, exception: Date): AppointmentDataItem => {
-  const MetroRecException = dataItem.MetroRecException ? [...dataItem.MetroRecException, exception] : [exception];
+  const RecException = dataItem.RecException ? [...dataItem.RecException, exception] : [exception];
   const { occurrenceId, originalStart, EventDate, EndDate, ...others } = dataItem;
   return {
     ...others,
@@ -52,7 +52,7 @@ export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, excep
     EndDate,
     Start: new Date(EventDate),
     End: new Date(EndDate),
-    MetroRecException,
+    RecException,
     RecurrenceID: null,
   };
 };
@@ -60,7 +60,6 @@ export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, excep
 export const getNewDataItemOnRecurrenceDragEvent = (dataItem: KendoDataItem) => (allIds: number[]): AppointmentDataItem => {
   const ID = generateId(allIds);
   const { occurrenceId, originalStart, Start, End, TeamID, ...newDataItem } = dataItem;
-  console.log(`dataItem`, dataItem)
 
   return {
     ...newDataItem,

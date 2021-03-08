@@ -169,6 +169,7 @@ export const getNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewIte
         Modified: new Date().toISOString(),
 
         TeamID: 1,
+        RecException: null,
         Start: new Date(),
         End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
         inEdit: true,

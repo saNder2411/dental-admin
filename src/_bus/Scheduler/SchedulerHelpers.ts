@@ -29,6 +29,7 @@ export const getNewAppointmentDataItemForScheduler = (allIDs: number[], { Start,
     Modified: new Date().toISOString(),
 
     TeamID,
+    RecException: null,
     Start,
     End,
     inEdit: true,

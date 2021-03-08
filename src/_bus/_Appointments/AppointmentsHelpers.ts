@@ -11,7 +11,7 @@ export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): Appoin
     TeamID: LookupHR01teamId ? LookupHR01teamId : 1,
     Start: new Date(dataItem.EventDate),
     End: new Date(dataItem.EndDate),
-    MetroRecException: dataItem.MetroRecException ? dataItem.MetroRecException.map((exception) => new Date(exception)) : null,
+    RecException: dataItem.MetroRecException ? dataItem.MetroRecException.map((exception) => new Date(exception)) : null,
     LookupHR01teamId: LookupHR01teamId ? LookupHR01teamId : 1,
     LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
   }));
@@ -21,13 +21,14 @@ export const transformAPIDataItem = ({ __metadata, LookupHR01teamId, LookupMulti
   TeamID: LookupHR01teamId ? LookupHR01teamId : 1,
   Start: new Date(dataItem.EventDate),
   End: new Date(dataItem.EndDate),
-  MetroRecException: dataItem.MetroRecException ? dataItem.MetroRecException.map((exception) => new Date(exception)) : null,
+  RecException: dataItem.MetroRecException ? dataItem.MetroRecException.map((exception) => new Date(exception)) : null,
   LookupHR01teamId: LookupHR01teamId ? LookupHR01teamId : 1,
   LookupMultiBP01offeringsId: { results: LookupMultiBP01offeringsId.results },
 });
 
-export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, ...dataItem }: AppointmentDataItem): MutationAppointmentDataItem => ({
+export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, RecException, ...dataItem }: AppointmentDataItem): MutationAppointmentDataItem => ({
   ...dataItem,
+  MetroRecException: RecException  ? RecException.map((date) => date.toISOString()) : null,
   fRecurrence: !!dataItem.MetroRRule,
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });

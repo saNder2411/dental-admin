@@ -559,7 +559,7 @@ export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllId
   const ID = generateId(customersAllIds);
 
   const defaultConsultationCustomer =
-    newDataItem.AppointmentStatus === StatusNames.Consultation && !newDataItem.LookupCM102customersId ? getDefaultConsultationCustomer(ID) : null;
+    newDataItem.AppointmentStatus === StatusNames.Consultation && !newDataItem.LookupCM102customersId ? getDefaultConsultationCustomer(ID)(newDataItem.ID) : null;
 
   const newCustomer = IsNewCustomer
     ? {

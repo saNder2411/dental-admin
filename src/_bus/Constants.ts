@@ -34,11 +34,11 @@ export const SeriesColors = [
 
 export const Months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
-export const getDefaultConsultationCustomer = (Id: number): CustomerDataItem => ({
+export const getDefaultConsultationCustomer = (Id: number) => (appointmentID: number): CustomerDataItem => ({
   Id,
-  Title: 'Consultation',
+  Title: `Consultation(${appointmentID})`,
   FirstName: `Female`,
-  FullName: 'Female Consultation',
+  FullName: `Female Consultation(${appointmentID})`,
   CellPhone: '',
   Email: '',
   Gender: '(1) Female' as const,

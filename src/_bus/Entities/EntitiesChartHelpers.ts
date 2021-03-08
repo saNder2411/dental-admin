@@ -81,7 +81,7 @@ const generateRecAppointments = (appointment: AppointmentDataItem) => (dayRange:
     const Start = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayStart : isMonthlyRecurrence ? nextMonthStart : nextYearsStart;
     const End = !isMonthlyRecurrence && !isYearlyRecurrence ? nextDayEnd : isMonthlyRecurrence ? nextMonthEnd : nextYearsEnd;
 
-    const isExceptionDate = appointment.MetroRecException ? appointment.MetroRecException.find((exception) => isEqualDate(Start, exception)) : false;
+    const isExceptionDate = appointment.RecException ? appointment.RecException.find((exception) => isEqualDate(Start, exception)) : false;
 
     if (isExceptionDate) {
       continue;

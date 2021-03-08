@@ -24,7 +24,7 @@ interface BackendImmutableKey {
   Notes: null | string;
   fAllDayEvent: null | boolean;
   MetroRRule: null | string;
-  MetroRecException: null | Date[];
+  MetroRecException: null | string[];
   RecurrenceID: null | number;
   FirstAppointment: boolean;
   ID: number;
@@ -34,6 +34,7 @@ interface BackendImmutableKey {
 }
 
 interface FrontendKey {
+  RecException: null | Date[];
   TeamID: number;
   Start: Date;
   End: Date;
