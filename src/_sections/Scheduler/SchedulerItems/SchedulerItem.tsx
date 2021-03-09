@@ -28,7 +28,7 @@ import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '..
 
 export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element | null => {
   const { dataItem, children, _ref, group, isRecurring } = props;
-  // console.log(`SchedulerItem==>`, props);
+  console.log(`SchedulerItem==>`, props);
   const dispatch = useDispatch();
   const appointmentIsDataItemLoading = useSelector(selectDataItemIsLoading);
   const selectedView = useSelector(selectSelectedView);
@@ -101,7 +101,7 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
     dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, customersById, () => {}));
   };
 
-  return (
+  return resource ? (
     <>
       <KendoSchedulerItem {...props} onClick={onSchedulerItemClick} onDoubleClick={onEditBtnClick} onRemoveClick={onDeleteBtnClick}>
         {height && height > 25 && (
@@ -180,5 +180,5 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
         />
       )} */}
     </>
-  );
+  ) : null;
 };

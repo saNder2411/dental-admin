@@ -107,27 +107,21 @@ export const getRecurrenceAppointments = (appointment: AppointmentDataItem): App
   const { dayRange, interval, count, until } = parseRecurrenceRule(appointment.MetroRRule);
 
   if (count) {
-    const res = generateRecAppointments(appointment)(dayRange)(interval)(count);
-    console.log(`res`, res);
-    return res;
+    return generateRecAppointments(appointment)(dayRange)(interval)(count);
   }
 
   if (until) {
     const rangeDays = (until.getTime() - appointment.Start.getTime()) / 1000 / 60 / 60 / 24;
     const countRec = rangeDays / interval / dayRange;
 
-    const res = generateRecAppointments(appointment)(dayRange)(interval)(countRec);
-    console.log(`res`, res);
-    return res;
+    return generateRecAppointments(appointment)(dayRange)(interval)(countRec);
   }
 
   const neverEndUntil = addMonths(appointment.Start, NEVER_END_RECURRENCE_MONTH_AMOUNT);
   const rangeDays = (neverEndUntil.getTime() - appointment.Start.getTime()) / 1000 / 60 / 60 / 24;
   const countRec = rangeDays / interval / dayRange;
 
-  const res = generateRecAppointments(appointment)(dayRange)(interval)(countRec);
-  console.log(`res`, res);
-  return res;
+  return generateRecAppointments(appointment)(dayRange)(interval)(countRec);
 };
 
 const calcAppointmentsDurationSalesPerStaffMember = (staffMemberID: number, appointments: AppointmentDataItem[]) => {

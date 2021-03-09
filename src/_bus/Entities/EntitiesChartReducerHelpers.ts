@@ -311,6 +311,8 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   } = getServiceProductCalcData(appointmentsInLastMonthsRange, state.services.originalData);
   console.log(`serviceCategoryData`, serviceCategoryData);
   console.log(`productCategoryData`, productCategoryData);
+  console.log(`totalStaffWorkHoursInWeekRange`, totalStaffWorkHoursInWeekRange);
+  console.log(`totalAppointmentHours`, totalAppointmentHours);
 
   const averageHourlyRateAllServices = serviceTotalSales !== 0 ? +(serviceTotalSales / serviceTotalHours).toFixed(2) : 0;
   const salesPerServicePerMonthSeries = serviceCategoryData.map(({ name, totalSales }) => ({
@@ -328,7 +330,10 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
     data: +(totalSales / MONTH_RANGE).toFixed(2),
     color: SeriesColors[9],
   }));
-  const averageHourlyPerService = serviceCategoryData.map(({ name, totalSales, totalHours }) => ({ name, data: totalSales > 0 ? +(totalSales / totalHours).toFixed(2) : 0 }));
+  const averageHourlyPerService = serviceCategoryData.map(({ name, totalSales, totalHours }) => ({
+    name,
+    data: totalSales > 0 ? +(totalSales / totalHours).toFixed(2) : 0,
+  }));
 
   const appointmentValue = getAppointmentValue(appointmentsInLastMonthsRange);
 

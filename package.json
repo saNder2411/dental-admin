@@ -6,7 +6,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js --output-public-path='/build/static/'",
     "test": "node scripts/test.js",
-    "mock": "json-server -w db.json -p 4200 -d 70 --id Id",
+    "mock": "json-server -w db.json -p 4200 -d 0 --id Id",
     "server": "concurrently \"npm run start\" \"npm run mock\"",
     "proxy": "node ./api-server.ts",
     "spServer": "concurrently --kill-others \"npm run proxy\" \"npm run start\""

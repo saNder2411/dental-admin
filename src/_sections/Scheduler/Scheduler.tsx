@@ -1,4 +1,4 @@
-import React, { FC, useCallback } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Scheduler as KendoScheduler,
@@ -11,42 +11,54 @@ import {
 } from '@progress/kendo-react-scheduler';
 //Components
 import { SchedulerItem, SchedulerSlot, SchedulerAgendaTask, CustomDateHeaderCell } from './SchedulerItems';
+import { CancelDragModal } from './SchedulerItems/SchedulerConfirmModals';
 // Types
 import { CustomSchedulerProps } from './SchedulerTypes';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
 // Selectors
-import { selectCustomersById, selectStaffById, selectServicesById, selectAppointmentsAllIds } from '../../_bus/Entities/EntitiesSelectors';
+import {
+  selectCustomersById,
+  selectStaffById,
+  selectServicesById,
+  // selectAppointmentsAllIds
+} from '../../_bus/Entities/EntitiesSelectors';
 // Action Creators
-import { updateAppointmentDataItemInitAsyncAC, updateAppointmentRecurringDataItemInitAsyncAC } from '../../_bus/Entities/EntitiesAC';
+import {
+  updateAppointmentDataItemInitAsyncAC,
+  // updateAppointmentRecurringDataItemInitAsyncAC
+} from '../../_bus/Entities/EntitiesAC';
 import { changeSelectedDateAC, changeSelectedViewAC } from '../../_bus/Scheduler/SchedulerAC';
 // Helpers
-import { getNewDataItemOnRecurrenceDragEvent } from './SchedulerHelpers';
+// import { getNewDataItemOnRecurrenceDragEvent } from './SchedulerHelpers';
 
 export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, resources, setIsAgendaDataItemLoading }) => {
   const dispatch = useDispatch();
   const servicesById = useSelector(selectServicesById());
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
-  const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
+  // const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
+
+  const [showCancelDragPopup, setShowCancelDragPopup] = useState(false);
 
   const onDataChange = useCallback(
     ({ updated, created }: SchedulerDataChangeEvent) => {
       if (typeof updated[0] === 'number' || !updated[0]) return;
 
       const [{ occurrenceId, originalStart, ...updatedDataItem }] = updated as KendoDataItem[];
-      console.log(`updatedDataItem`, updatedDataItem);
 
       if (updatedDataItem.MetroRRule && created[0]) {
-        setIsAgendaDataItemLoading(true);
+        setShowCancelDragPopup(true);
 
-        const processCreateDataItem = getNewDataItemOnRecurrenceDragEvent(created[0])(appointmentsAllIDs);
+        // setIsAgendaDataItemLoading(true);
 
-        dispatch(
-          updateAppointmentRecurringDataItemInitAsyncAC(updatedDataItem, processCreateDataItem, null, servicesById, staffById, customersById, () =>
-            setIsAgendaDataItemLoading(false)
-          )
-        );
+        // const processCreateDataItem = getNewDataItemOnRecurrenceDragEvent(created[0])(appointmentsAllIDs);
+
+        // dispatch(
+        //   updateAppointmentRecurringDataItemInitAsyncAC(updatedDataItem, processCreateDataItem, null, servicesById, staffById, customersById, () =>
+        //     setIsAgendaDataItemLoading(false)
+        //   )
+        // );
         return;
       }
 
@@ -55,7 +67,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
 
       dispatch(updateAppointmentDataItemInitAsyncAC(processUpdateDataItem, null, servicesById, staffById, customersById, () => setIsAgendaDataItemLoading(false)));
     },
-    [appointmentsAllIDs, customersById, dispatch, servicesById, setIsAgendaDataItemLoading, staffById]
+    [customersById, dispatch, servicesById, setIsAgendaDataItemLoading, staffById]
   );
 
   const onDateChange = useCallback((evt: SchedulerDateChangeEvent) => dispatch(changeSelectedDateAC(evt.value)), [dispatch]);
@@ -90,6 +102,14 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         <MonthView dateHeaderCell={CustomDateHeaderCell} />
         {/* <AgendaView /> */}
       </KendoScheduler>
+      {showCancelDragPopup && (
+        <CancelDragModal
+          onCancel={() => setShowCancelDragPopup(false)}
+          onClose={() => setShowCancelDragPopup(false)}
+          title={`Edit Recurring Item`}
+          message={`Editing Recurring items is not supported here. please request admin assitance`}
+        />
+      )}
     </>
   );
 };

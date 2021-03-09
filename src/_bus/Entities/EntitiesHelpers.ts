@@ -47,10 +47,7 @@ export const deleteId = (ids: number[], deletedId: number) => {
   return [...ids.slice(0, index), ...ids.slice(index + 1)];
 };
 
-export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = GenericDataItem>(
-  stateSlice: EntitiesStateSlice<T>,
-  data: T[]
-): EntitiesStateSlice<T> => {
+export const updateStateSliceOnFetchDataSuccess = <T extends GenericDataItem = GenericDataItem>(stateSlice: EntitiesStateSlice<T>, data: T[]): EntitiesStateSlice<T> => {
   const [byId, allIDs] = transformArrayDataToByIdData(data);
 
   return { ...stateSlice, originalData: data, processData: [...data], processById: { ...byId }, byId, allIDs };
@@ -81,10 +78,7 @@ export const updateStateSliceOnCreateDataItem = <T extends GenericDataItem = Gen
   return { ...stateSlice, originalData, processData, processById, byId: { ...processById }, allIDs };
 };
 
-export const updateStateSliceOnUpdateDataItem = <T extends GenericDataItem = GenericDataItem>(
-  stateSlice: EntitiesStateSlice<T>,
-  dataItem: T
-): EntitiesStateSlice<T> => {
+export const updateStateSliceOnUpdateDataItem = <T extends GenericDataItem = GenericDataItem>(stateSlice: EntitiesStateSlice<T>, dataItem: T): EntitiesStateSlice<T> => {
   const processById = { ...stateSlice.processById, [dataItem.ID]: dataItem };
   const processData = updateDataItemInArray(stateSlice.processData, dataItem);
   const originalData = updateDataItemInArray(stateSlice.originalData, dataItem);
@@ -144,120 +138,6 @@ export const updateStateSliceOnAddNewItemToEditInGrid = (stateSlice: EntitiesSta
   return { ...stateSlice, processData, processById, byId: { ...processById }, allIDs };
 };
 
-export const getNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewItem[EntitiesKeys] => {
-  switch (entityName) {
-    case EntitiesKeys.Appointments:
-      return {
-        Id: ID,
-        Title: ``,
-        AppointmentStatus: StatusNames.Consultation,
-        EventDate: new Date().toISOString(),
-        EndDate: new Date().toISOString(),
-        Description: null,
-        Duration: 3600,
-        Notes: '',
-        ServiceCharge: 0,
-        fAllDayEvent: null,
-        RecurrenceID: null,
-        MetroRRule: null,
-        MetroRecException: null,
-        FirstAppointment: false,
-        LookupCM102customersId: -1,
-        LookupHR01teamId: 1,
-        LookupMultiBP01offeringsId: { results: [] },
-        ID,
-        Modified: new Date().toISOString(),
-
-        TeamID: 1,
-        RecException: null,
-        Start: new Date(),
-        End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
-        inEdit: true,
-        isNew: true,
-      };
-    case EntitiesKeys.Customers:
-      return {
-        Id: ID,
-        Title: '',
-        FirstName: ``,
-        FullName: '',
-        CellPhone: '',
-        Email: '',
-        Gender: '(1) Female',
-        ClientPhoto: {
-          Description: '',
-          Url: '',
-          __metadata: { type: 'SP.FieldUrlValue' },
-        },
-        ID,
-        Modified: new Date().toISOString(),
-        LookupMultiHR01teamId: { results: [] },
-        LookupMultiHR03eventsId: { results: [] },
-
-        ClientPhotoUrl: '',
-        inEdit: true,
-        isNew: true,
-      };
-
-    case EntitiesKeys.Services:
-      return {
-        Id: ID,
-        OfferingsName_Edit: '',
-        ShowOnline: false,
-        ConsultReq: false,
-        MinutesDuration: 60,
-        Amount: 50,
-        OfferingCatType: '',
-        OfferingDiscount: 0,
-        ContentTypeId: ContentTypes.Services,
-        ID,
-        ImageThumbnail: {
-          Description: '',
-          Url: '',
-          __metadata: { type: 'SP.FieldUrlValue' },
-        },
-        LookupMultiHR02SkillsId: { results: [] },
-
-        ImageThumbnailUrl: OfferIcons.Tooth,
-        inEdit: true,
-        isNew: true,
-      };
-    case EntitiesKeys.Staff:
-      return {
-        Id: ID,
-        Title: '',
-        FirstName: '',
-        FullName: '',
-        TeamProfilePhoto: {
-          __metadata: { type: 'SP.FieldUrlValue' },
-          Description: '',
-          Url: '',
-        },
-        ShowOnline: false,
-        Email: '',
-        CellPhone: '',
-        JobTitle: '',
-        CalendarColHex: generateColor(),
-        StaffWeekHours: DEFAULT_WORK_WEEK_HOURS,
-        LookupMultiHR02SkillsId: { results: [] },
-        ID,
-
-        TeamProfilePhotoUrl: '',
-        inEdit: true,
-        isNew: true,
-      };
-    case EntitiesKeys.Skills:
-      return {
-        Id: ID,
-        ID,
-        Title: '',
-      };
-
-    default:
-      throw new Error(`Grid Data Name not correct`);
-  }
-};
-
 interface NewItem {
   [EntitiesKeys.Appointments]: AppointmentDataItem;
   [EntitiesKeys.Services]: ServiceDataItem;
@@ -266,8 +146,8 @@ interface NewItem {
   [EntitiesKeys.Skills]: SkillDataItem;
 }
 
-const getDefaultNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewItem[EntitiesKeys] =>
-  ({
+const getDefaultNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewItem[EntitiesKeys] => {
+  const newItems: NewItem = {
     [EntitiesKeys.Appointments]: {
       Id: ID,
       Title: ``,
@@ -283,17 +163,14 @@ const getDefaultNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewIte
       MetroRRule: null,
       MetroRecException: null,
       FirstAppointment: false,
-      // FirstName: ``,
-      // LastNameAppt: ``,
-      // Email: null,
-      // CellPhone: null,
-      LookupCM102customersId: -1,
+      LookupCM102customersId: null,
       LookupHR01teamId: 1,
       LookupMultiBP01offeringsId: { results: [] },
       ID,
       Modified: new Date().toISOString(),
 
       TeamID: 1,
+      RecException: null,
       Start: new Date(),
       End: new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate(), new Date().getHours() + 1),
       inEdit: true,
@@ -371,4 +248,7 @@ const getDefaultNewDataItem = (ID: number) => (entityName: EntitiesKeys): NewIte
       ID,
       Title: '',
     },
-  }[entityName]);
+  };
+
+  return newItems[entityName];
+};
