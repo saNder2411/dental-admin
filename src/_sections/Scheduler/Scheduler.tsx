@@ -23,6 +23,7 @@ import {
   selectServicesById,
   // selectAppointmentsAllIds
 } from '../../_bus/Entities/EntitiesSelectors';
+import { selectSelectedView, selectSelectedDate } from '../../_bus/Scheduler/SchedulerSelectors';
 // Action Creators
 import {
   updateAppointmentDataItemInitAsyncAC,
@@ -37,6 +38,8 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   const servicesById = useSelector(selectServicesById());
   const staffById = useSelector(selectStaffById());
   const customersById = useSelector(selectCustomersById());
+  const selectedView = useSelector(selectSelectedView);
+  const selectedDate = useSelector(selectSelectedDate);
   // const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
 
   const [showCancelDragPopup, setShowCancelDragPopup] = useState(false);
@@ -88,7 +91,8 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
         item={SchedulerItem}
         slot={SchedulerSlot}
         task={SchedulerAgendaTask}
-        defaultView={'day'}
+        defaultView={selectedView}
+        defaultDate={selectedDate}
         editable={{
           add: true,
           remove: true,

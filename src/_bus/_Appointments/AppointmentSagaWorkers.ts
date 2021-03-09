@@ -127,9 +127,9 @@ const ProcessHandlers = {
 
 const refreshCustomersByIdAndProcessAppointment = (createdCustomer: CustomerDataItem) => (customersById: ById<CustomerDataItem>) => (
   processAppointment: AppointmentDataItem
-) => (FirstAppointment: boolean) => ({
+) => ({
   refreshCustomersById: { ...customersById, [createdCustomer.ID]: createdCustomer },
-  refreshProcessAppointment: { ...processAppointment, FirstAppointment, LookupCM102customersId: createdCustomer.ID },
+  refreshProcessAppointment: { ...processAppointment, LookupCM102customersId: createdCustomer.ID },
 });
 
 const refreshProcessCustomer = (processStatus: ProcessStatus) => (customer: CustomerDataItem) => ({
@@ -157,7 +157,7 @@ const workerHelperProcessAppointmentWithNewCustomer = (processStatus: ProcessSta
   function* (customersById: ById<CustomerDataItem>) {
     const createdCustomer: CustomerDataItem = yield call(helperCreateNewCustomer, newCustomer);
 
-    const { refreshCustomersById, refreshProcessAppointment } = refreshCustomersByIdAndProcessAppointment(createdCustomer)(customersById)(processAppointment)(true);
+    const { refreshCustomersById, refreshProcessAppointment } = refreshCustomersByIdAndProcessAppointment(createdCustomer)(customersById)(processAppointment);
 
     const createdOrUpdatedAppointment = yield* ProcessHandlers[processStatus](refreshProcessAppointment)(servicesById)(staffById)(refreshCustomersById);
 

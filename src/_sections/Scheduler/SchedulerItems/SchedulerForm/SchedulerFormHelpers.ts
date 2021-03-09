@@ -550,16 +550,10 @@ export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllId
 
   const hasService = Boolean(others.LookupMultiBP01offeringsId.results.find((serviceId) => servicesById[serviceId].ContentTypeId === ContentTypes.Services));
 
-  const newDataItem = {
-    ...others,
-    MetroRRule: setRecurrenceRule(repeatOptions),
-    fAllDayEvent: !hasService,
-  };
-
   const ID = generateId(customersAllIds);
 
   const defaultConsultationCustomer =
-    newDataItem.AppointmentStatus === StatusNames.Consultation && !newDataItem.LookupCM102customersId ? getDefaultConsultationCustomer(ID)(newDataItem.ID) : null;
+    others.AppointmentStatus === StatusNames.Consultation && !others.LookupCM102customersId ? getDefaultConsultationCustomer(ID)(others.ID) : null;
 
   const newCustomer = IsNewCustomer
     ? {
@@ -582,6 +576,13 @@ export const parseFormDataItem = (formDataItem: InitialFormValue, customersAllId
         ClientPhotoUrl,
       }
     : defaultConsultationCustomer;
+
+  const newDataItem = {
+    ...others,
+    FirstAppointment: !!newCustomer,
+    MetroRRule: setRecurrenceRule(repeatOptions),
+    fAllDayEvent: !hasService,
+  };
 
   return { newDataItem, newCustomer };
 };
