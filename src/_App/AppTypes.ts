@@ -1,11 +1,10 @@
-import { Dispatch } from 'redux';
-
-export enum ActionTypes {
-  CHANGE_LOCALE = `CHANGE_LOCALE`,
-}
+export const ActionTypes = {
+  SET_LOCALE: `SET_LOCALE`,
+  SET_IS_EXPANDED_SIDEBAR: `SET_IS_EXPANDED_SIDEBAR`,
+} as const;
 
 export interface AppState {
   currentLocaleID: string;
   locales: Array<{ locale: string; localeID: string }>;
-  onLocaleChange: (dispatch: Dispatch, localeID: string) => void;
+  isExpendedSidebar: boolean;
 }

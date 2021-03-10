@@ -1,11 +1,8 @@
 // Types
 import { ActionTypes } from './AppTypes';
 
-interface ChangeLocaleAc {
-  type: ActionTypes.CHANGE_LOCALE;
-  payload: string;
-}
+export const setLocaleAC = (localeID: string) => ({ type: ActionTypes.SET_LOCALE, payload: localeID });
 
-export const changeLocaleAC = (localeID: string): ChangeLocaleAc => ({ type: ActionTypes.CHANGE_LOCALE, payload: localeID });
+export const setIsExpendedSidebarAC = (isExpanded: boolean) => ({ type: ActionTypes.SET_IS_EXPANDED_SIDEBAR, payload: isExpanded });
 
-export type Actions = ChangeLocaleAc;
+export type Actions = ReturnType<typeof setLocaleAC> | ReturnType<typeof setIsExpendedSidebarAC>;

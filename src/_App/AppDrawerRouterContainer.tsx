@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, NavLink } from 'react-router-dom';
 import { Drawer, DrawerContent, DrawerItem, DrawerItemProps } from '@progress/kendo-react-layout';
 import { useLocalization } from '@progress/kendo-react-intl';
@@ -6,6 +7,10 @@ import { useLocalization } from '@progress/kendo-react-intl';
 import { AppHeader } from './AppHeader';
 // SC
 import * as SC from './AppItemsStyled/CustomDrawerItemStyled';
+// Selectors
+import { selectIsExpandedSidebar } from './AppSelectors';
+// Actions
+import { setIsExpendedSidebarAC } from './AppActions';
 // Images
 import bodyBg from '../_assets/body-bg.jpeg';
 // App-Config
@@ -44,7 +49,8 @@ interface Props {
 }
 
 export const AppDrawerRouterContainer: FC<Props> = ({ children }): JSX.Element => {
-  const [isExpended, setIsExpended] = useState(true);
+  const dispatch = useDispatch();
+  const isExpended = useSelector(selectIsExpandedSidebar);
   const [isSmallerScreen, setIsSmallerScreen] = useState(false);
   const localizationService = useLocalization();
   const { pathname } = useLocation();
@@ -62,7 +68,7 @@ export const AppDrawerRouterContainer: FC<Props> = ({ children }): JSX.Element =
   return (
     <>
       <AppHeader
-        onBurgerMenuClick={() => setIsExpended((prevState) => !prevState)}
+        onBurgerMenuClick={() => dispatch(setIsExpendedSidebarAC(!isExpended))}
         page={localizationService.toLanguageString(`custom.${selectedItemName}`, `${selectedItemName}`)}
       />
       <Drawer
@@ -76,8 +82,8 @@ export const AppDrawerRouterContainer: FC<Props> = ({ children }): JSX.Element =
         position="start"
         mode={isSmallerScreen ? 'overlay' : 'push'}
         mini={!isSmallerScreen}
-        onOverlayClick={() => setIsExpended((prevState) => !prevState)}
-        onSelect={() => setIsExpended(false)}
+        onOverlayClick={() => dispatch(setIsExpendedSidebarAC(!isExpended))}
+        onSelect={() => dispatch(setIsExpendedSidebarAC(false))}
         style={{ backgroundImage: `url(${bodyBg})`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}>
         <DrawerContent>{children}</DrawerContent>
       </Drawer>

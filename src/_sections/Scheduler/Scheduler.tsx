@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from 'react';
+import React, { FC, useCallback, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Scheduler as KendoScheduler,
@@ -23,6 +23,7 @@ import {
   selectServicesById,
   // selectAppointmentsAllIds
 } from '../../_bus/Entities/EntitiesSelectors';
+import { selectIsExpandedSidebar } from '../../_App/AppSelectors';
 import { selectSelectedView, selectSelectedDate } from '../../_bus/Scheduler/SchedulerSelectors';
 // Action Creators
 import {
@@ -41,6 +42,16 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   const selectedView = useSelector(selectSelectedView);
   const selectedDate = useSelector(selectSelectedDate);
   // const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
+
+  const isExpendedSidebar = useSelector(selectIsExpandedSidebar);
+
+  const [, setIsDoReRender] = useState(false);
+
+  useEffect(() => {
+    const delay = setTimeout(() => setIsDoReRender((prevState) => !prevState), 0);
+
+    return () => clearTimeout(delay);
+  }, [isExpendedSidebar]);
 
   const [showCancelDragPopup, setShowCancelDragPopup] = useState(false);
 
@@ -80,7 +91,7 @@ export const Scheduler: FC<CustomSchedulerProps> = ({ data, modelFields, group, 
   return (
     <>
       <KendoScheduler
-        style={{ minHeight: 700, minWidth: 1300, overflow: 'auto' }}
+        style={{ minHeight: 700 }}
         data={data}
         modelFields={modelFields}
         onDataChange={onDataChange}

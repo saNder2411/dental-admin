@@ -5,6 +5,8 @@ import { useLocalization } from '@progress/kendo-react-intl';
 // Selectors
 import { selectLocaleState } from './AppSelectors';
 import { selectMemoUser } from '../_bus/User/UserSelectors';
+// Actions
+import { setLocaleAC } from './AppActions';
 // Types
 import { UserRoles } from '../_bus/User/UserTypes';
 // Images
@@ -20,7 +22,7 @@ interface Props {
 
 export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element => {
   const localizationService = useLocalization();
-  const { currentLocaleID, locales, onLocaleChange } = useSelector(selectLocaleState);
+  const { currentLocaleID, locales } = useSelector(selectLocaleState);
   const dispatch = useDispatch();
   const selectUser = useMemo(() => selectMemoUser(), []);
   const user = useSelector(selectUser);
@@ -28,7 +30,7 @@ export const AppHeader: FC<Props> = ({ onBurgerMenuClick, page }): JSX.Element =
 
   const currentLanguage = locales.find((item) => item.localeID === currentLocaleID);
 
-  const onLanguageChange = useCallback(({ value }: DropDownListChangeEvent) => onLocaleChange(dispatch, value.localeID), [onLocaleChange, dispatch]);
+  const onLanguageChange = useCallback(({ value }: DropDownListChangeEvent) => dispatch(setLocaleAC(value.localeID)), [dispatch]);
 
   return (
     <header className="header" style={{ backgroundImage: `url(${headerBg})` }}>

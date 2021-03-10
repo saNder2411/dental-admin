@@ -10,11 +10,10 @@ import * as SC from './CalendarStyled/CalendarStyled';
 // Selectors
 import { selectSelectedDate, selectSelectedView } from '../_bus/Scheduler/SchedulerSelectors';
 import { selectAppointmentsAllIds } from '../_bus/Entities/EntitiesSelectors';
+import { selectOriginalAppointmentsData } from '../_bus/Entities/EntitiesSelectors';
 // Action Creators
 import { fetchAppointmentsDataInitAsyncAC } from '../_bus/Entities/EntitiesAC';
 import { changeMapTeamToFilteredAC, addNewItemToEditFormAC } from '../_bus/Scheduler/SchedulerAC';
-// Selectors
-import { selectOriginalAppointmentsData } from '../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useSelectBindDataLengthForAgenda } from '../Agenda/AgendaHooks';
 import { useStaffDataForScheduler } from './CalendarHooks';
@@ -29,8 +28,7 @@ export const Calendar: FC = () => {
   const { customersDataLength, staffDataLength, servicesDataLength } = useSelectBindDataLengthForAgenda();
   const hasAllData = appointmentsData.length > 0 && servicesDataLength > 0 && staffDataLength > 0 && customersDataLength > 0;
   const initAsyncAC = useCallback(
-    () =>
-      fetchAppointmentsDataInitAsyncAC({ appointmentsDataLength: appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength }),
+    () => fetchAppointmentsDataInitAsyncAC({ appointmentsDataLength: appointmentsData.length, servicesDataLength, staffDataLength, customersDataLength }),
     [appointmentsData.length, customersDataLength, servicesDataLength, staffDataLength]
   );
   const isDataLoading = useFetchData(hasAllData, initAsyncAC);
@@ -85,12 +83,7 @@ export const Calendar: FC = () => {
                 .map((item) => ({
                   ...item,
                   text: (
-                    <CalendarHeaderCardCell
-                      cardColor={item.CalendarColHex}
-                      employeeImage={item.TeamProfilePhotoUrl}
-                      fullName={item.FullName}
-                      jobTitle={item.JobTitle}
-                    />
+                    <CalendarHeaderCardCell cardColor={item.CalendarColHex} employeeImage={item.TeamProfilePhotoUrl} fullName={item.FullName} jobTitle={item.JobTitle} />
                   ),
                 })),
               field: 'TeamID',
