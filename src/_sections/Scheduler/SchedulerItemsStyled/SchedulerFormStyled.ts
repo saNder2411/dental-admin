@@ -5,7 +5,6 @@ export const SchedulerForm = styled.section`
   padding-bottom: 0;
 
   && .k-form-fieldset {
-    height: 622px;
     display: flex;
     flex-direction: column;
   }
@@ -71,7 +70,7 @@ export const SchedulerForm = styled.section`
   .form__actions-bar-wrapper {
     margin-left: -1rem;
     margin-right: -1rem;
-    margin-top: auto;
+    margin-top: 60px;
     border-color: #ebebeb;
   }
 

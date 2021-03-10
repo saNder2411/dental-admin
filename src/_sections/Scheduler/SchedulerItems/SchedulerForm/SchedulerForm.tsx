@@ -127,7 +127,7 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
   );
 
   return (
-    <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose()} minWidth={700} height="73%">
+    <Dialog title="Event" onClose={() => !isDataItemLoading && onDialogClose()} width={700}>
       <SC.SchedulerForm>
         <Form
           initialValues={initialValue}

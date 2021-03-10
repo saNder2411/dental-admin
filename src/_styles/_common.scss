@@ -17,7 +17,7 @@ a:hover {
 
 .App {
   min-width: 1750px;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .k-drawer-container {
@@ -341,7 +341,11 @@ a:hover {
     align-items: center;
   }
 }
+//Scheduler Form wrapper
 
-.k-content.k-window-content.k-dialog-content {
-  margin: 25px;
+.k-dialog-wrapper .k-dialog {
+  min-height: 300px;
+}
+.k-window-content:last-child {
+  padding-bottom: 0;
 }
