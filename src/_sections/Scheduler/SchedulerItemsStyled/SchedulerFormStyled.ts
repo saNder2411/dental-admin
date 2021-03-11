@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 export const SchedulerForm = styled.section`
-  padding: 1rem;
-  padding-bottom: 0;
-
   && .k-form-fieldset {
     display: flex;
     flex-direction: column;

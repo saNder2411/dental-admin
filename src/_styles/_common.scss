@@ -221,16 +221,6 @@ a:hover {
   }
 }
 
-.k-dialog-content {
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-
-  & .k-scheduler-edit-form {
-    padding: 20px;
-  }
-}
-
 .popup-content {
   max-width: 270px;
   box-sizing: border-box;
@@ -341,10 +331,24 @@ a:hover {
     align-items: center;
   }
 }
+
+// Confirm Modal
+.k-dialog-content {
+  display: flex;
+  flex-direction: column;
+
+  & .k-scheduler-edit-form {
+    padding: 20px;
+  }
+}
+
+.k-content .k-dialog-content {
+  padding: 1rem;
+}
 //Scheduler Form wrapper
 
 .k-dialog-wrapper .k-dialog {
-  min-height: 300px;
+  min-height: 100px;
 }
 .k-window-content:last-child {
   padding-bottom: 0;

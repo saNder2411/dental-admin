@@ -792,30 +792,38 @@
     },
     {
       "Id": 19,
-      "Title": "C.Abraham-019",
-      "AppointmentStatus": "(5) Paid",
-      "EventDate": "2021-03-10T07:00:00.000Z",
-      "EndDate": "2021-03-10T08:45:00.000Z",
-      "Description": "Appointment with - Grace Robinson | Contact Reference - Corinne Abraham, +11189763244570, Coralie.Abraham@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S3 55.25 (-15%)",
-      "Duration": 6300,
+      "Title": "I.Aj-019",
+      "AppointmentStatus": "(3) Reserved",
+      "EventDate": "2021-03-11T06:00:00.000Z",
+      "EndDate": "2021-03-11T16:40:00.000Z",
+      "Description": "Appointment with - Christina Romanov | Contact Reference - Isabel Aj, +189797529114, Isabel.Aj@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S2 49.5 (-10%), Moisture Treatment S3 20.25 (-25%), Keratin Smoothening S4 95.25 (-25%), Texture-Perm S3 72.75 (-25%), Extensions-FH20 S4 577.5 (-25%), Bridal Head S4 147 (-0%), Bed Head Mens Shampoo-250ml 4.2415 (-15%), Original The Conditioner 300ml 15.2915 (-15%), Style Sculpting Foam 200ml 12.7075 (-15%)",
+      "Duration": 38400,
       "Notes": "",
-      "ServiceCharge": 102,
+      "ServiceCharge": 1041.2404999999999,
       "fAllDayEvent": false,
       "RecurrenceID": null,
       "MetroRRule": null,
       "MetroRecException": null,
       "FirstAppointment": false,
-      "LookupCM102customersId": 54,
-      "LookupHR01teamId": 3,
+      "LookupCM102customersId": 1219,
+      "ID": 19,
+      "Modified": "2021-03-11T11:07:50.350Z",
+      "fRecurrence": false,
+      "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
         "results": [
           1,
-          3
+          2,
+          23,
+          26,
+          28,
+          30,
+          31,
+          32,
+          42,
+          53
         ]
       },
-      "ID": 19,
-      "Modified": "2021-03-10T11:52:56.791Z",
-      "fRecurrence": false,
       "__metadata": {
         "type": "SP.Data.MetroHR03ListItem"
       }
@@ -2328,7 +2336,7 @@
       "Email": "Coralie.Abraham@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 54,
-      "Modified": "2021-03-10T11:52:57.440Z",
+      "Modified": "2021-03-11T11:04:59.547Z",
       "LookupMultiHR01teamId": {
         "results": [
           4,
@@ -2338,14 +2346,12 @@
           4,
           4,
           4,
-          3,
           3
         ]
       },
       "LookupMultiHR03eventsId": {
         "results": [
-          17,
-          19
+          17
         ]
       },
       "ClientPhoto": {
@@ -2913,15 +2919,21 @@
       "Email": "Isabel.Aj@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 1219,
-      "Modified": "2021-03-05T17:36:42.185Z",
+      "Modified": "2021-03-11T11:07:51.009Z",
       "LookupMultiHR01teamId": {
         "results": [
           5,
-          5
+          5,
+          4,
+          4,
+          4,
+          4
         ]
       },
       "LookupMultiHR03eventsId": {
-        "results": []
+        "results": [
+          19
+        ]
       },
       "ClientPhoto": {
         "Description": "",
