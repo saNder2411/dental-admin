@@ -73,9 +73,9 @@ export const selectStaffForDropDownListData = () =>
 // Customers
 const getCustomersState = ({ Entities }: RootState) => Entities.customers;
 
-const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
+export const getCustomersById = ({ Entities }: RootState) => Entities.customers.byId;
 
-const getCustomersAllIds = ({ Entities }: RootState) => Entities.customers.allIDs;
+export const getCustomersAllIds = ({ Entities }: RootState) => Entities.customers.allIDs;
 
 export const selectOriginalCustomersData = ({ Entities }: RootState) => Entities.customers.originalData;
 

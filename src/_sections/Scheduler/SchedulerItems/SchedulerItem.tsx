@@ -15,13 +15,13 @@ import { IconMap } from '../../../_instruments';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 import { CustomSchedulerItemProps } from './SchedulerItemTypes';
 import { StaffDataItem } from '../../../_bus/_Staff/StaffTypes';
-import { StatusNames } from '../../../_bus/_Appointments/AppointmentsTypes';
+import { StatusNames, TypesProcessDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 //Action Creators
 import { updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC, addItemToEditAC } from '../../../_bus/Entities/EntitiesAC';
 import { changeUpdatedRecurringDataItemAC, addNewItemToEditFormAC } from '../../../_bus/Scheduler/SchedulerAC';
 // Selectors
 import { selectSelectedView } from '../../../_bus/Scheduler/SchedulerSelectors';
-import { selectAppointmentsAllIds, selectServicesById, selectStaffById, selectCustomersById } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectAppointmentsAllIds } from '../../../_bus/Entities/EntitiesSelectors';
 import { selectDataItemIsLoading } from '../../../_bus/UI/UISelectors';
 // Helpers
 import { getNewDataItemWithUpdateException, getInitDataForNewDataItem } from '../SchedulerHelpers';
@@ -52,9 +52,6 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
   const height = _ref.current?.element?.offsetHeight;
 
   const appointmentsAllIDs = useSelector(selectAppointmentsAllIds);
-  const servicesById = useSelector(selectServicesById());
-  const staffById = useSelector(selectStaffById());
-  const customersById = useSelector(selectCustomersById());
 
   const onSchedulerItemClick = useCallback(() => !appointmentIsDataItemLoading && setShowPopup((prevState) => !prevState), [appointmentIsDataItemLoading]);
 
@@ -95,10 +92,10 @@ export const SchedulerItem: FC<CustomSchedulerItemProps> = (props): JSX.Element 
       const exception = new Date(dataItem.Start.getTime());
       const newDataItem = getNewDataItemWithUpdateException(dataItem, exception);
 
-      dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, null, servicesById, staffById, customersById, () => {}));
+      dispatch(updateAppointmentDataItemInitAsyncAC({ ...newDataItem, type: TypesProcessDataItem.Grid }, () => {}));
       return;
     }
-    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, customersById, () => {}));
+    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, () => {}));
   };
 
   return resource ? (

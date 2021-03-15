@@ -1,3 +1,6 @@
+// Types
+import { InitialFormValue } from './../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormTypes';
+
 export enum StatusNames {
   Consultation = '(1) Consultation',
   Pending = '(2) Pending',
@@ -56,6 +59,21 @@ export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
   LookupHR01teamId: number;
   LookupMultiBP01offeringsId: { results: number[] };
 }
+
+export const TypesProcessDataItem = {
+  Grid: 'Grid',
+  Scheduler: 'Scheduler',
+} as const;
+
+export interface GridProcessAppointmentDataItem extends AppointmentDataItem {
+  type: typeof TypesProcessDataItem.Grid;
+}
+
+export interface SchedulerProcessAppointmentDataItem extends InitialFormValue {
+  type: typeof TypesProcessDataItem.Scheduler;
+}
+
+export type ProcessAppointmentDataItem = GridProcessAppointmentDataItem | SchedulerProcessAppointmentDataItem;
 
 export interface MutationAppointmentDataItem extends BackendImmutableKey {
   __metadata: { type: 'SP.Data.MetroHR03ListItem' };

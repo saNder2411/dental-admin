@@ -2,8 +2,19 @@
 import { StaffDataItem } from '../../Staff';
 import { ById } from '../Entities/EntitiesTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
-import { ServiceDataItem } from '../_Services/ServicesTypes';
-import { QueryAppointmentDataItem, AppointmentDataItem, MutationAppointmentDataItem } from './AppointmentsTypes';
+import { ServiceDataItem, ContentTypes } from '../_Services/ServicesTypes';
+import {
+  QueryAppointmentDataItem,
+  AppointmentDataItem,
+  MutationAppointmentDataItem,
+  ProcessAppointmentDataItem,
+  StatusNames,
+  TypesProcessDataItem,
+} from './AppointmentsTypes';
+// Helpers
+import { generateId } from '../Entities/EntitiesHelpers';
+import { getDefaultConsultationCustomer } from '../Constants';
+import { setRecurrenceRule } from '../../_sections/Scheduler/SchedulerItems/SchedulerForm/SchedulerFormHelpers';
 
 export const transformAPIData = (apiResults: QueryAppointmentDataItem[]): AppointmentDataItem[] =>
   apiResults.map(({ __metadata, LookupHR01teamId, LookupMultiBP01offeringsId, ...dataItem }) => ({
@@ -28,7 +39,7 @@ export const transformAPIDataItem = ({ __metadata, LookupHR01teamId, LookupMulti
 
 export const transformDataItemForAPI = ({ TeamID, Start, End, isNew, inEdit, RecException, ...dataItem }: AppointmentDataItem): MutationAppointmentDataItem => ({
   ...dataItem,
-  MetroRecException: RecException  ? RecException.map((date) => date.toISOString()) : null,
+  MetroRecException: RecException ? RecException.map((date) => date.toISOString()) : null,
   fRecurrence: !!dataItem.MetroRRule,
   __metadata: { type: 'SP.Data.MetroHR03ListItem' },
 });
@@ -77,4 +88,93 @@ export const calculateAppointmentFieldsAssociatedWithCustomerServiceStaff = (app
     Description,
     Modified: new Date().toISOString(),
   };
+};
+
+export const parseProcessDataItem = (processDataItem: ProcessAppointmentDataItem) => (customersAllIds: number[]) => (servicesById: ById<ServiceDataItem>) => {
+  if (processDataItem.type === TypesProcessDataItem.Grid) {
+    const { type, ...newDataItem } = processDataItem;
+    return { newDataItem, newCustomer: null };
+  }
+
+  const {
+    IsNewCustomer,
+    FirstName,
+    LastName,
+    CellPhone,
+    Email,
+    ClientPhotoUrl,
+    Gender,
+    Repeat,
+    EndRepeat,
+    RepeatInterval,
+    EndCount,
+    EndUntil,
+    RepeatOnWeekday,
+    RepeatOnMonthly,
+    MonthlyDay,
+    MonthlyWeekNumber,
+    MonthlyDayType,
+    RepeatOnYearly,
+    YearlyMonth,
+    YearlyMonthDay,
+    YearlyWeekNumber,
+    YearlyDayType,
+    ...others
+  } = processDataItem;
+
+  const repeatOptions = {
+    Repeat,
+    EndRepeat,
+    RepeatInterval,
+    EndCount,
+    EndUntil,
+    RepeatOnWeekday,
+    RepeatOnMonthly,
+    MonthlyDay,
+    MonthlyWeekNumber,
+    MonthlyDayType,
+    RepeatOnYearly,
+    YearlyMonth,
+    YearlyMonthDay,
+    YearlyWeekNumber,
+    YearlyDayType,
+  };
+
+  const hasService = Boolean(others.LookupMultiBP01offeringsId.results.find((serviceId) => servicesById[serviceId].ContentTypeId === ContentTypes.Services));
+
+  const ID = generateId(customersAllIds);
+
+  const defaultConsultationCustomer =
+    others.AppointmentStatus === StatusNames.Consultation && !others.LookupCM102customersId ? getDefaultConsultationCustomer(ID)(others.ID) : null;
+
+  const newCustomer = IsNewCustomer
+    ? {
+        Id: ID,
+        Title: LastName,
+        FirstName,
+        FullName: `${FirstName} ${LastName}`,
+        CellPhone,
+        Email,
+        Gender,
+        ClientPhoto: {
+          Description: ClientPhotoUrl,
+          Url: ClientPhotoUrl,
+          __metadata: { type: 'SP.FieldUrlValue' },
+        },
+        ID,
+        Modified: new Date().toISOString(),
+        LookupMultiHR01teamId: { results: [] },
+        LookupMultiHR03eventsId: { results: [] },
+        ClientPhotoUrl,
+      }
+    : defaultConsultationCustomer;
+
+  const newDataItem = {
+    ...others,
+    FirstAppointment: !!newCustomer,
+    MetroRRule: setRecurrenceRule(repeatOptions),
+    fAllDayEvent: !hasService,
+  };
+
+  return { newDataItem, newCustomer };
 };

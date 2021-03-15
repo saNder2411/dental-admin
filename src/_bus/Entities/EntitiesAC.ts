@@ -1,6 +1,6 @@
 // Types
 import { ActionTypes, GenericDataItem, EntitiesKeys, ById } from './EntitiesTypes';
-import { AppointmentDataItem } from '../_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, ProcessAppointmentDataItem } from '../_Appointments/AppointmentsTypes';
 import { CustomerDataItem } from '../_Customers/CustomersTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { ServiceDataItem } from '../_Services/ServicesTypes';
@@ -34,17 +34,10 @@ export const fetchServicesDataInitAsyncAC = (meta: { servicesDataLength: number;
 export const fetchSkillsDataInitAsyncAC = () => ({ type: ActionTypes.FETCH_SKILLS_DATA_INIT_ASYNC });
 
 // Async Create Data Item
-export const createAppointmentDataItemInitAsyncAC = (
-  processDataItem: AppointmentDataItem,
-  newCustomerDataItem: CustomerDataItem | null,
-  servicesById: ById<ServiceDataItem>,
-  staffById: ById<StaffDataItem>,
-  customersById: ById<CustomerDataItem>,
-  sideEffectAfterCreatedDataItem: () => void
-) => ({
+export const createAppointmentDataItemInitAsyncAC = (processDataItem: ProcessAppointmentDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
   type: ActionTypes.CREATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: { processDataItem, newCustomerDataItem, servicesById, staffById, customersById },
-  meta: { sideEffectAfterCreatedDataItem },
+  processDataItem,
+  sideEffectAfterCreatedDataItem,
 });
 
 export const createCustomerDataItemInitAsyncAC = (createdDataItem: CustomerDataItem, sideEffectAfterCreatedDataItem: () => void) => ({
@@ -66,31 +59,21 @@ export const createServiceDataItemInitAsyncAC = (createdDataItem: ServiceDataIte
 });
 
 // Async Update Data Item
-export const updateAppointmentDataItemInitAsyncAC = (
-  processDataItem: AppointmentDataItem,
-  newCustomerDataItem: CustomerDataItem | null,
-  servicesById: ById<ServiceDataItem>,
-  staffById: ById<StaffDataItem>,
-  customersById: ById<CustomerDataItem>,
-  sideEffectAfterUpdatedDataItem: () => void
-) => ({
+export const updateAppointmentDataItemInitAsyncAC = (processDataItem: ProcessAppointmentDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: { processDataItem, newCustomerDataItem, servicesById, staffById, customersById },
-  meta: { sideEffectAfterUpdatedDataItem },
+  processDataItem,
+  sideEffectAfterUpdatedDataItem,
 });
 
 export const updateAppointmentRecurringDataItemInitAsyncAC = (
   updatableRecurringDataItem: AppointmentDataItem,
-  createDataItem: AppointmentDataItem,
-  newCustomerDataItem: CustomerDataItem | null,
-  servicesById: ById<ServiceDataItem>,
-  staffById: ById<StaffDataItem>,
-  customersById: ById<CustomerDataItem>,
+  createDataItem: ProcessAppointmentDataItem,
   sideEffectAfterUpdatedDataItem: () => void
 ) => ({
   type: ActionTypes.UPDATE_APPOINTMENT_RECURRING_DATA_ITEM_ASYNC,
-  payload: { updatableRecurringDataItem, createDataItem, newCustomerDataItem, servicesById, staffById, customersById },
-  meta: sideEffectAfterUpdatedDataItem,
+  updatableRecurringDataItem,
+  createDataItem,
+  sideEffectAfterUpdatedDataItem,
 });
 
 export const updateCustomerDataItemInitAsyncAC = (updatedDataItem: CustomerDataItem, sideEffectAfterUpdatedDataItem: () => void) => ({
@@ -112,14 +95,10 @@ export const updateServiceDataItemInitAsyncAC = (updatedDataItem: ServiceDataIte
 });
 
 // Async Delete Data Item
-export const deleteAppointmentDataItemInitAsyncAC = (
-  processDataItem: AppointmentDataItem,
-  customersById: ById<CustomerDataItem>,
-  sideEffectAfterDeletedDataItem: () => void
-) => ({
+export const deleteAppointmentDataItemInitAsyncAC = (processDataItem: AppointmentDataItem, sideEffectAfterDeletedDataItem: () => void) => ({
   type: ActionTypes.DELETE_APPOINTMENT_DATA_ITEM_INIT_ASYNC,
-  payload: { processDataItem, customersById },
-  meta: sideEffectAfterDeletedDataItem,
+  processDataItem,
+  sideEffectAfterDeletedDataItem,
 });
 
 export const deleteCustomerDataItemInitAsyncAC = (

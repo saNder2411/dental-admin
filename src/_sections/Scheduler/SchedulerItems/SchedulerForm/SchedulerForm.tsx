@@ -18,13 +18,12 @@ import {
 } from './SchedulerFormItemsCustom';
 import { FormInput, FormRadioGroup, FormMaskedTextBox, FormDateTimePicker, FormTextArea, FormNumericTextBox, FormDropDownList } from './SchedulerFormItems';
 // Selectors
-import { selectCustomersById, selectStaffById, selectServicesById, selectMemoCustomersAllIds } from '../../../../_bus/Entities/EntitiesSelectors';
+import { selectServicesById } from '../../../../_bus/Entities/EntitiesSelectors';
 import { selectMemoUpdatableRecurringDataItem } from '../../../../_bus/Scheduler/SchedulerSelectors';
 import { selectDataItemErrorMessage } from '../../../../_bus/UI/UISelectors';
 // Types
-import { AppointmentDataItem, StatusNames } from '../../../../_bus/_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, StatusNames, TypesProcessDataItem } from '../../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../../_bus/Entities/EntitiesTypes';
-// import { CustomerDataItem } from '../../../../_bus/_Customers/CustomersTypes';
 import { InitialFormValue } from './SchedulerFormTypes';
 // Actions
 import {
@@ -53,7 +52,6 @@ import {
 // Helpers
 import {
   getInitialFormValue,
-  parseFormDataItem,
   requiredValidator,
   requiredCustomerDropDownListValidator,
   phoneValidator,
@@ -76,28 +74,21 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
   const updatableRecurringDataItem = useSelector(selectUpdatableRecurringDataItem);
 
   const servicesById = useSelector(selectServicesById());
-  const staffById = useSelector(selectStaffById());
-  const customersById = useSelector(selectCustomersById());
-
-  const selectCustomersAllIds = useMemo(selectMemoCustomersAllIds, []);
-  const customersAllIds = useSelector(selectCustomersAllIds);
 
   const initialValue = getInitialFormValue(dataItem);
 
   const onFormSubmit = (formDataItem: InitialFormValue, evt: SyntheticEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    const { newDataItem, newCustomer } = parseFormDataItem(formDataItem, customersAllIds, servicesById);
-
     setIsDataItemLoading(true);
 
     if (updatableRecurringDataItem && dataItem.isNew) {
-      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm));
+      dispatch(updateAppointmentRecurringDataItemInitAsyncAC(updatableRecurringDataItem, { ...formDataItem, type: TypesProcessDataItem.Scheduler }, onHideForm));
       return;
     }
 
     dataItem.isNew
-      ? dispatch(createAppointmentDataItemInitAsyncAC(newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm))
-      : dispatch(updateAppointmentDataItemInitAsyncAC(newDataItem, newCustomer, servicesById, staffById, customersById, onHideForm));
+      ? dispatch(createAppointmentDataItemInitAsyncAC({ ...formDataItem, type: TypesProcessDataItem.Scheduler }, onHideForm))
+      : dispatch(updateAppointmentDataItemInitAsyncAC({ ...formDataItem, type: TypesProcessDataItem.Scheduler }, onHideForm));
   };
 
   const onDialogClose = useCallback(() => {
@@ -142,14 +133,6 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
             const isNewCustomer = formRenderProps.valueGetter('IsNewCustomer');
             const startAppointmentValue = formRenderProps.valueGetter('Start') as Date;
             const endAppointmentValue = formRenderProps.valueGetter('End') as Date;
-
-            // const setCustomerField = (customerDataItem: CustomerDataItem | undefined) => {
-            //   formRenderProps.onChange(`FirstName`, { value: customerDataItem?.FirstName });
-            //   formRenderProps.onChange(`LastName`, { value: customerDataItem?.Title });
-            //   formRenderProps.onChange(`Email`, { value: customerDataItem?.Email ?? '' });
-            //   formRenderProps.onChange(`Gender`, { value: customerDataItem?.Gender ?? '(1) Female' });
-            //   formRenderProps.onChange(`CellPhone`, { value: customerDataItem?.CellPhone ?? '' });
-            // };
 
             const resetCustomerId = () => formRenderProps.onChange(`LookupCM102customersId`, { value: null });
             const setEndDateOnServiceChange = (startDate: Date) => (serviceById: typeof servicesById) => (servicesId: number[]) => {
@@ -378,7 +361,6 @@ export const SchedulerForm: FC<Props> = ({ dataItem, onHideForm = () => void 0 }
                           name="LookupCM102customersId"
                           label="Customer"
                           isNewCustomer={isNewCustomer}
-                          // setCustomerField={setCustomerField}
                           component={CustomersFormComboBox}
                           disabled={isDataItemLoading || isNewCustomer}
                           validator={requiredCustomerDropDownListValidator(isNewCustomer)}

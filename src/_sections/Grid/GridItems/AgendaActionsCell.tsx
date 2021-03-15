@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ViewActionsControlCell } from './ViewActionsCells';
 // Types
 import { GridCellProps } from './GridItemsTypes';
-import { AppointmentDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
+import { AppointmentDataItem, TypesProcessDataItem } from '../../../_bus/_Appointments/AppointmentsTypes';
 import { EntitiesKeys } from '../../../_bus/Entities/EntitiesTypes';
 // Actions
 import { createAppointmentDataItemInitAsyncAC, updateAppointmentDataItemInitAsyncAC, deleteAppointmentDataItemInitAsyncAC } from '../../../_bus/Entities/EntitiesAC';
 // Selectors
-import { selectMemoProcessDataItem, selectCustomersById, selectStaffById, selectServicesById } from '../../../_bus/Entities/EntitiesSelectors';
+import { selectMemoProcessDataItem } from '../../../_bus/Entities/EntitiesSelectors';
 // Hooks
 import { useByIdValidation, useStartDateEventValidation, useEndDateEventValidation } from '../GridHooks';
 
@@ -24,24 +24,20 @@ export const AgendaActionsControlCell: FC<GridCellProps<AppointmentDataItem>> = 
   const { isValid: isValidStartEvent } = useStartDateEventValidation(dataItem.Start, dataItem.LookupHR01teamId);
   const { isValid: isValidEndEvent } = useEndDateEventValidation(dataItem.End, dataItem.LookupHR01teamId);
 
-  const servicesById = useSelector(selectServicesById());
-  const staffById = useSelector(selectStaffById());
-  const customersById = useSelector(selectCustomersById());
-
   const onCreateDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(createAppointmentDataItemInitAsyncAC(dataItem, null, servicesById, staffById, customersById, () => setIsDataItemLoading(false)));
-  }, [customersById, dataItem, dispatch, servicesById, staffById]);
+    dispatch(createAppointmentDataItemInitAsyncAC({ ...dataItem, type: TypesProcessDataItem.Grid }, () => setIsDataItemLoading(false)));
+  }, [dataItem, dispatch]);
 
   const onUpdatedDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(updateAppointmentDataItemInitAsyncAC(dataItem, null, servicesById, staffById, customersById, () => setIsDataItemLoading(false)));
-  }, [customersById, dataItem, dispatch, servicesById, staffById]);
+    dispatch(updateAppointmentDataItemInitAsyncAC({ ...dataItem, type: TypesProcessDataItem.Grid }, () => setIsDataItemLoading(false)));
+  }, [dataItem, dispatch]);
 
   const onDeleteDataItem = useCallback(() => {
     setIsDataItemLoading(true);
-    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, customersById, () => setIsDataItemLoading(false)));
-  }, [customersById, dataItem, dispatch]);
+    dispatch(deleteAppointmentDataItemInitAsyncAC(dataItem, () => setIsDataItemLoading(false)));
+  }, [dataItem, dispatch]);
 
   return (
     <ViewActionsControlCell

@@ -1,9 +1,11 @@
 import { SagaIterator } from '@redux-saga/core';
-import { put, apply, all, call } from 'redux-saga/effects';
+import { put, apply, all, call, select } from 'redux-saga/effects';
 // API
 import { API } from '../../_REST';
 // Actions
 import * as actions from '../Entities/EntitiesAC';
+// Selectors
+import { getStaffById, getCustomersById, getServicesById, getCustomersAllIds } from '../Entities/EntitiesSelectors';
 // Types
 import {
   FetchAppointmentsDataInitAsyncActionType,
@@ -19,7 +21,13 @@ import { QueryServiceDataItem, ServiceDataItem } from '../_Services/ServicesType
 import { QueryStaffDataItem, StaffDataItem } from '../_Staff/StaffTypes';
 import { QueryCustomerDataItem, CustomerDataItem } from '../_Customers/CustomersTypes';
 // Helpers
-import { transformAPIData, transformAPIDataItem, transformDataItemForAPI, calculateAppointmentFieldsAssociatedWithCustomerServiceStaff } from './AppointmentsHelpers';
+import {
+  transformAPIData,
+  transformAPIDataItem,
+  transformDataItemForAPI,
+  calculateAppointmentFieldsAssociatedWithCustomerServiceStaff,
+  parseProcessDataItem,
+} from './AppointmentsHelpers';
 import { transformAPIData as transformTeamStaffAPIData } from '../_Staff/StaffHelpers';
 import {
   transformAPIData as transformCustomersAPIData,
@@ -182,19 +190,23 @@ const workerHelperProcessAppointment = (processStatus: ProcessStatus) => (proces
     yield call(helperUpdateCustomer, refreshCustomerDataItem);
   };
 
-export function* workerCreateDataItem({
-  payload: { processDataItem, newCustomerDataItem, servicesById, staffById, customersById },
-  meta: { sideEffectAfterCreatedDataItem },
-}: CreateAppointmentDataItemInitAsyncActionType): SagaIterator {
+export function* workerCreateDataItem({ processDataItem, sideEffectAfterCreatedDataItem }: CreateAppointmentDataItemInitAsyncActionType): SagaIterator {
+  const servicesById: ReturnType<typeof getServicesById> = yield select(getServicesById);
+  const staffById: ReturnType<typeof getStaffById> = yield select(getStaffById);
+  const customersById: ReturnType<typeof getCustomersById> = yield select(getCustomersById);
+  const customersAllIds: ReturnType<typeof getCustomersAllIds> = yield select(getCustomersAllIds);
+
+  const { newDataItem, newCustomer } = parseProcessDataItem(processDataItem)(customersAllIds)(servicesById);
+
   try {
     yield put(actions.createDataItemRequestAC());
 
-    if (newCustomerDataItem) {
-      yield* workerHelperProcessAppointmentWithNewCustomer(ProcessStatus.Create)(processDataItem)(newCustomerDataItem)(servicesById)(staffById)(customersById);
+    if (newCustomer) {
+      yield* workerHelperProcessAppointmentWithNewCustomer(ProcessStatus.Create)(newDataItem)(newCustomer)(servicesById)(staffById)(customersById);
       return;
     }
 
-    yield* workerHelperProcessAppointment(ProcessStatus.Create)(processDataItem)(servicesById)(staffById)(customersById);
+    yield* workerHelperProcessAppointment(ProcessStatus.Create)(newDataItem)(servicesById)(staffById)(customersById);
   } catch (error) {
     yield put(actions.createDataItemFailureAC(`Appointments create data item Error: ${error.message}`));
   } finally {
@@ -204,19 +216,23 @@ export function* workerCreateDataItem({
   }
 }
 
-export function* workerUpdateDataItem({
-  payload: { processDataItem, newCustomerDataItem, servicesById, staffById, customersById },
-  meta: { sideEffectAfterUpdatedDataItem },
-}: UpdateAppointmentDataItemInitAsyncActionType): SagaIterator {
+export function* workerUpdateDataItem({ processDataItem, sideEffectAfterUpdatedDataItem }: UpdateAppointmentDataItemInitAsyncActionType): SagaIterator {
+  const servicesById: ReturnType<typeof getServicesById> = yield select(getServicesById);
+  const staffById: ReturnType<typeof getStaffById> = yield select(getStaffById);
+  const customersById: ReturnType<typeof getCustomersById> = yield select(getCustomersById);
+  const customersAllIds: ReturnType<typeof getCustomersAllIds> = yield select(getCustomersAllIds);
+
+  const { newDataItem, newCustomer } = parseProcessDataItem(processDataItem)(customersAllIds)(servicesById);
+
   try {
     yield put(actions.updateDataItemRequestAC());
 
-    if (newCustomerDataItem) {
-      yield* workerHelperProcessAppointmentWithNewCustomer(ProcessStatus.Update)(processDataItem)(newCustomerDataItem)(servicesById)(staffById)(customersById);
+    if (newCustomer) {
+      yield* workerHelperProcessAppointmentWithNewCustomer(ProcessStatus.Update)(newDataItem)(newCustomer)(servicesById)(staffById)(customersById);
       return;
     }
 
-    yield* workerHelperProcessAppointment(ProcessStatus.Update)(processDataItem)(servicesById)(staffById)(customersById);
+    yield* workerHelperProcessAppointment(ProcessStatus.Update)(newDataItem)(servicesById)(staffById)(customersById);
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Appointments update data item Error: ${error.message}`));
   } finally {
@@ -227,19 +243,27 @@ export function* workerUpdateDataItem({
 }
 
 export function* workerUpdateRecurringDataItem({
-  payload: { updatableRecurringDataItem, createDataItem, newCustomerDataItem, servicesById, staffById, customersById },
-  meta: sideEffectAfterUpdatedDataItem,
+  updatableRecurringDataItem,
+  createDataItem,
+  sideEffectAfterUpdatedDataItem,
 }: UpdateAppointmentRecurringDataItemInitAsyncActionType): SagaIterator {
+  const servicesById: ReturnType<typeof getServicesById> = yield select(getServicesById);
+  const staffById: ReturnType<typeof getStaffById> = yield select(getStaffById);
+  const customersById: ReturnType<typeof getCustomersById> = yield select(getCustomersById);
+  const customersAllIds: ReturnType<typeof getCustomersAllIds> = yield select(getCustomersAllIds);
+
+  const { newDataItem, newCustomer } = parseProcessDataItem(createDataItem)(customersAllIds)(servicesById);
+
   try {
     yield put(actions.updateDataItemRequestAC());
 
     yield* ProcessHandlers[ProcessStatus.Update](updatableRecurringDataItem)(servicesById)(staffById)(customersById);
 
-    if (newCustomerDataItem) {
-      yield* workerHelperProcessAppointmentWithNewCustomer(ProcessStatus.Create)(createDataItem)(newCustomerDataItem)(servicesById)(staffById)(customersById);
+    if (newCustomer) {
+      yield* workerHelperProcessAppointmentWithNewCustomer(ProcessStatus.Create)(newDataItem)(newCustomer)(servicesById)(staffById)(customersById);
       return;
     }
-    yield* workerHelperProcessAppointment(ProcessStatus.Create)(createDataItem)(servicesById)(staffById)(customersById);
+    yield* workerHelperProcessAppointment(ProcessStatus.Create)(newDataItem)(servicesById)(staffById)(customersById);
   } catch (error) {
     yield put(actions.updateDataItemFailureAC(`Appointments update recurring data item Error: ${error.message}`));
   } finally {
@@ -249,10 +273,8 @@ export function* workerUpdateRecurringDataItem({
   }
 }
 
-export function* workerDeleteDataItem({
-  payload: { processDataItem, customersById },
-  meta: sideEffectAfterDeletedDataItem,
-}: DeleteAppointmentDataItemInitAsyncActionType): SagaIterator {
+export function* workerDeleteDataItem({ processDataItem, sideEffectAfterDeletedDataItem }: DeleteAppointmentDataItemInitAsyncActionType): SagaIterator {
+  const customersById: ReturnType<typeof getCustomersById> = yield select(getCustomersById);
   try {
     yield put(actions.deleteDataItemRequestAC());
 

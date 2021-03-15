@@ -3,6 +3,7 @@ import { FieldRenderProps } from '@progress/kendo-react-form';
 import { ViewType } from '../../_bus/Scheduler/SchedulerTypes';
 import { AppointmentDataItem } from '../../_bus/_Appointments/AppointmentsTypes';
 import { KendoDataItem } from './SchedulerItems/SchedulerItemTypes';
+import { TypesProcessDataItem } from './../../_bus/_Appointments/AppointmentsTypes';
 // Helpers
 import { generateId } from '../../_bus/Entities/EntitiesHelpers';
 
@@ -45,9 +46,9 @@ export const getInitDataForNewDataItem = (selectedDate: Date, selectedView: View
 
 export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, exception: Date): AppointmentDataItem => {
   const RecException = dataItem.RecException ? [...dataItem.RecException, exception] : [exception];
-  const { occurrenceId, originalStart, EventDate, EndDate, ...others } = dataItem;
+  const { occurrenceId, originalStart, EventDate, EndDate, ...newDataItem } = dataItem;
   return {
-    ...others,
+    ...newDataItem,
     EventDate,
     EndDate,
     Start: new Date(EventDate),
@@ -57,12 +58,13 @@ export const getNewDataItemWithUpdateException = (dataItem: KendoDataItem, excep
   };
 };
 
-export const getNewDataItemOnRecurrenceDragEvent = (dataItem: KendoDataItem) => (allIds: number[]): AppointmentDataItem => {
+export const getNewDataItemOnRecurrenceDragEvent = (dataItem: KendoDataItem) => (allIds: number[]) => {
   const ID = generateId(allIds);
   const { occurrenceId, originalStart, Start, End, TeamID, ...newDataItem } = dataItem;
 
   return {
     ...newDataItem,
+    type: TypesProcessDataItem.Grid,
     Start,
     End,
     EventDate: Start.toISOString(),

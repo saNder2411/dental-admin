@@ -651,8 +651,8 @@
       "Id": 14,
       "Title": "F.Consultation(14)-014",
       "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-03-16T06:00:00.000Z",
-      "EndDate": "2021-03-16T07:00:00.000Z",
+      "EventDate": "2021-03-09T06:00:00.000Z",
+      "EndDate": "2021-03-09T07:00:00.000Z",
       "Description": "Appointment with - Christina Romanov | Contact Reference - Female Consultation(14), ,  | Service Type - ",
       "Duration": 3600,
       "Notes": "",
@@ -664,7 +664,7 @@
       "FirstAppointment": true,
       "LookupCM102customersId": 1271,
       "ID": 14,
-      "Modified": "2021-03-11T11:10:07.764Z",
+      "Modified": "2021-03-15T14:17:28.539Z",
       "fRecurrence": true,
       "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
@@ -678,8 +678,8 @@
       "Id": 15,
       "Title": "F.Consultation(15)-015",
       "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-03-31T05:00:00.000Z",
-      "EndDate": "2021-03-31T06:00:00.000Z",
+      "EventDate": "2021-03-30T05:00:00.000Z",
+      "EndDate": "2021-03-30T06:00:00.000Z",
       "Description": "Appointment with - Christina Romanov | Contact Reference - Female Consultation(15), ,  | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
       "Duration": 3600,
       "Notes": "",
@@ -691,7 +691,7 @@
       "FirstAppointment": true,
       "LookupCM102customersId": 1273,
       "ID": 15,
-      "Modified": "2021-03-09T09:26:46.188Z",
+      "Modified": "2021-03-15T14:17:37.002Z",
       "fRecurrence": false,
       "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
@@ -707,8 +707,8 @@
       "Id": 16,
       "Title": "F.Consultation(16)-016",
       "AppointmentStatus": "(1) Consultation",
-      "EventDate": "2021-03-27T06:00:00.000Z",
-      "EndDate": "2021-03-27T06:50:00.000Z",
+      "EventDate": "2021-03-20T06:00:00.000Z",
+      "EndDate": "2021-03-20T06:50:00.000Z",
       "Description": "Appointment with - Christina Romanov | Contact Reference - Female Consultation(16), ,  | Service Type - Ladies Wash+Cut+Dry S2 49.5 (-10%)",
       "Duration": 3000,
       "Notes": "",
@@ -720,7 +720,7 @@
       "FirstAppointment": true,
       "LookupCM102customersId": 1274,
       "ID": 16,
-      "Modified": "2021-03-09T09:26:41.508Z",
+      "Modified": "2021-03-15T14:17:33.644Z",
       "fRecurrence": false,
       "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
@@ -792,36 +792,89 @@
     },
     {
       "Id": 19,
-      "Title": "I.Aj-019",
-      "AppointmentStatus": "(3) Reserved",
-      "EventDate": "2021-03-11T06:00:00.000Z",
-      "EndDate": "2021-03-11T16:40:00.000Z",
-      "Description": "Appointment with - Christina Romanov | Contact Reference - Isabel Aj, +189797529114, Isabel.Aj@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Ladies Wash+Cut+Dry S2 49.5 (-10%), Moisture Treatment S3 20.25 (-25%), Keratin Smoothening S4 95.25 (-25%), Texture-Perm S3 72.75 (-25%), Extensions-FH20 S4 577.5 (-25%), Bridal Head S4 147 (-0%), Bed Head Mens Shampoo-250ml 4.2415 (-15%), Original The Conditioner 300ml 15.2915 (-15%), Style Sculpting Foam 200ml 12.7075 (-15%)",
-      "Duration": 38400,
+      "Title": "C.Abraham-019",
+      "AppointmentStatus": "(5) Paid",
+      "EventDate": "2021-01-12T06:00:00.000Z",
+      "EndDate": "2021-01-12T08:15:00.000Z",
+      "Description": "Appointment with - Christina Romanov | Contact Reference - Corinne Abraham, +11189763244570, Coralie.Abraham@schedulingtoday.local | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%), Highlights 1/2 S3 56.25 (-25%)",
+      "Duration": 8100,
       "Notes": "",
-      "ServiceCharge": 1041.2404999999999,
+      "ServiceCharge": 103,
       "fAllDayEvent": false,
       "RecurrenceID": null,
-      "MetroRRule": null,
+      "MetroRRule": "FREQ=WEEKLY;INTERVAL=1;UNTIL=2021-03-15T16:23:59.316Z;BYDAY=MO",
       "MetroRecException": null,
       "FirstAppointment": false,
-      "LookupCM102customersId": 1219,
-      "ID": 19,
-      "Modified": "2021-03-11T11:07:50.350Z",
-      "fRecurrence": false,
+      "LookupCM102customersId": 54,
       "LookupHR01teamId": 4,
       "LookupMultiBP01offeringsId": {
         "results": [
           1,
-          2,
-          23,
-          26,
-          28,
-          30,
-          31,
-          32,
-          42,
-          53
+          14
+        ]
+      },
+      "ID": 19,
+      "Modified": "2021-03-15T16:26:25.870Z",
+      "type": "Scheduler",
+      "fRecurrence": true,
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 20,
+      "Title": "F.Consultation(20)-020",
+      "AppointmentStatus": "(1) Consultation",
+      "EventDate": "2021-02-01T06:00:00.000Z",
+      "EndDate": "2021-02-01T07:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Female Consultation(20), ,  | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": false,
+      "RecurrenceID": null,
+      "MetroRRule": "FREQ=DAILY;INTERVAL=2;COUNT=4",
+      "MetroRecException": [
+        "2021-02-03T06:00:00.000Z"
+      ],
+      "FirstAppointment": false,
+      "LookupCM102customersId": 1278,
+      "ID": 20,
+      "Modified": "2021-03-15T16:28:43.550Z",
+      "fRecurrence": true,
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
+        ]
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroHR03ListItem"
+      }
+    },
+    {
+      "Id": 21,
+      "Title": "F.Consultation(20)-021",
+      "AppointmentStatus": "(1) Consultation",
+      "EventDate": "2021-02-26T06:00:00.000Z",
+      "EndDate": "2021-02-26T07:00:00.000Z",
+      "Description": "Appointment with - Alex Locatelli | Contact Reference - Female Consultation(20), ,  | Service Type - Ladies Wash+Cut+Dry S1 46.75 (-15%)",
+      "Duration": 3600,
+      "Notes": "",
+      "ServiceCharge": 46.75,
+      "fAllDayEvent": false,
+      "RecurrenceID": 20,
+      "MetroRRule": null,
+      "MetroRecException": null,
+      "FirstAppointment": false,
+      "LookupCM102customersId": 1278,
+      "ID": 21,
+      "Modified": "2021-03-15T16:28:33.159Z",
+      "fRecurrence": false,
+      "LookupHR01teamId": 6,
+      "LookupMultiBP01offeringsId": {
+        "results": [
+          1
         ]
       },
       "__metadata": {
@@ -2336,7 +2389,7 @@
       "Email": "Coralie.Abraham@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 54,
-      "Modified": "2021-03-11T11:04:59.547Z",
+      "Modified": "2021-03-15T16:26:26.278Z",
       "LookupMultiHR01teamId": {
         "results": [
           4,
@@ -2346,12 +2399,14 @@
           4,
           4,
           4,
-          3
+          3,
+          4
         ]
       },
       "LookupMultiHR03eventsId": {
         "results": [
-          17
+          17,
+          19
         ]
       },
       "ClientPhoto": {
@@ -2405,7 +2460,7 @@
       "Email": "Ilona.Acciardi@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 77,
-      "Modified": "2021-03-07T18:15:56.370Z",
+      "Modified": "2021-03-15T14:17:22.788Z",
       "LookupMultiHR01teamId": {
         "results": [
           2,
@@ -2919,21 +2974,18 @@
       "Email": "Isabel.Aj@schedulingtoday.local",
       "Gender": "(1) Female",
       "ID": 1219,
-      "Modified": "2021-03-11T11:07:51.009Z",
+      "Modified": "2021-03-15T14:16:23.864Z",
       "LookupMultiHR01teamId": {
         "results": [
           5,
           5,
           4,
           4,
-          4,
           4
         ]
       },
       "LookupMultiHR03eventsId": {
-        "results": [
-          19
-        ]
+        "results": []
       },
       "ClientPhoto": {
         "Description": "",
@@ -40284,7 +40336,7 @@
       "Email": "",
       "Gender": "(1) Female",
       "ID": 1271,
-      "Modified": "2021-03-11T11:10:08.330Z",
+      "Modified": "2021-03-15T14:17:29.049Z",
       "LookupMultiHR01teamId": {
         "results": [
           4
@@ -40342,7 +40394,7 @@
       "Email": "",
       "Gender": "(1) Female",
       "ID": 1273,
-      "Modified": "2021-03-09T09:26:46.496Z",
+      "Modified": "2021-03-15T14:17:37.246Z",
       "LookupMultiHR01teamId": {
         "results": [
           4
@@ -40373,7 +40425,7 @@
       "Email": "",
       "Gender": "(1) Female",
       "ID": 1274,
-      "Modified": "2021-03-09T09:26:41.818Z",
+      "Modified": "2021-03-15T14:17:33.882Z",
       "LookupMultiHR01teamId": {
         "results": [
           4
@@ -40441,6 +40493,77 @@
       },
       "LookupMultiHR03eventsId": {
         "results": []
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1277,
+      "Title": "Consultation(19)",
+      "FirstName": "Female",
+      "FullName": "Female Consultation(19)",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1277,
+      "Modified": "2021-03-15T14:16:50.063Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          5
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          19
+        ]
+      },
+      "ClientPhoto": {
+        "Description": "",
+        "Url": "",
+        "__metadata": {
+          "type": "SP.FieldUrlValue"
+        }
+      },
+      "__metadata": {
+        "type": "SP.Data.MetroCM102ListItem"
+      }
+    },
+    {
+      "Id": 1278,
+      "Title": "Consultation(20)",
+      "FirstName": "Female",
+      "FullName": "Female Consultation(20)",
+      "CellPhone": "",
+      "Email": "",
+      "Gender": "(1) Female",
+      "ID": 1278,
+      "Modified": "2021-03-15T16:28:43.958Z",
+      "LookupMultiHR01teamId": {
+        "results": [
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6,
+          6
+        ]
+      },
+      "LookupMultiHR03eventsId": {
+        "results": [
+          20,
+          21
+        ]
       },
       "ClientPhoto": {
         "Description": "",
