@@ -17,20 +17,7 @@ export const NEVER_END_RECURRENCE_MONTH_AMOUNT = 36;
 
 export const statusNameList = Object.values(StatusNames);
 
-export const SeriesColors = [
-  `#dc6a60`,
-  `#eed15d`,
-  `#7fc94b`,
-  `#4cabbb`,
-  `#3f6fd9`,
-  `#9e4daf`,
-  `LightSalmon`,
-  `PeachPuff`,
-  `Fuchsia`,
-  `Aqua`,
-  `RoyalBlue`,
-  `Plum`,
-];
+export const SeriesColors = [`#dc6a60`, `#eed15d`, `#7fc94b`, `#4cabbb`, `#3f6fd9`, `#9e4daf`, `LightSalmon`, `PeachPuff`, `Fuchsia`, `Aqua`, `RoyalBlue`, `Plum`];
 
 export const Months = [`January`, `February`, `March`, `April`, `May`, `June`, `July`, `August`, `September`, `October`, `November`, `December`];
 
@@ -50,3 +37,32 @@ export const getDefaultConsultationCustomer = (Id: number) => (appointmentID: nu
 
   ClientPhotoUrl: '',
 });
+
+let WeeksRange = {
+  start: START_PREV_WEEKS_DATE.getTime(),
+  end: MONDAY_CURRENT_WEEK.getTime(),
+};
+
+let MonthsRange = {
+  start: START_PREV_MONTH_DATE.getTime(),
+  end: MONDAY_CURRENT_WEEK.getTime(),
+};
+
+let PrevWeekRange = {
+  start: PREV_WEEK.getTime(),
+  end: MONDAY_CURRENT_WEEK.getTime(),
+};
+
+const proxyHandlers = {
+  has(target: { start: number; end: number }, prop: string) {
+    return +prop >= target.start && +prop <= target.end;
+  },
+};
+
+WeeksRange = new Proxy(WeeksRange, proxyHandlers);
+
+MonthsRange = new Proxy(MonthsRange, proxyHandlers);
+
+PrevWeekRange = new Proxy(PrevWeekRange, proxyHandlers);
+
+export { WeeksRange, MonthsRange, PrevWeekRange };

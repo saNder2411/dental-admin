@@ -7,7 +7,7 @@ import { SeriesForChart } from './EntitiesChartTypes';
 import { StaffDataItem } from '../_Staff/StaffTypes';
 import { DateRange } from '../Entities/EntitiesChartTypes';
 // Constants
-import { MONDAY_CURRENT_WEEK, START_PREV_WEEKS_DATE, PREV_WEEK, SeriesColors, START_PREV_MONTH_DATE, MONTH_RANGE } from '../Constants';
+import { MONDAY_CURRENT_WEEK, SeriesColors, MONTH_RANGE, WeeksRange, MonthsRange, PrevWeekRange } from '../Constants';
 // Helpers
 import { WeekPoints, calcAppointmentsDurationSalesPerWeekPerStaffMember, MonthPoints, getRecurrenceAppointments, isExcludeAppointment } from './EntitiesChartHelpers';
 
@@ -219,12 +219,8 @@ const getServiceProductCalcData = (sliceAppointments: AppointmentDataItem[], ser
 export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState): ChartState => {
   const appointmentsWithRecItems = state.appointments.originalData.flatMap((appointment) => [appointment, ...getRecurrenceAppointments(appointment)]);
   console.log(`appointmentsWithRecItems`, appointmentsWithRecItems);
-  const appointmentsInLastWeeksRange = appointmentsWithRecItems.filter(
-    ({ Start, End }) => Start.getTime() >= START_PREV_WEEKS_DATE.getTime() && End.getTime() <= MONDAY_CURRENT_WEEK.getTime()
-  );
-  const appointmentsInLastMonthsRange = appointmentsWithRecItems.filter(
-    ({ Start, End }) => Start.getTime() >= START_PREV_MONTH_DATE.getTime() && End.getTime() <= MONDAY_CURRENT_WEEK.getTime()
-  );
+  const appointmentsInLastWeeksRange = appointmentsWithRecItems.filter(({ Start, End }) => Start.getTime() in WeeksRange && End.getTime() in WeeksRange);
+  const appointmentsInLastMonthsRange = appointmentsWithRecItems.filter(({ Start, End }) => Start.getTime() in MonthsRange && End.getTime() in MonthsRange);
 
   const {
     appointmentReservations,
@@ -238,7 +234,7 @@ export const updateChartDataOnFinallyAppointmentsRequest = (state: EntitiesState
   } = appointmentsWithRecItems.reduce(
     (acc, { AppointmentStatus, Start, End, ServiceCharge, LookupCM102customersId }) => {
       const isFuture = Start.getTime() >= MONDAY_CURRENT_WEEK.getTime();
-      const isPrevWeek = Start.getTime() >= PREV_WEEK.getTime() && End.getTime() < MONDAY_CURRENT_WEEK.getTime();
+      const isPrevWeek = Start.getTime() in PrevWeekRange && End.getTime() in PrevWeekRange;
 
       if (isFuture) {
         AppointmentStatus === StatusNames.Reserved && acc.appointmentReservations++;
