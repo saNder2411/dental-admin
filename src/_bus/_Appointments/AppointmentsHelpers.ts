@@ -119,6 +119,7 @@ export const parseProcessDataItem = (processDataItem: ProcessAppointmentDataItem
     YearlyMonthDay,
     YearlyWeekNumber,
     YearlyDayType,
+    type,
     ...others
   } = processDataItem;
 
@@ -178,16 +179,3 @@ export const parseProcessDataItem = (processDataItem: ProcessAppointmentDataItem
 
   return { newDataItem, newCustomer };
 };
-
-// const filter = <A>(array: A[], f: (item: A) => boolean): A[] => {
-//   let result = [];
-//   for (let i = 0; i < array.length; i++) {
-//     let item = array[i];
-//     if (f(item)) {
-//       result.push(item);
-//     }
-//   }
-//   return result;
-// };
-
-// const b = filter([1,2,3], (_) => _ < 2 ); 
