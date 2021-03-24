@@ -9,13 +9,13 @@ interface FrontendKey {
   isNew?: boolean;
 }
 
-export interface QuerySkillDataItem extends BackendImmutableKey {
+export type QuerySkillDataItem = BackendImmutableKey & {
   __metadata: {
     id: string;
     uri: string;
     etag: string;
     type: 'SP.Data.MetroHR02_x005f_SkillsListItem';
   };
-}
+};
 
-export interface SkillDataItem extends BackendImmutableKey, FrontendKey {}
+export type SkillDataItem = BackendImmutableKey & FrontendKey;

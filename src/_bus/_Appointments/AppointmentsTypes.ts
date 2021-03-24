@@ -45,7 +45,7 @@ interface FrontendKey {
   isNew?: boolean;
 }
 
-export interface QueryAppointmentDataItem extends BackendImmutableKey {
+export type QueryAppointmentDataItem = BackendImmutableKey & {
   __metadata: {
     id: string;
     uri: string;
@@ -53,30 +53,31 @@ export interface QueryAppointmentDataItem extends BackendImmutableKey {
     type: 'SP.Data.MetroHR03ListItem';
   };
   LookupMultiBP01offeringsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
-}
+};
 
-export interface AppointmentDataItem extends BackendImmutableKey, FrontendKey {
-  LookupHR01teamId: number;
-  LookupMultiBP01offeringsId: { results: number[] };
-}
+export type AppointmentDataItem = BackendImmutableKey &
+  FrontendKey & {
+    LookupHR01teamId: number;
+    LookupMultiBP01offeringsId: { results: number[] };
+  };
 
 export const TypesProcessDataItem = {
   Grid: 'Grid',
   Scheduler: 'Scheduler',
 } as const;
 
-export interface GridProcessAppointmentDataItem extends AppointmentDataItem {
+export type GridProcessAppointmentDataItem = AppointmentDataItem & {
   type: typeof TypesProcessDataItem.Grid;
-}
+};
 
-export interface SchedulerProcessAppointmentDataItem extends InitialFormValue {
+export type SchedulerProcessAppointmentDataItem = InitialFormValue & {
   type: typeof TypesProcessDataItem.Scheduler;
-}
+};
 
 export type ProcessAppointmentDataItem = GridProcessAppointmentDataItem | SchedulerProcessAppointmentDataItem;
 
-export interface MutationAppointmentDataItem extends BackendImmutableKey {
+export type MutationAppointmentDataItem = BackendImmutableKey & {
   __metadata: { type: 'SP.Data.MetroHR03ListItem' };
   fRecurrence: null | boolean;
   LookupMultiBP01offeringsId: { results: number[] };
-}
+};

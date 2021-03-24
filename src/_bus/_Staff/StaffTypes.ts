@@ -23,7 +23,7 @@ interface FrontendKey {
   isNew?: boolean;
 }
 
-export interface QueryStaffDataItem extends BackendImmutableKey {
+export type QueryStaffDataItem = BackendImmutableKey & {
   __metadata: {
     id: string;
     uri: string;
@@ -31,13 +31,14 @@ export interface QueryStaffDataItem extends BackendImmutableKey {
     type: 'SP.Data.MetroHR01ListItem';
   };
   LookupMultiHR02SkillsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
-}
+};
 
-export interface StaffDataItem extends BackendImmutableKey, FrontendKey {
-  LookupMultiHR02SkillsId: { results: number[] };
-}
+export type StaffDataItem = BackendImmutableKey &
+  FrontendKey & {
+    LookupMultiHR02SkillsId: { results: number[] };
+  };
 
-export interface MutationStaffDataItem extends BackendImmutableKey {
+export type MutationStaffDataItem = BackendImmutableKey & {
   __metadata: { type: 'SP.Data.MetroHR01ListItem' };
   LookupMultiHR02SkillsId: { results: number[] };
-}
+};

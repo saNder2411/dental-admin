@@ -21,7 +21,7 @@ interface FrontendKey {
   isNew?: boolean;
 }
 
-export interface QueryCustomerDataItem extends BackendImmutableKey {
+export type QueryCustomerDataItem = BackendImmutableKey & {
   __metadata: {
     id: string;
     uri: string;
@@ -30,15 +30,16 @@ export interface QueryCustomerDataItem extends BackendImmutableKey {
   };
   LookupMultiHR01teamId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
   LookupMultiHR03eventsId: { __metadata: { type: 'Collection(Edm.Int32)' }; results: number[] };
-}
+};
 
-export interface CustomerDataItem extends BackendImmutableKey, FrontendKey {
-  LookupMultiHR01teamId: { results: number[] };
-  LookupMultiHR03eventsId: { results: number[] };
-}
+export type CustomerDataItem = BackendImmutableKey &
+  FrontendKey & {
+    LookupMultiHR01teamId: { results: number[] };
+    LookupMultiHR03eventsId: { results: number[] };
+  };
 
-export interface MutationCustomerDataItem extends BackendImmutableKey {
+export type MutationCustomerDataItem = BackendImmutableKey & {
   LookupMultiHR01teamId: { results: number[] };
   LookupMultiHR03eventsId: { results: number[] };
   __metadata: { type: 'SP.Data.MetroCM102ListItem' };
-}
+};
